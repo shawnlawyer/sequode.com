@@ -1,0 +1,33 @@
+
+.fitBlock {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height:auto;
+  display: block;
+}
+.noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.noSize {
+  width:0;
+  height:0;
+  overflow:visible;
+}
+.alignLeft {
+  text-align:left;
+}
+.alignCenter {
+  text-align:center;
+}
+.fullGridHeight {
+  height:80%;
+}
+.pointer{
+cursor: pointer;
+}

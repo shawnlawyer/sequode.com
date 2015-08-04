@@ -1,0 +1,124 @@
+.automagic-card-deck{
+  font-family: Verdana;
+  color: #000;
+  min-height: 0px;
+  min-width:481px;
+  width:100%;
+  height:100%;
+  vertical-align: top;
+  text-align:center;
+}
+.automagic-card{
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background: #fff;
+  padding: 0;
+  margin: 0 auto 2em auto;
+  vertical-align: top;
+  display: inline-block;
+  width: auto;
+}
+.automagic-card-menu-container{
+  position:relative;
+  top:-.5em;
+  left:-.5em;
+  height:2em;
+  width: 2em;
+  overflow:hidden;
+}
+.automagic-card-menu-container:hover{
+  height:3.5em;
+  width: 3.5em;
+  overflow:visible;
+}
+.automagic-card-menu{
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background: #fff;
+  margin: 2.5em auto 0 .5em;
+  padding: .5em 0;
+  display: inline-block;
+  width: auto;
+}
+.automagic-card-menu-item-label{
+  -webkit-transition: background .6s;
+  background: #fff; 
+  padding: .5em 1em .5em 1em;
+  height:1em;
+  width: auto;
+  text-align:left;
+  display:block;
+  white-space:nowrap;
+  font-family: Verdana;
+  cursor:default;
+  font-size: .9em;
+  font-weight:800;
+  color: black;
+}
+.automagic-card-menu-item{
+  -webkit-transition: background .6s;
+  background: #fff; 
+  padding: .5em 1em .5em 1em;
+  height:1em;
+  width: auto;
+  text-align:left;
+  display:block;
+  white-space:nowrap;
+  cursor:pointer;
+  font-family: Verdana;
+  cursor:pointer;
+  font-size: .9em;
+  font-weight:800;
+  color: black;
+}
+.automagic-card-menu-item:hover{
+  background: #f5f5f5;
+}
+.automagic-card-head{
+  position:relative;
+  white-space:nowrap;
+  right:0px;
+  z-index:2;
+  margin: 0;
+  padding: .5em;
+  width: auto;
+  text-align:left;
+  display:block;
+}
+.automagic-card-body{
+  font-size: 1em;
+  position:relative;
+  z-index:1;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  text-align:left;
+  display:block;
+}
+.automagic-card-next {
+  position: absolute;
+  top: 1.2em;
+  right: .5em;
+  display: block;
+  cursor: pointer;
+  font-size: .9em;
+  font-weight: 800;
+  color: black;
+}
+.automagic-card-text-button{
+  cursor:pointer;
+}
+
+.automagic-card-menu-right-side-adjuster{
+    margin: 0 auto 0 auto;
+    position:relative;
+    left: 3em;
+}

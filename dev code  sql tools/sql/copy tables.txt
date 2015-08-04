@@ -1,0 +1,37 @@
+USE sequode_app;
+
+CREATE TABLE groups_beta LIKE groups; 
+INSERT groups_beta SELECT * FROM groups;
+
+CREATE TABLE users_beta LIKE users; 
+INSERT users_beta SELECT * FROM users;
+
+CREATE TABLE components_beta LIKE components; 
+INSERT components_beta SELECT * FROM components;
+
+CREATE TABLE sessions_beta LIKE sessions;
+
+
+CREATE TABLE ajax_beta LIKE ajax; 
+INSERT ajax_beta SELECT * FROM ajax;
+
+
+
+CREATE TABLE groups_dev LIKE groups; 
+INSERT groups_dev SELECT * FROM groups;
+
+CREATE TABLE users_dev LIKE users; 
+INSERT users_dev SELECT * FROM users;
+
+CREATE TABLE components_dev LIKE components; 
+INSERT components_dev SELECT * FROM components;
+
+CREATE TABLE sessions_dev LIKE sessions;
+
+
+CREATE TABLE ajax_dev LIKE ajax; 
+INSERT ajax_dev SELECT * FROM ajax;
+
+
+CREATE TABLE sequodes_dev LIKE sequodes_beta; 
+INSERT sequodes_dev SELECT * FROM sequodes_beta;
