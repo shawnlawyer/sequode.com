@@ -25,7 +25,7 @@ class SQDE_SiteCardsAjax {
                 $card = SQDE_Cards::render(self::$package,'usersMenu');
                 $html[] = SQDE_Card::menuCardHidingContainer($card->html,7);
                 $js[] = $card->js;
-                $card = SQDE_Cards::render(self::$package,'packageMenu');
+                $card = SQDE_Cards::render(self::$package,'packagesMenu');
                 $html[] = SQDE_Card::menuCardHidingContainer($card->html,6);
                 $js[] = $card->js;
                 $card = SQDE_Cards::render(self::$package,'machinesMenu');
