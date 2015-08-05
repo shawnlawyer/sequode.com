@@ -14,6 +14,9 @@ class SQDE_DashboardCardObjects {
             case 'machines':
             case 'my_machines':
                 return self::myMachines($user_model);
+            case 'packages':
+            case 'my_packages':
+                return self::myPackages($user_model);
         }
     }
     public static function gettingStarted($user_model=null){
@@ -29,6 +32,10 @@ class SQDE_DashboardCardObjects {
         $html[] = SQDE_Card::shim();
         $html[] = SQDE_Card::shim();
         $component_object = SQDE_Cards::render('Dashboard', 'collection', array('my_sequodes', $user_model));
+        $html[] = $component_object->html;
+        $js[] = $component_object->js;
+        $html[] = SQDE_Card::shim();
+        $component_object = SQDE_Cards::render('Dashboard', 'collection', array('my_packages', $user_model));
         $html[] = $component_object->html;
         $js[] = $component_object->js;
         $html[] = SQDE_Card::shim();
