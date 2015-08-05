@@ -15,7 +15,7 @@ class SQDE_PackageCardObjects {
         $card_object->body[] = '<div class="subline kids">Package Token</div>';
         $card_object->body[] = $_model->token;
         $card_object->body[] = '<div class="subline kids">Routes</div>';
-        $card_object->body[] = json_decode($_model->routes);
+        $card_object->body[] = $_model->routes;
         $html = $js = array();
         
         
