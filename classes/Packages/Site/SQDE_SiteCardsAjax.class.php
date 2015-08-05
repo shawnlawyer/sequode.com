@@ -35,7 +35,7 @@ class SQDE_SiteCardsAjax {
         }
         if(SQDE_UserAuthority::isSystemOwner()){ 
             $card = SQDE_Cards::render(self::$package,'sessionsMenu');
-            $html[] = SQDE_Card::menuCardHidingContainer($card->html,5);
+            $html[] = SQDE_Card::menuCardHidingContainer($card->html,4);
             $js[] = $card->js;
         }
         return SQDE_BrowserRemote::addIntoDom($dom_id, implode('',$html), 'replace'). implode(' ',$js);
