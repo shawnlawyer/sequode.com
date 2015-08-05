@@ -6,10 +6,10 @@ class SQDE_SequodeRoutes{
 			case 'my':
                 $where = array();
 				$where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
-                $sequode_model = new SQDE_Sequodes;
-				$sequode_model->getAll($where,'id,name');
+                $_model = new SQDE_Sequodes;
+				$_model->getAll($where,'id,name');
                 $nodes = array();
-				foreach($sequode_model->all as $object){
+				foreach($_model->all as $object){
 					$nodes[] = '"'.$object->id.'":{"id":"'.$object->id.'","n":"'.$object->name.'"}';
 				}
 				echo '{'.implode(',', $nodes).'}';
@@ -17,10 +17,10 @@ class SQDE_SequodeRoutes{
 			case 'machines':
                 $where = array();
 				$where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
-                $machine_model = new SQDE_Machines;
-				$machine_model->getAll($where,'id,name');
+                $_model = new SQDE_Machines;
+				$_model->getAll($where,'id,name');
                 $nodes = array();
-				foreach($machine_model->all as $object){
+				foreach($_model->all as $object){
 					$nodes[] = '"'.$object->id.'":{"id":"'.$object->id.'","n":"'.$object->name.'"}';
 				}
 				echo '{'.implode(',', $nodes).'}';
@@ -28,10 +28,10 @@ class SQDE_SequodeRoutes{
 			case 'packages':
                 $where = array();
 				$where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
-                $machine_model = new SQDE_Machines;
-				$machine_model->getAll($where,'id,name');
+                $_model = new SQDE_Packages;
+				$_model->getAll($where,'id,name');
                 $nodes = array();
-				foreach($machine_model->all as $object){
+				foreach($_model->all as $object){
 					$nodes[] = '"'.$object->id.'":{"id":"'.$object->id.'","n":"'.$object->name.'"}';
 				}
 				echo '{'.implode(',', $nodes).'}';
