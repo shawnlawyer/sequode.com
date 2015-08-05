@@ -1,5 +1,5 @@
 <?php
-class SQDE_Packages {
+class SQDE_PackagesHandler {
     public static function container($mode, $key = null, $value = null) {
         static $store;
         if(!is_array($store)){
