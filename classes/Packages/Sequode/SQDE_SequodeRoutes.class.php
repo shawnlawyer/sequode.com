@@ -25,6 +25,17 @@ class SQDE_SequodeRoutes{
 				}
 				echo '{'.implode(',', $nodes).'}';
                 return;
+			case 'packages':
+                $where = array();
+				$where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
+                $machine_model = new SQDE_Machines;
+				$machine_model->getAll($where,'id,name');
+                $nodes = array();
+				foreach($machine_model->all as $object){
+					$nodes[] = '"'.$object->id.'":{"id":"'.$object->id.'","n":"'.$object->name.'"}';
+				}
+				echo '{'.implode(',', $nodes).'}';
+                return;
 			case 'sequode_search':
 				if(SQDE_Session::is($collection)){
                     $search = SQDE_SequodesFinder::search(json_decode(SQDE_Session::get($collection)));
@@ -55,6 +66,18 @@ class SQDE_SequodeRoutes{
                     $nodes = array();
                     foreach($search as $object){
                         $nodes[] = '"'.$object->id.'":{"id":"'.$object->id.'","n":"'.$object->username.'"}';
+                    }
+                    echo '{'.implode(',', $nodes).'}';
+                }else{
+                    echo '{}';
+                }
+                return;
+			case 'package_search':
+				if(SQDE_Session::is($collection)){
+                    $search = SQDE_PackagesFinder::search(json_decode(SQDE_Session::get($collection)));
+                    $nodes = array();
+                    foreach($search as $object){
+                        $nodes[] = '"'.$object->id.'":{"id":"'.$object->id.'","n":"'.$object->name.'"}';
                     }
                     echo '{'.implode(',', $nodes).'}';
                 }else{
