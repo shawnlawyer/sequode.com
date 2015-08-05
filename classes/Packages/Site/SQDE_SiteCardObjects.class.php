@@ -207,6 +207,43 @@ class SQDE_SiteCardObjects {
         }
         return $card_object;
     }
+    public static function packagesMenu(){
+        $card_object = (object) null;
+        $card_object->icon_type = 'menu-icon';
+        $card_object->icon_background = 'atom-icon-background';
+        $card_object->menu = (object) null;
+        $dom_id_base = SQDE_Component::uniqueHash('','');
+        $card_object->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
+        
+        $card_object->menu->items = array();
+        if(
+            isset(SQDE_AuthenticatedUser::model()->role_id)
+            && SQDE_AuthenticatedUser::model()->role_id < 101
+        ){
+            $dom_id = SQDE_Component::uniqueHash('','');
+            $card_object->menu->items[] = array(
+                'css_classes'=>'automagic-card-menu-item noSelect',
+                'id'=>$dom_id,
+                'contents'=>'New Package',
+                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/package/newPackage'))
+            );
+            $dom_id = SQDE_Component::uniqueHash('','');
+            $card_object->menu->items[] = array(
+                'css_classes'=>'automagic-card-menu-item noSelect',
+                'id'=>$dom_id,
+                'contents'=>'My Packages',
+                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/package/my'))
+            );
+            $dom_id = SQDE_Component::uniqueHash('','');
+            $card_object->menu->items[] = array(
+                'css_classes'=>'automagic-card-menu-item noSelect',
+                'id'=>$dom_id,
+                'contents'=>'Search Packages',
+                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/package/search'))
+            );
+        }
+        return $card_object;
+    }
     public static function sessionsMenu(){
         $card_object = (object) null;
         $card_object->icon_type = 'menu-icon';

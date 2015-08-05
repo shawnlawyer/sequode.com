@@ -22,19 +22,35 @@ class SQDE_UserOperations {
     }
 	public static function getMachinesCount($user_model = null){
         if($user_model != null ){ SQDE_User::model($user_model); }
-        $machine_model = new SQDE_Machine::$model;
+        $_model = new SQDE_Machine::$model;
         $where = array();
         $where[] = array('field'=>'owner_id','operator'=>'=','value'=>$user_model->id);
-        $machine_model->getCount($where, 'id');
-        return intval($machine_model->results_count);
+        $_model->getCount($where, 'id');
+        return intval($_model->results_count);
+	}
+	public static function getPackagesCount($user_model = null){
+        if($user_model != null ){ SQDE_User::model($user_model); }
+        $_model = new SQDE_Package::$model;
+        $where = array();
+        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>$user_model->id);
+        $_model->getCount($where, 'id');
+        return intval($_model->results_count);
 	}
 	public static function getMachinesModelOfAllMachines($user_model = null, $fields='id'){
         if($user_model != null ){ SQDE_User::model($user_model); }
-        $machine_model = new SQDE_Machine::$model;
+        $_model = new SQDE_Machine::$model;
         $where = array();
         $where[] = array('field'=>'owner_id','operator'=>'=','value'=>$user_model->id);
-        $machine_model->getAll($where, $fields);
-        return $machine_model;
+        $_model->getAll($where, $fields);
+        return $_model;
+	}
+	public static function getPackagesModelOfAllPackages($user_model = null, $fields='id'){
+        if($user_model != null ){ SQDE_User::model($user_model); }
+        $_model = new SQDE_Package::$model;
+        $where = array();
+        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>$user_model->id);
+        $_model->getAll($where, $fields);
+        return $_model;
 	}
 	public static function getSequodesModelOfAllSequencedSequodes($user_model = null, $fields='id'){
         if($user_model != null ){ SQDE_User::model($user_model); }
