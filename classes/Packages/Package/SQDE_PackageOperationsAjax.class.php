@@ -8,7 +8,7 @@ class SQDE_PackageOperationsAjax {
         $js[] = SQDE_PackageCardsAjax::details(SQDE_Package::model()->id);
         return implode(' ', $js);
     }
-    public static function updateName($_model_id, $json){
+    public static function rename($_model_id, $json){
         if(!(
         SQDE_Package::exists($_model_id,'id')
         && (SQDE_UserAuthority::isOwner( SQDE_Package::model() )
