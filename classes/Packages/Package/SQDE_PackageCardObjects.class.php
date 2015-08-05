@@ -4,7 +4,7 @@ class SQDE_PackageCardObjects {
     public static function details($_model = null){
         if($_model == null ){ $_model = SQDE_Package::model(); }
         $_model = SQDE_Package::model($_model);
-        $card_object = self::operationsCards();
+        $card_object = self::operationsCards('',$_model);
         $card_object->head = 'Package Details';
         $card_object->size = 'large';
         $card_object->body = array('');
@@ -117,7 +117,7 @@ class SQDE_PackageCardObjects {
         $dom_id = SQDE_Component::uniqueHash();
         $html[] = '<div  class="fitBlock alignCenter" id="'.$dom_id.'"></div>';
         $js[] = 'collection_cards = new SQDE_CollectionCards();';
-        $js[] = 'collection_cards.details_route = \'cards/packages/details\';';
+        $js[] = 'collection_cards.details_route = \'cards/package/details\';';
         $js[] = 'collection_cards.icon = \'atom\';';
         $js[] = 'collection_cards.container = \''.$dom_id.'\';';
         $js[] = 'collection_cards.collection = \'packages\';';
