@@ -26,7 +26,7 @@ class SQDE_SiteAjaxRoutes {
             return;
         }
         $package = ucfirst(strtolower($call_pieces[1]));
-        if(!SQDE_Packages::is($package)){
+        if(!SQDE_PackagesHandler::is($package)){
             return;
         }
         $request_type = $call_pieces[0];
