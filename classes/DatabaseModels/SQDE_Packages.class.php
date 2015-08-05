@@ -9,18 +9,14 @@ class SQDE_Packages extends SQDE_DatabaseModel {
 	public function create(){
 		$sql = "
 			INSERT INTO {$this->table}
-		 	(`id`,`usage_type`,`owner_id`,`name`,`domain`,`application_token`,`authentication_token`,`ip_addresses`,`webhooks`,`workflow`)
+		 	(`id`,`owner_id`,`name`,`token`,`routes`)
 			VALUES
 		 	(''
 			,0
-			,0
 			,'New Machine'
 			,''
-            ,".$this->safedSQLData(SQDE_Session::uniqueHash('application_token'), 'text')."
-            ,".$this->safedSQLData(SQDE_Session::uniqueHash('authentication_token'), 'text')."
-            ,'[]'
+            ,".$this->safedSQLData(SQDE_Session::uniqueHash('token'), 'text')."
             ,'{}'
-            ,0
             )
 			";
 		$this->database->query($sql);

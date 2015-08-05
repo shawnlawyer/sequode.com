@@ -23,7 +23,7 @@ class SQDE_PackageOperationsAjax {
             return ' alert(\'Package name should start with a letter or underscore\');';
         }
         if(!eregi("^([A-Za-z0-9_])*$",$name)){
-            return ' alert(\'Package must be alphanumeric and all spaces will convert to underscore.\');';
+            return ' alert(\'Package name must be alphanumeric and all spaces will convert to underscore.\');';
         }
         SQDE_PackageOperations::updateName($name);
         $js = array();
