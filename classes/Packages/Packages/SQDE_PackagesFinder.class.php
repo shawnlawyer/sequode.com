@@ -17,10 +17,10 @@ class SQDE_PackagesFinder {
                 $where[] = $shared_where;
             }
             $where[] = array('field'=> $search_object->field,'operator'=>$search_object->position,'value'=>$search_object->search);
-            $machines_model = new SQDE_Packages;
-            $machines_model->getAll($where,'id,name',false, $limit);
-            $results = $machines_model->all;
-            unset($machines_model);
+            $_model = new SQDE_Packages;
+            $_model->getAll($where,'id,name',false, $limit);
+            $results = $_model->all;
+            unset($_model);
         }else{
             $where = array();
             if(isset($shared_where)){
@@ -29,10 +29,10 @@ class SQDE_PackagesFinder {
             $where[] = array('field'=> $search_object->field,'operator'=>$search_object->position,'value'=>$search_object->search);
             $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
             
-            $machines_model = new SQDE_Packages;
-            $machines_model->getAll($where,'id,name',false, $limit);
-            $results = $machines_model->all;
-            unset($machines_model);
+            $_model = new SQDE_Packages;
+            $_model->getAll($where,'id,name',false, $limit);
+            $results = $_model->all;
+            unset($_model);
         }
         return $results;
     }

@@ -1,10 +1,10 @@
 <?php
 class SQDE_PackageFormsAjax {
     public static $package = 'Package';
-    public static function name($machine_model_id, $dom_id){
+    public static function name($_model_id, $dom_id){
         if(!(
-        SQDE_Package::exists($machine_model_id,'id')
-        && (SQDE_UserAuthority::isPackageOwner()
+        SQDE_Package::exists($_model_id,'id')
+        && (SQDE_UserAuthority::isOwner( SQDE_Package::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){ return; }
         $components_array = SQDE_Forms::render(self::$package,__FUNCTION__);

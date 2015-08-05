@@ -1,10 +1,10 @@
 <?php
 class SQDE_PackageCardsAjax {
     public static $package = 'Package';
-    public static function details($machine_model_id=0, $dom_id = 'MagicCardsContainer'){
+    public static function details($_model_id=0, $dom_id = 'MagicCardsContainer'){
         if(!(
-        SQDE_Package::exists($machine_model_id,'id')
-        && (SQDE_UserAuthority::isPackageOwner()
+        SQDE_Package::exists($_model_id,'id')
+        && (SQDE_UserAuthority::isOwner( SQDE_Package::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){ return; }
         $card = SQDE_Cards::render(self::$package,__FUNCTION__);

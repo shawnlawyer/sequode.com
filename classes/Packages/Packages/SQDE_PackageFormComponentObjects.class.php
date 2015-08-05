@@ -1,14 +1,14 @@
 <?php
 class SQDE_PackageFormComponentObjects   {
-    public static function name($machine_model = null){
-        if($machine_model == null ){ $machine_model = SQDE_Package::model(); }
+    public static function name($_model = null){
+        if($_model == null ){ $_model = SQDE_Package::model(); }
         
         $components_object = (object) null;
         
         SQDE_Component::exists('str','name');
         $components_object->name = json_decode(SQDE_Component::model()->component_object);
         $components_object->name->Label = '';
-        $components_object->name->Value = $machine_model->name;
+        $components_object->name->Value = $_model->name;
         $components_object->name->Width = 200;
         $components_object->name->CSS_Class = 'focus-input';
         
@@ -24,7 +24,7 @@ class SQDE_PackageFormComponentObjects   {
         $components_object->search->Label = '';
         $components_object->search->Value = '';
         $components_object->search->Width = 200;
-        $components_object->search->CSS_Class = 'search-machines-input';
+        $components_object->search->CSS_Class = 'focus-input';
         
         SQDE_Component::exists('select','name');
         $components_object->position = json_decode(SQDE_Component::model()->component_object);

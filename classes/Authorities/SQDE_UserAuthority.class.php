@@ -94,4 +94,8 @@ class SQDE_UserAuthority {
         if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
         return (in_array($sequode_model->id, json_decode($user_model->sequode_favorites))) ? true : false;
     }
+    public static function isOwner(&$_model, $user_model = null){
+        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
+        return (isset($user_model->id) && isset($_model->owner_id) &&  $_model->owner_id == $user_model->id) ? true : false;
+    }
 }
