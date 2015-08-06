@@ -11,11 +11,10 @@ class SQDE_PackageCardObjects {
         $card_object->body[] = (object) array('js' => 'registry.setContext({card:\'cards/package/details\',collection:\'packages\',node:\''.$_model->id.'\'});');
         $card_object->body[] = '<div class="subline kids">Name</div>';
         $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::ajaxCallObject('forms/package/name', array($_model->id)), $_model->name, 'settings');
-        $card_object->body[] = $component_object;
+        $card_object->body[] = '<div class="subline kids">Package Sequode</div>';
+        $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::ajaxCallObject('forms/package/packageSequode', array($_model->id)), $_model->name, 'settings');
         $card_object->body[] = '<div class="subline kids">Package Token</div>';
         $card_object->body[] = $_model->token;
-        $card_object->body[] = '<div class="subline kids">Routes</div>';
-        $card_object->body[] = $_model->routes;
         $html = $js = array();
         
         

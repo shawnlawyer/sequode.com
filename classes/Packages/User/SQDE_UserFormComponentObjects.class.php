@@ -1,7 +1,7 @@
 <?php
 class SQDE_UserFormComponentObjects{
     public static function selectPalette($user_model = null){
-        if($user_model == null ){ $user_model = SQDE_User::model($user_model); }
+        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
         $components_object = (object) null;
         $values = $where = array();
         
