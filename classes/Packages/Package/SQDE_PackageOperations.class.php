@@ -30,7 +30,7 @@ class SQDE_PackageOperations {
 	}
     public static function updatePackageSequode($sequode_id, $_model = null){
         if($_model != null ){ SQDE_Package::model($_model); }
-        SQDE_Package::model()->updateField(sequode_id,'sequode_id');
+        SQDE_Package::model()->updateField($sequode_id,'sequode_id');
         return SQDE_Package::model();
     }
     public static function updateName($name, $_model = null){
