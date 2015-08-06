@@ -15,7 +15,7 @@ class SQDE_PackageFormObjects   {
 		$form_object = SQDE_Form::formObject(static::$objects_source,__FUNCTION__,static::$ajax_library,func_get_args());
         $form_object->auto_submit_time = 1;
         $form_object->submit_ajax_call_parameters = array();
-        $form_object->submit_ajax_call_route = static::$ajax_library.'/'.updatePackageSequode';
+        $form_object->submit_ajax_call_route = static::$ajax_library.'/'.'updatePackageSequode';
         $form_object->submit_ajax_call_parameters[] = SQDE_Package::model()->id;
         $form_object->submit_ajax_call_parameters[] = SQDE_Form::$collection_replacement_hook;
 		return $form_object;
