@@ -88,7 +88,7 @@ class SequodeSDK{
     }
     private function installApplication($application_token){
         $filepath = SEQUODE_DIRECTORY . DIRECTORY_SEPARATOR . $application_token.'.class.php';
-        $url = $this->origin_host . $application_token . '/origins/sequode/application';
+        $url = $this->origin_host . $application_token . '/origins/sequode/package';
         $read = fopen($url, "rb");
         if($read){
             $write = fopen($filepath, "wb");

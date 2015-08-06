@@ -1,6 +1,6 @@
 <?php
 class SQDE_SequodeOriginsRest{
-	public static function application(){
+	public static function package(){
         $used_ids = array();
         SQDE_Sequode::exists(SQDE_Package::model()->sequode_id,'id');
         $package_sequode_model_ids = array_unique(json_decode(SQDE_Sequode::model()->sequence));
