@@ -167,4 +167,17 @@ class SQDE_SequodeFormComponentObjects   {
         $components_object->palette->Value = (SQDE_SequodeAuthority::isPalette($sequode_model)) ? 1 : 0;
 		return $components_object;
 	}
+    public static function updateIsPackage($sequode_model = null){
+        if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
+        $components_object = (object) null;
+        SQDE_Component::exists('checkboxSwitch','name');
+        $components_object->palette = json_decode(SQDE_Component::model()->component_object);
+        $components_object->palette->Label = '';
+        $components_object->palette->On_Text = 'Useable As Package';
+        $components_object->palette->On_Value = 1;
+        $components_object->palette->Off_Text = 'Not Used As Package';
+        $components_object->palette->Off_Value = 0;
+        $components_object->palette->Value = (SQDE_SequodeAuthority::isPalette($sequode_model)) ? 1 : 0;
+		return $components_object;
+	}
 }

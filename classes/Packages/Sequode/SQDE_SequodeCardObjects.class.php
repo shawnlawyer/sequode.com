@@ -123,6 +123,26 @@ class SQDE_SequodeCardObjects {
                 $card_object->body[] = $text;
             }
         } 
+        if(SQDE_SequodeAuthority::isSequence() && !SQDE_SequodeAuthority::isEmptySequence()){
+            $card_object->body[] = '<div class="subline kids">Palette Visibility</div>';
+            $text = (SQDE_SequodeAuthority::isPalette()) ? 'Shown in Palettes' : 'Hidden from Palettes';
+            if(SQDE_UserAuthority::canEdit()){
+                $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('forms/sequode/updateIsPalette', array($sequode_model->id));
+                $card_object->body[] = SQDE_ComponentJS::loadComponentHere($ajax_call_object, $text, 'setting');
+            }else{
+                $card_object->body[] = $text;
+            }
+        } 
+        if(SQDE_SequodeAuthority::isSequence() && !SQDE_SequodeAuthority::isEmptySequence()){
+            $card_object->body[] = '<div class="subline kids">Palette Visibility</div>';
+            $text = (SQDE_SequodeAuthority::isPalette()) ? 'Shown in Palettes' : 'Hidden from Palettes';
+            if(SQDE_UserAuthority::canEdit()){
+                $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('forms/sequode/updateIsPalette', array($sequode_model->id));
+                $card_object->body[] = SQDE_ComponentJS::loadComponentHere($ajax_call_object, $text, 'setting');
+            }else{
+                $card_object->body[] = $text;
+            }
+        } 
         foreach(array('input','property') as $type){
             switch($type){
                 case 'input':                            

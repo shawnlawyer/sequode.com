@@ -44,4 +44,8 @@ class SQDE_SequodeAuthority {
         if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
         return ($sequode_model->palette == 1) ? true : false;
     }
+    public static function isPackage($sequode_model = null){
+        if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
+        return ($sequode_model->package == 1) ? true : false;
+    }
 }
