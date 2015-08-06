@@ -9,12 +9,12 @@ class SQDE_Packages extends SQDE_DatabaseModel {
 	public function create(){
 		$sql = "
 			INSERT INTO {$this->table}
-		 	(`id`,`owner_id`,`name`,`token`,`routes`)
+		 	(`id`,`sequode_id`,`owner_id`,`name`,`token`,`routes`)
 			VALUES
 		 	(''
 			,0
-			,'New Machine'
-			,''
+			,0
+			,'New Package'
             ,".$this->safedSQLData(SQDE_Session::uniqueHash('token'), 'text')."
             ,'{}'
             )
