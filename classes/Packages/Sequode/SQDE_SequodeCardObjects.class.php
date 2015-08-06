@@ -118,7 +118,7 @@ class SQDE_SequodeCardObjects {
             $text = (SQDE_SequodeAuthority::isPalette()) ? 'Shown in Palettes' : 'Hidden from Palettes';
             if(SQDE_UserAuthority::canEdit($sequode_model)){
                 $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('forms/sequode/updateIsPalette', array($sequode_model->id));
-                $card_object->body[] = SQDE_ComponentJS::loadComponentHere($ajax_call_object, $text, 'setting');
+                $card_object->body[] = SQDE_ComponentJS::loadComponentHere($ajax_call_object, $text, 'settings');
             }else{
                 $card_object->body[] = $text;
             }
@@ -128,7 +128,7 @@ class SQDE_SequodeCardObjects {
             $text = (SQDE_SequodeAuthority::isPackage()) ? 'Useable As Package' : 'Not Used As Package';
             if(SQDE_UserAuthority::canEdit($sequode_model)){
                 $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('forms/sequode/updateIsPackage', array($sequode_model->id));
-                $card_object->body[] = SQDE_ComponentJS::loadComponentHere($ajax_call_object, $text, 'setting');
+                $card_object->body[] = SQDE_ComponentJS::loadComponentHere($ajax_call_object, $text, 'settings');
             }else{
                 $card_object->body[] = $text;
             }
