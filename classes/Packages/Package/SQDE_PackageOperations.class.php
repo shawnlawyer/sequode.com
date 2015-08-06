@@ -28,20 +28,25 @@ class SQDE_PackageOperations {
         }
         return false;   
 	}
-    public static function updateName($name, $machine_model = null){
-        if($machine_model != null ){ SQDE_Package::model($machine_model); }
+    public static function updatePackageSequode($sequode_id, $_model = null){
+        if($_model != null ){ SQDE_Package::model($_model); }
+        SQDE_Package::model()->updateField(sequode_id,'sequode_id');
+        return SQDE_Package::model();
+    }
+    public static function updateName($name, $_model = null){
+        if($_model != null ){ SQDE_Package::model($_model); }
         SQDE_Package::model()->updateField(str_replace(" ","_",$name),'name');
         return SQDE_Package::model();
     }
     public static function newPackage($owner = 0){
         SQDE_Package::model()->create();
         SQDE_Package::exists(SQDE_Package::model()->id,'id');
-        SQDE_Package::model()->updateField(substr(SQDE_Session::uniqueHash('machine_name','SQDEMAC'),0,15),'name');
+        SQDE_Package::model()->updateField(substr(SQDE_Session::uniqueHash('package','SQDEPAC'),0,15),'name');
         SQDE_Package::model()->updateField($owner,'owner_id');
         return SQDE_Package::model();
 	}
-    public static function delete($machine_model = null){
-        if($machine_model != null ){ SQDE_Package::model($machine_model); }
+    public static function delete($_model = null){
+        if($_model != null ){ SQDE_Package::model($_model); }
         SQDE_Package::model()->delete(SQDE_Package::model()->id);
         return SQDE_Package::model();
     }
