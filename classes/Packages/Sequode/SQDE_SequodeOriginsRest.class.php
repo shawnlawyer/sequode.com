@@ -11,14 +11,8 @@ class SQDE_SequodeOriginsRest{
             $sequode_model->exists($id,'id');
             $used_ids = array_merge($used_ids, json_decode(SQDE_Sequode::model()->sequence));
         }
-        
-        
 		$sequode_model = new SQDE_Sequodes;
         $models = array();
-        $sequode_model->getAll($where,'id,name,detail,usage_type,coding_type,sequence,input_object,property_object,output_object,input_object_detail,property_object_detail,output_object_detail,input_object_map,property_object_map,output_object_map,input_form_object,property_form_object');
-        
-        
-        
         $where = array();
         $where[] = array('field'=>'owner_id','operator'=>'!=','value'=>SQDE_AuthenticatedUser::model()->id);
         $where[] = array('field'=>'shared','operator'=>'=','value'=>'1');
@@ -30,16 +24,11 @@ class SQDE_SequodeOriginsRest{
         $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
         $sequode_model->getAll($where,'id,name,detail,usage_type,coding_type,sequence,input_object,property_object,output_object,input_object_detail,property_object_detail,output_object_detail,input_object_map,property_object_map,output_object_map,input_form_object,property_form_object');
         
-        
-        $sequode_model->getAll($where,'id,name,detail,usage_type,coding_type,sequence,input_object,property_object,output_object,input_object_detail,property_object_detail,output_object_detail,input_object_map,property_object_map,output_object_map,input_form_object,property_form_object');
-        $models = $sequode_model->all;
-        $where = array();
-        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
-        $sequode_model->getAll($where,'id,name,detail,usage_type,coding_type,sequence,input_object,property_object,output_object,input_object_detail,property_object_detail,output_object_detail,input_object_map,property_object_map,output_object_map,input_form_object,property_form_object');
-        
         $model_name_to_model_id = array();
         foreach($sequode_model->all as $key => $object){
-            $model_name_to_model_id[$object->name] = $object->id;
+            if(in_array($model->id, $package_sequode_model_ids)){
+                $model_name_to_model_id[$object->name] = $object->id;
+            }
         }
         $models = array_merge($models, $sequode_model->all);
         $model_id_to_key = array();
@@ -81,7 +70,7 @@ class SQDE_SequodeOriginsRest{
         $used_ids = array_unique($used_ids);
         $filtered_models = array();
         foreach($models as $key => $model){
-            if(in_array($model->id, $used_ids) || in_array($model->id, $package_sequode_model_ids) ){
+            if(in_array($model->id, $used_ids)){
                 $filtered_models[] = $model;
                 $models[$key] = null;
             }
