@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin: *');
 class SQDE_Server {
 	public static function run(){
 		$route_class = false;
