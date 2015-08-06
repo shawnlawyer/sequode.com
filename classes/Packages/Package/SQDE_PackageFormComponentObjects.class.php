@@ -42,11 +42,11 @@ class SQDE_PackageFormComponentObjects   {
         $values = $where = array();
         
         $values[] = '{\'value\':\'0\',\'printable\':\'Select Package Sequode\'}';
+        $sequodes_model = new SQDE_Sequodes;
         /*
         $where[] = array('field'=>'owner_id','operator'=>'=','value'=>5);
         $where[] = array('field'=>'shared','operator'=>'=','value'=>1);
         $where[] = array('field'=>'package','operator'=>'=','value'=>1);
-        $sequodes_model = new SQDE_Sequodes;
         $sequodes_model->getAll($where);
         foreach( $sequodes_model->all as $object){
             $values[] = '{\'value\':\''.$object->id.'\',\'printable\':\''.$object->name.'\'}';
