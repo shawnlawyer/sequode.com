@@ -60,12 +60,12 @@ class SQDE_PackageFormComponentObjects   {
             $values[] = '{\'value\':\''.$object->id.'\',\'printable\':\''.$object->name.'\'}';
         }
         SQDE_Component::exists('select','name');
-        $components_object->palette = json_decode(SQDE_Component::model()->component_object);
-        $components_object->palette->Label = '';
-        $components_object->palette->Values = '[' . implode(',',$values) . ']';
-        $components_object->palette->Value = '0';
-        $components_object->palette->Value_Key = 'value';
-        $components_object->palette->Printable_Key = 'printable';
+        $components_object->sequode = json_decode(SQDE_Component::model()->component_object);
+        $components_object->sequode->Label = '';
+        $components_object->sequode->Values = '[' . implode(',',$values) . ']';
+        $components_object->sequode->Value = '0';
+        $components_object->sequode->Value_Key = 'value';
+        $components_object->sequode->Printable_Key = 'printable';
         
 		return $components_object;
 	}
