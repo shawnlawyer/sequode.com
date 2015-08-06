@@ -1,8 +1,24 @@
 <?php
 class SQDE_SequodeOriginsRest{
 	public static function application(){
+        $used_ids = array();
+        SQDE_Sequode::exists(SQDE_Package::model()->sequode_id,'id');
+        $package_sequode_model_ids = array_unique(json_decode(SQDE_Sequode::model()->sequence));
+        
+		$sequode_model = new SQDE_Sequodes;
+        foreach($package_sequode_model_ids as $id){
+            $used_ids[] = $id;
+            $sequode_model->exists($id,'id');
+            $used_ids = array_merge($used_ids, json_decode(SQDE_Sequode::model()->sequence));
+        }
+        
+        
 		$sequode_model = new SQDE_Sequodes;
         $models = array();
+        $sequode_model->getAll($where,'id,name,detail,usage_type,coding_type,sequence,input_object,property_object,output_object,input_object_detail,property_object_detail,output_object_detail,input_object_map,property_object_map,output_object_map,input_form_object,property_form_object');
+        
+        
+        
         $where = array();
         $where[] = array('field'=>'owner_id','operator'=>'!=','value'=>SQDE_AuthenticatedUser::model()->id);
         $where[] = array('field'=>'shared','operator'=>'=','value'=>'1');
