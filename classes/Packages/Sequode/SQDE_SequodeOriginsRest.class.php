@@ -69,10 +69,7 @@ class SQDE_SequodeOriginsRest{
         $used_ids = array_unique($used_ids);
         $filtered_models = array();
         foreach($models as $key => $model){
-            if(isset($model->c) && in_array($model->id, $used_ids)){
-                $filtered_models[] = $model;
-                $models[$key] = null;
-            }elseif(isset($model->s)){
+            if(in_array($model->id, $used_ids) || in_array($model->id, $package_sequode_model_ids) ){
                 $filtered_models[] = $model;
                 $models[$key] = null;
             }
