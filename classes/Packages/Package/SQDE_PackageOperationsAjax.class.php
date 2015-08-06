@@ -17,7 +17,7 @@ class SQDE_PackageOperationsAjax {
         && SQDE_SequodeAuthority::isPackage(SQDE_Sequode::model())
         && ( SQDE_UserAuthority::isOwner(SQDE_Package::model()) || SQDE_UserAuthority::isSystemOwner() )
         )){ return; }
-        SQDE_SequodeOperations::updatePackageSequode($input->sequode);
+        SQDE_PackageOperations::updatePackageSequode($input->sequode);
 		return;
 	}
     public static function updateName($_model_id, $json){
