@@ -121,6 +121,7 @@ class SQDE_SequodeOperationsAjax {
         SQDE_SequodeOperations::updateName($name);
         $js = array();
         $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
+		$js[] = SQDE_SequodeCardsAjax::details(SQDE_Sequode::model()->id);
         return implode(' ', $js);
         
         return;
@@ -147,7 +148,7 @@ class SQDE_SequodeOperationsAjax {
             $js[] = 'registry.fetch({collection:\'my\'});';
             $js[] = 'registry.fetch({collection:\'palette\'});';
             $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
-            
+            $js[] = SQDE_SequodeCardsAjax::my();
             return implode(' ', $js);
         }
     }
