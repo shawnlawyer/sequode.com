@@ -310,6 +310,16 @@ class SQDE_SequodeOperationsAjax {
         SQDE_SequodeOperations::updateIsPalette(rawurldecode($input->palette));
 		return;
 	}
+	public static function updateIsPackage($sequode_model_id,$json){
+        if(!(
+            SQDE_Sequode::exists($sequode_model_id,'id')
+            && SQDE_UserAuthority::canEdit()
+        )){return;}
+        $input = json_decode($json);
+        if (!is_object($input)){ return; }
+        SQDE_SequodeOperations::updateIsPackage(rawurldecode($input->package));
+		return;
+	}
 	public static function updateDescription($sequode_model_id, $json){
         if(!(
         SQDE_Sequode::exists($sequode_model_id,'id')
