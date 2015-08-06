@@ -156,10 +156,10 @@ class SequodeSDK{
             }
             unset($request_pieces);
 		}else{
-			//$_sm = $_a::getIndex();
-			//if(!$_sm){
+            $_sm = $_a::model($_a::index, 'id');
+			if(!$_sm){
 				return;
-			//}
+			}
 		}
 		foreach($_sm->i as $m => $v){
 			if(isset($parameters[0])){

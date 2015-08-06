@@ -16,7 +16,7 @@ class SQDE_SequodeOriginsRest{
         $where = array();
         $where[] = array('field'=>'owner_id','operator'=>'!=','value'=>SQDE_AuthenticatedUser::model()->id);
         $where[] = array('field'=>'shared','operator'=>'=','value'=>'1');
-        //$where[] = array('field'=>'palette','operator'=>'=','value'=>'0');
+        $where[] = array('field'=>'palette','operator'=>'=','value'=>'0');
         $sequode_model->getAll($where,'id,name,detail,usage_type,coding_type,sequence,input_object,property_object,output_object,input_object_detail,property_object_detail,output_object_detail,input_object_map,property_object_map,output_object_map,input_form_object,property_form_object');
         
         $models = $sequode_model->all;
@@ -94,6 +94,7 @@ class ' . SQDE_Package::model()->token . ' {
     
     public static $model_name_to_model_id = ' . SQDE_FileManager::var_export($model_name_to_model_id, true) . ';
     public static $model_id_to_key = ' . SQDE_FileManager::var_export($model_id_to_key, true) . ';
+    public static $index = ' . $package_sequode_model_ids[0] . ';
     public static function models(){
         return ' . str_replace('Inp_Obj','i', str_replace('Prop_Obj','p', str_replace('Out_Obj','o', str_replace('\'%START_CLOSURE_REPLACEMENT_HOOK%','function($_s){ ',str_replace('%END_CLOSURE_REPLACEMENT_HOOK%\'',' return; }',SQDE_FileManager::var_export($filtered_models, true)))))) . ';
     }
@@ -123,23 +124,6 @@ class ' . SQDE_Package::model()->token . ' {
 	}
 }
 ';
-    /*
-	public static function getIndex($owner_id){
-        $sequode_model = new SQDE_Sequode::$model;
-        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>$owner_id);
-        $where[] = array('field'=>'index','operator'=>'=','value'=> 1);
-        $sequode_model->getAll($where,'id',false,1);
-        $index = false;
-        foreach($sequode_model->all as $key => $object){
-            $index = $object->id;
-			break;
-        }
-        if($index != false){
-            SQDE_Sequode::exists($index,'id');
-            return SQDE_Sequode::model();
-        }
-        return false;   
-	}*/
     }
 	public static function sdk(){
         header('Content-Type: text/plain',true);
