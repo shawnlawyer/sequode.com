@@ -124,7 +124,7 @@ class SQDE_SiteRoutes{
             echo '!function() {';
         }
         if($force_SSL == true && $_SERVER['WORKFLOW_ENVIRONMENT'] != 'development'){
-            echo SQDE_ComponentJS::forceSSL();
+            //echo SQDE_ComponentJS::forceSSL();
         }
 		foreach($files as $file){
 			echo file_get_contents($file,true);
