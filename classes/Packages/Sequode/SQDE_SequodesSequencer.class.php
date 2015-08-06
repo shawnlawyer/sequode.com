@@ -9,7 +9,6 @@ class SQDE_SequodesSequencer{
         $input_object_map = json_decode(SQDE_Sequode::model()->input_object_map);
         $property_object_map = json_decode(SQDE_Sequode::model()->property_object_map);
         $output_object_map = json_decode(SQDE_Sequode::model()->output_object_map);
-        $process_instance_object = json_decode(SQDE_Sequode::model()->process_instance_object);
         $input_object = json_decode(SQDE_Sequode::model()->input_object);
         $property_object = json_decode(SQDE_Sequode::model()->property_object);
         $output_object = json_decode(SQDE_Sequode::model()->output_object);

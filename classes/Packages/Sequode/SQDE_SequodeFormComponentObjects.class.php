@@ -130,30 +130,29 @@ class SQDE_SequodeFormComponentObjects   {
     public static function tenancy($sequode_model = null){
         if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
         $components_object = (object) null;
-        
-        SQDE_Component::exists('select','name');
-        $components_object->tenancy = json_decode(SQDE_Component::model()->component_object);
-        $components_object->tenancy->Label = '';
-        $components_object->tenancy->Values = "[{'value':0,'printable':'Dedicated Tenancy'},{'value':1,'printable':'Shared Tenancy'}]";
-        $components_object->tenancy->Value = (SQDE_SequodeAuthority::isTenacyDedicated($sequode_model)) ? 0 : 1;
-        $components_object->tenancy->Value_Key = 'value';
-        $components_object->tenancy->Printable_Key = 'printable';
+        SQDE_Component::exists('checkboxSwitch','name');
+        $components_object->sharing = json_decode(SQDE_Component::model()->component_object);
+        $components_object->sharing->Label = '';
+        $components_object->sharing->On_Text = 'Dedicated Tenancy';
+        $components_object->sharing->On_Value = 1;
+        $components_object->sharing->Off_Text = 'Shared Tenancy';
+        $components_object->sharing->Off_Value = 0;
+        $components_object->sharing->Value = (SQDE_SequodeAuthority::isTenacyDedicated($sequode_model)) ? 0 : 1;
 		return $components_object;
 	}
     public static function sharing($sequode_model = null){
         if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
         $components_object = (object) null;
-        
-        SQDE_Component::exists('select','name');
+        SQDE_Component::exists('checkboxSwitch','name');
         $components_object->sharing = json_decode(SQDE_Component::model()->component_object);
         $components_object->sharing->Label = '';
-        $components_object->sharing->Values = "[{'value':0,'printable':'Private Restricted'},{'value':1,'printable':'Publicly Shared'}]";
+        $components_object->sharing->On_Text = 'Publicly Shared';
+        $components_object->sharing->On_Value = 1;
+        $components_object->sharing->Off_Text = 'Private Restricted';
+        $components_object->sharing->Off_Value = 0;
         $components_object->sharing->Value = (SQDE_SequodeAuthority::isShared($sequode_model)) ? 1 : 0;
-        $components_object->sharing->Value_Key = 'value';
-        $components_object->sharing->Printable_Key = 'printable';
 		return $components_object;
 	}
-    
     public static function updateIsPalette($sequode_model = null){
         if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
         $components_object = (object) null;
@@ -177,7 +176,7 @@ class SQDE_SequodeFormComponentObjects   {
         $components_object->palette->On_Value = 1;
         $components_object->palette->Off_Text = 'Not Used As Package';
         $components_object->palette->Off_Value = 0;
-        $components_object->palette->Value = (SQDE_SequodeAuthority::isPalette($sequode_model)) ? 1 : 0;
+        $components_object->palette->Value = (SQDE_SequodeAuthority::isPackage($sequode_model)) ? 1 : 0;
 		return $components_object;
 	}
 }

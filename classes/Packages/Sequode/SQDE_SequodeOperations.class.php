@@ -108,6 +108,18 @@ class SQDE_SequodeOperations {
         SQDE_Sequode::model($sequode_model)->updateField($value,'palette');
         return SQDE_Sequode::model();
 	}
+	public static function updateIsPackage($value = 0, $sequode_model = null){
+        if($sequode_model != null ){ SQDE_Sequode::model($sequode_model); }
+        switch(intval($value)){
+            case 1:
+                break;
+            default:
+                $value = 0;
+            
+        }
+        SQDE_Sequode::model($sequode_model)->updateField($value,'package');
+        return SQDE_Sequode::model();
+	}
     public static function updateName($name, $sequode_model = null){
         if($sequode_model != null ){ SQDE_Sequode::model($sequode_model); }
         SQDE_Sequode::model()->updateField(str_replace(" ","_",$name),'name');
@@ -144,7 +156,6 @@ class SQDE_SequodeOperations {
 					$form_object_member->$loop_member = $input_object->$loop_member;
 			}
 		}
-         
 		$form_object->$member = $form_object_member;
         SQDE_Sequode::model()->updateField(json_encode($form_object),$object_member);
         self::maintenance();
