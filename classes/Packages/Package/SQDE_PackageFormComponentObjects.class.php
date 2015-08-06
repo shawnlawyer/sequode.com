@@ -36,7 +36,8 @@ class SQDE_PackageFormComponentObjects   {
         
 		return $components_object;
 	}
-    public static function packageSequode($user_model = null){
+    public static function packageSequode($_model = null, $user_model = null){
+        if($_model == null ){ $_model = SQDE_Package::model(); }
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
         $components_object = (object) null;
         $values = $where = array();
@@ -63,7 +64,7 @@ class SQDE_PackageFormComponentObjects   {
         $components_object->sequode = json_decode(SQDE_Component::model()->component_object);
         $components_object->sequode->Label = '';
         $components_object->sequode->Values = '[' . implode(',',$values) . ']';
-        $components_object->sequode->Value = '0';
+        $components_object->sequode->Value = $_model->sequode_id;
         $components_object->sequode->Value_Key = 'value';
         $components_object->sequode->Printable_Key = 'printable';
         
