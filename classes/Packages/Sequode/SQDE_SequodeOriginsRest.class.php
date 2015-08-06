@@ -14,9 +14,21 @@ class SQDE_SequodeOriginsRest{
         $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
         $sequode_model->getAll($where,'id,name,detail,usage_type,coding_type,sequence,input_object,property_object,output_object,input_object_detail,property_object_detail,output_object_detail,input_object_map,property_object_map,output_object_map,input_form_object,property_form_object');
         
+        SQDE_Package::exists(SQDE_Package::model()->sequode_id,'id')
+        $package_sequode_model_ids = unique_array(json_decode(SQDE_Package::model()->sequence));
+        
+        
+        $sequode_model->getAll($where,'id,name,detail,usage_type,coding_type,sequence,input_object,property_object,output_object,input_object_detail,property_object_detail,output_object_detail,input_object_map,property_object_map,output_object_map,input_form_object,property_form_object');
+        $models = $sequode_model->all;
+        $where = array();
+        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
+        $sequode_model->getAll($where,'id,name,detail,usage_type,coding_type,sequence,input_object,property_object,output_object,input_object_detail,property_object_detail,output_object_detail,input_object_map,property_object_map,output_object_map,input_form_object,property_form_object');
+        
         $model_name_to_model_id = array();
         foreach($sequode_model->all as $key => $object){
-            $model_name_to_model_id[$object->name] = $object->id;
+            if(in_array($object->id, $package_sequode_model_ids)){
+                $model_name_to_model_id[$object->name] = $object->id;
+            }
         }
         $models = array_merge($models, $sequode_model->all);
         $model_id_to_key = array();
@@ -75,12 +87,12 @@ class SQDE_SequodeOriginsRest{
         $api_host = 'https://sequode.com/';
         
         header('Content-Type: text/plain',true);
-        header('Content-Disposition: attachment; filename="'.SQDE_Machine::model()->application_token.'.class.php"');
+        header('Content-Disposition: attachment; filename="'.SQDE_Package::model()->token.'.class.php"');
         echo '<?php
-class ' . SQDE_Machine::model()->application_token . ' {
+class ' . SQDE_Package::model()->token . ' {
     public static $origin_host = \'' . $api_host . '\';
-    public static $application_name = \'' . SQDE_Machine::model()->name . '\';
-    public static $application_token = \'' . SQDE_Machine::model()->application_token . '\';
+    public static $application_name = \'' . SQDE_Package::model()->name . '\';
+    public static $application_token = \'' . SQDE_Package::model()->token . '\';
     ' . file_get_contents('SQDE_SequodeExpressor.class.php',true) . '
     
     public static $model_name_to_model_id = ' . SQDE_FileManager::var_export($model_name_to_model_id, true) . ';

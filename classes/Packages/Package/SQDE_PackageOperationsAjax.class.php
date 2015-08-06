@@ -8,6 +8,19 @@ class SQDE_PackageOperationsAjax {
         $js[] = SQDE_PackageCardsAjax::details(SQDE_Package::model()->id);
         return implode(' ', $js);
     }
+    
+	public static function addToSequence($sequode_model_id, $add_sequode_model_id, $position=0, $position_tuner = null, $grid_modifier = null){
+        if(!(
+		SQDE_Sequode::exists($add_sequode_model_id,'id')
+		&& SQDE_UserAuthority::canRun()
+		&& SQDE_Sequode::exists($sequode_model_id,'id')
+		&& SQDE_UserAuthority::canEdit()
+        && SQDE_SequodeAuthority::isSequence()
+        && !SQDE_SequodeAuthority::isFullSequence()
+		)){ return; }
+        SQDE_SequodeOperations::addToSequence($add_sequode_model_id, $position, $position_tuner, $grid_modifier);
+		return;
+	}
     public static function updateName($_model_id, $json){
         if(!(
         SQDE_Package::exists($_model_id,'id')
@@ -15,7 +28,7 @@ class SQDE_PackageOperationsAjax {
         || SQDE_UserAuthority::isSystemOwner())
         )){ return; }
         $input = json_decode($json);
-        $name = trim(str_replace('-','_',str_replace(' ','_',urldecode($input->name))));
+        $name = trim(str_replace('-','_',str_replace(' ','_',urldecode($input->sequode))));
         if(strlen($name) < 2){
             return ' alert(\'Package name should be more than 1 character long.\');';
         }
