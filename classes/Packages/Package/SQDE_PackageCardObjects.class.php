@@ -16,7 +16,7 @@ class SQDE_PackageCardObjects {
             $text = SQDE_Sequode::model()->name;
             $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::ajaxCallObject('forms/package/packageSequode', array($_model->id)), $_model->sequode_id, 'settings');
         }else{
-            $card_object->body[] = SQDE_Forms::render(self::$package,'packageSequode')
+            $card_object->body[] = SQDE_Forms::render(self::$package,'packageSequode');
         }
         $card_object->body[] = '<div class="subline kids">Package Token</div>';
         $card_object->body[] = $_model->token;
