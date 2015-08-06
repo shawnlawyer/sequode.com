@@ -12,9 +12,9 @@ class SQDE_PackageCardObjects {
         $card_object->body[] = '<div class="subline kids">Name</div>';
         $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::ajaxCallObject('forms/package/name', array($_model->id)), $_model->name, 'settings');
         $card_object->body[] = '<div class="subline kids">Package Sequode</div>';
-        if(SQDE_Sequode::exists($_model->sequode_id,'id')){
+        if($_model->sequode_id != 0 && SQDE_Sequode::exists($_model->sequode_id,'id')){
             $text = SQDE_Sequode::model()->name;
-            $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::ajaxCallObject('forms/package/packageSequode', array($_model->id)), $_model->sequode_id, 'settings');
+            $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::ajaxCallObject('forms/package/packageSequode', array($_model->id)), $text, 'settings');
         }else{
             $card_object->body[] = SQDE_Forms::render(self::$package,'packageSequode');
         }
