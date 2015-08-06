@@ -16,7 +16,7 @@ class SQDE_SequodeOriginsRest{
         $where = array();
         $where[] = array('field'=>'owner_id','operator'=>'!=','value'=>SQDE_AuthenticatedUser::model()->id);
         $where[] = array('field'=>'shared','operator'=>'=','value'=>'1');
-        $where[] = array('field'=>'palette','operator'=>'=','value'=>'0');
+        $where[] = array('field'=>'palette','operator'=>'!=','value'=>'1');
         $sequode_model->getAll($where,'id,name,detail,usage_type,coding_type,sequence,input_object,property_object,output_object,input_object_detail,property_object_detail,output_object_detail,input_object_map,property_object_map,output_object_map,input_form_object,property_form_object');
         
         $models = $sequode_model->all;
@@ -60,7 +60,7 @@ class SQDE_SequodeOriginsRest{
             if($model->usage_type == 1){
                 $node->st = json_decode($model->usage_type);
                 $node->s = json_decode($model->sequence);
-                $used_ids = array_merge($node->s,$used_ids);
+                $used_ids = array_merge($used_ids,$node->s);
             }elseif($model->usage_type == 0){
                 $node->ct = intval($model->coding_type);
                 $node->c = '%START_CLOSURE_REPLACEMENT_HOOK%'.SQDE_SequodesGenerator::makeCodeFromNode($node).'%END_CLOSURE_REPLACEMENT_HOOK%';
