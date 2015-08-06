@@ -202,9 +202,6 @@ class SQDE_SequodeOperations {
         $model_copy->updateField(json_encode(json_decode(SQDE_Sequode::model()->input_object)),'input_object_detail');
         $model_copy->updateField(json_encode(json_decode(SQDE_Sequode::model()->input_object_map)),'input_object_map');
         $model_copy->updateField(json_encode(json_decode(SQDE_Sequode::model()->input_form_object)),'input_form_object');
-        $process_instance_object = json_decode(SQDE_Sequode::model()->process_instance_object);
-        $process_instance_object->Request_Name = $name;
-        $model_copy->updateField(json_encode($process_instance_object),'process_instance_object');
         $model_copy->updateField(json_encode(json_decode(SQDE_Sequode::model()->output_object)),'output_object');
         $model_copy->updateField(json_encode(json_decode(SQDE_Sequode::model()->input_object)),'output_object_detail');
         $model_copy->updateField(json_encode(json_decode(SQDE_Sequode::model()->output_object_map)),'output_object_map');
@@ -447,28 +444,9 @@ class SQDE_SequodeOperations {
 		$input_object = json_decode(SQDE_Sequode::model()->input_object);
 		$property_object = json_decode(SQDE_Sequode::model()->property_object);
 		$output_object = json_decode(SQDE_Sequode::model()->output_object);
-		$process_instance_object = (object) null;
-		$process_instance_object->Request = SQDE_Sequode::model()->name;
 		
-		$input_form_object = (object) null;
-		$property_form_object = (object) null;
-		
-		foreach($input_object as $member => $value){
-			$process_instance_object->Parameters->$member = null;
-			$input_form_object->$member = (object) null;
-			$input_form_object->$member->Component = 'str';
-			$input_form_object->$member->Label = $member;
-			$input_form_object->$member->Value = $value;
-		}
-		foreach($property_object as $member=>$value){
-			$property_form_object->$member  = (object) null;
-			$property_form_object->$member->Component = 'str';
-			$property_form_object->$member->Label = $member;
-			$property_form_object->$member->Value = $value;
-		}
 		SQDE_Sequode::model()->updateField(json_encode($input_form_object),'input_form_object');
 		SQDE_Sequode::model()->updateField(json_encode($property_form_object),'property_form_object');
-		SQDE_Sequode::model()->updateField(json_encode($process_instance_object),'process_instance_object');
 		SQDE_Sequode::model()->updateField('[]','input_object_map');
 		SQDE_Sequode::model()->updateField('[]','property_object_map');
 		SQDE_Sequode::model()->updateField('[]','output_object_map');
