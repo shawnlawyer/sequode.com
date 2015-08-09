@@ -36,7 +36,7 @@ var SQDE_SequodeConsoleRegistry = function(){
             }
             var fetched = {};
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url:  self.cacheBust(route),
                 dataType: "json",
                 success: function(data){
