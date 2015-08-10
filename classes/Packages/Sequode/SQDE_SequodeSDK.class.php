@@ -10,7 +10,7 @@ function SequodeSDK($application_token = false) {
 class SequodeSDK{
    
     private $application = false;
-    private $origin_host = 'https://sequode.com/';
+    private $origin_host = 'https://api.sequode.com/';
     private $application_name = null;
     private $application_token = null;
     public function __construct($application_token = false){
