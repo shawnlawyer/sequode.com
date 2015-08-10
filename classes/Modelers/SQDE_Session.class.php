@@ -75,7 +75,7 @@ class SQDE_Session extends SQDE_Modeler {
         if(self::exists(self::getCookieValue()) && self::model()->ip_address == $ip_address){
             self::load();
             SQDE_Session::set('history', array_merge(self::get('history'), array(substr($_SERVER['REQUEST_URI'], 0, 25))));
-        }elseif($auto_create == true){
+        }elseif($auto_create == true && $_SERVER['HTTP_HOST'] == SQDE_Application::model()->sessions->create_domain){
             self::create($ip_address);
             SQDE_Session::set('history', array(substr($_SERVER['REQUEST_URI'], 0, 25)));
             self::setCookie();
@@ -98,8 +98,10 @@ class SQDE_Session extends SQDE_Modeler {
         self::setAll(unserialize(self::model()->session_data),false);
     }
 	public static function setCookie(){
-        setcookie(SQDE_Application::model()->sessions->cookie, self::id(), time()+SQDE_Application::model()->sessions->length, SQDE_Application::model()->sessions->path, 'origin.'.SQDE_Application::model()->sessions->domain);
-        setcookie(SQDE_Application::model()->sessions->cookie, self::id(), time()+SQDE_Application::model()->sessions->length, SQDE_Application::model()->sessions->path, SQDE_Application::model()->sessions->domain);
+        $expire = time()+SQDE_Application::model()->sessions->length
+        setcookie(SQDE_Application::model()->sessions->cookie, self::id(), $expire, SQDE_Application::model()->sessions->path, '.'.SQDE_Application::model()->sessions->domain);
+        setcookie(SQDE_Application::model()->sessions->cookie, self::id(), $expire, SQDE_Application::model()->sessions->path, '.'.SQDE_Application::model()->sessions->domain);
+        setcookie(SQDE_Application::model()->sessions->cookie, self::id(), $expire, SQDE_Application::model()->sessions->path, '*.'.SQDE_Application::model()->sessions->domain);
     }
 	public static function getCookieValue(){
         return (self::isCookieValid()) ? $_COOKIE[SQDE_Application::model()->sessions->cookie] : false;

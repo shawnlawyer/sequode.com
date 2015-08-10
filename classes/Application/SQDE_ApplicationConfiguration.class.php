@@ -2,7 +2,14 @@
 class SQDE_ApplicationConfiguration {
 	
 	public function __construct(){
+        $session_create = json_decode('{
+            "domain": "sequode.com",
+            "length": 86400,
+            "path": "/",
+            "cookie": "sequodeUser"
+        }');
         $sessions = json_decode('{
+            "create_domain": "origin.sequode.com",
             "domain": "sequode.com",
             "length": 86400,
             "path": "/",
