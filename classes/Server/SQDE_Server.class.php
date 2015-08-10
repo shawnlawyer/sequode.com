@@ -1,6 +1,7 @@
 <?php
-
-header('Access-Control-Allow-Origin: '.((!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) ? $_SERVER['HTTP_X_FORWARDED_PROTO'] : ((!empty($_SERVER['HTTPS'])) ? "https" : "http")).'://sequode.com');
+if(in_array($_SERVER['HTTP_HOST'],SQDE_Application::model()->access_control)){;
+    header('Access-Control-Allow-Origin: '.((!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) ? $_SERVER['HTTP_X_FORWARDED_PROTO'] : ((!empty($_SERVER['HTTPS'])) ? "https" : "http")).'://'.$_SERVER['HTTP_HOST']);
+}
 class SQDE_Server {
 	public static function run(){
 		$route_class = false;
