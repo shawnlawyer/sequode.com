@@ -1,16 +1,6 @@
 <?php
-if (isset($_SERVER['HTTP_ORIGIN'])) {
+if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], array('https://sequode.com','https://origin.sequode.com','https://console.sequode.com'))) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
-    echo $_SERVER['HTTP_ORIGIN'];
-    exit;
-    /*
-    header("Access-Control-Allow-Origin: http://sequode.com");
-    header('Access-Control-Allow-Origin: https://sequode.com');
-    header('Access-Control-Allow-Origin: http://console.sequode.com');
-    header('Access-Control-Allow-Origin: https://console.sequode.com');
-    header('Access-Control-Allow-Origin: http://origin.sequode.com');
-    header('Access-Control-Allow-Origin: https://origin.sequode.com');
-    */
 }
 class SQDE_Server {
 	public static function run(){
