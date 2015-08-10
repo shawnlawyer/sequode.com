@@ -81,7 +81,7 @@ class SQDE_SequodeOriginsRest{
             $model_id_to_key[$object->id] = $key;
         }
         
-        $api_host = 'https://sequode.com/';
+        $api_host = 'https://api.sequode.com/';
         
         header('Content-Type: text/plain',true);
         header('Content-Disposition: attachment; filename="'.SQDE_Package::model()->token.'.class.php"');
