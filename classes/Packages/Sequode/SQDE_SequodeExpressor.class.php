@@ -2,7 +2,7 @@
         $_ks = $_ki = $_kp = $_ko = 0;
         $_s = array(array());
         foreach($sm->s as $id){
-            $_s[] = self::model($sm->s[$_ks]);
+            $_s[] = self::node($sm->s[$_ks]);
             $_ks++;
             foreach($_s[$_ks]->i as $_m => $_v){
                 $_ki++;

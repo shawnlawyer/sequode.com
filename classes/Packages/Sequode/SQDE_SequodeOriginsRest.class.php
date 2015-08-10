@@ -95,7 +95,7 @@ class ' . SQDE_Package::model()->token . ' {
     public static $model_name_to_model_id = ' . SQDE_FileManager::var_export($model_name_to_model_id, true) . ';
     public static $model_id_to_key = ' . SQDE_FileManager::var_export($model_id_to_key, true) . ';
     public static $index = ' . $package_sequode_model_ids[0] . ';
-    public static function models(){
+    public static function collection(){
         return ' . str_replace('Inp_Obj','i', str_replace('Prop_Obj','p', str_replace('Out_Obj','o', str_replace('\'%START_CLOSURE_REPLACEMENT_HOOK%','function($_s){ ',str_replace('%END_CLOSURE_REPLACEMENT_HOOK%\'',' return; }',SQDE_FileManager::var_export($filtered_models, true)))))) . ';
     }
     public static function exists($value, $by=\'id\'){
@@ -106,7 +106,7 @@ class ' . SQDE_Package::model()->token . ' {
         }
     }
     
-    public static function model($value, $by = null){
+    public static function node($value, $by = null){
         switch($by){
             case \'id\':
             case \'name\':
@@ -115,10 +115,10 @@ class ' . SQDE_Package::model()->token . ' {
                 $by = \'id\';
                 break;
         }
-        $model_key = self::exists($value,$by);
+        $key = self::exists($value,$by);
         
-        if($model_key !== false){
-            return self::models()[$model_key];
+        if($key !== false){
+            return self::collection()[$key];
         }
         return false;   
 	}
