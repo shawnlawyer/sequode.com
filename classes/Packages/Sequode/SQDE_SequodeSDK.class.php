@@ -141,7 +141,7 @@ class SequodeSDK{
                 $route = str_replace('.json', '', $route);
             }
             array_shift($request_pieces);
-            $_sm = $_a::model($route, 'name');
+            $_sm = $_a::node($route, 'name');
 			if($_sm === false){   
 				echo 'Does Not Exist! : '.$route;
                 return;
@@ -156,7 +156,7 @@ class SequodeSDK{
             }
             unset($request_pieces);
 		}else{
-            $_sm = $_a::model($_a::$index, 'id');
+            $_sm = $_a::node($_a::$index, 'id');
 			if(!$_sm){
 				return;
 			}
