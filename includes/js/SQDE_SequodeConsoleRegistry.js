@@ -1,6 +1,6 @@
 var SQDE_SequodeConsoleRegistry = function(){
 	var self = this;
-	self.origin_host = 'https://origin.sequode.com';
+	self.origin_host = 'https://console.sequode.com';
 	self.collections_feed = self.origin_host + '/collections';
     self.collections = {};
     self.active_context = false;
@@ -36,7 +36,7 @@ var SQDE_SequodeConsoleRegistry = function(){
             }
             var fetched = {};
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url:  self.cacheBust(route),
                 dataType: "json",
                 success: function(data){
