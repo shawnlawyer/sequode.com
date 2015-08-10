@@ -1,9 +1,11 @@
 <?php
 foreach(array('https', 'http') as $protocol){
     foreach(SQDE_Application::model()->access_control as $domain){
-        header('Access-Control-Allow-Origin: '.$protocol.'://'.$domain);
+        header('Access-Control-Allow-Origin: https://'.$domain);
     }
 }
+print_r(SQDE_Application::model()->access_control);
+die();
 class SQDE_Server {
 	public static function run(){
 		$route_class = false;
