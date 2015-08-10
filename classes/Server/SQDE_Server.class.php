@@ -1,6 +1,8 @@
 <?php
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+    echo $_SERVER['HTTP_ORIGIN'];
+    exit;
     /*
     header("Access-Control-Allow-Origin: http://sequode.com");
     header('Access-Control-Allow-Origin: https://sequode.com');
