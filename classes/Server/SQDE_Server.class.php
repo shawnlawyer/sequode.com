@@ -1,6 +1,6 @@
 <?php
 foreach(array('https', 'http') as $protocol){
-    foreach(SQDE_Application::model()->access_control) as $domain){
+    foreach(SQDE_Application::model()->access_control as $domain){
         header('Access-Control-Allow-Origin: '.$protocol.'://'.$domain);
     }
 }
