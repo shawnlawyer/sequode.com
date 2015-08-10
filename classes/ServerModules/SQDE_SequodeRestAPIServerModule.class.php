@@ -1,6 +1,9 @@
 <?php
 class SQDE_SequodeRestAPIServerModule{
     public static function run(){
+        if ($_SERVER['HTTP_HOST'] != 'api.sequode.com'){
+            exit;
+        }
         $request_pieces = SQDE_Server::requestUriPieces();
         if(!isset($request_pieces[0]) || trim($request_pieces[0]) == ''){
             exit;
