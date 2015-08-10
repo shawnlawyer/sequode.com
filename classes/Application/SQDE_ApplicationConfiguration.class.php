@@ -2,12 +2,16 @@
 class SQDE_ApplicationConfiguration {
 	
 	public function __construct(){
-        $access_control = json_decode('{
-            "api.sequode.com","origin.sequode.com","console.sequode.com","sequode.com"
-        }');
+        $access_control = array( 
+            'api.sequode.com',
+            'xhr.sequode.com',
+            'origin.sequode.com',
+            'console.sequode.com',
+            'sequode.com'
+        );
         $this->access_control = $access_control;
         $sessions = json_decode('{
-            "create_domain": "origin.sequode.com",
+            "create_domain": "console.sequode.com",
             "domain": "sequode.com",
             "length": 86400,
             "path": "/",
