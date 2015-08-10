@@ -1,10 +1,7 @@
 <?php
-//foreach(array('https', 'http') as $protocol){
-    //foreach(SQDE_Application::model()->access_control as $domain){
-    foreach(array("api.sequode.com","origin.sequode.com","console.sequode.com","sequode.com") as $domain){
-        header('Access-Control-Allow-Origin: https://'.$domain);
-    }
-//}
+header('Access-Control-Allow-Origin: https://sequode.com');
+header('Access-Control-Allow-Origin: https://console.sequode.com');
+header('Access-Control-Allow-Origin: https://origin.sequode.com');
 class SQDE_Server {
 	public static function run(){
 		$route_class = false;
