@@ -1,6 +1,9 @@
 <?php
+header('Access-Control-Allow-Origin: http://sequode.com');
 header('Access-Control-Allow-Origin: https://sequode.com');
+header('Access-Control-Allow-Origin: http://console.sequode.com');
 header('Access-Control-Allow-Origin: https://console.sequode.com');
+header('Access-Control-Allow-Origin: http://origin.sequode.com');
 header('Access-Control-Allow-Origin: https://origin.sequode.com');
 class SQDE_Server {
 	public static function run(){
