@@ -11,7 +11,7 @@ class SQDE_ApplicationConfiguration {
         );
         $this->access_control = $access_control;
         $sessions = json_decode('{
-            "create_domain": "xhr.sequode.com",
+            "create_domain": "sequode.com",
             "domain": "sequode.com",
             "length": 86400,
             "path": "/",
