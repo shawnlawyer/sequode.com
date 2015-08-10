@@ -98,7 +98,7 @@ class SQDE_Session extends SQDE_Modeler {
         self::setAll(unserialize(self::model()->session_data),false);
     }
 	public static function setCookie(){
-        $expire = time()+SQDE_Application::model()->sessions->length
+        $expire = time()+SQDE_Application::model()->sessions->length;
         setcookie(SQDE_Application::model()->sessions->cookie, self::id(), $expire, SQDE_Application::model()->sessions->path, '.'.SQDE_Application::model()->sessions->domain);
         setcookie(SQDE_Application::model()->sessions->cookie, self::id(), $expire, SQDE_Application::model()->sessions->path, '.'.SQDE_Application::model()->sessions->domain);
         setcookie(SQDE_Application::model()->sessions->cookie, self::id(), $expire, SQDE_Application::model()->sessions->path, '*.'.SQDE_Application::model()->sessions->domain);
