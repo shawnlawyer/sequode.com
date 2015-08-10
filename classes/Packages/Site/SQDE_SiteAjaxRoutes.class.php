@@ -2,12 +2,12 @@
 class SQDE_SiteAjaxRoutes {
 	public static $merge = true;
 	public static $routes = array(
-		'ajax.php'
+		'xhr'
 	);
 	public static $routes_to_methods = array(
-		'ajax.php' => 'ajax'
+		'xhr' => 'xhr'
 	);
-	public static function ajax(){
+	public static function xhr(){
         
 		$call = false;
 		$args = array();
