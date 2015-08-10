@@ -24,10 +24,10 @@ class SQDE_SequodeOriginsRest{
         $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
         $sequode_model->getAll($where,'id,name,detail,usage_type,coding_type,sequence,input_object,property_object,output_object,input_object_detail,property_object_detail,output_object_detail,input_object_map,property_object_map,output_object_map,input_form_object,property_form_object');
         
-        $model_name_to_model_id = array();
+        $name_to_id = array();
         foreach($sequode_model->all as $key => $object){
             if(in_array($object->id, $package_sequode_model_ids)){
-                $model_name_to_model_id[$object->name] = $object->id;
+                $name_to_id[$object->name] = $object->id;
             }
         }
         $models = array_merge($models, $sequode_model->all);
@@ -76,9 +76,9 @@ class SQDE_SequodeOriginsRest{
             }
         }
         unset($models);
-        $model_id_to_key = array();
+        $id_to_key = array();
         foreach($filtered_models as $key => $object){
-            $model_id_to_key[$object->id] = $key;
+            $id_to_key[$object->id] = $key;
         }
         
         $api_host = 'https://api.sequode.com/';
@@ -92,17 +92,17 @@ class ' . SQDE_Package::model()->token . ' {
     public static $application_token = \'' . SQDE_Package::model()->token . '\';
     ' . file_get_contents('SQDE_SequodeExpressor.class.php',true) . '
     
-    public static $model_name_to_model_id = ' . SQDE_FileManager::var_export($model_name_to_model_id, true) . ';
-    public static $model_id_to_key = ' . SQDE_FileManager::var_export($model_id_to_key, true) . ';
+    public static $name_to_id = ' . SQDE_FileManager::var_export($name_to_id, true) . ';
+    public static $id_to_key = ' . SQDE_FileManager::var_export($id_to_key, true) . ';
     public static $index = ' . $package_sequode_model_ids[0] . ';
     public static function collection(){
         return ' . str_replace('Inp_Obj','i', str_replace('Prop_Obj','p', str_replace('Out_Obj','o', str_replace('\'%START_CLOSURE_REPLACEMENT_HOOK%','function($_s){ ',str_replace('%END_CLOSURE_REPLACEMENT_HOOK%\'',' return; }',SQDE_FileManager::var_export($filtered_models, true)))))) . ';
     }
     public static function exists($value, $by=\'id\'){
         if($by == \'name\'){
-            return (isset(static::$model_name_to_model_id[$value])) ? static::$model_id_to_key[static::$model_name_to_model_id[$value]] : false;
+            return (isset(static::$name_to_id[$value])) ? static::$id_to_key[static::$name_to_id[$value]] : false;
         }else{ 
-            return (isset(static::$model_id_to_key[intval($value)])) ? static::$model_id_to_key[intval($value)] : false;
+            return (isset(static::$id_to_key[intval($value)])) ? static::$id_to_key[intval($value)] : false;
         }
     }
     
