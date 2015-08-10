@@ -1,6 +1,8 @@
 <?php
-if(in_array($_SERVER['HTTP_HOST'],SQDE_Application::model()->access_control)){;
-    header('Access-Control-Allow-Origin: '.((!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) ? $_SERVER['HTTP_X_FORWARDED_PROTO'] : ((!empty($_SERVER['HTTPS'])) ? "https" : "http")).'://'.$_SERVER['HTTP_HOST']);
+foreach(array('https', 'http') as $protocol){
+    foreach(SQDE_Application::model()->access_control) as $domain){
+        header('Access-Control-Allow-Origin: '.$protocol.'://'.$domain);
+    }
 }
 class SQDE_Server {
 	public static function run(){
