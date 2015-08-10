@@ -6,7 +6,7 @@ var SQDE_AjaxCall = function(){
                 self[i] = arguments[0][i];
             }
         }
-        var o = new SQDE_AjaxCallObject();
+        var o = new SQDE_XHRObject();
         o.route = self.route;
         o.protocol = self.protocol;
         o.protocol_version = self.protocol_version;
@@ -44,7 +44,7 @@ var SQDE_AjaxCall = function(){
         self.send(arguments[0]);
     }
 }
-var SQDE_AjaxCallObject = function(){
+var SQDE_XHRObject = function(){
 	var self = this;    
     self.XMLHttpRequestObject = function (){
         var o;
