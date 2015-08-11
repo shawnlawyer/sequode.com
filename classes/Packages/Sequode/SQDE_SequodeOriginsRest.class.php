@@ -88,8 +88,8 @@ class SQDE_SequodeOriginsRest{
         echo '<?php
 class ' . SQDE_Package::model()->token . ' {
     public static $origin_host = \'' . $api_host . '\';
-    public static $application_name = \'' . SQDE_Package::model()->name . '\';
-    public static $application_token = \'' . SQDE_Package::model()->token . '\';
+    public static $name = \'' . SQDE_Package::model()->name . '\';
+    public static $token = \'' . SQDE_Package::model()->token . '\';
     ' . file_get_contents('SQDE_SequodeExpressor.class.php',true) . '
     
     public static $name_to_id = ' . SQDE_FileManager::var_export($name_to_id, true) . ';
