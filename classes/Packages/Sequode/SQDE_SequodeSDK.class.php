@@ -123,7 +123,7 @@ class SequodeSDK{
         }
         if(class_exists($token)){
             $this->package = $token;
-            $this->name = $token::name;
+            $this->name = $token::$name;
             $this->token = $token::$token;
             $this->origin_host = $token::$origin_host;
         }
