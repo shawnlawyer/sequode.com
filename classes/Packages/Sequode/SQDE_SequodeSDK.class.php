@@ -168,12 +168,13 @@ class SequodeSDK{
 			}
 		}
 		foreach($_sm->p as $m => $v){
-			if($m != 'Run_Process'){ continue; }
+			if($m == 'Run_Process'){ continue; }
 			if(isset($parameters[0])){
 				$_sm->p->$m = $parameters[0];
 				array_shift($parameters);
 			}
 		}
+        $_sm->p->Run_Process = true;
         if($buffer_output == true){
             ob_start();
             $_a::express($_sm);
