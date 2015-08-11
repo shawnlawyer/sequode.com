@@ -152,7 +152,7 @@ class SequodeSDK{
             }
             unset($request_pieces);
 		}else{
-            $_sm = $_a::node($_a::$index, 'id');
+            $_sm = $_package::node($_package::$index, 'id');
 			if(!$_sm){
 				return;
 			}
