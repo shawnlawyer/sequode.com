@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin: *');
 define('MACHINE_TEMP_DIRECTORY',((!empty($_SERVER['WINDIR'])) ? '%TEMP%' : '/tmp'));
 define('SEQUODE_DIRECTORY', MACHINE_TEMP_DIRECTORY . DIRECTORY_SEPARATOR . 'sequode');
 if(!is_dir( SEQUODE_DIRECTORY ) && !mkdir( SEQUODE_DIRECTORY , 0777, true)) {
