@@ -63,7 +63,7 @@ class SequodeSDK{
             $url = $this->origin_host . $this->token . '/' . substr_replace(trim($line), '', 0 ,strlen('origin/'));
             $this->apiRequest($url, true);
         }elseif(strpos(trim($line),'-b')  === 0){
-            $this->installApplication($this->token);
+            $this->installPackage($this->token);
             echo "Rebuilt " . str_replace('_',' ', $this->name) ."\n";
             echo "Must restart\n";
             exit;
