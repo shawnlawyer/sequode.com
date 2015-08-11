@@ -4,20 +4,20 @@ define('SEQUODE_DIRECTORY', MACHINE_TEMP_DIRECTORY . DIRECTORY_SEPARATOR . 'sequ
 if(!is_dir( SEQUODE_DIRECTORY ) && !mkdir( SEQUODE_DIRECTORY , 0777, true)) {
     echo 'no cache directory:' . SEQUODE_DIRECTORY;
 }
-function SequodeSDK($application_token = false) {
-    return new SequodeSDK($application_token);
+function SequodeSDK($token = false) {
+    return new SequodeSDK($token);
 }
 class SequodeSDK{
    
-    private $application = false;
+    private $package = false;
     private $origin_host = 'https://api.sequode.com/';
-    private $application_name = null;
-    private $application_token = null;
-    public function __construct($application_token = false){
-        if($application_token != false && !class_exists($application_token)){
-            $this->loadApplication($application_token, true);
+    private $name = null;
+    private $token = null;
+    public function __construct($token = false){
+        if($token != false && !class_exists($token)){
+            $this->loadPackage($token, true);
         }
-        return ($this->application != false && $this->application == $application_token) ? $this : false;
+        return ($this->package != false && $this->package == $token) ? $this : false;
     }
     public static function uniqueHash($seed='',$prefix='SQDE'){
 		$time = explode(' ', microtime());
@@ -55,16 +55,16 @@ class SequodeSDK{
     }
     public function console($show_welcome = true){
         if($show_welcome == true){
-            echo str_replace('_',' ', $this->application_name) .' Console:';
+            echo str_replace('_',' ', $this->name) .' Console:';
         }
         echo "\n:";
         $line = fgets(STDIN);
         if(strpos(trim($line),'origin/')  === 0){
-            $url = $this->origin_host . $this->application_token . '/' . substr_replace(trim($line), '', 0 ,strlen('origin/'));
+            $url = $this->origin_host . $this->token . '/' . substr_replace(trim($line), '', 0 ,strlen('origin/'));
             $this->apiRequest($url, true);
         }elseif(strpos(trim($line),'-b')  === 0){
-            $this->installApplication($this->application_token);
-            echo "Rebuilt " . str_replace('_',' ', $this->application_name) ."\n";
+            $this->installApplication($this->token);
+            echo "Rebuilt " . str_replace('_',' ', $this->name) ."\n";
             echo "Must restart\n";
             exit;
         }elseif(strpos(trim($line),'end')  === 0){
@@ -86,9 +86,9 @@ class SequodeSDK{
 		$this->expressRequest(self::requestPieces( __FUNCTION__ ) , true);
         exit;
     }
-    private function installApplication($application_token){
-        $filepath = SEQUODE_DIRECTORY . DIRECTORY_SEPARATOR . $application_token.'.class.php';
-        $url = $this->origin_host . $application_token . '/origins/sequode/package';
+    private function installPackage($token){
+        $filepath = SEQUODE_DIRECTORY . DIRECTORY_SEPARATOR . $token.'.class.php';
+        $url = $this->origin_host . $token . '/origins/sequode/package';
         $read = fopen($url, "rb");
         if($read){
             $write = fopen($filepath, "wb");
@@ -111,26 +111,26 @@ class SequodeSDK{
             fclose($read);
         }
     }
-	private function loadApplication($application_token, $try_install = false){
-        if(!class_exists($application_token)){
-            $filepath = SEQUODE_DIRECTORY . DIRECTORY_SEPARATOR . $application_token.'.class.php';
+	private function loadPackage($token, $try_install = false){
+        if(!class_exists($token)){
+            $filepath = SEQUODE_DIRECTORY . DIRECTORY_SEPARATOR . $token.'.class.php';
             if(!@include($filepath)){
                 if($try_install == true){
-                    $this->installApplication($application_token);
-                    $this->loadApplication($application_token);
+                    $this->installPackage($token);
+                    $this->loadPackage($token);
                 }
             }
         }
-        if(class_exists($application_token)){
-            $this->application = $application_token;
-            $this->application_name = $application_token::$application_name;
-            $this->application_token = $application_token::$application_token;
-            $this->origin_host = $application_token::$origin_host;
+        if(class_exists($token)){
+            $this->package = $token;
+            $this->name = $token::name;
+            $this->token = $token::$token;
+            $this->origin_host = $token::$origin_host;
         }
 	}
     private function expressRequest($request_pieces, $buffer_output=true){
         $output_as = '';
-        $_a = $this->application;
+        $_package = $this->package;
         if(isset($request_pieces[0]) && trim($request_pieces[0]) != ''){
 			$route = str_replace('\s','_',str_replace('%20','_',str_replace(' ','_',trim($request_pieces[0]))));
             if(strpos($route,'.exp') !== false){
@@ -141,13 +141,9 @@ class SequodeSDK{
                 $route = str_replace('.json', '', $route);
             }
             array_shift($request_pieces);
-            $_sm = $_a::node($route, 'name');
+            $_sm = $_package::node($route, 'name');
 			if($_sm === false){   
-				echo 'Does Not Exist! : '.$route;
-                return;
-			}
-            if(isset($_sm->c)){
-				echo 'Sequence-able code type sequode elements cannot be directly run. : '.$route;
+				echo 'Unknown: '.$route;
                 return;
 			}
             $parameters = array();
@@ -177,7 +173,7 @@ class SequodeSDK{
         $_sm->p->Run_Process = true;
         if($buffer_output == true){
             ob_start();
-            $_a::express($_sm);
+            $_package::express($_sm);
             $_sm->o->Headers_List = headers_list();
             $_sm->o->Output_Buffer = ob_get_contents();
             ob_end_clean();
@@ -204,7 +200,7 @@ class SequodeSDK{
                     break; 
             }
         }else{
-            $_a::express($_sm);
+            $_package::express($_sm);
         }
     }
 }
