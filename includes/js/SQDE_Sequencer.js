@@ -19,13 +19,13 @@ var SQDE_Sequencer = function(){
             self.first_run_complete == false;
         }
         self.initialized = false;
-		self.view_dragger_layer.remove();
+		self.view_positioner_layer.remove();
 		self.grid_areas_layer.remove();
 		self.flow_lines_layer.remove();
 		self.sequence_layer.remove();
 		self.ends_layer.remove();
 		self.wiring_layer.remove();
-		self.view_dragger_layer.destroy();
+		self.view_positioner_layer.destroy();
 		self.grid_areas_layer.destroy();
 		self.flow_lines_layer.destroy();
 		self.sequence_layer.destroy();
