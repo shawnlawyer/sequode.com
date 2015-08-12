@@ -1068,10 +1068,9 @@ var SQDE_Sequencer = function(){
 					strokeWidth: 1,
 					dash: [11, 11]
 				});
-				self.wire_group.add(wire);
-				self.wire_group.add(wire1);
-				self.wire_group.add(wire2);
-				self.wiring.push(wire_group);
+				wire_group.add(wire);
+				wire_group.add(wire1);
+				wire_group.add(wire2);
 				self.wiring_group.add(wire_group);
 			}
 		}
