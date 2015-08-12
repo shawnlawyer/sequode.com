@@ -54,17 +54,7 @@ var SQDE_Sequencer = function(){
             
     };
     self.modelComplete = function(model){
-        
-        // drag listner event attachments
-        
-		model = self.attachModelButtonsEventOnTap(model);
-        
-        // drag listner event attachments
-        
-        model = self.attachModelEventOnDragStart(model);
-        model = self.attachModelEventOnDragMove(model);
-        model = self.attachModelEventOnDragEnd(model);
-		self.models[model.sequence_order] = model;
+        self.models[model.sequence_order] = self.modelEventListners(model);;
         self.models_done++;
         self.done();
     };
@@ -231,10 +221,7 @@ var SQDE_Sequencer = function(){
 			model.valignment = 'bottom';
 			model.type = type;
 			model.run();
-			model = self.attachModelEndsEventButtonsOnClick(model);
-			model = self.attachModelEndsEventButtonsOnDblClick(model);
-			model = self.attachModelEndsEventBodyOnClick(model);
-			self.IOPmodels[type] = model;
+			self.IOPmodels[type] = self.modelEndsEventListners(model);
 		}
 	};
     self.makeGridAreas = function(){
@@ -949,6 +936,22 @@ var SQDE_Sequencer = function(){
     };
     self.initialize();
     
+    // Event Listners attachments
+    
+	self.modelEventListners = function(model){
+		model = self.attachModelButtonsEventOnTap(model);
+        model = self.attachModelEventOnDragStart(model);
+        model = self.attachModelEventOnDragMove(model);
+        model = self.attachModelEventOnDragEnd(model);
+		return model;
+	};
+
+	self.modelEndsEventListners = function(model){
+        model = self.attachModelEndsEventButtonsOnTap(model);
+        model = self.attachModelEndsEventBodyOnTap(model);
+		return model;
+	};
+    
     //drag event listner attachments
     
     self.attachGridAreaEventOnDragStart = function(gridarea){
@@ -1082,44 +1085,18 @@ var SQDE_Sequencer = function(){
         }
         self.saveSequence(model);
 	};
-    // tap event listner attachments
 
-	self.attachModelEndsEventButtonsOnDblClick = function(model){
-		var name;
+    //tap event listner attachments
+    
+    self.attachModelEndsEventButtonsOnTap = function(model){
 		for(var type in model.button_shapes){
 			for( var i in model.button_shapes[type] ){
-				name = model.node[type][i].n;
-				model.button_shapes[type][i] = self.attachModelEndsEventButtonOnDblClick(model.button_shapes[type][i], type, model.node[type][i].n, model.node.id);
+				model.button_shapes[type][i] = self.attachModelEndsEventButtonOnTap(model.button_shapes[type][i],type,i);
 			}
 		}
 		return model;
 	};
-	self.attachModelEndsEventButtonOnDblClick = function(shape,type,member,id){
-        var alt_type;
-        switch(type){
-			case 'i':
-				alt_type = 'input';
-				break;
-			case 'p':
-				alt_type = 'property';
-				break;
-            default:
-                return shape;
-		}
-        shape.on("dblclick", function(){
-            clearTimeout(self.clickTimeout);
-        });
-		return shape;
-	};
-	self.attachModelEndsEventButtonsOnClick = function(model){
-		for(var type in model.button_shapes){
-			for( var i in model.button_shapes[type] ){
-				model.button_shapes[type][i] = self.attachModelEndsEventButtonOnClick(model.button_shapes[type][i],type,i);
-			}
-		}
-		return model;
-	};
-	self.attachModelEndsEventButtonOnClick = function(shape,type,i){
+	self.attachModelEndsEventButtonOnTap = function(shape,type,i){
 		switch(type){
 			case 'i':
 				shape.on("click touchend", function(){
@@ -1142,7 +1119,7 @@ var SQDE_Sequencer = function(){
 		}
 		return shape;
 	};
-	self.attachModelEndsEventBodyOnClick = function(model){
+	self.attachModelEndsEventBodyOnTap = function(model){
 		switch(model.type){
 			case 'base':
 				model.body_shape.on("click touchend", function(){
