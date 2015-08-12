@@ -996,7 +996,6 @@ var SQDE_Sequencer = function(){
 	};
 	self.makeWiring = function(){
 		self.wiring_group = shapesKit.group(config.model.group);
-		self.wiring = [];
 		var wire, wire1, wire2, connections, wire_group;
 		var start, end, padding, start_y_padding, end_y_padding, start_x_padding, end_x_padding;
 		var start_x, start_y, end_x, end_y;
