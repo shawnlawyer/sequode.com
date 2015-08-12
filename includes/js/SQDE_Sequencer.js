@@ -1053,12 +1053,12 @@ var SQDE_Sequencer = function(){
                 wire_group = shapesKit.group(config.model.group);
                 wire = new Kinetic.Line({
 					points: [start_x, start_y, end_x, end_y],
-					stroke: type_stroke[connections[i].end.type],
+					stroke: 'black',
 					strokeWidth: 1.5
 				});
                 wire1 = new Kinetic.Line({
 					points: [start_x, start_y, end_x, end_y],
-					stroke: ,
+					stroke: type_stroke[connections[i].end.type],
 					strokeWidth: 1
 				});
                 wire2 = new Kinetic.Line({
