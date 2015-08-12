@@ -36,16 +36,16 @@ var SQDE_Sequencer = function(){
 			self[self.dict[i]] = undefined;
 		}
 	};
-	self.dict = ['models','sequence','flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer','view_dragger_layer','id','dragging','drag_id','y','offstage','tweens_playing','grids','grid','grid_mode','grid_x','grid_order','align_lock'];
+	self.dict = ['models','sequence','flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer','view_positioner_layer','id','dragging','drag_id','y','offstage','tweens_playing','grids','grid','grid_mode','grid_x','grid_order','align_lock'];
 	self.models = [];
 	self.IOPmodels = { 'head':false, 'base':true };
     self.grid_auger_types = ['prepend','split','append'];
-	self.connections = {'inputs':[],'properties':[],'outputs':[]};
-	self.connecters = {'inputs':[],'properties':[],'outputs':[]};
+    self.connections = {'i':[],'p':[],'o':[]};
+    self.connecters = {'i':[],'p':[],'o':[]};
 	self.gridarea_height = 200;
     self.view_layers_offset = {x:0,y:0};
     self.view_layers_starting_offset = {x:0,y:0};
-    self.all_layers = ['flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer','view_dragger_layer'];
+    self.all_layers = ['flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer','view_positioner_layer'];
     self.view_layers = ['flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer'];
     self.makeChartViewable = function(){
         self.center_stage = {x:Math.floor(stage.getWidth()/2), y:Math.floor(stage.getHeight()/2)};
@@ -84,8 +84,8 @@ var SQDE_Sequencer = function(){
         self.focused_grid_area_id = false;
         self.grid_area_augmenter = false;
         self.grid_auger_split_position = false;
-		self.view_dragger_layer = new Kinetic.Layer();
-		stage.add(self.view_dragger_layer);
+		self.view_positioner_layer = new Kinetic.Layer();
+		stage.add(self.view_positioner_layer);
 		self.flow_lines_layer = new Kinetic.Layer();
 		stage.add(self.flow_lines_layer);
 		self.grid_areas_layer = new Kinetic.Layer();
@@ -152,8 +152,8 @@ var SQDE_Sequencer = function(){
 		});
         o.group.add(o.box);
         o = self.viewerPositionerEventListners(o);
-        self.view_dragger_layer.add(o.group);
-        self.view_dragger_layer.moveToBottom();
+        self.view_positioner_layer.add(o.group);
+        self.view_positioner_layer.moveToBottom();
 	};
 	self.makeSequenceModels = function(){
         self.models_done = 0;
