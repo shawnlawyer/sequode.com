@@ -1052,8 +1052,8 @@ var SQDE_Sequencer = function(){
                 }
                 wire = new Kinetic.Line({
 					points: [start_x, start_y, end_x, end_y],
-					stroke: 'black',
-					strokeWidth: 1
+					stroke: type_stroke[connections[i].end.type],
+					strokeWidth: 1.5
 				});
 				self.wiring.push(wire);
 				self.wiring_group.add(wire);
