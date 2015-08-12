@@ -98,7 +98,7 @@ var SQDE_Sequencer = function(){
 		stage.add(self.wiring_layer);
 		self.node = registry.node('sequodes', id);
         if(self.node.s.length > 0 ){
-            setTimeout(self.makeViewer,0);
+            setTimeout(self.makeViewPositioner,0);
         self.makeChartViewable();
         }
 		self.sequence = self.node.s;
