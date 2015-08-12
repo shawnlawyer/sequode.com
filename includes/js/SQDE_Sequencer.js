@@ -1007,8 +1007,9 @@ var SQDE_Sequencer = function(){
 		for( var type in self.connections ){
 			connections = self.connections[type];
 			for( var i = 0; i < connections.length; i++ ){
+                if( connections[i].end == undefined ){ continue; }
                 start = connections[i].start;
-				end = ( connections[i].end == undefined ) ? connections[i].start : connections[i].end ;
+				end = connections[i].end ;
                 if(start.y == end.y){
                     start_adjuster = (connections[i].start.type != 'p') ? .75 : 0 ;
                     end_adjuster = (connections[i].start.type != 'p') ? .75 : 0 ;
@@ -1182,6 +1183,21 @@ var SQDE_Sequencer = function(){
         self.addConnection();
 	};
     self.addConnection = function(){
+        if(self.connection_receiver == false || self.connection_transmitter == false){
+            return;
+        }
+        if(self.connection_receiver.type == 'external' && self.connection_transmitter.type == 'external'){
+            self.connection_receiver = false;
+            self.connection_transmitter = false;
+            return;
+        }
+        var route = (self.connection_receiver.type == 'external' || self.connection_transmitter.type == 'external') ? 'operations/sequode/addExternalConnection' : 'operations/sequode/addInternalConnection';
+        var type = (self.connection_receiver.type == 'external') ? self.connection_transmitter.type : self.connection_receiver.type;
+        new SQDE_AjaxCall({route:route, inputs:[self.id,type,self.connection_transmitter.key,self.connection_receiver.key], done_callback: function(){registry.fetch({collection:'sequodes', key: self.id})}});
+        self.connection_receiver = false;
+        self.connection_transmitter = false;
+	};
+    self.removeConnection = function(){
         if(self.connection_receiver == false || self.connection_transmitter == false){
             return;
         }
