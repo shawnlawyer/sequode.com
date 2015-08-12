@@ -1003,6 +1003,7 @@ var SQDE_Sequencer = function(){
         var start_adjuster, end_adjuster;
         padding = (model_button.radius / 2) + model_button.strokeWidth;
         var type_stroke = {'i':'yellow','p':'#306EFF','o':'#00FF00'};
+        console.log(self.connections);
 		for( var type in self.connections ){
 			connections = self.connections[type];
 			for( var i = 0; i < connections.length; i++ ){
