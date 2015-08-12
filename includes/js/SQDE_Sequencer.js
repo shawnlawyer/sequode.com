@@ -98,7 +98,7 @@ var SQDE_Sequencer = function(){
 		stage.add(self.wiring_layer);
 		self.node = registry.node('sequodes', id);
         if(self.node.s.length > 0 ){
-            setTimeout(self.makeViewDragger,0);
+            setTimeout(self.makeViewer,0);
         self.makeChartViewable();
         }
 		self.sequence = self.node.s;
@@ -137,29 +137,23 @@ var SQDE_Sequencer = function(){
         if(self.grid_flow_lines_done != self.grid_areas.length -1){return;}
         self.complete();
     }
-    self.makeViewDragger = function(){
-        var dragger = {};
-        dragger.width = stage.getWidth();
-        dragger.height = stage.getHeight();
-		dragger.x = 0;
-        dragger.y = 0;
-        dragger.group = new Kinetic.Group({x:dragger.x, y:dragger.y, draggable:true, dragDistance:2});
-        dragger.box = new Kinetic.Rect({
+    self.makeViewPositioner = function(){
+        var o = {};
+        o.width = stage.getWidth();
+        o.height = stage.getHeight();
+		o.x = 0;
+        o.y = 0;
+        o.group = new Kinetic.Group({x:o.x, y:o.y, draggable:true, dragDistance:2});
+        o.box = new Kinetic.Rect({
             x: 0,
             y: 0,
-            width: dragger.width,
-            height: dragger.height
+            width: o.width,
+            height: o.height
 		});
-        dragger.group.add(dragger.box);
-        
-        dragger.group = eventsKit.attachDraggableCursorEvents(dragger.group);
-        dragger = self.attachViewDraggerEventOnDragStart(dragger);
-        dragger = self.attachViewDraggerEventOnDragMove(dragger);
-        dragger = self.attachViewDraggerEventOnDragEnd(dragger);
-        
-        self.view_dragger_layer.add(dragger.group);
+        o.group.add(o.box);
+        o = self.viewerPositionerEventListners(o);
+        self.view_dragger_layer.add(o.group);
         self.view_dragger_layer.moveToBottom();
-        self.dragger = dragger;
 	};
 	self.makeSequenceModels = function(){
         self.models_done = 0;
@@ -938,6 +932,14 @@ var SQDE_Sequencer = function(){
     
     // Event Listners attachments
     
+	self.viewerPositionerEventListners = function(positioner){
+        positioner.group = eventsKit.attachDraggableCursorEvents(positioner.group);
+        positioner = self.attachViewDraggerEventOnDragStart(positioner);
+        positioner = self.attachViewDraggerEventOnDragMove(positioner);
+        positioner = self.attachViewDraggerEventOnDragEnd(positioner);
+        return positioner;
+	};
+    
 	self.modelEventListners = function(model){
 		model = self.attachModelButtonsEventOnTap(model);
         model = self.attachModelEventOnDragStart(model);
@@ -990,27 +992,27 @@ var SQDE_Sequencer = function(){
 		});
 		return gridarea;
 	};
-	self.attachViewDraggerEventOnDragStart = function(dragger){
-        dragger.group.on("dragstart", function(){
+	self.attachViewDraggerEventOnDragStart = function(positioner){
+        positioner.group.on("dragstart", function(){
             self.view_layers_starting_offset = {x:self.view_layers_offset.x,y:self.view_layers_offset.y};
         });
-        return dragger;
+        return positioner;
     };
-    self.attachViewDraggerEventOnDragMove = function(dragger){
-        dragger.group.on("dragmove", function(){
-            self.view_layers_offset = {x:dragger.group.getX() + self.view_layers_starting_offset.x,y:dragger.group.getY() +self.view_layers_starting_offset.y};
+    self.attachViewDraggerEventOnDragMove = function(positioner){
+        positioner.group.on("dragmove", function(){
+            self.view_layers_offset = {x:positioner.group.getX() + self.view_layers_starting_offset.x,y:positioner.group.getY() +self.view_layers_starting_offset.y};
             self.setViewOffset(true);
         });
-        return dragger;
+        return positioner;
     };
-    self.attachViewDraggerEventOnDragEnd = function(dragger){
-        dragger.group.on("dragend", function(){
-            dragger.group.setX(0);
-            dragger.group.setY(0);
+    self.attachViewDraggerEventOnDragEnd = function(positioner){
+        positioner.group.on("dragend", function(){
+            positioner.group.setX(0);
+            positioner.group.setY(0);
             self.complete();
             self.view_layers_starting_offset = {x:0,y:0};
         });
-        return dragger;
+        return positioner;
     };
     self.attachModelEventOnDragStart = function(model){
 		model.group.on("dragstart", function(){
