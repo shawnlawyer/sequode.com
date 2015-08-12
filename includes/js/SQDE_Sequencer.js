@@ -997,7 +997,7 @@ var SQDE_Sequencer = function(){
 	self.makeWiring = function(){
 		self.wiring_group = shapesKit.group(config.model.group);
 		self.wiring = [];
-		var wire, wire1, wire2, connections;
+		var wire, wire1, wire2, connections, wire_group;
 		var start, end, padding, start_y_padding, end_y_padding, start_x_padding, end_x_padding;
 		var start_x, start_y, end_x, end_y;
         var model_button = config.get('model','button');
@@ -1050,13 +1050,29 @@ var SQDE_Sequencer = function(){
                     end_y =  (start.y > end.y) ? end.y + end_y_padding + end_adjuster : end.y - end_y_padding + end_adjuster;
                     
                 }
+                
+                wire_group = shapesKit.group(config.model.group);
                 wire = new Kinetic.Line({
 					points: [start_x, start_y, end_x, end_y],
-					stroke: type_stroke[connections[i].start.type],
+					stroke: type_stroke[connections[i].end.type],
 					strokeWidth: 1.5
 				});
-				self.wiring.push(wire);
-				self.wiring_group.add(wire);
+                wire1 = new Kinetic.Line({
+					points: [start_x, start_y, end_x, end_y],
+					stroke: ,
+					strokeWidth: 1
+				});
+                wire2 = new Kinetic.Line({
+					points: [start_x, start_y, end_x, end_y],
+					stroke: type_stroke[connections[i].start.type],
+					strokeWidth: 1,
+					dash: [11, 11]
+				});
+				self.wire_group.add(wire);
+				self.wire_group.add(wire1);
+				self.wire_group.add(wire2);
+				self.wiring.push(wire_group);
+				self.wiring_group.add(wire_group);
 			}
 		}
 		self.wiring_layer.add(self.wiring_group);
