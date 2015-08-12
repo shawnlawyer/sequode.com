@@ -10,7 +10,32 @@ var SQDE_Sequencer = function(){
         registry.subscribeToUpdates({type:'context', collection:'sequodes', key:true, call: self.run});
         
         self.initialized = true;
-    }
+    };
+    self.tearDown = function(id){
+		if(self.active == false){ return;}
+        if(id != self.id){
+            self.view_layers_offset = {x:0,y:0};
+            console.log(self.view_layers_offset);
+            self.first_run_complete == false;
+        }
+        self.initialized = false;
+		self.view_dragger_layer.remove();
+		self.grid_areas_layer.remove();
+		self.flow_lines_layer.remove();
+		self.sequence_layer.remove();
+		self.ends_layer.remove();
+		self.wiring_layer.remove();
+		self.view_dragger_layer.destroy();
+		self.grid_areas_layer.destroy();
+		self.flow_lines_layer.destroy();
+		self.sequence_layer.destroy();
+		self.ends_layer.destroy();
+		self.wiring_layer.destroy();
+		var i;
+		for( i in self.dict){
+			self[self.dict[i]] = undefined;
+		}
+	};
 	self.dict = ['models','sequence','flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer','view_dragger_layer','id','dragging','drag_id','y','offstage','tweens_playing','grids','grid','grid_mode','grid_x','grid_order','align_lock'];
 	self.models = [];
 	self.IOPmodels = { 'head':false, 'base':true };
@@ -28,11 +53,34 @@ var SQDE_Sequencer = function(){
         self.view_layers_offset = {x:Math.floor((stage.getWidth()/2)- (self.gridAreaWidth(self.node.grid_areas[0].count)/2)),y:Math.floor(stage.getHeight()/2)};
             
     };
+    self.modelComplete = function(model){
+        
+        // drag listner event attachments
+        
+		model = self.attachModelButtonsEventOnTap(model);
+        
+        // drag listner event attachments
+        
+        model = self.attachModelEventOnDragStart(model);
+        model = self.attachModelEventOnDragMove(model);
+        model = self.attachModelEventOnDragEnd(model);
+		self.models[model.sequence_order] = model;
+        self.models_done++;
+        self.done();
+    };
+    self.done = function(){
+        if(self.models_done != self.sequence.length){return false;}
+        self.modelsComplete();
+    };
+	self.modelsComplete = function(){
+        self.sequenceIPOConnectionModels();
+		self.makeWiringStacks();
+		self.makeWiring();
+        self.wiring_layer.moveToTop();
+        setTimeout(self.makeGridAreaTchotchkes,0);
+    };
     self.run = function(){
-        
         sequencer_palette.run();
-        
-        
         self.grid_areas = [];
         self.focused_grid_area_id = false;
 		id = parseInt((arguments.length != 0) ? arguments[0] : self.id);
@@ -98,28 +146,6 @@ var SQDE_Sequencer = function(){
         self.grid_flow_lines_done++;
         if(self.grid_flow_lines_done != self.grid_areas.length -1){return;}
         self.complete();
-    }
-    self.modelComplete = function(model){
-		model = self.attachModelButtonsEventOnDblClick(model);
-		model = self.attachModelButtonsEventOnDblClick(model);
-        model = self.attachModelButtonsEventOnClick(model);
-        model = self.attachModelEventOnDragStart(model);
-        model = self.attachModelEventOnDragMove(model);
-        model = self.attachModelEventOnDragEnd(model);
-		self.models[model.sequence_order] = model;
-        self.models_done++;
-        self.done();
-    }
-	self.modelsComplete = function(){
-        self.sequenceIPOConnectionModels();
-		self.makeWiringStacks();
-		self.makeWiring();
-        self.wiring_layer.moveToTop();
-        setTimeout(self.makeGridAreaTchotchkes,0);
-    }
-    self.done = function(){
-        if(self.models_done != self.sequence.length){return false;}
-        self.modelsComplete();
     }
     self.makeViewDragger = function(){
         var dragger = {};
@@ -482,6 +508,159 @@ var SQDE_Sequencer = function(){
             self.complete();
         }
 	};
+	self.makeWiringStacks = function(){
+		var connecter, connection;
+		var model, node;
+		var end_stack, end_key;
+		var shape;
+		var stack_keys = {'i':'i','p':'p','o':'o'};
+		self.connections = {'i':[],'p':[],'o':[]};
+		self.connecters = {'i':[],'p':[],'o':[]};
+		
+		model = self.IOPmodels['head'];
+		for(var i=0;i<self.node['i'].length;i++){
+			connecter = {};
+			connecter.type = 'i';
+			connecter.shape = model.button_shapes['i'][i];
+			connecter.x = connecter.shape.getAbsolutePosition().x;
+			connecter.y = connecter.shape.getAbsolutePosition().y;
+			self.connecters['i'].push(connecter);
+		}
+		for(var i=0;i<self.node['p'].length;i++){
+			connecter = {};
+			connecter.type = 'p';
+			connecter.shape = model.button_shapes['p'][i];
+			connecter.x = connecter.shape.getAbsolutePosition().x;
+			connecter.y = connecter.shape.getAbsolutePosition().y;
+			self.connecters['p'].push(connecter);
+		}
+		for(var i=0;i<self.sequence.length;i++){
+			model = self.models[i];
+			node = self.node.m[i];
+			for(var stack in self.connecters){
+				for(var j=0;j<node[stack].length;j++){
+					connecter = {};
+					connecter.type = stack;
+					connecter.shape = model.button_shapes[stack][j];
+					connecter.x = connecter.shape.getAbsolutePosition().x;
+					connecter.y = connecter.shape.getAbsolutePosition().y;
+                    
+					if(node[stack][j].srcKey != -1 && stack !='o'){
+						connection = {};
+						connection.start = connecter;
+						end_stack = stack_keys[node[stack][j].stack];
+						if(end_stack == 'i' || end_stack == 'p'){
+							end_key = node[stack][j].srcKey;
+						}else if(end_stack == 'o'){
+							end_key = node[stack][j].srcKey;
+						}
+						connection.end = self.connecters[end_stack][end_key];
+						self.connections[stack].push(connection);
+					}
+					self.connecters[stack].push(connecter);
+					
+				}
+			}
+		}
+		model = self.IOPmodels['base'];
+        
+		for(var i=0;i<model.button_shapes['o'].length;i++){
+			connecter = {};
+			connecter.type = 'o';
+			connecter.shape = model.button_shapes['o'][i];
+			connecter.x = connecter.shape.getAbsolutePosition().x;
+			connecter.y = connecter.shape.getAbsolutePosition().y;
+			self.connecters['o'].push(connecter);
+			
+            node = self.node['o'][i];
+			connection = {};
+			connection.start = connecter;
+			end_key = node.srcKey;
+			connection.end = self.connecters['o'][end_key];
+			self.connections['o'].push(connection);
+		}
+	};
+	self.makeWiring = function(){
+		self.wiring_group = shapesKit.group(config.model.group);
+		var wire, wire1, wire2, connections, wire_group;
+		var start, end, padding, start_y_padding, end_y_padding, start_x_padding, end_x_padding;
+		var start_x, start_y, end_x, end_y;
+        var model_button = config.get('model','button');
+        var start_adjuster, end_adjuster;
+        padding = (model_button.radius / 2) + model_button.strokeWidth;
+        var type_stroke = {'i':'yellow','p':'#306EFF','o':'#00FF00'};
+		for( var type in self.connections ){
+			connections = self.connections[type];
+			for( var i = 0; i < connections.length; i++ ){
+                if( connections[i].end == undefined ){ continue; }
+                start = connections[i].start;
+				end = connections[i].end ;
+                if(start.y == end.y){
+                    start_adjuster = (connections[i].start.type != 'p') ? .75 : 0 ;
+                    end_adjuster = (connections[i].start.type != 'p') ? .75 : 0 ;
+                    start_x_padding = padding;
+                    end_x_padding = padding;
+                    start_y_padding = padding;
+                    end_y_padding = padding;
+                    
+                    start_x = (start.x > end.x) ?  start.x - start_x_padding - start_adjuster : start.x + start_x_padding + start_adjuster;
+                    end_x = (start.x > end.x) ?  end.x + end_x_padding + end_adjuster : end.x - end_x_padding - end_adjuster;
+                    start_y = start.y;
+                    end_y = end.y;
+                    
+                }else if((start.y > end.y && start.y - end.y < 30) || (start.y < end.y && end.y - start.y < 30)){
+                    start_adjuster = (connections[i].start.type != 'p') ? .75 : 0 ;
+                    end_adjuster = (connections[i].start.type != 'p') ? .75 : 0 ;
+                    start_x_padding = padding + 2.5;
+                    end_x_padding = padding + .5;
+                    start_y_padding = padding;
+                    end_y_padding = padding;
+                    
+                    start_x = start.x - start_x_padding - start_adjuster;
+                    end_x = end.x + end_x_padding + end_adjuster;
+                    start_y = (start.y > end.y) ? start.y - 1 : start.y + 1;
+                    end_y = (start.y > end.y) ? end.y + 1 : end.y - 1;
+                    
+                }else{
+                    start_adjuster = (connections[i].start.type != 'p') ? .75 : 0 ;
+                    end_adjuster = (connections[i].start.type != 'p') ? .75 : 0 ;
+                    start_x_padding = padding;
+                    end_x_padding = padding;
+                    start_y_padding = padding;
+                    end_y_padding = padding;
+                    
+                    start_x = start.x - start_x_padding - start_adjuster;
+                    end_x = end.x + end_x_padding + end_adjuster;
+                    start_y = (start.y > end.y) ? start.y - start_y_padding + start_adjuster: start.y + start_y_padding + start_adjuster;
+                    end_y =  (start.y > end.y) ? end.y + end_y_padding + end_adjuster : end.y - end_y_padding + end_adjuster;
+                    
+                }
+                
+                wire_group = shapesKit.group(config.model.group);
+                wire = new Kinetic.Line({
+					points: [start_x, start_y, end_x, end_y],
+					stroke: 'black',
+					strokeWidth: 1.5
+				});
+                wire1 = new Kinetic.Line({
+					points: [start_x, start_y, end_x, end_y],
+					stroke: type_stroke[connections[i].end.type],
+					strokeWidth: 1
+				});
+                wire2 = new Kinetic.Line({
+					points: [start_x, start_y, end_x, end_y],
+					stroke: type_stroke[connections[i].start.type],
+					strokeWidth: 1,
+					dash: [11, 11]
+				});
+				wire_group.add(wire);
+				wire_group.add(wire1);
+				wire_group.add(wire2);
+				self.wiring_group.add(wire_group);
+			}
+		}
+		self.wiring_layer.add(self.wiring_group);
+	};
 	self.setGridMode = function(mode){
 		switch(mode){
 			case 'add':
@@ -574,31 +753,6 @@ var SQDE_Sequencer = function(){
 		}).play();
 		self.tweens_playing[id] = true;
 	};
-	self.tearDown = function(id){
-		if(self.active == false){ return;}
-        if(id != self.id){
-            self.view_layers_offset = {x:0,y:0};
-            console.log(self.view_layers_offset);
-            self.first_run_complete == false;
-        }
-        self.initialized = false;
-		self.view_dragger_layer.remove();
-		self.grid_areas_layer.remove();
-		self.flow_lines_layer.remove();
-		self.sequence_layer.remove();
-		self.ends_layer.remove();
-		self.wiring_layer.remove();
-		self.view_dragger_layer.destroy();
-		self.grid_areas_layer.destroy();
-		self.flow_lines_layer.destroy();
-		self.sequence_layer.destroy();
-		self.ends_layer.destroy();
-		self.wiring_layer.destroy();
-		var i;
-		for( i in self.dict){
-			self[self.dict[i]] = undefined;
-		}
-	};
 	self.saveSequence = function(model){
         if( self.focused_grid_area_id === false){
             if(self.node.s.length < 1 ){
@@ -647,457 +801,7 @@ var SQDE_Sequencer = function(){
         (a_pos.x > b_pos.x + b.getWidth())
         );
     }
-    self.attachGridAreaEventOnDragStart = function(gridarea){
-		gridarea.group.on("dragstart", function(){
-            
-            self.flow_lines_layer.hide();
-            self.ends_layer.hide();
-            self.sequence_layer.hide();
-            self.wiring_layer.hide();
-            gridarea.placement_preview.show();
-            gridarea.placement_preview.setPosition(self.gridAreaDropPosition(gridarea));
-            self.drawViewLayers();
-		});
-		return gridarea;
-	};
-	self.attachGridAreaEventOnDragMove = function(gridarea){
-        gridarea.group.on("dragmove", function(){
-            gridarea.placement_preview.setPosition(self.gridAreaDropPosition(gridarea));
-            gridarea.placement_collider.setPosition(self.gridAreaDropPosition(gridarea));
-            self.grid_areas_layer.draw();
-            setTimeout(self.gridPlacementHitTest,0,gridarea);
-        });
-		return gridarea;
-	};
-	self.attachGridAreaEventOnDragEnd = function(gridarea){
-		gridarea.group.on("dragend", function(){
-            gridarea.placement_preview.hide();
-            self.grid_areas_layer.draw();
-            if(self.can_drop_grid_target == true){
-                self.node.grid_areas[gridarea.id].x = gridarea.group.getX() + config.sequencer.grid_cell_width*.5 + 15;
-                self.node.grid_areas[gridarea.id].y = gridarea.group.getY() + gridarea.height - 15;
-                self.saveGridArea(gridarea);
-            }else{
-                self.run();
-            }
-		});
-		return gridarea;
-	};
-	self.attachModelEventOnDragStart = function(model){
-		model.group.on("dragstart", function(){
-            var height = model.height * 1.667;
-            var width = config.model.width * 1.667;
-			self.ends_layer.hide();
-			self.wiring_layer.hide();
-            self.flow_lines_layer.hide();
-			self.dragging = true;
-			self.drag_id = model.sequence_order;
-            self.focused_grid_area_id = model.grid_area;
-		});
-		return model;
-	};
-	self.attachModelEventOnDragMove = function(model){
-        model.group.on("dragmove", function(){
-            for(var grid_area_id in self.grid_areas){
-                if(self.detectCollision(self.grid_areas[grid_area_id].placement_collider,model.placement_collider) && self.detectCollision(model.placement_collider,self.grid_areas[grid_area_id].placement_collider)){
-                    if (self.focused_grid_area_id !== false && self.focused_grid_area_id != grid_area_id){
-                        self.cleanupAfterModelToGridAreaCollision(model, self.grid_areas[self.focused_grid_area_id]);
-                    }
-                    var grid_area = self.grid_areas[grid_area_id];
-                    if(self.focused_grid_area_id === false){
-                        self.focused_grid_area_id = grid_area_id;
-                        if(self.focused_grid_area_id != model.grid_area){
-                            self.setGridMode('add');
-                            grid_area.models.push(model.sequence_id);
-                        }else{
-                            self.setGridMode('sequence');
-                        }
-                        var box_width = grid_area.box.getWidth() + config.sequencer.grid_cell_width;
-                        grid_area.box.setWidth(box_width);
-                        grid_area.append_auger.group.setX(box_width);
-                        self.grid_areas_layer.draw();
-                        self.grid_areas[grid_area.id] = grid_area;
-                        if(grid_area.id+1 != self.grid_areas.length){
-                            self.grid_areas[grid_area.id+1].line.remove();
-                            self.grid_areas[grid_area.id+1].line.destroy();
-                            self.makeGridFlowLine(grid_area.id+1,false);
-                        }
-                        self.reorderFocusedGridArea();
-                        self.alignModelsToGrid(true);
-                        self.grid_areas_layer.draw();
-                    }else{
-                        self.reorderFocusedGridArea();
-                        self.alignModelsToGrid(true);
-                    }
-                    if( grid_area.grid_order.length > 1){
-                        self.gridAugerHitTest(grid_area,model);
-                    }
-                    break;
-                }else{
-                    if(self.focused_grid_area_id !== false){
-                        self.cleanupAfterModelToGridAreaCollision(model, self.grid_areas[self.focused_grid_area_id]);
-                    }
-                }
-            }
-        });
-        return model;
-    };
-    self.cleanupAfterModelToGridAreaCollision = function(model, grid_area){
-        if(self.focused_grid_area_id != model.grid_area){
-            self.setGridMode('sequence');
-            grid_area.models.pop();
-        }else{
-            self.setGridMode('remove');
-        }
-        var grid_order = [];
-        for(var i=0; i < grid_area.grid_order.length;i++){
-            if(i != grid_area.models.length){
-                grid_order.push(i);
-            }
-        }
-        grid_area.grid_order = grid_order;
-        self.reorderFocusedGridArea();
-        self.alignModelsToGrid(true);
-        self.sequence_layer.draw();
-        self.focused_grid_area_id = false;
-        var box_width = grid_area.box.getWidth() - config.sequencer.grid_cell_width;
-        grid_area.box.setWidth(box_width);
-        grid_area.append_auger.group.setX(box_width);
-        self.grid_areas[grid_area.id] = grid_area;
-        if(grid_area.id+1 != self.grid_areas.length){
-            self.grid_areas[grid_area.id+1].line.remove();
-            self.grid_areas[grid_area.id+1].line.destroy();
-            self.grid_areas[grid_area.id] = grid_area;
-            self.makeGridFlowLine(grid_area.id+1,false);
-        }
-        self.grid_areas_layer.draw();
-        grid_area.box.fill('white');
-        self.grid_areas[grid_area.id] = grid_area;
-        self.flow_lines_layer.show();
-        
-        self.grid_area_augmenter = false;
-        for(var i=0; i< self.grid_auger_types.length;i++){
-            type = self.grid_auger_types[i];
-            auger = type + '_auger';
-            grid_area[auger].circle.setStroke('black');
-            grid_area[auger].symbol.fill('darkgrey');
-        }
-        self.grid_areas_layer.draw();
-        self.grid_auger_split_position = false;
-    }
-	self.attachModelEventOnDragEnd = function(model){
-		model.group.on("dragend", function(){
-            self.modelOnDragEnd(model);
-		});
-		return model;
-	};
-    self.modelOnDragEnd = function(model){
-		self.dragging = false;
-        self.drag_id = false;
-        if(self.grid_area_augmenter == false){
-            self.alignModelsToGrid(true);
-        }
-        self.saveSequence(model);
-	};
-	self.attachModelButtonsEventOnClick = function(model){
-		/*
-        for(var type in model.button_shapes){
-			for( var i in model.button_shapes[type] ){
-				model.button_shapes[type][i] = self.attachEventButtonOnClick(model.button_shapes[type][i],model.sequence_order,type,i);
-			}
-		}
-        */
-		return model;
-	};
-	self.attachEventButtonOnClick = function(shape,i,type,j){
-		return shape;
-	};
-	self.attachModelEndsEventButtonsOnDblClick = function(model){
-		var name;
-		for(var type in model.button_shapes){
-			for( var i in model.button_shapes[type] ){
-				name = model.node[type][i].n;
-				model.button_shapes[type][i] = self.attachModelEndsEventButtonOnDblClick(model.button_shapes[type][i], type, model.node[type][i].n, model.node.id);
-			}
-		}
-		return model;
-	};
-	self.attachModelEndsEventButtonOnDblClick = function(shape,type,member,id){
-        var alt_type;
-        switch(type){
-			case 'i':
-				alt_type = 'input';
-				break;
-			case 'p':
-				alt_type = 'property';
-				break;
-            default:
-                return shape;
-		}
-        shape.on("dblclick", function(){
-            clearTimeout(self.clickTimeout);
-        });
-		return shape;
-	};
-	self.attachModelEndsEventButtonsOnClick = function(model){
-		for(var type in model.button_shapes){
-			for( var i in model.button_shapes[type] ){
-				model.button_shapes[type][i] = self.attachModelEndsEventButtonOnClick(model.button_shapes[type][i],type,i);
-			}
-		}
-		return model;
-	};
-	self.attachModelEndsEventButtonOnClick = function(shape,type,i){
-		switch(type){
-			case 'i':
-				shape.on("click touchend", function(){
-					clearTimeout(self.clickTimeout);
-					self.clickTimeout = setTimeout(function(){
-                        self.setConnectionTransmitter({'type':'input', 'key' : (i+1) });
-					},300);
-				});
-				break;
-			case 'p':
-				shape.on("click touchend", function(){
-					clearTimeout(self.clickTimeout);
-					self.clickTimeout = setTimeout(function(){
-                        self.setConnectionTransmitter({'type':'property', 'key' : (i+1) });
-					},300);
-				});
-				break;
-			default:
-				break;
-		}
-		return shape;
-	};
-	self.attachModelEndsEventBodyOnClick = function(model){
-		switch(model.type){
-			case 'base':
-				model.body_shape.on("click touchend", function(){
-					clearTimeout(self.clickTimeout);
-                    self.setConnectionReceiver({'type':'external', 'key':0});
-				});
-				break;
-			case 'head':
-				model.body_shape.on("click touchend", function(){
-					clearTimeout(self.clickTimeout);   
-                    self.setConnectionTransmitter({'type':'external', 'key':0});
-				});
-				break;
-			default:
-				break;
-		}
-		return model;
-	};
-	self.attachModelButtonsEventOnDblClick = function(model){
-		for(var type in model.button_shapes){
-			for( var i in model.button_shapes[type] ){
-				model.button_shapes[type][i] = self.attachModelEventButtonOnDblClick(model.button_shapes[type][i],model.sequence_order,type,i);
-			}
-		}
-		return model;
-	};
-	self.attachModelEventButtonOnDblClick = function(shape,i,type,j){
-		switch(type){
-			case 'i':
-				shape.on("click touchend", function(){
-					clearTimeout( self.clickTimeout );
-                    self.setConnectionReceiver({'type':'input', 'key':(self.node.m[i][type][j].lead)});
-				});
-				break;
-			case 'p':
-				shape.on("click touchend", function(){
-					clearTimeout(self.clickTimeout);
-                    self.setConnectionReceiver({'type':'property', 'key':(self.node.m[i][type][j].lead)});
-				});
-				break;
-			case 'o':
-				shape.on("click touchend", function(){
-					clearTimeout(self.clickTimeout);
-                    self.setConnectionTransmitter({'type':'output', 'key':(self.node.m[i][type][j].lead)});
-				});
-				break;
-			default:
-				break;
-		}
-		return shape;
-	};
-	self.makeWiringStacks = function(){
-		var connecter, connection;
-		var model, node;
-		var end_stack, end_key;
-		var shape;
-		var stack_keys = {'i':'i','p':'p','o':'o'};
-		self.connections = {'i':[],'p':[],'o':[]};
-		self.connecters = {'i':[],'p':[],'o':[]};
-		
-		model = self.IOPmodels['head'];
-		for(var i=0;i<self.node['i'].length;i++){
-			connecter = {};
-			connecter.type = 'i';
-			connecter.shape = model.button_shapes['i'][i];
-			connecter.x = connecter.shape.getAbsolutePosition().x;
-			connecter.y = connecter.shape.getAbsolutePosition().y;
-			self.connecters['i'].push(connecter);
-		}
-		for(var i=0;i<self.node['p'].length;i++){
-			connecter = {};
-			connecter.type = 'p';
-			connecter.shape = model.button_shapes['p'][i];
-			connecter.x = connecter.shape.getAbsolutePosition().x;
-			connecter.y = connecter.shape.getAbsolutePosition().y;
-			self.connecters['p'].push(connecter);
-		}
-		for(var i=0;i<self.sequence.length;i++){
-			model = self.models[i];
-			node = self.node.m[i];
-			for(var stack in self.connecters){
-				for(var j=0;j<node[stack].length;j++){
-					connecter = {};
-					connecter.type = stack;
-					connecter.shape = model.button_shapes[stack][j];
-					connecter.x = connecter.shape.getAbsolutePosition().x;
-					connecter.y = connecter.shape.getAbsolutePosition().y;
-                    
-					if(node[stack][j].srcKey != -1 && stack !='o'){
-						connection = {};
-						connection.start = connecter;
-						end_stack = stack_keys[node[stack][j].stack];
-						if(end_stack == 'i' || end_stack == 'p'){
-							end_key = node[stack][j].srcKey;
-						}else if(end_stack == 'o'){
-							end_key = node[stack][j].srcKey;
-						}
-						connection.end = self.connecters[end_stack][end_key];
-						self.connections[stack].push(connection);
-					}
-					self.connecters[stack].push(connecter);
-					
-				}
-			}
-		}
-		model = self.IOPmodels['base'];
-        
-		for(var i=0;i<model.button_shapes['o'].length;i++){
-			connecter = {};
-			connecter.type = 'o';
-			connecter.shape = model.button_shapes['o'][i];
-			connecter.x = connecter.shape.getAbsolutePosition().x;
-			connecter.y = connecter.shape.getAbsolutePosition().y;
-			self.connecters['o'].push(connecter);
-			
-            node = self.node['o'][i];
-			connection = {};
-			connection.start = connecter;
-			end_key = node.srcKey;
-			connection.end = self.connecters['o'][end_key];
-			self.connections['o'].push(connection);
-		}
-	};
-	self.makeWiring = function(){
-		self.wiring_group = shapesKit.group(config.model.group);
-		var wire, wire1, wire2, connections, wire_group;
-		var start, end, padding, start_y_padding, end_y_padding, start_x_padding, end_x_padding;
-		var start_x, start_y, end_x, end_y;
-        var model_button = config.get('model','button');
-        var start_adjuster, end_adjuster;
-        padding = (model_button.radius / 2) + model_button.strokeWidth;
-        var type_stroke = {'i':'yellow','p':'#306EFF','o':'#00FF00'};
-        console.log(self.connections);
-		for( var type in self.connections ){
-			connections = self.connections[type];
-			for( var i = 0; i < connections.length; i++ ){
-                if( connections[i].end == undefined ){ continue; }
-                start = connections[i].start;
-				end = connections[i].end ;
-                if(start.y == end.y){
-                    start_adjuster = (connections[i].start.type != 'p') ? .75 : 0 ;
-                    end_adjuster = (connections[i].start.type != 'p') ? .75 : 0 ;
-                    start_x_padding = padding;
-                    end_x_padding = padding;
-                    start_y_padding = padding;
-                    end_y_padding = padding;
-                    
-                    start_x = (start.x > end.x) ?  start.x - start_x_padding - start_adjuster : start.x + start_x_padding + start_adjuster;
-                    end_x = (start.x > end.x) ?  end.x + end_x_padding + end_adjuster : end.x - end_x_padding - end_adjuster;
-                    start_y = start.y;
-                    end_y = end.y;
-                    
-                }else if((start.y > end.y && start.y - end.y < 30) || (start.y < end.y && end.y - start.y < 30)){
-                    start_adjuster = (connections[i].start.type != 'p') ? .75 : 0 ;
-                    end_adjuster = (connections[i].start.type != 'p') ? .75 : 0 ;
-                    start_x_padding = padding + 2.5;
-                    end_x_padding = padding + .5;
-                    start_y_padding = padding;
-                    end_y_padding = padding;
-                    
-                    start_x = start.x - start_x_padding - start_adjuster;
-                    end_x = end.x + end_x_padding + end_adjuster;
-                    start_y = (start.y > end.y) ? start.y - 1 : start.y + 1;
-                    end_y = (start.y > end.y) ? end.y + 1 : end.y - 1;
-                    
-                }else{
-                    start_adjuster = (connections[i].start.type != 'p') ? .75 : 0 ;
-                    end_adjuster = (connections[i].start.type != 'p') ? .75 : 0 ;
-                    start_x_padding = padding;
-                    end_x_padding = padding;
-                    start_y_padding = padding;
-                    end_y_padding = padding;
-                    
-                    start_x = start.x - start_x_padding - start_adjuster;
-                    end_x = end.x + end_x_padding + end_adjuster;
-                    start_y = (start.y > end.y) ? start.y - start_y_padding + start_adjuster: start.y + start_y_padding + start_adjuster;
-                    end_y =  (start.y > end.y) ? end.y + end_y_padding + end_adjuster : end.y - end_y_padding + end_adjuster;
-                    
-                }
-                
-                wire_group = shapesKit.group(config.model.group);
-                wire = new Kinetic.Line({
-					points: [start_x, start_y, end_x, end_y],
-					stroke: 'black',
-					strokeWidth: 1.5
-				});
-                wire1 = new Kinetic.Line({
-					points: [start_x, start_y, end_x, end_y],
-					stroke: type_stroke[connections[i].end.type],
-					strokeWidth: 1
-				});
-                wire2 = new Kinetic.Line({
-					points: [start_x, start_y, end_x, end_y],
-					stroke: type_stroke[connections[i].start.type],
-					strokeWidth: 1,
-					dash: [11, 11]
-				});
-				wire_group.add(wire);
-				wire_group.add(wire1);
-				wire_group.add(wire2);
-				self.wiring_group.add(wire_group);
-			}
-		}
-		self.wiring_layer.add(self.wiring_group);
-	};
-    self.attachViewDraggerEventOnDragStart = function(dragger){
-        dragger.group.on("dragstart", function(){
-            self.view_layers_starting_offset = {x:self.view_layers_offset.x,y:self.view_layers_offset.y};
-        });
-        return dragger;
-    };
-    self.attachViewDraggerEventOnDragMove = function(dragger){
-        dragger.group.on("dragmove", function(){
-            self.view_layers_offset = {x:dragger.group.getX() + self.view_layers_starting_offset.x,y:dragger.group.getY() +self.view_layers_starting_offset.y};
-            self.setViewOffset(true);
-        });
-        return dragger;
-    };
-    self.attachViewDraggerEventOnDragEnd = function(dragger){
-        dragger.group.on("dragend", function(){
-            dragger.group.setX(0);
-            dragger.group.setY(0);
-            self.complete();
-            self.view_layers_starting_offset = {x:0,y:0};
-        });
-        return dragger;
-    };
+
     self.setViewOffset = function(draw){
 		for(i=0;i<self.view_layers.length;i++){
             self[self.view_layers[i]].setX(self.view_layers_offset.x);
@@ -1197,23 +901,298 @@ var SQDE_Sequencer = function(){
         self.connection_receiver = false;
         self.connection_transmitter = false;
 	};
-    self.removeConnection = function(){
-        if(self.connection_receiver == false || self.connection_transmitter == false){
-            return;
+    self.cleanupAfterModelToGridAreaCollision = function(model, grid_area){
+        if(self.focused_grid_area_id != model.grid_area){
+            self.setGridMode('sequence');
+            grid_area.models.pop();
+        }else{
+            self.setGridMode('remove');
         }
-        if(self.connection_receiver.type == 'external' && self.connection_transmitter.type == 'external'){
-            self.connection_receiver = false;
-            self.connection_transmitter = false;
-            return;
+        var grid_order = [];
+        for(var i=0; i < grid_area.grid_order.length;i++){
+            if(i != grid_area.models.length){
+                grid_order.push(i);
+            }
         }
-        var route = (self.connection_receiver.type == 'external' || self.connection_transmitter.type == 'external') ? 'operations/sequode/addExternalConnection' : 'operations/sequode/addInternalConnection';
-        var type = (self.connection_receiver.type == 'external') ? self.connection_transmitter.type : self.connection_receiver.type;
-        new SQDE_AjaxCall({route:route, inputs:[self.id,type,self.connection_transmitter.key,self.connection_receiver.key], done_callback: function(){registry.fetch({collection:'sequodes', key: self.id})}});
-        self.connection_receiver = false;
-        self.connection_transmitter = false;
-	};
+        grid_area.grid_order = grid_order;
+        self.reorderFocusedGridArea();
+        self.alignModelsToGrid(true);
+        self.sequence_layer.draw();
+        self.focused_grid_area_id = false;
+        var box_width = grid_area.box.getWidth() - config.sequencer.grid_cell_width;
+        grid_area.box.setWidth(box_width);
+        grid_area.append_auger.group.setX(box_width);
+        self.grid_areas[grid_area.id] = grid_area;
+        if(grid_area.id+1 != self.grid_areas.length){
+            self.grid_areas[grid_area.id+1].line.remove();
+            self.grid_areas[grid_area.id+1].line.destroy();
+            self.grid_areas[grid_area.id] = grid_area;
+            self.makeGridFlowLine(grid_area.id+1,false);
+        }
+        self.grid_areas_layer.draw();
+        grid_area.box.fill('white');
+        self.grid_areas[grid_area.id] = grid_area;
+        self.flow_lines_layer.show();
+        
+        self.grid_area_augmenter = false;
+        for(var i=0; i< self.grid_auger_types.length;i++){
+            type = self.grid_auger_types[i];
+            auger = type + '_auger';
+            grid_area[auger].circle.setStroke('black');
+            grid_area[auger].symbol.fill('darkgrey');
+        }
+        self.grid_areas_layer.draw();
+        self.grid_auger_split_position = false;
+    };
     self.gridAreaWidth = function(models_count){
         return(models_count*config.sequencer.grid_cell_width) + (config.sequencer.grid_cell_width);
     };
     self.initialize();
+    
+    //drag event listner attachments
+    
+    self.attachGridAreaEventOnDragStart = function(gridarea){
+		gridarea.group.on("dragstart", function(){
+            
+            self.flow_lines_layer.hide();
+            self.ends_layer.hide();
+            self.sequence_layer.hide();
+            self.wiring_layer.hide();
+            gridarea.placement_preview.show();
+            gridarea.placement_preview.setPosition(self.gridAreaDropPosition(gridarea));
+            self.drawViewLayers();
+		});
+		return gridarea;
+	};
+	self.attachGridAreaEventOnDragMove = function(gridarea){
+        gridarea.group.on("dragmove", function(){
+            gridarea.placement_preview.setPosition(self.gridAreaDropPosition(gridarea));
+            gridarea.placement_collider.setPosition(self.gridAreaDropPosition(gridarea));
+            self.grid_areas_layer.draw();
+            setTimeout(self.gridPlacementHitTest,0,gridarea);
+        });
+		return gridarea;
+	};
+	self.attachGridAreaEventOnDragEnd = function(gridarea){
+		gridarea.group.on("dragend", function(){
+            gridarea.placement_preview.hide();
+            self.grid_areas_layer.draw();
+            if(self.can_drop_grid_target == true){
+                self.node.grid_areas[gridarea.id].x = gridarea.group.getX() + config.sequencer.grid_cell_width*.5 + 15;
+                self.node.grid_areas[gridarea.id].y = gridarea.group.getY() + gridarea.height - 15;
+                self.saveGridArea(gridarea);
+            }else{
+                self.run();
+            }
+		});
+		return gridarea;
+	};
+	self.attachViewDraggerEventOnDragStart = function(dragger){
+        dragger.group.on("dragstart", function(){
+            self.view_layers_starting_offset = {x:self.view_layers_offset.x,y:self.view_layers_offset.y};
+        });
+        return dragger;
+    };
+    self.attachViewDraggerEventOnDragMove = function(dragger){
+        dragger.group.on("dragmove", function(){
+            self.view_layers_offset = {x:dragger.group.getX() + self.view_layers_starting_offset.x,y:dragger.group.getY() +self.view_layers_starting_offset.y};
+            self.setViewOffset(true);
+        });
+        return dragger;
+    };
+    self.attachViewDraggerEventOnDragEnd = function(dragger){
+        dragger.group.on("dragend", function(){
+            dragger.group.setX(0);
+            dragger.group.setY(0);
+            self.complete();
+            self.view_layers_starting_offset = {x:0,y:0};
+        });
+        return dragger;
+    };
+    self.attachModelEventOnDragStart = function(model){
+		model.group.on("dragstart", function(){
+            var height = model.height * 1.667;
+            var width = config.model.width * 1.667;
+			self.ends_layer.hide();
+			self.wiring_layer.hide();
+            self.flow_lines_layer.hide();
+			self.dragging = true;
+			self.drag_id = model.sequence_order;
+            self.focused_grid_area_id = model.grid_area;
+		});
+		return model;
+	};
+	self.attachModelEventOnDragMove = function(model){
+        model.group.on("dragmove", function(){
+            for(var grid_area_id in self.grid_areas){
+                if(self.detectCollision(self.grid_areas[grid_area_id].placement_collider,model.placement_collider) && self.detectCollision(model.placement_collider,self.grid_areas[grid_area_id].placement_collider)){
+                    if (self.focused_grid_area_id !== false && self.focused_grid_area_id != grid_area_id){
+                        self.cleanupAfterModelToGridAreaCollision(model, self.grid_areas[self.focused_grid_area_id]);
+                    }
+                    var grid_area = self.grid_areas[grid_area_id];
+                    if(self.focused_grid_area_id === false){
+                        self.focused_grid_area_id = grid_area_id;
+                        if(self.focused_grid_area_id != model.grid_area){
+                            self.setGridMode('add');
+                            grid_area.models.push(model.sequence_id);
+                        }else{
+                            self.setGridMode('sequence');
+                        }
+                        var box_width = grid_area.box.getWidth() + config.sequencer.grid_cell_width;
+                        grid_area.box.setWidth(box_width);
+                        grid_area.append_auger.group.setX(box_width);
+                        self.grid_areas_layer.draw();
+                        self.grid_areas[grid_area.id] = grid_area;
+                        if(grid_area.id+1 != self.grid_areas.length){
+                            self.grid_areas[grid_area.id+1].line.remove();
+                            self.grid_areas[grid_area.id+1].line.destroy();
+                            self.makeGridFlowLine(grid_area.id+1,false);
+                        }
+                        self.reorderFocusedGridArea();
+                        self.alignModelsToGrid(true);
+                        self.grid_areas_layer.draw();
+                    }else{
+                        self.reorderFocusedGridArea();
+                        self.alignModelsToGrid(true);
+                    }
+                    if( grid_area.grid_order.length > 1){
+                        self.gridAugerHitTest(grid_area,model);
+                    }
+                    break;
+                }else{
+                    if(self.focused_grid_area_id !== false){
+                        self.cleanupAfterModelToGridAreaCollision(model, self.grid_areas[self.focused_grid_area_id]);
+                    }
+                }
+            }
+        });
+        return model;
+    };
+	self.attachModelEventOnDragEnd = function(model){
+		model.group.on("dragend", function(){
+            self.modelOnDragEnd(model);
+		});
+		return model;
+	};
+    self.modelOnDragEnd = function(model){
+		self.dragging = false;
+        self.drag_id = false;
+        if(self.grid_area_augmenter == false){
+            self.alignModelsToGrid(true);
+        }
+        self.saveSequence(model);
+	};
+    // tap event listner attachments
+
+	self.attachModelEndsEventButtonsOnDblClick = function(model){
+		var name;
+		for(var type in model.button_shapes){
+			for( var i in model.button_shapes[type] ){
+				name = model.node[type][i].n;
+				model.button_shapes[type][i] = self.attachModelEndsEventButtonOnDblClick(model.button_shapes[type][i], type, model.node[type][i].n, model.node.id);
+			}
+		}
+		return model;
+	};
+	self.attachModelEndsEventButtonOnDblClick = function(shape,type,member,id){
+        var alt_type;
+        switch(type){
+			case 'i':
+				alt_type = 'input';
+				break;
+			case 'p':
+				alt_type = 'property';
+				break;
+            default:
+                return shape;
+		}
+        shape.on("dblclick", function(){
+            clearTimeout(self.clickTimeout);
+        });
+		return shape;
+	};
+	self.attachModelEndsEventButtonsOnClick = function(model){
+		for(var type in model.button_shapes){
+			for( var i in model.button_shapes[type] ){
+				model.button_shapes[type][i] = self.attachModelEndsEventButtonOnClick(model.button_shapes[type][i],type,i);
+			}
+		}
+		return model;
+	};
+	self.attachModelEndsEventButtonOnClick = function(shape,type,i){
+		switch(type){
+			case 'i':
+				shape.on("click touchend", function(){
+					clearTimeout(self.clickTimeout);
+					self.clickTimeout = setTimeout(function(){
+                        self.setConnectionTransmitter({'type':'input', 'key' : (i+1) });
+					},300);
+				});
+				break;
+			case 'p':
+				shape.on("click touchend", function(){
+					clearTimeout(self.clickTimeout);
+					self.clickTimeout = setTimeout(function(){
+                        self.setConnectionTransmitter({'type':'property', 'key' : (i+1) });
+					},300);
+				});
+				break;
+			default:
+				break;
+		}
+		return shape;
+	};
+	self.attachModelEndsEventBodyOnClick = function(model){
+		switch(model.type){
+			case 'base':
+				model.body_shape.on("click touchend", function(){
+					clearTimeout(self.clickTimeout);
+                    self.setConnectionReceiver({'type':'external', 'key':0});
+				});
+				break;
+			case 'head':
+				model.body_shape.on("click touchend", function(){
+					clearTimeout(self.clickTimeout);   
+                    self.setConnectionTransmitter({'type':'external', 'key':0});
+				});
+				break;
+			default:
+				break;
+		}
+		return model;
+	};
+	self.attachModelButtonsEventOnTap = function(model){
+		for(var type in model.button_shapes){
+			for( var i in model.button_shapes[type] ){
+				model.button_shapes[type][i] = self.attachModelEventButtonOnTap(model.button_shapes[type][i],model.sequence_order,type,i);
+			}
+		}
+		return model;
+	};
+	self.attachModelEventButtonOnTap = function(shape,i,type,j){
+		switch(type){
+			case 'i':
+				shape.on("click touchend", function(){
+					clearTimeout( self.clickTimeout );
+                    self.setConnectionReceiver({'type':'input', 'key':(self.node.m[i][type][j].lead)});
+				});
+				break;
+			case 'p':
+				shape.on("click touchend", function(){
+					clearTimeout(self.clickTimeout);
+                    self.setConnectionReceiver({'type':'property', 'key':(self.node.m[i][type][j].lead)});
+				});
+				break;
+			case 'o':
+				shape.on("click touchend", function(){
+					clearTimeout(self.clickTimeout);
+                    self.setConnectionTransmitter({'type':'output', 'key':(self.node.m[i][type][j].lead)});
+				});
+				break;
+			default:
+				break;
+		}
+		return shape;
+	};
+    
 }
