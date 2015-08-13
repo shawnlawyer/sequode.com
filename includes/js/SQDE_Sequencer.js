@@ -6,8 +6,9 @@ var SQDE_Sequencer = function(){
     self.first_run_complete = false;
 	self.active = false;
     self.initialize = function(){
-        if(self.initialized == true){ return;}
-        
+        if(self.initialized == true){
+            return;
+        }
         self.initialized = true;
     };
     self.tearDown = function(id){
@@ -771,7 +772,7 @@ var SQDE_Sequencer = function(){
         y = (self.node.grid_areas[gridarea.id].y - self.node.grid_areas[0].y);
         new SQDE_AjaxCall({route:'operations/sequode/moveGridArea', inputs:[self.id, gridarea.id, x, y], done_callback: function(){registry.fetch({collection:'sequodes', key: self.id})}});
 	};
-	self.detectCollision = function(a, b) {
+	self.detectCollision = function(a, b){
         var a_pos = a.getAbsolutePosition();
         var b_pos = b.getAbsolutePosition();
         return !(
@@ -780,7 +781,7 @@ var SQDE_Sequencer = function(){
         (a_pos.x + a.getWidth() < b_pos.x) ||
         (a_pos.x > b_pos.x + b.getWidth())
         );
-    ;
+    };
     self.setViewOffset = function(draw){
 		for(i=0;i<self.view_layers.length;i++){
             self[self.view_layers[i]].setX(self.view_layers_offset.x);
