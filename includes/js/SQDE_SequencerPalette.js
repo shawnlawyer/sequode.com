@@ -1,6 +1,7 @@
 var SQDE_SequencerPalette = function(){
 	var self = this;
     var sequencer;
+    self.grid_position = {x:32.5,y:stage.getHeight() - 8};
     self.dict = ['models','height','background_layer','models_layer','temp_layer','grid'];
     self.initialized = false;
     self.initialize = function(){
@@ -9,7 +10,6 @@ var SQDE_SequencerPalette = function(){
         self.initialized = true;
         
     }
-    self.grid_position = {x:32.5,y:stage.getHeight() - 8};
 	self.run = function (){
         self.tearDown();
 		self.temp_layer = new Kinetic.Layer();
