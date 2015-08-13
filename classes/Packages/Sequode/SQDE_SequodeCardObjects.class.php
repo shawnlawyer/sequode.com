@@ -453,7 +453,8 @@ class SQDE_SequodeCardObjects {
         //$js[] = 'var stage, sequencer;';
         $js[] = 'stage = shapesKit.stage({ container: \''.$dom_id.'chart\',	width: $(window).width(), height: $(window).height() });';
         $js[] = 'sequencer = new SQDE_Sequencer();';
-        $js[] = 'sequencer.run('.$sequode_model->id.');';
+        $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'sequodes\', key:true, call: sequencer.run});';
+        $js[] = 'registry.fetch({collection:\'sequodes\',key:'.$sequode_model->id.'});';
         $component_object = (object) null;
         $component_object->html = implode('', $html);
         $component_object->js = implode(' ', $js);

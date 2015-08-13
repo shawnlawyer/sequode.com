@@ -7,7 +7,6 @@ var SQDE_Sequencer = function(){
 	self.active = false;
     self.initialize = function(){
         if(self.initialized == true){ return;}
-        registry.subscribeToUpdates({type:'context', collection:'sequodes', key:true, call: self.run});
         
         self.initialized = true;
     };
@@ -781,8 +780,7 @@ var SQDE_Sequencer = function(){
         (a_pos.x + a.getWidth() < b_pos.x) ||
         (a_pos.x > b_pos.x + b.getWidth())
         );
-    }
-
+    ;
     self.setViewOffset = function(draw){
 		for(i=0;i<self.view_layers.length;i++){
             self[self.view_layers[i]].setX(self.view_layers_offset.x);
