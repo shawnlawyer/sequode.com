@@ -174,7 +174,6 @@ class SQDE_SequodeOperationsRest{
         echo json_encode($object);
         exit;
 	}
-    
     public static function updateValue($sequode_model_id = 0, $type = false, $map_key = 0, $value = null){
         if(!(
         SQDE_Sequode::exists($sequode_model_id,'id')
@@ -211,7 +210,6 @@ class SQDE_SequodeOperationsRest{
         echo json_encode($object);
         exit;
     }
-    
     public static function removeReceivingConnection($sequode_model_id = 0, $connection_type = false, $restore_key = 0){
         if(!(
         SQDE_Sequode::exists($sequode_model_id,'id')
@@ -250,7 +248,6 @@ class SQDE_SequodeOperationsRest{
         SQDE_SequodeOperations::updateSharing($value);
         exit;
     }
-    
     public static function updateName($sequode_model_id = 0, $name=''){
         if(!(
         SQDE_Sequode::exists($sequode_model_id,'id')

@@ -15,7 +15,6 @@ var SQDE_Sequencer = function(){
 		if(self.active == false){ return;}
         if(id != self.id){
             self.view_layers_offset = {x:0,y:0};
-            console.log(self.view_layers_offset);
             self.first_run_complete == false;
         }
         self.initialized = false;
