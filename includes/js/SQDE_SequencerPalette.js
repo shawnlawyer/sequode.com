@@ -9,7 +9,7 @@ var SQDE_SequencerPalette = function(){
         registry.subscribeToUpdates({type:'context', collection:'palette', call: self.run});
         self.initialized = true;
         
-    }
+    };
 	self.run = function (){
         self.tearDown();
 		self.temp_layer = new Kinetic.Layer();
@@ -74,10 +74,10 @@ var SQDE_SequencerPalette = function(){
         if(self.models.length == Object.keys(registry.collection('palette')).length){
             self.modelsComplete();
         }
-    }
+    };
     self.modelsComplete = function(model){
         setTimeout(self.makePaletteArea,0);
-    }
+    };
     self.makePaletteArea = function(){
         var layer = {};
         layer.width = stage.getWidth()-12;
@@ -101,38 +101,13 @@ var SQDE_SequencerPalette = function(){
         self.background_layer.draw();
         self.models_layer.batchDraw();
 	};
-	self.attachEventModelOnDragStart = function(model){
-		model.group.on("dragstart", function(event){
-            model.group.remove();
-			self.dragging = true;
-            sequencer.dragging = true;
-            model.original = false;
-			if(typeof(sequencer.sequence) == "object" && sequencer.sequence.length > 0 ){
-                sequencer.ends_layer.hide();
-                sequencer.wiring_layer.hide();
-                sequencer.flow_lines_layer.hide();
-                sequencer.dragging = true;
-                sequencer.focused_grid_area_id = false;
-            }
-            if(typeof(sequencer.sequence) != "object" || sequencer.sequence.length < 1 ){
-                model.group.moveTo(self.temp_layer);
-                model.group.moveToTop();
-                self.temp_layer.draw();
-            } else {
-                model.group.moveTo(sequencer.sequence_layer);
-                model.group.moveToTop();
-                sequencer.sequence_layer.draw();
-            }
-		});
-		return model;
-	}
     self.moveDragModel = function(model){
         if(typeof(sequencer.sequence) != "object" || sequencer.sequence.length < 1 ){
             self.temp_layer.draw();
         }else{
             sequencer.sequence_layer.draw();
         }
-    }
+    };
     self.detectDragModelCollision = function(model){
         var grid_area_id;
         for(grid_area_id in sequencer.grid_areas){
@@ -175,32 +150,10 @@ var SQDE_SequencerPalette = function(){
                 }
             }
         }
-    }
-    self.attachEventModelOnDragMove = function(model){
-		model.group.on("dragmove", function(){
-            setTimeout(self.moveDragModel,0,model);
-            if(typeof(sequencer.sequence) == "object" || sequencer.sequence.length > 0 ){
-                setTimeout(sequencer.reorderFocusedGridArea,2);
-                setTimeout(self.detectDragModelCollision,10,model);
-            }
-		});
-		return model;
-	}
-	self.modelOnDragEndTween = function(tween_id, model, x, y){
+    };
+    self.modelOnDragEndTween = function(tween_id, model, x, y){
         sequencer.alignModelsTween(tween_id, model, x, y);
-    }
-	self.attachEventModelOnDragEnd = function(model){
-		model.group.on("dragend", function(event){
-            sequencer.dragging = false;
-            if(typeof(sequencer.sequence) != "object" || sequencer.sequence.length < 1 ){
-                self.temp_layer.draw();
-            }else{
-                sequencer.sequence_layer.draw();
-            }
-            sequencer.modelOnDragEnd(model);
-		});
-		return model;
-	}
+    };
     self.cleanupAfterModelToGridAreaCollision = function(model, grid_area){
         sequencer.setGridMode('sequence');
         grid_area.models.pop();
@@ -239,6 +192,53 @@ var SQDE_SequencerPalette = function(){
         }
         sequencer.grid_areas_layer.draw();
         sequencer.grid_auger_split_position = false;
-    }
+    };
     self.initialize();
+    self.attachEventModelOnDragStart = function(model){
+		model.group.on("dragstart", function(event){
+            model.group.remove();
+			self.dragging = true;
+            sequencer.dragging = true;
+            model.original = false;
+			if(typeof(sequencer.sequence) == "object" && sequencer.sequence.length > 0 ){
+                sequencer.ends_layer.hide();
+                sequencer.wiring_layer.hide();
+                sequencer.flow_lines_layer.hide();
+                sequencer.dragging = true;
+                sequencer.focused_grid_area_id = false;
+            }
+            if(typeof(sequencer.sequence) != "object" || sequencer.sequence.length < 1 ){
+                model.group.moveTo(self.temp_layer);
+                model.group.moveToTop();
+                self.temp_layer.draw();
+            } else {
+                model.group.moveTo(sequencer.sequence_layer);
+                model.group.moveToTop();
+                sequencer.sequence_layer.draw();
+            }
+		});
+		return model;
+	};
+    self.attachEventModelOnDragMove = function(model){
+		model.group.on("dragmove", function(){
+            setTimeout(self.moveDragModel,0,model);
+            if(typeof(sequencer.sequence) == "object" || sequencer.sequence.length > 0 ){
+                setTimeout(sequencer.reorderFocusedGridArea,2);
+                setTimeout(self.detectDragModelCollision,10,model);
+            }
+		});
+		return model;
+	};
+    self.attachEventModelOnDragEnd = function(model){
+		model.group.on("dragend", function(event){
+            sequencer.dragging = false;
+            if(typeof(sequencer.sequence) != "object" || sequencer.sequence.length < 1 ){
+                self.temp_layer.draw();
+            }else{
+                sequencer.sequence_layer.draw();
+            }
+            sequencer.modelOnDragEnd(model);
+		});
+		return model;
+	};
 }
