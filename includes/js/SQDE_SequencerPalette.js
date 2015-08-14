@@ -11,6 +11,7 @@ var SQDE_SequencerPalette = function(){
         
     };
 	self.run = function (){
+        sequencer = self.parent;
         self.tearDown();
 		self.temp_layer = new Kinetic.Layer();
 		stage.add(self.temp_layer);
@@ -19,11 +20,9 @@ var SQDE_SequencerPalette = function(){
 		self.models_layer = new Kinetic.Layer();
 		stage.add(self.models_layer);
         self.models_layer.moveToTop();
-		self.setupGrids();
+		self.setupGrid();
         var grid_id = 0;
-        
         self.models = [];
-        
         var collection = registry.collection('palette');
         var i = 0 ;
 		for( var id in collection ){
@@ -43,7 +42,7 @@ var SQDE_SequencerPalette = function(){
 			self[self.dict[i]] = undefined;
 		}
 	};
-	self.setupGrids = function(){
+	self.setupGrid = function(){
 		self.grid = [];
         var collection_length = Object.keys(registry.collection('palette')).length;
         for(var i = 0; i < collection_length; i++) {
