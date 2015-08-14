@@ -12,6 +12,7 @@ var SQDE_Configuration = function(){
 	self.model.stroke_width = 1;
 	self.model.padding_height = 10;
 	self.model.segment_height = 16;
+    self.model.button_positions_x = [3.25,(self.model.width/2),self.model.width-3.25];
 	
 	self.model.halo = {
 		x:(self.model.width / 2),

@@ -1,13 +1,12 @@
 var SQDE_Model = function(){
 	var self = this; 
 	self.group = false;
-	self.button_shapes = {'i':[],'p':[],'o':[]};
+	self.buttons = {'i':[],'p':[],'o':[]};
 	self.default_events = true;
 	self.hide_tips = true;
 	self.iop_buttons = [];
     self.height = 35;
 	self.run = function(){
-		self.iop_button_coords_x = [3.25,(config.model.width/2),config.model.width-3.25];
 		if(self.group == false){
             self.group = shapesKit.group(config.model.group);
 		}
@@ -18,7 +17,7 @@ var SQDE_Model = function(){
         var height_multiplier = 1;
         var most_buttons = 'p';
         var padding_multiplier = 3.5;
-		for(var type in self.button_shapes){
+		for(var type in self.buttons){
 			if ( height_multiplier < self.node[type].length ){
                 most_buttons = type;
 				height_multiplier = self.node[type].length;
@@ -55,20 +54,19 @@ var SQDE_Model = function(){
 		}	
 	};
     self.done = function(){
-        if(self.button_shapes.i.length != self.node.i.length){return false;}
-        if(self.button_shapes.p.length != self.node.p.length){return false;}
-        if(self.button_shapes.o.length != self.node.o.length){return false;}
+        if(self.buttons.i.length != self.node.i.length){return false;}
+        if(self.buttons.p.length != self.node.p.length){return false;}
+        if(self.buttons.o.length != self.node.o.length){return false;}
         self.parent.modelComplete(self);
     };
 	self.halo = function(i,j){
-        var h;
 		var t = false;
 		var o = {};
 		o.inpObj = config.get('model','halo');
 		o.inpObj.height = self.height;
-		h = shapesKit.circle(o.inpObj);
+		o.shape = shapesKit.circle(o.inpObj);
         if( self.default_events == true ){
-            h.on('mouseout', function(){
+           o.shape.on('mouseout', function(){
                 if(t != false){
                     t.shape.remove();
                     t.shape.destroy();
@@ -76,7 +74,7 @@ var SQDE_Model = function(){
                     self.layer.batchDraw();
                 }
             });
-            h.on('mouseover', function() {
+            o.shape.on('mouseover', function() {
                 if(t == false){
                     document.body.style.cursor = '-webkit-grab';
                     t = {};
@@ -95,7 +93,7 @@ var SQDE_Model = function(){
                     self.layer.batchDraw();
                 }
             });
-            h.on('touchend', function(){
+            o.shape.on('touchend', function(){
                 if(t != false){
                     t.shape.remove();
                     t.shape.destroy();
@@ -120,44 +118,43 @@ var SQDE_Model = function(){
                 }
             });
         }
-		self.group.add(h);
+		self.group.add(o.shape);
 	};
 	self.body = function(){
-		var body = {};
-		body.inpObj = config.get('model','body');
-		body.inpObj.height = self.height;
-		self.body_shape = shapesKit.box(body.inpObj);
+		var o = {};
+		o.inpObj = config.get('model','body');
+		o.inpObj.height = self.height;
+		o.shape = shapesKit.box(o.inpObj);
         if( self.default_events == true ){
-            self.body_shape.on('mouseover touch', function() {
+            o.shape.on('mouseover touch', function() {
                 self.group.moveToTop();
                 self.group.draggable(true);
                 self.layer.batchDraw();
             });
-            self.body_shape.on('mouseout touchend', function() {
+            o.shape.on('mouseout touchend', function() {
                 self.group.moveToTop();
                 self.layer.batchDraw();
             });
         }
-		self.group.add(self.body_shape);
+		self.group.add(o.shape);
 	};
 	self.button = function(i,j){
-		var button = {};
-		var tip = {};
-		var type = config.model.button_types[i];
-		button.inpObj = config.get('model','button');
-		button.inpObj.fill = config.model.button_type_colors[i];
-		button.inpObj.x = self.iop_button_coords_x[i];
-		button.inpObj.y = self.height - ( config.model.padding_height + (j*config.model.segment_height) + config.model.button_type_height_adjustment[type]);
-		button.shape = shapesKit.circle(button.inpObj);
+		var o = t = {};
+		var m = config.model.button_types[i];
+		o.inpObj = config.get('model','button');
+		o.inpObj.fill = config.model.button_type_colors[i];
+		o.inpObj.x =  config.model.button_positions_x[i];
+		o.inpObj.y = self.height - ( config.model.padding_height + (j*config.model.segment_height) + config.model.button_type_height_adjustment[m]);
+		o.shape = shapesKit.circle(o.inpObj);
         
         if( self.default_events == true ){
-            button = self.attachButtonEventMouseOverOut(button, tip, button.inpObj.x, button.inpObj.y - button.inpObj.radius, self.node[type][j].n);
+            o = self.attachButtonEventMouseOverOut(o, tip, o.inpObj.x, o.inpObj.y - o.inpObj.radius, self.node[m][j].n);
         }
-		self.button_shapes[type][j] = button.shape;
-        if(type != 'p'){
-            self.button_shapes[type][j].setScale({x:0.71,y:1.05});
+		self.buttons[m][j] = o.shape;
+        if(m != 'p'){
+            self.buttons[m][j].setScale({x:0.71,y:1.05});
         }
-		self.group.add(self.button_shapes[type][j]);
+		self.group.add(self.buttons[m][j]);
         self.done();
 	};
 	self.attachButtonEventMouseOverOut = function(button, tip, x, y, text){
