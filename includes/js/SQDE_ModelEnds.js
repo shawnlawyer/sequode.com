@@ -6,7 +6,6 @@ var SQDE_ModelEnds = function(){
 	
 	self.buttons = {'i':[],'p':[],'o':[]};
 	self.run = function(){
-		self.iop_button_coords_x = [0,(config.model.width/2),config.model.width];
 		if(self.group == false){
 			self.group = shapesKit.group();
 		}
@@ -34,8 +33,9 @@ var SQDE_ModelEnds = function(){
         }
         self.height = ((height_multiplier - 1)*config.model.segment_height)+(config.model.padding_height*padding_multiplier);
 	};
-	self.buildModel = function(xml){
-		self.generateModelParts();
+	self.buildModel = function(){
+        setTimeout(self.makeBody,0);
+        setTimeout(self.makeButtons,0);
 		switch(self.valignment){
 			case 'bottom':
 				self.group.setY(self.y - self.height);
@@ -47,18 +47,12 @@ var SQDE_ModelEnds = function(){
 		self.group.setX(self.x);
 		self.layer.add(self.group);
 	};
-	self.generateModelParts = function(node){
-        setTimeout(self.makeBody,0);
-        setTimeout(self.makeButtons,0);
-	};
 	self.makeBody = function(){
-		var layer, inpObj;
+		var inpObj;
         inpObj = config.get('model_end_'+self.type,'body');
 		inpObj.height = self.height;
-		layer = {};
-        layer.box = shapesKit.box(inpObj);
-        self.group.add(layer.box);
-        self.body = layer.box;
+        self.group.add(self.body);
+        self.body = shapesKit.box(inpObj);
 	};
 	self.makeButtons = function(){
         self.buttons = {'i':[],'p':[],'o':[]};
