@@ -509,7 +509,7 @@ var SQDE_Sequencer = function(){
 		for(var i=0;i<self.node['p'].length;i++){
 			connecter = {};
 			connecter.type = 'p';
-			connecter.shape = model.button_shapes['p'][i];
+			connecter.shape = model.buttons['p'][i];
 			connecter.x = connecter.shape.getAbsolutePosition().x;
 			connecter.y = connecter.shape.getAbsolutePosition().y;
 			self.connecters['p'].push(connecter);
@@ -521,7 +521,7 @@ var SQDE_Sequencer = function(){
 				for(var j=0;j<node[stack].length;j++){
 					connecter = {};
 					connecter.type = stack;
-					connecter.shape = model.button_shapes[stack][j];
+					connecter.shape = model.buttons[stack][j];
 					connecter.x = connecter.shape.getAbsolutePosition().x;
 					connecter.y = connecter.shape.getAbsolutePosition().y;
                     
@@ -544,10 +544,10 @@ var SQDE_Sequencer = function(){
 		}
 		model = self.IOPmodels['base'];
         
-		for(var i=0;i<model.button_shapes['o'].length;i++){
+		for(var i=0;i<model.buttons['o'].length;i++){
 			connecter = {};
 			connecter.type = 'o';
-			connecter.shape = model.button_shapes['o'][i];
+			connecter.shape = model.buttons['o'][i];
 			connecter.x = connecter.shape.getAbsolutePosition().x;
 			connecter.y = connecter.shape.getAbsolutePosition().y;
 			self.connecters['o'].push(connecter);
@@ -1083,9 +1083,9 @@ var SQDE_Sequencer = function(){
     //tap event listner attachments
     
     self.attachModelEndsEventButtonsOnTap = function(model){
-		for(var type in model.button_shapes){
-			for( var i in model.button_shapes[type] ){
-				model.button_shapes[type][i] = self.attachModelEndsEventButtonOnTap(model.button_shapes[type][i],type,i);
+		for(var type in model.buttons){
+			for( var i in model.buttons[type] ){
+				model.buttons[type][i] = self.attachModelEndsEventButtonOnTap(model.buttons[type][i],type,i);
 			}
 		}
 		return model;
@@ -1133,9 +1133,9 @@ var SQDE_Sequencer = function(){
 		return model;
 	};
 	self.attachModelButtonsEventOnTap = function(model){
-		for(var type in model.button_shapes){
-			for( var i in model.button_shapes[type] ){
-				model.button_shapes[type][i] = self.attachModelEventButtonOnTap(model.button_shapes[type][i],model.sequence_order,type,i);
+		for(var type in model.buttons){
+			for( var i in model.buttons[type] ){
+				model.buttons[type][i] = self.attachModelEventButtonOnTap(model.buttons[type][i],model.sequence_order,type,i);
 			}
 		}
 		return model;
