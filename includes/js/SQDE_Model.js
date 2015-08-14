@@ -61,13 +61,14 @@ var SQDE_Model = function(){
         self.parent.modelComplete(self);
     };
 	self.halo = function(i,j){
+        var h;
 		var t = false;
 		var o = {};
 		o.inpObj = config.get('model','halo');
 		o.inpObj.height = self.height;
-		o = shapesKit.circle(o.inpObj);
+		h = shapesKit.circle(o.inpObj);
         if( self.default_events == true ){
-            o.on('mouseout', function(){
+            h.on('mouseout', function(){
                 if(t != false){
                     t.shape.remove();
                     t.shape.destroy();
@@ -75,7 +76,7 @@ var SQDE_Model = function(){
                     self.layer.batchDraw();
                 }
             });
-            o.on('mouseover', function() {
+            h.on('mouseover', function() {
                 if(t == false){
                     document.body.style.cursor = '-webkit-grab';
                     t = {};
@@ -94,7 +95,7 @@ var SQDE_Model = function(){
                     self.layer.batchDraw();
                 }
             });
-            o.on('touchend', function(){
+            h.on('touchend', function(){
                 if(t != false){
                     t.shape.remove();
                     t.shape.destroy();
@@ -104,8 +105,8 @@ var SQDE_Model = function(){
                     document.body.style.cursor = '-webkit-grab';
                     t = {};
                     t.inpObj = config.get('model','halo_tip_label');
-                    t.inpObj.x = halo.inpObj.x;
-                    t.inpObj.y = halo.inpObj.y - halo.inpObj.radius;
+                    t.inpObj.x = o.inpObj.x;
+                    t.inpObj.y = o.inpObj.y - o.inpObj.radius;
                     t.shape = shapesKit.label(t.inpObj);
                     t.inpObj = config.get('model','halo_tip_tag');
                     t.shape.add(shapesKit.tag(t.inpObj));
@@ -119,7 +120,7 @@ var SQDE_Model = function(){
                 }
             });
         }
-		self.group.add(o);
+		self.group.add(h);
 	};
 	self.body = function(){
 		var body = {};
