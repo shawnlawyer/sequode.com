@@ -35,7 +35,7 @@ var SQDE_Sequencer = function(){
 			self[self.dict[i]] = undefined;
 		}
 	};
-	self.dict = ['models','sequence','flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer','view_positioner_layer','id','dragging','drag_id','y','offstage','tweens_playing','grids','grid','grid_mode','grid_x','grid_order','align_lock'];
+	self.dict = ['models','sequence','flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer','view_positioner_layer','id','dragging','drag_id','y''tweens_playing','grids','grid','grid_mode','grid_x','grid_order','align_lock'];
 	self.models = [];
 	self.IOPmodels = { 'head':false, 'base':true };
     self.grid_auger_types = ['prepend','split','append'];
@@ -55,11 +55,9 @@ var SQDE_Sequencer = function(){
     self.modelComplete = function(model){
         self.models[model.sequence_order] = self.modelEventListeners(model);;
         self.models_done++;
-        self.done();
-    };
-    self.done = function(){
-        if(self.models_done != self.sequence.length){return false;}
-        self.modelsComplete();
+        if(self.models_done == self.sequence.length){
+            self.modelsComplete();
+        }
     };
 	self.modelsComplete = function(){
         self.sequenceIPOConnectionModels();
@@ -927,9 +925,7 @@ var SQDE_Sequencer = function(){
         return(models_count*config.sequencer.grid_cell_width) + (config.sequencer.grid_cell_width);
     };
     self.initialize();
-    
     // Event Listeners attachments
-    
 	self.viewerPositionerEventListeners = function(positioner){
         positioner.group = eventsKit.attachDraggableCursorEvents(positioner.group);
         positioner = self.attachViewDraggerEventOnDragStart(positioner);
@@ -937,7 +933,6 @@ var SQDE_Sequencer = function(){
         positioner = self.attachViewDraggerEventOnDragEnd(positioner);
         return positioner;
 	};
-    
 	self.modelEventListeners = function(model){
 		model = self.attachModelButtonsEventOnTap(model);
         model = self.attachModelEventOnDragStart(model);
@@ -945,15 +940,12 @@ var SQDE_Sequencer = function(){
         model = self.attachModelEventOnDragEnd(model);
 		return model;
 	};
-
 	self.modelEndsEventListeners = function(model){
         model = self.attachModelEndsEventButtonsOnTap(model);
         model = self.attachModelEndsEventBodyOnTap(model);
 		return model;
 	};
-    
     //drag event listner attachments
-    
     self.attachGridAreaEventOnDragStart = function(gridarea){
 		gridarea.group.on("dragstart", function(){
             
