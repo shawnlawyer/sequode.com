@@ -1,18 +1,16 @@
 var SQDE_SequencerPalette = function(){
 	var self = this;
     var sequencer;
-    self.grid_position = {x:32.5,y:stage.getHeight() - 8};
-    self.dict = ['models','height','background_layer','models_layer','temp_layer','grid'];
     self.initialized = false;
     self.initialize = function(){
         if(self.initialized == true){ return;}
         registry.subscribeToUpdates({type:'context', collection:'palette', call: self.run});
         self.initialized = true;
-        
     };
 	self.run = function (){
-        sequencer = self.parent;
         self.tearDown();
+        sequencer = self.parent;
+        self.grid_position = {x:32.5, y:stage.getHeight() - 8};
 		self.temp_layer = new Kinetic.Layer();
 		stage.add(self.temp_layer);
 		self.background_layer = new Kinetic.Layer();
@@ -38,6 +36,11 @@ var SQDE_SequencerPalette = function(){
 		self.temp_layer.destroy();
 		self.models_layer.destroy();
 		self.background_layer.destroy();
+        self.models = undefined;
+        self.background_layer = undefined;
+        self.models_layer = undefined;
+        self.temp_layer = undefined;
+        self.grid = undefined;
 		for(var i in self.dict ){
 			self[self.dict[i]] = undefined;
 		}
@@ -64,12 +67,7 @@ var SQDE_SequencerPalette = function(){
 		model.run();
 	};
 	self.modelComplete = function(model){
-        model.group = eventsKit.attachDraggableCursorEvents(model.group);
-		model = self.attachEventModelOnDragStart(model);
-		model = self.attachEventModelOnDragMove(model);
-		model = self.attachEventModelOnDragEnd(model);
-
-        self.models[model.grid_id] = model;
+        self.models[model.grid_id] = self.modelEventListeners(model);
         if(self.models.length == Object.keys(registry.collection('palette')).length){
             self.modelsComplete();
         }
@@ -193,6 +191,16 @@ var SQDE_SequencerPalette = function(){
         sequencer.grid_auger_split_position = false;
     };
     self.initialize();
+    
+    // Event Listeners attachments
+    
+	self.modelEventListeners = function(model){
+        model.group = eventsKit.attachDraggableCursorEvents(model.group);
+		model = self.attachEventModelOnDragStart(model);
+		model = self.attachEventModelOnDragMove(model);
+		model = self.attachEventModelOnDragEnd(model);
+		return model;
+	};
     self.attachEventModelOnDragStart = function(model){
 		model.group.on("dragstart", function(event){
             model.group.remove();
@@ -222,8 +230,8 @@ var SQDE_SequencerPalette = function(){
 		model.group.on("dragmove", function(){
             setTimeout(self.moveDragModel,0,model);
             if(typeof(sequencer.sequence) == "object" || sequencer.sequence.length > 0 ){
-                setTimeout(sequencer.reorderFocusedGridArea,2);
-                setTimeout(self.detectDragModelCollision,10,model);
+                setTimeout(sequencer.reorderFocusedGridArea,0);
+                setTimeout(self.detectDragModelCollision,0,model);
             }
 		});
 		return model;
