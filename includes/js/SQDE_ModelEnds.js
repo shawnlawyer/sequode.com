@@ -17,18 +17,18 @@ var SQDE_ModelEnds = function(){
         var height_multiplier = 1;
         var most_buttons = 'p';
         var padding_multiplier = 3.5;
-		for(var type in self.buttons){
-			if ( height_multiplier < self.node[type].length ){
-                most_buttons = type;
-				height_multiplier = self.node[type].length;
+            for(var m in self.buttons){
+            if(self.type == 'head' && m == 'o'){
+                continue;
+            }
+            if(self.type == 'base' && (m == 'i' || m == 'p')){
+                continue;
+            }
+			if ( height_multiplier < self.node[m].length ){
+                most_buttons = m;
+				height_multiplier = self.node[m].length;
 			}
 		}
-        if(self.type == 'head' && config.model.button_types[i] == 'o'){
-            continue;
-        }
-        if(self.type == 'base' && (config.model.button_types[i] == 'i' || config.model.button_types[i] == 'p')){
-            continue;
-        }
         if((most_buttons != 'p' && self.node['p'].length != self.node[most_buttons].length) && !(self.node['i'].length == self.node['p'].length && self.node['p'].length == self.node['o'].length)){
             padding_multiplier = 2;
         }
