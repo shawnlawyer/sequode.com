@@ -50,7 +50,7 @@ var SQDE_ModelEnds = function(){
 	self.makeButtons = function(){
 		for(var m in self.buttons){
 			for (var i=0;i<self.node[m].length;i++){
-                setTimeout(self.makeButton,0,m,i);
+                self.makeButton(m,i);
 			}
 		}
 	};
