@@ -55,7 +55,7 @@ var SQDE_ModelEnds = function(){
 		var o = {};
 		o.inpObj = config.model.button;
 		o.inpObj.fill = config.model.button_type_colors[m];
-		o.inpObj.x =  config.model.button_positions_x[m];
+		o.inpObj.x = config.model.button_positions_x[m];
 		o.inpObj.y = self.height - ( config.model.padding_height + ( i * config.model.segment_height ) + config.model.button_type_height_adjustment[m] );
 		o.shape = shapesKit.circle(o.inpObj);
         if( self.default_events == true ){
