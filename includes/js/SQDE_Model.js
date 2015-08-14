@@ -36,14 +36,14 @@ var SQDE_Model = function(){
 		self.group.setX(self.x);
 		self.layer.add(self.group);
 	};
-	self.makeHalo = function(i,j){
-		var t = false;
+	self.makeHalo = function(){
 		var o = {};
 		o.inpObj = config.get('model','halo');
 		o.inpObj.height = self.height;
 		o.shape = shapesKit.circle(o.inpObj);
         if( self.default_events == true ){
-           o.shape.on('mouseout', function(){
+            var t = false;
+            o.shape.on('mouseout', function(){
                 if(t != false){
                     t.shape.remove();
                     t.shape.destroy();
@@ -146,38 +146,77 @@ var SQDE_Model = function(){
         return;
 	};
 	self.attachButtonEventMouseOverOut = function(button, text){
-        var tip = {};
-		button.shape.on('mouseover', function() {
-            document.body.style.cursor = 'pointer';
-            if(self.original){
-                self.parent.wiring_layer.hide();
-            }
-			tip.inpObj = config.get('model','tip_label');
-			tip.inpObj.x = button.inpObj.x;
-			tip.inpObj.y = button.inpObj.y - button.inpObj.radius;
-			tip.shape = shapesKit.label(tip.inpObj);
-			tip.inpObj = config.get('model','tip_tag');
-			tip.shape.add(shapesKit.tag(tip.inpObj));
-			tip.inpObj = config.get('model','tip_text');
-			tip.inpObj.text = decodeURIComponent(text);
-			tip.shape.add(shapesKit.text(tip.inpObj));
-			self.group.add(tip.shape);
-			self.group.setDraggable(false);
-			self.group.moveToTop();
-			tip.shape.moveToTop();
-			self.layer.batchDraw();
-		});
-		button.shape.on('mouseout', function(){
-            document.body.style.cursor = 'default';
-            if(self.original){
-                self.parent.wiring_layer.show();
-            }
-            self.group.setDraggable(false);
-			tip.shape.remove();
-			tip.shape.destroy();
-			self.layer.batchDraw();
-		});
-		return button;
+        if( self.default_events == true ){
+            var t = false;
+            o.shape.on('mouseout', function(){
+                if(t != false){
+                    document.body.style.cursor = 'default';
+                    if(self.original){
+                        self.parent.wiring_layer.show();
+                    }
+                    self.group.setDraggable(false);
+                    t.shape.remove();
+                    t.shape.destroy();
+                    t = false;
+                    self.layer.batchDraw();
+                }
+            });
+            o.shape.on('mouseover', function() {
+                if(t == false){
+                    document.body.style.cursor = 'pointer';
+                    if(self.original){
+                        self.parent.wiring_layer.hide();
+                    }
+                    t.inpObj = config.get('model','tip_label');
+                    t.inpObj.x = button.inpObj.x;
+                    t.inpObj.y = button.inpObj.y - button.inpObj.radius;
+                    t.shape = shapesKit.label(t.inpObj);
+                    t.inpObj = config.get('model','tip_tag');
+                    t.shape.add(shapesKit.tag(t.inpObj));
+                    t.inpObj = config.get('model','tip_text');
+                    t.inpObj.text = decodeURIComponent(text);
+                    t.shape.add(shapesKit.text(t.inpObj));
+                    self.group.add(t.shape);
+                    self.group.setDraggable(false);
+                    self.group.moveToTop();
+                    t.shape.moveToTop();
+                    self.layer.batchDraw();
+                }
+            });
+            o.shape.on('touchend', function(){
+                if(t != false){
+                    document.body.style.cursor = 'default';
+                    if(self.original){
+                        self.parent.wiring_layer.show();
+                    }
+                    self.group.setDraggable(false);
+                    t.shape.remove();
+                    t.shape.destroy();
+                    t = false;
+                    self.layer.batchDraw();
+                }else{
+                    document.body.style.cursor = 'pointer';
+                    if(self.original){
+                        self.parent.wiring_layer.hide();
+                    }
+                    t.inpObj = config.get('model','tip_label');
+                    t.inpObj.x = button.inpObj.x;
+                    t.inpObj.y = button.inpObj.y - button.inpObj.radius;
+                    t.shape = shapesKit.label(t.inpObj);
+                    t.inpObj = config.get('model','tip_tag');
+                    t.shape.add(shapesKit.tag(t.inpObj));
+                    t.inpObj = config.get('model','tip_text');
+                    t.inpObj.text = decodeURIComponent(text);
+                    t.shape.add(shapesKit.text(t.inpObj));
+                    self.group.add(t.shape);
+                    self.group.setDraggable(false);
+                    self.group.moveToTop();
+                    t.shape.moveToTop();
+                    self.layer.batchDraw();
+                }
+            });
+        }
+		return o;
 	};
 	self.makeCollider = function(){
 		var inpObj = {
