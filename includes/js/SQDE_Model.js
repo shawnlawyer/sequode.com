@@ -61,66 +61,66 @@ var SQDE_Model = function(){
         self.parent.modelComplete(self);
     };
 	self.halo = function(i,j){
-		var halo = {};
-		var tip = false;
-		halo.inpObj = config.get('model','halo');
-		halo.inpObj.height = self.height;
-		self.halo_shape = shapesKit.circle(halo.inpObj);
+		var t = false;
+		var o = {};
+		o.inpObj = config.get('model','halo');
+		o.inpObj.height = self.height;
+		o = shapesKit.circle(o.inpObj);
         if( self.default_events == true ){
-            self.halo_shape.on('mouseout', function(){
+            o.on('mouseout', function(){
                 
-                if(tip != false){
-                    tip.shape.remove();
-                    tip.shape.destroy();
-                    tip = false;
+                if(t != false){
+                    t.shape.remove();
+                    t.shape.destroy();
+                    t = false;
                     self.layer.batchDraw();
                 }
             });
-            self.halo_shape.on('mouseover', function() {
-                if(tip == false){
+            o.on('mouseover', function() {
+                if(t == false){
                     document.body.style.cursor = '-webkit-grab';
-                    tip = {};
-                    tip.inpObj = config.get('model','halo_tip_label');
-                    tip.inpObj.x = halo.inpObj.x;
-                    tip.inpObj.y = halo.inpObj.y - halo.inpObj.radius;
-                    tip.shape = shapesKit.label(tip.inpObj);
-                    tip.inpObj = config.get('model','halo_tip_tag');
-                    tip.shape.add(shapesKit.tag(tip.inpObj));
-                    tip.inpObj = config.model.halo_tip_text;
-                    tip.inpObj.text = decodeURIComponent(self.node.n);
-                    tip.shape.add(shapesKit.text(tip.inpObj));
-                    self.group.add(tip.shape);
+                    t = {};
+                    t.inpObj = config.get('model','halo_tip_label');
+                    t.inpObj.x = o.inpObj.x;
+                    t.inpObj.y = o.inpObj.y - o.inpObj.radius;
+                    t.shape = shapesKit.label(t.inpObj);
+                    t.inpObj = config.get('model','halo_tip_tag');
+                    t.shape.add(shapesKit.tag(t.inpObj));
+                    t.inpObj = config.model.halo_tip_text;
+                    t.inpObj.text = decodeURIComponent(self.node.n);
+                    t.shape.add(shapesKit.text(t.inpObj));
+                    self.group.add(t.shape);
                     self.group.moveToTop();
-                    tip.shape.moveToTop();
+                    t.shape.moveToTop();
                     self.layer.batchDraw();
                 }
             });
-            self.halo_shape.on('touchend', function(){
-                if(tip != false){
-                    tip.shape.remove();
-                    tip.shape.destroy();
-                    tip = false;
+            self.o.on('touchend', function(){
+                if(t != false){
+                    t.shape.remove();
+                    t.shape.destroy();
+                    t = false;
                     self.layer.batchDraw();
                 }else{
                     document.body.style.cursor = '-webkit-grab';
-                    tip = {};
-                    tip.inpObj = config.get('model','halo_tip_label');
-                    tip.inpObj.x = halo.inpObj.x;
-                    tip.inpObj.y = halo.inpObj.y - halo.inpObj.radius;
-                    tip.shape = shapesKit.label(tip.inpObj);
-                    tip.inpObj = config.get('model','halo_tip_tag');
-                    tip.shape.add(shapesKit.tag(tip.inpObj));
-                    tip.inpObj = config.model.halo_tip_text;
-                    tip.inpObj.text = decodeURIComponent(self.node.n);
-                    tip.shape.add(shapesKit.text(tip.inpObj));
-                    self.group.add(tip.shape);
+                    t = {};
+                    t.inpObj = config.get('model','halo_tip_label');
+                    t.inpObj.x = halo.inpObj.x;
+                    t.inpObj.y = halo.inpObj.y - halo.inpObj.radius;
+                    t.shape = shapesKit.label(t.inpObj);
+                    t.inpObj = config.get('model','halo_tip_tag');
+                    t.shape.add(shapesKit.tag(t.inpObj));
+                    t.inpObj = config.model.halo_tip_text;
+                    t.inpObj.text = decodeURIComponent(self.node.n);
+                    t.shape.add(shapesKit.text(t.inpObj));
+                    self.group.add(t.shape);
                     self.group.moveToTop();
-                    tip.shape.moveToTop();
+                    t.shape.moveToTop();
                     self.layer.batchDraw();
                 }
             });
         }
-		self.group.add(self.halo_shape);
+		self.group.add(o);
 	};
 	self.body = function(){
 		var body = {};
