@@ -16,7 +16,7 @@ var SQDE_ModelEnds = function(){
         var height_multiplier = 1;
         var most_buttons = 'p';
         var padding_multiplier = 3.5;
-            for(var m in self.buttons){
+        for(var m in self.buttons){
             if(self.type == 'head' && m == 'o'){
                 continue;
             }
@@ -59,6 +59,12 @@ var SQDE_ModelEnds = function(){
 		var m;
 		for(var i=0;i<config.model.button_types.length;i++){
 			m = config.model.button_types[i];
+            if(self.type == 'head' && m == 'o'){
+                continue;
+            }
+            if(self.type == 'base' && (m == 'i' || m == 'p')){
+                continue;
+            }
 			for (var j=0;j<self.node[m].length;j++){
                 setTimeout(self.makeButton,0,i,j);
 			}
