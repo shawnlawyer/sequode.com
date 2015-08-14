@@ -437,7 +437,6 @@ class SQDE_SequodeCardObjects {
         $card_object->body = array();
         $component_object->js = 'registry.setContext({card:\'cards/sequode/chart\',collection:\'sequodes\',node:'.$sequode_model->id.',tearDown:function(){sequencer = null; }});';
         $card_object->body[] = $component_object;
-        $html = $js = array();
         $dom_id = SQDE_Component::uniqueHash();
         $item_head = array(
             'css_classes'=>'automagic-card-menu-item-label noSelect',
@@ -449,6 +448,8 @@ class SQDE_SequodeCardObjects {
             'js_action'=> 'new SQDE_AjaxCall({route:\'forms/user/selectPalette\',inputs:['.SQDE_Form::jsQuotedValue($dom_id).']});'                 
         );
         $card_object->menu->items = array_merge(array($item_head,$item),$card_object->menu->items);
+        
+        $html = $js = array();
         $html[] = '<div class="SequencerStageContainer" id="'.$dom_id.'chart"></div>';
         //$js[] = 'var sequencer;';
         $js[] = 'sequencer = new SQDE_Sequencer();';
