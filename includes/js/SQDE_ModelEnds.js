@@ -9,10 +9,7 @@ var SQDE_ModelEnds = function(){
         var most_buttons = 'p';
         var padding_multiplier = 3.5;
         for(var m in self.buttons){
-            if(self.type == 'head' && m == 'o'){
-                continue;
-            }
-            if(self.type == 'base' && (m == 'i' || m == 'p')){
+            if((self.type == 'head' && m == 'o') || (self.type == 'base' && (m == 'i' || m == 'p'))){
                 continue;
             }
 			if ( height_multiplier < self.node[m].length ){
