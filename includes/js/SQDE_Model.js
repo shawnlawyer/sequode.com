@@ -134,18 +134,6 @@ var SQDE_Model = function(){
         if( self.default_events == true ){
             o = self.attachButtonEventMouseOverOut(o, self.node[m][i].n);
         }
-		self.buttons[m][i] = o.shape;
-        if(m != 'p'){
-            self.buttons[m][i].setScale({x:0.71,y:1.05});
-        }
-		self.group.add(self.buttons[m][i]);
-		for(var ipo in self.buttons){
-            if(self.buttons[ipo].length != self.node[ipo].length){ return; }
-        }
-        self.parent.modelComplete(self);
-        return;
-	};
-	self.attachButtonEventMouseOverOut = function(o, text){
         if( self.default_events == true ){
             var t = false;
             o.shape.on('mouseout', function(){
@@ -216,7 +204,16 @@ var SQDE_Model = function(){
                 }
             });
         }
-		return o;
+		self.buttons[m][i] = o.shape;
+        if(m != 'p'){
+            self.buttons[m][i].setScale({x:0.71,y:1.05});
+        }
+		self.group.add(self.buttons[m][i]);
+		for(var ipo in self.buttons){
+            if(self.buttons[ipo].length != self.node[ipo].length){ return; }
+        }
+        self.parent.modelComplete(self);
+        return;
 	};
 	self.makeCollider = function(){
 		var inpObj = {
