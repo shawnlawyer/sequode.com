@@ -1,15 +1,16 @@
 var SQDE_SequencerPalette = function(){
 	var self = this;
     var sequencer;
+    var stage;
     self.initialized = false;
     self.initialize = function(){
         if(self.initialized == true){ return;}
-        registry.subscribeToUpdates({type:'context', collection:'palette', call: self.run});
         self.initialized = true;
     };
 	self.run = function (){
         self.tearDown();
         sequencer = self.parent;
+        stage = sequencer.stage;
         self.grid_position = {x:32.5, y:stage.getHeight() - 8};
 		self.temp_layer = new Kinetic.Layer();
 		stage.add(self.temp_layer);

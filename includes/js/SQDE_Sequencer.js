@@ -1,5 +1,6 @@
 var SQDE_Sequencer = function(){
 	var self = this;
+    var stage;
     var sequencer_palette = new SQDE_SequencerPalette;
     sequencer_palette.parent = self;
     self.initialized = false;

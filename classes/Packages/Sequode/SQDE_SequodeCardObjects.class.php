@@ -435,7 +435,7 @@ class SQDE_SequodeCardObjects {
         $card_object->size = 'fullscreen';
         $card_object->head = 'Sequode Chart &gt; '.$sequode_model->name;
         $card_object->body = array();
-        $component_object->js = 'registry.setContext({card:\'cards/sequode/chart\',collection:\'sequodes\',node:'.$sequode_model->id.',tearDown:function(){stage = null; sequencer = null; sequencer_palette = null;}});';
+        $component_object->js = 'registry.setContext({card:\'cards/sequode/chart\',collection:\'sequodes\',node:'.$sequode_model->id.',tearDown:function(){sequencer = null; }});';
         $card_object->body[] = $component_object;
         $html = $js = array();
         $dom_id = SQDE_Component::uniqueHash();
@@ -450,15 +450,13 @@ class SQDE_SequodeCardObjects {
         );
         $card_object->menu->items = array_merge(array($item_head,$item),$card_object->menu->items);
         $html[] = '<div class="SequencerStageContainer" id="'.$dom_id.'chart"></div>';
-        //$js[] = 'var stage, sequencer;';
-        $js[] = 'stage = shapesKit.stage({ container: \''.$dom_id.'chart\',	width: $(window).width(), height: $(window).height() });';
+        //$js[] = 'var sequencer;';
         $js[] = 'sequencer = new SQDE_Sequencer();';
+        $js[] = 'sequencer.stage = shapesKit.stage({ container: \''.$dom_id.'chart\', width: $(window).width(), height: $(window).height() });';
         $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'sequodes\', key:true, call: sequencer.run});';
+        $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'palette\', call: sequencer.palette.run});';
         $js[] = 'registry.fetch({collection:\'sequodes\',key:'.$sequode_model->id.'});';
-        $component_object = (object) null;
-        $component_object->html = implode('', $html);
-        $component_object->js = implode(' ', $js);
-        $card_object->body[] = $component_object;
+        $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
         return $card_object;
     }
     public static function search( $sequode_model = null){
