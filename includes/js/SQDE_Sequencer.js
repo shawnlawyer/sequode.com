@@ -5,13 +5,23 @@ var SQDE_Sequencer = function(){
     self.initialized = false;
     self.first_run_complete = false;
 	self.active = false;
+	self.dict = ['models','sequence','flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer','view_positioner_layer','id','dragging','drag_id','y','tweens_playing','grids','grid','grid_mode','grid_x','grid_order','align_lock'];
+	self.models = [];
+	self.IOPmodels = { 'head':false, 'base':true };
+    self.grid_auger_types = ['prepend','split','append'];
+    self.connections = {'i':[],'p':[],'o':[]};
+    self.connecters = {'i':[],'p':[],'o':[]};
+	self.gridarea_height = 200;
+    self.view_layers_offset = {x:0,y:0};
+    self.view_layers_starting_offset = {x:0,y:0};
+    self.all_layers = ['flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer','view_positioner_layer'];
+    self.view_layers = ['flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer'];
     self.initialize = function(){
         if(self.initialized == true){
             return;
         }
         self.initialized = true;
     };
-	self.dict = ['models','sequence','flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer','view_positioner_layer','id','dragging','drag_id','y''tweens_playing','grids','grid','grid_mode','grid_x','grid_order','align_lock'];
     self.tearDown = function(id){
 		if(self.active == false){ return;}
         if(id != self.id){
@@ -36,16 +46,6 @@ var SQDE_Sequencer = function(){
 			self[self.dict[i]] = undefined;
 		}
 	};
-	self.models = [];
-	self.IOPmodels = { 'head':false, 'base':true };
-    self.grid_auger_types = ['prepend','split','append'];
-    self.connections = {'i':[],'p':[],'o':[]};
-    self.connecters = {'i':[],'p':[],'o':[]};
-	self.gridarea_height = 200;
-    self.view_layers_offset = {x:0,y:0};
-    self.view_layers_starting_offset = {x:0,y:0};
-    self.all_layers = ['flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer','view_positioner_layer'];
-    self.view_layers = ['flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer'];
     self.makeChartViewable = function(){
         self.center_stage = {x:Math.floor(stage.getWidth()/2), y:Math.floor(stage.getHeight()/2)};
         if(self.view_layers_offset.x != 0 || self.view_layers_offset.y != 0 ){return;}
