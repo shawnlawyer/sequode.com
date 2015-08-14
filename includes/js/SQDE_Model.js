@@ -140,7 +140,7 @@ var SQDE_Model = function(){
 		o.inpObj.y = self.height - ( config.model.padding_height + ( i * config.model.segment_height) + config.model.button_type_height_adjustment[m] );
 		o.shape = shapesKit.circle(o.inpObj);
         if( self.default_events == true ){
-            o = self.attachButtonEventMouseOverOut(o, {}, o.inpObj.x, o.inpObj.y - o.inpObj.radius, self.node[m][j].n);
+            o = self.attachButtonEventMouseOverOut(o, {}, o.inpObj.x, o.inpObj.y - o.inpObj.radius, self.node[m][i].n);
         }
 		self.buttons[m][i] = o.shape;
         if(m != 'p'){
