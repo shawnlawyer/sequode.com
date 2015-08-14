@@ -5,49 +5,21 @@ var SQDE_Configuration = function(){
 		width: $(window).width(),
 		height: $(window).height()-5
 	};
-    
+    var model_width = 35;
+    var segment_height = 16;
+    var padding_height = 10;
+    var stroke_width = 1;
 	self.model = {};
 	self.model.group = { draggable:true, dragDistance: 3};
-	self.model.width = 35;
-	self.model.stroke_width = 1;
-	self.model.padding_height = 10;
-	self.model.segment_height = 16;
+	self.model.width = model_width;
+	self.model.stroke_width = stroke_width;
+	self.model.padding_height = padding_height;
+	self.model.segment_height = segment_height;
 	self.model.button_types = ['i','p','o'];
-    self.model.button_positions_x = {'i':3.25,'p':(35/2),'o':35-3.25};
-	self.model.button_type_height_adjustment = {'i':0,'p':(16/2),'o':0};
+    self.model.button_positions_x = {'i':3.25,'p':(model_width/2),'o':model_width-3.25};
+	self.model.button_type_height_adjustment = {'i':0,'p':(segment_height/2),'o':0};
     self.model.button_type_colors = {'i':'yellow','p':'#306EFF','o':'#00FF00'};
     
-	self.model.halo = {
-		x:(self.model.width / 2),
-		y:0, 
-		width: self.model.width, 
-		height: 0,
-		radius: (self.model.width / 4), 
-		fill: 'white',
-		stroke: 'black',
-		strokeWidth: self.model.stroke_width
-	};
-	self.model.halo_tip_label = {
-		x: 0,
-		y: 0,
-		opacity: 1.00
-	};
-	self.model.halo_tip_tag = {
-		fill: 'white',
-		pointerDirection: 'down',
-		pointerWidth: 5,
-		pointerHeight: 10,
-		lineJoin: 'round',
-		stroke: 'black',
-		strokeWidth: self.model.stroke_width
-	};
-	self.model.halo_tip_text = {
-		text: '',
-		fontFamily: 'Calibri',
-		fontSize: 14,
-		padding: 4,
-		fill: 'black'
-	};
 	self.model.tip_label = {
 		x: 0,
 		y: 0,
@@ -60,7 +32,7 @@ var SQDE_Configuration = function(){
 		pointerHeight: 10,
 		lineJoin: 'round',
 		stroke: 'black',
-		strokeWidth: self.model.stroke_width
+		strokeWidth: 1
 	};
 	self.model.tip_text = {
 		text: '',
@@ -68,6 +40,24 @@ var SQDE_Configuration = function(){
 		fontSize: 14,
 		padding: 4,
 		fill: 'black'
+	};
+	self.model.halo = {
+		x:(model_width / 2),
+		y:0, 
+		width: self.model.width, 
+		height: 0,
+		radius: (model_width / 4), 
+		fill: 'white',
+		stroke: 'black',
+		strokeWidth: 1
+	};
+	self.model.button = {
+		x: 0,
+		y: 0,
+		radius: 6,
+		fill: 'gray',
+		stroke: 'black',
+		strokeWidth: 1
 	};
 	self.model.body = {
 		x:0,
@@ -77,7 +67,7 @@ var SQDE_Configuration = function(){
 		name: 'mainbox',
 		stroke: 'black',
 		cornerRadius: 10,
-		strokeWidth: self.model.stroke_width,
+		strokeWidth: 1
         fillLinearGradientStartPoint: {x:0, y:0},
         fillLinearGradientEndPoint: {x:35,y:0},
         fillLinearGradientColorStops: [0, 'white',
@@ -100,36 +90,6 @@ var SQDE_Configuration = function(){
                                        1, 'white'
                                        ]
 	};
-	self.model.button = {
-		x: 0,
-		y: 0,
-		radius: 6,
-		fill: 'gray',
-		stroke: 'black',
-		strokeWidth: self.model.stroke_width
-	}
-	self.model.button_tip_label = {
-		x: 0,
-		y: 0,
-		opacity: 1.00
-	};
-	self.model.button_tip_tag = {
-		fill: 'white',
-		pointerDirection: 'down',
-		pointerWidth: 5,
-		pointerHeight: 10,
-		stroke: 'black',
-		strokeWidth: self.model.stroke_width,
-        lineJoin: 'round',
-		cornerRadius: 5
-	};
-	self.model.button_tip_text = {
-		text: '',
-		fontFamily: 'Calibri',
-		fontSize: 14,
-		padding: 4,
-		fill: 'black'
-	};
 	self.sequencer = {};
 	self.sequencer.grid_area_auger = {
 		x:0,
@@ -137,7 +97,7 @@ var SQDE_Configuration = function(){
 		radius: 10, 
 		fill: 'white',
 		stroke: 'black',
-		strokeWidth: self.model.stroke_width
+		strokeWidth: 1
 	};
 	self.sequencer.grid_area_auger_collider = {
 		x:-15,
@@ -193,6 +153,22 @@ var SQDE_Configuration = function(){
 		cornerRadius: 5,
 		strokeWidth: self.model.stroke_width
 	};
+    self.finder = {};
+    self.finder.horizontal_scroller = {
+		x:0,
+		y:-1,
+		radius: 5, 
+		fill: 'white',
+		stroke: 'black',
+		strokeWidth: 1
+	};
+    self.finder.horizontal_bar = {
+        x: 0,
+        y: 3,
+        width:100,
+        height: 3,
+        fill: 'black'
+    };
     self.icon_symbols = {};
     self.icon_symbols.flip_card = {
         text: $('<textarea />').html("&#8617;").text(),
@@ -295,22 +271,6 @@ var SQDE_Configuration = function(){
 		fontFamily:'sans-serif',
 		fontSize:11,
 		fill:'black'
-    };
-    self.finder = {};
-    self.finder.horizontal_scroller = {
-		x:0,
-		y:-1,
-		radius: 5, 
-		fill: 'white',
-		stroke: 'black',
-		strokeWidth: self.model.stroke_width
-	};
-    self.finder.horizontal_bar = {
-        x: 0,
-        y: 3,
-        width:100,
-        height: 3,
-        fill: 'black'
     };
     self.copy = function(obj){
         var newObj = {};
