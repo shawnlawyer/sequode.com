@@ -52,8 +52,14 @@ var SQDE_ModelEnds = function(){
 		}
 	};
 	self.makeButton = function(m,i){
+		if(self.type == 'head' && m == 'o'){
+			return;
+		}
+		if(self.type == 'base' && (m == 'i' || m == 'p')){
+			return;
+		}
 		var o = {};
-		o.inpObj = config.model.button;
+		o.inpObj = config.get('model','button');
 		o.inpObj.fill = config.model.button_type_colors[m];
 		o.inpObj.x = config.model.button_positions_x[m];
 		o.inpObj.y = self.height - ( config.model.padding_height + ( i * config.model.segment_height ) + config.model.button_type_height_adjustment[m] );
@@ -62,12 +68,6 @@ var SQDE_ModelEnds = function(){
             o = self.attachButtonEventMouseOverOut(o, self.node[m][i].n);
         }
 		self.buttons[m][i] = o.shape;
-		if(self.type == 'head' && m == 'o'){
-			return;
-		}
-		if(self.type == 'base' && (m == 'i' || m == 'p')){
-			return;
-		}
 		self.group.add(self.buttons[m][i]);
 	};
 	self.attachButtonEventMouseOverOut = function(button, text){
