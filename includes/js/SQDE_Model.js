@@ -139,10 +139,11 @@ var SQDE_Model = function(){
             self.buttons[m][i].setScale({x:0.71,y:1.05});
         }
 		self.group.add(self.buttons[m][i]);
-		for(var m in self.buttons){
-            if(self.buttons[m].length != self.node[m].length){ break; }
-            self.parent.modelComplete(self);
+		for(var ipo in self.buttons){
+            if(self.buttons[ipo].length != self.node[ipo].length){ return; }
         }
+        self.parent.modelComplete(self);
+        return;
 	};
 	self.attachButtonEventMouseOverOut = function(button, tip, x, y, text){
 		button.shape.on('mouseover', function() {
