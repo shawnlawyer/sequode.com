@@ -67,7 +67,7 @@ var SQDE_Configuration = function(){
 		name: 'mainbox',
 		stroke: 'black',
 		cornerRadius: 10,
-		strokeWidth: 1
+		strokeWidth: 1,
         fillLinearGradientStartPoint: {x:0, y:0},
         fillLinearGradientEndPoint: {x:35,y:0},
         fillLinearGradientColorStops: [0, 'white',
@@ -121,7 +121,7 @@ var SQDE_Configuration = function(){
 		radius: (self.model.width*.33), 
 		fill: 'white',
 		stroke: 'black',
-		strokeWidth: self.model.stroke_width
+		strokeWidth: 1
 	};
 	self.sequencer.grid_cell_width = 65;
 	self.sequencer.grid_padding = self.sequencer.grid_cell_width - self.model.width;
@@ -140,7 +140,7 @@ var SQDE_Configuration = function(){
 		fill: 'white',
 		stroke: 'darkgray',
 		cornerRadius: 5,
-		strokeWidth: self.model.stroke_width
+		strokeWidth: 1
 	};
 	self.model_end_base = {};
     self.model_end_base.body = {
