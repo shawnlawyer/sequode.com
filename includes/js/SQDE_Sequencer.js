@@ -497,7 +497,6 @@ var SQDE_Sequencer = function(){
 		var stack_keys = {'i':'i','p':'p','o':'o'};
 		self.connections = {'i':[],'p':[],'o':[]};
 		self.connecters = {'i':[],'p':[],'o':[]};
-		
 		model = self.IOPmodels['head'];
 		for(var i=0;i<self.node['i'].length;i++){
 			connecter = {};
@@ -544,7 +543,6 @@ var SQDE_Sequencer = function(){
 			}
 		}
 		model = self.IOPmodels['base'];
-        
 		for(var i=0;i<model.buttons['o'].length;i++){
 			connecter = {};
 			connecter.type = 'o';

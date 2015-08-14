@@ -109,52 +109,6 @@ var SQDE_Configuration = function(){
 		padding: 4,
 		fill: 'black'
 	};
-	self.model_detail = {};
-	self.model_detail.width = 195;
-	self.model_detail.text = {
-		text: '',
-		fontFamily: 'Verdana',
-		fontSize: 11,
-		fill: 'black'
-	};
-    self.model_detail.front_text = {
-		text: '',
-		fontFamily: 'Verdana',
-		fontSize: 13,
-		fill: 'black'
-	};
-	self.model_detail.back_header = {
-		text: '',
-		fontFamily: 'Verdana',
-        fontStyle: 'bold',
-		fontSize: 13,
-		fill: '#111111'
-	};
-	self.model_detail.back_text = {
-		text: '',
-		fontFamily: 'Verdana',
-		fontSize: 13,
-		fill: 'black'
-	};
-	self.model_detail.info = {
-		text: '',
-		fontFamily: 'Verdana',
-		fontSize: 13,
-		fill: 'black'
-	};
-	self.model_detail.help = {
-		text: '',
-		fontFamily: 'Verdana',
-		fontSize: 14,
-		fill: 'black'
-	};
-	self.model_detail.form_component_link_symbol = {
-		text: '',
-		fontFamily: 'Verdana',  
-        fontStyle: 'bold italic',
-		fontSize: 13,
-		fill: 'black'
-	};
 	self.sequencer = {};
 	self.sequencer.grid_area_auger = {
 		x:0,
