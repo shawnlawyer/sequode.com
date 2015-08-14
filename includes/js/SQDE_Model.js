@@ -68,7 +68,6 @@ var SQDE_Model = function(){
 		o = shapesKit.circle(o.inpObj);
         if( self.default_events == true ){
             o.on('mouseout', function(){
-                
                 if(t != false){
                     t.shape.remove();
                     t.shape.destroy();
@@ -95,7 +94,7 @@ var SQDE_Model = function(){
                     self.layer.batchDraw();
                 }
             });
-            self.o.on('touchend', function(){
+            o.on('touchend', function(){
                 if(t != false){
                     t.shape.remove();
                     t.shape.destroy();
