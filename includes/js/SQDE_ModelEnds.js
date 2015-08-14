@@ -51,8 +51,8 @@ var SQDE_ModelEnds = function(){
 		var inpObj;
         inpObj = config.get('model_end_'+self.type,'body');
 		inpObj.height = self.height;
-        self.group.add(self.body);
         self.body = shapesKit.box(inpObj);
+        self.group.add(self.body);
 	};
 	self.makeButtons = function(){
         self.buttons = {'i':[],'p':[],'o':[]};
