@@ -145,7 +145,7 @@ var SQDE_Model = function(){
         self.parent.modelComplete(self);
         return;
 	};
-	self.attachButtonEventMouseOverOut = function(button, text){
+	self.attachButtonEventMouseOverOut = function(o, text){
         if( self.default_events == true ){
             var t = false;
             o.shape.on('mouseout', function(){
@@ -168,8 +168,8 @@ var SQDE_Model = function(){
                         self.parent.wiring_layer.hide();
                     }
                     t.inpObj = config.get('model','tip_label');
-                    t.inpObj.x = button.inpObj.x;
-                    t.inpObj.y = button.inpObj.y - button.inpObj.radius;
+                    t.inpObj.x = o.inpObj.x;
+                    t.inpObj.y = o.inpObj.y - o.inpObj.radius;
                     t.shape = shapesKit.label(t.inpObj);
                     t.inpObj = config.get('model','tip_tag');
                     t.shape.add(shapesKit.tag(t.inpObj));
@@ -200,8 +200,8 @@ var SQDE_Model = function(){
                         self.parent.wiring_layer.hide();
                     }
                     t.inpObj = config.get('model','tip_label');
-                    t.inpObj.x = button.inpObj.x;
-                    t.inpObj.y = button.inpObj.y - button.inpObj.radius;
+                    t.inpObj.x = o.inpObj.x;
+                    t.inpObj.y = o.inpObj.y - o.inpObj.radius;
                     t.shape = shapesKit.label(t.inpObj);
                     t.inpObj = config.get('model','tip_tag');
                     t.shape.add(shapesKit.tag(t.inpObj));
