@@ -77,13 +77,13 @@ var SQDE_ModelEnds = function(){
             if(self.original){
                 self.parent.wiring_layer.hide();
             }
-			tip.inpObj = config.get('model','button_tip_label');
+			tip.inpObj = config.get('model','tip_label');
 			tip.inpObj.x = button.inpObj.x;
 			tip.inpObj.y = button.inpObj.y - button.inpObj.radius;
 			tip.shape = shapesKit.label(tip.inpObj);
-			tip.inpObj = config.get('model','button_tip_tag');
+			tip.inpObj = config.get('model','tip_tag');
 			tip.shape.add(shapesKit.tag(tip.inpObj));
-			tip.inpObj = config.get('model','button_tip_text');
+			tip.inpObj = config.get('model','tip_text');
 			tip.inpObj.text = decodeURIComponent(text);
 			tip.shape.add(shapesKit.text(tip.inpObj));
 			self.group.add(tip.shape);
