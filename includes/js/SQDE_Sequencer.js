@@ -53,7 +53,7 @@ var SQDE_Sequencer = function(){
             
     };
     self.modelComplete = function(model){
-        self.models[model.sequence_order] = self.modelEventListners(model);;
+        self.models[model.sequence_order] = self.modelEventListeners(model);;
         self.models_done++;
         self.done();
     };
@@ -150,7 +150,7 @@ var SQDE_Sequencer = function(){
             height: o.height
 		});
         o.group.add(o.box);
-        o = self.viewerPositionerEventListners(o);
+        o = self.viewerPositionerEventListeners(o);
         self.view_positioner_layer.add(o.group);
         self.view_positioner_layer.moveToBottom();
 	};
@@ -214,7 +214,7 @@ var SQDE_Sequencer = function(){
 			model.valignment = 'bottom';
 			model.type = type;
 			model.run();
-			self.IOPmodels[type] = self.modelEndsEventListners(model);
+			self.IOPmodels[type] = self.modelEndsEventListeners(model);
 		}
 	};
     self.makeGridAreas = function(){
@@ -928,9 +928,9 @@ var SQDE_Sequencer = function(){
     };
     self.initialize();
     
-    // Event Listners attachments
+    // Event Listeners attachments
     
-	self.viewerPositionerEventListners = function(positioner){
+	self.viewerPositionerEventListeners = function(positioner){
         positioner.group = eventsKit.attachDraggableCursorEvents(positioner.group);
         positioner = self.attachViewDraggerEventOnDragStart(positioner);
         positioner = self.attachViewDraggerEventOnDragMove(positioner);
@@ -938,7 +938,7 @@ var SQDE_Sequencer = function(){
         return positioner;
 	};
     
-	self.modelEventListners = function(model){
+	self.modelEventListeners = function(model){
 		model = self.attachModelButtonsEventOnTap(model);
         model = self.attachModelEventOnDragStart(model);
         model = self.attachModelEventOnDragMove(model);
@@ -946,7 +946,7 @@ var SQDE_Sequencer = function(){
 		return model;
 	};
 
-	self.modelEndsEventListners = function(model){
+	self.modelEndsEventListeners = function(model){
         model = self.attachModelEndsEventButtonsOnTap(model);
         model = self.attachModelEndsEventBodyOnTap(model);
 		return model;
