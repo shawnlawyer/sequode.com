@@ -13,7 +13,7 @@ var SQDE_Model = function(){
 		}
 		self.initialize();
 		self.buildModel();
-	}
+	};
 	self.initialize = function(){
         var height_multiplier = 1;
         var most_buttons = 'p';
@@ -28,7 +28,7 @@ var SQDE_Model = function(){
             padding_multiplier = 2;
         }
         self.height = ((height_multiplier - 1)*config.model.segment_height)+(config.model.padding_height*padding_multiplier);
-	}
+	};
 	self.buildModel = function(){
 		setTimeout(self.generateModelParts,0);
 		switch(self.valignment){
@@ -41,7 +41,7 @@ var SQDE_Model = function(){
 		}
 		self.group.setX(self.x);
 		self.layer.add(self.group);
-	}
+	};
 	self.generateModelParts = function(node){
         setTimeout(self.collider,0);
         setTimeout(self.body,0);
@@ -53,13 +53,13 @@ var SQDE_Model = function(){
                 setTimeout(self.button,0,i,j);
 			}
 		}	
-	}
+	};
     self.done = function(){
         if(self.button_shapes.i.length != self.node.i.length){return false;}
         if(self.button_shapes.p.length != self.node.p.length){return false;}
         if(self.button_shapes.o.length != self.node.o.length){return false;}
         self.parent.modelComplete(self);
-    }
+    };
 	self.halo = function(i,j){
 		var halo = {};
 		var tip = false;
@@ -121,7 +121,7 @@ var SQDE_Model = function(){
             });
         }
 		self.group.add(self.halo_shape);
-	}
+	};
 	self.body = function(){
 		var body = {};
 		body.inpObj = config.get('model','body');
@@ -139,7 +139,7 @@ var SQDE_Model = function(){
             });
         }
 		self.group.add(self.body_shape);
-	}
+	};
 	self.button = function(i,j){
 		var button = {};
 		var tip = {};
@@ -159,7 +159,7 @@ var SQDE_Model = function(){
         }
 		self.group.add(self.button_shapes[type][j]);
         self.done();
-	}
+	};
 	self.attachButtonEventMouseOverOut = function(button, tip, x, y, text){
 		button.shape.on('mouseover', function() {
             document.body.style.cursor = 'pointer';
@@ -194,11 +194,10 @@ var SQDE_Model = function(){
 			self.layer.batchDraw();
 		});
 		return button;
-	}
-    
+	};
 	self.add = function(shape){
 		self.group.add(shape);
-	}
+	};
 	self.collider = function(){
 		var inpObj = {
             x: -((config.model.width * 2)/8),
@@ -212,5 +211,5 @@ var SQDE_Model = function(){
 		self.placement_collider = shapesKit.box(inpObj);
 		self.placement_collider.hide();
 		self.group.add(self.placement_collider);
-	}
-}
+	};
+};

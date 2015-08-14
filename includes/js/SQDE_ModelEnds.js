@@ -2,7 +2,7 @@ var SQDE_ModelEnds = function(){
 	var self = this; 
 	self.group = false;
 	self.types = ['head','base'];
-	self.type = 'head'
+	self.type = 'head';
 	
 	self.button_shapes = {'i':[],'p':[],'o':[]};
 	self.height_multiplier = 1;
@@ -15,7 +15,7 @@ var SQDE_ModelEnds = function(){
 		}
 		self.initialize();
 		self.buildModel();
-	}
+	};
 	self.initialize = function(){
 		for(var i=0;i<config.model.button_types.length;i++){
 			key = config.model.button_types[i]
@@ -37,7 +37,7 @@ var SQDE_ModelEnds = function(){
             self.padding_multiplier = 3.5;
         }
 		self.height = ((self.height_multiplier - 1)*config.model.segment_height)+(config.model.padding_height*self.padding_multiplier);
-	}
+	};
 	self.buildModel = function(xml){
 		self.generateModelParts();
 		switch(self.valignment){
@@ -50,7 +50,7 @@ var SQDE_ModelEnds = function(){
 		}
 		self.group.setX(self.x);
 		self.layer.add(self.group);
-	}
+	};
 	self.generateModelParts = function(node){
 		self.body();
 		var key;
@@ -60,7 +60,7 @@ var SQDE_ModelEnds = function(){
 				self.button(i,j);
 			}
 		}	
-	}
+	};
 	self.body = function(){
 		var layer, inpObj;
         inpObj = config.get('model_end_'+self.type,'body');
@@ -69,7 +69,7 @@ var SQDE_ModelEnds = function(){
         layer.box = shapesKit.box(inpObj);
         self.group.add(layer.box);
         self.body_shape = layer.box;
-	}
+	};
 	self.button = function(i,j){
 		var button = {};
 		var tip = {};
@@ -88,7 +88,7 @@ var SQDE_ModelEnds = function(){
 			return;
 		}
 		self.group.add(self.button_shapes[type][j]);
-	}
+	};
 	self.attachButtonEventMouseOverOut = function(button, tip, x, y, text){
 		button.shape.on('mouseover', function() {
 			tip.inpObj = config.model.button_tip_label;
@@ -113,5 +113,5 @@ var SQDE_ModelEnds = function(){
 			self.layer.draw();
 		});
 		return button;
-	}
-}
+	};
+};
