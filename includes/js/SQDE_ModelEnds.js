@@ -48,25 +48,29 @@ var SQDE_ModelEnds = function(){
 		self.layer.add(self.group);
 	};
 	self.generateModelParts = function(node){
-		self.body();
-		var key;
-		for(var i=0;i<config.model.button_types.length;i++){
-			key = config.model.button_types[i];
-			for (var j=0;j<self.node[key].length;j++){
-				self.button(i,j);
-			}
-		}	
+        setTimeout(self.makeBody,0);
+        setTimeout(self.makeButtons,0);
 	};
-	self.body = function(){
+	self.makeBody = function(){
 		var layer, inpObj;
         inpObj = config.get('model_end_'+self.type,'body');
 		inpObj.height = self.height;
 		layer = {};
         layer.box = shapesKit.box(inpObj);
         self.group.add(layer.box);
-        self.body_shape = layer.box;
+        self.body = layer.box;
 	};
-	self.button = function(i,j){
+	self.makeButtons = function(){
+        self.buttons = {'i':[],'p':[],'o':[]};
+		var m;
+		for(var i=0;i<config.model.button_types.length;i++){
+			m = config.model.button_types[i];
+			for (var j=0;j<self.node[m].length;j++){
+                setTimeout(self.makeButton,0,i,j);
+			}
+		}
+	};
+	self.makeButton = function(i,j){
 		var button = {};
 		var tip = {};
 		var type = config.model.button_types[i];

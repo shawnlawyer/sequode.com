@@ -1,10 +1,8 @@
 var SQDE_Model = function(){
 	var self = this; 
 	self.group = false;
-	self.buttons = {'i':[],'p':[],'o':[]};
 	self.default_events = true;
 	self.hide_tips = true;
-	self.iop_buttons = [];
     self.height = 35;
 	self.run = function(){
 		if(self.group == false){
@@ -29,7 +27,10 @@ var SQDE_Model = function(){
         self.height = ((height_multiplier - 1)*config.model.segment_height)+(config.model.padding_height*padding_multiplier);
 	};
 	self.buildModel = function(){
-		setTimeout(self.generateModelParts,0);
+        setTimeout(self.makeCollider,0);
+        setTimeout(self.makeBody,0);
+        setTimeout(self.makeHalo,0);
+        setTimeout(self.makeButtons,0);
 		switch(self.valignment){
 			case 'bottom':
 				self.group.setY(self.y - self.height);
@@ -41,25 +42,10 @@ var SQDE_Model = function(){
 		self.group.setX(self.x);
 		self.layer.add(self.group);
 	};
-	self.generateModelParts = function(node){
-        setTimeout(self.collider,0);
-        setTimeout(self.body,0);
-        setTimeout(self.halo,0);
-		var key;
-		for(var i=0;i<config.model.button_types.length;i++){
-			key = config.model.button_types[i];
-			for (var j=0;j<self.node[key].length;j++){
-                setTimeout(self.button,0,i,j);
-			}
-		}	
-	};
     self.done = function(){
-        if(self.buttons.i.length != self.node.i.length){return false;}
-        if(self.buttons.p.length != self.node.p.length){return false;}
-        if(self.buttons.o.length != self.node.o.length){return false;}
-        self.parent.modelComplete(self);
+        
     };
-	self.halo = function(i,j){
+	self.makeHalo = function(i,j){
 		var t = false;
 		var o = {};
 		o.inpObj = config.get('model','halo');
@@ -119,8 +105,9 @@ var SQDE_Model = function(){
             });
         }
 		self.group.add(o.shape);
+        self.halo = o.shape;
 	};
-	self.body = function(){
+	self.makeBody = function(){
 		var o = {};
 		o.inpObj = config.get('model','body');
 		o.inpObj.height = self.height;
@@ -137,8 +124,19 @@ var SQDE_Model = function(){
             });
         }
 		self.group.add(o.shape);
+        self.body = o.shape;
 	};
-	self.button = function(i,j){
+	self.makeButtons = function(){
+        self.buttons = {'i':[],'p':[],'o':[]};
+		var m;
+		for(var i=0;i<config.model.button_types.length;i++){
+			m = config.model.button_types[i];
+			for (var j=0;j<self.node[m].length;j++){
+                setTimeout(self.makeButton,0,i,j);
+			}
+		}
+	};
+	self.makeButton = function(i,j){
 		var o = t = {};
 		var m = config.model.button_types[i];
 		o.inpObj = config.get('model','button');
@@ -155,14 +153,15 @@ var SQDE_Model = function(){
             self.buttons[m][j].setScale({x:0.71,y:1.05});
         }
 		self.group.add(self.buttons[m][j]);
-        self.done();
+        if(self.buttons.i.length == self.node.i.length && self.buttons.p.length == self.node.p.length && self.buttons.o.length == self.node.o.length){
+            self.parent.modelComplete(self);
+        }
 	};
 	self.attachButtonEventMouseOverOut = function(button, tip, x, y, text){
 		button.shape.on('mouseover', function() {
             document.body.style.cursor = 'pointer';
-            
             if(self.original){
-                sequencer.wiring_layer.hide();
+                self.parent.wiring_layer.hide();
             }
 			tip.inpObj = config.get('model','button_tip_label');
 			tip.inpObj.x = x;
@@ -180,10 +179,9 @@ var SQDE_Model = function(){
 			self.layer.batchDraw();
 		});
 		button.shape.on('mouseout', function(){
-        
             document.body.style.cursor = 'default';
             if(self.original){
-                sequencer.wiring_layer.show();
+                self.parent.wiring_layer.show();
             }
             self.group.setDraggable(false);
 			tip.shape.remove();

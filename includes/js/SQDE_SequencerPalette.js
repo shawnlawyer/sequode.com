@@ -10,7 +10,7 @@ var SQDE_SequencerPalette = function(){
 	self.run = function (){
         self.tearDown();
         sequencer = self.parent;
-        stage = sequencer.stage;
+        stage = self.parent.stage;
         self.grid_position = {x:32.5, y:stage.getHeight() - 8};
 		self.temp_layer = new Kinetic.Layer();
 		stage.add(self.temp_layer);
@@ -42,9 +42,6 @@ var SQDE_SequencerPalette = function(){
         self.models_layer = undefined;
         self.temp_layer = undefined;
         self.grid = undefined;
-		for(var i in self.dict ){
-			self[self.dict[i]] = undefined;
-		}
 	};
 	self.setupGrid = function(){
 		self.grid = [];
