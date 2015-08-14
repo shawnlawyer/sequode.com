@@ -24,7 +24,7 @@ var SQDE_ModelEnds = function(){
             padding_multiplier = 2;
         }
         self.height = ((height_multiplier - 1)*config.model.segment_height)+(config.model.padding_height*padding_multiplier);
-		self.buildModel(),0);
+		self.buildModel();
 	};
 	self.buildModel = function(){
         self.makeBody();
