@@ -43,9 +43,6 @@ var SQDE_Model = function(){
 		self.group.setX(self.x);
 		self.layer.add(self.group);
 	};
-    self.done = function(){
-        
-    };
 	self.makeHalo = function(i,j){
 		var t = false;
 		var o = {};
@@ -141,11 +138,10 @@ var SQDE_Model = function(){
 		var o = t = {};
 		var m = config.model.button_types[i];
 		o.inpObj = config.get('model','button');
-		o.inpObj.fill = config.model.button_type_colors[i];
-		o.inpObj.x =  config.model.button_positions_x[i];
+		o.inpObj.fill = config.model.button_type_colors[m];
+		o.inpObj.x =  config.model.button_positions_x[m];
 		o.inpObj.y = self.height - ( config.model.padding_height + (j*config.model.segment_height) + config.model.button_type_height_adjustment[m]);
 		o.shape = shapesKit.circle(o.inpObj);
-        
         if( self.default_events == true ){
             o = self.attachButtonEventMouseOverOut(o, t, o.inpObj.x, o.inpObj.y - o.inpObj.radius, self.node[m][j].n);
         }

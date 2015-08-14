@@ -67,21 +67,21 @@ var SQDE_ModelEnds = function(){
 	self.makeButton = function(i,j){
 		var button = {};
 		var tip = {};
-		var type = config.model.button_types[i];
+		var m = config.model.button_types[i];
 		button.inpObj = config.model.button;
-		button.inpObj.fill = config.model.button_type_colors[i];
-		button.inpObj.x =  config.model.button_positions_x[i];
-		button.inpObj.y = self.height - ( config.model.padding_height + (j*config.model.segment_height) + config.model.button_type_height_adjustment[type]);
+		button.inpObj.fill = config.model.button_type_colors[m];
+		button.inpObj.x =  config.model.button_positions_x[m];
+		button.inpObj.y = self.height - ( config.model.padding_height + (j*config.model.segment_height) + config.model.button_type_height_adjustment[m]);
 		button.shape = shapesKit.circle(button.inpObj);
-		button = self.attachButtonEventMouseOverOut(button, tip, button.inpObj.x, button.inpObj.y - button.inpObj.radius, self.node[type][j].n);
-		self.buttons[type][j] = button.shape;
-		if(self.type == 'head' && config.model.button_types[i] == 'o'){
+		button = self.attachButtonEventMouseOverOut(button, tip, button.inpObj.x, button.inpObj.y - button.inpObj.radius, self.node[m][j].n);
+		self.buttons[m][j] = button.shape;
+		if(self.type == 'head' && m == 'o'){
 			return;
 		}
-		if(self.type == 'base' && (config.model.button_types[i] == 'i' || config.model.button_types[i] == 'p')){
+		if(self.type == 'base' && (m == 'i' || m == 'p')){
 			return;
 		}
-		self.group.add(self.buttons[type][j]);
+		self.group.add(self.buttons[m][j]);
 	};
 	self.attachButtonEventMouseOverOut = function(button, tip, x, y, text){
 		button.shape.on('mouseover', function() {
