@@ -4,6 +4,7 @@ var SQDE_Model = function(){
 	self.default_events = true;
 	self.hide_tips = true;
     self.height = 35;
+	self.buttons = {'i':[],'p':[],'o':[]};
 	self.run = function(){
 		if(self.group == false){
             self.group = shapesKit.group(config.model.group);

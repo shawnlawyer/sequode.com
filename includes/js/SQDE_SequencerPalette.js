@@ -106,7 +106,7 @@ var SQDE_SequencerPalette = function(){
     self.detectDragModelCollision = function(model){
         var grid_area_id;
         for(grid_area_id in sequencer.grid_areas){
-            if(sequencer.detectCollision(sequencer.grid_areas[grid_area_id].box,model.body_shape)){
+            if(sequencer.detectCollision(sequencer.grid_areas[grid_area_id].box,model.body)){
                 if (sequencer.focused_grid_area_id !== false && sequencer.focused_grid_area_id != grid_area_id){
                     self.cleanupAfterModelToGridAreaCollision(model, sequencer.grid_areas[sequencer.focused_grid_area_id]);
                 }
