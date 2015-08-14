@@ -1,18 +1,10 @@
 var SQDE_ModelEnds = function(){
 	var self = this; 
-	self.group = false;
 	self.types = ['head','base'];
 	self.type = 'head';
-	
 	self.buttons = {'i':[],'p':[],'o':[]};
 	self.run = function(){
-		if(self.group == false){
-			self.group = shapesKit.group();
-		}
-		self.initialize();
-		self.buildModel();
-	};
-	self.initialize = function(){
+		self.group = shapesKit.group();
         var height_multiplier = 1;
         var most_buttons = 'p';
         var padding_multiplier = 3.5;
@@ -32,10 +24,11 @@ var SQDE_ModelEnds = function(){
             padding_multiplier = 2;
         }
         self.height = ((height_multiplier - 1)*config.model.segment_height)+(config.model.padding_height*padding_multiplier);
+		setTimeout(self.buildModel(),0);
 	};
 	self.buildModel = function(){
-        setTimeout(self.makeButtons,0);
         self.makeBody();
+        self.makeButtons();
 		switch(self.valignment){
 			case 'bottom':
 				self.group.setY(self.y - self.height);
@@ -55,7 +48,6 @@ var SQDE_ModelEnds = function(){
         self.group.add(self.body);
 	};
 	self.makeButtons = function(){
-        self.buttons = {'i':[],'p':[],'o':[]};
 		for(var m in self.buttons){
 			for (var i=0;i<self.node[m].length;i++){
                 setTimeout(self.makeButton,0,m,i);
@@ -69,7 +61,6 @@ var SQDE_ModelEnds = function(){
 		o.inpObj.x =  config.model.button_positions_x[m];
 		o.inpObj.y = self.height - ( config.model.padding_height + ( i * config.model.segment_height ) + config.model.button_type_height_adjustment[m] );
 		o.shape = shapesKit.circle(o.inpObj);
-		o = self.attachButtonEventMouseOverOut(o, {}, o.inpObj.x, ( o.inpObj.y - o.inpObj.radius), self.node[m][i].n);
 		self.buttons[m][i] = o.shape;
 		if(self.type == 'head' && m == 'o'){
 			return;
@@ -78,30 +69,5 @@ var SQDE_ModelEnds = function(){
 			return;
 		}
 		self.group.add(self.buttons[m][i]);
-	};
-	self.attachButtonEventMouseOverOut = function(button, tip, x, y, text){
-		button.shape.on('mouseover', function() {
-			tip.inpObj = config.model.button_tip_label;
-			tip.inpObj.x = x;
-			tip.inpObj.y = y;
-			tip.shape = shapesKit.label(tip.inpObj);
-			tip.inpObj = config.model.button_tip_tag;
-			tip.shape.add(shapesKit.tag(tip.inpObj));
-			tip.inpObj = config.model.button_tip_text;
-			tip.inpObj.text = text;
-			tip.shape.add(shapesKit.text(tip.inpObj));
-			self.group.add(tip.shape);
-			self.group.moveToTop();
-			tip.shape.moveToTop();
-			self.parent.wiring_layer.hide();
-			self.layer.draw();
-		});
-		button.shape.on('mouseout', function(){
-			tip.shape.remove();
-			tip.shape.destroy();
-			self.parent.wiring_layer.show();
-			self.layer.draw();
-		});
-		return button;
 	};
 };

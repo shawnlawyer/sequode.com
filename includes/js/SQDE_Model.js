@@ -125,7 +125,6 @@ var SQDE_Model = function(){
         self.body = o.shape;
 	};
 	self.makeButtons = function(){
-        self.buttons = {'i':[],'p':[],'o':[]};
 		for(var m in self.buttons){
 			for (var i=0;i<self.node[m].length;i++){
                 setTimeout(self.makeButton,0,m,i);
