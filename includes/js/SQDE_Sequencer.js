@@ -11,6 +11,7 @@ var SQDE_Sequencer = function(){
         }
         self.initialized = true;
     };
+	self.dict = ['models','sequence','flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer','view_positioner_layer','id','dragging','drag_id','y''tweens_playing','grids','grid','grid_mode','grid_x','grid_order','align_lock'];
     self.tearDown = function(id){
 		if(self.active == false){ return;}
         if(id != self.id){
@@ -35,7 +36,6 @@ var SQDE_Sequencer = function(){
 			self[self.dict[i]] = undefined;
 		}
 	};
-	self.dict = ['models','sequence','flow_lines_layer','grid_areas_layer','sequence_layer','wiring_layer','ends_layer','view_positioner_layer','id','dragging','drag_id','y''tweens_playing','grids','grid','grid_mode','grid_x','grid_order','align_lock'];
 	self.models = [];
 	self.IOPmodels = { 'head':false, 'base':true };
     self.grid_auger_types = ['prepend','split','append'];
