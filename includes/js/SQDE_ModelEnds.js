@@ -57,37 +57,35 @@ var SQDE_ModelEnds = function(){
 	self.makeButtons = function(){
         self.buttons = {'i':[],'p':[],'o':[]};
 		var m;
-		for(var i=0;i<config.model.button_types.length;i++){
-			m = config.model.button_types[i];
+        
+		for(var m in self.buttons){
             if(self.type == 'head' && m == 'o'){
                 continue;
             }
             if(self.type == 'base' && (m == 'i' || m == 'p')){
                 continue;
             }
-			for (var j=0;j<self.node[m].length;j++){
-                setTimeout(self.makeButton,0,i,j);
+			for (var i=0;i<self.node[m].length;i++){
+                setTimeout(self.makeButton,0,m,i);
 			}
 		}
 	};
-	self.makeButton = function(i,j){
-		var button = {};
-		var tip = {};
-		var m = config.model.button_types[i];
-		button.inpObj = config.model.button;
-		button.inpObj.fill = config.model.button_type_colors[m];
-		button.inpObj.x =  config.model.button_positions_x[m];
-		button.inpObj.y = self.height - ( config.model.padding_height + (j*config.model.segment_height) + config.model.button_type_height_adjustment[m]);
-		button.shape = shapesKit.circle(button.inpObj);
-		button = self.attachButtonEventMouseOverOut(button, tip, button.inpObj.x, button.inpObj.y - button.inpObj.radius, self.node[m][j].n);
-		self.buttons[m][j] = button.shape;
+	self.makeButton = function(m,i){
+		var o = {};
+		o.inpObj = config.model.button;
+		o.inpObj.fill = config.model.button_type_colors[m];
+		o.inpObj.x =  config.model.button_positions_x[m];
+		o.inpObj.y = self.height - ( config.model.padding_height + ( i * config.model.segment_height ) + config.model.button_type_height_adjustment[m] );
+		o.shape = shapesKit.circle(o.inpObj);
+		button = self.attachButtonEventMouseOverOut(o, {}, o.inpObj.x, ( o.inpObj.y - o.inpObj.radius), self.node[m][i].n);
+		self.buttons[m][i] = button.shape;
 		if(self.type == 'head' && m == 'o'){
 			return;
 		}
 		if(self.type == 'base' && (m == 'i' || m == 'p')){
 			return;
 		}
-		self.group.add(self.buttons[m][j]);
+		self.group.add(self.buttons[m][i]);
 	};
 	self.attachButtonEventMouseOverOut = function(button, tip, x, y, text){
 		button.shape.on('mouseover', function() {
