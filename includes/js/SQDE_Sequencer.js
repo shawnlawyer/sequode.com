@@ -68,12 +68,13 @@ var SQDE_Sequencer = function(){
         setTimeout(self.makeGridAreaTchotchkes,0);
     };
     self.run = function(){
+		id = parseInt((arguments.length != 0) ? arguments[0] : self.id);
+        self.tearDown(id);
+        
         stage = self.stage;
         registry.fetch({collection:'palette'});
         self.grid_areas = [];
         self.focused_grid_area_id = false;
-		id = parseInt((arguments.length != 0) ? arguments[0] : self.id);
-        self.tearDown(id);
         
         registry.active_sequence = id;
         self.grid_flow_lines_done = 0;
