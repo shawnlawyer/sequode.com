@@ -177,7 +177,7 @@ var SQDE_Model = function(){
 		});
 		return button;
 	};
-	self.collider = function(){
+	self.makeCollider = function(){
 		var inpObj = {
             x: -((config.model.width * 2)/8),
             y: 0,
