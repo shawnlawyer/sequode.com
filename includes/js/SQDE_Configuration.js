@@ -13,9 +13,9 @@ var SQDE_Configuration = function(){
 	self.model.padding_height = 10;
 	self.model.segment_height = 16;
 	self.model.button_types = ['i','p','o'];
-    self.model.button_positions_x = ['i':3.25,'p':(self.model.width/2),'o':self.model.width-3.25];
+    self.model.button_positions_x = {'i':3.25,'p':(self.model.width/2),'o':self.model.width-3.25};
 	self.model.button_type_height_adjustment = {'i':0,'p':(self.model.segment_height/2),'o':0};
-	self.model.button_type_colors = ['i':'yellow','p':'#306EFF','o':'#00FF00'];
+    self.model.button_type_colors = {'i':'yellow','p':'#306EFF','o':'#00FF00'};
     
 	self.model.halo = {
 		x:(self.model.width / 2),
