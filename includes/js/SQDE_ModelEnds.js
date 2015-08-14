@@ -48,9 +48,9 @@ var SQDE_ModelEnds = function(){
         self.group.add(self.body);
 	};
 	self.makeButtons = function(){
-		for(var m in self.buttons){
-			for (var i=0;i<self.node[m].length;i++){
-                self.makeButton(m,i);
+		for(var ipo in self.buttons){
+			for (var i=0;i<self.node[ipo].length;i++){
+                self.makeButton(ipo,i);
 			}
 		}
 	};

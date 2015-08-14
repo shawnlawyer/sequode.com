@@ -1,18 +1,10 @@
 var SQDE_Model = function(){
-	var self = this; 
-	self.group = false;
+	var self = this;
 	self.default_events = true;
-	self.hide_tips = true;
     self.height = 35;
 	self.buttons = {'i':[],'p':[],'o':[]};
 	self.run = function(){
-		if(self.group == false){
-            self.group = shapesKit.group(config.model.group);
-		}
-		self.initialize();
-		self.buildModel();
-	};
-	self.initialize = function(){
+        self.group = shapesKit.group(config.model.group);
         var height_multiplier = 1;
         var most_buttons = 'p';
         var padding_multiplier = 3.5;
@@ -26,6 +18,7 @@ var SQDE_Model = function(){
             padding_multiplier = 2;
         }
         self.height = ((height_multiplier - 1)*config.model.segment_height)+(config.model.padding_height*padding_multiplier);
+		self.buildModel();
 	};
 	self.buildModel = function(){
         setTimeout(self.makeCollider,0);
@@ -125,9 +118,9 @@ var SQDE_Model = function(){
         self.body = o.shape;
 	};
 	self.makeButtons = function(){
-		for(var m in self.buttons){
-			for (var i=0;i<self.node[m].length;i++){
-                setTimeout(self.makeButton,0,m,i);
+		for(var ipo in self.buttons){
+			for (var i=0;i<self.node[ipo].length;i++){
+                self.makeButton(ipo,i);
 			}
 		}
 	};
@@ -147,9 +140,8 @@ var SQDE_Model = function(){
         }
 		self.group.add(self.buttons[m][i]);
 		for(var m in self.buttons){
-            if(self.buttons[m].length == self.node[m].length){
-                 self.parent.modelComplete(self);
-            }
+            if(self.buttons[m].length != self.node[m].length){ break; }
+            self.parent.modelComplete(self);
         }
 	};
 	self.attachButtonEventMouseOverOut = function(button, tip, x, y, text){
