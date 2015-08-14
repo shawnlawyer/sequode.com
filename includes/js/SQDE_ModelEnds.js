@@ -34,8 +34,8 @@ var SQDE_ModelEnds = function(){
         self.height = ((height_multiplier - 1)*config.model.segment_height)+(config.model.padding_height*padding_multiplier);
 	};
 	self.buildModel = function(){
-        setTimeout(self.makeBody,0);
         setTimeout(self.makeButtons,0);
+        self.makeBody();
 		switch(self.valignment){
 			case 'bottom':
 				self.group.setY(self.y - self.height);
