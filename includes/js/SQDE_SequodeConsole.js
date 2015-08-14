@@ -1,7 +1,7 @@
 var SQDE_SequodeConsole = function(){
 	var self = this;
 	self.tearDown = function(){
-        main, baseKit, registry, config, shapesKit, cardsKit, eventsKit,  sequencer, sequencer_palette, collection_cards, stage = undefined;
+        main, baseKit, registry, config, shapesKit, cardsKit, eventsKit, sequencer, collection_cards;
 	};
 	self.startUp = function(){
 		self.placeContainers();
