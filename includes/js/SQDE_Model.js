@@ -132,7 +132,7 @@ var SQDE_Model = function(){
 		o.inpObj.y = self.height - ( config.model.padding_height + ( i * config.model.segment_height) + config.model.button_type_height_adjustment[m] );
 		o.shape = shapesKit.circle(o.inpObj);
         if( self.default_events == true ){
-            o = self.attachButtonEventMouseOverOut(o, {}, o.inpObj.x, o.inpObj.y - o.inpObj.radius, self.node[m][i].n);
+            o = self.attachButtonEventMouseOverOut(o, self.node[m][i].n);
         }
 		self.buttons[m][i] = o.shape;
         if(m != 'p'){
@@ -145,15 +145,16 @@ var SQDE_Model = function(){
         self.parent.modelComplete(self);
         return;
 	};
-	self.attachButtonEventMouseOverOut = function(button, tip, x, y, text){
+	self.attachButtonEventMouseOverOut = function(button, text){
+        var tip = {};
 		button.shape.on('mouseover', function() {
             document.body.style.cursor = 'pointer';
             if(self.original){
                 self.parent.wiring_layer.hide();
             }
 			tip.inpObj = config.get('model','button_tip_label');
-			tip.inpObj.x = x;
-			tip.inpObj.y = y;
+			tip.inpObj.x = button.inpObj.x;
+			tip.inpObj.y = button.inpObj.y - button.inpObj.radius;
 			tip.shape = shapesKit.label(tip.inpObj);
 			tip.inpObj = config.get('model','button_tip_tag');
 			tip.shape.add(shapesKit.tag(tip.inpObj));

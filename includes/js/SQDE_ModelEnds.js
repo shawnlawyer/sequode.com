@@ -61,6 +61,9 @@ var SQDE_ModelEnds = function(){
 		o.inpObj.x =  config.model.button_positions_x[m];
 		o.inpObj.y = self.height - ( config.model.padding_height + ( i * config.model.segment_height ) + config.model.button_type_height_adjustment[m] );
 		o.shape = shapesKit.circle(o.inpObj);
+        if( self.default_events == true ){
+            o = self.attachButtonEventMouseOverOut(o, self.node[m][i].n);
+        }
 		self.buttons[m][i] = o.shape;
 		if(self.type == 'head' && m == 'o'){
 			return;
@@ -69,5 +72,39 @@ var SQDE_ModelEnds = function(){
 			return;
 		}
 		self.group.add(self.buttons[m][i]);
+	};
+	self.attachButtonEventMouseOverOut = function(button, text){
+        var tip = {};
+		button.shape.on('mouseover', function() {
+            document.body.style.cursor = 'pointer';
+            if(self.original){
+                self.parent.wiring_layer.hide();
+            }
+			tip.inpObj = config.get('model','button_tip_label');
+			tip.inpObj.x = button.inpObj.x;
+			tip.inpObj.y = button.inpObj.y - button.inpObj.radius;
+			tip.shape = shapesKit.label(tip.inpObj);
+			tip.inpObj = config.get('model','button_tip_tag');
+			tip.shape.add(shapesKit.tag(tip.inpObj));
+			tip.inpObj = config.get('model','button_tip_text');
+			tip.inpObj.text = decodeURIComponent(text);
+			tip.shape.add(shapesKit.text(tip.inpObj));
+			self.group.add(tip.shape);
+			self.group.setDraggable(false);
+			self.group.moveToTop();
+			tip.shape.moveToTop();
+			self.layer.batchDraw();
+		});
+		button.shape.on('mouseout', function(){
+            document.body.style.cursor = 'default';
+            if(self.original){
+                self.parent.wiring_layer.show();
+            }
+            self.group.setDraggable(false);
+			tip.shape.remove();
+			tip.shape.destroy();
+			self.layer.batchDraw();
+		});
+		return button;
 	};
 };
