@@ -48,6 +48,27 @@ var SQDE_Configuration = function(){
 		padding: 4,
 		fill: 'black'
 	};
+	self.model.tip_label = {
+		x: 0,
+		y: 0,
+		opacity: 1.00
+	};
+	self.model.tip_tag = {
+		fill: 'white',
+		pointerDirection: 'down',
+		pointerWidth: 5,
+		pointerHeight: 10,
+		lineJoin: 'round',
+		stroke: 'black',
+		strokeWidth: self.model.stroke_width
+	};
+	self.model.tip_text = {
+		text: '',
+		fontFamily: 'Calibri',
+		fontSize: 14,
+		padding: 4,
+		fill: 'black'
+	};
 	self.model.body = {
 		x:0,
 		y:0,
