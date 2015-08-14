@@ -1116,13 +1116,13 @@ var SQDE_Sequencer = function(){
 	self.attachModelEndsEventBodyOnTap = function(model){
 		switch(model.type){
 			case 'base':
-				model.body_shape.on("click touchend", function(){
+				model.body.on("click touchend", function(){
 					clearTimeout(self.clickTimeout);
                     self.setConnectionReceiver({'type':'external', 'key':0});
 				});
 				break;
 			case 'head':
-				model.body_shape.on("click touchend", function(){
+				model.body.on("click touchend", function(){
 					clearTimeout(self.clickTimeout);   
                     self.setConnectionTransmitter({'type':'external', 'key':0});
 				});
