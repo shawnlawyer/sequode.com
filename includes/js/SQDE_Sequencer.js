@@ -501,7 +501,7 @@ var SQDE_Sequencer = function(){
 		for(var i=0;i<self.node['i'].length;i++){
 			connecter = {};
 			connecter.type = 'i';
-			connecter.shape = model.button_shapes['i'][i];
+			connecter.shape = model.buttons['i'][i];
 			connecter.x = connecter.shape.getAbsolutePosition().x;
 			connecter.y = connecter.shape.getAbsolutePosition().y;
 			self.connecters['i'].push(connecter);
