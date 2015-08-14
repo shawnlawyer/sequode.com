@@ -435,7 +435,7 @@ class SQDE_SequodeCardObjects {
         $card_object->size = 'fullscreen';
         $card_object->head = 'Sequode Chart &gt; '.$sequode_model->name;
         $card_object->body = array();
-        $component_object->js = 'registry.setContext({card:\'cards/sequode/chart\',collection:\'sequodes\',node:'.$sequode_model->id.',tearDown:function(){sequencer = null; }});';
+        $component_object->js = 'registry.setContext({card:\'cards/sequode/chart\',collection:\'sequodes\',node:'.$sequode_model->id.',tearDown:function(){ sequencer = null; }});';
         $card_object->body[] = $component_object;
         $dom_id = SQDE_Component::uniqueHash();
         $item_head = array(

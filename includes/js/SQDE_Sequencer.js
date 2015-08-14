@@ -1,8 +1,8 @@
 var SQDE_Sequencer = function(){
 	var self = this;
     var stage;
-    var sequencer_palette = new SQDE_SequencerPalette;
-    sequencer_palette.parent = self;
+    self.palette = new SQDE_SequencerPalette;
+    self.palette.parent = self;
     self.initialized = false;
     self.first_run_complete = false;
 	self.active = false;
@@ -68,7 +68,8 @@ var SQDE_Sequencer = function(){
         setTimeout(self.makeGridAreaTchotchkes,0);
     };
     self.run = function(){
-        sequencer_palette.run();
+        stage = self.stage;
+        registry.fetch({collection:'palette'});
         self.grid_areas = [];
         self.focused_grid_area_id = false;
 		id = parseInt((arguments.length != 0) ? arguments[0] : self.id);
