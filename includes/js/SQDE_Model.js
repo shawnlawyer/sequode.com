@@ -148,7 +148,7 @@ var SQDE_Model = function(){
 		o.shape = shapesKit.circle(o.inpObj);
         
         if( self.default_events == true ){
-            o = self.attachButtonEventMouseOverOut(o, tip, o.inpObj.x, o.inpObj.y - o.inpObj.radius, self.node[m][j].n);
+            o = self.attachButtonEventMouseOverOut(o, t, o.inpObj.x, o.inpObj.y - o.inpObj.radius, self.node[m][j].n);
         }
 		self.buttons[m][j] = o.shape;
         if(m != 'p'){
@@ -191,9 +191,6 @@ var SQDE_Model = function(){
 			self.layer.batchDraw();
 		});
 		return button;
-	};
-	self.add = function(shape){
-		self.group.add(shape);
 	};
 	self.collider = function(){
 		var inpObj = {
