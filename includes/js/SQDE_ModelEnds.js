@@ -56,15 +56,7 @@ var SQDE_ModelEnds = function(){
 	};
 	self.makeButtons = function(){
         self.buttons = {'i':[],'p':[],'o':[]};
-		var m;
-        
 		for(var m in self.buttons){
-            if(self.type == 'head' && m == 'o'){
-                continue;
-            }
-            if(self.type == 'base' && (m == 'i' || m == 'p')){
-                continue;
-            }
 			for (var i=0;i<self.node[m].length;i++){
                 setTimeout(self.makeButton,0,m,i);
 			}
