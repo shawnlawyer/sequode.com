@@ -27,6 +27,7 @@ var SQDE_SequodeConsole = function(){
 	self.setContext = function(){
         var call = {};
         call.route = baseKit.getURLVar("context");
+        call.inputs = [];
         if(baseKit.getURLVar("id") !== null){
             call.inputs.push(baseKit.getURLVar("id"));
         };
