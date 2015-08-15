@@ -34,6 +34,7 @@ var SQDE_Configuration = function(){
 		stroke: 'black',
 		strokeWidth: 1
 	};
+	self.tip = {};
 	self.tip.text = {
 		text: '',
 		fontFamily: 'Calibri',
