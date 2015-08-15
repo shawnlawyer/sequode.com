@@ -42,7 +42,7 @@ class SQDE_ComponentJS {
 	}
 	public static function ajaxCall($call_object){
         $js = array();
-        $js[] = 'new SQDE_AjaxCall({';
+        $js[] = 'new SQDE_XHRCall({';
         $js[] = 'route:\''. $call_object->route .'\'';
         if(is_array($call_object->inputs) && count($call_object->inputs) != 0){
             $js[] = ',inputs:['. implode(',',$call_object->inputs) .']';
@@ -121,7 +121,7 @@ class SQDE_ComponentJS {
         if($active_collection != null){
             $js[] = 'registry.active_collection = \''.$active_collection.'\';';
         }
-        $js[] = 'new SQDE_AjaxCall({';
+        $js[] = 'new SQDE_XHRCall({';
         $js[] = 'route:\''.$route.'\'';
         if($inputs != null){
             $js[] = ',inputs:['.implode(',',$inputs).']';

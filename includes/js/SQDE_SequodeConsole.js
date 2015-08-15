@@ -19,10 +19,10 @@ var SQDE_SequodeConsole = function(){
 	eventsKit = new SQDE_EventsKit();
 	registry = new SQDE_SequodeConsoleRegistry();
 	self.loadMenus = function() {
-        new SQDE_AjaxCall({route:'cards/site/menus', inputs:['MenusContainer']});
+        new SQDE_XHRCall({route:'cards/site/menus', inputs:['MenusContainer']});
     };
     self.loadCard = function(route, inputs) {
-        new SQDE_AjaxCall({route:route, inputs:inputs});
+        new SQDE_XHRCall({route:route, inputs:inputs});
     };
 	self.setContext = function(){
         var call = {};
@@ -40,7 +40,7 @@ var SQDE_SequodeConsole = function(){
                 call.route = 'cards/dashboard/index';
                 break;
         }
-        new SQDE_AjaxCall(call);
+        new SQDE_XHRCall(call);
 	};
     self.placeContainers = function(){
         var html = 

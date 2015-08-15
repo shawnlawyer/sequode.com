@@ -37,7 +37,7 @@ var SQDE_CollectionCards = function(){
 	};
 	self.attachCardEvents = function(card,id){
             card.on("click touchend", function(){
-                new SQDE_AjaxCall({route:self.details_route, inputs:[id]});
+                new SQDE_XHRCall({route:self.details_route, inputs:[id]});
             });
         return card;
 	};

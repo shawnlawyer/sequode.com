@@ -33,22 +33,22 @@ class SQDE_SessionCardObjects {
         
         $js[] = 'if (e.keyCode == 66){';
         
-        $js[] = 'new SQDE_AjaxCall({route:"operations/session/blockIP",inputs:['.$session_model->id.']});';
+        $js[] = 'new SQDE_XHRCall({route:"operations/session/blockIP",inputs:['.$session_model->id.']});';
         $js[] = '}';
         
         $js[] = 'if(next_id != \''.$session_model->id.'\'){';
         
         $js[] = 'if (e.keyCode == 39){';
-        $js[] = 'new SQDE_AjaxCall({route:"cards/session/details",inputs:[next_id]});';
+        $js[] = 'new SQDE_XHRCall({route:"cards/session/details",inputs:[next_id]});';
         $js[] = '}';
         
         $js[] = 'if (e.keyCode == 46){';
-        $js[] = 'new SQDE_AjaxCall({route:\'operations/session/delete\',inputs: ['.$session_model->id.'],done_callback:function(){ new SQDE_AjaxCall({route:\'cards/session/details\',inputs:[next_id]});} });';
+        $js[] = 'new SQDE_XHRCall({route:\'operations/session/delete\',inputs: ['.$session_model->id.'],done_callback:function(){ new SQDE_XHRCall({route:\'cards/session/details\',inputs:[next_id]});} });';
         $js[] = '}';
         
         $js[] = '}else{';
         $js[] = 'if (e.keyCode == 46){';
-        $js[] = 'new SQDE_AjaxCall({route:\'operations/session/delete\',inputs: ['.$session_model->id.']});';
+        $js[] = 'new SQDE_XHRCall({route:\'operations/session/delete\',inputs: ['.$session_model->id.']});';
         $js[] = '}';
         
         $js[] = '}';

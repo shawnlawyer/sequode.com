@@ -1,4 +1,4 @@
-var SQDE_AjaxCall = function(){
+var SQDE_XHRCall = function(){
 	var self = this;
     self.send = function (){
         if(arguments.length != 0 && typeof arguments[0] == "object" && 'route' in arguments[0]){

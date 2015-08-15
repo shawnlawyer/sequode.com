@@ -735,9 +735,9 @@ var SQDE_Sequencer = function(){
 	self.saveSequence = function(model){
         if( self.focused_grid_area_id === false){
             if(self.node.s.length < 1 ){
-                new SQDE_AjaxCall({route:'operations/sequode/addToSequence', inputs:[self.id, model.node.id, 0, 0, 0], done_callback: function(){registry.fetch({collection:'sequodes', key: self.id})}});
+                new SQDE_XHRCall({route:'operations/sequode/addToSequence', inputs:[self.id, model.node.id, 0, 0, 0], done_callback: function(){registry.fetch({collection:'sequodes', key: self.id})}});
             }else if(self.focused_grid_area_id === false && model.original == true){
-                new SQDE_AjaxCall({route:'operations/sequode/removeFromSequence', inputs:[self.id, model.sequence_order], done_callback: function(){registry.fetch({collection:'sequodes', key: self.id})}});
+                new SQDE_XHRCall({route:'operations/sequode/removeFromSequence', inputs:[self.id, model.sequence_order], done_callback: function(){registry.fetch({collection:'sequodes', key: self.id})}});
             }
             return;  
         }else if(self.focused_grid_area_id !== false){
@@ -751,10 +751,10 @@ var SQDE_Sequencer = function(){
                 for(var j=0; j<grid_area.grid_order.length; j++){
                     models_key = grid_area.models[grid_area.grid_order[j]];
                     if(model.original == true && self.models[models_key].sequence_order == model.sequence_order ){
-                        new SQDE_AjaxCall({route:'operations/sequode/reorderSequence', inputs:[self.id, model.sequence_order, position, (j == 0) ? 0 : 1 ,(self.grid_area_augmenter == false) ? 0 : 1], done_callback: function(){registry.fetch({collection:'sequodes', key: self.id})}});
+                        new SQDE_XHRCall({route:'operations/sequode/reorderSequence', inputs:[self.id, model.sequence_order, position, (j == 0) ? 0 : 1 ,(self.grid_area_augmenter == false) ? 0 : 1], done_callback: function(){registry.fetch({collection:'sequodes', key: self.id})}});
                         return;
                     }else if(model.original == false && self.models[models_key].original == false ){
-                        new SQDE_AjaxCall({route:'operations/sequode/addToSequence', inputs:[self.id, model.node.id, position, (j == 0) ? 0 : 1 ,(self.grid_area_augmenter == false) ? 0 : 1], done_callback: function(){registry.fetch({collection:'sequodes', key: self.id})}});
+                        new SQDE_XHRCall({route:'operations/sequode/addToSequence', inputs:[self.id, model.node.id, position, (j == 0) ? 0 : 1 ,(self.grid_area_augmenter == false) ? 0 : 1], done_callback: function(){registry.fetch({collection:'sequodes', key: self.id})}});
                         return;
                     }
                     position++;
@@ -768,7 +768,7 @@ var SQDE_Sequencer = function(){
         if(gridarea.id == 0){return;}
         x = (self.node.grid_areas[gridarea.id].x - self.node.grid_areas[0].x);
         y = (self.node.grid_areas[gridarea.id].y - self.node.grid_areas[0].y);
-        new SQDE_AjaxCall({route:'operations/sequode/moveGridArea', inputs:[self.id, gridarea.id, x, y], done_callback: function(){registry.fetch({collection:'sequodes', key: self.id})}});
+        new SQDE_XHRCall({route:'operations/sequode/moveGridArea', inputs:[self.id, gridarea.id, x, y], done_callback: function(){registry.fetch({collection:'sequodes', key: self.id})}});
 	};
 	self.detectCollision = function(a, b){
         var a_pos = a.getAbsolutePosition();
@@ -875,7 +875,7 @@ var SQDE_Sequencer = function(){
         }
         var route = (self.connection_receiver.type == 'external' || self.connection_transmitter.type == 'external') ? 'operations/sequode/addExternalConnection' : 'operations/sequode/addInternalConnection';
         var type = (self.connection_receiver.type == 'external') ? self.connection_transmitter.type : self.connection_receiver.type;
-        new SQDE_AjaxCall({route:route, inputs:[self.id,type,self.connection_transmitter.key,self.connection_receiver.key], done_callback: function(){registry.fetch({collection:'sequodes', key: self.id})}});
+        new SQDE_XHRCall({route:route, inputs:[self.id,type,self.connection_transmitter.key,self.connection_receiver.key], done_callback: function(){registry.fetch({collection:'sequodes', key: self.id})}});
         self.connection_receiver = false;
         self.connection_transmitter = false;
 	};

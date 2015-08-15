@@ -13,7 +13,7 @@ class SQDE_Form extends SQDE_Mason {
 	}
 	public static function ajaxCall($route, $inputs){
         $js = array();
-        $js[] = 'new SQDE_AjaxCall({';
+        $js[] = 'new SQDE_XHRCall({';
         $js[] = 'route:\''. $route .'\'';
         if(is_array($inputs) && count($inputs) != 0){
             $js[] = ',inputs:['. implode(',',$inputs) .']';

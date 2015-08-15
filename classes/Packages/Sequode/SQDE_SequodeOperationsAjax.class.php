@@ -72,7 +72,7 @@ class SQDE_SequodeOperationsAjax {
         $form_object = json_decode(SQDE_Sequode::model()->$model_member);
         if($previous_form_object->$member->Component != $form_member_object->Component){
             $js = array();
-            $js[] = 'new SQDE_AjaxCall({route:"forms/sequode/componentSettings",inputs:[\''.$type.'\', \''.$member.'\', '.SQDE_Sequode::model()->id.', \''.$dom_id.'\']});';
+            $js[] = 'new SQDE_XHRCall({route:"forms/sequode/componentSettings",inputs:[\''.$type.'\', \''.$member.'\', '.SQDE_Sequode::model()->id.', \''.$dom_id.'\']});';
 			return implode(' ',$js);
         }
     }
@@ -138,7 +138,7 @@ class SQDE_SequodeOperationsAjax {
 			$js[] = 'if(';
 			$js[] = 'confirm(\'Are you sure you want to delete this?\')';
 			$js[] = '){';
-            $js[] = 'new SQDE_AjaxCall({route:"operations/sequode/deleteSequence",inputs:['.SQDE_Sequode::model()->id.', true]});';
+            $js[] = 'new SQDE_XHRCall({route:"operations/sequode/deleteSequence",inputs:['.SQDE_Sequode::model()->id.', true]});';
 			$js[] = '}';
 			return implode(' ',$js);
         }else{
@@ -163,13 +163,13 @@ class SQDE_SequodeOperationsAjax {
 			$js[] = 'if(';
 			$js[] = 'confirm(\'Are you sure you want to format '.SQDE_Sequode::model()->id.'?\')';
 			$js[] = '){';
-            $js[] = 'new SQDE_AjaxCall({route:"operations/sequode/formatSequence",inputs:['.SQDE_Sequode::model()->id.', true]});';
+            $js[] = 'new SQDE_XHRCall({route:"operations/sequode/formatSequence",inputs:['.SQDE_Sequode::model()->id.', true]});';
 			$js[] = '}';
         }else{
             SQDE_SequodeOperations::makeDefaultSequencedSequode();
             $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
             $js[] = 'if(typeof registry.active_context != \'undefined\' && typeof registry.active_context.card != \'undefined\'){';
-            $js[] = 'new SQDE_AjaxCall({route:registry.active_context.card, inputs:['.SQDE_Sequode::model()->id.']});';
+            $js[] = 'new SQDE_XHRCall({route:registry.active_context.card, inputs:['.SQDE_Sequode::model()->id.']});';
             $js[] = '}';
         }
         return implode(' ',$js);
@@ -241,7 +241,7 @@ class SQDE_SequodeOperationsAjax {
         SQDE_SequodeOperations::emptySequence();
         $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
         $js[] = 'if(registry.active_context != false && registry.active_context.card != \'\' && registry.active_context.node != \'\'){';
-        $js[] = 'new SQDE_AjaxCall({route:registry.active_context.card, inputs:[registry.active_context.node]});';
+        $js[] = 'new SQDE_XHRCall({route:registry.active_context.card, inputs:[registry.active_context.node]});';
         $js[] = '}';
         return implode('',$js);
 	}
