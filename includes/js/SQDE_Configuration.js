@@ -43,33 +43,10 @@ var SQDE_Configuration = function(){
 		y:0,
 		width: model_width,
 		height: 0,
-		name: 'mainbox',
 		stroke: 'black',
 		cornerRadius: 10,
         fill:'white',
 		strokeWidth: 1
-        /*,
-        fillLinearGradientStartPoint: {x:0, y:0},
-        fillLinearGradientEndPoint: {x:35,y:0},
-        fillLinearGradientColorStops: [0, 'white',
-                                       0.07 , 'white',
-                                       0.08, 'black',
-                                       0.09, 'black',
-                                       0.10 , 'white',
-                                       0.16 , 'white',
-                                       0.18, 'black',
-                                       0.19, 'black',
-                                       0.20, 'white',
-                                       0.80, 'white',
-                                       0.81, 'black',
-                                       0.82, 'black',
-                                       0.84, 'white',
-                                       0.90, 'white',
-                                       0.91, 'black',
-                                       0.92, 'black',
-                                       0.93 , 'white',
-                                       1, 'white'
-                                       ]*/
 	};
 	self.tip = {};
 	self.tip.text = {
