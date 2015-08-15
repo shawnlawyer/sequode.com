@@ -55,13 +55,13 @@ var SQDE_Model = function(){
                 if(t == false){
                     document.body.style.cursor = '-webkit-grab';
                     t = {};
-                    t.inpObj = config.get('model','tip_label');
+                    t.inpObj = config.get('tip','label');
                     t.inpObj.x = o.inpObj.x;
                     t.inpObj.y = o.inpObj.y - o.inpObj.radius;
                     t.shape = shapesKit.label(t.inpObj);
-                    t.inpObj = config.get('model','tip_tag');
+                    t.inpObj = config.get('tip','tag');
                     t.shape.add(shapesKit.tag(t.inpObj));
-                    t.inpObj = config.get('model','tip_text');
+                    t.inpObj = config.get('tip','text');
                     t.inpObj.text = decodeURIComponent(self.node.n);
                     t.shape.add(shapesKit.text(t.inpObj));
                     self.group.add(t.shape);

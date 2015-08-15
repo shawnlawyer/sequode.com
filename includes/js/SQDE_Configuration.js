@@ -20,19 +20,55 @@ var SQDE_Configuration = function(){
 	self.model.button_type_height_adjustment = {'i':0,'p':(segment_height/2),'o':0};
     self.model.button_type_colors = {'i':'yellow','p':'#306EFF','o':'#00FF00'};
     
-	self.model.tip_label = {
-		x: 0,
-		y: 0,
-		opacity: 1.00
-	};
-	self.model.tip_tag = {
+	self.model.halo = {
+		x:(model_width / 2),
+		y:0, 
+		width: model_width, 
+		height: 0,
+		radius: (model_width / 4), 
 		fill: 'white',
-		pointerDirection: 'down',
-		pointerWidth: 5,
-		pointerHeight: 10,
-		lineJoin: 'round',
 		stroke: 'black',
 		strokeWidth: 1
+	};
+	self.model.button = {
+		x: 0,
+		y: 0,
+		radius: 6,
+		fill: 'gray',
+		stroke: 'black',
+		strokeWidth: 1
+	};
+	self.model.body = {
+		x:0,
+		y:0,
+		width: model_width,
+		height: 0,
+		name: 'mainbox',
+		stroke: 'black',
+		cornerRadius: 10,
+		strokeWidth: 1
+        /*,
+        fillLinearGradientStartPoint: {x:0, y:0},
+        fillLinearGradientEndPoint: {x:35,y:0},
+        fillLinearGradientColorStops: [0, 'white',
+                                       0.07 , 'white',
+                                       0.08, 'black',
+                                       0.09, 'black',
+                                       0.10 , 'white',
+                                       0.16 , 'white',
+                                       0.18, 'black',
+                                       0.19, 'black',
+                                       0.20, 'white',
+                                       0.80, 'white',
+                                       0.81, 'black',
+                                       0.82, 'black',
+                                       0.84, 'white',
+                                       0.90, 'white',
+                                       0.91, 'black',
+                                       0.92, 'black',
+                                       0.93 , 'white',
+                                       1, 'white'
+                                       ]*/
 	};
 	self.tip = {};
 	self.tip.text = {
@@ -56,62 +92,6 @@ var SQDE_Configuration = function(){
 		lineJoin: 'round',
 		stroke: 'black',
 		strokeWidth: 1
-	};
-	self.model.tip_text = {
-		text: '',
-		fontFamily: 'Calibri',
-		fontSize: 14,
-		padding: 4,
-		fill: 'black'
-	};
-	self.model.halo = {
-		x:(model_width / 2),
-		y:0, 
-		width: self.model.width, 
-		height: 0,
-		radius: (model_width / 4), 
-		fill: 'white',
-		stroke: 'black',
-		strokeWidth: 1
-	};
-	self.model.button = {
-		x: 0,
-		y: 0,
-		radius: 6,
-		fill: 'gray',
-		stroke: 'black',
-		strokeWidth: 1
-	};
-	self.model.body = {
-		x:0,
-		y:0,
-		width: self.model.width,
-		height: 0,
-		name: 'mainbox',
-		stroke: 'black',
-		cornerRadius: 10,
-		strokeWidth: 1,
-        fillLinearGradientStartPoint: {x:0, y:0},
-        fillLinearGradientEndPoint: {x:35,y:0},
-        fillLinearGradientColorStops: [0, 'white',
-                                       0.07 , 'white',
-                                       0.08, 'black',
-                                       0.09, 'black',
-                                       0.10 , 'white',
-                                       0.16 , 'white',
-                                       0.18, 'black',
-                                       0.19, 'black',
-                                       0.20, 'white',
-                                       0.80, 'white',
-                                       0.81, 'black',
-                                       0.82, 'black',
-                                       0.84, 'white',
-                                       0.90, 'white',
-                                       0.91, 'black',
-                                       0.92, 'black',
-                                       0.93 , 'white',
-                                       1, 'white'
-                                       ]
 	};
 	self.sequencer = {};
 	self.sequencer.grid_area_auger = {
@@ -141,18 +121,18 @@ var SQDE_Configuration = function(){
 	self.sequencer.grid_flow_line = {
 		x:0,
 		y:0,
-		radius: (self.model.width*.33), 
+		radius: (model_width * .33), 
 		fill: 'white',
 		stroke: 'black',
 		strokeWidth: 1
 	};
 	self.sequencer.grid_cell_width = 65;
-	self.sequencer.grid_padding = self.sequencer.grid_cell_width - self.model.width;
+	self.sequencer.grid_padding = 30;
     self.model_end_head = {};
     self.model_end_head.body = {
 		x:0,
 		y:0,
-		width: self.model.width / 2,
+		width: model_width / 2,
 		height: 0,
 		fill: 'white',
 		stroke: 'darkgray',
@@ -168,7 +148,7 @@ var SQDE_Configuration = function(){
 		fill: 'white',
 		stroke: 'darkgray',
 		cornerRadius: 5,
-		strokeWidth: self.model.stroke_width
+		strokeWidth: 1
 	};
     self.copy = function(obj){
         var newObj = {};
