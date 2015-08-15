@@ -25,15 +25,21 @@ var SQDE_SequodeConsole = function(){
         new SQDE_AjaxCall({route:route, inputs:inputs});
     };
 	self.setContext = function(){
-        if(baseKit.getURLVar("scid") !== null){
-            setTimeout(self.loadCard, 0, 'cards/sequode/chart', [baseKit.getURLVar("scid")]);
-		}else if(baseKit.getURLVar("sdid") !== null){
-            setTimeout(self.loadCard, 0, 'cards/sequode/details', [baseKit.getURLVar("sdid")]);
-		}else if(baseKit.getURLVar("sifid") !== null){
-            setTimeout(self.loadCard, 0, 'cards/sequode/internalForms', [baseKit.getURLVar("sifid")]);
-		}else{
-            setTimeout(self.loadCard, 0, 'cards/dashboard/index', []);
+        var call = {};
+        call.route = baseKit.getURLVar("context");
+        if(baseKit.getURLVar("id") !== null){
+            call.inputs.push(baseKit.getURLVar("id"));
+        };
+        switch(call.route){
+            case 'cards/sequode/chart':
+            case 'cards/sequode/details':
+            case 'cards/sequode/internalForms':
+                break;
+            default :
+                call.route = 'cards/dashboard/index';
+                break;
         }
+        new SQDE_AjaxCall(call);
 	};
     self.placeContainers = function(){
         var html = 
