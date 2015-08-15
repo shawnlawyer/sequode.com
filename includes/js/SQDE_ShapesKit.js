@@ -26,12 +26,12 @@ var SQDE_ShapesKit = function(){
         t.inpObj = config.get('tip','label');
         t.inpObj.x = o.x;
         t.inpObj.y = o.y;
-        t.shape = shapesKit.label(t.inpObj);
+        t.shape = self.label(t.inpObj);
         t.inpObj = config.get('tip','tag');
-        t.shape.add(shapesKit.tag(t.inpObj));
+        t.shape.add(self.tag(t.inpObj));
         t.inpObj = config.get('tip','text');
         t.inpObj.text = o.text;
-        t.shape.add(shapesKit.text(t.inpObj));
+        t.shape.add(self.text(t.inpObj));
         return t;
 	};
     self.textButton = function(x,y,text,font,fontsize){
