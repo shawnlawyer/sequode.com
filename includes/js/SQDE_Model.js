@@ -153,6 +153,7 @@ var SQDE_Model = function(){
                         self.parent.wiring_layer.hide();
                     }
                     t.inpObj = config.get('model','tip_label');
+                    cnsole.log(o);
                     t.inpObj.x = o.inpObj.x;
                     t.inpObj.y = o.inpObj.y - o.inpObj.radius;
                     t.shape = shapesKit.label(t.inpObj);
