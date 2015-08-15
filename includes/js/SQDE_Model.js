@@ -160,7 +160,7 @@ var SQDE_Model = function(){
                     t.inpObj = config.get('model','tip_tag');
                     t.shape.add(shapesKit.tag(t.inpObj));
                     t.inpObj = config.get('model','tip_text');
-                    t.inpObj.text = decodeURIComponent(text);
+                    t.inpObj.text = decodeURIComponent( self.node[m][i].n );
                     t.shape.add(shapesKit.text(t.inpObj));
                     self.group.add(t.shape);
                     self.group.setDraggable(false);
@@ -193,7 +193,7 @@ var SQDE_Model = function(){
                     t.inpObj = config.get('model','tip_tag');
                     t.shape.add(shapesKit.tag(t.inpObj));
                     t.inpObj = config.get('model','tip_text');
-                    t.inpObj.text = decodeURIComponent(text);
+                    t.inpObj.text = decodeURIComponent( self.node[m][i].n );
                     t.shape.add(shapesKit.text(t.inpObj));
                     self.group.add(t.shape);
                     self.group.setDraggable(false);
