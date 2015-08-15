@@ -54,16 +54,7 @@ var SQDE_Model = function(){
             o.shape.on('mouseover', function() {
                 if(t == false){
                     document.body.style.cursor = '-webkit-grab';
-                    t = {};
-                    t.inpObj = config.get('tip','label');
-                    t.inpObj.x = o.inpObj.x;
-                    t.inpObj.y = o.inpObj.y - o.inpObj.radius;
-                    t.shape = shapesKit.label(t.inpObj);
-                    t.inpObj = config.get('tip','tag');
-                    t.shape.add(shapesKit.tag(t.inpObj));
-                    t.inpObj = config.get('tip','text');
-                    t.inpObj.text = decodeURIComponent(self.node.n);
-                    t.shape.add(shapesKit.text(t.inpObj));
+                    t = shapesKit.label({x:o.inpObj.x,y:o.inpObj.y - o.inpObj.radius,text:decodeURIComponent(self.node.n)});
                     self.group.add(t.shape);
                     self.group.moveToTop();
                     t.shape.moveToTop();
@@ -78,16 +69,7 @@ var SQDE_Model = function(){
                     self.layer.batchDraw();
                 }else{
                     document.body.style.cursor = '-webkit-grab';
-                    t = {};
-                    t.inpObj = config.get('tip','label');
-                    t.inpObj.x = o.inpObj.x;
-                    t.inpObj.y = o.inpObj.y - o.inpObj.radius;
-                    t.shape = shapesKit.label(t.inpObj);
-                    t.inpObj = config.get('tip','tag');
-                    t.shape.add(shapesKit.tag(t.inpObj));
-                    t.inpObj = config.get('tip','text');
-                    t.inpObj.text = decodeURIComponent(self.node.n);
-                    t.shape.add(shapesKit.text(t.inpObj));
+                    t = shapesKit.label({x:o.inpObj.x,y:o.inpObj.y - o.inpObj.radius,text:decodeURIComponent(self.node.n)});
                     self.group.add(t.shape);
                     self.group.moveToTop();
                     t.shape.moveToTop();

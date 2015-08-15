@@ -1,25 +1,38 @@
 var SQDE_ShapesKit = function(){
 	var self = this;
-	self.stage = function(stdObj){
-		return new Kinetic.Stage(stdObj);
+	self.stage = function(o){
+		return new Kinetic.Stage(o);
 	};
-	self.group = function(stdObj){
-		return new Kinetic.Group(stdObj);
+	self.group = function(o){
+		return new Kinetic.Group(o);
 	};
-	self.circle = function(stdObj){
-		return new Kinetic.Circle(stdObj);
+	self.circle = function(o){
+		return new Kinetic.Circle(o);
 	};
-	self.box = function(stdObj){
-		return new Kinetic.Rect(stdObj);
+	self.box = function(o){
+		return new Kinetic.Rect(o);
 	};
-	self.label = function(stdObj){
-		return new Kinetic.Label(stdObj);
+	self.label = function(o){
+		return new Kinetic.Label(o);
 	};
-	self.tag = function(stdObj){
-		return new Kinetic.Tag(stdObj);
+	self.tag = function(o){
+		return new Kinetic.Tag(o);
 	};
-	self.text = function(stdObj){
-		return new Kinetic.Text(stdObj);
+	self.text = function(o){
+		return new Kinetic.Text(o);
+	};
+	self.tip = function(o){
+        t = {};
+        t.inpObj = config.get('tip','label');
+        t.inpObj.x = o.x;
+        t.inpObj.y = o.y;
+        t.shape = shapesKit.label(t.inpObj);
+        t.inpObj = config.get('tip','tag');
+        t.shape.add(shapesKit.tag(t.inpObj));
+        t.inpObj = config.get('tip','text');
+        t.inpObj.text = o.text;
+        t.shape.add(shapesKit.text(t.inpObj));
+        return t;
 	};
     self.textButton = function(x,y,text,font,fontsize){
         var shapes = {};
