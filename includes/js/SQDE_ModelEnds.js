@@ -64,44 +64,80 @@ var SQDE_ModelEnds = function(){
 		o.inpObj.x = config.model.button_positions_x[m];
 		o.inpObj.y = self.height - ( config.model.padding_height + ( i * config.model.segment_height ) + config.model.button_type_height_adjustment[m] );
 		o.shape = shapesKit.circle(o.inpObj);
+        o.shape = shapesKit.circle(o.inpObj);
         if( self.default_events == true ){
-            o = self.attachButtonEventMouseOverOut(o, self.node[m][i].n);
+            var t = false;
+            o.shape.on('mouseout', function(){
+                if(t != false){
+                    document.body.style.cursor = 'default';
+                    if(self.original){
+                        self.parent.wiring_layer.show();
+                    }
+                    self.group.setDraggable(false);
+                    t.shape.remove();
+                    t.shape.destroy();
+                    t = false;
+                    self.layer.batchDraw();
+                }
+            });
+            o.shape.on('mouseover', function() {
+                if(t == false){
+                    document.body.style.cursor = 'pointer';
+                    if(self.original){
+                        self.parent.wiring_layer.hide();
+                    }
+                    t = {};
+                    t.inpObj = config.get('model','tip_label');
+                    t.inpObj.x = o.inpObj.x;
+                    t.inpObj.y = o.inpObj.y - o.inpObj.radius;
+                    t.shape = shapesKit.label(t.inpObj);
+                    t.inpObj = config.get('model','tip_tag');
+                    t.shape.add(shapesKit.tag(t.inpObj));
+                    t.inpObj = config.get('model','tip_text');
+                    t.inpObj.text = decodeURIComponent( self.node[m][i].n );
+                    t.shape.add(shapesKit.text(t.inpObj));
+                    self.group.add(t.shape);
+                    self.group.setDraggable(false);
+                    self.group.moveToTop();
+                    t.shape.moveToTop();
+                    self.layer.batchDraw();
+                }
+            });
+            o.shape.on('touchend', function(){
+                if(t != false){
+                    document.body.style.cursor = 'default';
+                    if(self.original){
+                        self.parent.wiring_layer.show();
+                    }
+                    self.group.setDraggable(false);
+                    t.shape.remove();
+                    t.shape.destroy();
+                    t = false;
+                    self.layer.batchDraw();
+                }else{
+                    document.body.style.cursor = 'pointer';
+                    if(self.original){
+                        self.parent.wiring_layer.hide();
+                    }
+                    t = {};
+                    t.inpObj = config.get('model','tip_label');
+                    t.inpObj.x = o.inpObj.x;
+                    t.inpObj.y = o.inpObj.y - o.inpObj.radius;
+                    t.shape = shapesKit.label(t.inpObj);
+                    t.inpObj = config.get('model','tip_tag');
+                    t.shape.add(shapesKit.tag(t.inpObj));
+                    t.inpObj = config.get('model','tip_text');
+                    t.inpObj.text = decodeURIComponent( self.node[m][i].n );
+                    t.shape.add(shapesKit.text(t.inpObj));
+                    self.group.add(t.shape);
+                    self.group.setDraggable(false);
+                    self.group.moveToTop();
+                    t.shape.moveToTop();
+                    self.layer.batchDraw();
+                }
+            });
         }
 		self.buttons[m][i] = o.shape;
 		self.group.add(self.buttons[m][i]);
-	};
-	self.attachButtonEventMouseOverOut = function(button, text){
-        var tip = {};
-		button.shape.on('mouseover', function() {
-            document.body.style.cursor = 'pointer';
-            if(self.original){
-                self.parent.wiring_layer.hide();
-            }
-			tip.inpObj = config.get('model','tip_label');
-			tip.inpObj.x = button.inpObj.x;
-			tip.inpObj.y = button.inpObj.y - button.inpObj.radius;
-			tip.shape = shapesKit.label(tip.inpObj);
-			tip.inpObj = config.get('model','tip_tag');
-			tip.shape.add(shapesKit.tag(tip.inpObj));
-			tip.inpObj = config.get('model','tip_text');
-			tip.inpObj.text = decodeURIComponent(text);
-			tip.shape.add(shapesKit.text(tip.inpObj));
-			self.group.add(tip.shape);
-			self.group.setDraggable(false);
-			self.group.moveToTop();
-			tip.shape.moveToTop();
-			self.layer.batchDraw();
-		});
-		button.shape.on('mouseout', function(){
-            document.body.style.cursor = 'default';
-            if(self.original){
-                self.parent.wiring_layer.show();
-            }
-            self.group.setDraggable(false);
-			tip.shape.remove();
-			tip.shape.destroy();
-			self.layer.batchDraw();
-		});
-		return button;
 	};
 };
