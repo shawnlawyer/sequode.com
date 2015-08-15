@@ -46,6 +46,7 @@ var SQDE_Configuration = function(){
 		name: 'mainbox',
 		stroke: 'black',
 		cornerRadius: 10,
+        fill:'white',
 		strokeWidth: 1
         /*,
         fillLinearGradientStartPoint: {x:0, y:0},
