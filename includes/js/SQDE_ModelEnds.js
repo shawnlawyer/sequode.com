@@ -71,9 +71,6 @@ var SQDE_ModelEnds = function(){
             o.shape.on('mouseout', function(){
                 if(t != false){
                     document.body.style.cursor = 'default';
-                    if(self.original){
-                        self.parent.wiring_layer.show();
-                    }
                     self.group.setDraggable(false);
                     t.shape.remove();
                     t.shape.destroy();
@@ -84,19 +81,7 @@ var SQDE_ModelEnds = function(){
             o.shape.on('mouseover', function() {
                 if(t == false){
                     document.body.style.cursor = 'pointer';
-                    if(self.original){
-                        self.parent.wiring_layer.hide();
-                    }
-                    t = {};
-                    t.inpObj = config.get('tip','label');
-                    t.inpObj.x = o.inpObj.x;
-                    t.inpObj.y = o.inpObj.y - o.inpObj.radius;
-                    t.shape = shapesKit.label(t.inpObj);
-                    t.inpObj = config.get('tip','tag');
-                    t.shape.add(shapesKit.tag(t.inpObj));
-                    t.inpObj = config.get('tip','text');
-                    t.inpObj.text = decodeURIComponent( self.node[m][i].n );
-                    t.shape.add(shapesKit.text(t.inpObj));
+                    t = shapesKit.tip({x:o.inpObj.x,y:o.inpObj.y - o.inpObj.radius,text:decodeURIComponent(self.node[m][i].n)});
                     self.group.add(t.shape);
                     self.group.setDraggable(false);
                     self.group.moveToTop();
@@ -107,9 +92,6 @@ var SQDE_ModelEnds = function(){
             o.shape.on('touchend', function(){
                 if(t != false){
                     document.body.style.cursor = 'default';
-                    if(self.original){
-                        self.parent.wiring_layer.show();
-                    }
                     self.group.setDraggable(false);
                     t.shape.remove();
                     t.shape.destroy();
@@ -117,19 +99,7 @@ var SQDE_ModelEnds = function(){
                     self.layer.batchDraw();
                 }else{
                     document.body.style.cursor = 'pointer';
-                    if(self.original){
-                        self.parent.wiring_layer.hide();
-                    }
-                    t = {};
-                    t.inpObj = config.get('tip','label');
-                    t.inpObj.x = o.inpObj.x;
-                    t.inpObj.y = o.inpObj.y - o.inpObj.radius;
-                    t.shape = shapesKit.label(t.inpObj);
-                    t.inpObj = config.get('tip','tag');
-                    t.shape.add(shapesKit.tag(t.inpObj));
-                    t.inpObj = config.get('tip','text');
-                    t.inpObj.text = decodeURIComponent( self.node[m][i].n );
-                    t.shape.add(shapesKit.text(t.inpObj));
+                    t = shapesKit.tip({x:o.inpObj.x,y:o.inpObj.y - o.inpObj.radius,text:decodeURIComponent(self.node[m][i].n)});
                     self.group.add(t.shape);
                     self.group.setDraggable(false);
                     self.group.moveToTop();
