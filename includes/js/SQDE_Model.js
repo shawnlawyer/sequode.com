@@ -130,10 +130,8 @@ var SQDE_Model = function(){
 		o.inpObj.fill = config.model.button_type_colors[m];
 		o.inpObj.x = config.model.button_positions_x[m];
 		o.inpObj.y = self.height - ( config.model.padding_height + ( i * config.model.segment_height) + config.model.button_type_height_adjustment[m] );
-        console.log(o.inpObj);
-		o.shape = shapesKit.circle(o.inpObj);
-        console.log(o.inpObj);
-		if( self.default_events == true ){
+        o.shape = shapesKit.circle(o.inpObj);
+        if( self.default_events == true ){
             var t = false;
             o.shape.on('mouseout', function(){
                 if(t != false){
@@ -154,9 +152,8 @@ var SQDE_Model = function(){
                     if(self.original){
                         self.parent.wiring_layer.hide();
                     }
+                    t = {};
                     t.inpObj = config.get('model','tip_label');
-                    console.log(o.inpObj);
-		
                     t.inpObj.x = o.inpObj.x;
                     t.inpObj.y = o.inpObj.y - o.inpObj.radius;
                     t.shape = shapesKit.label(t.inpObj);
@@ -188,6 +185,7 @@ var SQDE_Model = function(){
                     if(self.original){
                         self.parent.wiring_layer.hide();
                     }
+                    t = {};
                     t.inpObj = config.get('model','tip_label');
                     t.inpObj.x = o.inpObj.x;
                     t.inpObj.y = o.inpObj.y - o.inpObj.radius;
