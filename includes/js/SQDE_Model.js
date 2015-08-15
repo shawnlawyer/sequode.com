@@ -132,9 +132,6 @@ var SQDE_Model = function(){
 		o.inpObj.y = self.height - ( config.model.padding_height + ( i * config.model.segment_height) + config.model.button_type_height_adjustment[m] );
 		o.shape = shapesKit.circle(o.inpObj);
         if( self.default_events == true ){
-            o = self.attachButtonEventMouseOverOut(o, self.node[m][i].n);
-        }
-        if( self.default_events == true ){
             var t = false;
             o.shape.on('mouseout', function(){
                 if(t != false){
