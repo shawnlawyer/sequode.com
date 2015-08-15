@@ -435,7 +435,7 @@ class SQDE_SequodeCardObjects {
         $card_object->size = 'fullscreen';
         $card_object->head = 'Sequode Chart &gt; '.$sequode_model->name;
         $card_object->body = array();
-        $component_object->js = 'registry.setContext({card:\'cards/sequode/chart\',collection:\'sequodes\',node:'.$sequode_model->id.',tearDown:function(){ sequencer = null; }});';
+        $component_object->js = 'registry.setContext({card:\'cards/sequode/chart\',collection:\'sequodes\',node:'.$sequode_model->id.',tearDown:function(){ sequencer = undefined; }});';
         $card_object->body[] = $component_object;
         $dom_id = SQDE_Component::uniqueHash();
         $item_head = array(
@@ -451,7 +451,7 @@ class SQDE_SequodeCardObjects {
         
         $html = $js = array();
         $html[] = '<div class="SequencerStageContainer" id="'.$dom_id.'chart"></div>';
-        //$js[] = 'var sequencer;';
+        $js[] = 'var sequencer;';
         $js[] = 'sequencer = new SQDE_Sequencer();';
         $js[] = 'sequencer.stage = shapesKit.stage({ container: \''.$dom_id.'chart\', width: $(window).width(), height: $(window).height() });';
         $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'sequodes\', key:true, call: sequencer.run});';
