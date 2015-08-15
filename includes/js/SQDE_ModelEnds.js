@@ -1,5 +1,6 @@
 var SQDE_ModelEnds = function(){
-	var self = this; 
+	var self = this;
+	self.default_events = true;
 	self.types = ['head','base'];
 	self.type = 'head';
 	self.buttons = {'i':[],'p':[],'o':[]};
