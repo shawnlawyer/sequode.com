@@ -26,20 +26,15 @@ var SQDE_SequodeConsole = function(){
     };
 	self.setContext = function(){
         var call = {};
-        call.route = baseKit.getURLVar("context");
+        call.route = baseKit.getURLVar("card");
         call.inputs = [];
+        if(baseKit.getURLVar("card") === null){
+            call.route = 'dashboard/index';
+        };
         if(baseKit.getURLVar("id") !== null){
             call.inputs.push(baseKit.getURLVar("id"));
         };
-        switch(call.route){
-            case 'cards/sequode/chart':
-            case 'cards/sequode/details':
-            case 'cards/sequode/internalForms':
-                break;
-            default :
-                call.route = 'cards/dashboard/index';
-                break;
-        }
+        call.route = 'cards/' + call.route;
         new SQDE_XHRCall(call);
 	};
     self.placeContainers = function(){
