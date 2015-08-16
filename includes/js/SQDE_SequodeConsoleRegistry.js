@@ -18,15 +18,11 @@ var SQDE_SequodeConsoleRegistry = function(){
         }
         self.clearTypeSubscriptions('context');
         self.active_context = o;
+        self.active_collection = o.collection;
     };
-    self.active_collection = 'sequodes';
+    self.active_collection = '';
     self.update_subscriptions = [];
     self.timeouts = [];
-    
-	self.sequode_finder_view_nodes = [];    
-    
-    self.sequode_finder_last_search_hash = '';
-    self.sequode_finder_last_search = '';
     
     self.fetch = function(o){
         var call = function(o){
