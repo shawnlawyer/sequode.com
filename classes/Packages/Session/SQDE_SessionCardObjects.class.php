@@ -116,4 +116,5 @@ class SQDE_SessionCardObjects {
         
         return $card_object;
     }
+    
 }
