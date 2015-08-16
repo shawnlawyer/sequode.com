@@ -435,8 +435,7 @@ class SQDE_SequodeCardObjects {
         $card_object->size = 'fullscreen';
         $card_object->head = 'Sequode Chart &gt; '.$sequode_model->name;
         $card_object->body = array();
-        $component_object->js = 'registry.setContext({card:\'cards/sequode/chart\',collection:\'sequodes\',node:'.$sequode_model->id.',tearDown:function(){ sequencer = undefined; }});';
-        $card_object->body[] = $component_object;
+        
         $dom_id = SQDE_Component::uniqueHash();
         $item_head = array(
             'css_classes'=>'automagic-card-menu-item-label noSelect',
@@ -454,6 +453,7 @@ class SQDE_SequodeCardObjects {
         $js[] = 'var sequencer;';
         $js[] = 'sequencer = new SQDE_Sequencer();';
         $js[] = 'sequencer.stage = shapesKit.stage({ container: \''.$dom_id.'chart\', width: $(window).width(), height: $(window).height() });';
+        $js[] = 'registry.setContext({card:\'cards/sequode/chart\',collection:\'sequodes\',node:'.$sequode_model->id.',tearDown:function(){ sequencer = undefined; }});';
         $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'sequodes\', key:true, call: sequencer.run});';
         $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'palette\', call: sequencer.palette.run});';
         $js[] = 'registry.fetch({collection:\'sequodes\',key:'.$sequode_model->id.'});';
@@ -469,8 +469,6 @@ class SQDE_SequodeCardObjects {
         $search_components_array = SQDE_Forms::render(self::$package,'search');
         $card_object->head = $search_components_array[0];
         array_shift($search_components_array);
-        $html = $js = array();
-        $dom_id = SQDE_Component::uniqueHash();
         
         $card_object->menu->items = array();
         foreach($search_components_array as $key => $object){
@@ -481,22 +479,18 @@ class SQDE_SequodeCardObjects {
             );
         }
         $card_object->body = array();
-        $component_object->js = 'registry.setContext({card:\'cards/sequode/search\',collection:\'search_sequodes\',tearDown:function(){collection_cards = null;}});';
-        $card_object->body[] = $component_object;
-        $dom_id = SQDE_Component::uniqueHash();
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $html = $js = array();
         $html[] = '<div  class="fitBlock alignCenter" id="'.$dom_id.'"></div>';
-        $js[] = 'collection_cards = new SQDE_CollectionCards();';
-        $js[] = 'collection_cards.details_route = \'cards/sequode/details\';';
-        $js[] = 'collection_cards.icon = \'sequode\';';
-        $js[] = 'collection_cards.container = \''.$dom_id.'\';';
-        $js[] = 'collection_cards.collection = \'sequode_search\';';
-        $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'sequode_search\', call: collection_cards.run});';
+        $js[] = 'cards = new SQDE_CollectionCards();';
+        $js[] = 'cards.details_route = \'cards/sequode/details\';';
+        $js[] = 'cards.icon = \'sequode\';';
+        $js[] = 'cards.container = \''.$dom_id.'\';';
+        $js[] = 'cards.collection = \'sequode_search\';';
+        $js[] = 'registry.setContext({card:\'cards/sequode/search\',collection:\'search_sequodes\',tearDown:function(){cards = undefined;}});';
+        $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'sequode_search\', call: cards.run});';
         $js[] = 'registry.fetch({collection:\'sequode_search\'});';
-        $component_object = (object) null;
-        $component_object->html = implode('', $html);
-        $component_object->js = implode(' ', $js);
-        $card_object->body[] = $component_object;
-        
+        $card_object->body[] = array('html' =>implode('', $html),'js' => implode(' ', $js));
         return $card_object;
     }
     public static function my($user_model=null){
@@ -512,29 +506,26 @@ class SQDE_SequodeCardObjects {
         $card_object->menu->items =  array();
         
         $dom_id = SQDE_Component::uniqueHash('','');
-        $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('operations/sequode/newSequence');
         $card_object->menu->items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'New Sequode',
-            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
+            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/sequode/newSequence'))
         );
+        
         $card_object->body = array();
-        $component_object->js = 'registry.setContext({card:\'cards/sequode/my\',collection:\'my\',tearDown:function(){collection_cards = null;}});';
-        $card_object->body[] = $component_object;
-        $dom_id = SQDE_Component::uniqueHash();
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $html = $js = array();
         $html[] = '<div  class="fitBlock alignCenter" id="'.$dom_id.'"></div>';
-        $js[] = 'collection_cards = new SQDE_CollectionCards();';
-        $js[] = 'collection_cards.details_route = \'cards/sequode/details\';';
-        $js[] = 'collection_cards.icon = \'sequode\';';
-        $js[] = 'collection_cards.container = \''.$dom_id.'\';';
-        $js[] = 'collection_cards.collection = \'my\';';
-        $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'my\', call: collection_cards.run});';
+        $js[] = 'var cards = new SQDE_CollectionCards();';
+        $js[] = 'cards.details_route = \'cards/sequode/details\';';
+        $js[] = 'cards.icon = \'sequode\';';
+        $js[] = 'cards.container = \''.$dom_id.'\';';
+        $js[] = 'cards.collection = \'my\';';
+        $js[] = 'registry.setContext({card:\'cards/sequode/my\',collection:\'my\',tearDown:function(){cards = undefined;}});';
+        $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'my\', call: cards.run});';
         $js[] = 'registry.fetch({collection:\'my\'});';
-        $component_object = (object) null;
-        $component_object->html = implode('', $html);
-        $component_object->js = implode(' ', $js);
-        $card_object->body[] = $component_object;
+        $card_object->body[] = array('html' =>implode('', $html),'js' => implode(' ', $js));
         return $card_object;
     }
     public static function favorites(){
@@ -550,29 +541,26 @@ class SQDE_SequodeCardObjects {
         $card_object->menu->items =  array();
         
         $dom_id = SQDE_Component::uniqueHash('','');
-        $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('operations/user/emptySequodeFavorites',[],'function(){registry.fetch({collection:\'sequode_favorites\'});}');
         $card_object->menu->items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
-            'contents'=>'Clear Favorites',
-            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
+            'contents'=>'Empty Favorites',
+            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/user/emptySequodeFavorites',[],'function(){registry.fetch({collection:\'sequode_favorites\'});}'))
         );
+        
         $card_object->body = array();
-        $component_object->js = 'registry.setContext({card:\'cards/sequode/favorites\',collection:\'sequode_favorites\',tearDown:function(){collection_cards = null;}});';
-        $card_object->body[] = $component_object;
-        $dom_id = SQDE_Component::uniqueHash();
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $html = $js = array();
         $html[] = '<div  class="fitBlock alignCenter" id="'.$dom_id.'"></div>';
-        $js[] = 'collection_cards = new SQDE_CollectionCards();';
-        $js[] = 'collection_cards.details_route = \'cards/sequode/details\';';
-        $js[] = 'collection_cards.icon = \'sequode\';';
-        $js[] = 'collection_cards.container = \''.$dom_id.'\';';
-        $js[] = 'collection_cards.collection = \'sequode_favorites\';';
-        $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'sequode_favorites\', call: collection_cards.run});';
+        $js[] = 'var cards = new SQDE_CollectionCards();';
+        $js[] = 'cards.details_route = \'cards/sequode/details\';';
+        $js[] = 'cards.icon = \'sequode\';';
+        $js[] = 'cards.container = \''.$dom_id.'\';';
+        $js[] = 'cards.collection = \'sequode_favorites\';';
+        $js[] = 'registry.setContext({card:\'cards/sequode/favorites\',collection:\'sequode_favorites\',tearDown:function(){cards = undefined;}});';
+        $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'sequode_favorites\', call: cards.run});';
         $js[] = 'registry.fetch({collection:\'sequode_favorites\'});';
-        $component_object = (object) null;
-        $component_object->html = implode('', $html);
-        $component_object->js = implode(' ', $js);
-        $card_object->body[] = $component_object;
+        $card_object->body[] = array('html' =>implode('', $html),'js' => implode(' ', $js));
         return $card_object;
     }
 }

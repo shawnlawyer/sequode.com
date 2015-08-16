@@ -1,7 +1,7 @@
 var SQDE_SequodeConsole = function(){
 	var self = this;
 	self.tearDown = function(){
-        main, baseKit, registry, config, shapesKit, cardsKit, eventsKit, collection_cards = undefined;
+        main, baseKit, registry, config, shapesKit, cardsKit, eventsKit = undefined;
         document.getElementsByTagName('body')[0].innerHTML = '';
 	};
 	self.startUp = function(){
