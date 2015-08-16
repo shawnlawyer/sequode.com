@@ -175,9 +175,6 @@ class SQDE_SequodeCardObjects {
         $card_object->size = 'large';
         $card_object->body = array('');
         
-        $component_object = (object) null;
-        $component_object->
-        
         $card_object->body[] = (object) array('js' => 'registry.setContext({card:\'cards/sequode/details\',collection:\'sequodes\',node:\''.$_model->id.'\'});');
         $input_object = json_decode($_model->input_object);
         $property_object = json_decode($_model->property_object);
