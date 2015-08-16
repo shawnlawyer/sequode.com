@@ -25,15 +25,12 @@ var SQDE_SequodeConsole = function(){
         new SQDE_XHRCall({route:route, inputs:inputs});
     };
 	self.setContext = function(){
-        var call = {};
-        call.route = baseKit.getURLVar("card");
-        call.inputs = [];
-        if(baseKit.getURLVar("card") === null){
+        var call = {route:baseKit.getURLVar("card"),inputs:[]};
+        if(call.route === null){
             call.route = 'dashboard/index';
-        };
-        if(baseKit.getURLVar("id") !== null){
+        }else if(baseKit.getURLVar("id") !== null){
             call.inputs.push(baseKit.getURLVar("id"));
-        };
+        }
         call.route = 'cards/' + call.route;
         new SQDE_XHRCall(call);
 	};
