@@ -1,6 +1,139 @@
 <?php
 class SQDE_SequodeCardObjects {
     public static $package = 'Sequode';
+    
+    public static function operationsCards($filter='', $sequode_model = null){
+        if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
+        $card_object = (object) null;
+        $card_object->icon_type = 'menu-icon';
+        $card_object->icon_background = 'sequode-icon-background';
+        $card_object->menu = (object) null;
+        $card_object->menu->items = array();
+        
+        //details
+        if(SQDE_UserAuthority::canView($sequode_model)){
+            $dom_id = SQDE_Component::uniqueHash();
+            $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('cards/sequode/details', array($sequode_model->id));
+            $card_object->menu->items[] = array(
+                'css_classes'=>'automagic-card-menu-item noSelect',
+                'id'=>$dom_id,
+                'contents'=>'Details',
+                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
+            );
+        }
+        //favorites
+        if(SQDE_UserAuthority::isInSequodeFavorites($sequode_model)){
+            $dom_id = SQDE_Component::uniqueHash();
+            $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('operations/user/removeFromSequodeFavorites', array($sequode_model->id));
+            $card_object->menu->items[] = array(
+                'css_classes'=>'automagic-card-menu-item noSelect',
+                'id'=>$dom_id,
+                'contents'=>'Remove From Favorites',
+                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
+            );
+        }else{
+            $dom_id = SQDE_Component::uniqueHash();
+            $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('operations/user/addToSequodeFavorites', array($sequode_model->id));
+            $card_object->menu->items[] = array(
+                'css_classes'=>'automagic-card-menu-item noSelect',
+                'id'=>$dom_id,
+                'contents'=>'Add To Favorites',
+                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
+            );
+        }
+        if(SQDE_SequodeAuthority::isSequence($sequode_model)){
+            
+            //Sequence Chart
+            if(SQDE_UserAuthority::canEdit($sequode_model)){
+                $dom_id = SQDE_Component::uniqueHash();
+                $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('cards/sequode/chart', array($sequode_model->id));
+                $card_object->menu->items[] = array(
+                    'css_classes'=>'automagic-card-menu-item noSelect',
+                    'id'=>$dom_id,
+                    'contents'=>'Sequence Chart',
+                    'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
+                );
+            }
+            //Sequence Chart
+            if(SQDE_UserAuthority::canRun($sequode_model)){
+                $dom_id = SQDE_Component::uniqueHash();
+                $card_object->menu->items[] = array(
+                    'css_classes'=>'automagic-card-menu-item noSelect',
+                    'id'=>$dom_id,
+                    'contents'=>'Run',
+                    'js_action'=> SQDE_ComponentJS::onTapEvents($dom_id, 'var win = window.open(\'http://sequo.de/'.$sequode_model->name.'\', \'_blank\'); win.focus();')
+                );
+            }
+            //Empty Sequence
+            if(SQDE_UserAuthority::canEdit($sequode_model)){
+                if(!SQDE_SequodeAuthority::isEmptySequence($sequode_model)){
+                    $dom_id = SQDE_Component::uniqueHash();
+                    $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('operations/sequode/emptySequence', array($sequode_model->id));
+                    $card_object->menu->items[] = array(
+                        'css_classes'=>'automagic-card-menu-item noSelect',
+                        'id'=>$dom_id,
+                        'contents'=>'Empty Sequence',
+                        'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
+                    );
+                }
+            }
+            //Restore To Default
+            if(SQDE_UserAuthority::canEdit($sequode_model)){
+                if(!SQDE_SequodeAuthority::isEmptySequence($sequode_model)){
+                    $dom_id = SQDE_Component::uniqueHash();
+                    $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('operations/sequode/formatSequence', array($sequode_model->id));
+                    $card_object->menu->items[] = array(
+                        'css_classes'=>'automagic-card-menu-item noSelect',
+                        'id'=>$dom_id,
+                        'contents'=>'Restore To Default',
+                        'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
+                    );
+                }
+            }
+            
+            //Make Exact Clone 
+            if(SQDE_UserAuthority::canCopy($sequode_model)){
+                if(!SQDE_SequodeAuthority::isEmptySequence($sequode_model)){
+                    $dom_id = SQDE_Component::uniqueHash();
+                    $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('operations/sequode/cloneSequence', array($sequode_model->id));
+                    $card_object->menu->items[] = array(
+                        'css_classes'=>'automagic-card-menu-item noSelect',
+                        'id'=>$dom_id,
+                        'contents'=>'Clone',
+                        'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
+                    );
+                }
+            }
+            //Internal Forms
+            if(SQDE_UserAuthority::canEdit($sequode_model)){
+                if(!SQDE_SequodeAuthority::isEmptySequence($sequode_model)){
+                    $dom_id = SQDE_Component::uniqueHash();
+                    $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('cards/sequode/internalForms', array($sequode_model->id));
+                    $card_object->menu->items[] = array(
+                        'css_classes'=>'automagic-card-menu-item noSelect',
+                        'id'=>$dom_id,
+                        'contents'=>'Internal Forms',
+                        'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
+                    );
+                }
+            }
+            //Delete
+            if(SQDE_UserAuthority::canDelete($sequode_model)){
+                if(SQDE_SequodeAuthority::isEmptySequence($sequode_model)){
+                    $dom_id = SQDE_Component::uniqueHash();
+                    $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('operations/sequode/deleteSequence', array($sequode_model->id));
+                    $card_object->menu->items[] = array(
+                        'css_classes'=>'automagic-card-menu-item noSelect',
+                        'id'=>$dom_id,
+                        'contents'=>'Delete',
+                        'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
+                    );
+                }
+            }
+        }
+        
+        return $card_object;
+    }
 	public static function componentSettings($type, $member, $sequode_model = null){
         $card_object = (object) null;
         $card_object->head = 'Component Settings';
@@ -295,138 +428,6 @@ class SQDE_SequodeCardObjects {
         }
         return $card_object;
     }
-    public static function operationsCards($filter='', $sequode_model = null){
-        if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
-        $card_object = (object) null;
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'sequode-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->items = array();
-        
-        //details
-        if(SQDE_UserAuthority::canView($sequode_model)){
-            $dom_id = SQDE_Component::uniqueHash();
-            $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('cards/sequode/details', array($sequode_model->id));
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Details',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
-            );
-        }
-        //favorites
-        if(SQDE_UserAuthority::isInSequodeFavorites($sequode_model)){
-            $dom_id = SQDE_Component::uniqueHash();
-            $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('operations/user/removeFromSequodeFavorites', array($sequode_model->id));
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Remove From Favorites',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
-            );
-        }else{
-            $dom_id = SQDE_Component::uniqueHash();
-            $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('operations/user/addToSequodeFavorites', array($sequode_model->id));
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Add To Favorites',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
-            );
-        }
-        if(SQDE_SequodeAuthority::isSequence($sequode_model)){
-            
-            //Sequence Chart
-            if(SQDE_UserAuthority::canEdit($sequode_model)){
-                $dom_id = SQDE_Component::uniqueHash();
-                $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('cards/sequode/chart', array($sequode_model->id));
-                $card_object->menu->items[] = array(
-                    'css_classes'=>'automagic-card-menu-item noSelect',
-                    'id'=>$dom_id,
-                    'contents'=>'Sequence Chart',
-                    'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
-                );
-            }
-            //Sequence Chart
-            if(SQDE_UserAuthority::canRun($sequode_model)){
-                $dom_id = SQDE_Component::uniqueHash();
-                $card_object->menu->items[] = array(
-                    'css_classes'=>'automagic-card-menu-item noSelect',
-                    'id'=>$dom_id,
-                    'contents'=>'Run',
-                    'js_action'=> SQDE_ComponentJS::onTapEvents($dom_id, 'var win = window.open(\'http://sequo.de/'.$sequode_model->name.'\', \'_blank\'); win.focus();')
-                );
-            }
-            //Empty Sequence
-            if(SQDE_UserAuthority::canEdit($sequode_model)){
-                if(!SQDE_SequodeAuthority::isEmptySequence($sequode_model)){
-                    $dom_id = SQDE_Component::uniqueHash();
-                    $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('operations/sequode/emptySequence', array($sequode_model->id));
-                    $card_object->menu->items[] = array(
-                        'css_classes'=>'automagic-card-menu-item noSelect',
-                        'id'=>$dom_id,
-                        'contents'=>'Empty Sequence',
-                        'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
-                    );
-                }
-            }
-            //Restore To Default
-            if(SQDE_UserAuthority::canEdit($sequode_model)){
-                if(!SQDE_SequodeAuthority::isEmptySequence($sequode_model)){
-                    $dom_id = SQDE_Component::uniqueHash();
-                    $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('operations/sequode/formatSequence', array($sequode_model->id));
-                    $card_object->menu->items[] = array(
-                        'css_classes'=>'automagic-card-menu-item noSelect',
-                        'id'=>$dom_id,
-                        'contents'=>'Restore To Default',
-                        'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
-                    );
-                }
-            }
-            
-            //Make Exact Clone 
-            if(SQDE_UserAuthority::canCopy($sequode_model)){
-                if(!SQDE_SequodeAuthority::isEmptySequence($sequode_model)){
-                    $dom_id = SQDE_Component::uniqueHash();
-                    $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('operations/sequode/cloneSequence', array($sequode_model->id));
-                    $card_object->menu->items[] = array(
-                        'css_classes'=>'automagic-card-menu-item noSelect',
-                        'id'=>$dom_id,
-                        'contents'=>'Clone',
-                        'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
-                    );
-                }
-            }
-            //Internal Forms
-            if(SQDE_UserAuthority::canEdit($sequode_model)){
-                if(!SQDE_SequodeAuthority::isEmptySequence($sequode_model)){
-                    $dom_id = SQDE_Component::uniqueHash();
-                    $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('cards/sequode/internalForms', array($sequode_model->id));
-                    $card_object->menu->items[] = array(
-                        'css_classes'=>'automagic-card-menu-item noSelect',
-                        'id'=>$dom_id,
-                        'contents'=>'Internal Forms',
-                        'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
-                    );
-                }
-            }
-            //Delete
-            if(SQDE_UserAuthority::canDelete($sequode_model)){
-                if(SQDE_SequodeAuthority::isEmptySequence($sequode_model)){
-                    $dom_id = SQDE_Component::uniqueHash();
-                    $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('operations/sequode/deleteSequence', array($sequode_model->id));
-                    $card_object->menu->items[] = array(
-                        'css_classes'=>'automagic-card-menu-item noSelect',
-                        'id'=>$dom_id,
-                        'contents'=>'Delete',
-                        'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
-                    );
-                }
-            }
-        }
-        
-        return $card_object;
-    }
     public static function chart( $sequode_model = null){
         if($sequode_model != null ){ SQDE_Sequode::model($sequode_model); }
         $sequode_model = SQDE_Sequode::model($sequode_model);
@@ -434,7 +435,6 @@ class SQDE_SequodeCardObjects {
         $card_object = self::operationsCards('',$sequence_model);
         $card_object->size = 'fullscreen';
         $card_object->head = 'Sequode Chart &gt; '.$sequode_model->name;
-        $card_object->body = array();
         
         $dom_id = SQDE_Component::uniqueHash();
         $item_head = array(
@@ -448,6 +448,8 @@ class SQDE_SequodeCardObjects {
         );
         $card_object->menu->items = array_merge(array($item_head,$item),$card_object->menu->items);
         
+        $card_object->body = array();
+        $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
         $html[] = '<div class="SequencerStageContainer" id="'.$dom_id.'chart"></div>';
         $js[] = 'var sequencer;';
@@ -490,7 +492,7 @@ class SQDE_SequodeCardObjects {
         $js[] = 'registry.setContext({card:\'cards/sequode/search\',collection:\'search_sequodes\',tearDown:function(){cards = undefined;}});';
         $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'sequode_search\', call: cards.run});';
         $js[] = 'registry.fetch({collection:\'sequode_search\'});';
-        $card_object->body[] = array('html' =>implode('', $html),'js' => implode(' ', $js));
+        $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
         return $card_object;
     }
     public static function my($user_model=null){
@@ -525,7 +527,7 @@ class SQDE_SequodeCardObjects {
         $js[] = 'registry.setContext({card:\'cards/sequode/my\',collection:\'my\',tearDown:function(){cards = undefined;}});';
         $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'my\', call: cards.run});';
         $js[] = 'registry.fetch({collection:\'my\'});';
-        $card_object->body[] = array('html' =>implode('', $html),'js' => implode(' ', $js));
+        $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
         return $card_object;
     }
     public static function favorites(){
@@ -560,7 +562,7 @@ class SQDE_SequodeCardObjects {
         $js[] = 'registry.setContext({card:\'cards/sequode/favorites\',collection:\'sequode_favorites\',tearDown:function(){cards = undefined;}});';
         $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'sequode_favorites\', call: cards.run});';
         $js[] = 'registry.fetch({collection:\'sequode_favorites\'});';
-        $card_object->body[] = array('html' =>implode('', $html),'js' => implode(' ', $js));
+        $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
         return $card_object;
     }
 }
