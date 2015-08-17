@@ -33,7 +33,6 @@ class SQDE_PackageCardObjects {
         $card_object->menu->items = self::modelOperationsMenuItems();
         
         $card_object->head = 'Package Details';
-        $card_object->size = 'large';
         $card_object->body = array('');
         $card_object->body[] = (object) array('js' => 'registry.setContext({card:\'cards/package/details\',collection:\'packages\',node:\''.$_model->id.'\'});');
         $card_object->body[] = '<div class="subline kids">Name</div>';
@@ -97,7 +96,7 @@ class SQDE_PackageCardObjects {
         $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
         return $card_object;
     }
-    public static function search($_model = null){
+    public static function search(){
         $card_object = (object) null;
         $card_object->size = 'fullscreen';
         $card_object->icon_type = 'menu-icon';
