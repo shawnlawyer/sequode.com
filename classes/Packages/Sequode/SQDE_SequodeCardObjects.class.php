@@ -51,16 +51,6 @@ class SQDE_SequodeCardObjects {
                     'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, $ajax_call_object)
                 );
             }
-            //Sequence Chart
-            if(SQDE_UserAuthority::canRun($_model)){
-                $dom_id = SQDE_Component::uniqueHash();
-                $items[] = array(
-                    'css_classes'=>'automagic-card-menu-item noSelect',
-                    'id'=>$dom_id,
-                    'contents'=>'Run',
-                    'js_action'=> SQDE_ComponentJS::onTapEvents($dom_id, 'var win = window.open(\'http://sequo.de/'.$_model->name.'\', \'_blank\'); win.focus();')
-                );
-            }
             //Empty Sequence
             if(SQDE_UserAuthority::canEdit($_model)){
                 if(!SQDE_SequodeAuthority::isEmptySequence($_model)){
