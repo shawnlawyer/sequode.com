@@ -417,7 +417,7 @@ class SQDE_SequodeCardObjects {
                 $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('forms/sequode/component', array(SQDE_Form::jsQuotedValue($component->type), $_model->id, $component->map_key));
                 $card_object->body[] = SQDE_ComponentJS::loadComponentHere($ajax_call_object, $text, 'settings');
             }else{
-                $components_array = SQDE_Forms::render(self::$package,'component',array($component->type, $component->map_key));
+                $components_array = SQDE_Forms::render(self::$package,'component',array($component->type, $component->map_key, $_model));
                 foreach($components_array as $component_object){
                     $card_object->body[] = $component_object;
                 }
