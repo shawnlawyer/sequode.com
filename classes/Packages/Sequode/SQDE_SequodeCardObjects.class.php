@@ -8,7 +8,6 @@ class SQDE_SequodeCardObjects {
         $card_object->icon_type = 'menu-icon';
         $card_object->icon_background = 'sequode-icon-background';
         $card_object->menu = (object) null;
-        $dom_id_base = SQDE_Component::uniqueHash('','');
         $card_object->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
         $card_object->menu->items =  self::menuItems();
         return $card_object;
