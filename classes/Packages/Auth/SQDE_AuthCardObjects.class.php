@@ -13,17 +13,6 @@ class SQDE_AuthCardObjects {
     public static function menuItems(){
         $items = array();
         
-        if(
-            SQDE_UserAuthority::isAuthenticated()
-        ){
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Logout',
-                'js_action'=> SQDE_ComponentJS::onTapEvents($dom_id, 'window.location.assign(\'/logout\');')
-            );
-        }else{
             $dom_id = SQDE_Component::uniqueHash('','');
             $items[] = array(
                 'css_classes'=>'automagic-card-menu-item noSelect',
@@ -32,16 +21,6 @@ class SQDE_AuthCardObjects {
                 'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/auth/login'))
             
             );
-            /*
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Get Started',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/auth/terms'))
-            );
-            */
-        }
         return $items;
     }
     public static function login(){
