@@ -47,7 +47,6 @@ class SQDE_PackageCardObjects {
         $card_object->body[] = '<div class="subline kids">Package Token</div>';
         $card_object->body[] = $_model->token;
         
-        $card_object->body = array();
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
         
