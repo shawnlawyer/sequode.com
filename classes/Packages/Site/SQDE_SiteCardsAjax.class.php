@@ -52,9 +52,9 @@ class SQDE_SiteCardsAjax {
             }
         }
         if(SQDE_UserAuthority::isSystemOwner()){ 
-            $card = SQDE_Cards::render('Session','menu');
-            $html[] = SQDE_Card::menuCardHidingContainer($card->html,4);
-            $js[] = $card->js;
+            //$card = SQDE_Cards::render('Session','menu');
+            //$html[] = SQDE_Card::menuCardHidingContainer($card->html,4);
+            //$js[] = $card->js;
         }
         return SQDE_BrowserRemote::addIntoDom($dom_id, implode('',$html), 'replace'). implode(' ',$js);
     }
