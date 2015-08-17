@@ -86,7 +86,7 @@ class SQDE_PackageCardObjects {
         $html[] = '<div  class="fitBlock alignCenter" id="'.$dom_id.'"></div>';
         $js[] = 'var cards = new SQDE_CollectionCards();';
         $js[] = 'cards.details_route = \'cards/package/details\';';
-        $js[] = 'cards.icon = \'sequode\';';
+        $js[] = 'cards.icon = \'atom\';';
         $js[] = 'cards.container = \''.$dom_id.'\';';
         $js[] = 'cards.collection = \'packages\';';
         $js[] = 'registry.setContext({card:\'cards/package/my\',collection:\'packages\',tearDown:function(){cards = undefined;}});';
