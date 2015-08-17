@@ -46,22 +46,4 @@ class SQDE_SiteCardObjects {
         $card_object->body[] = (object) array('html' => implode('',$html));
         return $card_object;
     }
-    public static function sequodesMenu(){
-        return SQDE_SequodeCardObjects::menu();
-    }
-    public static function authMenu(){
-        return SQDE_AuthCardObjects::menu();
-    }
-    public static function usersMenu(){
-        return SQDE_UsersCardObjects::menu();
-    }
-    public static function machinesMenu(){
-        return SQDE_MachineCardObjects::menu();
-    }
-    public static function packagesMenu(){
-        return SQDE_PackageCardObjects::menu();
-    }
-    public static function sessionsMenu(){
-        return SQDE_SessionCardObjects::menu();
-    }
 }
