@@ -1,5 +1,5 @@
 <?php
-class SQDE_AuthCardObjects {
+class SQDE_AuthedCardObjects {
     public static $package = 'Authed';
     public static function menu(){
         $card_object = (object) null;
