@@ -30,6 +30,7 @@ class SQDE_AuthCardObjects {
                 'id'=>$dom_id,
                 'contents'=>'Login',
                 'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/auth/login'))
+            
             );
             /*
             $dom_id = SQDE_Component::uniqueHash('','');

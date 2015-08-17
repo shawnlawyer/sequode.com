@@ -20,7 +20,7 @@ class SQDE_SessionCardObjects {
             'id'=>$dom_id,
             'contents'=>'Search Sessions',
             'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/session/search'))
-        }
+        );
         return $items;
     }
     public static function details($_model=null){

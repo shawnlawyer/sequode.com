@@ -22,9 +22,9 @@ class SQDE_SiteCardsAjax {
             $html[] = SQDE_Card::menuCardHidingContainer($card->html,8);
             $js[] = $card->js;
             if(SQDE_AuthenticatedUser::model()->role_id < 101){
-                //$card = SQDE_Cards::render('Users','menu');
-                //$html[] = SQDE_Card::menuCardHidingContainer($card->html,7);
-                //$js[] = $card->js;
+                $card = SQDE_Cards::render('Users','menu');
+                $html[] = SQDE_Card::menuCardHidingContainer($card->html,7);
+                $js[] = $card->js;
                 $card = SQDE_Cards::render('Package','menu');
                 $html[] = SQDE_Card::menuCardHidingContainer($card->html,6);
                 $js[] = $card->js;
