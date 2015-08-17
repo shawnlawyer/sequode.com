@@ -14,7 +14,7 @@ class SQDE_SiteCardsAjax {
     }
     public static function menus($dom_id = 'MenusContainer'){
         $html = $js = array();
-        if(SQDE_UserAuthority::isAuthenticated(){
+        if(SQDE_UserAuthority::isAuthenticated()){
             $card = SQDE_Cards::render('Authed','menu');
             $html[] = SQDE_Card::menuCardHidingContainer($card->html,9);
             $js[] = $card->js;
