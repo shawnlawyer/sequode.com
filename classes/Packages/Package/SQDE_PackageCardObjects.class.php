@@ -99,7 +99,7 @@ class SQDE_PackageCardObjects {
         $card_object = (object) null;
         $card_object->size = 'fullscreen';
         $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'session-icon-background';
+        $card_object->icon_background = 'atom-icon-background';
         $card_object->menu = (object) null;
         $card_object->menu->items = array();
         
