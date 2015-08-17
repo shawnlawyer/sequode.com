@@ -348,7 +348,6 @@ class SQDE_SequodeCardObjects {
         $card_object->icon_type = 'menu-icon';
         $card_object->icon_background = 'sequode-icon-background';
         $card_object->menu = (object) null;
-        $card_object->menu->items = self::modelOperationsMenuItems();
         
         
         $input_object_map = json_decode($_model->input_object_map);
@@ -363,6 +362,7 @@ class SQDE_SequodeCardObjects {
         $sequence_model->exists($sequence_model_id,'id');
         
         $card_object->head = $sequence_model->name;
+        $card_object->menu->items = self::modelOperationsMenuItems('', $sequence_model);
         $card_object->body = array();
         $card_object->body[] = '';
         $sequence_model->input_object_detail = json_decode($sequence_model->input_object_detail);
