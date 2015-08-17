@@ -7,7 +7,7 @@ class SQDE_AuthCardObjects {
         $card_object->icon_background = 'settings-icon-background';
         $card_object->menu = (object) null;
         $card_object->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
-        $card_object->menu->items =  self::menuItems();
+        $card_object->menu->items = self::menuItems();
         return $card_object;
     }
     public static function menuItems(){
@@ -16,7 +16,6 @@ class SQDE_AuthCardObjects {
         if(
             SQDE_UserAuthority::isAuthenticated()
         ){
-            
             $dom_id = SQDE_Component::uniqueHash('','');
             $items[] = array(
                 'css_classes'=>'automagic-card-menu-item noSelect',
@@ -34,7 +33,7 @@ class SQDE_AuthCardObjects {
             );
             /*
             $dom_id = SQDE_Component::uniqueHash('','');
-            $card_object->menu->items[] = array(
+            $items[] = array(
                 'css_classes'=>'automagic-card-menu-item noSelect',
                 'id'=>$dom_id,
                 'contents'=>'Get Started',
