@@ -12,29 +12,11 @@ class SQDE_SiteCardsAjax {
         $js[] = $card->js;
         return implode(' ',$js);
     }
-    public static function sequodesMenu(){
-        return SQDE_SequodeCardObjects::menu();
-    }
-    public static function authMenu(){
-        return SQDE_AuthCardObjects::menu();
-    }
-    public static function usersMenu(){
-        return SQDE_UsersCardObjects::menu();
-    }
-    public static function machinesMenu(){
-        return SQDE_MachineCardObjects::menu();
-    }
-    public static function packagesMenu(){
-        return SQDE_PackageCardObjects::menu();
-    }
-    public static function sessionsMenu(){
-        return SQDE_SessionCardObjects::menu();
-    }
     public static function menus($dom_id = 'MenusContainer'){
         $html = $js = array();
-        //$card = SQDE_Cards::render('Auth','menu');
-        //$html[] = SQDE_Card::menuCardHidingContainer($card->html,9);
-        //$js[] = $card->js;
+        $card = SQDE_Cards::render('Auth','menu');
+        $html[] = SQDE_Card::menuCardHidingContainer($card->html,9);
+        $js[] = $card->js;
         if(SQDE_UserAuthority::isAuthenticated()){
             $card = SQDE_Cards::render('Sequode','menu');
             $html[] = SQDE_Card::menuCardHidingContainer($card->html,8);
