@@ -16,7 +16,7 @@ class SQDE_SiteCardsAjax {
         $html = $js = array();\
         $i = 100;
         $packages = SQDE_PackagesHandler::models();
-        foreach($packages as $package => $model{
+        foreach($packages as $package => $model){
             if(isset($model->card_objects)){
                 if(in_array('menu',get_class_methods($model->card_objects))){
                     $i--;
