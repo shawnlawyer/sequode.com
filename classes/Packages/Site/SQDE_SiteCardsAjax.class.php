@@ -14,11 +14,7 @@ class SQDE_SiteCardsAjax {
     }
     public static function menus($dom_id = 'MenusContainer'){
         $html = $js = array();
-        if(!(SQDE_UserAuthority::isAuthenticated())){
-            $card = SQDE_Cards::render('Auth','menu');
-            $html[] = SQDE_Card::menuCardHidingContainer($card->html,9);
-            $js[] = $card->js;
-        }else{
+        if(SQDE_UserAuthority::isAuthenticated(){
             $card = SQDE_Cards::render('Authed','menu');
             $html[] = SQDE_Card::menuCardHidingContainer($card->html,9);
             $js[] = $card->js;
@@ -36,10 +32,14 @@ class SQDE_SiteCardsAjax {
                 $html[] = SQDE_Card::menuCardHidingContainer($card->html,5);
                 $js[] = $card->js;
             }
-        }
-        if(SQDE_UserAuthority::isSystemOwner()){ 
-            $card = SQDE_Cards::render('Session','menu');
-            $html[] = SQDE_Card::menuCardHidingContainer($card->html,4);
+            if(SQDE_UserAuthority::isSystemOwner()){ 
+                $card = SQDE_Cards::render('Session','menu');
+                $html[] = SQDE_Card::menuCardHidingContainer($card->html,4);
+                $js[] = $card->js;
+            }
+        }else{
+            $card = SQDE_Cards::render('Auth','menu');
+            $html[] = SQDE_Card::menuCardHidingContainer($card->html,9);
             $js[] = $card->js;
         }
         return SQDE_BrowserRemote::addIntoDom($dom_id, implode('',$html), 'replace'). implode(' ',$js);
