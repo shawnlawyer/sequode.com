@@ -465,8 +465,6 @@ class SQDE_SequodeCardObjects {
         return $card_object;
     }
     public static function search($_model = null){
-        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
-        
         $card_object = (object) null;
         $card_object->size = 'fullscreen';
         $card_object->icon_type = 'menu-icon';
@@ -494,15 +492,13 @@ class SQDE_SequodeCardObjects {
         $js[] = 'cards.icon = \'sequode\';';
         $js[] = 'cards.container = \''.$dom_id.'\';';
         $js[] = 'cards.collection = \'sequode_search\';';
-        $js[] = 'registry.setContext({card:\'cards/sequode/search\',collection:\'search_sequodes\',tearDown:function(){cards = undefined;}});';
+        $js[] = 'registry.setContext({card:\'cards/sequode/search\',collection:\'sequode_search\',tearDown:function(){cards = undefined;}});';
         $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'sequode_search\', call: cards.run});';
         $js[] = 'registry.fetch({collection:\'sequode_search\'});';
         $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
         return $card_object;
     }
-    public static function my($_model=null){
-        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
-        
+    public static function my(){
         $card_object = (object) null;
         $card_object->size = 'fullscreen';
         $card_object->icon_type = 'menu-icon';
@@ -536,8 +532,6 @@ class SQDE_SequodeCardObjects {
         return $card_object;
     }
     public static function favorites(){
-        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
-        
         $card_object = (object) null;
         $card_object->size = 'fullscreen';
         $card_object->icon_type = 'menu-icon';
