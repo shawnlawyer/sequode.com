@@ -37,7 +37,7 @@ class SQDE_AccountCardObjects {
             $html[] = $object->name;
             $html[] = '</div>';
             $js[] = SQDE_ComponentJS::onTapEventsAjaxCall($dom_id.$i, SQDE_ComponentJS::ajaxCallObject('cards/sequode/details', array($object->id)));
-            $card_object->body[] = (object) array('html' => implode('',$html).'js' => implode('',$js));
+            $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         }
         if(SQDE_UserAuthority::isSystemOwner()){
             $card_object->body[] = '<div style="position:absolute; bottom:5px; right:5px;" class="subline kids">Id: '.$_model->id.'</div>';
