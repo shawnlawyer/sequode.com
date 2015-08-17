@@ -4,83 +4,50 @@ class SQDE_SiteCardObjects {
         $card_object = (object) null;
         $card_object->head = 'Sequode is Liquid Software';
         $card_object->component_seperator = '';
+        
+        $html = $js = array();
         $card_object->body = array();
-        $card_object->body[] = '<div class="card-subtitle kids">Liquid who?</div>';
-        $card_object->body[] = '<div class="card-textblock card-text">';
-        $card_object->body[] = 'Sequode is short for Sequencing Sequence-able Code, so basically turning software code into a bunch of numbers, or as I call it, Liquid Software.';
-        $card_object->body[] = '</div>';
+        $html[] = '<div class="card-subtitle kids">Liquid who?</div>';
+        $html[] = '<div class="card-textblock card-text">';
+        $html[] = 'Sequode is short for Sequencing Sequence-able Code, so basically turning software code into a bunch of numbers, or as I call it, Liquid Software.';
+        $html[] = '</div>';
         
-        $card_object->body[] = '<div class="subline kids">It\'s what you make it.</div>';
+        $html[] = '<div class="subline kids">It\'s what you make it.</div>';
         
-        $card_object->body[] = '<div class="card-textblock card-text">';
-        $card_object->body[] = 'Sequode is visual software programming, in which a user arranges a computer language\'s code elements into computer software, no coding necessary, but totally allowed if you want to turn your own code into Sequodes. Enterprise grade software, all with what feels like a prototype\'s flowchart. And you can create with the touch of a finger, since Sequode is completely touch enabled and mobile ready from day one!';
-        $card_object->body[] = '</div>';
+        $html[] = '<div class="card-textblock card-text">';
+        $html[] = 'Sequode is visual software programming, in which a user arranges a computer language\'s code elements into computer software, no coding necessary, but totally allowed if you want to turn your own code into Sequodes. Enterprise grade software, all with what feels like a prototype\'s flowchart. And you can create with the touch of a finger, since Sequode is completely touch enabled and mobile ready from day one!';
+        $html[] = '</div>';
         
-        $card_object->body[] = '<div class="subline kids">So easy, even a kid can program!</div>';
+        $html[] = '<div class="subline kids">So easy, even a kid can program!</div>';
         
-        $card_object->body[] = '<div class="card-textblock card-text">';
-        $card_object->body[] = 'Sequode is so easy to use that a kid with no programming skills, can make working programs. Then learn indepth programming, along the way through a completely visual and friendly enviroment.';
-        $card_object->body[] = '</div>';
+        $html[] = '<div class="card-textblock card-text">';
+        $html[] = 'Sequode is so easy to use that a kid with no programming skills, can make working programs. Then learn indepth programming, along the way through a completely visual and friendly enviroment.';
+        $html[] = '</div>';
         
-        $card_object->body[] = '<div class="card-textblock card-text">';
-        $card_object->body[] = 'So watch out, search goggles, face space, tweater and tumblee. Some 10 year old, maybe even your 10 year old, will be able to build all of the next Big Tools in Sequode.';
-        $card_object->body[] = '</div>';
+        $html[] = '<div class="card-textblock card-text">';
+        $html[] = 'So watch out, search goggles, face space, tweater and tumblee. Some 10 year old, maybe even your 10 year old, will be able to build all of the next Big Tools in Sequode.';
+        $html[] = '</div>';
         
-        $card_object->body[] = '<div class="subline kids">Better</div>';
-        $card_object->body[] = '<div class="card-textblock card-text">';
-        $card_object->body[] = 'At public launch Sequode will be free to all school age kids globally, because Sequode is about making the World better.';
-        $card_object->body[] = '</div>';
+        $html[] = '<div class="subline kids">Better</div>';
+        $html[] = '<div class="card-textblock card-text">';
+        $html[] = 'At public launch Sequode will be free to all school age kids globally, because Sequode is about making the World better.';
+        $html[] = '</div>';
         
-        $card_object->body[] = '<div class="subline kids">Fun</div>';
-        $card_object->body[] = '<div class="card-textblock card-text">';
-        $card_object->body[] = 'What do you call the automated regression suite for a web based visual programming tool?';
-        $card_object->body[] = '</div>';
+        $html[] = '<div class="subline kids">Fun</div>';
+        $html[] = '<div class="card-textblock card-text">';
+        $html[] = 'What do you call the automated regression suite for a web based visual programming tool?';
+        $html[] = '</div>';
         
-        $card_object->body[] = '<div class="card-textblock card-text">';
-        $card_object->body[] = 'A programmer :)';
-        $card_object->body[] = '</div>';
+        $html[] = '<div class="card-textblock card-text">';
+        $html[] = 'A programmer :)';
+        $html[] = '</div>';
         
-        $card_object->body[] = '<div class="subline kids alignCenter">Launch 7.21.2015</div>';
+        $html[] = '<div class="subline kids alignCenter">Launch 7.21.2015</div>';
+        $card_object->body[] = (object) array('html' => implode('',$html));
         return $card_object;
     }
     public static function sequodesMenu(){
-        $card_object = (object) null;
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'sequode-icon-background';
-        $card_object->menu = (object) null;
-        $dom_id_base = SQDE_Component::uniqueHash('','');
-        $card_object->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
-        $card_object->menu->items =  array();
-        
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $card_object->menu->items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'New Sequode',
-            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/sequode/newSequence'))
-        );
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $card_object->menu->items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Search Sequodes',
-            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/sequode/search'))
-        );
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $card_object->menu->items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'My Sequodes',
-            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/sequode/my'))
-        );
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $card_object->menu->items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Sequode Favorites',
-            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/sequode/favorites'))
-        );
-        return $card_object;
+        return SQDE_SequodeCardObjects::menu();
     }
     public static function authMenu(){
         $card_object = (object) null;

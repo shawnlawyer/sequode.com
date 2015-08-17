@@ -3,6 +3,49 @@ class SQDE_SequodeCardObjects {
     public static $package = 'Sequode';
     public static $modeler = 'SQDE_Sequode';
     
+    public static function menu(){
+        $card_object = (object) null;
+        $card_object->icon_type = 'menu-icon';
+        $card_object->icon_background = 'sequode-icon-background';
+        $card_object->menu = (object) null;
+        $dom_id_base = SQDE_Component::uniqueHash('','');
+        $card_object->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
+        $card_object->menu->items =  self::menuItems();
+        return $card_object;
+    }
+    public static function menuItems(){
+        $items = array();
+        
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $items[] = array(
+            'css_classes'=>'automagic-card-menu-item noSelect',
+            'id'=>$dom_id,
+            'contents'=>'New Sequode',
+            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/sequode/newSequence'))
+        );
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $items[] = array(
+            'css_classes'=>'automagic-card-menu-item noSelect',
+            'id'=>$dom_id,
+            'contents'=>'Search Sequodes',
+            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/sequode/search'))
+        );
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $items[] = array(
+            'css_classes'=>'automagic-card-menu-item noSelect',
+            'id'=>$dom_id,
+            'contents'=>'My Sequodes',
+            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/sequode/my'))
+        );
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $items[] = array(
+            'css_classes'=>'automagic-card-menu-item noSelect',
+            'id'=>$dom_id,
+            'contents'=>'Sequode Favorites',
+            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/sequode/favorites'))
+        );
+        return $items;
+    }
     public static function modelOperationsMenuItems($filter='', $_model = null){
         $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
         $items = array();
@@ -222,13 +265,13 @@ class SQDE_SequodeCardObjects {
             }else{
                     $card_object->body[] = 'Sequode is empty.';   
             }
-        }    
+        }
         if(SQDE_UserAuthority::isSystemOwner()){
             $card_object->body[] = '<div class="subline kids">Use Policy</div>';
             $text = (SQDE_SequodeAuthority::isShared()) ? 'Public Use' : 'System Restricted Use';
             $ajax_call_object = SQDE_ComponentJS::ajaxCallObject('forms/sequode/sharing', array($_model->id));
             $card_object->body[] = SQDE_ComponentJS::loadComponentHere($ajax_call_object, $text, 'atom');
-    }
+        }
         if(SQDE_SequodeAuthority::isCode()){
             $card_object->body[] = '<div class="subline kids">Tenancy Requirement</div>';
             $text = (SQDE_SequodeAuthority::isTenacyDedicated()) ? 'Dedicated Enviroment' : 'Shared Enviroment';
