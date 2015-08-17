@@ -350,7 +350,6 @@ class SQDE_SequodeCardObjects {
         $card_object->menu = (object) null;
         $card_object->menu->items = self::modelOperationsMenuItems();
         
-        $card_object->head = $_model->name;
         
         $input_object_map = json_decode($_model->input_object_map);
         $default_input_object_map = json_decode($_model->default_input_object_map);
@@ -363,6 +362,7 @@ class SQDE_SequodeCardObjects {
         $sequence_model = new SQDE_Sequode::$model;
         $sequence_model->exists($sequence_model_id,'id');
         
+        $card_object->head = $sequence_model->name;
         $card_object->body = array();
         $card_object->body[] = '';
         $sequence_model->input_object_detail = json_decode($sequence_model->input_object_detail);
