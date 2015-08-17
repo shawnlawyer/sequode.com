@@ -5,7 +5,6 @@ class SQDE_SequodeCardObjects {
     
     public static function modelOperationsMenuItems($filter='', $_model = null){
         $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
-        
         $items = array();
         //details
         if(SQDE_UserAuthority::canView($_model)){
