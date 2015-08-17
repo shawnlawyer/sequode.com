@@ -2,7 +2,27 @@
 class SQDE_AccountCardObjects {
     public static $package = 'Account';
     public static $modeler = 'SQDE_User';
-    public static function details($_model = null){
+    public static function menu(){
+        $card_object = (object) null;
+        $card_object->icon_type = 'menu-icon';
+        $card_object->icon_background = 'user-icon-background';
+        $card_object->menu = (object) null;
+        $card_object->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
+        $card_object->menu->items =  self::menuItems();
+        return $card_object;
+    }
+    public static function menuItems(){
+        $items = array();
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $items[] = array(
+            'css_classes'=>'automagic-card-menu-item noSelect',
+            'id'=>$dom_id,
+            'contents'=>'Account Details',
+            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/account/details'))
+        );
+        return $items;
+    }
+    public static function details(){
          $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
         $card_object = (object) null;
         $card_object->head = 'Account Detail';

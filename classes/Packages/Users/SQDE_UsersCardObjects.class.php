@@ -14,42 +14,27 @@ class SQDE_UsersCardObjects {
     public static function menuItems(){
         $items = array();
         
-        if(
-            isset(SQDE_AuthenticatedUser::model()->role_id)
-            && SQDE_AuthenticatedUser::model()->role_id < 101
-        ){
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'User Details',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/user/accountSettings'))
-            );
-        }
-        if(SQDE_UserAuthority::isSystemOwner()){
-            
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Search Users',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/users/search'))
-            );
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'New User',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/users/newUser'))
-            );
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'New Guest',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/users/newGuest'))
-            );
-        }
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $items[] = array(
+            'css_classes'=>'automagic-card-menu-item noSelect',
+            'id'=>$dom_id,
+            'contents'=>'Search Users',
+            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/users/search'))
+        );
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $items[] = array(
+            'css_classes'=>'automagic-card-menu-item noSelect',
+            'id'=>$dom_id,
+            'contents'=>'New User',
+            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/users/newUser'))
+        );
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $items[] = array(
+            'css_classes'=>'automagic-card-menu-item noSelect',
+            'id'=>$dom_id,
+            'contents'=>'New Guest',
+            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/users/newGuest'))
+        );
         return $items;
     }
     public static function modelOperationsMenuItems($filter='', $_model = null){
