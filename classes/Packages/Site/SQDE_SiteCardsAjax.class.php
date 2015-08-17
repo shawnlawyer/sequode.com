@@ -43,9 +43,9 @@ class SQDE_SiteCardsAjax {
                 //$card = SQDE_Cards::render('Users','menu');
                 //$html[] = SQDE_Card::menuCardHidingContainer($card->html,7);
                 //$js[] = $card->js;
-                //$card = SQDE_Cards::render('Package','menu');
-                //$html[] = SQDE_Card::menuCardHidingContainer($card->html,6);
-                //$js[] = $card->js;
+                $card = SQDE_Cards::render('Package','menu');
+                $html[] = SQDE_Card::menuCardHidingContainer($card->html,6);
+                $js[] = $card->js;
                 //$card = SQDE_Cards::render('Machine','menu');
                 //$html[] = SQDE_Card::menuCardHidingContainer($card->html,5);
                 //$js[] = $card->js;
