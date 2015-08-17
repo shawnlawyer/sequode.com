@@ -13,7 +13,7 @@ class SQDE_SiteCardsAjax {
         return implode(' ',$js);
     }
     public static function menus($dom_id = 'MenusContainer'){
-        $html = $js = array();\
+        $html = $js = array();
         $i = 100;
         $packages = SQDE_PackagesHandler::models();
         foreach($packages as $package => $model){
