@@ -2,6 +2,46 @@
 class SQDE_PackageCardObjects {
     public static $package = 'Package';
     public static $modeler = 'SQDE_Package';
+    public static function menu(){
+        $card_object = (object) null;
+        $card_object->icon_type = 'menu-icon';
+        $card_object->icon_background = 'atom-icon-background';
+        $card_object->menu = (object) null;
+        $card_object->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
+        $card_object->menu->items =  self::menuItems();
+        return $card_object;
+    }
+    public static function menuItems(){
+        $items = array();
+       
+        if(
+            isset(SQDE_AuthenticatedUser::model()->role_id)
+            && SQDE_AuthenticatedUser::model()->role_id < 101
+        ){
+            $dom_id = SQDE_Component::uniqueHash('','');
+            $items[] = array(
+                'css_classes'=>'automagic-card-menu-item noSelect',
+                'id'=>$dom_id,
+                'contents'=>'New Package',
+                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/package/newPackage'))
+            );
+            $dom_id = SQDE_Component::uniqueHash
+            $items[] = array(
+                'css_classes'=>'automagic-card-menu-item noSelect',
+                'id'=>$dom_id,
+                'contents'=>'My Packages',
+                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/package/my'))
+            );
+            $dom_id = SQDE_Component::uniqueHash('','');
+            $items[] = array(
+                'css_classes'=>'automagic-card-menu-item noSelect',
+                'id'=>$dom_id,
+                'contents'=>'Search Packages',
+                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/package/search'))
+            );
+        }
+        return $items;
+    }
     public static function modelOperationsMenuItems($filter='', $_model = null){
         $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
         $items = array();

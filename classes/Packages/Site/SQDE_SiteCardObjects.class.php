@@ -50,182 +50,18 @@ class SQDE_SiteCardObjects {
         return SQDE_SequodeCardObjects::menu();
     }
     public static function authMenu(){
-        $card_object = (object) null;
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'settings-icon-background';
-        $card_object->menu = (object) null;
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $card_object->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
-        
-        $card_object->menu->items =  array();
-        if(
-            SQDE_UserAuthority::isAuthenticated()
-        ){
-            
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Logout',
-                'js_action'=> SQDE_ComponentJS::onTapEvents($dom_id, 'window.location.assign(\'/logout\');')
-            );
-        }else{
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Login',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/auth/login'))
-            );
-            /*
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Get Started',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/auth/terms'))
-            );
-            */
-        }
-        return $card_object;
+        return SQDE_AuthCardObjects::menu();
     }
     public static function usersMenu(){
-        $card_object = (object) null;
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'user-icon-background';
-        $card_object->menu = (object) null;
-        $dom_id_base = SQDE_Component::uniqueHash('','');
-        $card_object->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
-        
-        $card_object->menu->items = array();
-        if(
-            isset(SQDE_AuthenticatedUser::model()->role_id)
-            && SQDE_AuthenticatedUser::model()->role_id < 101
-        ){
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'User Details',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/user/accountSettings'))
-            );
-        }
-        if(SQDE_UserAuthority::isSystemOwner()){
-            
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Search Users',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/users/search'))
-            );
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'New User',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/users/newUser'))
-            );
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'New Guest',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/users/newGuest'))
-            );
-        }
-        return $card_object;
+        return SQDE_UsersCardObjects::menu();
     }
-    
     public static function machinesMenu(){
-        $card_object = (object) null;
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'atom-icon-background';
-        $card_object->menu = (object) null;
-        $dom_id_base = SQDE_Component::uniqueHash('','');
-        $card_object->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
-        
-        $card_object->menu->items = array();
-        if(
-            isset(SQDE_AuthenticatedUser::model()->role_id)
-            && SQDE_AuthenticatedUser::model()->role_id < 101
-        ){
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'New Application Machine',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/machine/newMachine'))
-            );
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'My Application Machines',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/machine/my'))
-            );
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Search Application Machine',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/machine/search'))
-            );
-        }
-        return $card_object;
+        return SQDE_MachineCardObjects::menu();
     }
     public static function packagesMenu(){
-        $card_object = (object) null;
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'atom-icon-background';
-        $card_object->menu = (object) null;
-        $dom_id_base = SQDE_Component::uniqueHash('','');
-        $card_object->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
-        
-        $card_object->menu->items = array();
-        if(
-            isset(SQDE_AuthenticatedUser::model()->role_id)
-            && SQDE_AuthenticatedUser::model()->role_id < 101
-        ){
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'New Package',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/package/newPackage'))
-            );
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'My Packages',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/package/my'))
-            );
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $card_object->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Search Packages',
-                'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/package/search'))
-            );
-        }
-        return $card_object;
+        return SQDE_PackageCardObjects::menu();
     }
     public static function sessionsMenu(){
-        $card_object = (object) null;
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'session-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->position_adjuster = 'automagic-card-menu-right-side-adjuster';
-        $card_object->menu->items = array();
-        
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $card_object->menu->items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Search Sessions',
-            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/session/search'))
-        );
-        return $card_object;
+        return SQDE_SessionCardObjects::menu();
     }
 }
