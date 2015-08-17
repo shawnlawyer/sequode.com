@@ -14,8 +14,9 @@ class SQDE_SiteCardsAjax {
     }
     public static function menus($dom_id = 'MenusContainer'){
         $html = $js = array();
-        $i = 100;
+        
         $packages = SQDE_PackagesHandler::models();
+        $i = count($packages);
         foreach($packages as $package => $model){
             if(isset($model->card_objects)){
                 if(in_array('menu',get_class_methods($model->card_objects))){
