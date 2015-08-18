@@ -7,10 +7,10 @@ class SQDE_UsersPackage {
         $model->form_objects = 'SQDE_UsersFormObjects';
         $model->operations = 'SQDE_UserOperations';
         $model->finder = 'SQDE_UsersFinder';
-        $model->ajax = (object) null;
-        $model->ajax->operations = 'SQDE_UsersOperationsAjax';
-        $model->ajax->forms = 'SQDE_UsersFormsAjax';
-        $model->ajax->cards = 'SQDE_UsersCardsAjax';
+        $model->xhr = (object) null;
+        $model->xhr->operations = 'SQDE_UsersOperationsAjax';
+        $model->xhr->forms = 'SQDE_UsersFormsAjax';
+        $model->xhr->cards = 'SQDE_UsersCardsAjax';
 		return $model;
 	}
 }

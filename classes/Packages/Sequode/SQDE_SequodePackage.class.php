@@ -10,10 +10,10 @@ class SQDE_SequodePackage {
 		$model->routes = array(
 			'SQDE_SequodeRoutes'
 		);
-        $model->ajax = (object) null;
-        $model->ajax->operations = 'SQDE_SequodeOperationsAjax';
-        $model->ajax->forms = 'SQDE_SequodeFormsAjax';
-        $model->ajax->cards = 'SQDE_SequodeCardsAjax';
+        $model->xhr = (object) null;
+        $model->xhr->operations = 'SQDE_SequodeOperationsAjax';
+        $model->xhr->forms = 'SQDE_SequodeFormsAjax';
+        $model->xhr->cards = 'SQDE_SequodeCardsAjax';
         $model->rest = (object) null;
         $model->rest->operations = 'SQDE_SequodeOperationsRest';
         $model->rest->origins = 'SQDE_SequodeOriginsRest';

@@ -88,7 +88,7 @@ class SQDE_Form extends SQDE_Mason {
         if($form_object->submit_js != null){
             $submit_js = str_replace(static::$collection_replacement_hook, self::collectValues($form_object->components,$dom_ids), $form_object->submit_js);    
         }else{
-            $submit_js = str_replace(static::$collection_replacement_hook, self::collectValues($form_object->components,$dom_ids), self::xhrCall($form_object->submit_ajax_call_route, $form_object->submit_ajax_call_parameters));
+            $submit_js = str_replace(static::$collection_replacement_hook, self::collectValues($form_object->components,$dom_ids), self::xhrCall($form_object->submit_xhr_call_route, $form_object->submit_xhr_call_parameters));
         }
         $event_js = array();
         if($form_object->auto_submit_time != null){
@@ -112,15 +112,15 @@ class SQDE_Form extends SQDE_Mason {
         }
 		return $components_array;
 	}
-    public static function formObject($object_class, $object_method, $ajax_library, $parameters = null){
+    public static function formObject($object_class, $object_method, $xhr_library, $parameters = null){
         $form_object = (object) null;
         $form_object->components = forward_static_call_array(array($object_class,$object_method),($parameters == null) ? array() : $parameters);
         $form_object->submit_js = null;
         $form_object->submit_button = null;
         $form_object->submit_on_enter = true;
         $form_object->auto_submit_time = null;
-        $form_object->submit_ajax_call_route = $ajax_library .'/'. $object_method;
-        $form_object->submit_ajax_call_parameters = array(static::$collection_replacement_hook);
+        $form_object->submit_xhr_call_route = $xhr_library .'/'. $object_method;
+        $form_object->submit_xhr_call_parameters = array(static::$collection_replacement_hook);
         return $form_object;
 	}
 }

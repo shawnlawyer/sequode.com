@@ -7,10 +7,10 @@ class SQDE_SessionPackage {
         $model->form_objects = 'SQDE_SessionFormObjects';
         $model->operations = 'SQDE_SessionOperations';
         $model->finder = 'SQDE_SessionsFinder';
-        $model->ajax = (object) null;
-        $model->ajax->operations = 'SQDE_SessionOperationsAjax';
-        $model->ajax->forms = 'SQDE_SessionFormsAjax';
-        $model->ajax->cards = 'SQDE_SessionCardsAjax';
+        $model->xhr = (object) null;
+        $model->xhr->operations = 'SQDE_SessionOperationsAjax';
+        $model->xhr->forms = 'SQDE_SessionFormsAjax';
+        $model->xhr->cards = 'SQDE_SessionCardsAjax';
 		return $model;
 	}
 }

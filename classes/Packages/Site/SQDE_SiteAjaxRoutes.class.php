@@ -30,10 +30,10 @@ class SQDE_SiteAjaxRoutes {
             return;
         }
         $request_type = $call_pieces[0];
-        if(!isset(SQDE_PackagesHandler::model($package)->ajax->$request_type)){
+        if(!isset(SQDE_PackagesHandler::model($package)->xhr->$request_type)){
             return;
         }
-        $routes_class = SQDE_PackagesHandler::model($package)->ajax->$request_type;
+        $routes_class = SQDE_PackagesHandler::model($package)->xhr->$request_type;
         if(!in_array($call_pieces[2], SQDE_Routes::routes($routes_class))){
             return;
         }

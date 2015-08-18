@@ -4,8 +4,8 @@ class SQDE_DashboardPackage {
 	public static function model($set = false){
         $model = (object) null;
         $model->card_objects = 'SQDE_DashboardCardObjects';
-        $model->ajax = (object) null;
-        $model->ajax->cards = 'SQDE_DashboardCardsAjax';
+        $model->xhr = (object) null;
+        $model->xhr->cards = 'SQDE_DashboardCardsAjax';
 		return $model;
 	}
 }

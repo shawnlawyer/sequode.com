@@ -7,10 +7,10 @@ class SQDE_PackagePackage {
         $model->form_objects = 'SQDE_PackageFormObjects';
         $model->operations = 'SQDE_PackageOperations';
         $model->finder = 'SQDE_PackagesFinder';
-        $model->ajax = (object) null;
-        $model->ajax->operations = 'SQDE_PackageOperationsAjax';
-        $model->ajax->forms = 'SQDE_PackageFormsAjax';
-        $model->ajax->cards = 'SQDE_PackageCardsAjax';
+        $model->xhr = (object) null;
+        $model->xhr->operations = 'SQDE_PackageOperationsAjax';
+        $model->xhr->forms = 'SQDE_PackageFormsAjax';
+        $model->xhr->cards = 'SQDE_PackageCardsAjax';
 		return $model;
 	}
 }

@@ -9,8 +9,8 @@ class SQDE_SitePackage {
 			'SQDE_SiteAjaxRoutes',
 			'SQDE_SequodeOriginRestrictedViewRoutes',
 		);
-        $model->ajax = (object) null;
-        $model->ajax->cards = 'SQDE_SiteCardsAjax';
+        $model->xhr = (object) null;
+        $model->xhr->cards = 'SQDE_SiteCardsAjax';
 		return $model;
 	}
 }
