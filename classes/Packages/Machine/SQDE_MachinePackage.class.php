@@ -8,9 +8,9 @@ class SQDE_MachinePackage {
         $model->operations = 'SQDE_MachineOperations';
         $model->finder = 'SQDE_MachinesFinder';
         $model->xhr = (object) null;
-        $model->xhr->operations = 'SQDE_MachineOperationsAjax';
-        $model->xhr->forms = 'SQDE_MachineFormsAjax';
-        $model->xhr->cards = 'SQDE_MachineCardsAjax';
+        $model->xhr->operations = 'SQDE_MachineOperationsXHR';
+        $model->xhr->forms = 'SQDE_MachineFormsXHR';
+        $model->xhr->cards = 'SQDE_MachineCardsXHR';
 		return $model;
 	}
 }

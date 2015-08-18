@@ -1,5 +1,5 @@
 <?php
-class SQDE_PackageFormsAjax {
+class SQDE_PackageFormsXHR {
     public static $package = 'Package';
     public static function name($_model_id, $dom_id){
         if(!(

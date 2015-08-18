@@ -1,11 +1,11 @@
 <?php
-class SQDE_PackageOperationsAjax {
+class SQDE_PackageOperationsXHR {
     public static $package = 'Package';
     public static function newPackage(){
         SQDE_PackageOperations::newPackage(SQDE_AuthenticatedUser::model()->id);
         $js = array();
         $js[] = 'registry.fetch({collection:\'packages\', key:'.SQDE_Package::model()->id.'});';
-        $js[] = SQDE_PackageCardsAjax::details(SQDE_Package::model()->id);
+        $js[] = SQDE_PackageCardsXHR::details(SQDE_Package::model()->id);
         return implode(' ', $js);
     }
     

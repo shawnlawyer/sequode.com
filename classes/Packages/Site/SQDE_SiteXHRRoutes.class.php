@@ -1,5 +1,5 @@
 <?php
-class SQDE_SiteAjaxRoutes {
+class SQDE_SiteXHRRoutes {
 	public static $merge = true;
 	public static $routes = array(
 		'xhr'
@@ -48,7 +48,7 @@ class SQDE_SiteAjaxRoutes {
 			$args = $_GET['args'];
 		}
 
-        echo SQDE_Ajax::call($routes_class, $route, $args);
+        echo SQDE_XHR::call($routes_class, $route, $args);
         return true;
     }
 }

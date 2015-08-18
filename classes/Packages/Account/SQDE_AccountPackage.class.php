@@ -7,9 +7,9 @@ class SQDE_AccountPackage {
         $model->form_objects = 'SQDE_AccountFormObjects';
         $model->operations = 'SQDE_UserOperations';
         $model->xhr = (object) null;
-        $model->xhr->operations = 'SQDE_AccountOperationsAjax';
-        $model->xhr->forms = 'SQDE_AccountFormsAjax';
-        $model->xhr->cards = 'SQDE_AccountCardsAjax';
+        $model->xhr->operations = 'SQDE_AccountOperationsXHR';
+        $model->xhr->forms = 'SQDE_AccountFormsXHR';
+        $model->xhr->cards = 'SQDE_AccountCardsXHR';
 		return $model;
 	}
 }

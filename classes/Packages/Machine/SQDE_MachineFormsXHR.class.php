@@ -1,5 +1,5 @@
 <?php
-class SQDE_MachineFormsAjax {
+class SQDE_MachineFormsXHR {
     public static $package = 'Machine';
     public static function name($machine_model_id, $dom_id){
         if(!(

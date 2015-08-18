@@ -10,9 +10,9 @@ class SQDE_AuthPackage {
 			'SQDE_AuthRoutes'
 		);
         $model->xhr = (object) null;
-        $model->xhr->operations = 'SQDE_AuthOperationsAjax';
-        $model->xhr->forms = 'SQDE_AuthFormsAjax';
-        $model->xhr->cards = 'SQDE_AuthCardsAjax';
+        $model->xhr->operations = 'SQDE_AuthOperationsXHR';
+        $model->xhr->forms = 'SQDE_AuthFormsXHR';
+        $model->xhr->cards = 'SQDE_AuthCardsXHR';
         $model->rest = (object) null;
         $model->rest->operations = 'SQDE_AuthOperationsRest';
 		return $model;

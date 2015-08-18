@@ -1,5 +1,5 @@
 <?php
-class SQDE_SequodeFormsAjax {
+class SQDE_SequodeFormsXHR {
     public static $package = 'Sequode';
     public static function name($sequode_model_id, $dom_id){
         if(!(

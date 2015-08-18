@@ -1,5 +1,5 @@
 <?php
-class SQDE_UserOperationsAjax {
+class SQDE_UserOperationsXHR {
     public static $package = 'User';
     public static function emptySequodeFavorites(){
         if(!(

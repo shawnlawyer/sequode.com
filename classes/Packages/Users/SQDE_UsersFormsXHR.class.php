@@ -1,5 +1,5 @@
 <?php
-class SQDE_UsersFormsAjax {
+class SQDE_UsersFormsXHR {
     public static $package = 'Users';
     public static function search($dom_id = ''){
         $components_array = SQDE_Forms::render(self::$package,__FUNCTION__);

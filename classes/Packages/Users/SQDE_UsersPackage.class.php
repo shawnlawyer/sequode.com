@@ -8,9 +8,9 @@ class SQDE_UsersPackage {
         $model->operations = 'SQDE_UserOperations';
         $model->finder = 'SQDE_UsersFinder';
         $model->xhr = (object) null;
-        $model->xhr->operations = 'SQDE_UsersOperationsAjax';
-        $model->xhr->forms = 'SQDE_UsersFormsAjax';
-        $model->xhr->cards = 'SQDE_UsersCardsAjax';
+        $model->xhr->operations = 'SQDE_UsersOperationsXHR';
+        $model->xhr->forms = 'SQDE_UsersFormsXHR';
+        $model->xhr->cards = 'SQDE_UsersCardsXHR';
 		return $model;
 	}
 }

@@ -1,5 +1,5 @@
 <?php
-class SQDE_AuthOperationsAjax {
+class SQDE_AuthOperationsXHR {
     public static $package = 'Auth';
     public static function login($json){
         $js = array();

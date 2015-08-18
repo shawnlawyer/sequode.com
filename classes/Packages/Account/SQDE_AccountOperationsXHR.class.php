@@ -1,5 +1,5 @@
 <?php
-class SQDE_AccountOperationsAjax {
+class SQDE_AccountOperationsXHR {
     public static $package = 'Account';
     public static function updateDomain($json){
         if(!(

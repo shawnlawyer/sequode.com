@@ -1,5 +1,5 @@
 <?php
-class SQDE_SequodeCardsAjax {
+class SQDE_SequodeCardsXHR {
     public static $package = 'Sequode';
     public static function componentSettings($type = false, $member=null, $sequode_model_id=0, $dom_id = 'MagicCardsContainer'){
         if(!(

@@ -1,11 +1,10 @@
 <?php
-class SQDE_MachineCardsAjax {
-    public static $package = 'Machine';
-    public static function details($machine_model_id=0, $dom_id = 'MagicCardsContainer'){
+class SQDE_UsersCardsXHR {
+    public static $package = 'Users';
+    public static function details($user_model_id=0, $dom_id = 'MagicCardsContainer'){
         if(!(
-        SQDE_Machine::exists($machine_model_id,'id')
-        && (SQDE_UserAuthority::isMachineOwner()
-        || SQDE_UserAuthority::isSystemOwner())
+        SQDE_UserAuthority::isSystemOwner()
+        && SQDE_User::exists($user_model_id,'id')
         )){ return; }
         $card = SQDE_Cards::render(self::$package,__FUNCTION__);
         $html = array();
@@ -19,15 +18,9 @@ class SQDE_MachineCardsAjax {
         return implode(' ',$js);
     }
     public static function search($dom_id = 'MagicCardsContainer'){
-        $card = SQDE_Cards::render(self::$package,__FUNCTION__);
-        $html = array();
-        $js = array();
-        $html[] = $card->html;
-        $js[] = SQDE_BrowserRemote::addIntoDom($dom_id, implode(' ',$html), 'replace');
-        $js[] = $card->js;
-        return implode(' ',$js);
-    }
-    public static function my($dom_id = 'MagicCardsContainer'){
+        if(!(
+        SQDE_UserAuthority::isSystemOwner()
+        )){ return; }
         $card = SQDE_Cards::render(self::$package,__FUNCTION__);
         $html = array();
         $js = array();

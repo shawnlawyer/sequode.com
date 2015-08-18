@@ -1,5 +1,5 @@
 <?php
-class SQDE_UserFormsAjax {
+class SQDE_UserFormsXHR {
     public static $package = 'User';
     public static function selectPalette($dom_id = ''){
         

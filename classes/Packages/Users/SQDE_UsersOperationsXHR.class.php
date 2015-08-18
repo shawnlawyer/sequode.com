@@ -1,17 +1,17 @@
 <?php
-class SQDE_UsersOperationsAjax {
+class SQDE_UsersOperationsXHR {
     public static $package = 'Users';
     public static function newUser(){
         if(!(
         SQDE_UserAuthority::isSystemOwner()
         )){ return; }
-        return SQDE_UsersCardsAjax::details(SQDE_UserOperations::newUser()->id);
+        return SQDE_UsersCardsXHR::details(SQDE_UserOperations::newUser()->id);
     }
     public static function newGuest(){
         if(!(
         SQDE_UserAuthority::isSystemOwner()
         )){ return; }
-        return SQDE_UsersCardsAjax::details(SQDE_UserOperations::newGuest()->id);
+        return SQDE_UsersCardsXHR::details(SQDE_UserOperations::newGuest()->id);
     }
     public static function delete($user_model_id){
         if(!(

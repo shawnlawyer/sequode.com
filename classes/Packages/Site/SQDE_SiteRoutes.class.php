@@ -99,7 +99,7 @@ class SQDE_SiteRoutes{
                 'js/SQDE_EventsKit.js',
                 'js/SQDE_ShapesKit.js',
                 'js/SQDE_CardsKit.js',
-                'js/SQDE_Ajax.js',
+                'js/SQDE_XHR.js',
                 'js/SQDE_Model.js',
                 'js/SQDE_ModelEnds.js',
                 'js/SQDE_Sequencer.js',
@@ -111,7 +111,7 @@ class SQDE_SiteRoutes{
             );
         }else{
             $files = array(
-                'js/SQDE_Ajax.js',
+                'js/SQDE_XHR.js',
                 'js/SQDE_AuthConsole.js',
                 'js/SQDE_AuthConsoleRegistry.js',
                 'js/auth-main.js'

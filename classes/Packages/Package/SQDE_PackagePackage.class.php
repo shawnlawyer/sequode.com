@@ -8,9 +8,9 @@ class SQDE_PackagePackage {
         $model->operations = 'SQDE_PackageOperations';
         $model->finder = 'SQDE_PackagesFinder';
         $model->xhr = (object) null;
-        $model->xhr->operations = 'SQDE_PackageOperationsAjax';
-        $model->xhr->forms = 'SQDE_PackageFormsAjax';
-        $model->xhr->cards = 'SQDE_PackageCardsAjax';
+        $model->xhr->operations = 'SQDE_PackageOperationsXHR';
+        $model->xhr->forms = 'SQDE_PackageFormsXHR';
+        $model->xhr->cards = 'SQDE_PackageCardsXHR';
 		return $model;
 	}
 }

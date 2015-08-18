@@ -11,9 +11,9 @@ class SQDE_SequodePackage {
 			'SQDE_SequodeRoutes'
 		);
         $model->xhr = (object) null;
-        $model->xhr->operations = 'SQDE_SequodeOperationsAjax';
-        $model->xhr->forms = 'SQDE_SequodeFormsAjax';
-        $model->xhr->cards = 'SQDE_SequodeCardsAjax';
+        $model->xhr->operations = 'SQDE_SequodeOperationsXHR';
+        $model->xhr->forms = 'SQDE_SequodeFormsXHR';
+        $model->xhr->cards = 'SQDE_SequodeCardsXHR';
         $model->rest = (object) null;
         $model->rest->operations = 'SQDE_SequodeOperationsRest';
         $model->rest->origins = 'SQDE_SequodeOriginsRest';

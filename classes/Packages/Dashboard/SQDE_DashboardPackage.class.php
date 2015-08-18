@@ -5,7 +5,7 @@ class SQDE_DashboardPackage {
         $model = (object) null;
         $model->card_objects = 'SQDE_DashboardCardObjects';
         $model->xhr = (object) null;
-        $model->xhr->cards = 'SQDE_DashboardCardsAjax';
+        $model->xhr->cards = 'SQDE_DashboardCardsXHR';
 		return $model;
 	}
 }

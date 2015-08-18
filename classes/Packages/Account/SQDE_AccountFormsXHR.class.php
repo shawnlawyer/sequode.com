@@ -1,5 +1,5 @@
 <?php
-class SQDE_UserFormsAjax {
+class SQDE_UserFormsXHR {
     public static $package = 'Account';
     public static function updatePassword($dom_id = 'FormsContainer'){
     

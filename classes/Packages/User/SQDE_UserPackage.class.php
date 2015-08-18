@@ -6,8 +6,8 @@ class SQDE_UserPackage {
         $model->form_objects = 'SQDE_UserFormObjects';
         $model->operations = 'SQDE_UserOperations';
         $model->xhr = (object) null;
-        $model->xhr->operations = 'SQDE_UserOperationsAjax';
-        $model->xhr->forms = 'SQDE_UserFormsAjax';
+        $model->xhr->operations = 'SQDE_UserOperationsXHR';
+        $model->xhr->forms = 'SQDE_UserFormsXHR';
 		return $model;
 	}
 }

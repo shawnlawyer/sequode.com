@@ -1,5 +1,5 @@
 <?php
-class SQDE_SequodeOperationsAjax {
+class SQDE_SequodeOperationsXHR {
     public static function updateIndex($sequode_model_id){
         if(!(
         SQDE_Sequode::exists($sequode_model_id,'id')
@@ -11,7 +11,7 @@ class SQDE_SequodeOperationsAjax {
         $js[] = 'registry.fetch({collection:\'index\'});';
         $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
 			
-		return SQDE_SequodeCardAjax::details($sequode_model_id);
+		return SQDE_SequodeCardXHR::details($sequode_model_id);
     }
     public static function updateConnection($sequode_model_id, $from_object, $to_object){
         if(!(
@@ -88,7 +88,7 @@ class SQDE_SequodeOperationsAjax {
         $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
         $js[] = 'registry.active_collection = \'my\';';
         $js[] = 'registry.fetch({collection:\'my\'});';
-		$js[] = SQDE_SequodeCardsAjax::details(SQDE_Sequode::model()->id);
+		$js[] = SQDE_SequodeCardsXHR::details(SQDE_Sequode::model()->id);
         return implode(' ', $js);
     }
     public static function newSequence(){
@@ -98,7 +98,7 @@ class SQDE_SequodeOperationsAjax {
         SQDE_Sequode::model(SQDE_SequodeOperations::newSequence(SQDE_AuthenticatedUser::model()->id));
         $js = array();
         $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
-        $js[] = SQDE_SequodeCardsAjax::details(SQDE_Sequode::model()->id);
+        $js[] = SQDE_SequodeCardsXHR::details(SQDE_Sequode::model()->id);
         return implode(' ', $js);
     }
     public static function updateName($sequode_model_id, $json){
@@ -121,7 +121,7 @@ class SQDE_SequodeOperationsAjax {
         SQDE_SequodeOperations::updateName($name);
         $js = array();
         $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
-		$js[] = SQDE_SequodeCardsAjax::details(SQDE_Sequode::model()->id);
+		$js[] = SQDE_SequodeCardsXHR::details(SQDE_Sequode::model()->id);
         return implode(' ', $js);
         
         return;
@@ -148,7 +148,7 @@ class SQDE_SequodeOperationsAjax {
             $js[] = 'registry.fetch({collection:\'my\'});';
             $js[] = 'registry.fetch({collection:\'palette\'});';
             $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
-            $js[] = SQDE_SequodeCardsAjax::my();
+            $js[] = SQDE_SequodeCardsXHR::my();
             return implode(' ', $js);
         }
     }

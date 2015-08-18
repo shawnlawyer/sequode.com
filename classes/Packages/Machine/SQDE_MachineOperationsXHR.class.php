@@ -1,10 +1,10 @@
 <?php
-class SQDE_MachineOperationsAjax {
+class SQDE_MachineOperationsXHR {
     public static function newMachine(){
         SQDE_MachineOperations::newMachine(SQDE_AuthenticatedUser::model()->id);
         $js = array();
         $js[] = 'registry.fetch({collection:\'machines\', key:'.SQDE_Machine::model()->id.'});';
-        $js[] = SQDE_MachineCardsAjax::details(SQDE_Machine::model()->id);
+        $js[] = SQDE_MachineCardsXHR::details(SQDE_Machine::model()->id);
         return implode(' ', $js);
     }
     public static function updateName($machine_model_id, $json){

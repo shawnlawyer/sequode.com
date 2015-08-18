@@ -6,11 +6,11 @@ class SQDE_SitePackage {
         $model->card_objects = 'SQDE_SiteCardObjects';
 		$model->routes = array(
 			'SQDE_SiteRoutes',
-			'SQDE_SiteAjaxRoutes',
+			'SQDE_SiteXHRRoutes',
 			'SQDE_SequodeOriginRestrictedViewRoutes',
 		);
         $model->xhr = (object) null;
-        $model->xhr->cards = 'SQDE_SiteCardsAjax';
+        $model->xhr->cards = 'SQDE_SiteCardsXHR';
 		return $model;
 	}
 }

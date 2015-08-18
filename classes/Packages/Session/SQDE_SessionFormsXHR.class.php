@@ -1,5 +1,5 @@
 <?php
-class SQDE_SessionFormsAjax {
+class SQDE_SessionFormsXHR {
     public static $package = 'Session';
     public static function search($dom_id = 'FormsContainer'){
         if((!SQDE_UserAuthority::isSystemOwner())){ return; }

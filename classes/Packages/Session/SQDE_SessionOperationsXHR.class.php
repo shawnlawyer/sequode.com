@@ -1,5 +1,5 @@
 <?php
-class SQDE_SessionOperationsAjax {
+class SQDE_SessionOperationsXHR {
     public static function delete($session_model_id){
         if(!(
         SQDE_UserAuthority::isSystemOwner()

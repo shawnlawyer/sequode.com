@@ -1,5 +1,5 @@
 <?php
-class SQDE_PackageCardsAjax {
+class SQDE_PackageCardsXHR {
     public static $package = 'Package';
     public static function details($_model_id=0, $dom_id = 'MagicCardsContainer'){
         if(!(

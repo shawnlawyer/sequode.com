@@ -1,5 +1,5 @@
 <?php
-class SQDE_DashboardCardsAjax {
+class SQDE_DashboardCardsXHR {
     public static $package = 'Dashboard';
     public static function index($user_model_id=0, $dom_id = 'MagicCardsContainer'){
         if(!(

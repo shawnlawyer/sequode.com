@@ -5,7 +5,7 @@ class SQDE_BlacklistIPPackage {
         $model = (object) null;
         $model->operations = 'SQDE_BlacklistIPCardObjects';
         $model->xhr = (object) null;
-        $model->xhr->operations = 'SQDE_BlacklistIPOperationsAjax';
+        $model->xhr->operations = 'SQDE_BlacklistIPOperationsXHR';
 		return $model;
 	}
 }

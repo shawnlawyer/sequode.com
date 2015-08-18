@@ -8,9 +8,9 @@ class SQDE_SessionPackage {
         $model->operations = 'SQDE_SessionOperations';
         $model->finder = 'SQDE_SessionsFinder';
         $model->xhr = (object) null;
-        $model->xhr->operations = 'SQDE_SessionOperationsAjax';
-        $model->xhr->forms = 'SQDE_SessionFormsAjax';
-        $model->xhr->cards = 'SQDE_SessionCardsAjax';
+        $model->xhr->operations = 'SQDE_SessionOperationsXHR';
+        $model->xhr->forms = 'SQDE_SessionFormsXHR';
+        $model->xhr->cards = 'SQDE_SessionCardsXHR';
 		return $model;
 	}
 }
