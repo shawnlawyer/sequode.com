@@ -30,8 +30,8 @@ class SQDE_ComponentJS {
         $js[] = '});';
         return implode('',$js);
 	}
-    public static function onTapEventsXHRCall($dom_id, $ajax_call_object){
-        return self::onTapEvents($dom_id,self::xhrCall($ajax_call_object));
+    public static function onTapEventsXHRCall($dom_id, $xhr_call_object){
+        return self::onTapEvents($dom_id,self::xhrCall($xhr_call_object));
 	}
 	public static function xhrCallObject($route='', $inputs=null, $done_callback=false){
         $object = (object) null;
@@ -115,30 +115,5 @@ class SQDE_ComponentJS {
 	}
     
     
-    public static function menuItemAjaxAction($dom_id,$route,$inputs=null,$container=null,$active_collection=null){
-        $js = array();
-        $js[] = '$(\'#'.$dom_id.'\').on("click touch", function(){';
-        if($active_collection != null){
-            $js[] = 'registry.active_collection = \''.$active_collection.'\';';
-        }
-        $js[] = 'new SQDE_XHRCall({';
-        $js[] = 'route:\''.$route.'\'';
-        if($inputs != null){
-            $js[] = ',inputs:['.implode(',',$inputs).']';
-        }
-        $js[] = '});';
-        $js[] = '});';
-        return implode('',$js);
-	}
-    public static function menuItemJSAction($dom_id, $js_action ,$container=null, $active_collection=null){
-        $js = array();
-        $js[] = '$(\'#'.$dom_id.'\').on("click touch", function(){';
-        if($active_collection != null){
-            $js[] = 'registry.active_collection = \''.$active_collection.'\';';
-        }
-        $js[] = $js_action;
-        $js[] = '});';
-        return implode(' ',$js);
-	}
     */
 }
