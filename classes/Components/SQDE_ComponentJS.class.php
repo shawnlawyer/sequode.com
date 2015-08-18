@@ -54,7 +54,7 @@ class SQDE_ComponentJS {
         return implode('',$js);
 	}
     
-    public static function loadComponentHere($ajax_call_object, $contents='', $icon = 'atom'){
+    public static function loadComponentHere($call_object, $contents='', $icon = 'atom'){
         $html = $js = array();
         $dom_id = SQDE_Component::uniqueHash();
         
@@ -66,9 +66,9 @@ class SQDE_ComponentJS {
         }
         $html[] = '</span>';
         $html[] = '</span>';
-        $ajax_call_object->inputs = array_merge($ajax_call_object->inputs, array(self::jsQuotedValue($dom_id.'c')));
+        $call_object->inputs = array_merge($call_object->inputs, array(self::jsQuotedValue($dom_id.'c')));
         $js[] = '$(\'#'.$dom_id.'b\').on("click touchend", function(){';
-        $js[] = self::xhrCall($ajax_call_object);
+        $js[] = self::xhrCall($call_object);
         $js[] = '});';
         
         $components_object = (object) null;
