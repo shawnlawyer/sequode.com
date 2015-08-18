@@ -61,7 +61,7 @@ class SQDE_DashboardCardObjects {
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'New Sequode',
-            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/sequode/newSequence'))
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/sequode/newSequence'))
         );
         $card_object->body = array();
         $card_object->body[] = '';
@@ -73,7 +73,7 @@ class SQDE_DashboardCardObjects {
             $html[] = '<div class="automagic-card-text-button" id="'.$dom_id.$i.'">';
             $html[] = $object->name;
             $html[] = '</div>';
-            $js[] = SQDE_ComponentJS::onTapEventsAjaxCall($dom_id.$i, SQDE_ComponentJS::ajaxCallObject('cards/sequode/details', array($object->id)));
+            $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/sequode/details', array($object->id)));
             $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         }
         return $card_object;
@@ -93,7 +93,7 @@ class SQDE_DashboardCardObjects {
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'New Application Machine',
-            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/machine/newMachine'))
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/machine/newMachine'))
         );
         $card_object->body = array();
         $card_object->body[] = '';
@@ -105,7 +105,7 @@ class SQDE_DashboardCardObjects {
             $html[] = '<div class="automagic-card-text-button" id="'.$dom_id.$i.'">';
             $html[] = $object->name;
             $html[] = '</div>';
-            $js[] = SQDE_ComponentJS::onTapEventsAjaxCall($dom_id.$i, SQDE_ComponentJS::ajaxCallObject('cards/machine/details', array($object->id)));
+            $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/machine/details', array($object->id)));
             $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         }
         return $card_object;
@@ -125,7 +125,7 @@ class SQDE_DashboardCardObjects {
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'New Package',
-            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/package/newPackage'))
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/package/newPackage'))
         );
         $card_object->body = array();
         $card_object->body[] = '';
@@ -137,7 +137,7 @@ class SQDE_DashboardCardObjects {
             $html[] = '<div class="automagic-card-text-button" id="'.$dom_id.$i.'">';
             $html[] = $object->name;
             $html[] = '</div>';
-            $js[] = SQDE_ComponentJS::onTapEventsAjaxCall($dom_id.$i, SQDE_ComponentJS::ajaxCallObject('cards/package/details', array($object->id)));
+            $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/package/details', array($object->id)));
             $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         }
         return $card_object;

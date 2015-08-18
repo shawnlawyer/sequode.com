@@ -19,7 +19,7 @@ class SQDE_SessionCardObjects {
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'Search Sessions',
-            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/session/search'))
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/session/search'))
         );
         return $items;
     }
@@ -38,7 +38,7 @@ class SQDE_SessionCardObjects {
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'Delete Session',
-            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('operations/session/delete', array($_model->id)))
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/session/delete', array($_model->id)))
         );
         
         
@@ -76,7 +76,7 @@ class SQDE_SessionCardObjects {
         $js[] = '}));';
         $js[] = 'if(next_id != \''.$_model->id.'\'){';
         $js[] = 'document.getElementById(\''.$dom_id.'c\').innerHTML = \'<span class="noSelect kids" id="'.$dom_id.'">\' + registry.node(registry.active_collection, next_id).n + \' &gt;</span>\';';
-        $js[] = SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/session/details', array('next_id')));
+        $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/session/details', array('next_id')));
         $js[] = '}';
         
         $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));

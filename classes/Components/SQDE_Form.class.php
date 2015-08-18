@@ -11,7 +11,7 @@ class SQDE_Form extends SQDE_Mason {
         }
         return $dom_ids;
 	}
-	public static function ajaxCall($route, $inputs){
+	public static function xhrCall($route, $inputs){
         $js = array();
         $js[] = 'new SQDE_XHRCall({';
         $js[] = 'route:\''. $route .'\'';
@@ -88,7 +88,7 @@ class SQDE_Form extends SQDE_Mason {
         if($form_object->submit_js != null){
             $submit_js = str_replace(static::$collection_replacement_hook, self::collectValues($form_object->components,$dom_ids), $form_object->submit_js);    
         }else{
-            $submit_js = str_replace(static::$collection_replacement_hook, self::collectValues($form_object->components,$dom_ids), self::ajaxCall($form_object->submit_ajax_call_route, $form_object->submit_ajax_call_parameters));
+            $submit_js = str_replace(static::$collection_replacement_hook, self::collectValues($form_object->components,$dom_ids), self::xhrCall($form_object->submit_ajax_call_route, $form_object->submit_ajax_call_parameters));
         }
         $event_js = array();
         if($form_object->auto_submit_time != null){

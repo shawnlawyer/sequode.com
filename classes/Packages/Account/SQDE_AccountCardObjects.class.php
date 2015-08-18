@@ -18,7 +18,7 @@ class SQDE_AccountCardObjects {
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'Account Details',
-            'js_action'=> SQDE_ComponentJS::onTapEventsAjaxCall($dom_id, SQDE_ComponentJS::ajaxCallObject('cards/account/details'))
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/account/details'))
         );
         return $items;
     }
@@ -56,7 +56,7 @@ class SQDE_AccountCardObjects {
             $html[] = ' &#8727; ';
             $html[] = $object->name;
             $html[] = '</div>';
-            $js[] = SQDE_ComponentJS::onTapEventsAjaxCall($dom_id.$i, SQDE_ComponentJS::ajaxCallObject('cards/sequode/details', array($object->id)));
+            $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/sequode/details', array($object->id)));
             $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         }
         if(SQDE_UserAuthority::isSystemOwner()){

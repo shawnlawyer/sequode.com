@@ -30,17 +30,17 @@ class SQDE_ComponentJS {
         $js[] = '});';
         return implode('',$js);
 	}
-    public static function onTapEventsAjaxCall($dom_id, $ajax_call_object){
-        return self::onTapEvents($dom_id,self::ajaxCall($ajax_call_object));
+    public static function onTapEventsXHRCall($dom_id, $ajax_call_object){
+        return self::onTapEvents($dom_id,self::xhrCall($ajax_call_object));
 	}
-	public static function ajaxCallObject($route='', $inputs=null, $done_callback=false){
+	public static function xhrCallObject($route='', $inputs=null, $done_callback=false){
         $object = (object) null;
         $object->route = $route;
         $object->inputs = ($inputs == null) ? array() : $inputs;
         $object->done_callback = $done_callback;
 		return $object;
 	}
-	public static function ajaxCall($call_object){
+	public static function xhrCall($call_object){
         $js = array();
         $js[] = 'new SQDE_XHRCall({';
         $js[] = 'route:\''. $call_object->route .'\'';
@@ -68,7 +68,7 @@ class SQDE_ComponentJS {
         $html[] = '</span>';
         $ajax_call_object->inputs = array_merge($ajax_call_object->inputs, array(self::jsQuotedValue($dom_id.'c')));
         $js[] = '$(\'#'.$dom_id.'b\').on("click touchend", function(){';
-        $js[] = self::ajaxCall($ajax_call_object);
+        $js[] = self::xhrCall($ajax_call_object);
         $js[] = '});';
         
         $components_object = (object) null;
