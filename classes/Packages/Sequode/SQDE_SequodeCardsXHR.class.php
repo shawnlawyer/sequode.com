@@ -37,21 +37,12 @@ class SQDE_SequodeCardsXHR {
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
     public static function search($dom_id = 'MagicCardsContainer'){
-        if(!(
-        SQDE_UserAuthority::isAuthenticated()
-        )){ return; }
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
     public static function my($dom_id = 'MagicCardsContainer'){
-        if(!(
-        SQDE_UserAuthority::isAuthenticated()
-        )){ return; }
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
     public static function favorites($dom_id = 'MagicCardsContainer'){
-        if(!(
-        SQDE_UserAuthority::isAuthenticated()
-        )){ return; }
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
 }

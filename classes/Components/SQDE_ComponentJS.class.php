@@ -52,6 +52,9 @@ class SQDE_ComponentJS {
 		return $object;
 	}
 	public static function xhrCall($call_object){
+        if(is_array($call_object) && isset($call_object['route'])){
+            $call_object = (object) $call_object;
+        }
         $js = array();
         $js[] = 'new SQDE_XHRCall({';
         $js[] = 'route:\''. $call_object->route .'\'';

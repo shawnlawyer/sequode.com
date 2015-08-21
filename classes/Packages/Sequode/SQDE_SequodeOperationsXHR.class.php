@@ -1,32 +1,9 @@
 <?php
 class SQDE_SequodeOperationsXHR {
-    public static function updateIndex($sequode_model_id){
+    public static $package = 'Sequode';
+    public static function updateValue($type, $_model_id, $map_key, $json){
         if(!(
-        SQDE_Sequode::exists($sequode_model_id,'id')
-        && SQDE_SequodeAuthority::isSequence()
-        && SQDE_UserAuthority::canEdit()
-        )){ return; }
-        SQDE_SequodeOperations::updateIndex();
-		$js = array();
-        $js[] = 'registry.fetch({collection:\'index\'});';
-        $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
-			
-		return SQDE_SequodeCardXHR::details($sequode_model_id);
-    }
-    public static function updateConnection($sequode_model_id, $from_object, $to_object){
-        if(!(
-        SQDE_Sequode::exists($sequode_model_id,'id') 
-        && SQDE_SequodeAuthority::isSequence()
-        && SQDE_UserAuthority::canEdit()
-        )){ return; }
-        SQDE_Sequode::model(SQDE_SequodesSequencer::updateConnection(json_decode(stripslashes($from_object)), json_decode(stripslashes($to_object))));
-		$js = array();
-		$js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
-		return implode(' ',$js);
-    }
-    public static function updateValue($type, $sequode_model_id, $map_key, $json){
-        if(!(
-        SQDE_Sequode::exists($sequode_model_id,'id')
+        SQDE_Sequode::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canEdit()
         )){ return; }
@@ -49,9 +26,9 @@ class SQDE_SequodeOperationsXHR {
 			return implode(' ',$js);
         }
     }
-    public static function updateComponentSettings($type, $member, $member_json, $sequode_model_id, $dom_id='FormsContainer'){
+    public static function updateComponentSettings($type, $member, $member_json, $_model_id, $dom_id='FormsContainer'){
         if(!(
-        SQDE_Sequode::exists($sequode_model_id,'id')
+        SQDE_Sequode::exists($_model_id,'id')
         && SQDE_UserAuthority::canEdit()
         )){ return; }
         $form_member_object = json_decode(stripslashes($member_json));
@@ -68,26 +45,23 @@ class SQDE_SequodeOperationsXHR {
                 return;
         }
         $previous_form_object = json_decode(SQDE_Sequode::model()->$model_member);
-        SQDE_Sequode::model(SQDE_SequodeOperations::updateComponentSettings($type, $member, $form_member_object));
-        $form_object = json_decode(SQDE_Sequode::model()->$model_member);
+        SQDE_SequodeOperations::updateComponentSettings($type, $member, $form_member_object);
         if($previous_form_object->$member->Component != $form_member_object->Component){
             $js = array();
             $js[] = 'new SQDE_XHRCall({route:"forms/sequode/componentSettings",inputs:[\''.$type.'\', \''.$member.'\', '.SQDE_Sequode::model()->id.', \''.$dom_id.'\']});';
 			return implode(' ',$js);
         }
     }
-    public static function cloneSequence($sequode_model_id){
+    public static function cloneSequence($_model_id){
         if(!(
         SQDE_UserAuthority::canCreate()
-        && SQDE_Sequode::exists($sequode_model_id,'id')
+        && SQDE_Sequode::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canCopy()
         )){ return; }
         SQDE_Sequode::model(SQDE_SequodeOperations::makeSequenceCopy(SQDE_AuthenticatedUser::model()->id));
         $js = array();
         $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
-        $js[] = 'registry.active_collection = \'my\';';
-        $js[] = 'registry.fetch({collection:\'my\'});';
 		$js[] = SQDE_SequodeCardsXHR::details(SQDE_Sequode::model()->id);
         return implode(' ', $js);
     }
@@ -101,9 +75,9 @@ class SQDE_SequodeOperationsXHR {
         $js[] = SQDE_SequodeCardsXHR::details(SQDE_Sequode::model()->id);
         return implode(' ', $js);
     }
-    public static function updateName($sequode_model_id, $json){
+    public static function updateName($_model_id, $json){
         if(!(
-        SQDE_Sequode::exists($sequode_model_id,'id')
+        SQDE_Sequode::exists($_model_id,'id')
         && SQDE_UserAuthority::canEdit()
         )){ return; }
         $input = json_decode($json);
@@ -117,18 +91,17 @@ class SQDE_SequodeOperationsXHR {
         if(!SQDE_UserAuthority::canRename($name)){
             return ' alert(\'Name already exists\');';
         }
-        SQDE_Sequode::exists($sequode_model_id,'id');
+        SQDE_Sequode::exists($_model_id,'id');
         SQDE_SequodeOperations::updateName($name);
         $js = array();
-        $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
 		$js[] = SQDE_SequodeCardsXHR::details(SQDE_Sequode::model()->id);
         return implode(' ', $js);
         
         return;
     }
-    public static function deleteSequence($sequode_model_id,$confirmed=false){
+    public static function deleteSequence($_model_id,$confirmed=false){
         if(!(
-        SQDE_Sequode::exists($sequode_model_id,'id')
+        SQDE_Sequode::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canDelete()
         )){ return; }
@@ -144,17 +117,14 @@ class SQDE_SequodeOperationsXHR {
         }else{
             SQDE_SequodeOperations::deleteSequence();
             $js = array();
-            //$js[] = 'registry.active_collection = \'my\';';
-            $js[] = 'registry.fetch({collection:\'my\'});';
-            $js[] = 'registry.fetch({collection:\'palette\'});';
             $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
             $js[] = SQDE_SequodeCardsXHR::my();
             return implode(' ', $js);
         }
     }
-    public static function formatSequence($sequode_model_id,$confirmed=false){
+    public static function formatSequence($_model_id,$confirmed=false){
         if(!(
-        SQDE_Sequode::exists($sequode_model_id,'id')
+        SQDE_Sequode::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canEdit()
         )){ return; }
@@ -193,48 +163,48 @@ class SQDE_SequodeOperationsXHR {
         
         return implode(' ',$js);
     }
-	public static function addToSequence($sequode_model_id, $add_sequode_model_id, $position=0, $position_tuner = null, $grid_modifier = null){
+	public static function addToSequence($_model_id, $add_model_id, $position=0, $position_tuner = null, $grid_modifier = null){
         if(!(
-		SQDE_Sequode::exists($add_sequode_model_id,'id')
+		SQDE_Sequode::exists($add_model_id,'id')
 		&& SQDE_UserAuthority::canRun()
-		&& SQDE_Sequode::exists($sequode_model_id,'id')
+		&& SQDE_Sequode::exists($_model_id,'id')
 		&& SQDE_UserAuthority::canEdit()
         && SQDE_SequodeAuthority::isSequence()
         && !SQDE_SequodeAuthority::isFullSequence()
 		)){ return; }
-        SQDE_SequodeOperations::addToSequence($add_sequode_model_id, $position, $position_tuner, $grid_modifier);
+        SQDE_SequodeOperations::addToSequence($add_model_id, $position, $position_tuner, $grid_modifier);
 		return;
 	}
-	public static function reorderSequence($sequode_model_id, $from_position=0, $to_position=0, $position_tuner = null, $grid_modifier = null){
+	public static function reorderSequence($_model_id, $from_position=0, $to_position=0, $position_tuner = null, $grid_modifier = null){
         if(!(
-		SQDE_Sequode::exists($sequode_model_id,'id')
+		SQDE_Sequode::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
 		&& SQDE_UserAuthority::canEdit()
 		)){ return; }
         SQDE_SequodeOperations::reorderSequence($from_position, $to_position, $position_tuner, $grid_modifier);
 		return;
 	}
-	public static function removeFromSequence($sequode_model_id, $position){
+	public static function removeFromSequence($_model_id, $position){
         if(!(
-		SQDE_Sequode::exists($sequode_model_id,'id')
+		SQDE_Sequode::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
 		&& SQDE_UserAuthority::canEdit()
 		)){ return; }
         SQDE_SequodeOperations::removeFromSequence($position);
 		return;
 	}
-	public static function modifyGridAreas($sequode_model_id, $position){
+	public static function modifyGridAreas($_model_id, $position){
         if(!(
-		SQDE_Sequode::exists($sequode_model_id,'id')
+		SQDE_Sequode::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
 		&& SQDE_UserAuthority::canEdit()
 		)){ return; }
         SQDE_SequodeOperations::modifyGridAreas($position);
 		return;
 	}
-	public static function emptySequence($sequode_model_id){
+	public static function emptySequence($_model_id){
         if(!(
-        SQDE_Sequode::exists($sequode_model_id,'id')
+        SQDE_Sequode::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canEdit()
         )){ return; }
@@ -245,45 +215,45 @@ class SQDE_SequodeOperationsXHR {
         $js[] = '}';
         return implode('',$js);
 	}
-	public static function moveGridArea($sequode_model_id, $grid_area_key = 0, $x = 0, $y = 0){
+	public static function moveGridArea($_model_id, $grid_area_key = 0, $x = 0, $y = 0){
         if(!(
-        SQDE_Sequode::exists($sequode_model_id,'id')
+        SQDE_Sequode::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canEdit()
         )){ return; }
         SQDE_SequodeOperations::moveGridArea($grid_area_key, $x, $y);
 		return;
 	}
-	public static function addInternalConnection($sequode_model_id, $receiver_type = false, $transmitter_key = 0, $receiver_key = 0){
+	public static function addInternalConnection($_model_id, $receiver_type = false, $transmitter_key = 0, $receiver_key = 0){
         if(!(
-        SQDE_Sequode::exists($sequode_model_id,'id')
+        SQDE_Sequode::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canEdit()
         )){ return; }
         SQDE_SequodeOperations::addInternalConnection($receiver_type, $transmitter_key, $receiver_key);
 		return;
 	}
-	public static function addExternalConnection($sequode_model_id, $receiver_type = false, $transmitter_key = 0, $receiver_key = 0){
+	public static function addExternalConnection($_model_id, $receiver_type = false, $transmitter_key = 0, $receiver_key = 0){
         if(!(
-        SQDE_Sequode::exists($sequode_model_id,'id')
+        SQDE_Sequode::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canEdit()
         )){ return; }
         SQDE_SequodeOperations::addExternalConnection($receiver_type, $transmitter_key, $receiver_key);
 		return;
 	}
-	public static function removeReceivingConnection($sequode_model_id, $connection_type = false, $restore_key = 0){
+	public static function removeReceivingConnection($_model_id, $connection_type = false, $restore_key = 0){
         if(!(
-        SQDE_Sequode::exists($sequode_model_id,'id')
+        SQDE_Sequode::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canEdit()
         )){ return; }
         SQDE_SequodeOperations::removeReceivingConnection($connection_type, $restore_key);
 		return;
 	}
-	public static function updateTenancy($sequode_model_id,$json){
+	public static function updateTenancy($_model_id,$json){
         if(!(
-        SQDE_Sequode::exists($sequode_model_id,'id')
+        SQDE_Sequode::exists($_model_id,'id')
         && SQDE_UserAuthority::isSystemOwner()
         )){ return; }
         $input = json_decode($json);
@@ -291,9 +261,9 @@ class SQDE_SequodeOperationsXHR {
         SQDE_SequodeOperations::updateTenancy(rawurldecode($input->tenancy));
 		return;
 	}
-	public static function updateSharing($sequode_model_id,$json){
+	public static function updateSharing($_model_id,$json){
         if(!(
-        SQDE_Sequode::exists($sequode_model_id,'id')
+        SQDE_Sequode::exists($_model_id,'id')
         && SQDE_UserAuthority::canShare()
         )){ return; }
         $input = json_decode($json);
@@ -301,9 +271,9 @@ class SQDE_SequodeOperationsXHR {
         SQDE_SequodeOperations::updateSharing(rawurldecode($input->sharing));
 		return;
 	}
-	public static function updateIsPalette($sequode_model_id,$json){
+	public static function updateIsPalette($_model_id,$json){
         if(!(
-            SQDE_Sequode::exists($sequode_model_id,'id')
+            SQDE_Sequode::exists($_model_id,'id')
             && SQDE_UserAuthority::canEdit()
         )){return;}
         $input = json_decode($json);
@@ -311,9 +281,9 @@ class SQDE_SequodeOperationsXHR {
         SQDE_SequodeOperations::updateIsPalette(rawurldecode($input->palette));
 		return;
 	}
-	public static function updateIsPackage($sequode_model_id,$json){
+	public static function updateIsPackage($_model_id,$json){
         if(!(
-            SQDE_Sequode::exists($sequode_model_id,'id')
+            SQDE_Sequode::exists($_model_id,'id')
             && SQDE_UserAuthority::canEdit()
         )){return;}
         $input = json_decode($json);
@@ -321,9 +291,9 @@ class SQDE_SequodeOperationsXHR {
         SQDE_SequodeOperations::updateIsPackage(rawurldecode($input->package));
 		return;
 	}
-	public static function updateDescription($sequode_model_id, $json){
+	public static function updateDescription($_model_id, $json){
         if(!(
-        SQDE_Sequode::exists($sequode_model_id,'id')
+        SQDE_Sequode::exists($_model_id,'id')
         && SQDE_UserAuthority::canEdit()
         )){ return; }
         $input = json_decode($json);

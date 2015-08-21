@@ -11,22 +11,6 @@ class SQDE_SequodeOperations {
         ob_end_clean();
         return $sequode;
 	}
-	public static function getIndex($owner_id){
-        $sequode_model = new SQDE_Sequode::$model;
-        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>$owner_id);
-        $where[] = array('field'=>'index','operator'=>'=','value'=> 1);
-        $sequode_model->getAll($where,'id',false,1);
-        $index = false;
-        foreach($sequode_model->all as $key => $object){
-            $index = $object->id;
-			break;
-        }
-        if($index != false){
-            SQDE_Sequode::exists($index,'id');
-            return SQDE_Sequode::model();
-        }
-        return false;   
-	}
     public static function getModel($value = null, $by = null, $owner_id = null){
         $sequode_model = new SQDE_Sequode::$model;
         switch($by){
@@ -54,23 +38,6 @@ class SQDE_SequodeOperations {
             return SQDE_Sequode::model();
         }
         return false;   
-	}
-	public static function updateIndex($owner, $sequode_model = null){
-        if($sequode_model != null ){ SQDE_Sequode::model($sequode_model); }
-        $all_models = new SQDE_Sequode::$model;
-        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>$owner);
-        $where[] = array('field'=>'index','operator'=>'=','value'=>'1');
-        $all_models->getAll($where,'id');
-        $all = $all_models->all;
-        unset($all_models);
-        
-        $loop_model = new SQDE_Sequode::$model;
-        foreach($all as $object){
-            $loop_model->exists($object->id,'id');
-            $loop_model->updateField(0,'index');
-        }        
-		SQDE_Sequode::model()->updateField(1,'index');
-		return SQDE_Sequode::model();
 	}
 	public static function updateTenancy($value = 0, $sequode_model = null){
         if($sequode_model != null ){ SQDE_Sequode::model($sequode_model); }
