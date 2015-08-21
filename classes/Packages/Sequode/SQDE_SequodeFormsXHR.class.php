@@ -19,7 +19,7 @@ class SQDE_SequodeFormsXHR {
         if(!(
             SQDE_Sequode::exists($_model_id,'id')
             && SQDE_UserAuthority::canEdit()
-            && in_array($type, array('input','property'));
+            && in_array($type, array('input','property'))
         )){ return; }
         return SQDE_ComponentJS::placeForm(SQDE_Forms::render(self::$package, __FUNCTION__, array($type, $map_key)), $dom_id);
     }
@@ -27,7 +27,7 @@ class SQDE_SequodeFormsXHR {
         if(!(
             SQDE_Sequode::exists($_model_id,'id')
             && SQDE_UserAuthority::canEdit()
-            && in_array($type, array('input','property'));
+            && in_array($type, array('input','property'))
         )){ return; }
         return SQDE_ComponentJS::placeForm(SQDE_Forms::render(self::$package, __FUNCTION__, array($type, $member, $dom_id)), $dom_id);
     }
