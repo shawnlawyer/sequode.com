@@ -83,7 +83,7 @@ class SQDE_SequodeCardObjects {
                 $items[] = array(
                     'css_classes'=>'automagic-card-menu-item noSelect',
                     'id'=>$dom_id,
-                    'contents'=>'View',
+                    'contents'=>'View Chart',
                     'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/sequode/chart', array($_model->id)))
                 );
             //Sequence Chart Edit Mode
@@ -92,7 +92,7 @@ class SQDE_SequodeCardObjects {
                 $items[] = array(
                     'css_classes'=>'automagic-card-menu-item noSelect',
                     'id'=>$dom_id,
-                    'contents'=>'Edit',
+                    'contents'=>'Edit Chart',
                     'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/sequode/sequencer', array($_model->id)))
                 );
             }
