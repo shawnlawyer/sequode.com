@@ -1,7 +1,7 @@
 <?php
 class SQDE_ComponentJS {
     
-    public static function placeForm($form, $dom_id,){
+    public static function placeForm($form, $dom_id){
         $html = $js = array();
         if(count($form) == 1){
             foreach($components_array as $key => $object){
