@@ -78,8 +78,14 @@ class SQDE_SessionCardObjects {
         $js[] = 'document.getElementById(\''.$dom_id.'c\').innerHTML = \'<span class="noSelect kids" id="'.$dom_id.'">\' + registry.node(registry.active_collection, next_id).n + \' &gt;</span>\';';
         $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/session/details', array('next_id')));
         $js[] = '}';
-        
         $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
+        
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $html = $js = array();
+        $html[] = '<span class="automagic-card-delete" id="'.$dom_id.'d">delete x</span>';
+        $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/session/delete', array($_model->id)));
+        $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
+        
         $card_object->body[] = '<div class="subline kids">Username</div>';
         $card_object->body[] = $_model->username;
         $card_object->body[] = '<div class="subline kids">Ip Address</div>';
