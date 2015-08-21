@@ -3,8 +3,9 @@ class SQDE_UsersFormsXHR {
     public static $package = 'Users';
     public static $modeler = 'SQDE_User';
     public static function updatePassword($_model_id, $dom_id){
+        $modeler = static::$modeler;
         if(!(
-        {static::$modeler}::exists($_model_id,'id')
+        $modeler::exists($_model_id,'id')
         )){return;}
         return SQDE_ComponentJS::placeForm(SQDE_Forms::render(self::$package,__FUNCTION__), $dom_id);
     }
