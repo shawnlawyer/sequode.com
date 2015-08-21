@@ -79,13 +79,21 @@ class SQDE_SequodeCardObjects {
         if(SQDE_SequodeAuthority::isSequence($_model)){
             
             //Sequence Chart
+                $dom_id = SQDE_Component::uniqueHash();
+                $items[] = array(
+                    'css_classes'=>'automagic-card-menu-item noSelect',
+                    'id'=>$dom_id,
+                    'contents'=>'View',
+                    'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/sequode/chart', array($_model->id)))
+                );
+            //Sequence Chart Edit Mode
             if(SQDE_UserAuthority::canEdit($_model)){
                 $dom_id = SQDE_Component::uniqueHash();
                 $items[] = array(
                     'css_classes'=>'automagic-card-menu-item noSelect',
                     'id'=>$dom_id,
-                    'contents'=>'Sequence Chart',
-                    'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/sequode/chart', array($_model->id)))
+                    'contents'=>'Edit',
+                    'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/sequode/sequencer', array($_model->id)))
                 );
             }
             //Empty Sequence
@@ -439,7 +447,7 @@ class SQDE_SequodeCardObjects {
         $card_object->menu = (object) null;
         $card_object->menu->items = self::modelOperationsMenuItems();
         
-        $card_object->head = 'Sequode Chart &gt; '.$_model->name;
+        $card_object->head = 'Sequode Chart &gt; View &gt; '.$_model->name;
         
         $items = array();
         $items[] = array(
@@ -473,10 +481,12 @@ class SQDE_SequodeCardObjects {
         
         $card_object = (object) null;
         $card_object->size = 'fullscreen';
-        $card_object->icon_type = 'card-icon';
+        $card_object->icon_type = 'menu-icon';
         $card_object->icon_background = 'sequode-icon-background';
+        $card_object->menu = (object) null;
+        $card_object->menu->items = self::modelOperationsMenuItems();
         
-        $card_object->head = 'Sequode Chart &gt; '.$_model->name;
+        $card_object->head = 'Sequode Chart &gt; Edit &gt; '.$_model->name;
         
         $card_object->body = array();
         $dom_id = SQDE_Component::uniqueHash('','');
