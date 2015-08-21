@@ -1,6 +1,7 @@
 var SQDE_Sequencer = function(){
 	var self = this;
     var stage;
+	self.default_events = true;
     self.palette = new SQDE_SequencerPalette;
     self.palette.parent = self;
     self.initialized = false;
@@ -72,7 +73,10 @@ var SQDE_Sequencer = function(){
         self.tearDown(id);
         
         stage = self.stage;
-        registry.fetch({collection:'palette'});
+        
+        if( self.default_events == true ){
+            registry.fetch({collection:'palette'});
+        }
         self.grid_areas = [];
         self.focused_grid_area_id = false;
         
@@ -99,7 +103,7 @@ var SQDE_Sequencer = function(){
 		self.node = registry.node('sequodes', id);
         if(self.node.s.length > 0 ){
             setTimeout(self.makeViewPositioner,0);
-        self.makeChartViewable();
+            self.makeChartViewable();
         }
 		self.sequence = self.node.s;
 		self.id = id;
@@ -116,7 +120,6 @@ var SQDE_Sequencer = function(){
         self.grid_order = [];
         if(self.sequence.length != 0){
             self.grids = { 'add': [], 'sequence': [], 'remove': [] };
-            
             self.makeGridAreas();
             self.setGridMode('sequence');
             self.makeSequenceModels();
@@ -219,35 +222,23 @@ var SQDE_Sequencer = function(){
 		}
 	};
     self.makeGridAreas = function(){
-        var grid_areas = [];
-        var grid_area_ids = [];
-        var i;
-        var model_sequence_id = 0;
+        var i,j,k = 0;
+        self.focused_grid_area_id = false;
+        self.grid_areas = [];
         for(i=0;i<self.node.grid_areas.length;i++){
-            grid_areas[i] = {'id':i,'models':[],'grid_order':[]};
+            self.grid_areas[i] = {'id':i,'models':[],'grid_order':[]};
             for(j=0;j<self.node.grid_areas[i].count;j++){
-                grid_areas[i].models.push(model_sequence_id);
-                grid_areas[i].grid_order.push(j);
-                model_sequence_id++;
+                self.grid_areas[i].models.push(k);
+                self.grid_areas[i].grid_order.push(j);
+                k++;
             }
         };
-        var grid_area;
-        for(grid_area_id in grid_areas){
-            grid_area = grid_areas[grid_area_id];
-            grid_area = self.makeGridArea(grid_area);
-            grid_area = self.makeGridAreaStates(grid_area);
-            if(grid_area_id == 0){
-                grid_area.group.draggable(false);
-            }else{
-                grid_area.group = eventsKit.attachMoveableCursorEvents(grid_area.group);
-                grid_area = self.attachGridAreaEventOnDragStart(grid_area);
-                grid_area = self.attachGridAreaEventOnDragMove(grid_area);
-                grid_area = self.attachGridAreaEventOnDragEnd(grid_area);
-            }
-            self.grid_areas_layer.add(grid_area.group);
+        for(var i in self.grid_areas){
+            self.grid_areas[i] = self.makeGridArea(self.grid_areas[i]);
+            self.grid_areas[i] = self.makeGridAreaStates(self.grid_areas[i]);
+            self.grid_areas[i] = self.gridareaEventListeners(self.grid_areas[i]);
+            self.grid_areas_layer.add(self.grid_areas[i].group);
         }
-        self.grid_areas = grid_areas;
-        self.focused_grid_area_id = false;
 	};
     self.makeGridArea = function(grid_area){
         var layer, width, height, x, y, group_x, group_y;
@@ -928,22 +919,45 @@ var SQDE_Sequencer = function(){
     self.initialize();
     // Event Listeners attachments
 	self.viewerPositionerEventListeners = function(positioner){
-        positioner.group = eventsKit.attachDraggableCursorEvents(positioner.group);
-        positioner = self.attachViewDraggerEventOnDragStart(positioner);
-        positioner = self.attachViewDraggerEventOnDragMove(positioner);
-        positioner = self.attachViewDraggerEventOnDragEnd(positioner);
+        if( self.default_events == true ){
+            positioner.group = eventsKit.attachDraggableCursorEvents(positioner.group);
+            positioner = self.attachViewDraggerEventOnDragStart(positioner);
+            positioner = self.attachViewDraggerEventOnDragMove(positioner);
+            positioner = self.attachViewDraggerEventOnDragEnd(positioner);
+        }
         return positioner;
 	};
+	self.gridareaEventListeners = function(grid_area){
+        if( self.default_events == true ){
+            if( self.default_events == true ){
+                if(grid_area.id == 0){
+                    grid_area.group.draggable(false);
+                }else{
+                    grid_area.group = eventsKit.attachMoveableCursorEvents(grid_area.group);
+                    grid_area = self.attachGridAreaEventOnDragStart(grid_area);
+                    grid_area = self.attachGridAreaEventOnDragMove(grid_area);
+                    grid_area = self.attachGridAreaEventOnDragEnd(grid_area);
+                }
+            }
+        }
+		return grid_area;
+	};
 	self.modelEventListeners = function(model){
-		model = self.attachModelButtonsEventOnTap(model);
-        model = self.attachModelEventOnDragStart(model);
-        model = self.attachModelEventOnDragMove(model);
-        model = self.attachModelEventOnDragEnd(model);
+        
+        if( self.default_events == true ){
+            model = self.attachModelButtonsEventOnTap(model);
+            model = self.attachModelEventOnDragStart(model);
+            model = self.attachModelEventOnDragMove(model);
+            model = self.attachModelEventOnDragEnd(model);
+        }
 		return model;
 	};
 	self.modelEndsEventListeners = function(model){
-        model = self.attachModelEndsEventButtonsOnTap(model);
-        model = self.attachModelEndsEventBodyOnTap(model);
+        
+        if( self.default_events == true ){
+            model = self.attachModelEndsEventButtonsOnTap(model);
+            model = self.attachModelEndsEventBodyOnTap(model);
+        }
 		return model;
 	};
     //drag event listner attachments
@@ -1078,9 +1092,7 @@ var SQDE_Sequencer = function(){
         }
         self.saveSequence(model);
 	};
-
     //tap event listner attachments
-    
     self.attachModelEndsEventButtonsOnTap = function(model){
 		for(var type in model.buttons){
 			for( var i in model.buttons[type] ){

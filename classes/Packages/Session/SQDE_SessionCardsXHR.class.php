@@ -9,7 +9,6 @@ class SQDE_SessionCardsXHR {
         )){ return; }
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
-    
     public static function search($dom_id = 'MagicCardsContainer'){
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }

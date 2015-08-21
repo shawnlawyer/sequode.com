@@ -429,7 +429,7 @@ class SQDE_SequodeCardObjects {
         }
         return $card_object;
     }
-    public static function chart( $_model = null){
+    public static function sequencer( $_model = null){
         $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
         
         $card_object = (object) null;
@@ -464,6 +464,30 @@ class SQDE_SequodeCardObjects {
         $js[] = 'registry.setContext({card:\'cards/sequode/chart\',collection:\'sequodes\',node:'.$_model->id.',tearDown:function(){ sequencer = undefined; }});';
         $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'sequodes\', key:true, call: sequencer.run});';
         $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'palette\', call: sequencer.palette.run});';
+        $js[] = 'registry.fetch({collection:\'sequodes\',key:'.$_model->id.'});';
+        $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
+        return $card_object;
+    }
+    public static function chart( $_model = null){
+        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
+        
+        $card_object = (object) null;
+        $card_object->size = 'fullscreen';
+        $card_object->icon_type = 'card-icon';
+        $card_object->icon_background = 'sequode-icon-background';
+        
+        $card_object->head = 'Sequode Chart &gt; '.$_model->name;
+        
+        $card_object->body = array();
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $html = $js = array();
+        $html[] = '<div class="SequencerStageContainer" id="'.$dom_id.'chart"></div>';
+        $js[] = 'var sequencer;';
+        $js[] = 'sequencer = new SQDE_Sequencer();';
+        $js[] = 'sequencer.default_events = false';
+        $js[] = 'sequencer.stage = shapesKit.stage({ container: \''.$dom_id.'chart\', width: $(window).width(), height: $(window).height() });';
+        $js[] = 'registry.setContext({card:\'cards/sequode/chart\',collection:\'sequodes\',node:'.$_model->id.',tearDown:function(){ sequencer = undefined; }});';
+        $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'sequodes\', key:true, call: sequencer.run});';
         $js[] = 'registry.fetch({collection:\'sequodes\',key:'.$_model->id.'});';
         $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
         return $card_object;
