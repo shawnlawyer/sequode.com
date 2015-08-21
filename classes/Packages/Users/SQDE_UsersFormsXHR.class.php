@@ -31,7 +31,6 @@ class SQDE_UsersFormsXHR {
         )){return;}
         return SQDE_ComponentJS::placeForm(SQDE_Forms::render(self::$package,__FUNCTION__), $dom_id);
     }
-    
     public static function updateName($_model_id, $dom_id){
         if(!(
             SQDE_User::exists($_model_id,'id')
