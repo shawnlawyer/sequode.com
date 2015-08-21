@@ -928,16 +928,14 @@ var SQDE_Sequencer = function(){
         return positioner;
 	};
 	self.gridareaEventListeners = function(grid_area){
-        if( self.default_events == true ){
+        if(grid_area.id == 0){
+            grid_area.group.draggable(false);
+        }else{
             if( self.default_events == true ){
-                if(grid_area.id == 0){
-                    grid_area.group.draggable(false);
-                }else{
                     grid_area.group = eventsKit.attachMoveableCursorEvents(grid_area.group);
                     grid_area = self.attachGridAreaEventOnDragStart(grid_area);
                     grid_area = self.attachGridAreaEventOnDragMove(grid_area);
                     grid_area = self.attachGridAreaEventOnDragEnd(grid_area);
-                }
             }
         }
 		return grid_area;
