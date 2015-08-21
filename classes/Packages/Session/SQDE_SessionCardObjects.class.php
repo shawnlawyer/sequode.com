@@ -82,7 +82,7 @@ class SQDE_SessionCardObjects {
         
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
-        $html[] = '<span class="automagic-card-delete noSelect kids" id="'.$dom_id.'d">delete x</span>';
+        $html[] = '<span class="automagic-card-delete noSelect kids" id="'.$dom_id.'">delete x</span>';
         $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/session/delete', array($_model->id)));
         $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         
