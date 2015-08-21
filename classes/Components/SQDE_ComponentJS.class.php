@@ -1,6 +1,33 @@
 <?php
 class SQDE_ComponentJS {
     
+    public static function placeForm($form, $dom_id,){
+        $html = $js = array();
+        if(count($form) == 1){
+            foreach($components_array as $key => $object){
+                if(isset($object->html)){
+                    $html[] = $object->html;
+                }
+            }
+        }else{
+            $html[] = SQDE_Card::contentRowDivider();
+            foreach($form as $key => $object){
+                if(isset($object->html)){
+                    $html[] = $object->html;
+                    $html[] = SQDE_Card::contentRowDivider();
+                }
+            }
+        }
+        $js[] = SQDE_BrowserRemote::addIntoDom($dom_id,implode('',$html),'replace');
+        foreach($form as $key => $object){
+            if(isset($object->js)){
+                $js[] = $object->js;
+            }
+        }
+        $js[] = '$(\'.focus-input\').focus();';
+        $js[] = '$(\'.focus-input\').select();';    
+        return implode(' ',$js);
+    }
     public static function placeCard($card, $dom_id = 'MagicCardsContainer'){
         $html = $js = array();
         if($dom_id == 'MagicCardsContainer'){
