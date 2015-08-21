@@ -7,7 +7,7 @@ class SQDE_SequodeFormsXHR {
             && SQDE_UserAuthority::canEdit()
         )){ return; }
         return SQDE_ComponentJS::placeForm(SQDE_Forms::render(self::$package,__FUNCTION__), $dom_id);
-    }  
+    }
     public static function description($_model_id, $dom_id){
         if(!(
             SQDE_Sequode::exists($_model_id,'id')

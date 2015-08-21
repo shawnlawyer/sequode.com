@@ -4,8 +4,10 @@ class SQDE_ComponentJS {
     public static function placeForm($form, $dom_id){
         $html = $js = array();
         if(count($form) == 1){
-            if(isset($form->html)){
-                $html[] = $form->html;
+            foreach($form as $key => $object){
+                if(isset($object->html)){
+                    $html[] = $object->html;
+                }
             }
         }else{
             $html[] = SQDE_Card::contentRowDivider();
