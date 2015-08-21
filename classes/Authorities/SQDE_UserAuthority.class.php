@@ -1,6 +1,14 @@
 <?php
 class SQDE_UserAuthority {
     
+    public static function isAuthenticated($user_model = null){
+        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
+        return (self::isActive($user_model) || self::isSystemOwner($user_model)) ? true : false;
+    }
+    public static function isOwner(&$_model, $user_model = null){
+        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
+        return (isset($user_model->id) && isset($_model->owner_id) &&  $_model->owner_id == $user_model->id) ? true : false;
+    }
     public static function isSequodeOwner($sequode_model = null, $user_model = null){
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
         if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
@@ -14,10 +22,6 @@ class SQDE_UserAuthority {
     public static function isSystemOwner($user_model = null){
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
         return (isset($user_model->role_id) && $user_model->role_id == 0) ? true : false;
-    }
-    public static function isAuthenticated($user_model = null){
-        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
-        return (self::isActive($user_model) || self::isSystemOwner($user_model)) ? true : false;
     }
     public static function canCreate($user_model = null){
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
@@ -93,9 +97,5 @@ class SQDE_UserAuthority {
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
         if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
         return (in_array($sequode_model->id, json_decode($user_model->sequode_favorites))) ? true : false;
-    }
-    public static function isOwner(&$_model, $user_model = null){
-        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
-        return (isset($user_model->id) && isset($_model->owner_id) &&  $_model->owner_id == $user_model->id) ? true : false;
     }
 }

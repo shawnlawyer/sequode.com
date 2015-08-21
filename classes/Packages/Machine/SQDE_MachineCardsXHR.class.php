@@ -1,12 +1,14 @@
 <?php
 class SQDE_MachineCardsXHR {
     public static $package = 'Machine';
+    public static $modeler = 'SQDE_Machine';
     public static function details($_model_id=0, $dom_id = 'MagicCardsContainer'){
+        $modeler = static::$modeler;
         if(!(
-        SQDE_Machine::exists($_model_id,'id')
-        && (SQDE_UserAuthority::isMachineOwner()
+        $modeler::exists($_model_id,'id')
+        && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
-        )){ return; }
+        )){return;}
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
     public static function search($dom_id = 'MagicCardsContainer'){
