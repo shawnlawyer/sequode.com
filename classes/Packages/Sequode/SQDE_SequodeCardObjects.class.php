@@ -447,7 +447,7 @@ class SQDE_SequodeCardObjects {
         $card_object->menu = (object) null;
         $card_object->menu->items = self::modelOperationsMenuItems();
         
-        $card_object->head = 'Sequode Chart &gt; View &gt; '.$_model->name;
+        $card_object->head = 'Sequode Chart &gt; Edit &gt; '.$_model->name;
         
         $items = array();
         $items[] = array(
@@ -486,7 +486,7 @@ class SQDE_SequodeCardObjects {
         $card_object->menu = (object) null;
         $card_object->menu->items = self::modelOperationsMenuItems();
         
-        $card_object->head = 'Sequode Chart &gt; Edit &gt; '.$_model->name;
+        $card_object->head = 'Sequode Chart &gt; View &gt; '.$_model->name;
         
         $card_object->body = array();
         $dom_id = SQDE_Component::uniqueHash('','');
