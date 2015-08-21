@@ -1,5 +1,16 @@
 <?php
 class SQDE_ComponentJS {
+    
+    public static function placeCard($card, $dom_id = 'MagicCardsContainer'){
+        $html = $js = array();
+        if($dom_id == 'MagicCardsContainer'){
+            $html[] = SQDE_Card::divider();
+        }
+        $html[] = $card->html;
+        $js[] = SQDE_BrowserRemote::addIntoDom($dom_id, implode(' ',$html), 'replace');
+        $js[] = $card->js;
+        return implode(' ',$js);
+    }
     public static function googleAnalytics(){
         $js = array();
         $js[] = '(function(i,s,o,g,r,a,m){i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function(){';

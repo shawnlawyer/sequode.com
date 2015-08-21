@@ -1,9 +1,9 @@
 <?php
 class SQDE_SequodeFormsXHR {
     public static $package = 'Sequode';
-    public static function name($sequode_model_id, $dom_id){
+    public static function name($_model_id, $dom_id){
         if(!(
-            SQDE_Sequode::exists($sequode_model_id,'id')
+            SQDE_Sequode::exists($_model_id,'id')
             && SQDE_UserAuthority::canEdit()
         )){ return; }
         
@@ -24,9 +24,9 @@ class SQDE_SequodeFormsXHR {
         $js[] = '$(\'.focus-input\').select();';    
         return implode(' ',$js);
     }  
-    public static function description($sequode_model_id, $dom_id){
+    public static function description($_model_id, $dom_id){
         if(!(
-            SQDE_Sequode::exists($sequode_model_id,'id')
+            SQDE_Sequode::exists($_model_id,'id')
             && SQDE_UserAuthority::canEdit()
         )){ return; }
         
@@ -74,9 +74,9 @@ class SQDE_SequodeFormsXHR {
         }
         return implode(' ',$js);
     }
-    public static function component($type, $sequode_model_id, $map_key, $dom_id='FormsContainer'){
+    public static function component($type, $_model_id, $map_key, $dom_id){
         if(!(
-            SQDE_Sequode::exists($sequode_model_id,'id')
+            SQDE_Sequode::exists($_model_id,'id')
             && SQDE_UserAuthority::canEdit()
         )){ return; }
 		switch($type){
@@ -101,9 +101,9 @@ class SQDE_SequodeFormsXHR {
         }
         return implode(' ',$js);
     }
-    public static function componentSettings($type, $member, $sequode_model_id, $dom_id='FormsContainer'){
+    public static function componentSettings($type, $member, $_model_id, $dom_id){
         if(!(
-            SQDE_Sequode::exists($sequode_model_id,'id')
+            SQDE_Sequode::exists($_model_id,'id')
             && SQDE_UserAuthority::canEdit()
         )){ return; }
         switch($type){
@@ -132,9 +132,9 @@ class SQDE_SequodeFormsXHR {
         }
         return implode(' ',$js);
     }
-    public static function sequode($sequode_model_id, $dom_id='FormsContainer'){
+    public static function sequode($_model_id, $dom_id){
         if(!(
-            SQDE_Sequode::exists($sequode_model_id, 'id')
+            SQDE_Sequode::exists($_model_id, 'id')
             && SQDE_UserAuthority::canRun()
         )){ return; }
         
@@ -154,9 +154,9 @@ class SQDE_SequodeFormsXHR {
 		
         return implode(' ',$js);
     }
-    public static function updateIsPalette($sequode_model_id, $dom_id='FormsContainer'){
+    public static function updateIsPalette($_model_id, $dom_id){
         if(!(
-            SQDE_Sequode::exists($sequode_model_id, 'id')
+            SQDE_Sequode::exists($_model_id, 'id')
             && SQDE_UserAuthority::canEdit()
         )){return;}
         $components_array = SQDE_Forms::render(self::$package, __FUNCTION__);
@@ -174,9 +174,9 @@ class SQDE_SequodeFormsXHR {
         }
         return implode(' ',$js);
     }
-    public static function updateIsPackage($sequode_model_id, $dom_id='FormsContainer'){
+    public static function updateIsPackage($_model_id, $dom_id){
         if(!(
-            SQDE_Sequode::exists($sequode_model_id, 'id')
+            SQDE_Sequode::exists($_model_id, 'id')
             && SQDE_UserAuthority::canEdit()
         )){return;}
         $components_array = SQDE_Forms::render(self::$package, __FUNCTION__);
@@ -194,10 +194,10 @@ class SQDE_SequodeFormsXHR {
         }
         return implode(' ',$js);
     }
-    public static function sharing($sequode_model_id, $dom_id='FormsContainer'){
+    public static function sharing($_model_id, $dom_id){
         if(!(
             SQDE_UserAuthority::isSystemOwner()
-            && SQDE_Sequode::exists($sequode_model_id, 'id')
+            && SQDE_Sequode::exists($_model_id, 'id')
         )){return;}
         $components_array = SQDE_Forms::render(self::$package, __FUNCTION__);
         $html = array();
@@ -214,10 +214,10 @@ class SQDE_SequodeFormsXHR {
         }
         return implode(' ',$js);
     }
-    public static function tenancy($sequode_model_id, $dom_id='FormsContainer'){
+    public static function tenancy($_model_id, $dom_id){
         if(!(
             SQDE_UserAuthority::isSystemOwner()
-            && SQDE_Sequode::exists($sequode_model_id, 'id')
+            && SQDE_Sequode::exists($_model_id, 'id')
         )){return;}
         $components_array = SQDE_Forms::render(self::$package, __FUNCTION__);
         $html = array();
