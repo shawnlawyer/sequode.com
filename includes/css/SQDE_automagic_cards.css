@@ -115,13 +115,14 @@
 }
 .automagic-card-delete {
   position: absolute;
-  top: 2.2em;
+  top: 3em;
   right: .5em;
   display: block;
   cursor: pointer;
   font-size: .9em;
   font-weight: 800;
   color: red;
+  text-decoration:underline;
 }
 .automagic-card-text-button{
   cursor:pointer;
