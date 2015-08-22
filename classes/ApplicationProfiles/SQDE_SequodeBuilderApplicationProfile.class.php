@@ -13,6 +13,7 @@ class SQDE_SequodeBuilderApplicationProfile {
                 SQDE_PackagesHandler::add('SQDE_AccountPackage');
                 SQDE_PackagesHandler::add('SQDE_PackagePackage');
                 SQDE_PackagesHandler::add('SQDE_MachinePackage');
+                SQDE_PackagesHandler::add('SQDE_TokenPackage');
             }
         }else{
             SQDE_PackagesHandler::add('SQDE_AuthPackage');   
