@@ -110,7 +110,18 @@ class SQDE_TokenCardObjects {
             'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/token/newToken'))
         );
         $card_object->body = array();
-        $card_object->body[] = SQDE_CardComponent::collection((object) array('collection'=>'tokens','icon'=>'atom','card_route'=>'cards/token/my','details_route'=>'cards/token/details'));
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $html = $js = array();
+        $html[] = '<div  class="fitBlock alignCenter" id="'.$dom_id.'"></div>';
+        $js[] = 'var cards = new SQDE_CollectionCards();';
+        $js[] = 'cards.details_route = \'cards/token/details\';';
+        $js[] = 'cards.icon = \'atom\';';
+        $js[] = 'cards.container = \''.$dom_id.'\';';
+        $js[] = 'cards.collection = \'tokens\';';
+        $js[] = 'registry.setContext({card:\'cards/token/my\',collection:\'tokens\',tearDown:function(){cards = undefined;}});';
+        $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'tokens\', call: cards.run});';
+        $js[] = 'registry.fetch({collection:\'tokens\'});';
+        $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
         return $card_object;
     }
     public static function search(){
@@ -133,7 +144,18 @@ class SQDE_TokenCardObjects {
             );
         }
         $card_object->body = array();
-        $card_object->body[] = SQDE_CardComponent::collection((object) array('collection'=>'token_search','icon'=>'atom','card_route'=>'cards/token/my','details_route'=>'cards/token/details'));
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $html = $js = array();
+        $html[] = '<div  class="fitBlock alignCenter" id="'.$dom_id.'"></div>';
+        $js[] = 'cards = new SQDE_CollectionCards();';
+        $js[] = 'cards.details_route = \'cards/token/details\';';
+        $js[] = 'cards.icon = \'atom\';';
+        $js[] = 'cards.container = \''.$dom_id.'\';';
+        $js[] = 'cards.collection = \'token_search\';';
+        $js[] = 'registry.setContext({card:\'cards/token/search\',collection:\'token_search\',tearDown:function(){cards = undefined;}});';
+        $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'token_search\', call: cards.run});';
+        $js[] = 'registry.fetch({collection:\'token_search\'});';
+        $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
         return $card_object;
     }
 }

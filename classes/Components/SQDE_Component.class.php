@@ -25,7 +25,7 @@ class SQDE_Component {
 	}
     public static function select($component){
         $html = $js = $class = $style = array();
-        $output_component = self::outputComponent();
+        $output_component = (object) array('dom_id'=>'','html'=>'','js'=>'');
         $dom_id = (isset($component->Dom_Id)) ? $component->Dom_Id : self::uniqueHash();
         if(!is_array($component->Values) && !is_object($component->Values)){
            $component->Values = json_decode(str_replace('.*-"-*.',"\\'",str_replace("'",'"',str_replace("\\'",'.*-"-*.',$component->Values))));
@@ -96,7 +96,7 @@ class SQDE_Component {
     }
     public static function password($component){
         $html = $js = $class = $style = array();
-        $output_component = self::outputComponent();
+        $output_component = (object) array('dom_id'=>'','html'=>'','js'=>'');
         $dom_id = (isset($component->Dom_Id)) ? $component->Dom_Id : self::uniqueHash();
         
         if(isset($component->Value)){   
@@ -157,7 +157,7 @@ class SQDE_Component {
 	}
     public static function input($component){
         $html = $js = $class = $style = array();
-        $output_component = self::outputComponent();
+        $output_component = (object) array('dom_id'=>'','html'=>'','js'=>'');
         $dom_id = (isset($component->Dom_Id)) ? $component->Dom_Id : self::uniqueHash();
         
         if(isset($component->Value)){   
@@ -218,7 +218,7 @@ class SQDE_Component {
 	}
     public static function textarea($component){	
         $html = $js = $class = $style = array();
-        $output_component = self::outputComponent();
+        $output_component = (object) array('dom_id'=>'','html'=>'','js'=>'');
         $dom_id = '';
 		
         if(isset($component->Dom_Id)){   
@@ -292,7 +292,7 @@ class SQDE_Component {
         
         $html = array();
         $js = array();
-        $output_component = self::outputComponent();
+        $output_component = (object) array('dom_id'=>'','html'=>'','js'=>'');
         $dom_id = (isset($component->Dom_Id)) ? $component->Dom_Id : self::uniqueHash();
         
         if(isset($component->Value)){   
@@ -316,7 +316,7 @@ class SQDE_Component {
 	}
     public static function label($component){
         $html = array();
-        $output_component = self::outputComponent();
+        $output_component = (object) array('dom_id'=>'','html'=>'','js'=>'');
         $for_dom_id = $value = '';
 		
         $dom_id = (isset($component->Dom_Id)) ? $component->Dom_Id : self::uniqueHash();
@@ -336,7 +336,7 @@ class SQDE_Component {
     }
     public static function divLabel($component){
         $html = array();
-        $output_component = self::outputComponent();
+        $output_component = (object) array('dom_id'=>'','html'=>'','js'=>'');
         $dom_id = $value = '';
 		
         if(isset($component->Dom_Id)){   
@@ -354,7 +354,7 @@ class SQDE_Component {
     }
     public static function button($component){	
         $html = $js = $class = $style = array();
-        $output_component = self::outputComponent();
+        $output_component = (object) array('dom_id'=>'','html'=>'','js'=>'');
         $dom_id = (isset($component->Dom_Id)) ? $component->Dom_Id : self::uniqueHash();
         $value = 'Button';
         if(isset($component->Value)){   
@@ -387,7 +387,7 @@ class SQDE_Component {
 	}
     public static function checkbox($component){
         $html = $js = $class = $style = array();
-        $output_component = self::outputComponent();
+        $output_component = (object) array('dom_id'=>'','html'=>'','js'=>'');
         $dom_id = $value = '';
 		
         if(isset($component->Dom_Id)){   
@@ -459,7 +459,7 @@ class SQDE_Component {
     }
     public static function checkboxSwitch($component){
         
-        $output_component = self::outputComponent();
+        $output_component = (object) array('dom_id'=>'','html'=>'','js'=>'');
         $stream = array();
         
         $checkbox_dom_id = $component->Dom_Id.'CheckBox';
@@ -486,13 +486,6 @@ class SQDE_Component {
         
         $output_component = self::mergeComponents($output_component,self::checkbox($checkbox_component));
         $output_component = self::mergeComponents($output_component,self::hiddenInput($component));
-        return $output_component;
-    }
-	public static function outputComponent(){
-        $output_component = (object) null;
-        $output_component->dom_id = '';
-        $output_component->html = '';
-        $output_component->js = '';
         return $output_component;
     }
 	public static function mergeComponents($component_a, $component_b){
