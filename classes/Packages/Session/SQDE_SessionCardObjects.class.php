@@ -124,18 +124,7 @@ class SQDE_SessionCardObjects {
             );
         }
         $card_object->body = array();
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $html = $js = array();
-        $html[] = '<div  class="fitBlock alignCenter" id="'.$dom_id.'"></div>';
-        $js[] = 'cards = new SQDE_CollectionCards();';
-        $js[] = 'cards.details_route = \'cards/session/details\';';
-        $js[] = 'cards.icon = \'atom\';';
-        $js[] = 'cards.container = \''.$dom_id.'\';';
-        $js[] = 'cards.collection = \'session_search\';';
-        $js[] = 'registry.setContext({card:\'cards/session/search\',collection:\'session_search\',tearDown:function(){cards = undefined;}});';
-        $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'session_search\', call: cards.run});';
-        $js[] = 'registry.fetch({collection:\'session_search\'});';
-        $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
+        $card_object->body[] = SQDE_CardComponent::collection((object) array('collection'=>'session_search','icon'=>'atom','card_route'=>'cards/session/search','details_route'=>'cards/session/details'));
         return $card_object;
     }
 }

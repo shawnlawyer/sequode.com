@@ -460,7 +460,6 @@ class SQDE_Component {
     public static function checkboxSwitch($component){
         
         $output_component = (object) array('dom_id'=>'','html'=>'','js'=>'');
-        $stream = array();
         
         $checkbox_dom_id = $component->Dom_Id.'CheckBox';
         $checkbox_labeltext_dom_id = $checkbox_dom_id . 'LabelText';

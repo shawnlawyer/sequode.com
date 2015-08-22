@@ -142,18 +142,7 @@ class SQDE_UsersCardObjects {
             );
         }
         $card_object->body = array();
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $html = $js = array();
-        $html[] = '<div  class="fitBlock alignCenter" id="'.$dom_id.'"></div>';
-        $js[] = 'cards = new SQDE_CollectionCards();';
-        $js[] = 'cards.details_route = \'cards/users/details\';';
-        $js[] = 'cards.icon = \'user\';';
-        $js[] = 'cards.container = \''.$dom_id.'\';';
-        $js[] = 'cards.collection = \'user_search\';';
-        $js[] = 'registry.setContext({card:\'cards/users/search\',collection:\'user_search\',tearDown:function(){cards = undefined;}});';
-        $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'user_search\', call: cards.run});';
-        $js[] = 'registry.fetch({collection:\'user_search\'});';
-        $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
+        $card_object->body[] = SQDE_CardComponent::collection((object) array('collection'=>'user_search','icon'=>'user','card_route'=>'cards/users/search','details_route'=>'cards/users/details'));
         return $card_object;
     }
 }

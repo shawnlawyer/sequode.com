@@ -116,18 +116,7 @@ class SQDE_MachineCardObjects {
             'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/package/newPackage'))
         );
         $card_object->body = array();
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $html = $js = array();
-        $html[] = '<div  class="fitBlock alignCenter" id="'.$dom_id.'"></div>';
-        $js[] = 'var cards = new SQDE_CollectionCards();';
-        $js[] = 'cards.details_route = \'cards/machine/details\';';
-        $js[] = 'cards.icon = \'atom\';';
-        $js[] = 'cards.container = \''.$dom_id.'\';';
-        $js[] = 'cards.collection = \'machines\';';
-        $js[] = 'registry.setContext({card:\'cards/machine/my\',collection:\'machines\',tearDown:function(){cards = undefined;}});';
-        $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'machines\', call: cards.run});';
-        $js[] = 'registry.fetch({collection:\'machines\'});';
-        $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
+        $card_object->body[] = SQDE_CardComponent::collection((object) array('collection'=>'machines','icon'=>'atom','card_route'=>'cards/machine/my','details_route'=>'cards/machine/details'));
         return $card_object;
     }
     public static function search(){
@@ -150,18 +139,7 @@ class SQDE_MachineCardObjects {
             );
         }
         $card_object->body = array();
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $html = $js = array();
-        $html[] = '<div  class="fitBlock alignCenter" id="'.$dom_id.'"></div>';
-        $js[] = 'cards = new SQDE_CollectionCards();';
-        $js[] = 'cards.details_route = \'cards/machine/details\';';
-        $js[] = 'cards.icon = \'atom\';';
-        $js[] = 'cards.container = \''.$dom_id.'\';';
-        $js[] = 'cards.collection = \'machine_search\';';
-        $js[] = 'registry.setContext({card:\'cards/machine/search\',collection:\'machine_search\',tearDown:function(){cards = undefined;}});';
-        $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'machine_search\', call: cards.run});';
-        $js[] = 'registry.fetch({collection:\'machine_search\'});';
-        $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
+        $card_object->body[] = SQDE_CardComponent::collection((object) array('collection'=>'machine_search','icon'=>'atom','card_route'=>'cards/machine/search','details_route'=>'cards/machine/details'));
         return $card_object;
     }
 }
