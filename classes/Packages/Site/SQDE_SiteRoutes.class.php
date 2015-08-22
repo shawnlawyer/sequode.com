@@ -95,6 +95,7 @@ class SQDE_SiteRoutes{
         if(SQDE_UserAuthority::isAuthenticated()){
             $files = array(
                 'js/SQDE_Configuration.js',
+                'js/SQDE_SymbolsKit.js',
                 'js/SQDE_BaseKit.js',
                 'js/SQDE_EventsKit.js',
                 'js/SQDE_ShapesKit.js',
