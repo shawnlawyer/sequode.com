@@ -9,7 +9,7 @@ class SQDE_Tokens extends SQDE_DatabaseModel {
 	public function create(){
 		$sql = "
 			INSERT INTO {$this->table}
-		 	(`id`,`owner_id`,`name`,`token)
+		 	(`id`,`owner_id`,`name`,`token`)
 			VALUES
 		 	(''
 			,0
