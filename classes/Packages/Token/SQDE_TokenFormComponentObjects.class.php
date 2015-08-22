@@ -1,7 +1,7 @@
 <?php
-class SQDE_PackageFormComponentObjects   {
+class SQDE_TokenFormComponentObjects   {
     public static function name($_model = null){
-        if($_model == null ){ $_model = SQDE_Package::model(); }
+        if($_model == null ){ $_model = SQDE_Token::model(); }
         
         $components_object = (object) null;
         
