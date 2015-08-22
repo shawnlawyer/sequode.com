@@ -1,7 +1,7 @@
 <?php
 class SQDE_SequodeRoutes{
 	public static function collections($collection='collections', $key = null){
-        $collections = array('my', 'sequode_favorites', 'palette', 'index', 'user', 'sequodes');
+        $collections = array('my', 'sequode_favorites', 'palette', 'user', 'sequodes');
         switch($collection){
 			case 'my':
                 $where = array();
@@ -29,6 +29,17 @@ class SQDE_SequodeRoutes{
                 $where = array();
 				$where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
                 $_model = new SQDE_Packages;
+				$_model->getAll($where,'id,name');
+                $nodes = array();
+				foreach($_model->all as $object){
+					$nodes[] = '"'.$object->id.'":{"id":"'.$object->id.'","n":"'.$object->name.'"}';
+				}
+				echo '{'.implode(',', $nodes).'}';
+                return;
+			case 'tokens':
+                $where = array();
+				$where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
+                $_model = new SQDE_Tokens;
 				$_model->getAll($where,'id,name');
                 $nodes = array();
 				foreach($_model->all as $object){
@@ -84,6 +95,18 @@ class SQDE_SequodeRoutes{
                     echo '{}';
                 }
                 return;
+			case 'token_search':
+				if(SQDE_Session::is($collection)){
+                    $search = SQDE_TokensFinder::search(json_decode(SQDE_Session::get($collection)));
+                    $nodes = array();
+                    foreach($search as $object){
+                        $nodes[] = '"'.$object->id.'":{"id":"'.$object->id.'","n":"'.$object->name.'"}';
+                    }
+                    echo '{'.implode(',', $nodes).'}';
+                }else{
+                    echo '{}';
+                }
+                return;
 			case 'machine_search':
 				if(SQDE_Session::is($collection)){
                     $search = SQDE_MachinesFinder::search(json_decode(SQDE_Session::get($collection)));
@@ -126,22 +149,6 @@ class SQDE_SequodeRoutes{
                         $nodes[] = '"'.$sequode_model->id.'":{"id":"'.$sequode_model->id.'","n":"'.$sequode_model->name.'"}';
                     }
                     echo '{'.implode(',', $nodes).'}';
-                }else{
-                    echo '{}';
-                }
-                return;
-			case 'index':
-                $sequode_model = new SQDE_Sequodes;
-                $where = array();
-				$where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
-				$where[] = array('field'=>'index','operator'=>'=','value'=>1);
-				$sequode_model->getAll($where,'id,name');
-                if(count($sequode_model->all ) != 0){
-                    foreach($sequode_model->all as $object){
-                        $sequode_model = $object;
-                        break;
-                    }
-                    echo '{"'.$object->id.'":{"id":"'.$object->id.'","n":"'.$object->name.'"}}';
                 }else{
                     echo '{}';
                 }
