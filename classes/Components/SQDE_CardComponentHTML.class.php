@@ -1,6 +1,6 @@
 <?php
 class SQDE_CardComponentHTML {
-    public static function modelId(&$model){
+    public static function modelId(&$_model){
         return '<div style="position:absolute; bottom:5px; right:5px;" class="subline kids">Id: '.$_model->id.'</div>';
     }
 }
