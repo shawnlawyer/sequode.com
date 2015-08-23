@@ -313,19 +313,7 @@ class SQDE_SequodeCardObjects {
             $card_object->body[] = '';
         }
         
-        
-        $html = $js = array();
-        $dom_id = SQDE_Component::uniqueHash();
-        $html[] = '<span class="automagic-card-next" id="'.$dom_id.'c"></span>';
-       
-        $js = array();
-        $js[] = 'var next_id = registry.nextNode(registry.collection(registry.active_collection), \''.$_model->id.'\');';
-        
-        $js[] = 'if(next_id != \''.$_model->id.'\'){';
-        $js[] = 'document.getElementById(\''.$dom_id.'c\').innerHTML = \'<span class="noSelect kids" id="'.$dom_id.'">\' + registry.node(registry.active_collection, next_id).n + \' &gt;</span>\';';
-        $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/sequode/details', array('next_id')));
-        $js[] = '}';
-        $card_object->body[] = (object) array('html' => implode('',$html), 'js' => implode('',$js));
+        $card_object->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/sequode/details'));
         
         if(SQDE_UserAuthority::isSystemOwner()){
             $card_object->body[] = SQDE_CardComponentHTML::modelId($_model);
