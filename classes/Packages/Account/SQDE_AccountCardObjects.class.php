@@ -34,21 +34,21 @@ class SQDE_AccountCardObjects {
         
         $html = $js = array();
         
-        $card_object->body[] = '<div class="subline kids">Username</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Username');
         $card_object->body[] = $_model->username;
-        $card_object->body[] = '<div class="subline kids">Role</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Role');
         SQDE_Role::exists($_model->role_id,'id');
         $card_object->body[] = SQDE_Role::model()->name;
-        $card_object->body[] = '<div class="subline kids">Sign Up Date</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Sign Up Date');
         $card_object->body[] = date('g:ia \o\n l jS F Y',$_model->sign_up_date);
-        $card_object->body[] = '<div class="subline kids">Allowed Sequode Count</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Allowed Sequode Count');
         $card_object->body[] = $_model->allowed_sequode_count;
-        $card_object->body[] = '<div class="subline kids">Sequode Favorites</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Sequode Favorites');
         $card_object->body[] = $_model->sequode_favorites;
-        $card_object->body[] = '<div class="subline kids">Email</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Email');
         $card_object->body[] = $_model->email;
         $sequodes_model = SQDE_UserOperations::getSequodesModelOfAllSequodes($_model,'id,name');
-        $card_object->body[] = '<div class="subline kids">Sequodes Created : '.count($sequodes_model->all).'</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock(Sequodes Created : '.count($sequodes_model->all));
         $dom_id = SQDE_Component::uniqueHash();
         foreach($sequodes_model->all as $i => $object){
             $html = $js = array();

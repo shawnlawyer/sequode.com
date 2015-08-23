@@ -65,10 +65,10 @@ class SQDE_DashboardCardObjects {
         );
         $card_object->body = array();
         $card_object->body[] = '';
-        $sequodes_model = SQDE_UserOperations::getSequodesModelOfAllSequodes($user_model,'id,name');
-        $card_object->body[] = '<div class="subline kids">Sequodes Created : '.count($sequodes_model->all).'</div>';
+        $_model = SQDE_UserOperations::getSequodesModelOfAllSequodes($user_model,'id,name');
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Sequodes Created : '.count($_model->all));
         $dom_id = SQDE_Component::uniqueHash();
-        foreach($sequodes_model->all as $i => $object){
+        foreach($_model->all as $i => $object){
             $html = $js = array();
             $html[] = '<div class="automagic-card-text-button" id="'.$dom_id.$i.'">';
             $html[] = $object->name;
@@ -97,10 +97,10 @@ class SQDE_DashboardCardObjects {
         );
         $card_object->body = array();
         $card_object->body[] = '';
-        $machines_model = SQDE_UserOperations::getMachinesModelOfAllMachines($user_model,'id,name');
-        $card_object->body[] = '<div class="subline kids">Application Machines : '.count($machines_model->all).'</div>';
+        $_model = SQDE_UserOperations::getMachinesModelOfAllMachines($user_model,'id,name');
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Application Machines : '.count($_model->all));
         $dom_id = SQDE_Component::uniqueHash();
-        foreach($machines_model->all as $i => $object){
+        foreach($_model->all as $i => $object){
             $html = $js = array();
             $html[] = '<div class="automagic-card-text-button" id="'.$dom_id.$i.'">';
             $html[] = $object->name;
@@ -130,7 +130,7 @@ class SQDE_DashboardCardObjects {
         $card_object->body = array();
         $card_object->body[] = '';
         $_model = SQDE_UserOperations::getPackagesModelOfAllPackages($user_model,'id,name');
-        $card_object->body[] = '<div class="subline kids">Packages : '.count($_model->all).'</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Packages : '.count($_model->all));
         $dom_id = SQDE_Component::uniqueHash();
         foreach($_model->all as $i => $object){
             $html = $js = array();

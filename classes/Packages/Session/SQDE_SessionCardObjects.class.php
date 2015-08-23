@@ -42,12 +42,11 @@ class SQDE_SessionCardObjects {
         );
         
         
+        $card_object->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/session/details'));
+        
         $card_object->body = array();
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
-        $html[] = '<span class="automagic-card-next" id="'.$dom_id.'c"></span>';
-       
-        $js[] = 'var next_id = registry.nextNode(registry.collection(registry.active_collection), \''.$_model->id.'\');';
         $js[] = SQDE_ComponentJS::documentEventOff('keydown');
         $js[] = '$(document).on(\'keydown\',(function(e){';
         
@@ -74,33 +73,24 @@ class SQDE_SessionCardObjects {
         $js[] = '}';
         
         $js[] = '}));';
-        $js[] = 'if(next_id != \''.$_model->id.'\'){';
-        $js[] = 'document.getElementById(\''.$dom_id.'c\').innerHTML = \'<span class="noSelect kids" id="'.$dom_id.'">\' + registry.node(registry.active_collection, next_id).n + \' &gt;</span>\';';
-        $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/session/details', array('next_id')));
-        $js[] = '}';
-        $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $html = $js = array();
-        $html[] = '<span class="automagic-card-delete noSelect kids" id="'.$dom_id.'">x</span>';
-        $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/session/delete', array($_model->id)));
-        $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         
-        $card_object->body[] = '<div class="subline kids">Username</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Username');
         $card_object->body[] = $_model->username;
-        $card_object->body[] = '<div class="subline kids">Ip Address</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Ip Address');
         $card_object->body[] = $_model->ip_address;
-        $card_object->body[] = '<div class="subline kids">Data</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Data');
         $card_object->body[] = '<textarea style="width:20em; height:10em;">'.$_model->session_data.'</textarea>';
         $location = geoip_record_by_name($_model->ip_address);
         if ($location) {
-        $card_object->body[] = '<div class="subline kids">Geo Location</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Geo Location');
         $card_object->body[] = $location['city'].((!empty($location['region'])) ? ' '.$location['region'] : ''). ', '. $location['country_name'].((!empty($location['postal_code'])) ? ', '.$location['postal_code'] : '');
             
         }
-        $card_object->body[] = '<div class="subline kids">Session Started</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Session Started');
         $card_object->body[] = date('g:ia \o\n l jS F Y',$_model->session_start);
-        $card_object->body[] = '<div class="subline kids">Last Sign In</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Last Sign In');
+        $card_object->body[] = SQDE_CardComponent::deleteInCollection((object) array('route'=>'cards/session/delete','model_id'=>$_model->id));
         $card_object->body[] = SQDE_CardComponentHTML::modelId($_model);
         return $card_object;
     }

@@ -65,7 +65,7 @@ class SQDE_MachineCardObjects {
     public static function details($_model = null){
          $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
         
-        $card_object = (object) null;
+        $_object = (object) null;
         $card_object->size = 'large';
         $card_object->icon_type = 'menu-icon';
         $card_object->icon_background = 'atom-icon-background';
@@ -75,28 +75,18 @@ class SQDE_MachineCardObjects {
         $card_object->head = 'Machine Details';
         $card_object->body = array('');
         $card_object->body[] = (object) array('js' => 'registry.setContext({card:\'cards/machine/details\',collection:\'machines\',node:\''.$_model->id.'\'});');
-        $card_object->body[] = '<div class="subline kids">Name</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Name');
         $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/machine/name', array($_model->id)), $_model->name, 'settings');
-        $card_object->body[] = $component_object;
-        $card_object->body[] = '<div class="subline kids">Application Token</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Application Token');
         $card_object->body[] = $_model->application_token;
-        $card_object->body[] = '<div class="subline kids">Authentication Token</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Authentication Token');
         $card_object->body[] = $_model->authentication_token;
         
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $html = $js = array();
-        
-        $html[] = '<span class="automagic-card-next" id="'.$dom_id.'c"></span>';
-        $js[] = 'var next_id = registry.nextNode(registry.collection(registry.active_collection), \''.$_model->id.'\');';
-        $js[] = 'if(next_id != \''.$_model->id.'\'){';
-        $js[] = 'document.getElementById(\''.$dom_id.'c\').innerHTML = \'<span class="noSelect kids" id="'.$dom_id.'">\' + registry.node(registry.active_collection, next_id).n + \' &gt;</span>\';';
-        $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/machine/details', array('next_id')));
-        $js[] = '}';
-        $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
-        
+        $card_object->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/machine/details'));
         if(SQDE_UserAuthority::isSystemOwner()){
             $card_object->body[] = SQDE_CardComponentHTML::modelId($_model);
         }
+        
         return $card_object;
     }
     public static function my(){

@@ -26,8 +26,8 @@ class SQDE_CardComponent {
     public static function nextInCollection($component){
         if(!(
             isset($component->model_id) 
-            && isset($component->details_route))
-        ){ 
+            && isset($component->details_route)
+        )){ 
             return (object) array('html' => '', 'js' => '');
         }
         $html = $js = array();
@@ -35,12 +35,25 @@ class SQDE_CardComponent {
         $html[] = '<span class="automagic-card-next noSelect kids" id="'.$dom_id.'"></span>';
         if(isset($component->model_id) && isset($component->details_route)){
             $js[] = 'var next_id = registry.nextNode(registry.collection(registry.active_collection), \''.$component->model_id.'\');';
-        
             $js[] = 'if(next_id != \''.$_model->id.'\'){';
             $js[] = 'document.getElementById(\''.$dom_id.'\').innerHTML = registry.node(registry.active_collection, next_id).n + \' &gt;\';';
             $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject($component->details_route, array('next_id')));
             $js[] = '}';
         }
         return (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
+    }
+    public static function deleteInCollection($component){
+        if(!(
+            isset($component->model_id)
+            && isset($component->route)
+            
+        )){ 
+            return (object) array('html' => '', 'js' => '');
+        }
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $html = $js = array();
+        $html[] = '<span class="automagic-card-delete noSelect kids" id="'.$dom_id.'">x</span>';
+        $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject($component->route, array($_model->id)));
+        return (object) array('html' => implode('',$html),'js' => implode('',$js));
     }
 }

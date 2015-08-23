@@ -215,22 +215,15 @@ class SQDE_SequodeCardObjects {
         $input_form_object = json_decode($_model->input_form_object);
         $property_form_object = json_decode($_model->property_form_object);
         
-        $card_object->body[] = '<div class="subline kids">Name</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Name');
         $text = $_model->name;
-        if(SQDE_UserAuthority::canEdit()){
-            $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/name', array($_model->id)), $text, 'settings');
-        }else{
-            $card_object->body[] = $text;
-        }
+        $card_object->body[] = (SQDE_UserAuthority::canEdit()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/name', array($_model->id)), $text, 'settings') : $text;
         
-        $card_object->body[] = '<div class="subline kids">Description</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Description');
         $text = json_decode($_model->detail)->description;
         $text = (!empty($text)) ? $text : 'Sequode needs description.';
-        if(SQDE_UserAuthority::canEdit()){
-            $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/description', array($_model->id)), $text, 'settings');
-        }else{
-            $card_object->body[] = $text;
-        }
+        $card_object->body[] = (SQDE_UserAuthority::canEdit()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/description', array($_model->id)), $text, 'settings') : $text;
+        
         if(SQDE_SequodeAuthority::isCode() && $_model->owner_id == 8){
             $dom_id = SQDE_Component::uniqueHash('','');
             $html = $js = array();
@@ -239,7 +232,7 @@ class SQDE_SequodeCardObjects {
             $card_object->body[] = (object) array('html' => $html, 'js' => $js);
         }
         if(SQDE_SequodeAuthority::isSequence()){
-            $card_object->body[] = '<div class="subline kids">Sequence</div>';
+            $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Sequence');
             $sequence = json_decode($_model->sequence);
             $model_object_cache = array();
             if(!SQDE_SequodeAuthority::isEmptySequence($_model)){
@@ -249,34 +242,30 @@ class SQDE_SequodeCardObjects {
                         $model_object_cache[$loop_model_id]->exists($loop_model_id,'id');
                     }
                     $text = '('.($loop_sequence_key+1).') '.$model_object_cache[$loop_model_id]->name;
-                    if(SQDE_UserAuthority::canEdit()){
-                        $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('cards/sequode/internalPositionForms', array($_model->id, $loop_sequence_key)), $text, 'settings');
-                    }else{
-                        $card_object->body[] = $text;
-                    }
+                    $card_object->body[] = (SQDE_UserAuthority::canEdit()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('cards/sequode/internalPositionForms', array($_model->id, $loop_sequence_key)), $text, 'settings') : $text;
                 }
             }else{
                     $card_object->body[] = 'Sequode is empty.';   
             }
         }
         if(SQDE_UserAuthority::isSystemOwner()){
-            $card_object->body[] = '<div class="subline kids">Use Policy</div>';
+            $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Use Policy');
             $text = (SQDE_SequodeAuthority::isShared()) ? 'Public Use' : 'System Restricted Use';
             $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/sharing', array($_model->id)), $text, 'atom');
         }
         if(SQDE_SequodeAuthority::isCode()){
-            $card_object->body[] = '<div class="subline kids">Tenancy Requirement</div>';
+            $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Tenancy Requirement');
             $text = (SQDE_SequodeAuthority::isTenacyDedicated()) ? 'Dedicated Enviroment' : 'Shared Enviroment';
             $card_object->body[] = (SQDE_UserAuthority::isSystemOwner()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/tenancy', array($_model->id)), $text, 'setting') : $text;
         } 
         if(SQDE_SequodeAuthority::isSequence() && !SQDE_SequodeAuthority::isEmptySequence()){
-            $card_object->body[] = '<div class="subline kids">Palette Visibility</div>';
-            $text = (SQDE_SequodeAuthority::isPalette()) ? 'Shown in Palettes' : 'Hidden from Palettes';
+            $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Palettes Menu Visibility');
+            $text = (SQDE_SequodeAuthority::isPalette()) ? 'Shown in Palettes Menu' : 'Hidden from Palettes Menu';
             $card_object->body[] = (SQDE_UserAuthority::canEdit($_model)) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/updateIsPalette', array($_model->id)), $text, 'settings') : $text;
         } 
         if(SQDE_SequodeAuthority::isSequence() && !SQDE_SequodeAuthority::isEmptySequence()){
-            $card_object->body[] = '<div class="subline kids">Package Useability</div>';
-            $text = (SQDE_SequodeAuthority::isPackage()) ? 'Useable As Package' : 'Not Used As Package';
+            $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Packages Menu Visibility');
+            $text = (SQDE_SequodeAuthority::isPackage()) ? 'Shown in Packages Menu' : 'Hidden from Packages Menu';
             $card_object->body[] = (SQDE_UserAuthority::canEdit($_model)) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/updateIsPackage', array($_model->id)), $text, 'settings') : $text;
         } 
         foreach(array('input','property') as $type){
@@ -296,7 +285,7 @@ class SQDE_SequodeCardObjects {
             }
         
             if($type_object != (object) null){
-                $card_object->body[] = '<div class="subline kids">'.$type_title.'</div>';
+                $card_object->body[] = SQDE_CardComponentHTML::sublineBlock($type_title);
                 foreach($type_object as $member => $value){
                     $card_object->body[] = $member . ' (' . $type_object_detail->$member->type. ') ' . (($type_object_detail->$member->required == true) ? 'required' : 'optional');
                     SQDE_Component::exists($type_form_object->$member->Component,'name');
@@ -306,7 +295,7 @@ class SQDE_SequodeCardObjects {
             }
         }
         if($output_object != (object) null){
-            $card_object->body[] = '<div class="subline kids">Outputs</div>';
+            $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Outputs');
             foreach($output_object as $member => $value){
                 $card_object->body[] = $member . ' (' . $output_object_detail->$member->type. ')';
             }
@@ -407,7 +396,7 @@ class SQDE_SequodeCardObjects {
         }
         foreach($possible_components as $component){
             if($type_labels[$component->type] != false){
-                $card_object->body[] = '<div class="subline kids">'.$type_labels[$component->type].'</div>';
+                $card_object->body[] = SQDE_CardComponentHTML::sublineBlock($type_labels[$component->type]);
                 $type_labels[$component->type] = false;
             }
             if(($component->connected == true)){

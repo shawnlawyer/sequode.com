@@ -71,30 +71,14 @@ class SQDE_PackageCardObjects {
         $card_object->head = 'Package Details';
         $card_object->body = array('');
         $card_object->body[] = (object) array('js' => 'registry.setContext({card:\'cards/package/details\',collection:\'packages\',node:\''.$_model->id.'\'});');
-        $card_object->body[] = '<div class="subline kids">Name</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Name');
         $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/package/name', array($_model->id)), $_model->name, 'settings');
-        $card_object->body[] = '<div class="subline kids">Package Sequode</div>';
-        if($_model->sequode_id != 0 && SQDE_Sequode::exists($_model->sequode_id,'id')){
-            $text = SQDE_Sequode::model()->name;
-            $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/package/packageSequode', array($_model->id)), $text, 'settings');
-        }else{
-            $card_object->body[] = SQDE_Forms::render(self::$package,'packageSequode')[0];
-        }
-        $card_object->body[] = '<div class="subline kids">Package Token</div>';
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Package Sequode');
+        $card_object->body[] = ($_model->sequode_id != 0 && SQDE_Sequode::exists($_model->sequode_id,'id')) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/package/packageSequode', array($_model->id)), SQDE_Sequode::model()->name, 'settings') : SQDE_Forms::render(self::$package,'packageSequode')[0];
+        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Package Token');
         $card_object->body[] = $_model->token;
         
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $html = $js = array();
-        
-        $html[] = '<span class="automagic-card-next" id="'.$dom_id.'c"></span>';
-       
-        $js[] = 'var next_id = registry.nextNode(registry.collection(registry.active_collection), \''.$_model->id.'\');';
-        $js[] = 'if(next_id != \''.$_model->id.'\'){';
-        $js[] = 'document.getElementById(\''.$dom_id.'c\').innerHTML = \'<span class="noSelect kids" id="'.$dom_id.'">\' + registry.node(registry.active_collection, next_id).n + \' &gt;</span>\';';
-        $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/package/details', array('next_id')));
-        $js[] = '}';
-        $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
-        
+        $card_object->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/package/details'));
         if(SQDE_UserAuthority::isSystemOwner()){
             $card_object->body[] = SQDE_CardComponentHTML::modelId($_model);
         }
