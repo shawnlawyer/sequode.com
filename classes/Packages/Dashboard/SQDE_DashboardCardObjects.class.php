@@ -21,11 +21,11 @@ class SQDE_DashboardCardObjects {
     }
     public static function gettingStarted($user_model=null){
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
-        $card_object = (object) null;
-        $card_object->size = 'fullscreen';
-        $card_object->head = 'Sequode Web Services';
-        $card_object->icon_background = 'sequode-icon-background';
-        $card_object->body = array();
+        $_o = (object) null;
+        $_o->size = 'fullscreen';
+        $_o->head = 'Sequode Web Services';
+        $_o->icon_background = 'sequode-icon-background';
+        $_o->body = array();
         
         $html = $js = array();
         $html[] = SQDE_Card::divider(true);
@@ -42,31 +42,31 @@ class SQDE_DashboardCardObjects {
         $component_object = SQDE_Cards::render('Dashboard', 'collection', array('my_machines', $user_model));
         $html[] = $component_object->html;
         $js[] = $component_object->js;
-        $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
-        return $card_object;
+        $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
+        return $_o;
     }
     
     public static function mySequodes($user_model=null){
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
-        $card_object = (object) null;
-        $card_object->head = 'My Sequodes';
-        $card_object->size = 'small';
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'sequode-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->items =  array();
+        $_o = (object) null;
+        $_o->head = 'My Sequodes';
+        $_o->size = 'small';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'sequode-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->items =  array();
         
         $dom_id = SQDE_Component::uniqueHash('','');
-        $card_object->menu->items[] = array(
+        $_o->menu->items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'New Sequode',
             'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/sequode/newSequence'))
         );
-        $card_object->body = array();
-        $card_object->body[] = '';
+        $_o->body = array();
+        $_o->body[] = '';
         $_model = SQDE_UserOperations::getSequodesModelOfAllSequodes($user_model,'id,name');
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Sequodes Created : '.count($_model->all));
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Sequodes Created : '.count($_model->all));
         $dom_id = SQDE_Component::uniqueHash();
         foreach($_model->all as $i => $object){
             $html = $js = array();
@@ -74,31 +74,31 @@ class SQDE_DashboardCardObjects {
             $html[] = $object->name;
             $html[] = '</div>';
             $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/sequode/details', array($object->id)));
-            $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
+            $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         }
-        return $card_object;
+        return $_o;
     }
     public static function myMachines($user_model=null){
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
-        $card_object = (object) null;
-        $card_object->head = 'My Application Machines';
-        $card_object->size = 'small';
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'atom-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->items =  array();
+        $_o = (object) null;
+        $_o->head = 'My Application Machines';
+        $_o->size = 'small';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'atom-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->items =  array();
         
         $dom_id = SQDE_Component::uniqueHash('','');
-        $card_object->menu->items[] = array(
+        $_o->menu->items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'New Application Machine',
             'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/machine/newMachine'))
         );
-        $card_object->body = array();
-        $card_object->body[] = '';
+        $_o->body = array();
+        $_o->body[] = '';
         $_model = SQDE_UserOperations::getMachinesModelOfAllMachines($user_model,'id,name');
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Application Machines : '.count($_model->all));
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Application Machines : '.count($_model->all));
         $dom_id = SQDE_Component::uniqueHash();
         foreach($_model->all as $i => $object){
             $html = $js = array();
@@ -106,31 +106,31 @@ class SQDE_DashboardCardObjects {
             $html[] = $object->name;
             $html[] = '</div>';
             $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/machine/details', array($object->id)));
-            $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
+            $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         }
-        return $card_object;
+        return $_o;
     }
     public static function myPackages($user_model=null){
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
-        $card_object = (object) null;
-        $card_object->head = 'My Packages';
-        $card_object->size = 'small';
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'atom-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->items =  array();
+        $_o = (object) null;
+        $_o->head = 'My Packages';
+        $_o->size = 'small';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'atom-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->items =  array();
         
         $dom_id = SQDE_Component::uniqueHash('','');
-        $card_object->menu->items[] = array(
+        $_o->menu->items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'New Package',
             'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/package/newPackage'))
         );
-        $card_object->body = array();
-        $card_object->body[] = '';
+        $_o->body = array();
+        $_o->body[] = '';
         $_model = SQDE_UserOperations::getPackagesModelOfAllPackages($user_model,'id,name');
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Packages : '.count($_model->all));
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Packages : '.count($_model->all));
         $dom_id = SQDE_Component::uniqueHash();
         foreach($_model->all as $i => $object){
             $html = $js = array();
@@ -138,8 +138,8 @@ class SQDE_DashboardCardObjects {
             $html[] = $object->name;
             $html[] = '</div>';
             $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/package/details', array($object->id)));
-            $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
+            $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         }
-        return $card_object;
+        return $_o;
     }
 }

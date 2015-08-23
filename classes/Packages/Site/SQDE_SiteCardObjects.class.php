@@ -1,12 +1,12 @@
 <?php
 class SQDE_SiteCardObjects {
     public static function sequode(){
-        $card_object = (object) null;
-        $card_object->head = 'Sequode is Liquid Software';
-        $card_object->component_seperator = '';
+        $_o = (object) null;
+        $_o->head = 'Sequode is Liquid Software';
+        $_o->component_seperator = '';
         
         $html = $js = array();
-        $card_object->body = array();
+        $_o->body = array();
         $html[] = '<div class="card-subtitle kids">Liquid who?</div>';
         $html[] = '<div class="card-textblock card-text">';
         $html[] = 'Sequode is short for Sequencing Sequence-able Code, so basically turning software code into a bunch of numbers, or as I call it, Liquid Software.';
@@ -43,7 +43,7 @@ class SQDE_SiteCardObjects {
         $html[] = '</div>';
         
         $html[] = '<div class="subline kids alignCenter">Launch 7.21.2015</div>';
-        $card_object->body[] = (object) array('html' => implode('',$html));
-        return $card_object;
+        $_o->body[] = (object) array('html' => implode('',$html));
+        return $_o;
     }
 }

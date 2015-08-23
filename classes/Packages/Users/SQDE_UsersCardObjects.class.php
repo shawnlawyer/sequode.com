@@ -3,13 +3,13 @@ class SQDE_UsersCardObjects {
     public static $package = 'Users';
     public static $modeler = 'SQDE_User';
     public static function menu(){
-        $card_object = (object) null;
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'user-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
-        $card_object->menu->items =  self::menuItems();
-        return $card_object;
+        $_o = (object) null;
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'user-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
+        $_o->menu->items =  self::menuItems();
+        return $_o;
     }
     public static function menuItems(){
         $items = array();
@@ -68,35 +68,35 @@ class SQDE_UsersCardObjects {
     public static function details($_model = null){
          $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
         
-        $card_object = (object) null;
-        $card_object->size = 'large';
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'user-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->items = self::modelOperationsMenuItems();
+        $_o = (object) null;
+        $_o->size = 'large';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'user-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->items = self::modelOperationsMenuItems();
         
-        $card_object->head = 'User Detail';
-        $card_object->body = array('');
+        $_o->head = 'User Detail';
+        $_o->body = array('');
         
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Username');
-        $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/users/updateName', array($_model->id)), $_model->username, 'settings');
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Password');
-        $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/users/updatePassword', array($_model->id)), 'Set Password', 'settings');
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Role');
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Username');
+        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/users/updateName', array($_model->id)), $_model->username, 'settings');
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Password');
+        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/users/updatePassword', array($_model->id)), 'Set Password', 'settings');
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Role');
         SQDE_Role::exists($_model->role_id,'id');
-        $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/users/updateRole', array($_model->id)), SQDE_Role::model()->name, 'settings');
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Active Status');
-        $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/users/updateActive', array($_model->id)), (($_model->active == 1) ? 'Active' : 'Suspended'), 'settings');
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Sign Up Date');
-        $card_object->body[] = date('g:ia \o\n l jS F Y',$_model->sign_up_date);
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Allowed Sequode Count');
-        $card_object->body[] = $_model->allowed_sequode_count;
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Favorite Sequodes');
-        $card_object->body[] = $_model->sequode_favorites;
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Email');
-        $card_object->body[] = $_model->email;
+        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/users/updateRole', array($_model->id)), SQDE_Role::model()->name, 'settings');
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Active Status');
+        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/users/updateActive', array($_model->id)), (($_model->active == 1) ? 'Active' : 'Suspended'), 'settings');
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Sign Up Date');
+        $_o->body[] = date('g:ia \o\n l jS F Y',$_model->sign_up_date);
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Allowed Sequode Count');
+        $_o->body[] = $_model->allowed_sequode_count;
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Favorite Sequodes');
+        $_o->body[] = $_model->sequode_favorites;
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Email');
+        $_o->body[] = $_model->email;
         $sequodes_model = SQDE_UserOperations::getSequodesModelOfAllSequodes($_model,'id,name');
-        $card_object->body[] = '<div class="subline kids">Sequodes Created : '.count($sequodes_model->all).'</div>';
+        $_o->body[] = '<div class="subline kids">Sequodes Created : '.count($sequodes_model->all).'</div>';
         $dom_id = SQDE_Component::uniqueHash('','');
         foreach($sequodes_model->all as $i => $object){
             $html = $js = array();
@@ -105,36 +105,36 @@ class SQDE_UsersCardObjects {
             $html[] = $object->name;
             $html[] = '</div>';            
             $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/users/details', array($object->id)));
-            $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
+            $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         }
         
-        $card_object->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/users/details'));
+        $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/users/details'));
         if(SQDE_UserAuthority::isSystemOwner()){
-            $card_object->body[] = SQDE_CardComponentHTML::modelId($_model);
+            $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
         }
-        return $card_object;
+        return $_o;
     }
     public static function search(){
-        $card_object = (object) null;
-        $card_object->size = 'fullscreen';
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'user-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->items = array();
+        $_o = (object) null;
+        $_o->size = 'fullscreen';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'user-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->items = array();
         
         $search_components_array = SQDE_Forms::render(self::$package,'search');
-        $card_object->head = $search_components_array[0];
+        $_o->head = $search_components_array[0];
         array_shift($search_components_array);
         
         foreach($search_components_array as $key => $object){
-            $card_object->menu->items[] = array(
+            $_o->menu->items[] = array(
                 'css_classes'=>'automagic-card-menu-item noSelect',
                 'contents'=>$object->html,
                 'js_action'=> $object->js                
             );
         }
-        $card_object->body = array();
-        $card_object->body[] = SQDE_CardComponent::collection((object) array('collection'=>'user_search','icon'=>'user','card_route'=>'cards/users/search','details_route'=>'cards/users/details'));
-        return $card_object;
+        $_o->body = array();
+        $_o->body[] = SQDE_CardComponent::collection((object) array('collection'=>'user_search','icon'=>'user','card_route'=>'cards/users/search','details_route'=>'cards/users/details'));
+        return $_o;
     }
 }

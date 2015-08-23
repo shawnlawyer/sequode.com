@@ -3,13 +3,13 @@ class SQDE_SessionCardObjects {
     public static $package = 'Session';
     public static $modeler = 'SQDE_Session';
     public static function menu(){
-        $card_object = (object) null;
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'session-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
-        $card_object->menu->items =  self::menuItems();
-        return $card_object;
+        $_o = (object) null;
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'session-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
+        $_o->menu->items =  self::menuItems();
+        return $_o;
     }
     public static function menuItems(){
         $items = array();
@@ -26,15 +26,15 @@ class SQDE_SessionCardObjects {
     public static function details($_model=null){
         $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
         
-        $card_object = (object) null;
-        $card_object->size = 'large';
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'session-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->items =  array();
+        $_o = (object) null;
+        $_o->size = 'large';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'session-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->items =  array();
         
         $dom_id = SQDE_Component::uniqueHash('','');
-        $card_object->menu->items[] = array(
+        $_o->menu->items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'Delete Session',
@@ -42,9 +42,9 @@ class SQDE_SessionCardObjects {
         );
         
         
-        $card_object->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/session/details'));
+        $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/session/details'));
         
-        $card_object->body = array();
+        $_o->body = array();
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
         $js[] = SQDE_ComponentJS::documentEventOff('keydown');
@@ -75,46 +75,46 @@ class SQDE_SessionCardObjects {
         $js[] = '}));';
         
         
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Username');
-        $card_object->body[] = $_model->username;
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Ip Address');
-        $card_object->body[] = $_model->ip_address;
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Data');
-        $card_object->body[] = '<textarea style="width:20em; height:10em;">'.$_model->session_data.'</textarea>';
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Username');
+        $_o->body[] = $_model->username;
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Ip Address');
+        $_o->body[] = $_model->ip_address;
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Data');
+        $_o->body[] = '<textarea style="width:20em; height:10em;">'.$_model->session_data.'</textarea>';
         $location = geoip_record_by_name($_model->ip_address);
         if ($location) {
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Geo Location');
-        $card_object->body[] = $location['city'].((!empty($location['region'])) ? ' '.$location['region'] : ''). ', '. $location['country_name'].((!empty($location['postal_code'])) ? ', '.$location['postal_code'] : '');
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Geo Location');
+        $_o->body[] = $location['city'].((!empty($location['region'])) ? ' '.$location['region'] : ''). ', '. $location['country_name'].((!empty($location['postal_code'])) ? ', '.$location['postal_code'] : '');
             
         }
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Session Started');
-        $card_object->body[] = date('g:ia \o\n l jS F Y',$_model->session_start);
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Last Sign In');
-        $card_object->body[] = SQDE_CardComponent::deleteInCollection((object) array('route'=>'cards/session/delete','model_id'=>$_model->id));
-        $card_object->body[] = SQDE_CardComponentHTML::modelId($_model);
-        return $card_object;
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Session Started');
+        $_o->body[] = date('g:ia \o\n l jS F Y',$_model->session_start);
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Last Sign In');
+        $_o->body[] = SQDE_CardComponent::deleteInCollection((object) array('route'=>'cards/session/delete','model_id'=>$_model->id));
+        $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
+        return $_o;
     }
     public static function search($_model = null){
-        $card_object = (object) null;
-        $card_object->size = 'fullscreen';
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'session-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->items = array();
+        $_o = (object) null;
+        $_o->size = 'fullscreen';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'session-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->items = array();
         
         $search_components_array = SQDE_Forms::render(self::$package,'search');
-        $card_object->head = $search_components_array[0];
+        $_o->head = $search_components_array[0];
         array_shift($search_components_array);
         
         foreach($search_components_array as $key => $object){
-            $card_object->menu->items[] = array(
+            $_o->menu->items[] = array(
                 'css_classes'=>'automagic-card-menu-item noSelect',
                 'contents'=>$object->html,
                 'js_action'=> $object->js                
             );
         }
-        $card_object->body = array();
-        $card_object->body[] = SQDE_CardComponent::collection((object) array('collection'=>'session_search','icon'=>'atom','card_route'=>'cards/session/search','details_route'=>'cards/session/details'));
-        return $card_object;
+        $_o->body = array();
+        $_o->body[] = SQDE_CardComponent::collection((object) array('collection'=>'session_search','icon'=>'atom','card_route'=>'cards/session/search','details_route'=>'cards/session/details'));
+        return $_o;
     }
 }

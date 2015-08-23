@@ -2,13 +2,13 @@
 class SQDE_AuthCardObjects {
     public static $package = 'Auth';
     public static function menu(){
-        $card_object = (object) null;
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'settings-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
-        $card_object->menu->items = self::menuItems();
-        return $card_object;
+        $_o = (object) null;
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'settings-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
+        $_o->menu->items = self::menuItems();
+        return $_o;
     }
     public static function menuItems(){
         $items = array();
@@ -33,19 +33,19 @@ class SQDE_AuthCardObjects {
         return $items;
     }
     public static function login(){
-        $card_object = (object) null;
-        $card_object->head = 'Login';
-        $card_object->icon_background = 'sessions-icon-background';
-        $card_object->size = 'medium';
-        $card_object->body = SQDE_Forms::render(self::$package,'login');
-        return $card_object;
+        $_o = (object) null;
+        $_o->head = 'Login';
+        $_o->icon_background = 'sessions-icon-background';
+        $_o->size = 'medium';
+        $_o->body = SQDE_Forms::render(self::$package,'login');
+        return $_o;
     }
     public static function terms(){
-        $card_object = (object) null;
-        $card_object->head = 'Terms and Conditions';
-        $card_object->icon_background = 'settings-icon-background';
-        $card_object->size = 'medium';
-        $card_object->body = array_merge(SQDE_Forms::render(self::$package,'terms'),SQDE_Forms::render(self::$package,'acceptTerms'));
-        return $card_object;
+        $_o = (object) null;
+        $_o->head = 'Terms and Conditions';
+        $_o->icon_background = 'settings-icon-background';
+        $_o->size = 'medium';
+        $_o->body = array_merge(SQDE_Forms::render(self::$package,'terms'),SQDE_Forms::render(self::$package,'acceptTerms'));
+        return $_o;
     }
 }

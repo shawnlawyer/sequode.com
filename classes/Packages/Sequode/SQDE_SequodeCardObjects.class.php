@@ -4,13 +4,13 @@ class SQDE_SequodeCardObjects {
     public static $modeler = 'SQDE_Sequode';
     
     public static function menu(){
-        $card_object = (object) null;
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'sequode-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
-        $card_object->menu->items =  self::menuItems();
-        return $card_object;
+        $_o = (object) null;
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'sequode-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
+        $_o->menu->items =  self::menuItems();
+        return $_o;
     }
     public static function menuItems(){
         $items = array();
@@ -164,48 +164,48 @@ class SQDE_SequodeCardObjects {
 	public static function componentSettings($type, $member, $_model = null){
         $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
         
-        $card_object = (object) null;
-        $card_object->head = 'Component Settings';
-        $card_object->icon_type = 'card-icon';
-        $card_object->icon_background = 'atom-icon-background';
-        $card_object->size = 'medium';
+        $_o = (object) null;
+        $_o->head = 'Component Settings';
+        $_o->icon_type = 'card-icon';
+        $_o->icon_background = 'atom-icon-background';
+        $_o->size = 'medium';
         $dom_id = SQDE_Component::uniqueHash('','');
         $components = SQDE_Forms::render(self::$package,'componentSettings', array($type, $member, $dom_id));
-        $card_object->body = array();
-        $card_object->body[] = '<div id="' . $dom_id . '">';
+        $_o->body = array();
+        $_o->body[] = '<div id="' . $dom_id . '">';
         foreach($components as $component){
-            $card_object->body[] = $component;
+            $_o->body[] = $component;
         }
-        $card_object->body[] = '</div>';
-        return $card_object;
+        $_o->body[] = '</div>';
+        return $_o;
 	}
     public static function sequode($dom_id, $_model = null){
         $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
         
-        $card_object = (object) null;
-        $card_object->head = 'Component';
+        $_o = (object) null;
+        $_o->head = 'Component';
         $components = SQDE_Forms::render(self::$package,'sequode');
-        $card_object->body = array();
+        $_o->body = array();
         foreach($components as $component){
-            $card_object->body[] = $component->html;
+            $_o->body[] = $component->html;
         }
-        return $card_object;
+        return $_o;
 	}   
     public static function details( $_model = null){
         $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
         
-        $card_object = (object) null;
-        $card_object->size = 'large';
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'sequode-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->items = self::modelOperationsMenuItems();
+        $_o = (object) null;
+        $_o->size = 'large';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'sequode-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->items = self::modelOperationsMenuItems();
         
-        $card_object->head = 'Sequode Details';
-        $card_object->size = 'large';
-        $card_object->body = array('');
+        $_o->head = 'Sequode Details';
+        $_o->size = 'large';
+        $_o->body = array('');
         
-        $card_object->body[] = (object) array('js' => 'registry.setContext({card:\'cards/sequode/details\',collection:\'sequodes\',node:\''.$_model->id.'\'});');
+        $_o->body[] = (object) array('js' => 'registry.setContext({card:\'cards/sequode/details\',collection:\'sequodes\',node:\''.$_model->id.'\'});');
         $input_object = json_decode($_model->input_object);
         $property_object = json_decode($_model->property_object);
         $output_object = json_decode($_model->output_object);
@@ -215,24 +215,24 @@ class SQDE_SequodeCardObjects {
         $input_form_object = json_decode($_model->input_form_object);
         $property_form_object = json_decode($_model->property_form_object);
         
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Name');
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Name');
         $text = $_model->name;
-        $card_object->body[] = (SQDE_UserAuthority::canEdit()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/name', array($_model->id)), $text, 'settings') : $text;
+        $_o->body[] = (SQDE_UserAuthority::canEdit()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/name', array($_model->id)), $text, 'settings') : $text;
         
-        $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Description');
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Description');
         $text = json_decode($_model->detail)->description;
         $text = (!empty($text)) ? $text : 'Sequode needs description.';
-        $card_object->body[] = (SQDE_UserAuthority::canEdit()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/description', array($_model->id)), $text, 'settings') : $text;
+        $_o->body[] = (SQDE_UserAuthority::canEdit()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/description', array($_model->id)), $text, 'settings') : $text;
         
         if(SQDE_SequodeAuthority::isCode() && $_model->owner_id == 8){
             $dom_id = SQDE_Component::uniqueHash('','');
             $html = $js = array();
             $html = '<div class="subline kids" id="'.$dom_id.'">More info</div>';
             $js = SQDE_ComponentJS::onTapEvents($dom_id, 'var win = window.open(\'http://php.net/'.$_model->name.'\', \'_blank\'); win.focus();');
-            $card_object->body[] = (object) array('html' => $html, 'js' => $js);
+            $_o->body[] = (object) array('html' => $html, 'js' => $js);
         }
         if(SQDE_SequodeAuthority::isSequence()){
-            $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Sequence');
+            $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Sequence');
             $sequence = json_decode($_model->sequence);
             $model_object_cache = array();
             if(!SQDE_SequodeAuthority::isEmptySequence($_model)){
@@ -242,31 +242,31 @@ class SQDE_SequodeCardObjects {
                         $model_object_cache[$loop_model_id]->exists($loop_model_id,'id');
                     }
                     $text = '('.($loop_sequence_key+1).') '.$model_object_cache[$loop_model_id]->name;
-                    $card_object->body[] = (SQDE_UserAuthority::canEdit()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('cards/sequode/internalPositionForms', array($_model->id, $loop_sequence_key)), $text, 'settings') : $text;
+                    $_o->body[] = (SQDE_UserAuthority::canEdit()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('cards/sequode/internalPositionForms', array($_model->id, $loop_sequence_key)), $text, 'settings') : $text;
                 }
             }else{
-                    $card_object->body[] = 'Sequode is empty.';   
+                    $_o->body[] = 'Sequode is empty.';   
             }
         }
         if(SQDE_UserAuthority::isSystemOwner()){
-            $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Use Policy');
+            $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Use Policy');
             $text = (SQDE_SequodeAuthority::isShared()) ? 'Public Use' : 'System Restricted Use';
-            $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/sharing', array($_model->id)), $text, 'atom');
+            $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/sharing', array($_model->id)), $text, 'atom');
         }
         if(SQDE_SequodeAuthority::isCode()){
-            $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Tenancy Requirement');
+            $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Tenancy Requirement');
             $text = (SQDE_SequodeAuthority::isTenacyDedicated()) ? 'Dedicated Enviroment' : 'Shared Enviroment';
-            $card_object->body[] = (SQDE_UserAuthority::isSystemOwner()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/tenancy', array($_model->id)), $text, 'setting') : $text;
+            $_o->body[] = (SQDE_UserAuthority::isSystemOwner()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/tenancy', array($_model->id)), $text, 'setting') : $text;
         } 
         if(SQDE_SequodeAuthority::isSequence() && !SQDE_SequodeAuthority::isEmptySequence()){
-            $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Palettes Menu Visibility');
+            $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Palettes Menu Visibility');
             $text = (SQDE_SequodeAuthority::isPalette()) ? 'Shown in Palettes Menu' : 'Hidden from Palettes Menu';
-            $card_object->body[] = (SQDE_UserAuthority::canEdit($_model)) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/updateIsPalette', array($_model->id)), $text, 'settings') : $text;
+            $_o->body[] = (SQDE_UserAuthority::canEdit($_model)) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/updateIsPalette', array($_model->id)), $text, 'settings') : $text;
         } 
         if(SQDE_SequodeAuthority::isSequence() && !SQDE_SequodeAuthority::isEmptySequence()){
-            $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Packages Menu Visibility');
+            $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Packages Menu Visibility');
             $text = (SQDE_SequodeAuthority::isPackage()) ? 'Shown in Packages Menu' : 'Hidden from Packages Menu';
-            $card_object->body[] = (SQDE_UserAuthority::canEdit($_model)) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/updateIsPackage', array($_model->id)), $text, 'settings') : $text;
+            $_o->body[] = (SQDE_UserAuthority::canEdit($_model)) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/updateIsPackage', array($_model->id)), $text, 'settings') : $text;
         } 
         foreach(array('input','property') as $type){
             switch($type){
@@ -285,60 +285,60 @@ class SQDE_SequodeCardObjects {
             }
         
             if($type_object != (object) null){
-                $card_object->body[] = SQDE_CardComponentHTML::sublineBlock($type_title);
+                $_o->body[] = SQDE_CardComponentHTML::sublineBlock($type_title);
                 foreach($type_object as $member => $value){
-                    $card_object->body[] = $member . ' (' . $type_object_detail->$member->type. ') ' . (($type_object_detail->$member->required == true) ? 'required' : 'optional');
+                    $_o->body[] = $member . ' (' . $type_object_detail->$member->type. ') ' . (($type_object_detail->$member->required == true) ? 'required' : 'optional');
                     SQDE_Component::exists($type_form_object->$member->Component,'name');
                     $text = 'Form Component : '. SQDE_Component::model()->printable_name;
-                    $card_object->body[] = (SQDE_UserAuthority::canEdit()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('cards/sequode/componentSettings', array(SQDE_Form::jsQuotedValue($type), SQDE_Form::jsQuotedValue($member), $_model->id)), $text, 'settings') : $text;
+                    $_o->body[] = (SQDE_UserAuthority::canEdit()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('cards/sequode/componentSettings', array(SQDE_Form::jsQuotedValue($type), SQDE_Form::jsQuotedValue($member), $_model->id)), $text, 'settings') : $text;
                 }
             }
         }
         if($output_object != (object) null){
-            $card_object->body[] = SQDE_CardComponentHTML::sublineBlock('Outputs');
+            $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Outputs');
             foreach($output_object as $member => $value){
-                $card_object->body[] = $member . ' (' . $output_object_detail->$member->type. ')';
+                $_o->body[] = $member . ' (' . $output_object_detail->$member->type. ')';
             }
-            $card_object->body[] = '';
+            $_o->body[] = '';
         }
         
-        $card_object->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/sequode/details'));
+        $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/sequode/details'));
         
         if(SQDE_UserAuthority::isSystemOwner()){
-            $card_object->body[] = SQDE_CardComponentHTML::modelId($_model);
+            $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
         }
-        return $card_object;
+        return $_o;
     }
     public static function internalForms( $_model = null){
         $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
         
-        $card_object = (object) null;
-        $card_object->size = 'large';
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'sequode-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->items = self::modelOperationsMenuItems();
+        $_o = (object) null;
+        $_o->size = 'large';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'sequode-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->items = self::modelOperationsMenuItems();
         
-        $card_object->head = $_model->name;
+        $_o->head = $_model->name;
         
         $sequence = json_decode($_model->sequence);
         foreach($sequence as $loop_sequence_key => $loop_model_id){
-            $card_object->body[] = SQDE_Cards::render(self::$package,'internalPositionForms',array($loop_sequence_key));
+            $_o->body[] = SQDE_Cards::render(self::$package,'internalPositionForms',array($loop_sequence_key));
         }
         if(SQDE_UserAuthority::isSystemOwner()){
-            $card_object->body[] = SQDE_CardComponentHTML::modelId($_model);
+            $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
         }
-        return $card_object;
+        return $_o;
     }
     public static function internalPositionForms($position, $_model = null){
         $position = intval($position);
         $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
         
-        $card_object = (object) null;
-        $card_object->size = 'medium';
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'sequode-icon-background';
-        $card_object->menu = (object) null;
+        $_o = (object) null;
+        $_o->size = 'medium';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'sequode-icon-background';
+        $_o->menu = (object) null;
         
         
         $input_object_map = json_decode($_model->input_object_map);
@@ -352,10 +352,10 @@ class SQDE_SequodeCardObjects {
         $sequence_model = new SQDE_Sequode::$model;
         $sequence_model->exists($sequence_model_id,'id');
         
-        $card_object->head = $sequence_model->name;
-        $card_object->menu->items = self::modelOperationsMenuItems('', $sequence_model);
-        $card_object->body = array();
-        $card_object->body[] = '';
+        $_o->head = $sequence_model->name;
+        $_o->menu->items = self::modelOperationsMenuItems('', $sequence_model);
+        $_o->body = array();
+        $_o->body[] = '';
         $sequence_model->input_object_detail = json_decode($sequence_model->input_object_detail);
         $sequence_model->property_object_detail = json_decode($sequence_model->property_object_detail);
         
@@ -396,35 +396,35 @@ class SQDE_SequodeCardObjects {
         }
         foreach($possible_components as $component){
             if($type_labels[$component->type] != false){
-                $card_object->body[] = SQDE_CardComponentHTML::sublineBlock($type_labels[$component->type]);
+                $_o->body[] = SQDE_CardComponentHTML::sublineBlock($type_labels[$component->type]);
                 $type_labels[$component->type] = false;
             }
             if(($component->connected == true)){
                 $text = $component->member;
-                $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/component', array(SQDE_Form::jsQuotedValue($component->type), $_model->id, $component->map_key)), $text, 'settings');
+                $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/component', array(SQDE_Form::jsQuotedValue($component->type), $_model->id, $component->map_key)), $text, 'settings');
             }elseif($component->required == false && $component->value_set == false){ 
                 $text = $component->member;
-                $card_object->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/component', array(SQDE_Form::jsQuotedValue($component->type), $_model->id, $component->map_key)), $text, 'settings');
+                $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/component', array(SQDE_Form::jsQuotedValue($component->type), $_model->id, $component->map_key)), $text, 'settings');
             }else{
                 $components_array = SQDE_Forms::render(self::$package,'component',array($component->type, $component->map_key, $_model));
                 foreach($components_array as $component_object){
-                    $card_object->body[] = $component_object;
+                    $_o->body[] = $component_object;
                 }
             }
         }
-        return $card_object;
+        return $_o;
     }
     public static function sequencer( $_model = null){
         $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
         
-        $card_object = (object) null;
-        $card_object->size = 'fullscreen';
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'sequode-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->items = self::modelOperationsMenuItems();
+        $_o = (object) null;
+        $_o->size = 'fullscreen';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'sequode-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->items = self::modelOperationsMenuItems();
         
-        $card_object->head = 'Sequode Chart &gt; Edit &gt; '.$_model->name;
+        $_o->head = 'Sequode Chart &gt; Edit &gt; '.$_model->name;
         
         $items = array();
         $items[] = array(
@@ -437,9 +437,9 @@ class SQDE_SequodeCardObjects {
             'id'=>$dom_id,
             'js_action'=> 'new SQDE_XHRCall({route:\'forms/user/selectPalette\',inputs:['.SQDE_Form::jsQuotedValue($dom_id).']});'                 
         );
-        $card_object->menu->items = array_merge($items,$card_object->menu->items);
+        $_o->menu->items = array_merge($items,$_o->menu->items);
         
-        $card_object->body = array();
+        $_o->body = array();
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
         $html[] = '<div class="SequencerStageContainer" id="'.$dom_id.'chart"></div>';
@@ -450,22 +450,22 @@ class SQDE_SequodeCardObjects {
         $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'sequodes\', key:true, call: sequencer.run});';
         $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'palette\', call: sequencer.palette.run});';
         $js[] = 'registry.fetch({collection:\'sequodes\',key:'.$_model->id.'});';
-        $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
-        return $card_object;
+        $_o->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
+        return $_o;
     }
     public static function chart( $_model = null){
         $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
         
-        $card_object = (object) null;
-        $card_object->size = 'fullscreen';
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'sequode-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->items = self::modelOperationsMenuItems();
+        $_o = (object) null;
+        $_o->size = 'fullscreen';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'sequode-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->items = self::modelOperationsMenuItems();
         
-        $card_object->head = 'Sequode Chart &gt; View &gt; '.$_model->name;
+        $_o->head = 'Sequode Chart &gt; View &gt; '.$_model->name;
         
-        $card_object->body = array();
+        $_o->body = array();
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
         $html[] = '<div class="SequencerStageContainer" id="'.$dom_id.'chart"></div>';
@@ -476,74 +476,74 @@ class SQDE_SequodeCardObjects {
         $js[] = 'registry.setContext({card:\'cards/sequode/chart\',collection:\'sequodes\',node:'.$_model->id.',tearDown:function(){ sequencer = undefined; }});';
         $js[] = 'registry.subscribeToUpdates({type:\'context\', collection:\'sequodes\', key:true, call: sequencer.run});';
         $js[] = 'registry.fetch({collection:\'sequodes\',key:'.$_model->id.'});';
-        $card_object->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
-        return $card_object;
+        $_o->body[] = (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
+        return $_o;
     }
     public static function search($_model = null){
-        $card_object = (object) null;
-        $card_object->size = 'fullscreen';
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'sequode-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->items = array();
+        $_o = (object) null;
+        $_o->size = 'fullscreen';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'sequode-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->items = array();
         
         $search_components_array = SQDE_Forms::render(self::$package,'search');
-        $card_object->head = $search_components_array[0];
+        $_o->head = $search_components_array[0];
         array_shift($search_components_array);
         
         foreach($search_components_array as $key => $object){
-            $card_object->menu->items[] = array(
+            $_o->menu->items[] = array(
                 'css_classes'=>'automagic-card-menu-item noSelect',
                 'contents'=>$object->html,
                 'js_action'=> $object->js                
             );
         }
-        $card_object->body = array();
-        $card_object->body[] = SQDE_CardComponent::collection((object) array('collection'=>'sequode_search','icon'=>'sequode','card_route'=>'cards/sequode/search','details_route'=>'cards/sequode/details'));
-        return $card_object;
+        $_o->body = array();
+        $_o->body[] = SQDE_CardComponent::collection((object) array('collection'=>'sequode_search','icon'=>'sequode','card_route'=>'cards/sequode/search','details_route'=>'cards/sequode/details'));
+        return $_o;
     }
     public static function my(){
-        $card_object = (object) null;
-        $card_object->size = 'fullscreen';
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'sequode-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->items = array();
+        $_o = (object) null;
+        $_o->size = 'fullscreen';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'sequode-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->items = array();
         
-        $card_object->head = 'My Sequodes';
+        $_o->head = 'My Sequodes';
         
         $dom_id = SQDE_Component::uniqueHash('','');
-        $card_object->menu->items[] = array(
+        $_o->menu->items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'New Sequode',
             'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/sequode/newSequence'))
         );
         
-        $card_object->body = array();
-        $card_object->body[] = SQDE_CardComponent::collection((object) array('collection'=>'my','icon'=>'sequode','card_route'=>'cards/sequode/my','details_route'=>'cards/sequode/details'));
-        return $card_object;
+        $_o->body = array();
+        $_o->body[] = SQDE_CardComponent::collection((object) array('collection'=>'my','icon'=>'sequode','card_route'=>'cards/sequode/my','details_route'=>'cards/sequode/details'));
+        return $_o;
     }
     public static function favorites(){
-        $card_object = (object) null;
-        $card_object->size = 'fullscreen';
-        $card_object->icon_type = 'menu-icon';
-        $card_object->icon_background = 'sequode-icon-background';
-        $card_object->menu = (object) null;
-        $card_object->menu->items = array();
+        $_o = (object) null;
+        $_o->size = 'fullscreen';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'sequode-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->items = array();
         
-        $card_object->head = 'Sequode Favorites';
+        $_o->head = 'Sequode Favorites';
         
         $dom_id = SQDE_Component::uniqueHash('','');
-        $card_object->menu->items[] = array(
+        $_o->menu->items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'Empty Favorites',
             'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/user/emptySequodeFavorites',[],'function(){registry.fetch({collection:\'sequode_favorites\'});}'))
         );
         
-        $card_object->body = array();
-        $card_object->body[] = SQDE_CardComponent::collection((object) array('collection'=>'sequode_favorites','icon'=>'sequode','card_route'=>'cards/sequode/favorites','details_route'=>'cards/sequode/details'));
-        return $card_object;
+        $_o->body = array();
+        $_o->body[] = SQDE_CardComponent::collection((object) array('collection'=>'sequode_favorites','icon'=>'sequode','card_route'=>'cards/sequode/favorites','details_route'=>'cards/sequode/details'));
+        return $_o;
     }
 }
