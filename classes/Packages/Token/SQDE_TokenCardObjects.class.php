@@ -89,7 +89,7 @@ class SQDE_TokenCardObjects {
         $card_object->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         
         if(SQDE_UserAuthority::isSystemOwner()){
-            $card_object->body[] = '<div style="position:absolute; bottom:5px; right:5px;" class="subline kids">Id: '.$_model->id.'</div>';
+            $card_object->body[] = SQDE_CardComponentHTML::modelId($_model);
         }
         return $card_object;
     }
