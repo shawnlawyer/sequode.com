@@ -27,7 +27,7 @@ class SQDE_CardComponent {
         $dom_id = SQDE_Component::uniqueHash();
         $html[] = '<span class="automagic-card-next" id="'.$dom_id.'c"></span>';
         if(isset($component->model_id) && isset($component->details_route)){
-            $js[] = 'var next_id = registry.nextNode(registry.collection(registry.active_collection), \''.$_model->id.'\');';
+            $js[] = 'var next_id = registry.nextNode(registry.collection(registry.active_collection), \''.$component->model_id.'\');';
         
             $js[] = 'if(next_id != \''.$_model->id.'\'){';
             $js[] = 'document.getElementById(\''.$dom_id.'c\').innerHTML = \'<span class="noSelect kids" id="'.$dom_id.'">\' + registry.node(registry.active_collection, next_id).n + \' &gt;</span>\';';
