@@ -21,4 +21,19 @@ class SQDE_CardComponent {
         }
         return (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
     }
+    public static function nextInCollection($component){
+        
+        $html = $js = array();
+        $dom_id = SQDE_Component::uniqueHash();
+        $html[] = '<span class="automagic-card-next" id="'.$dom_id.'c"></span>';
+        if(isset($component->model_id) && isset($component->details_route)){
+            $js[] = 'var next_id = registry.nextNode(registry.collection(registry.active_collection), \''.$_model->id.'\');';
+        
+            $js[] = 'if(next_id != \''.$_model->id.'\'){';
+            $js[] = 'document.getElementById(\''.$dom_id.'c\').innerHTML = \'<span class="noSelect kids" id="'.$dom_id.'">\' + registry.node(registry.active_collection, next_id).n + \' &gt;</span>\';';
+            $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject($component->details_route, array('next_id')));
+            $js[] = '}';
+        }
+        return (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
+    }
 }
