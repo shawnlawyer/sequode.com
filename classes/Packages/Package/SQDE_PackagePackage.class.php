@@ -8,7 +8,7 @@ class SQDE_PackagePackage {
         $model->collections->main = 'packages';
         $model->collections->search = 'package_search';
         $model->modeler = 'SQDE_Package';
-        $model->finder = 'SQDE_PackagesFinder';
+        $model->finder = 'SQDE_PackageFinder';
         $model->card_objects = 'SQDE_PackageCardObjects';
         $model->form_objects = 'SQDE_PackageFormObjects';
         $model->operations = 'SQDE_PackageOperations';

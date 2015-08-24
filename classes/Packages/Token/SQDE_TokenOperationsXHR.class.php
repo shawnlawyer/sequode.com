@@ -53,4 +53,5 @@ class SQDE_TokenOperationsXHR {
         $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->search);
         return implode(' ',$js);
     }
+    
 }
