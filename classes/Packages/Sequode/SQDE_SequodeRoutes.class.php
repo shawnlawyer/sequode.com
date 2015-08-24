@@ -1,7 +1,7 @@
 <?php
 class SQDE_SequodeRoutes{
 	public static function collections($collection='collections', $key = null){
-        $collections = array('my', 'sequode_favorites', 'palette', 'user', 'sequodes');
+        $collections = array('my', 'sequode_favorites', 'palette', 'user', 'sequodes', 'tokens', 'packages');
         switch($collection){
 			case 'my':
                 $where = array();
