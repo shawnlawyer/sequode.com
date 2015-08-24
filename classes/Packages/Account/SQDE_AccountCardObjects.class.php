@@ -1,7 +1,7 @@
 <?php
 class SQDE_AccountCardObjects {
     public static $package = 'Account';
-    public static $modeler = 'SQDE_User';
+    public static $modeler = 'SQDE_AuthenticatedUser';
     public static function menu(){
         $_o = (object) null;
         $_o->icon_type = 'menu-icon';
@@ -23,15 +23,11 @@ class SQDE_AccountCardObjects {
         return $items;
     }
     public static function details(){
-         $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
+        $_model = forward_static_call_array(array(self::$modeler,'model'),array());
         $_o = (object) null;
         $_o->head = 'Account Detail';
-        
-        $_o = (object) null;
         $_o->icon_type = 'menu-icon';
         $_o->icon_background = 'user-icon-background';
-        $_o->menu = (object) null;
-        
         
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Username');
         $_o->body[] = $_model->username;
