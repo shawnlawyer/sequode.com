@@ -1,7 +1,8 @@
 <?php
-class SQDE_MachinesFinder {
+class SQDE_MachineFinder {
+    public static $package = 'Machine';
     public static function search($search_object, $limit=100){
-        
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $search_object->position = urldecode($search_object->position);
         //$search_object->field = urldecode($search_object->field);
         if(!in_array($search_object->position, array('=%','%=%','%=','='))){
@@ -17,10 +18,10 @@ class SQDE_MachinesFinder {
                 $where[] = $shared_where;
             }
             $where[] = array('field'=> $search_object->field,'operator'=>$search_object->position,'value'=>$search_object->search);
-            $machines_model = new SQDE_Machines;
-            $machines_model->getAll($where,'id,name',false, $limit);
-            $results = $machines_model->all;
-            unset($machines_model);
+            $_model = new $modeler::$model;
+            $_model->getAll($where,'id,name',false, $limit);
+            $results = $_model->all;
+            unset($_model);
         }else{
             $where = array();
             if(isset($shared_where)){
@@ -29,10 +30,10 @@ class SQDE_MachinesFinder {
             $where[] = array('field'=> $search_object->field,'operator'=>$search_object->position,'value'=>$search_object->search);
             $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
             
-            $machines_model = new SQDE_Machines;
-            $machines_model->getAll($where,'id,name',false, $limit);
-            $results = $machines_model->all;
-            unset($machines_model);
+            $_model = new $modeler::$model;
+            $_model->getAll($where,'id,name',false, $limit);
+            $results = $_model->all;
+            unset($_model);
         }
         return $results;
     }

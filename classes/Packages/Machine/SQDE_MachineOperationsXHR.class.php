@@ -1,58 +1,56 @@
 <?php
 class SQDE_MachineOperationsXHR {
+    public static $package = 'Machine';
     public static function newMachine(){
-        SQDE_MachineOperations::newMachine(SQDE_AuthenticatedUser::model()->id);
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array(SQDE_AuthenticatedUser::model()->id));
         $js = array();
-        $js[] = 'registry.fetch({collection:\'machines\', key:'.SQDE_Machine::model()->id.'});';
-        $js[] = SQDE_MachineCardsXHR::details(SQDE_Machine::model()->id);
+        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
+        $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
-    public static function updateName($machine_model_id, $json){
+    public static function updateName($_model_id, $json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-        SQDE_Machine::exists($machine_model_id,'id')
-        && (SQDE_UserAuthority::isMachineOwner()
+        $modeler::exists($_model_id,'id')
+        && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){ return; }
-        $input = json_decode($json);
-        $name = trim(str_replace('-','_',str_replace(' ','_',urldecode($input->name))));
+        $_o = json_decode($json);
+        $name = trim(str_replace('-','_',str_replace(' ','_',urldecode($_o->name))));
         if(strlen($name) < 2){
-            return ' alert(\'Application name should be more than 1 character long.\');';
+            return ' alert(\'Machine name should be more than 1 character long.\');';
         }
         if(!eregi("^([A-Za-z_])*$",substr($name,0,1))){
-            return ' alert(\'Application name should start with a letter or underscore\');';
+            return ' alert(\'Machine name should start with a letter or underscore\');';
         }
         if(!eregi("^([A-Za-z0-9_])*$",$name)){
-            return ' alert(\'Application must be alphanumeric and all spaces will convert to underscore.\');';
+            return ' alert(\'Machine name must be alphanumeric and all spaces will convert to underscore.\');';
         }
-        SQDE_MachineOperations::updateName($name);
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($name));
         $js = array();
-        $js[] = 'registry.fetch({collection:\'machines\', key:'.SQDE_Machine::model()->id.'});';
+        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
+        $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
-        
-        return;
     }
-    public static function delete($machine_model_id){
+    public static function delete($_model_id){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-        SQDE_Machine::exists($machine_model_id,'id')
-        && (SQDE_UserAuthority::isMachineOwner()
+        $modeler::exists($_model_id,'id')
+        && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){ return; }
-        SQDE_MachineOperations::delete();
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array());
         $js = array();
-        $js[] = 'registry.fetch({collection:\'machines\', key:'.SQDE_Machine::model()->id.'});';
+        $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'my'),array());
         return implode(' ', $js);
     }
-    public static function search($search_json){
-        $search_object = json_decode(stripslashes($search_json));
-        if(!is_object($search_object) || (trim($search_object->search) == '' || empty(trim($search_object->search)))){
-            SQDE_Session::set('machine_search', '{}');
-        }else{
-            SQDE_Session::set('machine_search', stripslashes($search_json));
-        }
+    public static function search($json){
+        $_o = json_decode(stripslashes($json));
+        $_o = (!is_object($_o) || (trim($_o->search) == '' || empty(trim($_o->search)))) ? (object) null : $_o;
+        SQDE_Session::set(SQDE_PackagesHandler::model(static::$package)->collections->search, $_o);
 		$js=array();
-        $js[] = 'registry.fetch({collection:\'machine_search\'});';
-        $js[] = 'registry.active_collection = \'machine_search\';';
-        
+        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->search);
         return implode(' ',$js);
     }
 }
