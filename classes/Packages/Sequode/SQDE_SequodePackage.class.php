@@ -1,12 +1,17 @@
 <?php
 class SQDE_SequodePackage {
     public static $package = 'Sequode'; 
-	public static function model($set = false){
+	public static function model(){
         $model = (object) null;
+        $model->context = 'sequode';
+        $model->collections = (object) null;
+        $model->collections->main = 'sequodes';
+        $model->collections->search = 'sequode_search';
+        $model->modeler = 'SQDE_Sequode';
+        $model->finder = 'SQDE_SequodeFinder';
         $model->card_objects = 'SQDE_SequodeCardObjects';
         $model->form_objects = 'SQDE_SequodeFormObjects';
         $model->operations = 'SQDE_SequodeOperations';
-        $model->finder = 'SQDE_SequodesFinder';
 		$model->routes = array(
 			'SQDE_SequodeRoutes'
 		);
