@@ -61,7 +61,7 @@ class SQDE_TokenOperationsXHR {
     public static function search($json){
         $collection = 'token_search';
         $_o = json_decode(stripslashes($json));
-        $_o = (!is_object($_o) || (trim($_o->search) == '' || empty(trim($_o->search)))) ? (object) null : $_o));
+        $_o = (!is_object($_o) || (trim($_o->search) == '' || empty(trim($_o->search)))) ? (object) null : $_o;
         SQDE_Session::set($collection, $_o);
 		$js=array();
         $js[] = 'registry.fetch({collection:\''.$collection.'\'});';
