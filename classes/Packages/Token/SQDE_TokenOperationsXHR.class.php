@@ -10,22 +10,6 @@ class SQDE_TokenOperationsXHR {
         $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
-	public static function updatePackageSequode($_model_id, $json){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $collection = 'tokens';
-        $_o = json_decode($json);
-        if(!(
-        $modeler::exists($_model_id,'id')
-        && SQDE_Sequode::exists($_o->sequode,'id')
-        && SQDE_SequodeAuthority::isPackage(SQDE_Sequode::model())
-        && ( SQDE_UserAuthority::isOwner($modeler::model()) || SQDE_UserAuthority::isSystemOwner() )
-        )){ return; }
-        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($_o->sequode));
-        $js = array();
-        $js[] = SQDE_ComponentJS::fetchCollection($collection, $modeler::model()->id);
-        $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
-        return implode(' ', $js);
-	}
     public static function updateName($_model_id, $json){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $collection = 'tokens';
