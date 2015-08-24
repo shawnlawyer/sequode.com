@@ -43,6 +43,7 @@ class SQDE_TokenOperationsXHR {
         forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array());
         $js = array();
         $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
+        $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'my'),array($modeler::model()->id));
         return implode(' ', $js);
     }
     public static function search($json){
