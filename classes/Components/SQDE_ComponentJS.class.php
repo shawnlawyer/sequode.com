@@ -119,7 +119,7 @@ class SQDE_ComponentJS {
         return $components_object;
 	}
     public static function fetchCollection($collection, $key=null){
-        return ($key == null) ? 'registry.fetch({collection:\''.$collection.'\'});' : 'registry.fetch({collection:\''.$collection.'\', key:'.$key.'});';
+        return ($key == null) ? 'registry.fetch({collection:\''.$collection.'\'});' : 'registry.fetch({collection:\''.$collection.'\', key:\''.$key.\''});';
 	}
     /*
 	public static function collectValues($form_object, $dom_ids){
