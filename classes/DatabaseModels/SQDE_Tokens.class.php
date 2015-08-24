@@ -14,7 +14,7 @@ class SQDE_Tokens extends SQDE_DatabaseModel {
 		 	(''
 			,0
 			,'New Token'
-            ,".$this->safedSQLData(SQDE_Session::uniqueHash('token'), 'text')."
+            ,".$this->safedSQLData(SQDE_TokenOperations::uniqueHash('SQDETOK'), 'text')."
             )
 			";
 		$this->database->query($sql);

@@ -1,39 +1,39 @@
 <?php
-class SQDE_TokenFormComponentObjects   {
+class SQDE_TokenFormComponentObjects{
+    public static $package = 'Token';
+    public static $modeler = 'SQDE_Token';
     public static function name($_model = null){
-        if($_model == null ){ $_model = SQDE_Token::model(); }
-        
-        $components_object = (object) null;
+        $_model = ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : $_model;
+        $_o = (object) null;
         
         SQDE_Component::exists('str','name');
-        $components_object->name = json_decode(SQDE_Component::model()->component_object);
-        $components_object->name->Label = '';
-        $components_object->name->Value = $_model->name;
-        $components_object->name->Width = 200;
-        $components_object->name->CSS_Class = 'focus-input';
+        $_o->name = json_decode(SQDE_Component::model()->component_object);
+        $_o->name->Label = '';
+        $_o->name->Value = $_model->name;
+        $_o->name->Width = 200;
+        $_o->name->CSS_Class = 'focus-input';
         
-		return $components_object;
+		return $_o;
         
 	}
     public static function search(){
-        
-        $components_object = (object) null;
+        $_o = (object) null;
         
         SQDE_Component::exists('str','name');
-        $components_object->search = json_decode(SQDE_Component::model()->component_object);
-        $components_object->search->Label = '';
-        $components_object->search->Value = '';
-        $components_object->search->Width = 200;
-        $components_object->search->CSS_Class = 'focus-input';
+        $_o->search = json_decode(SQDE_Component::model()->component_object);
+        $_o->search->Label = '';
+        $_o->search->Value = '';
+        $_o->search->Width = 200;
+        $_o->search->CSS_Class = 'focus-input';
         
         SQDE_Component::exists('select','name');
-        $components_object->position = json_decode(SQDE_Component::model()->component_object);
-        $components_object->position->Label = '';
-        $components_object->position->Values = "[{'value':'=%','printable':'Starts With'},{'value':'%=%','printable':'Contains'},{'value':'%=','printable':'Ends With'},{'value':'=','printable':'Exact'}]";
-        $components_object->position->Value = '=%';
-        $components_object->position->Value_Key = 'value';
-        $components_object->position->Printable_Key = 'printable';
+        $_o->position = json_decode(SQDE_Component::model()->component_object);
+        $_o->position->Label = '';
+        $_o->position->Values = "[{'value':'=%','printable':'Starts With'},{'value':'%=%','printable':'Contains'},{'value':'%=','printable':'Ends With'},{'value':'=','printable':'Exact'}]";
+        $_o->position->Value = '=%';
+        $_o->position->Value_Key = 'value';
+        $_o->position->Printable_Key = 'printable';
         
-		return $components_object;
+		return $_o;
 	}
 }

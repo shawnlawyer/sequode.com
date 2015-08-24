@@ -1,7 +1,15 @@
 <?php
 class SQDE_TokenOperations {
+	//public static function uniqueHash($prefix=''){
+    //    return $prefix.openssl_digest(uniqid(rand(), true).microtime(), 'sha512');
+	//}
+	public static function uniqueHash($prefix='SQDE'){
+		return $prefix.sha1(microtime().uniqid(rand(), true));
+	}
+    public static $modeler = 'SQDE_Token';
     public static function getModel($value = null, $by = null, $owner_id = null){
-        $_model = new SQDE_Token::$model;
+        $modeler = static::$modeler;
+        $_model = new $modeler::$model;
         switch($by){
             case 'id':
             case 'name':
@@ -23,26 +31,25 @@ class SQDE_TokenOperations {
 			break;
         }
         if($id != false){
-            SQDE_Token::exists($id,'id');
-            return SQDE_Token::model();
+            $modeler::exists($id,'id');
+            return $modeler::model();
         }
         return false;   
 	}
     public static function updateName($name, $_model = null){
-        if($_model != null ){ SQDE_Token::model($_model); }
-        SQDE_Token::model()->updateField(str_replace(" ","_",$name),'name');
-        return SQDE_Token::model();
+        ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'),array($_model));
+        $modeler::model()->updateField(str_replace(" ","_",$name),'name');
+        return $modeler::model();
     }
     public static function newToken($owner = 0){
-        SQDE_Token::model()->create();
-        SQDE_Token::exists(SQDE_Token::model()->id,'id');
-        SQDE_Token::model()->updateField(substr(SQDE_Session::uniqueHash('tokens','SQDETOK'),0,15),'name');
-        SQDE_Token::model()->updateField($owner,'owner_id');
-        return SQDE_Token::model();
+        $modeler::model()->create();
+        $modeler::exists($modeler::model()->id,'id');
+        $modeler::model()->updateField(substr(self::uniqueHash(),0,15),'name');
+        $modeler::model()->updateField($owner,'owner_id');
+        return $modeler::model();
 	}
     public static function delete($_model = null){
-        if($_model != null ){ SQDE_Token::model($_model); }
-        SQDE_Token::model()->delete(SQDE_Token::model()->id);
-        return SQDE_Token::model();
+        ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler::model()->delete($modeler::model()->id);
+        return $modeler::model();
     }
 }

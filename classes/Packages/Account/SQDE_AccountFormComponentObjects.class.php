@@ -3,7 +3,7 @@ class SQDE_AccountFormComponentObjects{
     public static $package = 'Account';
     public static $modeler = 'SQDE_AuthenticatedUser';
     public static function updateEmail($_model = null){
-        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : $_model;
+        $_model = ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : $_model;
         $_o = (object) null;
         
         SQDE_Component::exists('str','name');
@@ -22,6 +22,7 @@ class SQDE_AccountFormComponentObjects{
 		return $_o;
 	}
     public static function updatePassword(){
+        $_o = (object) null;
         
         SQDE_Component::exists('password','name');
 		$_o->password = json_decode(SQDE_Component::model()->component_object);

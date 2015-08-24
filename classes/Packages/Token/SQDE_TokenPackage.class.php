@@ -1,8 +1,9 @@
 <?php
 class SQDE_TokenPackage {
     public static $package = 'Token'; 
-	public static function model($set = false){
+	public static function model(){
         $model = (object) null;
+        $model->modeler = 'SQDE_Token';
         $model->card_objects = 'SQDE_TokenCardObjects';
         $model->form_objects = 'SQDE_TokenFormObjects';
         $model->operations = 'SQDE_TokenOperations';
