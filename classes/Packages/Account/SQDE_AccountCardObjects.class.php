@@ -42,7 +42,7 @@ class SQDE_AccountCardObjects {
         $_o->body[] = $_model->sequode_favorites;
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Email');
         $_o->body[] = $_model->email;
-        $sequodes_model = SQDE_UserOperations::getSequodesModelOfAllSequodes($_model,'id,name');
+        $sequodes_model = SQDE_UserOperations::getOwnedModels('Sequode', $user_model, 'id,name');
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Sequodes Created : '.count($sequodes_model->all));
         $dom_id = SQDE_Component::uniqueHash();
         foreach($sequodes_model->all as $i => $object){

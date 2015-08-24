@@ -5,50 +5,50 @@ class SQDE_UserOperationsXHR {
         if(!(
         SQDE_UserAuthority::isAuthenticated()
         )){ return; }
-        SQDE_UserOperations::emptySequodeFavorites();
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array());
         return;
     }
-    public static function addToSequodeFavorites($sequode_model_id){
+    public static function addToSequodeFavorites($_model_id){
         if(!(
-		SQDE_Sequode::exists($sequode_model_id,'id')
+		SQDE_Sequode::exists($_model_id,'id')
         && !SQDE_UserAuthority::isInSequodeFavorites()
         && SQDE_UserAuthority::canView()
         )){ return; }
-        SQDE_UserOperations::addToSequodeFavorites();
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array());
         return;
     }
-    public static function removeFromSequodeFavorites($sequode_model_id){
+    public static function removeFromSequodeFavorites($_model_id){
         if(!(
-		SQDE_Sequode::exists($sequode_model_id,'id')
+		SQDE_Sequode::exists($_model_id,'id')
         && SQDE_UserAuthority::isInSequodeFavorites()
         )){ return; }
-        SQDE_UserOperations::removeFromSequodeFavorites();
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array());
         return;
     }
     public static function selectPalette($json){
         if(!(
         SQDE_UserAuthority::isAuthenticated()
         )){ return; }
-        $input = json_decode(stripslashes($json));
-        if(!is_object($input) || (trim($input->palette) == '' || empty(trim($input->palette)))){
+        $_o = json_decode(stripslashes($json));
+        if(!is_object($_o) || (trim($_o->palette) == '' || empty(trim($_o->palette)))){
             SQDE_Session::set('palette', false);
         }else{
-            switch($input->palette){
+            switch($_o->palette){
                 case 'sequode_search':
                 case 'sequode_favorites':
-                    SQDE_Session::set('palette', $input->palette);
+                    SQDE_Session::set('palette', $_o->palette);
                     break;
                 default:
                     if((
-                    SQDE_Sequode::exists($input->palette,'id')
+                    SQDE_Sequode::exists($_o->palette,'id')
                     && SQDE_UserAuthority::canView()
                     )){ 
-                    SQDE_Session::set('palette', $input->palette);
+                    SQDE_Session::set('palette', $_o->palette);
                     }
                     break;
             }
         }
-        $js[]=  'registry.fetch({collection:\'palette\'});';
+        $js[]=  SQDE_ComponentJS::fetchCollection('palette');
         return implode(' ',$js);
     }
 }

@@ -65,7 +65,7 @@ class SQDE_DashboardCardObjects {
         );
         $_o->body = array();
         $_o->body[] = '';
-        $_model = SQDE_UserOperations::getSequodesModelOfAllSequodes($user_model,'id,name');
+        $_model = SQDE_UserOperations::getOwnedModels('Sequode', $user_model, 'id,name');
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Sequodes Created : '.count($_model->all));
         $dom_id = SQDE_Component::uniqueHash();
         foreach($_model->all as $i => $object){
@@ -97,7 +97,7 @@ class SQDE_DashboardCardObjects {
         );
         $_o->body = array();
         $_o->body[] = '';
-        $_model = SQDE_UserOperations::getMachinesModelOfAllMachines($user_model,'id,name');
+        $_model = SQDE_UserOperations::getOwnedModels('Machine', $user_model, 'id,name');
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Application Machines : '.count($_model->all));
         $dom_id = SQDE_Component::uniqueHash();
         foreach($_model->all as $i => $object){
@@ -129,7 +129,7 @@ class SQDE_DashboardCardObjects {
         );
         $_o->body = array();
         $_o->body[] = '';
-        $_model = SQDE_UserOperations::getPackagesModelOfAllPackages($user_model,'id,name');
+        $_model = SQDE_UserOperations::getOwnedModels('Package', $user_model, 'id,name');
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Packages : '.count($_model->all));
         $dom_id = SQDE_Component::uniqueHash();
         foreach($_model->all as $i => $object){

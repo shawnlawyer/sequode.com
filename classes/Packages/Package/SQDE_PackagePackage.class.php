@@ -1,7 +1,7 @@
 <?php
 class SQDE_PackagePackage {
     public static $package = 'Package'; 
-	public static function model($set = false){
+	public static function model(){
         $model = (object) null;
         $model->context = 'package';
         $model->collections = (object) null;

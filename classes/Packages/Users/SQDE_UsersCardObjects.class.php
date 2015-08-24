@@ -95,7 +95,7 @@ class SQDE_UsersCardObjects {
         $_o->body[] = $_model->sequode_favorites;
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Email');
         $_o->body[] = $_model->email;
-        $sequodes_model = SQDE_UserOperations::getSequodesModelOfAllSequodes($_model,'id,name');
+        $sequodes_model = SQDE_UserOperations::getOwnedModels('Sequode', $user_model, 'id,name');
         $_o->body[] = '<div class="subline kids">Sequodes Created : '.count($sequodes_model->all).'</div>';
         $dom_id = SQDE_Component::uniqueHash('','');
         foreach($sequodes_model->all as $i => $object){
