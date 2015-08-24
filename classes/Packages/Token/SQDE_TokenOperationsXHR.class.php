@@ -3,15 +3,16 @@ class SQDE_TokenOperationsXHR {
     public static $package = 'Token';
     public static function newToken(){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $collection = 'tokens';
         forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array(SQDE_AuthenticatedUser::model()->id));
         $js = array();
-        $js[] = 'registry.fetch({collection:\'tokens\', key:'.$modeler::model()->id.'});';
+        $js[] = SQDE_ComponentJS::fetchCollection($collection, $modeler::model()->id);
         $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
-    
 	public static function updatePackageSequode($_model_id, $json){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $collection = 'tokens';
         $_o = json_decode($json);
         if(!(
         $modeler::exists($_model_id,'id')
@@ -20,7 +21,10 @@ class SQDE_TokenOperationsXHR {
         && ( SQDE_UserAuthority::isOwner($modeler::model()) || SQDE_UserAuthority::isSystemOwner() )
         )){ return; }
         forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($_o->sequode));
-		return;
+        $js = array();
+        $js[] = SQDE_ComponentJS::fetchCollection($collection, $modeler::model()->id);
+        $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
+        return implode(' ', $js);
 	}
     public static function updateName($_model_id, $json){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
@@ -43,7 +47,8 @@ class SQDE_TokenOperationsXHR {
         }
         forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($name));
         $js = array();
-        $js[] = 'registry.fetch({collection:\''.$collection.'\', key:'.$modeler::model()->id.'});';
+        $js[] = SQDE_ComponentJS::fetchCollection($collection, $modeler::model()->id);
+        $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
     public static function delete($_model_id){
@@ -55,7 +60,7 @@ class SQDE_TokenOperationsXHR {
         )){ return; }
         forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array());
         $js = array();
-        $js[] = 'registry.fetch({collection:\''.$collection.'\', key:'.$modeler::model()->id.'});';
+        $js[] = SQDE_ComponentJS::fetchCollection($collection, $modeler::model()->id);
         return implode(' ', $js);
     }
     public static function search($json){
@@ -64,7 +69,7 @@ class SQDE_TokenOperationsXHR {
         $_o = (!is_object($_o) || (trim($_o->search) == '' || empty(trim($_o->search)))) ? (object) null : $_o;
         SQDE_Session::set($collection, $_o);
 		$js=array();
-        $js[] = 'registry.fetch({collection:\''.$collection.'\'});';
+        $js[] = SQDE_ComponentJS::fetchCollection($collection);
         return implode(' ',$js);
     }
 }

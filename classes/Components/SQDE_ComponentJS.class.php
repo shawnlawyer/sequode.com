@@ -118,6 +118,9 @@ class SQDE_ComponentJS {
         $components_object->js = implode('',$js);
         return $components_object;
 	}
+    public static function fetchCollection($collection, $key=null){
+        return ($key == null)? 'registry.fetch({collection:\''.$collection.'\'});' : 'registry.fetch({collection:\''.$collection.'\', key:'.$key.'});';
+	}
     /*
 	public static function collectValues($form_object, $dom_ids){
         $js = array();
