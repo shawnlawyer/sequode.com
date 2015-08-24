@@ -1,7 +1,7 @@
 <?php
 class SQDE_PackageOperationsXHR {
     public static $package = 'Package';
-    public static function newPackage
+    public static function newPackage(){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array(SQDE_AuthenticatedUser::model()->id));
         $js = array();
