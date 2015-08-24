@@ -73,7 +73,7 @@ class SQDE_SequodeRoutes{
                 return;
 			case 'session_search':
 				if(SQDE_Session::is($collection)){
-                    $search = SQDE_SessionsFinder::search(json_decode(SQDE_Session::get($collection)));
+                    $search = SQDE_SessionFinder::search(json_decode(SQDE_Session::get($collection)));
                     $nodes = array();
                     foreach($search as $object){
                         $nodes[] = '"'.$object->id.'":{"id":"'.$object->id.'","n":"'.$object->username.'"}';
