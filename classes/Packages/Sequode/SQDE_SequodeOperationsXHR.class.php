@@ -22,7 +22,7 @@ class SQDE_SequodeOperationsXHR {
         
         if(empty($object_map[$map_key]->Value)){
 			$js = array();
-			$js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
+            $js[] = SQDE_ComponentJS::fetchCollection('sequodes', SQDE_Sequode::model()->id);
 			return implode(' ',$js);
         }
     }
@@ -61,7 +61,7 @@ class SQDE_SequodeOperationsXHR {
         )){ return; }
         SQDE_Sequode::model(SQDE_SequodeOperations::makeSequenceCopy(SQDE_AuthenticatedUser::model()->id));
         $js = array();
-        $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
+        $js[] = SQDE_ComponentJS::fetchCollection('sequodes', SQDE_Sequode::model()->id);
 		$js[] = SQDE_SequodeCardsXHR::details(SQDE_Sequode::model()->id);
         return implode(' ', $js);
     }
@@ -71,7 +71,7 @@ class SQDE_SequodeOperationsXHR {
         )){ return; }
         SQDE_Sequode::model(SQDE_SequodeOperations::newSequence(SQDE_AuthenticatedUser::model()->id));
         $js = array();
-        $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
+        $js[] = SQDE_ComponentJS::fetchCollection('sequodes', SQDE_Sequode::model()->id);
         $js[] = SQDE_SequodeCardsXHR::details(SQDE_Sequode::model()->id);
         return implode(' ', $js);
     }
@@ -117,7 +117,7 @@ class SQDE_SequodeOperationsXHR {
         }else{
             SQDE_SequodeOperations::deleteSequence();
             $js = array();
-            $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
+            $js[] = SQDE_ComponentJS::fetchCollection('sequodes', SQDE_Sequode::model()->id);
             $js[] = SQDE_SequodeCardsXHR::my();
             return implode(' ', $js);
         }
