@@ -8,7 +8,7 @@ class SQDE_TokenPackage {
         $model->collections->main = 'tokens';
         $model->collections->search = 'token_search';
         $model->modeler = 'SQDE_Token';
-        $model->finder = 'SQDE_TokensFinder';
+        $model->finder = 'SQDE_TokenFinder';
         $model->card_objects = 'SQDE_TokenCardObjects';
         $model->form_objects = 'SQDE_TokenFormObjects';
         $model->operations = 'SQDE_TokenOperations';

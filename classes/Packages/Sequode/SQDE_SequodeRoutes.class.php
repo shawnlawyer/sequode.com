@@ -97,7 +97,7 @@ class SQDE_SequodeRoutes{
                 return;
 			case 'token_search':
 				if(SQDE_Session::is($collection)){
-                    $search = SQDE_TokensFinder::search(SQDE_Session::get($collection));
+                    $search = SQDE_TokenFinder::search(SQDE_Session::get($collection));
                     $nodes = array();
                     foreach($search as $object){
                         $nodes[] = '"'.$object->id.'":{"id":"'.$object->id.'","n":"'.$object->name.'"}';
