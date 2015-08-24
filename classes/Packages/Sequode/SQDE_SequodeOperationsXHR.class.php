@@ -2,8 +2,9 @@
 class SQDE_SequodeOperationsXHR {
     public static $package = 'Sequode';
     public static function updateValue($type, $_model_id, $map_key, $json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-        SQDE_Sequode::exists($_model_id,'id')
+        $modeler::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canEdit()
         )){ return; }
@@ -17,18 +18,18 @@ class SQDE_SequodeOperationsXHR {
             default:
                 return false;
         }
-        $object_map = json_decode(SQDE_Sequode::model()->$model_member);
-        SQDE_SequodeOperations::updateValue($type, $map_key, rawurldecode($input->location));
-        
+        $object_map = json_decode($modeler::model()->$model_member);
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($type, $map_key, rawurldecode($input->location)));
         if(empty($object_map[$map_key]->Value)){
 			$js = array();
-            $js[] = SQDE_ComponentJS::fetchCollection('sequodes', SQDE_Sequode::model()->id);
+            $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
 			return implode(' ',$js);
         }
     }
     public static function updateComponentSettings($type, $member, $member_json, $_model_id, $dom_id='FormsContainer'){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-        SQDE_Sequode::exists($_model_id,'id')
+        $modeler::exists($_model_id,'id')
         && SQDE_UserAuthority::canEdit()
         )){ return; }
         $form_member_object = json_decode(stripslashes($member_json));
@@ -44,44 +45,47 @@ class SQDE_SequodeOperationsXHR {
             default:
                 return;
         }
-        $previous_form_object = json_decode(SQDE_Sequode::model()->$model_member);
-        SQDE_SequodeOperations::updateComponentSettings($type, $member, $form_member_object);
+        $previous_form_object = json_decode($modeler::model()->$model_member);
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($type, $member, $form_member_object));
         if($previous_form_object->$member->Component != $form_member_object->Component){
             $js = array();
-            $js[] = 'new SQDE_XHRCall({route:"forms/sequode/componentSettings",inputs:[\''.$type.'\', \''.$member.'\', '.SQDE_Sequode::model()->id.', \''.$dom_id.'\']});';
+            $js[] = 'new SQDE_XHRCall({route:"forms/sequode/componentSettings",inputs:[\''.$type.'\', \''.$member.'\', '.$modeler::model()->id.', \''.$dom_id.'\']});';
 			return implode(' ',$js);
         }
     }
     public static function cloneSequence($_model_id){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
         SQDE_UserAuthority::canCreate()
-        && SQDE_Sequode::exists($_model_id,'id')
+        && $modeler::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canCopy()
         )){ return; }
-        SQDE_Sequode::model(SQDE_SequodeOperations::makeSequenceCopy(SQDE_AuthenticatedUser::model()->id));
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,'makeSequenceCopy'),array(SQDE_AuthenticatedUser::model()->id));
         $js = array();
-        $js[] = SQDE_ComponentJS::fetchCollection('sequodes', SQDE_Sequode::model()->id);
-		$js[] = SQDE_SequodeCardsXHR::details(SQDE_Sequode::model()->id);
+        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
+        $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
     public static function newSequence(){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
         SQDE_UserAuthority::canCreate()
         )){ return; }
-        SQDE_Sequode::model(SQDE_SequodeOperations::newSequence(SQDE_AuthenticatedUser::model()->id));
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array(SQDE_AuthenticatedUser::model()->id));
         $js = array();
-        $js[] = SQDE_ComponentJS::fetchCollection('sequodes', SQDE_Sequode::model()->id);
-        $js[] = SQDE_SequodeCardsXHR::details(SQDE_Sequode::model()->id);
+        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
+        $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
     public static function updateName($_model_id, $json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-        SQDE_Sequode::exists($_model_id,'id')
+        $modeler::exists($_model_id,'id')
         && SQDE_UserAuthority::canEdit()
         )){ return; }
-        $input = json_decode($json);
-        $name = trim(str_replace('-','_',str_replace(' ','_',urldecode($input->name))));
+        $_o = json_decode($json);
+        $name = trim(str_replace('-','_',str_replace(' ','_',urldecode($_o->name))));
         if(strlen($name)==0){
             return ' alert(\'Name cannot be empty\');';
         }
@@ -91,214 +95,224 @@ class SQDE_SequodeOperationsXHR {
         if(!SQDE_UserAuthority::canRename($name)){
             return ' alert(\'Name already exists\');';
         }
-        SQDE_Sequode::exists($_model_id,'id');
-        SQDE_SequodeOperations::updateName($name);
+        $modeler::exists($_model_id,'id');
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($name));
         $js = array();
-		$js[] = SQDE_SequodeCardsXHR::details(SQDE_Sequode::model()->id);
+        $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
         
         return;
     }
     public static function deleteSequence($_model_id,$confirmed=false){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-        SQDE_Sequode::exists($_model_id,'id')
+        $modeler::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canDelete()
         )){ return; }
-        $sequence = json_decode(SQDE_Sequode::model()->sequence);
-        if ($confirmed===false && is_array($sequence) && count(json_decode(SQDE_Sequode::model()->sequence)) != 0){
+        $sequence = json_decode($modeler::model()->sequence);
+        if ($confirmed===false && is_array($sequence) && count(json_decode($modeler::model()->sequence)) != 0){
             $js = array();
 			$js[] = 'if(';
 			$js[] = 'confirm(\'Are you sure you want to delete this?\')';
 			$js[] = '){';
-            $js[] = 'new SQDE_XHRCall({route:"operations/sequode/deleteSequence",inputs:['.SQDE_Sequode::model()->id.', true]});';
+            $js[] = 'new SQDE_XHRCall({route:"operations/sequode/deleteSequence",inputs:['.$modeler::model()->id.', true]});';
 			$js[] = '}';
 			return implode(' ',$js);
         }else{
-            SQDE_SequodeOperations::deleteSequence();
+            forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array());
             $js = array();
-            $js[] = SQDE_ComponentJS::fetchCollection('sequodes', SQDE_Sequode::model()->id);
-            $js[] = SQDE_SequodeCardsXHR::my();
+            $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
+            $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'my'),array());
             return implode(' ', $js);
         }
     }
     public static function formatSequence($_model_id,$confirmed=false){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-        SQDE_Sequode::exists($_model_id,'id')
+        $modeler::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canEdit()
         )){ return; }
         $js = array();
         if ($confirmed===false){
 			$js[] = 'if(';
-			$js[] = 'confirm(\'Are you sure you want to format '.SQDE_Sequode::model()->id.'?\')';
+			$js[] = 'confirm(\'Are you sure you want to format '.$modeler::model()->id.'?\')';
 			$js[] = '){';
-            $js[] = 'new SQDE_XHRCall({route:"operations/sequode/formatSequence",inputs:['.SQDE_Sequode::model()->id.', true]});';
+            $js[] = 'new SQDE_XHRCall({route:"operations/sequode/formatSequence",inputs:['.$modeler::model()->id.', true]});';
 			$js[] = '}';
         }else{
-            SQDE_SequodeOperations::makeDefaultSequencedSequode();
-            $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
+            forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,'makeDefaultSequencedSequode'),array());
+            $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
             $js[] = 'if(typeof registry.active_context != \'undefined\' && typeof registry.active_context.card != \'undefined\'){';
-            $js[] = 'new SQDE_XHRCall({route:registry.active_context.card, inputs:['.SQDE_Sequode::model()->id.']});';
+            $js[] = 'new SQDE_XHRCall({route:registry.active_context.card, inputs:['.$modeler::model()->id.']});';
             $js[] = '}';
         }
         return implode(' ',$js);
     }
-    public static function search($search_json){
-        if(!(
-        SQDE_UserAuthority::isAuthenticated()
-        )){ return; }
-        $search_object = json_decode(stripslashes($search_json));
-        if(!is_object($search_object) || (trim($search_object->search) == '' || empty(trim($search_object->search)))){
-            SQDE_Session::set('sequode_search', '{}');
-        }else{
-            SQDE_Session::set('sequode_search', stripslashes($search_json));
-        }
+    public static function search($json){
+        $_o = json_decode(stripslashes($json));
+        $_o = (!is_object($_o) || (trim($_o->search) == '' || empty(trim($_o->search)))) ? (object) null : $_o;
+        SQDE_Session::set(SQDE_PackagesHandler::model(static::$package)->collections->search, $_o);
 		$js=array();
-        if(SQDE_Session::get('palette') == 'sequode_search'){
-            $js[] = 'registry.fetch({collection:\'palette\'});';
+        if(SQDE_Session::get('palette') == SQDE_PackagesHandler::model(static::$package)->collections->search){
+            $js[] = SQDE_ComponentJS::fetchCollection('palette');
         }
-        $js[] = 'registry.fetch({collection:\'sequode_search\'});';
-        $js[] = 'registry.active_collection = \'sequode_search\';';
-        
+        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->search);
         return implode(' ',$js);
     }
 	public static function addToSequence($_model_id, $add_model_id, $position=0, $position_tuner = null, $grid_modifier = null){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-		SQDE_Sequode::exists($add_model_id,'id')
+		$modeler::exists($add_model_id,'id')
 		&& SQDE_UserAuthority::canRun()
-		&& SQDE_Sequode::exists($_model_id,'id')
+		&& $modeler::exists($_model_id,'id')
 		&& SQDE_UserAuthority::canEdit()
         && SQDE_SequodeAuthority::isSequence()
         && !SQDE_SequodeAuthority::isFullSequence()
 		)){ return; }
-        SQDE_SequodeOperations::addToSequence($add_model_id, $position, $position_tuner, $grid_modifier);
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($add_model_id, $position, $position_tuner, $grid_modifier));
 		return;
 	}
 	public static function reorderSequence($_model_id, $from_position=0, $to_position=0, $position_tuner = null, $grid_modifier = null){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-		SQDE_Sequode::exists($_model_id,'id')
+		$modeler::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
 		&& SQDE_UserAuthority::canEdit()
 		)){ return; }
-        SQDE_SequodeOperations::reorderSequence($from_position, $to_position, $position_tuner, $grid_modifier);
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($from_position, $to_position, $position_tuner, $grid_modifier));
 		return;
 	}
 	public static function removeFromSequence($_model_id, $position){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-		SQDE_Sequode::exists($_model_id,'id')
+		$modeler::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
 		&& SQDE_UserAuthority::canEdit()
 		)){ return; }
-        SQDE_SequodeOperations::removeFromSequence($position);
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($position));
 		return;
 	}
 	public static function modifyGridAreas($_model_id, $position){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-		SQDE_Sequode::exists($_model_id,'id')
+		$modeler::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
 		&& SQDE_UserAuthority::canEdit()
 		)){ return; }
-        SQDE_SequodeOperations::modifyGridAreas($position);
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($position));
 		return;
 	}
 	public static function emptySequence($_model_id){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-        SQDE_Sequode::exists($_model_id,'id')
+        $modeler::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canEdit()
         )){ return; }
-        SQDE_SequodeOperations::emptySequence();
-        $js[] = 'registry.fetch({collection:\'sequodes\', key:'.SQDE_Sequode::model()->id.'});';
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array());
+        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
         $js[] = 'if(registry.active_context != false && registry.active_context.card != \'\' && registry.active_context.node != \'\'){';
         $js[] = 'new SQDE_XHRCall({route:registry.active_context.card, inputs:[registry.active_context.node]});';
         $js[] = '}';
         return implode('',$js);
 	}
 	public static function moveGridArea($_model_id, $grid_area_key = 0, $x = 0, $y = 0){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-        SQDE_Sequode::exists($_model_id,'id')
+        $modeler::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canEdit()
         )){ return; }
-        SQDE_SequodeOperations::moveGridArea($grid_area_key, $x, $y);
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($grid_area_key, $x, $y));
 		return;
 	}
 	public static function addInternalConnection($_model_id, $receiver_type = false, $transmitter_key = 0, $receiver_key = 0){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-        SQDE_Sequode::exists($_model_id,'id')
+        $modeler::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canEdit()
         )){ return; }
-        SQDE_SequodeOperations::addInternalConnection($receiver_type, $transmitter_key, $receiver_key);
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($receiver_type, $transmitter_key, $receiver_key));
 		return;
 	}
 	public static function addExternalConnection($_model_id, $receiver_type = false, $transmitter_key = 0, $receiver_key = 0){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-        SQDE_Sequode::exists($_model_id,'id')
+        $modeler::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canEdit()
         )){ return; }
-        SQDE_SequodeOperations::addExternalConnection($receiver_type, $transmitter_key, $receiver_key);
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($connection_type, $restore_key));
 		return;
 	}
 	public static function removeReceivingConnection($_model_id, $connection_type = false, $restore_key = 0){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-        SQDE_Sequode::exists($_model_id,'id')
+        $modeler::exists($_model_id,'id')
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canEdit()
         )){ return; }
-        SQDE_SequodeOperations::removeReceivingConnection($connection_type, $restore_key);
+        $_o = json_decode($json);
+        if (!is_object($_o)){ return; }
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($connection_type, $restore_key));
 		return;
 	}
 	public static function updateTenancy($_model_id,$json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-        SQDE_Sequode::exists($_model_id,'id')
+        $modeler::exists($_model_id,'id')
         && SQDE_UserAuthority::isSystemOwner()
         )){ return; }
-        $input = json_decode($json);
-        if (!is_object($input)){ return; }
-        SQDE_SequodeOperations::updateTenancy(rawurldecode($input->tenancy));
+        $_o = json_decode($json);
+        if (!is_object($_o)){ return; }
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array(rawurldecode($_o->tenancy)));
 		return;
 	}
 	public static function updateSharing($_model_id,$json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-        SQDE_Sequode::exists($_model_id,'id')
+        $modeler::exists($_model_id,'id')
         && SQDE_UserAuthority::canShare()
         )){ return; }
-        $input = json_decode($json);
-        if (!is_object($input)){ return; }
-        SQDE_SequodeOperations::updateSharing(rawurldecode($input->sharing));
+        $_o = json_decode($json);
+        if (!is_object($_o)){ return; }
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array(rawurldecode($_o->sharing)));
 		return;
 	}
 	public static function updateIsPalette($_model_id,$json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-            SQDE_Sequode::exists($_model_id,'id')
+            $modeler::exists($_model_id,'id')
             && SQDE_UserAuthority::canEdit()
         )){return;}
-        $input = json_decode($json);
-        if (!is_object($input)){ return; }
-        SQDE_SequodeOperations::updateIsPalette(rawurldecode($input->palette));
+        $_o = json_decode($json);
+        if (!is_object($_o)){ return; }
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array(rawurldecode($_o->palette)));
 		return;
 	}
 	public static function updateIsPackage($_model_id,$json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-            SQDE_Sequode::exists($_model_id,'id')
+            $modeler::exists($_model_id,'id')
             && SQDE_UserAuthority::canEdit()
         )){return;}
-        $input = json_decode($json);
-        if (!is_object($input)){ return; }
-        SQDE_SequodeOperations::updateIsPackage(rawurldecode($input->package));
+        $_o = json_decode($json);
+        if (!is_object($_o)){ return; }
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array(rawurldecode($_o->package)));
 		return;
 	}
 	public static function updateDescription($_model_id, $json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
-        SQDE_Sequode::exists($_model_id,'id')
+        $modeler::exists($_model_id,'id')
         && SQDE_UserAuthority::canEdit()
         )){ return; }
-        $input = json_decode($json);
-        if (!is_object($input)){ return; }
-        SQDE_SequodeOperations::updateDescription(rawurldecode($input->description));
+        $_o = json_decode($json);
+        if (!is_object($_o)){ return; }
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array(rawurldecode($_o->description)));
 		return;
 	}
 }
