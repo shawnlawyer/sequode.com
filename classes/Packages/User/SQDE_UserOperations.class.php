@@ -1,6 +1,7 @@
 <?php
 class SQDE_UserOperations {
 
+    public static $package = 'User';
 	public static function uniqueHash($seed='',$prefix='SQDE'){
 		$time = explode(' ', microtime());
         $time = $time[0] + $time[1];

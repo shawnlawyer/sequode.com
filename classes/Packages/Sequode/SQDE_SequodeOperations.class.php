@@ -1,5 +1,6 @@
 <?php
 class SQDE_SequodeOperations {
+    public static $package = 'Sequode';
     public static function getModel($value = null, $by = null, $owner_id = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $_model = new $modeler::$model;
