@@ -33,12 +33,12 @@ class SQDE_UserOperations {
 	public static function getOwnedModels($package, $_model = null, $fields='id'){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
-        $_modeler = SQDE_PackagesHandler::model($package)->modeler;
-        $_models = new $_modeler::$model;
+        $package_modeler = SQDE_PackagesHandler::model($package)->modeler;
+        $package_model = new $package_modeler::$model;
         $where = array();
         $where[] = array('field'=>'owner_id','operator'=>'=','value'=>$modeler::model()->id);
-        $_model->getAll($where, $fields);
-        return $_model;
+        $package_model->getAll($where, $fields);
+        return $package_model;
 	}
     public static function updateActive($active = 0, $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
