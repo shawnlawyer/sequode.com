@@ -1,6 +1,5 @@
 <?php
-class SQDE_SequodesGenerator {
-
+class SQDE_SequodeOperationsKit{
 	public static function uniqueHash($seed='',$prefix='SQDE'){
 		$time = explode(' ', microtime());
         $time = $time[0] + $time[1];
@@ -261,10 +260,10 @@ class SQDE_SequodesGenerator {
         return $node;
     }
 	public static function makeDefaultProcessObject($type){
-        $o = (object) null;
+        $_o = (object) null;
         switch($type){
             case 'property':
-                $o->Run_Process = true;
+                $_o->Run_Process = true;
                 break;
             case 'output':
                 //$o->Success = true;
@@ -272,7 +271,7 @@ class SQDE_SequodesGenerator {
             default:
                 break;
         }
-		return $o;
+		return $_o;
 	}
     public static function makeProcessObject($type, $sequode_model = null){
         if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }

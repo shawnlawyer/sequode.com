@@ -12,6 +12,7 @@ class SQDE_SequodePackage {
         $model->card_objects = 'SQDE_SequodeCardObjects';
         $model->form_objects = 'SQDE_SequodeFormObjects';
         $model->operations = 'SQDE_SequodeOperations';
+        $model->operations_kit = 'SQDE_SequodeOperationsKit';
 		$model->routes = array(
 			'SQDE_SequodeRoutes'
 		);

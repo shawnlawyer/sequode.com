@@ -128,29 +128,31 @@ class SQDE_SequodeOperations {
 	}
     public static function newSequence($owner = 0){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $modeler::model()->create(substr(SQDE_SequodesGenerator::uniqueHash(),0,15), '', 1, 1);
+        $kit = SQDE_PackagesHandler::model(static::$package)->operations_kit;
+        
+        $modeler::model()->create(substr($kit::uniqueHash(),0,15), '', 1, 1);
         $modeler::exists($modeler::model()->id,'id');
-        $modeler::model()->updateField(substr(SQDE_SequodesGenerator::uniqueHash($modeler::model()->id.$modeler::model()->name),0,15),'name');
+        $modeler::model()->updateField(substr($kit::uniqueHash($modeler::model()->id.$modeler::model()->name),0,15),'name');
         $modeler::model()->updateField(1,'sequence_type');
         $modeler::model()->updateField('[]','sequence');
         $modeler::model()->updateField('[]','grid_areas');
-        $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeDefaultProcessObject('input')),'input_object');
-        $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeDefaultSequenceObjectMap('input',$modeler::model())),'input_object_map');
-        $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeDefaultProcessInstanceObject($modeler::model())),'process_instance_object');
+        $modeler::model()->updateField(json_encode($kit::makeDefaultProcessObject('input')),'input_object');
+        $modeler::model()->updateField(json_encode($kit::makeDefaultSequenceObjectMap('input',$modeler::model())),'input_object_map');
+        $modeler::model()->updateField(json_encode($kit::makeDefaultProcessInstanceObject($modeler::model())),'process_instance_object');
         $modeler::model()->updateField('{}','input_form_object');
-        $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeDefaultProcessObject('output')),'output_object');
-        $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeDefaultSequenceObjectMap('output',$modeler::model())),'output_object_map');
+        $modeler::model()->updateField(json_encode($kit::makeDefaultProcessObject('output')),'output_object');
+        $modeler::model()->updateField(json_encode($kit::makeDefaultSequenceObjectMap('output',$modeler::model())),'output_object_map');
         $property_object_detail = (object) null;
         $member = 'Run_Process';
-        $property_object_detail->$member = SQDE_SequodesGenerator::makeDefaultProcessObjectDetailMember($member);
+        $property_object_detail->$member = $kit::makeDefaultProcessObjectDetailMember($member);
         $modeler::model()->updateField(json_encode($property_object_detail),'property_object_detail');
-        $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeDefaultProcessObject('property')),'property_object');
-        $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeDefaultSequenceObjectMap('property',$modeler::model())),'property_object_map');
+        $modeler::model()->updateField(json_encode($kit::makeDefaultProcessObject('property')),'property_object');
+        $modeler::model()->updateField(json_encode($kit::makeDefaultSequenceObjectMap('property',$modeler::model())),'property_object_map');
         $modeler::model()->updateField('{}','property_form_object');
         $modeler::model()->updateField('{}','input_object_detail');
         $output_object_detail = (object) null;
         $member = 'Success';
-        $output_object_detail->$member = SQDE_SequodesGenerator::makeDefaultProcessObjectDetailMember($member);
+        $output_object_detail->$member = $kit::makeDefaultProcessObjectDetailMember($member);
         //$modeler::model()->updateField(json_encode($output_object_detail),'output_object_detail');
         $modeler::model()->updateField('{}','output_object_detail');
         $modeler::model()->updateField($owner,'owner_id');
@@ -194,35 +196,36 @@ class SQDE_SequodeOperations {
 	}
     public static function maintenance($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $kit = SQDE_PackagesHandler::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         if(SQDE_SequodeAuthority::isSequence()){
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeProcessObject('input')),'input_object');
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeProcessObject('property')),'property_object');
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeProcessObject('output')),'output_object');
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeProcessInstanceObject()),'process_instance_object');
+            $modeler::model()->updateField(json_encode($kit::makeProcessObject('input')),'input_object');
+            $modeler::model()->updateField(json_encode($kit::makeProcessObject('property')),'property_object');
+            $modeler::model()->updateField(json_encode($kit::makeProcessObject('output')),'output_object');
+            $modeler::model()->updateField(json_encode($kit::makeProcessInstanceObject()),'process_instance_object');
         
         
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::removeKeys(json_decode($modeler::model()->input_object_map))),'input_object_map');
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::removeKeys(json_decode($modeler::model()->property_object_map))),'property_object_map');
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::removeKeys(json_decode($modeler::model()->output_object_map))),'output_object_map');
+            $modeler::model()->updateField(json_encode($kit::removeKeys(json_decode($modeler::model()->input_object_map))),'input_object_map');
+            $modeler::model()->updateField(json_encode($kit::removeKeys(json_decode($modeler::model()->property_object_map))),'property_object_map');
+            $modeler::model()->updateField(json_encode($kit::removeKeys(json_decode($modeler::model()->output_object_map))),'output_object_map');
             
         }
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::pruneFormObject('input')),'input_form_object');
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::pruneFormObject('property')),'property_form_object');
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::updateFormObjectMembers('input')),'input_form_object');
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::updateFormObjectMembers('property')),'property_form_object');
+            $modeler::model()->updateField(json_encode($kit::pruneFormObject('input')),'input_form_object');
+            $modeler::model()->updateField(json_encode($kit::pruneFormObject('property')),'property_form_object');
+            $modeler::model()->updateField(json_encode($kit::updateFormObjectMembers('input')),'input_form_object');
+            $modeler::model()->updateField(json_encode($kit::updateFormObjectMembers('property')),'property_form_object');
             
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::updateProcessObjectDetails('input')),'input_object_detail');
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::updateProcessObjectDetails('property')),'property_object_detail');
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::updateProcessObjectDetails('output')),'output_object_detail');
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::pruneProcessObjectDetails('input')),'input_object_detail');
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::pruneProcessObjectDetails('property')),'property_object_detail');
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::pruneProcessObjectDetails('output')),'output_object_detail');
+            $modeler::model()->updateField(json_encode($kit::updateProcessObjectDetails('input')),'input_object_detail');
+            $modeler::model()->updateField(json_encode($kit::updateProcessObjectDetails('property')),'property_object_detail');
+            $modeler::model()->updateField(json_encode($kit::updateProcessObjectDetails('output')),'output_object_detail');
+            $modeler::model()->updateField(json_encode($kit::pruneProcessObjectDetails('input')),'input_object_detail');
+            $modeler::model()->updateField(json_encode($kit::pruneProcessObjectDetails('property')),'property_object_detail');
+            $modeler::model()->updateField(json_encode($kit::pruneProcessObjectDetails('output')),'output_object_detail');
         
         if(SQDE_SequodeAuthority::isSequence()){
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeDefaultSequenceObjectMap('input',$modeler::model())),'default_input_object_map');
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeDefaultSequenceObjectMap('property',$modeler::model())),'default_property_object_map');
-            $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeDefaultSequenceObjectMap('output',$modeler::model())),'default_output_object_map');
+            $modeler::model()->updateField(json_encode($kit::makeDefaultSequenceObjectMap('input',$modeler::model())),'default_input_object_map');
+            $modeler::model()->updateField(json_encode($kit::makeDefaultSequenceObjectMap('property',$modeler::model())),'default_property_object_map');
+            $modeler::model()->updateField(json_encode($kit::makeDefaultSequenceObjectMap('output',$modeler::model())),'default_output_object_map');
             
             self::autoSetTenancy();
         }
@@ -231,17 +234,19 @@ class SQDE_SequodeOperations {
     }
     public static function regenerateProcessDescriptionNode($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $kit = SQDE_PackagesHandler::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
-        $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeSequodeProcessDescriptionNode()),'process_description_node');
+        $modeler::model()->updateField(json_encode($kit::makeSequodeProcessDescriptionNode()),'process_description_node');
         return $modeler::model();
     }
 	public static function makeDefaultSequencedSequode( $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $kit = SQDE_PackagesHandler::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		if(intval($modeler::model()->usage_type) != 1){return false;}
 		$input_object = (object) null;
 		$input_object->Request = $modeler::model()->name;
-        $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::defaultGridAreas(count(json_decode($modeler::model()->sequence)))),'grid_areas');
+        $modeler::model()->updateField(json_encode($kit::defaultGridAreas(count(json_decode($modeler::model()->sequence)))),'grid_areas');
 		$modeler::model()->updateField('{}','input_object');
 		$modeler::model()->updateField('{}','property_object');
 		$modeler::model()->updateField('{}','output_object');
@@ -249,9 +254,9 @@ class SQDE_SequodeOperations {
 		$modeler::model()->updateField('{}','property_form_object');
 		$modeler::model()->updateField('{}','process_description_node');
 		$modeler::model()->updateField('{"Request_Name":"'.$modeler::model()->name.'","Parameters":{}}','process_instance_object');	
-		$modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::removeKeys(SQDE_SequodesGenerator::makeDefaultSequenceObjectMap('input',$modeler::model()))),'input_object_map');
-		$modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::removeKeys(SQDE_SequodesGenerator::makeDefaultSequenceObjectMap('property',$modeler::model()))),'property_object_map');
-		$modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::removeKeys(SQDE_SequodesGenerator::makeDefaultSequenceObjectMap('output',$modeler::model()))),'output_object_map');
+		$modeler::model()->updateField(json_encode($kit::removeKeys($kit::makeDefaultSequenceObjectMap('input',$modeler::model()))),'input_object_map');
+		$modeler::model()->updateField(json_encode($kit::removeKeys($kit::makeDefaultSequenceObjectMap('property',$modeler::model()))),'property_object_map');
+		$modeler::model()->updateField(json_encode($kit::removeKeys($kit::makeDefaultSequenceObjectMap('output',$modeler::model()))),'output_object_map');
         $modeler::model()->updateField('{}','input_object_detail');
         $modeler::model()->updateField('{}','property_object_detail');
         $modeler::model()->updateField('{}','output_object_detail');
@@ -272,44 +277,37 @@ class SQDE_SequodeOperations {
         //$modeler::model()->delete($modeler::model()->id);
         return $modeler::model();
     }
-    public static function saveCode($_model = null){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
-        $filename = str_replace('::','--',str_replace(' ','_',$modeler::model()->name)).$modeler::model()->stub_file_extension;
-        $save_directory = str_replace($modeler::model()->stub_file_extension,'',SQDE_FileManager::systemFilePath($modeler::model()->stub_file_extension));
-        $code = SQDE_SequodesGenerator::makeSequodeFromModel($modeler::model());
-        return SQDE_FileManager::saveFile($code, $save_directory . $filename);
-    }
 	public static function updateProcessDescriptionNode($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
-		$modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeSequodeProcessDescriptionNode()),'process_description_node');
+		$modeler::model()->updateField(json_encode($kit::makeSequodeProcessDescriptionNode()),'process_description_node');
         return $modeler::model();
     }
 	public static function addToSequence($add__model_id, $position = 0, $position_tuner = null, $grid_modifier = null, $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $kit = SQDE_PackagesHandler::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		if($position_tuner != null ){ $position_tuner = intval($position_tuner);}; 
 		if($grid_modifier != null ){ $grid_modifier = intval($grid_modifier);}; 
 		
 		$sequence = json_decode($modeler::model()->sequence);
-        $position = (count($sequence) == 0) ? 0 : SQDE_SequodesGenerator::getSequencePosition($position, $sequence, 1);
+        $position = (count($sequence) == 0) ? 0 : $kit::getSequencePosition($position, $sequence, 1);
 		
-		$sequence_map = SQDE_SequodesGenerator::makeUpdateSequenceInputMap($sequence);
-		$sequence_map = SQDE_SequodesGenerator::addToUpdateSequenceInputMap($sequence_map, $add__model_id, $position);
+		$sequence_map = $kit::makeUpdateSequenceInputMap($sequence);
+		$sequence_map = $kit::addToUpdateSequenceInputMap($sequence_map, $add__model_id, $position);
         if(count($sequence) == 0){
             self::updateSequence($sequence_map);
             return self::makeDefaultSequencedSequode();
         }else{
             $grid_areas = json_decode($modeler::model()->grid_areas);
-            $grid_areas = SQDE_SequodesGenerator::addToGridArea($position, $grid_areas, $modeler::model());
+            $grid_areas = $kit::addToGridArea($position, $grid_areas, $modeler::model());
             if(count($sequence) != 0){
-                $grid_areas = SQDE_SequodesGenerator::tuneGridAreaPosition($position, $grid_areas, $position_tuner, $modeler::model());
+                $grid_areas = $kit::tuneGridAreaPosition($position, $grid_areas, $position_tuner, $modeler::model());
             }
             self::updateSequence($sequence_map);
             $modeler::model()->updateField(json_encode($grid_areas),'grid_areas');
             if($grid_modifier > 0){
-                $grid_areas = SQDE_SequodesGenerator::modifyGridAreas($position, $grid_areas, $modeler::model());
+                $grid_areas = $kit::modifyGridAreas($position, $grid_areas, $modeler::model());
                 $modeler::model()->updateField(json_encode($grid_areas),'grid_areas');
             }
             self::maintenance();
@@ -318,19 +316,20 @@ class SQDE_SequodeOperations {
     }
 	public static function reorderSequence($from_position = 0, $to_position = 0, $position_tuner = null, $grid_modifier = null, $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $kit = SQDE_PackagesHandler::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		$sequence = json_decode($modeler::model()->sequence);
-		$from_position = SQDE_SequodesGenerator::getSequencePosition($from_position, $sequence);
-		$to_position = SQDE_SequodesGenerator::getSequencePosition($to_position, $sequence);
-        $sequence_map = SQDE_SequodesGenerator::makeUpdateSequenceInputMap($sequence);
-        $sequence_map = SQDE_SequodesGenerator::reorderUpdateSequenceInputMap($sequence_map ,$from_position, $to_position);
+		$from_position = $kit::getSequencePosition($from_position, $sequence);
+		$to_position = $kit::getSequencePosition($to_position, $sequence);
+        $sequence_map = $kit::makeUpdateSequenceInputMap($sequence);
+        $sequence_map = $kit::reorderUpdateSequenceInputMap($sequence_map ,$from_position, $to_position);
 		$grid_areas = json_decode($modeler::model()->grid_areas);
-		$grid_areas = SQDE_SequodesGenerator::moveFromGridAreaToGridArea($from_position, $to_position, $grid_areas, $modeler::model());
-		$grid_areas = SQDE_SequodesGenerator::tuneGridAreaPosition($to_position, $grid_areas, $position_tuner, $modeler::model());
+		$grid_areas = $kit::moveFromGridAreaToGridArea($from_position, $to_position, $grid_areas, $modeler::model());
+		$grid_areas = $kit::tuneGridAreaPosition($to_position, $grid_areas, $position_tuner, $modeler::model());
 		SQDE_SequodesSequencer::updateSequence($sequence_map);
 		$modeler::model()->updateField(json_encode($grid_areas),'grid_areas');
         if($grid_modifier > 0){
-            $grid_areas = SQDE_SequodesGenerator::modifyGridAreas($to_position, $grid_areas, $modeler::model());
+            $grid_areas = $kit::modifyGridAreas($to_position, $grid_areas, $modeler::model());
             $modeler::model()->updateField(json_encode($grid_areas),'grid_areas');
         }
         self::maintenance();
@@ -338,13 +337,14 @@ class SQDE_SequodeOperations {
     }
 	public static function removeFromSequence($position, $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $kit = SQDE_PackagesHandler::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		$sequence = json_decode($modeler::model()->sequence);
-		$position = SQDE_SequodesGenerator::getSequencePosition($position, $sequence);
-        $sequence_map = SQDE_SequodesGenerator::makeUpdateSequenceInputMap($sequence);
-        $sequence_map = SQDE_SequodesGenerator::removeFromUpdateSequenceInputMap($sequence_map,$position);
+		$position = $kit::getSequencePosition($position, $sequence);
+        $sequence_map = $kit::makeUpdateSequenceInputMap($sequence);
+        $sequence_map = $kit::removeFromUpdateSequenceInputMap($sequence_map,$position);
 		$grid_areas = json_decode($modeler::model()->grid_areas);
-		$grid_areas = SQDE_SequodesGenerator::removeFromGridArea($position, $grid_areas, $modeler::model());
+		$grid_areas = $kit::removeFromGridArea($position, $grid_areas, $modeler::model());
 		self::updateSequence($sequence_map);
 		$modeler::model()->updateField(json_encode($grid_areas),'grid_areas');
         self::maintenance();
@@ -352,11 +352,12 @@ class SQDE_SequodeOperations {
     }
 	public static function modifyGridAreas($position = 0, $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $kit = SQDE_PackagesHandler::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		$sequence = json_decode($modeler::model()->sequence);
-		$position = SQDE_SequodesGenerator::getSequencePosition($position, $sequence, 1);
+		$position = $kit::getSequencePosition($position, $sequence, 1);
 		$grid_areas = json_decode($modeler::model()->grid_areas);
-		$grid_areas = SQDE_SequodesGenerator::modifyGridAreas($position, $grid_areas, $modeler::model());
+		$grid_areas = $kit::modifyGridAreas($position, $grid_areas, $modeler::model());
 		$modeler::model()->updateField(json_encode($grid_areas),'grid_areas');
         self::maintenance();
 		return $modeler::model();
@@ -370,6 +371,7 @@ class SQDE_SequodeOperations {
     }	
 	public static function buildSequodeCodeNodeOffMineObject($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $kit = SQDE_PackagesHandler::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $mine_object = json_decode($modeler::model()->mine_object);
         $detail = (object) null;
@@ -403,18 +405,18 @@ class SQDE_SequodeOperations {
         foreach($mine_object->parameters as $key_2 => $object_2){
             if($object_2->name != ''){
                 $member = $object_2->name;
-                $input_object_detail->$member = SQDE_SequodesGenerator::makeProcessObjectDetailMember('input', $object_2->type ,$object_2->name, $object_2->default_value ,'str', $object_2->required);
+                $input_object_detail->$member = $kit::makeProcessObjectDetailMember('input', $object_2->type ,$object_2->name, $object_2->default_value ,'str', $object_2->required);
             }
         }
         $property_object_detail = (object) null;
         $member = 'Run_Process';
-        $property_object_detail->$member = SQDE_SequodesGenerator::makeDefaultProcessObjectDetailMember($member);
+        $property_object_detail->$member = $kit::makeDefaultProcessObjectDetailMember($member);
         $output_object_detail = (object) null;
         $member = 'Success';
-        $output_object_detail->$member = SQDE_SequodesGenerator::makeDefaultProcessObjectDetailMember($member);
+        $output_object_detail->$member = $kit::makeDefaultProcessObjectDetailMember($member);
         if($mine_object->return_type != 'void' && $mine_object->return_type != ''){
             $member = $mine_object->return_type;
-            $output_object_detail->$member = SQDE_SequodesGenerator::makeProcessObjectDetailMember('output', $mine_object->return_type ,$mine_object->return_type, null);
+            $output_object_detail->$member = $kit::makeProcessObjectDetailMember('output', $mine_object->return_type ,$mine_object->return_type, null);
         }
         $modeler::model()->updateField(json_encode($detail),'detail');
         $modeler::model()->updateField(json_encode($input_object),'input_object');
@@ -427,6 +429,7 @@ class SQDE_SequodeOperations {
     }
 	public static function processCodedSequodeSetupData($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $kit = SQDE_PackagesHandler::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		$detail = json_decode($modeler::model()->detail);
 		$input_object_detail = json_decode($modeler::model()->input_object_detail);
@@ -442,11 +445,12 @@ class SQDE_SequodeOperations {
 		$modeler::model()->updateField('[]','property_object_map');
 		$modeler::model()->updateField('[]','output_object_map');
 		$modeler::model()->updateField('{}','process_description_node');
-        $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::makeSequodeProcessDescriptionNode($modeler::model())),'process_description_node');
+        $modeler::model()->updateField(json_encode($kit::makeSequodeProcessDescriptionNode($modeler::model())),'process_description_node');
 		return $modeler::model();
     }
 	public static function moveGridArea($grid_area_key = 0, $x = 0, $y = 0, $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $kit = SQDE_PackagesHandler::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $grid_area_key = intval($grid_area_key);
 		$x = intval($x); 
@@ -454,13 +458,14 @@ class SQDE_SequodeOperations {
         
         $grid_areas = json_decode($modeler::model()->grid_areas);
 		if(!isset($grid_areas[$grid_area_key])){return $modeler::model();}
-		$grid_areas = SQDE_SequodesGenerator::moveGridArea($grid_area_key, $grid_areas, $x, $y, $modeler::model());
+		$grid_areas = $kit::moveGridArea($grid_area_key, $grid_areas, $x, $y, $modeler::model());
 		$modeler::model()->updateField(json_encode($grid_areas),'grid_areas');
         self::maintenance();
 		return $modeler::model();
     }
     public static function updateValue($type = false, $map_key = 0, $value = null, $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $kit = SQDE_PackagesHandler::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         if (intval($modeler::model()->usage_type) === 0){return false;}
         switch($type){
@@ -528,7 +533,7 @@ class SQDE_SequodeOperations {
                 break;
         }
         $object_map[$map_key]->Value = $value;
-        $modeler::model()->updateField(json_encode(SQDE_SequodesGenerator::removeKeys($object_map)),$object_map_member);
+        $modeler::model()->updateField(json_encode($kit::removeKeys($object_map)),$object_map_member);
         if($run_maintenance){
             $modelerOperations::maintenance();
         }
@@ -569,6 +574,7 @@ class SQDE_SequodeOperations {
     }
     public static function addExternalConnection($connection_type = false, $transmitter_key = 0, $receiver_key = 0, $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $kit = SQDE_PackagesHandler::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         if(intval($modeler::model()->usage_type) === 0 ){return $modeler::model();}
         switch($connection_type){
@@ -593,7 +599,7 @@ class SQDE_SequodeOperations {
         if($external_key > count($type_object)){return $modeler::model();}
         
         if($external_key == 0){
-            $external_member_name = SQDE_SequodesGenerator::makeUniqueMemberName($default_object_map[$internal_key]->Member, $object_map);
+            $external_member_name = $kit::makeUniqueMemberName($default_object_map[$internal_key]->Member, $object_map);
         }else{
             $i = 1;
             foreach($type_object as $member => $value){
@@ -680,6 +686,7 @@ class SQDE_SequodeOperations {
     }
     public static function updateSequence($new_sequence_map, $sequode_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $kit = SQDE_PackagesHandler::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		
 		$old_sequence = json_decode($modeler::model()->sequence);
@@ -781,7 +788,7 @@ class SQDE_SequodeOperations {
 				$loop_object = json_decode($object_cache[$object->id]->input_object);
 				$loop_sequence_map = array();
 				foreach($loop_object as $member => $value){
-					$loop_sequence_map[] = SQDE_SequodesGenerator::makeMapLocationObject('input','x',$member,$value);
+					$loop_sequence_map[] = $kit::makeMapLocationObject('input','x',$member,$value);
 				}
 			}else{
 				$loop_sequence_map = $old_sequence_maps[$object->order]['input_object_map'];
@@ -792,7 +799,7 @@ class SQDE_SequodeOperations {
 				$loop_object = json_decode($object_cache[$object->id]->property_object);
 				$loop_sequence_map = array();
 				foreach($loop_object as $member => $value){
-					$loop_sequence_map[] = SQDE_SequodesGenerator::makeMapLocationObject('property','x',$member,$value);
+					$loop_sequence_map[] = $kit::makeMapLocationObject('property','x',$member,$value);
 				}
 			}else{
 				$loop_sequence_map = $old_sequence_maps[$object->order]['property_object_map'];
@@ -803,7 +810,7 @@ class SQDE_SequodeOperations {
 				$loop_object = json_decode($object_cache[$object->id]->output_object);
 				$loop_sequence_map = array();
                 foreach($loop_object as $member => $value){
-					$loop_sequence_map[] = SQDE_SequodesGenerator::makeMapLocationObject('output','x',$member,$value);
+					$loop_sequence_map[] = $kit::makeMapLocationObject('output','x',$member,$value);
 				}
 			}else{
 				$loop_sequence_map = $old_sequence_maps[$object->order]['output_object_map'];
@@ -829,21 +836,21 @@ class SQDE_SequodeOperations {
 			$loop_object = json_decode($object_cache[$object->id]->input_object);
 			$loop_sequence_map = array();
 			foreach( $loop_object as $member => $value){
-                $loop_sequence_map[] = SQDE_SequodesGenerator::makeMapLocationObject('input',$key+1,$member,$loop_object->$member);
+                $loop_sequence_map[] = $kit::makeMapLocationObject('input',$key+1,$member,$loop_object->$member);
 			}
             $default_sequence_maps[$key]['input_object_map'] = $loop_sequence_map;
 			
 			$loop_object = json_decode($object_cache[$object->id]->property_object);
 			$loop_sequence_map = array();
 			foreach( $loop_object as $member => $value){
-				$loop_sequence_map[] = SQDE_SequodesGenerator::makeMapLocationObject('property',$key+1,$member,$loop_object->$member);
+				$loop_sequence_map[] = $kit::makeMapLocationObject('property',$key+1,$member,$loop_object->$member);
 			}
 			$default_sequence_maps[$key]['property_object_map'] = $loop_sequence_map;
 
 			$loop_object = json_decode($object_cache[$object->id]->output_object);
 			$loop_sequence_map = array();
 			foreach( $loop_object as $member => $value){
-				$loop_sequence_map[] = SQDE_SequodesGenerator::makeMapLocationObject('output',$key+1,$member,$loop_object->$member);
+				$loop_sequence_map[] = $kit::makeMapLocationObject('output',$key+1,$member,$loop_object->$member);
 			}
 			$default_sequence_maps[$key]['output_object_map'] = $loop_sequence_map;
 		}
