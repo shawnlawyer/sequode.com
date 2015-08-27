@@ -149,7 +149,7 @@ class SQDE_DashboardCardObjects {
         }
         return $_o;
     }
-    public static function myPackages($user_model=null){
+    public static function myTokens($user_model=null){
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
         $_o = (object) null;
         $_o->head = 'My Tokens';
