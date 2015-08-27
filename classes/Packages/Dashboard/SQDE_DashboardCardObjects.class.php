@@ -17,6 +17,9 @@ class SQDE_DashboardCardObjects {
             case 'packages':
             case 'my_packages':
                 return self::myPackages($user_model);
+            case 'tokens':
+            case 'my_tokens':
+                return self::myTokens($user_model);
         }
     }
     public static function gettingStarted($user_model=null){
@@ -32,6 +35,10 @@ class SQDE_DashboardCardObjects {
         $html[] = SQDE_Card::shim();
         $html[] = SQDE_Card::shim();
         $component_object = SQDE_Cards::render('Dashboard', 'collection', array('my_sequodes', $user_model));
+        $html[] = $component_object->html;
+        $js[] = $component_object->js;
+        $html[] = SQDE_Card::shim();
+        $component_object = SQDE_Cards::render('Dashboard', 'collection', array('my_tokens', $user_model));
         $html[] = $component_object->html;
         $js[] = $component_object->js;
         $html[] = SQDE_Card::shim();
@@ -138,6 +145,38 @@ class SQDE_DashboardCardObjects {
             $html[] = $object->name;
             $html[] = '</div>';
             $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/package/details', array($object->id)));
+            $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
+        }
+        return $_o;
+    }
+    public static function myPackages($user_model=null){
+        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
+        $_o = (object) null;
+        $_o->head = 'My Tokens';
+        $_o->size = 'small';
+        $_o->icon_type = 'menu-icon';
+        $_o->icon_background = 'atom-icon-background';
+        $_o->menu = (object) null;
+        $_o->menu->items =  array();
+        
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $_o->menu->items[] = array(
+            'css_classes'=>'automagic-card-menu-item noSelect',
+            'id'=>$dom_id,
+            'contents'=>'New Token',
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/token/newToken'))
+        );
+        $_o->body = array();
+        $_o->body[] = '';
+        $_model = SQDE_UserOperations::getOwnedModels('Token', $user_model, 'id,name');
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Tokens : '.count($_model->all));
+        $dom_id = SQDE_Component::uniqueHash();
+        foreach($_model->all as $i => $object){
+            $html = $js = array();
+            $html[] = '<div class="automagic-card-text-button" id="'.$dom_id.$i.'">';
+            $html[] = $object->name;
+            $html[] = '</div>';
+            $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/token/details', array($object->id)));
             $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         }
         return $_o;
