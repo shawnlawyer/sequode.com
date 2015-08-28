@@ -87,7 +87,7 @@ class SQDE_SequodeFormComponentObjects   {
 	}
     public static function component($type, $map_key, $sequode_model = null){
         if($sequode_model != null ){ SQDE_Sequode::model($sequode_model); }
-        $default_map = SQDE_SequodesOperationsKit::makeDefaultSequenceObjectMap($type,$sequode_model);
+        $default_map = SQDE_SequodeOperationsKit::makeDefaultSequenceObjectMap($type,$sequode_model);
         $sequence =  json_decode(SQDE_Sequode::model()->sequence);
         $location_object = $default_map[$map_key];
 		$sequence_key = $location_object->Key - 1;
