@@ -5,7 +5,8 @@ class SQDE_PackageOperationsXHR {
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array(SQDE_AuthenticatedUser::model()->id));
         $js = array();
-        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
+        $collection = 'packages';
+        $js[] = SQDE_ComponentJS::fetchCollection($collection, $modeler::model()->id);
         $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
@@ -20,7 +21,8 @@ class SQDE_PackageOperationsXHR {
         )){ return; }
         forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($_o->sequode));
         $js = array();
-        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
+        $collection = 'packages';
+        $js[] = SQDE_ComponentJS::fetchCollection($collection, $modeler::model()->id);
         $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
 	}
@@ -44,7 +46,9 @@ class SQDE_PackageOperationsXHR {
         }
         forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($name));
         $js = array();
-        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
+        
+        $collection = 'packages';
+        $js[] = SQDE_ComponentJS::fetchCollection($collection, $modeler::model()->id);
         $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
@@ -63,9 +67,10 @@ class SQDE_PackageOperationsXHR {
     public static function search($json){
         $_o = json_decode(stripslashes($json));
         $_o = (!is_object($_o) || (trim($_o->search) == '' || empty(trim($_o->search)))) ? (object) null : $_o;
-        SQDE_Session::set(SQDE_PackagesHandler::model(static::$package)->collections->search, $_o);
+        $collection = 'package_search';
+        SQDE_Session::set($collection, $_o);
 		$js=array();
-        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->search);
+        $js[] = SQDE_ComponentJS::fetchCollection($collection);
         return implode(' ',$js);
     }
 }

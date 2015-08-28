@@ -22,7 +22,8 @@ class SQDE_SequodeOperationsXHR {
         forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($type, $map_key, rawurldecode($input->location)));
         if(empty($object_map[$map_key]->Value)){
 			$js = array();
-            $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
+            $collection = 'sequodes';
+            $js[] = SQDE_ComponentJS::fetchCollection($collection, $modeler::model()->id);
 			return implode(' ',$js);
         }
     }
@@ -63,7 +64,8 @@ class SQDE_SequodeOperationsXHR {
         )){ return; }
         forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,'makeSequenceCopy'),array(SQDE_AuthenticatedUser::model()->id));
         $js = array();
-        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
+        $collection = 'sequodes';
+        $js[] = SQDE_ComponentJS::fetchCollection($collection, $modeler::model()->id);
         $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
@@ -74,7 +76,8 @@ class SQDE_SequodeOperationsXHR {
         )){ return; }
         forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array(SQDE_AuthenticatedUser::model()->id));
         $js = array();
-        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
+        $collection = 'sequodes';
+        $js[] = SQDE_ComponentJS::fetchCollection($collection, $modeler::model()->id);
         $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
@@ -122,7 +125,8 @@ class SQDE_SequodeOperationsXHR {
         }else{
             forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array());
             $js = array();
-            $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
+            $collection = 'sequodes';
+            $js[] = SQDE_ComponentJS::fetchCollection($collection, $modeler::model()->id);
             $js[] = forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->xhr->cards,'my'),array());
             return implode(' ', $js);
         }
@@ -143,22 +147,12 @@ class SQDE_SequodeOperationsXHR {
 			$js[] = '}';
         }else{
             forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,'makeDefaultSequencedSequode'),array());
-            $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
+            $collection = 'sequodes';
+            $js[] = SQDE_ComponentJS::fetchCollection($collection, $modeler::model()->id);
             $js[] = 'if(typeof registry.active_context != \'undefined\' && typeof registry.active_context.card != \'undefined\'){';
             $js[] = 'new SQDE_XHRCall({route:registry.active_context.card, inputs:['.$modeler::model()->id.']});';
             $js[] = '}';
         }
-        return implode(' ',$js);
-    }
-    public static function search($json){
-        $_o = json_decode(stripslashes($json));
-        $_o = (!is_object($_o) || (trim($_o->search) == '' || empty(trim($_o->search)))) ? (object) null : $_o;
-        SQDE_Session::set(SQDE_PackagesHandler::model(static::$package)->collections->search, $_o);
-		$js=array();
-        if(SQDE_Session::get('palette') == SQDE_PackagesHandler::model(static::$package)->collections->search){
-            $js[] = SQDE_ComponentJS::fetchCollection('palette');
-        }
-        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->search);
         return implode(' ',$js);
     }
 	public static function addToSequence($_model_id, $add_model_id, $position=0, $position_tuner = null, $grid_modifier = null){
@@ -212,7 +206,8 @@ class SQDE_SequodeOperationsXHR {
         && SQDE_UserAuthority::canEdit()
         )){ return; }
         forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array());
-        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->main, $modeler::model()->id);
+        $collection = 'sequodes';
+        $js[] = SQDE_ComponentJS::fetchCollection($collection, $modeler::model()->id);
         $js[] = 'if(registry.active_context != false && registry.active_context.card != \'\' && registry.active_context.node != \'\'){';
         $js[] = 'new SQDE_XHRCall({route:registry.active_context.card, inputs:[registry.active_context.node]});';
         $js[] = '}';
@@ -315,4 +310,16 @@ class SQDE_SequodeOperationsXHR {
         forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array(rawurldecode($_o->description)));
 		return;
 	}
+    public static function search($json){
+        $_o = json_decode(stripslashes($json));
+        $_o = (!is_object($_o) || (trim($_o->search) == '' || empty(trim($_o->search)))) ? (object) null : $_o;
+        $collection = 'sequode_search';
+        SQDE_Session::set($collection, $_o);
+		$js=array();
+        if(SQDE_Session::get('palette') == $collection){
+            $js[] = SQDE_ComponentJS::fetchCollection('palette');
+        }
+        $js[] = SQDE_ComponentJS::fetchCollection($collection);
+        return implode('',$js);
+    }
 }

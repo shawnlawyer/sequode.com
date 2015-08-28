@@ -33,12 +33,13 @@ class SQDE_SessionOperationsXHR {
         )){ return; }
         SQDE_BlacklistIP::model()->create($modeler::model()->ip_address);
     }
-    public static function search($json='{}'){
+    public static function search($json){
         $_o = json_decode(stripslashes($json));
         $_o = (!is_object($_o) || (trim($_o->search) == '' || empty(trim($_o->search)))) ? (object) null : $_o;
-        SQDE_Session::set(SQDE_PackagesHandler::model(static::$package)->collections->search, $_o);
+        $collection = 'session_search';
+        SQDE_Session::set($collection, $_o);
 		$js=array();
-        $js[] = SQDE_ComponentJS::fetchCollection(SQDE_PackagesHandler::model(static::$package)->collections->search);
+        $js[] = SQDE_ComponentJS::fetchCollection($collection);
         return implode(' ',$js);
     }
 }
