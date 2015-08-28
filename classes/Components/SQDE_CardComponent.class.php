@@ -69,7 +69,7 @@ class SQDE_CardComponent {
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
         $html[] = '<span class="automagic-card-delete noSelect kids" id="'.$dom_id.'">x</span>';
-        $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject($component->route, array($_model->id)));
+        $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject($component->route, array($component->model_id)));
         return (object) array('html' => implode('',$html),'js' => implode('',$js));
     }
 }
