@@ -57,7 +57,7 @@ class SQDE_DashboardCardObjects {
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
         $_o = (object) null;
         $_o->head = 'My Sequodes';
-        $_o->size = 'small';
+        $_o->size = 'xsmall';
         $_o->icon_type = 'menu-icon';
         $_o->icon_background = 'sequode-icon-background';
         $_o->menu = (object) null;
@@ -79,7 +79,7 @@ class SQDE_DashboardCardObjects {
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
         $_o = (object) null;
         $_o->head = 'My Application Machines';
-        $_o->size = 'small';
+        $_o->size = 'xsmall';
         $_o->icon_type = 'menu-icon';
         $_o->icon_background = 'atom-icon-background';
         $_o->menu = (object) null;
@@ -101,7 +101,7 @@ class SQDE_DashboardCardObjects {
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
         $_o = (object) null;
         $_o->head = 'My Packages';
-        $_o->size = 'small';
+        $_o->size = 'xsmall';
         $_o->icon_type = 'menu-icon';
         $_o->icon_background = 'atom-icon-background';
         $_o->menu = (object) null;
@@ -123,7 +123,7 @@ class SQDE_DashboardCardObjects {
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
         $_o = (object) null;
         $_o->head = 'My Tokens';
-        $_o->size = 'small';
+        $_o->size = 'xsmall';
         $_o->icon_type = 'menu-icon';
         $_o->icon_background = 'atom-icon-background';
         $_o->menu = (object) null;

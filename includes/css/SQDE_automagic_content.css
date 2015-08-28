@@ -39,6 +39,11 @@
   display:block;
 }
 .automagic-content-area-xsmall{
+  width: 15em;
+  padding:0 1em 1em 1em;
+  display:block;
+}
+.automagic-content-area-xxsmall{
   width: 10em;
   padding:0 1em 1em 1em;
   display:block;
