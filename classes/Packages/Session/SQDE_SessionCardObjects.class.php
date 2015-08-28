@@ -90,7 +90,7 @@ class SQDE_SessionCardObjects {
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Session Started');
         $_o->body[] = date('g:ia \o\n l jS F Y',$_model->session_start);
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Last Sign In');
-        $_o->body[] = SQDE_CardComponent::deleteInCollection((object) array('route'=>'cards/session/delete','model_id'=>$_model->id));
+        $_o->body[] = SQDE_CardComponent::deleteInCollection((object) array('route'=>'operations/session/delete','model_id'=>$_model->id));
         $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
         return $_o;
     }
