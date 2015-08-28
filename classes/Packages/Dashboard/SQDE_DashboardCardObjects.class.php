@@ -72,7 +72,7 @@ class SQDE_DashboardCardObjects {
         );
         $_o->body = array();
         $_o->body[] = '';
-        $_o->body[] = SQDE_CardComponent::packageCollection('Sequode', 'Sequodes Created : ', $user_model);
+        $_o->body[] = SQDE_CardComponent::collectionTile('Sequode', 'Sequodes Created : ', $user_model);
         return $_o;
     }
     public static function myMachines($user_model=null){
