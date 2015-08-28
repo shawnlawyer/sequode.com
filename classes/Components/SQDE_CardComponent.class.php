@@ -10,9 +10,9 @@ class SQDE_CardComponent {
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Sequodes Created : '.count($_model->all));
         $html[] = SQDE_CardComponentHTML::sublineBlock($headline . count($_model->all));
         foreach($_models as $i => $object){
-            $html[] = '<span class="automagic-card-text-button" id="'.$dom_id.$i.'">';
+            $html[] = '<div class="automagic-card-text-button noSelect" id="'.$dom_id.$i.'">';
             $html[] = $object->name;
-            $html[] = '</span> ';
+            $html[] = '</div> ';
             $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/'.$context.'/details', array($object->id)));
         }
         return (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
