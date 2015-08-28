@@ -77,10 +77,10 @@ class SQDE_SequodeCollections{
         return;
 	}
 	public static function owned(){
-        
-        $where = array();
-        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $_model = new $modeler::$model;
+        $where = array();
+        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id
         $_model->getAll($where,'id,name');
         $nodes = array();
         foreach($_model->all as $object){
@@ -90,6 +90,7 @@ class SQDE_SequodeCollections{
         return;
 	}
 	public static function favorites(){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $collection = SQDE_PackagesHandler::model(static::$package)->context . '_' . __FUNCTION__;
         $nodes = array();
         if(!empty(SQDE_AuthenticatedUser::model()->$collection)){
