@@ -80,7 +80,7 @@ class SQDE_SequodeCollections{
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $_model = new $modeler::$model;
         $where = array();
-        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id
+        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
         $_model->getAll($where,'id,name');
         $nodes = array();
         foreach($_model->all as $object){
