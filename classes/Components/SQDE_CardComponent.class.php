@@ -1,5 +1,22 @@
 <?php
 class SQDE_CardComponent {
+    public static function packageCollection($package, $headline='', $user_model=null){
+        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $html = $js = array();
+        
+        $context = SQDE_PackagesHandler::model($package)->context;
+        $_models = SQDE_UserOperations::getOwnedModels($package, $user_model, 'id,name')->all;
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Sequodes Created : '.count($_model->all));
+        $html[] = SQDE_CardComponentHTML::sublineBlock($headline . count($_model->all));
+        foreach($_models as $i => $object){
+            $html[] = '<div class="automagic-card-text-button" id="'.$dom_id.$i.'">';
+            $html[] = $object->name;
+            $html[] = '</div>';
+            $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/'.$context.'/details', array($object->id)));
+        }
+        return (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
+    }
     public static function collection($component){
         if(!(
             isset($component->icon) 

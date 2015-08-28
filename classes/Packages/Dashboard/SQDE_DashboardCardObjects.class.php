@@ -72,17 +72,7 @@ class SQDE_DashboardCardObjects {
         );
         $_o->body = array();
         $_o->body[] = '';
-        $_model = SQDE_UserOperations::getOwnedModels('Sequode', $user_model, 'id,name');
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Sequodes Created : '.count($_model->all));
-        $dom_id = SQDE_Component::uniqueHash();
-        foreach($_model->all as $i => $object){
-            $html = $js = array();
-            $html[] = '<div class="automagic-card-text-button" id="'.$dom_id.$i.'">';
-            $html[] = $object->name;
-            $html[] = '</div>';
-            $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/sequode/details', array($object->id)));
-            $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
-        }
+        $_o->body[] = SQDE_CardComponent::packageCollection('Sequode', 'Sequodes Created : ', $user_model);
         return $_o;
     }
     public static function myMachines($user_model=null){
@@ -104,17 +94,7 @@ class SQDE_DashboardCardObjects {
         );
         $_o->body = array();
         $_o->body[] = '';
-        $_model = SQDE_UserOperations::getOwnedModels('Machine', $user_model, 'id,name');
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Application Machines : '.count($_model->all));
-        $dom_id = SQDE_Component::uniqueHash();
-        foreach($_model->all as $i => $object){
-            $html = $js = array();
-            $html[] = '<div class="automagic-card-text-button" id="'.$dom_id.$i.'">';
-            $html[] = $object->name;
-            $html[] = '</div>';
-            $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/machine/details', array($object->id)));
-            $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
-        }
+        $_o->body[] = SQDE_CardComponent::packageCollection('Machine', 'Application Machines Created: ', $user_model);
         return $_o;
     }
     public static function myPackages($user_model=null){
@@ -136,17 +116,7 @@ class SQDE_DashboardCardObjects {
         );
         $_o->body = array();
         $_o->body[] = '';
-        $_model = SQDE_UserOperations::getOwnedModels('Package', $user_model, 'id,name');
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Packages : '.count($_model->all));
-        $dom_id = SQDE_Component::uniqueHash();
-        foreach($_model->all as $i => $object){
-            $html = $js = array();
-            $html[] = '<div class="automagic-card-text-button" id="'.$dom_id.$i.'">';
-            $html[] = $object->name;
-            $html[] = '</div>';
-            $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/package/details', array($object->id)));
-            $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
-        }
+        $_o->body[] = SQDE_CardComponent::packageCollection('Package', 'Packages Created : ', $user_model);
         return $_o;
     }
     public static function myTokens($user_model=null){
@@ -168,17 +138,7 @@ class SQDE_DashboardCardObjects {
         );
         $_o->body = array();
         $_o->body[] = '';
-        $_model = SQDE_UserOperations::getOwnedModels('Token', $user_model, 'id,name');
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Tokens : '.count($_model->all));
-        $dom_id = SQDE_Component::uniqueHash();
-        foreach($_model->all as $i => $object){
-            $html = $js = array();
-            $html[] = '<div class="automagic-card-text-button" id="'.$dom_id.$i.'">';
-            $html[] = $object->name;
-            $html[] = '</div>';
-            $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/token/details', array($object->id)));
-            $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
-        }
+        $_o->body[] = SQDE_CardComponent::packageCollection('Token', 'Tokens Created : ', $user_model);
         return $_o;
     }
 }
