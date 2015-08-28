@@ -101,7 +101,7 @@ class SQDE_TokenCardObjects {
             'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/token/newToken'))
         );
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collection((object) array('collection'=>'tokens','icon'=>'atom','card_route'=>'cards/token/my','details_route'=>'cards/token/details'));
+        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'tokens','icon'=>'atom','card_route'=>'cards/token/my','details_route'=>'cards/token/details'));
         return $_o;
     }
     public static function search(){
@@ -124,7 +124,7 @@ class SQDE_TokenCardObjects {
             );
         }
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collection((object) array('collection'=>'token_search','icon'=>'atom','card_route'=>'cards/token/my','details_route'=>'cards/token/details'));
+        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'token_search','icon'=>'atom','card_route'=>'cards/token/my','details_route'=>'cards/token/details'));
         return $_o;
     }
 }

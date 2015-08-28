@@ -499,7 +499,7 @@ class SQDE_SequodeCardObjects {
             );
         }
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collection((object) array('collection'=>'sequode_search','icon'=>'sequode','card_route'=>'cards/sequode/search','details_route'=>'cards/sequode/details'));
+        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'sequode_search','icon'=>'sequode','card_route'=>'cards/sequode/search','details_route'=>'cards/sequode/details'));
         return $_o;
     }
     public static function my(){
@@ -521,7 +521,7 @@ class SQDE_SequodeCardObjects {
         );
         
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collection((object) array('collection'=>'my','icon'=>'sequode','card_route'=>'cards/sequode/my','details_route'=>'cards/sequode/details'));
+        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'my','icon'=>'sequode','card_route'=>'cards/sequode/my','details_route'=>'cards/sequode/details'));
         return $_o;
     }
     public static function favorites(){
@@ -543,7 +543,7 @@ class SQDE_SequodeCardObjects {
         );
         
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collection((object) array('collection'=>'sequode_favorites','icon'=>'sequode','card_route'=>'cards/sequode/favorites','details_route'=>'cards/sequode/details'));
+        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'sequode_favorites','icon'=>'sequode','card_route'=>'cards/sequode/favorites','details_route'=>'cards/sequode/details'));
         return $_o;
     }
 }

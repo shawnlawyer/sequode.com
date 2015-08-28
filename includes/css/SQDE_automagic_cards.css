@@ -123,11 +123,11 @@
   font-weight: 800;
   color: red;
 }
-.automagic-card-text-button{
+.automagic-card-text-button {
   cursor:pointer;
 }
 
-.automagic-card-menu-right-side-adjuster{
+.automagic-card-menu-right-side-adjuster {
     margin: 0 auto 0 auto;
     position:relative;
     left: 3em;

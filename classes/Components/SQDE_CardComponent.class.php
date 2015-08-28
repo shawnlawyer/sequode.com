@@ -1,6 +1,6 @@
 <?php
 class SQDE_CardComponent {
-    public static function packageCollection($package, $headline='', $user_model=null){
+    public static function collectionTile($package, $headline='', $user_model=null){
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
@@ -16,7 +16,7 @@ class SQDE_CardComponent {
         }
         return (object) array('html' => implode('', $html), 'js' => implode(' ', $js));
     }
-    public static function collection($component){
+    public static function collectionCard($component){
         if(!(
             isset($component->icon) 
             && isset($component->collection)

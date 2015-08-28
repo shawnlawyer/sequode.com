@@ -94,7 +94,7 @@ class SQDE_DashboardCardObjects {
         );
         $_o->body = array();
         $_o->body[] = '';
-        $_o->body[] = SQDE_CardComponent::packageCollection('Machine', 'Application Machines Created: ', $user_model);
+        $_o->body[] = SQDE_CardComponent::collectionTile('Machine', 'Application Machines Created: ', $user_model);
         return $_o;
     }
     public static function myPackages($user_model=null){
@@ -116,7 +116,7 @@ class SQDE_DashboardCardObjects {
         );
         $_o->body = array();
         $_o->body[] = '';
-        $_o->body[] = SQDE_CardComponent::packageCollection('Package', 'Packages Created : ', $user_model);
+        $_o->body[] = SQDE_CardComponent::collectionTile('Package', 'Packages Created : ', $user_model);
         return $_o;
     }
     public static function myTokens($user_model=null){
@@ -138,7 +138,7 @@ class SQDE_DashboardCardObjects {
         );
         $_o->body = array();
         $_o->body[] = '';
-        $_o->body[] = SQDE_CardComponent::packageCollection('Token', 'Tokens Created : ', $user_model);
+        $_o->body[] = SQDE_CardComponent::collectionTile('Token', 'Tokens Created : ', $user_model);
         return $_o;
     }
 }

@@ -114,7 +114,7 @@ class SQDE_SessionCardObjects {
             );
         }
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collection((object) array('collection'=>'session_search','icon'=>'atom','card_route'=>'cards/session/search','details_route'=>'cards/session/details'));
+        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'session_search','icon'=>'atom','card_route'=>'cards/session/search','details_route'=>'cards/session/details'));
         return $_o;
     }
 }

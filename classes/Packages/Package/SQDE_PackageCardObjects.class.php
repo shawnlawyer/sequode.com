@@ -101,7 +101,7 @@ class SQDE_PackageCardObjects {
             'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/package/newPackage'))
         );
         $card_object->body = array();
-        $card_object->body[] = SQDE_CardComponent::collection((object) array('collection'=>'packages','icon'=>'atom','card_route'=>'cards/package/my','details_route'=>'cards/package/details'));
+        $card_object->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'packages','icon'=>'atom','card_route'=>'cards/package/my','details_route'=>'cards/package/details'));
         return $card_object;
     }
     public static function search(){
@@ -124,7 +124,7 @@ class SQDE_PackageCardObjects {
             );
         }
         $card_object->body = array();
-        $card_object->body[] = SQDE_CardComponent::collection((object) array('collection'=>'package_search','icon'=>'atom','card_route'=>'cards/package/search','details_route'=>'cards/package/details'));
+        $card_object->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'package_search','icon'=>'atom','card_route'=>'cards/package/search','details_route'=>'cards/package/details'));
         return $card_object;
     }
 }

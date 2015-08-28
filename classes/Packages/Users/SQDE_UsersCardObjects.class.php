@@ -134,7 +134,7 @@ class SQDE_UsersCardObjects {
             );
         }
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collection((object) array('collection'=>'user_search','icon'=>'user','card_route'=>'cards/users/search','details_route'=>'cards/users/details'));
+        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'user_search','icon'=>'user','card_route'=>'cards/users/search','details_route'=>'cards/users/details'));
         return $_o;
     }
 }
