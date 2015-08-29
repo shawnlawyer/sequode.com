@@ -34,7 +34,7 @@ class SQDE_SequodeRoutes{
                 SQDE_MachineCollections::search();
                 return;
 			case 'sequode_favorites':
-                SQDE_SequodeCollections::favorites();
+                SQDE_SequodeCollections::favorited();
                 return;
 			case 'palette':
                 SQDE_SequodeCollections::palette();
