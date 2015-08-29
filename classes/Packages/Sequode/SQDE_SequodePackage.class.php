@@ -4,9 +4,7 @@ class SQDE_SequodePackage {
 	public static function model(){
         $model = (object) null;
         $model->context = 'sequode';
-        $model->collections = (object) null;
-        $model->collections->main = 'sequodes';
-        $model->collections->search = 'sequode_search';
+        $model->collections = 'SQDE_SequodeCollections';
         $model->modeler = 'SQDE_Sequode';
         $model->finder = 'SQDE_SequodeFinder';
         $model->card_objects = 'SQDE_SequodeCardObjects';

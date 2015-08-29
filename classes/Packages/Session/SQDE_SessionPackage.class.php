@@ -1,12 +1,10 @@
 <?php
 class SQDE_SessionPackage {
     public static $package = 'Session'; 
-	public static function model($set = false){
+	public static function model(){
         $model = (object) null;;
         $model->context = 'session';
-        $model->collections = (object) null;
-        $model->collections->main = 'sessions';
-        $model->collections->search = 'session_search';
+        $model->collections = 'SQDE_SessionCollections';
         $model->modeler = 'SQDE_Session';
         $model->finder = 'SQDE_SessionFinder';
         $model->card_objects = 'SQDE_SessionCardObjects';

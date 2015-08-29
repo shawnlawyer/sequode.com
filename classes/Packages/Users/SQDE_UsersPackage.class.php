@@ -1,8 +1,9 @@
 <?php
 class SQDE_UsersPackage {
     public static $package = 'Users';
-	public static function model($set = false){
+	public static function model(){
         $model = (object) null;
+        $model->context = 'users';
         $model->card_objects = 'SQDE_UsersCardObjects';
         $model->form_objects = 'SQDE_UsersFormObjects';
         $model->operations = 'SQDE_UserOperations';

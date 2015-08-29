@@ -4,9 +4,7 @@ class SQDE_PackagePackage {
 	public static function model(){
         $model = (object) null;
         $model->context = 'package';
-        $model->collections = (object) null;
-        $model->collections->main = 'packages';
-        $model->collections->search = 'package_search';
+        $model->collections = 'SQDE_PackageCollections';
         $model->modeler = 'SQDE_Package';
         $model->finder = 'SQDE_PackageFinder';
         $model->card_objects = 'SQDE_PackageCardObjects';

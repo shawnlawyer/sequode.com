@@ -1,10 +1,9 @@
 <?php
 class SQDE_AccountPackage {
     public static $package = 'Account';
-	public static function model($set = false){
+	public static function model(){
         $model = (object) null;
         $model->context = 'account';
-        $model->collections = (object) null;
         $model->modeler = 'SQDE_AuthenticatedUser';
         $model->card_objects = 'SQDE_AccountCardObjects';
         $model->form_objects = 'SQDE_AccountFormObjects';

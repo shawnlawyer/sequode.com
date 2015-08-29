@@ -1,7 +1,7 @@
 <?php
 class SQDE_SequodeCollections{
     public static $package = 'Sequode';
-	public static $merge = false;
+	public static $merge = true;
 	public static $routes = array(
 		'sequodes',
 		'my',
@@ -14,7 +14,7 @@ class SQDE_SequodeCollections{
 		'my' => 'owned',
 		'my_sequodes' => 'owned',
 		'sequode_search' => 'search',
-		'sequode_favorites' => 'favorites'
+		'sequode_favorites' => 'favorited'
 	);
 	public static function main($key = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
@@ -89,7 +89,7 @@ class SQDE_SequodeCollections{
         echo '{'.implode(',', $nodes).'}';
         return;
 	}
-	public static function favorites(){
+	public static function favorited(){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $collection = SQDE_PackagesHandler::model(static::$package)->context . '_' . __FUNCTION__;
         $nodes = array();

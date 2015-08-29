@@ -4,9 +4,7 @@ class SQDE_TokenPackage {
 	public static function model(){
         $model = (object) null;
         $model->context = 'token';
-        $model->collections = (object) null;
-        $model->collections->main = 'tokens';
-        $model->collections->search = 'token_search';
+        $model->collections = 'SQDE_TokenCollections';
         $model->modeler = 'SQDE_Token';
         $model->finder = 'SQDE_TokenFinder';
         $model->card_objects = 'SQDE_TokenCardObjects';

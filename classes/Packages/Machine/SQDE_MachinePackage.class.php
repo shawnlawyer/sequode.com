@@ -4,9 +4,7 @@ class SQDE_MachinePackage {
 	public static function model(){
         $model = (object) null;
         $model->context = 'machine';
-        $model->collections = (object) null;
-        $model->collections->main = 'machines';
-        $model->collections->search = 'machine_search';
+        $model->collections = 'SQDE_MachineCollections';
         $model->modeler = 'SQDE_Machine';
         $model->finder = 'SQDE_MachineFinder';
         $model->card_objects = 'SQDE_MachineCardObjects';

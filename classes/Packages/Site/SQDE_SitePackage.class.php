@@ -1,8 +1,9 @@
 <?php
 class SQDE_SitePackage {
     public static $package = 'Site';
-	public static function model($set = false){
+	public static function model(){
         $model = (object) null;
+        $model->context = 'site';
         $model->card_objects = 'SQDE_SiteCardObjects';
 		$model->routes = array(
 			'SQDE_SiteRoutes',
