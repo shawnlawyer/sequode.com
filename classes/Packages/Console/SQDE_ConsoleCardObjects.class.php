@@ -1,6 +1,6 @@
 <?php
-class SQDE_DashboardCardObjects {
-    public static $package = 'Dashboard';
+class SQDE_ConsoleCardObjects {
+    public static $package = 'Console';
     public static function index($user_model=null){
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
         return self::gettingStarted($user_model);
@@ -34,19 +34,19 @@ class SQDE_DashboardCardObjects {
         $html[] = SQDE_Card::divider(true);
         $html[] = SQDE_Card::shim();
         $html[] = SQDE_Card::shim();
-        $component_object = SQDE_Cards::render('Dashboard', 'collection', array('my_sequodes', $user_model));
+        $component_object = SQDE_Cards::render('Console', 'collection', array('my_sequodes', $user_model));
         $html[] = $component_object->html;
         $js[] = $component_object->js;
         $html[] = SQDE_Card::shim();
-        $component_object = SQDE_Cards::render('Dashboard', 'collection', array('my_tokens', $user_model));
+        $component_object = SQDE_Cards::render('Console', 'collection', array('my_tokens', $user_model));
         $html[] = $component_object->html;
         $js[] = $component_object->js;
         $html[] = SQDE_Card::shim();
-        $component_object = SQDE_Cards::render('Dashboard', 'collection', array('my_packages', $user_model));
+        $component_object = SQDE_Cards::render('Console', 'collection', array('my_packages', $user_model));
         $html[] = $component_object->html;
         $js[] = $component_object->js;
         $html[] = SQDE_Card::shim();
-        $component_object = SQDE_Cards::render('Dashboard', 'collection', array('my_machines', $user_model));
+        $component_object = SQDE_Cards::render('Console', 'collection', array('my_machines', $user_model));
         $html[] = $component_object->html;
         $js[] = $component_object->js;
         $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));

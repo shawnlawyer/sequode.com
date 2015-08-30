@@ -7,7 +7,7 @@ class SQDE_SequodeBuilderApplicationProfile {
         if(SQDE_UserAuthority::isAuthenticated()){
             SQDE_PackagesHandler::add('SQDE_UserPackage');
             SQDE_PackagesHandler::add('SQDE_AuthedPackage');
-            SQDE_PackagesHandler::add('SQDE_DashboardPackage');
+            SQDE_PackagesHandler::add('SQDE_ConsolePackage');
             SQDE_PackagesHandler::add('SQDE_SequodePackage');
             if(SQDE_AuthenticatedUser::model()->role_id < 101){
                 SQDE_PackagesHandler::add('SQDE_AccountPackage');
