@@ -1,8 +1,6 @@
 <?php
 class SQDE_SequodeCardObjects {
     public static $package = 'Sequode';
-    public static $modeler = 'SQDE_Sequode';
-    
     public static function menu(){
         $_o = (object) null;
         $_o->icon_type = 'menu-icon';
@@ -46,7 +44,8 @@ class SQDE_SequodeCardObjects {
         return $items;
     }
     public static function modelOperationsMenuItems($filter='', $_model = null){
-        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         $items = array();
         //details
         if(SQDE_UserAuthority::canView($_model)){
@@ -162,7 +161,8 @@ class SQDE_SequodeCardObjects {
         return $items;
     }
 	public static function componentSettings($type, $member, $_model = null){
-        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;
         $_o->head = 'Component Settings';
@@ -180,7 +180,8 @@ class SQDE_SequodeCardObjects {
         return $_o;
 	}
     public static function sequode($dom_id, $_model = null){
-        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;
         $_o->head = 'Component';
@@ -192,7 +193,8 @@ class SQDE_SequodeCardObjects {
         return $_o;
 	}   
     public static function details( $_model = null){
-        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;
         $_o->size = 'large';
@@ -310,7 +312,8 @@ class SQDE_SequodeCardObjects {
         return $_o;
     }
     public static function internalForms( $_model = null){
-        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;
         $_o->size = 'large';
@@ -332,7 +335,8 @@ class SQDE_SequodeCardObjects {
     }
     public static function internalPositionForms($position, $_model = null){
         $position = intval($position);
-        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;
         $_o->size = 'medium';
@@ -415,7 +419,8 @@ class SQDE_SequodeCardObjects {
         return $_o;
     }
     public static function sequencer( $_model = null){
-        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;
         $_o->size = 'fullscreen';
@@ -454,7 +459,8 @@ class SQDE_SequodeCardObjects {
         return $_o;
     }
     public static function chart( $_model = null){
-        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;
         $_o->size = 'fullscreen';

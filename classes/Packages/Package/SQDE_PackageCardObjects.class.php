@@ -1,7 +1,6 @@
 <?php
 class SQDE_PackageCardObjects {
     public static $package = 'Package';
-    public static $modeler = 'SQDE_Package';
     public static function menu(){
         $card_object = (object) null;
         $card_object->icon_type = 'menu-icon';
@@ -39,7 +38,8 @@ class SQDE_PackageCardObjects {
     }
     
     public static function modelOperationsMenuItems($filter='', $_model = null){
-        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         $items = array();
         $dom_id = SQDE_Component::uniqueHash('','');
         $items[] = array(
@@ -59,7 +59,8 @@ class SQDE_PackageCardObjects {
         return $items;
     }
     public static function details($_model = null){
-         $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $card_object = (object) null;
         $card_object->size = 'large';

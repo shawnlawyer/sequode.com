@@ -1,7 +1,6 @@
 <?php
 class SQDE_SessionCardObjects {
     public static $package = 'Session';
-    public static $modeler = 'SQDE_Session';
     public static function menu(){
         $_o = (object) null;
         $_o->icon_type = 'menu-icon';
@@ -24,7 +23,8 @@ class SQDE_SessionCardObjects {
         return $items;
     }
     public static function details($_model=null){
-        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;
         $_o->size = 'large';

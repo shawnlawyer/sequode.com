@@ -37,7 +37,8 @@ class SQDE_UserCardObjects {
         return $items;
     }
     public static function modelOperationsMenuItems($filter='', $_model = null){
-        $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         $items = array();
         $dom_id = SQDE_Component::uniqueHash('','');
         $items[] = array(
@@ -65,7 +66,8 @@ class SQDE_UserCardObjects {
         return $items;
     }
     public static function details($_model = null){
-         $_model = ($_model == null ) ? forward_static_call_array(array(self::$modeler,'model'),array()) : forward_static_call_array(array(self::$modeler,'model'), array($_model));
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;
         $_o->size = 'large';
