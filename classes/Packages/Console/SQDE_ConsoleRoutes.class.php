@@ -4,6 +4,7 @@ class SQDE_ConsoleRoutes{
 	public static $routes = array(
 		'xhr',
 		'routes',
+		'collections',
 		'health.php',
 		'application.css',
 		'3rdParty.js',
@@ -14,6 +15,7 @@ class SQDE_ConsoleRoutes{
 	public static $routes_to_methods = array(
 		'xhr' => 'xhr',
 		'routes' => 'routes',
+		'collections' => 'collections',
 		'health.php' => 'health',
 		'application.css' => 'css',
 		'3rdParty.js' => 'vendorJS',
