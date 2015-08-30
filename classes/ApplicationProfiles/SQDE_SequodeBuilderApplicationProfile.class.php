@@ -1,22 +1,20 @@
 <?php
 class SQDE_SequodeBuilderApplicationProfile {
 	public static function model(){
+        SQDE_PackagesHandler::add('SQDE_ConsolePackage');
         SQDE_PackagesHandler::add('SQDE_SitePackage');
-        //SQDE_PackagesHandler::add('SQDE_SessionSyncPackage');
         
         if(SQDE_UserAuthority::isAuthenticated()){
             SQDE_PackagesHandler::add('SQDE_UserPackage');
             SQDE_PackagesHandler::add('SQDE_AuthedPackage');
-            SQDE_PackagesHandler::add('SQDE_ConsolePackage');
             SQDE_PackagesHandler::add('SQDE_SequodePackage');
             if(SQDE_AuthenticatedUser::model()->role_id < 101){
                 SQDE_PackagesHandler::add('SQDE_AccountPackage');
                 SQDE_PackagesHandler::add('SQDE_PackagePackage');
-                SQDE_PackagesHandler::add('SQDE_MachinePackage');
                 SQDE_PackagesHandler::add('SQDE_TokenPackage');
             }
         }else{
-            SQDE_PackagesHandler::add('SQDE_AuthPackage');   
+            SQDE_PackagesHandler::add('SQDE_AuthPackage');
         }
         
         if(SQDE_UserAuthority::isSystemOwner()){
