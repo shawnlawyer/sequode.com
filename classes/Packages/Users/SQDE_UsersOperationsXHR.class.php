@@ -88,7 +88,7 @@ class SQDE_UsersOperationsXHR {
     public static function search($json){
         $_o = json_decode(stripslashes($json));
         $_o = (!is_object($_o) || (trim($_o->search) == '' || empty(trim($_o->search)))) ? (object) null : $_o;
-        $collection = 'users_search';
+        $collection = 'user_search';
         SQDE_Session::set($collection, $_o);
 		$js=array();
         $js[] = SQDE_ComponentJS::fetchCollection($collection);
