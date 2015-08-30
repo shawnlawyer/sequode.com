@@ -10,7 +10,7 @@ class SQDE_SessionPackage {
         $model->card_objects = 'SQDE_SessionCardObjects';
         $model->form_objects = 'SQDE_SessionFormObjects';
         $model->operations = 'SQDE_SessionOperations';
-        $model->finder = 'SQDE_SessionsFinder';
+        $model->finder = 'SQDE_SessionFinder';
         $model->xhr = (object) null;
         $model->xhr->operations = 'SQDE_SessionOperationsXHR';
         $model->xhr->forms = 'SQDE_SessionFormsXHR';
