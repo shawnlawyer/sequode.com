@@ -1,7 +1,6 @@
 <?php
 class SQDE_UserFormsXHR {
     public static $package = 'User';
-    public static $modeler = 'SQDE_User';
     public static function updatePassword($_model_id, $dom_id){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
