@@ -7,6 +7,11 @@ class SQDE_ConsolePackage {
         $model->card_objects = 'SQDE_ConsoleCardObjects';
         $model->xhr = (object) null;
         $model->xhr->cards = 'SQDE_ConsoleCardsXHR';
+		$model->routes = array(
+			'SQDE_ConsoleRoutes',
+			'SQDE_SiteXHRRoutes',
+			'SQDE_SequodeOriginRestrictedViewRoutes',
+		);
 		return $model;
 	}
 }
