@@ -1,7 +1,6 @@
 <?php
 class SQDE_UserCardObjects {
     public static $package = 'User';
-    public static $modeler = 'SQDE_User';
     public static function menu(){
         $_o = (object) null;
         $_o->icon_type = 'menu-icon';
@@ -19,21 +18,21 @@ class SQDE_UserCardObjects {
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'Search Users',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/users/search'))
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/user/search'))
         );
         $dom_id = SQDE_Component::uniqueHash('','');
         $items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'New User',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/users/newUser'))
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/user/newUser'))
         );
         $dom_id = SQDE_Component::uniqueHash('','');
         $items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'New Guest',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/users/newGuest'))
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/user/newGuest'))
         );
         return $items;
     }
@@ -45,14 +44,14 @@ class SQDE_UserCardObjects {
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'Details',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/users/details', array($_model->id)))
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/user/details', array($_model->id)))
         );
         $dom_id = SQDE_Component::uniqueHash('','');
         $items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'Delete',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/users/delete', array($_model->id)))
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/user/delete', array($_model->id)))
         );
         if(SQDE_UserAuthority::isSystemOwner()){
             $dom_id = SQDE_Component::uniqueHash('','');
@@ -60,7 +59,7 @@ class SQDE_UserCardObjects {
                 'css_classes'=>'automagic-card-menu-item noSelect',
                 'id'=>$dom_id,
                 'contents'=>'Login As',
-                'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/users/loginAs', array($_model->id)))
+                'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/user/loginAs', array($_model->id)))
             );
         }
         return $items;
@@ -79,14 +78,14 @@ class SQDE_UserCardObjects {
         $_o->body = array('');
         
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Username');
-        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/users/updateName', array($_model->id)), $_model->username, 'settings');
+        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/user/updateName', array($_model->id)), $_model->username, 'settings');
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Password');
-        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/users/updatePassword', array($_model->id)), 'Set Password', 'settings');
+        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/user/updatePassword', array($_model->id)), 'Set Password', 'settings');
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Role');
         SQDE_Role::exists($_model->role_id,'id');
-        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/users/updateRole', array($_model->id)), SQDE_Role::model()->name, 'settings');
+        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/user/updateRole', array($_model->id)), SQDE_Role::model()->name, 'settings');
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Active Status');
-        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/users/updateActive', array($_model->id)), (($_model->active == 1) ? 'Active' : 'Suspended'), 'settings');
+        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/user/updateActive', array($_model->id)), (($_model->active == 1) ? 'Active' : 'Suspended'), 'settings');
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Sign Up Date');
         $_o->body[] = date('g:ia \o\n l jS F Y',$_model->sign_up_date);
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Allowed Sequode Count');
@@ -95,20 +94,8 @@ class SQDE_UserCardObjects {
         $_o->body[] = $_model->sequode_favorites;
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Email');
         $_o->body[] = $_model->email;
-        $sequodes_model = SQDE_UserOperations::getOwnedModels('Sequode', $user_model, 'id,name');
-        $_o->body[] = '<div class="subline kids">Sequodes Created : '.count($sequodes_model->all).'</div>';
-        $dom_id = SQDE_Component::uniqueHash('','');
-        foreach($sequodes_model->all as $i => $object){
-            $html = $js = array();
-            $html[] = '<div class="automagic-card-text-button kids" id="'.$dom_id.$i.'">';
-            $html[] = ' &#8727; ';
-            $html[] = $object->name;
-            $html[] = '</div>';            
-            $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/users/details', array($object->id)));
-            $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
-        }
-        
-        $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/users/details'));
+        $_o->body[] = SQDE_CardComponent::SQDE_CardComponent('Sequode', 'Sequodes Created : ', $_model);
+        $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/user/details'));
         if(SQDE_UserAuthority::isSystemOwner()){
             $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
         }
@@ -134,7 +121,7 @@ class SQDE_UserCardObjects {
             );
         }
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'user_search','icon'=>'user','card_route'=>'cards/users/search','details_route'=>'cards/users/details'));
+        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'user_search','icon'=>'user','card_route'=>'cards/user/search','details_route'=>'cards/user/details'));
         return $_o;
     }
 }
