@@ -15,7 +15,7 @@ class SQDE_SessionCollections{
         if(SQDE_Session::is($collection)){
             $_array = $finder::search(SQDE_Session::get($collection));
             foreach($_array as $_object){
-                $nodes[] = '"'.$_object->id.'":{"id":"'.$_object->id.'","n":"'.$_object->name.'"}';
+                $nodes[] = '"'.$_object->id.'":{"id":"'.$_object->id.'","n":"'.$_object->username.'"}';
             }
         }
         echo '{'.implode(',', $nodes).'}';
