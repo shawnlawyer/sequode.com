@@ -22,6 +22,7 @@ class SQDE_AccountCardObjects {
         return $items;
     }
     public static function details(){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $operations = SQDE_PackagesHandler::model(static::$package)->operations
         $_model = forward_static_call_array(array(self::$modeler,'model'),array());
         $_o = (object) null;
