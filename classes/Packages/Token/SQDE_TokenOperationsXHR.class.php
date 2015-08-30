@@ -11,6 +11,7 @@ class SQDE_TokenOperationsXHR {
     }
     public static function updateName($_model_id, $json){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        if(!(
         $modeler::exists($_model_id,'id')
         && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
