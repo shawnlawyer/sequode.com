@@ -1,7 +1,6 @@
 <?php
 class SQDE_AccountCardObjects {
     public static $package = 'Account';
-    public static $modeler = 'SQDE_AuthenticatedUser';
     public static function menu(){
         $_o = (object) null;
         $_o->icon_type = 'menu-icon';
@@ -23,6 +22,7 @@ class SQDE_AccountCardObjects {
         return $items;
     }
     public static function details(){
+        $operations = SQDE_PackagesHandler::model(static::$package)->operations
         $_model = forward_static_call_array(array(self::$modeler,'model'),array());
         $_o = (object) null;
         $_o->head = 'Account Detail';
@@ -42,18 +42,7 @@ class SQDE_AccountCardObjects {
         $_o->body[] = $_model->sequode_favorites;
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Email');
         $_o->body[] = $_model->email;
-        $sequodes_model = SQDE_UserOperations::getOwnedModels('Sequode', $user_model, 'id,name');
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Sequodes Created : '.count($sequodes_model->all));
-        $dom_id = SQDE_Component::uniqueHash();
-        foreach($sequodes_model->all as $i => $object){
-            $html = $js = array();
-            $html[] = '<div class="automagic-card-text-button kids" id="'.$dom_id.$i.'">';
-            $html[] = ' &#8727; ';
-            $html[] = $object->name;
-            $html[] = '</div>';
-            $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id.$i, SQDE_ComponentJS::xhrCallObject('cards/sequode/details', array($object->id)));
-            $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
-        }
+        $_o->body[] = SQDE_CardComponent::SQDE_CardComponent('Sequode', 'Sequodes Created : ', $_model);
         if(SQDE_UserAuthority::isSystemOwner()){
             $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
         }

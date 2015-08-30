@@ -21,7 +21,7 @@ class SQDE_UserOperations {
             SQDE_AuthenticatedUser::exists(SQDE_Session::get('user_id'),'id');
         }
     }
-	public static function getModelersModelCount($_modeler, $_model = null){
+	public static function getModelersModelCount($_modeler, $_model){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $_models = new SQDE_Package::$model;
@@ -30,7 +30,7 @@ class SQDE_UserOperations {
         $_models->getCount($where, 'id');
         return intval($_models->results_count);
 	}
-	public static function getOwnedModels($package, $_model = null, $fields='id'){
+	public static function getOwnedModels($package, $_model, $fields='id'){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $package_modeler = SQDE_PackagesHandler::model($package)->modeler;
