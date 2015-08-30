@@ -10,7 +10,7 @@ class SQDE_ConsoleRoutes{
 		'3rdParty.js',
         'application.js',
 		'Kidsn.eot',
-		'Kidsn.ttf',
+		'Kidsn.ttf'
 	);
 	public static $routes_to_methods = array(
 		'xhr' => 'xhr',
@@ -202,7 +202,7 @@ class SQDE_ConsoleRoutes{
                 SQDE_SequodeCollections::search();
                 return;
 			case 'user_search':
-                SQDE_UsersCollections::search();
+                SQDE_UserCollections::search();
                 return;
 			case 'session_search':
                 SQDE_SessionCollections::search();
