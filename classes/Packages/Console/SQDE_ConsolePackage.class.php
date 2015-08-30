@@ -8,9 +8,7 @@ class SQDE_ConsolePackage {
         $model->xhr = (object) null;
         $model->xhr->cards = 'SQDE_ConsoleCardsXHR';
 		$model->routes = array(
-			'SQDE_ConsoleRoutes',
-			'SQDE_SiteXHRRoutes',
-			'SQDE_SequodeOriginRestrictedViewRoutes',
+			'SQDE_ConsoleRoutes'
 		);
 		return $model;
 	}
