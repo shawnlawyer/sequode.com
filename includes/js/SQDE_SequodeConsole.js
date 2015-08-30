@@ -27,7 +27,7 @@ var SQDE_SequodeConsole = function(){
 	self.setContext = function(){
         var call = {route:baseKit.getURLVar("card"),inputs:[]};
         if(call.route === null){
-            call.route = 'dashboard/index';
+            call.route = 'console/index';
         }else if(baseKit.getURLVar("id") !== null){
             call.inputs.push(baseKit.getURLVar("id"));
         }
