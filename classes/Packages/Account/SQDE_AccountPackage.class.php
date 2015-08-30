@@ -7,7 +7,7 @@ class SQDE_AccountPackage {
         $model->modeler = 'SQDE_AuthenticatedUser';
         $model->card_objects = 'SQDE_AccountCardObjects';
         $model->form_objects = 'SQDE_AccountFormObjects';
-        $model->operations = 'SQDE_UserOperations';
+        $model->operations = 'SQDE_AccountOperations';
         $model->xhr = (object) null;
         $model->xhr->operations = 'SQDE_AccountOperationsXHR';
         $model->xhr->forms = 'SQDE_AccountFormsXHR';

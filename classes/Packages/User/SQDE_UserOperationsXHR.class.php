@@ -1,54 +1,97 @@
 <?php
 class SQDE_UserOperationsXHR {
     public static $package = 'User';
-    public static function emptySequodeFavorites(){
+    public static function newUser(){
         if(!(
-        SQDE_UserAuthority::isAuthenticated()
+        SQDE_UserAuthority::isSystemOwner()
         )){ return; }
-        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array());
+        return SQDE_UserCardsXHR::details(SQDE_UserOperations::newUser()->id);
+    }
+    public static function newGuest(){
+        if(!(
+        SQDE_UserAuthority::isSystemOwner()
+        )){ return; }
+        return SQDE_UserCardsXHR::details(SQDE_UserOperations::newGuest()->id);
+    }
+    public static function delete($user_model_id){
+        if(!(
+        SQDE_UserAuthority::isSystemOwner()
+        && SQDE_User::exists($user_model_id,'id')
+        )){return;}
+        SQDE_UserOperations::delete();
         return;
     }
-    public static function addToSequodeFavorites($_model_id){
+    public static function loginAs($user_model_id){
+        $input = json_decode(rawurldecode($json));
         if(!(
-		SQDE_Sequode::exists($_model_id,'id')
-        && !SQDE_UserAuthority::isInSequodeFavorites()
-        && SQDE_UserAuthority::canView()
-        )){ return; }
-        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array());
+        SQDE_UserAuthority::isSystemOwner()
+        && SQDE_User::exists($user_model_id,'id')
+        )){return;}
+        SQDE_UserOperations::login();
+        return SQDE_SiteRoutes::applicationJS(false);
+    }
+    public static function updatePassword($user_model_id, $json){
+        $input = json_decode(rawurldecode($json));
+        if(!(
+        SQDE_UserAuthority::isSystemOwner()
+        && SQDE_User::exists($user_model_id,'id')
+        )){return;}
+        SQDE_UserOperations::updatePassword($input->password);
         return;
     }
-    public static function removeFromSequodeFavorites($_model_id){
+    public static function updateRole($user_model_id, $json){
+        $input = json_decode(rawurldecode($json));
         if(!(
-		SQDE_Sequode::exists($_model_id,'id')
-        && SQDE_UserAuthority::isInSequodeFavorites()
-        )){ return; }
-        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array());
+            SQDE_UserAuthority::isSystemOwner()
+            && SQDE_User::exists($user_model_id,'id')
+            && SQDE_Role::exists($input->role,'id')
+        )){return;}
+        SQDE_UserOperations::updateRole();
         return;
     }
-    public static function selectPalette($json){
+    public static function updateActive($user_model_id, $json){
+        $input = json_decode(rawurldecode($json));
         if(!(
-        SQDE_UserAuthority::isAuthenticated()
+            SQDE_UserAuthority::isSystemOwner()
+            && SQDE_User::exists($user_model_id,'id')
+        )){return;}
+        SQDE_UserOperations::updateActive($input->active);
+        return;
+    }
+    public static function updateName($user_model_id, $json){
+        if(!(
+            SQDE_User::exists($user_model_id,'id')
         )){ return; }
-        $_o = json_decode(stripslashes($json));
-        if(!is_object($_o) || (trim($_o->palette) == '' || empty(trim($_o->palette)))){
-            SQDE_Session::set('palette', false);
-        }else{
-            switch($_o->palette){
-                case 'sequode_search':
-                case 'sequode_favorites':
-                    SQDE_Session::set('palette', $_o->palette);
-                    break;
-                default:
-                    if((
-                    SQDE_Sequode::exists($_o->palette,'id')
-                    && SQDE_UserAuthority::canView()
-                    )){ 
-                    SQDE_Session::set('palette', $_o->palette);
-                    }
-                    break;
-            }
+        $input = json_decode($json);
+        $name = trim(str_replace('-','_',str_replace(' ','_',urldecode($input->username))));
+        if(strlen($name)==0){
+            return ' alert(\'Name cannot be empty\');';
         }
-        $js[]=  SQDE_ComponentJS::fetchCollection('palette');
+        if(!eregi("^([A-Za-z0-9_])*$",$name)){
+            return ' alert(\'Name can be alphanumeric and contain spaces only\');';
+        }
+        
+        if(SQDE_User::exists($name,'username') && SQDE_User::model()->id != $user_model_id){
+            return ' alert(\'Name already exists\');';
+        }elseif(SQDE_User::exists($name,'username') && SQDE_User::model()->id == $user_model_id){
+            return;
+        }
+        SQDE_User::exists($user_model_id,'id');
+        SQDE_UserOperations::updateName($name);
+        $js = array();
+        $js[] = 'registry.fetch({collection:\'users\', key:'.SQDE_User::model()->id.'});';
+        if(SQDE_AuthenticatedUser::model()->id == $user_model_id){
+            $js[] = 'registry.fetch({collection:\'user\');';
+        }
+        return implode(' ', $js);
+    }
+    public static function search($json){
+        $_o = json_decode(stripslashes($json));
+        $_o = (!is_object($_o) || (trim($_o->search) == '' || empty(trim($_o->search)))) ? (object) null : $_o;
+        $collection = 'user_search';
+        SQDE_Session::set($collection, $_o);
+		$js=array();
+        $js[] = SQDE_ComponentJS::fetchCollection($collection);
         return implode(' ',$js);
     }
 }

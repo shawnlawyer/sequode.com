@@ -1,6 +1,6 @@
 <?php
-class SQDE_UsersCardsXHR {
-    public static $package = 'Users';
+class SQDE_UserCardsXHR {
+    public static $package = 'User';
     public static $modeler = 'SQDE_User';
     public static function details($_model_id=0, $dom_id = 'MagicCardsContainer'){
         $modeler = static::$modeler;

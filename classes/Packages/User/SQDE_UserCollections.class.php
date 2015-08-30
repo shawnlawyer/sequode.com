@@ -1,6 +1,6 @@
 <?php
-class SQDE_UsersCollections{
-    public static $package = 'Users';
+class SQDE_UserCollections{
+    public static $package = 'User';
 	public static $merge = true;
 	public static $routes = array(
 		'user_search'
@@ -10,7 +10,7 @@ class SQDE_UsersCollections{
 	);
 	public static function search(){
         $finder = SQDE_PackagesHandler::model(static::$package)->finder;
-        $collection = 'user_search';
+        $collection = SQDE_PackagesHandler::model(static::$package)->context . '_' . __FUNCTION__;
         $nodes = array();
         if(SQDE_Session::is($collection)){
             $_array = $finder::search(SQDE_Session::get($collection));

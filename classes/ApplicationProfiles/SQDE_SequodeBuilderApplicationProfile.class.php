@@ -5,21 +5,18 @@ class SQDE_SequodeBuilderApplicationProfile {
         SQDE_PackagesHandler::add('SQDE_SitePackage');
         
         if(SQDE_UserAuthority::isAuthenticated()){
-            SQDE_PackagesHandler::add('SQDE_UserPackage');
             SQDE_PackagesHandler::add('SQDE_AuthedPackage');
             SQDE_PackagesHandler::add('SQDE_SequodePackage');
-            if(SQDE_AuthenticatedUser::model()->role_id < 101){
-                SQDE_PackagesHandler::add('SQDE_AccountPackage');
-                SQDE_PackagesHandler::add('SQDE_PackagePackage');
-                SQDE_PackagesHandler::add('SQDE_TokenPackage');
-            }
+            SQDE_PackagesHandler::add('SQDE_AccountPackage');
+            SQDE_PackagesHandler::add('SQDE_PackagePackage');
+            SQDE_PackagesHandler::add('SQDE_TokenPackage');
         }else{
             SQDE_PackagesHandler::add('SQDE_AuthPackage');
         }
         
         if(SQDE_UserAuthority::isSystemOwner()){
             SQDE_PackagesHandler::add('SQDE_SessionPackage');
-            SQDE_PackagesHandler::add('SQDE_UsersPackage');
+            SQDE_PackagesHandler::add('SQDE_UserPackage');
             SQDE_PackagesHandler::add('SQDE_BlacklistIPPackage');
         }
         

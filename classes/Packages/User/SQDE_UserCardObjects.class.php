@@ -1,6 +1,6 @@
 <?php
-class SQDE_UsersCardObjects {
-    public static $package = 'Users';
+class SQDE_UserCardObjects {
+    public static $package = 'User';
     public static $modeler = 'SQDE_User';
     public static function menu(){
         $_o = (object) null;
