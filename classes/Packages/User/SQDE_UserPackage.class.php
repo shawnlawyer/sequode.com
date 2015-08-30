@@ -4,6 +4,7 @@ class SQDE_UserPackage {
 	public static function model(){
         $model = (object) null;
         $model->context = 'user';
+        $model->modeler = 'SQDE_User';
         $model->card_objects = 'SQDE_UserCardObjects';
         $model->form_objects = 'SQDE_UserFormObjects';
         $model->operations = 'SQDE_UserOperations';
