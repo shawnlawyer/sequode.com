@@ -96,7 +96,7 @@ class SQDE_UserCardObjects {
         $_o->body[] = $_model->sequode_favorites;
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Email');
         $_o->body[] = $_model->email;
-        $_o->body[] = SQDE_CardComponent::SQDE_CardComponent('Sequode', 'Sequodes Created : ', $_model);
+        $_o->body[] = SQDE_CardComponent::collectionTile('Sequode', 'Sequodes Created : ', $_model);
         $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/user/details'));
         if(SQDE_UserAuthority::isSystemOwner()){
             $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
