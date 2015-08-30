@@ -45,10 +45,6 @@ class SQDE_ConsoleCardObjects {
         $component_object = SQDE_Cards::render('Console', 'collection', array('my_packages', $user_model));
         $html[] = $component_object->html;
         $js[] = $component_object->js;
-        $html[] = SQDE_Card::shim();
-        $component_object = SQDE_Cards::render('Console', 'collection', array('my_machines', $user_model));
-        $html[] = $component_object->html;
-        $js[] = $component_object->js;
         $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         return $_o;
     }
@@ -73,28 +69,6 @@ class SQDE_ConsoleCardObjects {
         $_o->body = array();
         $_o->body[] = '';
         $_o->body[] = SQDE_CardComponent::collectionTile('Sequode', 'Sequodes Created : ', $user_model);
-        return $_o;
-    }
-    public static function myMachines($user_model=null){
-        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
-        $_o = (object) null;
-        $_o->head = 'My Application Machines';
-        $_o->size = 'xsmall';
-        $_o->icon_type = 'menu-icon';
-        $_o->icon_background = 'atom-icon-background';
-        $_o->menu = (object) null;
-        $_o->menu->items =  array();
-        
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $_o->menu->items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'New Application Machine',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/machine/newMachine'))
-        );
-        $_o->body = array();
-        $_o->body[] = '';
-        $_o->body[] = SQDE_CardComponent::collectionTile('Machine', 'Application Machines Created: ', $user_model);
         return $_o;
     }
     public static function myPackages($user_model=null){

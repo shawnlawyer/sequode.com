@@ -11,9 +11,6 @@ class SQDE_SequodePackage {
         $model->form_objects = 'SQDE_SequodeFormObjects';
         $model->operations = 'SQDE_SequodeOperations';
         $model->operations_kit = 'SQDE_SequodeOperationsKit';
-		$model->routes = array(
-			'SQDE_SequodeRoutes'
-		);
         $model->xhr = (object) null;
         $model->xhr->operations = 'SQDE_SequodeOperationsXHR';
         $model->xhr->forms = 'SQDE_SequodeFormsXHR';
