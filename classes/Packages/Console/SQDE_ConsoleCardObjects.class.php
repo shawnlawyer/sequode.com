@@ -11,9 +11,6 @@ class SQDE_ConsoleCardObjects {
             case 'my':
             case 'my_sequodes':
                 return self::mySequodes($user_model);
-            case 'machines':
-            case 'my_machines':
-                return self::myMachines($user_model);
             case 'packages':
             case 'my_packages':
                 return self::myPackages($user_model);
