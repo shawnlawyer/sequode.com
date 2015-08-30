@@ -10,12 +10,12 @@ class SQDE_UsersCollections{
 	);
 	public static function search(){
         $finder = SQDE_PackagesHandler::model(static::$package)->finder;
-        $collection = SQDE_PackagesHandler::model(static::$package)->context . '_' . __FUNCTION__;
+        $collection = 'user_search';
         $nodes = array();
         if(SQDE_Session::is($collection)){
             $_array = $finder::search(SQDE_Session::get($collection));
             foreach($_array as $_object){
-                $nodes[] = '"'.$_object->id.'":{"id":"'.$_object->id.'","n":"'.$_object->name.'"}';
+                $nodes[] = '"'.$_object->id.'":{"id":"'.$_object->id.'","n":"'.$_object->username.'"}';
             }
         }
         echo '{'.implode(',', $nodes).'}';

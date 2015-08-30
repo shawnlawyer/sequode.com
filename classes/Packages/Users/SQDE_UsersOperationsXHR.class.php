@@ -21,14 +21,6 @@ class SQDE_UsersOperationsXHR {
         SQDE_UserOperations::delete();
         return;
     }
-    public static function updateDomain($json){
-        if(!(
-        SQDE_UserAuthority::isAuthenticated()
-        )){ return; }
-        $input = json_decode(rawurldecode($json));
-        SQDE_UserOperations::updateDomain(rawurldecode($input->domain));
-        return;
-    }
     public static function loginAs($user_model_id){
         $input = json_decode(rawurldecode($json));
         if(!(
@@ -66,20 +58,6 @@ class SQDE_UsersOperationsXHR {
         SQDE_UserOperations::updateActive($input->active);
         return;
     }
-    public static function search($search_json){
-        if(!(
-        SQDE_UserAuthority::isSystemOwner()
-        )){ return; }
-        $search_object = json_decode(stripslashes($search_json));
-        if(!is_object($search_object) || (trim($search_object->search) == '' || empty(trim($search_object->search)))){
-            SQDE_Session::set('user_search', '{}');
-        }else{
-            SQDE_Session::set('user_search', stripslashes($search_json));
-        }
-        $js[] = 'registry.active_collection = \'user_search\';';
-        $js[] = 'registry.fetch({collection:\'user_search\'});';
-        return implode(' ',$js);
-    }
     public static function updateName($user_model_id, $json){
         if(!(
             SQDE_User::exists($user_model_id,'id')
@@ -106,5 +84,14 @@ class SQDE_UsersOperationsXHR {
             $js[] = 'registry.fetch({collection:\'user\');';
         }
         return implode(' ', $js);
+    }
+    public static function search($json){
+        $_o = json_decode(stripslashes($json));
+        $_o = (!is_object($_o) || (trim($_o->search) == '' || empty(trim($_o->search)))) ? (object) null : $_o;
+        $collection = 'users_search';
+        SQDE_Session::set($collection, $_o);
+		$js=array();
+        $js[] = SQDE_ComponentJS::fetchCollection($collection);
+        return implode(' ',$js);
     }
 }
