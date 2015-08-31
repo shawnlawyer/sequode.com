@@ -12,7 +12,7 @@ var SQDE_AuthConsole = function(){
         self.startup();
 	};
     self.loadMenus = function() {
-        new SQDE_XHRCall({route:'cards/site/menus', inputs:['MenusContainer']});
+        new SQDE_XHRCall({route:'cards/console/menus', inputs:['MenusContainer']});
     };
     self.loadCard = function(route, inputs) {
         new SQDE_XHRCall({route:route, inputs:inputs});
