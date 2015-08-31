@@ -19,7 +19,7 @@ var SQDE_SequodeConsole = function(){
 	eventsKit = new SQDE_EventsKit();
 	registry = new SQDE_SequodeConsoleRegistry();
 	self.loadMenus = function() {
-        new SQDE_XHRCall({route:'cards/site/menus', inputs:['MenusContainer']});
+        new SQDE_XHRCall({route:'cards/console/menus', inputs:['MenusContainer']});
     };
     self.loadCard = function(route, inputs) {
         new SQDE_XHRCall({route:route, inputs:inputs});

@@ -1,9 +1,8 @@
 <?php
 class SQDE_TokenCardsXHR {
     public static $package = 'Token';
-    public static $modeler = 'SQDE_Token';
     public static function details($_model_id=0, $dom_id = 'MagicCardsContainer'){
-        $modeler = static::$modeler;
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
         $modeler::exists($_model_id,'id')
         && (SQDE_UserAuthority::isOwner( $modeler::model() )
