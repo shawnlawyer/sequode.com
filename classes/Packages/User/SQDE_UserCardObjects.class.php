@@ -97,7 +97,7 @@ class SQDE_UserCardObjects {
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Email');
         $_o->body[] = $_model->email;
         $_o->body[] = SQDE_CardComponent::collectionTile('Sequode', 'Sequodes Created : ', $_model);
-        $_o->body[] = SQDE_CardComponent::collectionTile('Package', 'Packages Created : ', $user_model);
+        $_o->body[] = SQDE_CardComponent::collectionTile('Package', 'Packages Created : ', $_model);
         $_o->body[] = SQDE_CardComponent::collectionTile('Token', 'Tokens Created : ', $_model);
         $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/user/details'));
         if(SQDE_UserAuthority::isSystemOwner()){
