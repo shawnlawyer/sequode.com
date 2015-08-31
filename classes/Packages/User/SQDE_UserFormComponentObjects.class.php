@@ -1,9 +1,8 @@
 <?php
 class SQDE_UserFormComponentObjects{
     public static $package = 'User';
-    public static function updatePassword($_model = null){
+    public static function updatePassword(){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $_o = (object) null;
         
         SQDE_Component::exists('password','name');
@@ -16,13 +15,13 @@ class SQDE_UserFormComponentObjects{
 	}
     public static function updateEmail($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
+        $_model = ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : $_model;
         $_o = (object) null;
         
         SQDE_Component::exists('str','name');
 		$_o->email = json_decode(SQDE_Component::model()->component_object);
         $_o->email->Label = 'Email';
-        $_o->email->Value = $modeler::model()->email;
+        $_o->email->Value = $_model->email;
         $_o->email->Width = 200;
         
         SQDE_Component::exists('password','name');
@@ -87,7 +86,7 @@ class SQDE_UserFormComponentObjects{
 	}
     public static function updateRole($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
+        $_model = ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : $_model;
         $_o = (object) null;
         $roles_model = new SQDE_Roles;
         $roles_model->getAll();
@@ -106,7 +105,7 @@ class SQDE_UserFormComponentObjects{
 	}
     public static function updateActive($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
+        $_model = ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : $_model;
         $_o = (object) null;
         SQDE_Component::exists('checkboxSwitch','name');
         $_o->active = json_decode(SQDE_Component::model()->component_object);
@@ -115,18 +114,18 @@ class SQDE_UserFormComponentObjects{
         $_o->active->On_Value = 1;
         $_o->active->Off_Text = 'Suspended';
         $_o->active->Off_Value = 0;
-        $_o->active->Value = $modeler::model()->active;
+        $_o->active->Value = $_model->active;
 		return $_o;
 	}
     public static function updateName($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
+        $_model = ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : $_model;
         $_o = (object) null;
         
         SQDE_Component::exists('str','name');
 		$_o->username = json_decode(SQDE_Component::model()->component_object);
         $_o->username->Label = '';
-        $_o->username->Value = $modeler::model()->username;
+        $_o->username->Value = $_model->username;
         $_o->username->Width = 200;
 		return $_o;
 	}

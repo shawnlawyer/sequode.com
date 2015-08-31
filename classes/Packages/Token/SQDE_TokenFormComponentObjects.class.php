@@ -3,6 +3,7 @@ class SQDE_TokenFormComponentObjects{
     public static $package = 'Token';
     public static $modeler = 'SQDE_Token';
     public static function name($_model = null){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $_model = ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : $_model;
         $_o = (object) null;
         

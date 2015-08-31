@@ -1,7 +1,6 @@
 <?php
 class SQDE_TokenFormsXHR {
     public static $package = 'Token';
-    public static $modeler = 'SQDE_Token';
     public static function name($_model_id, $dom_id){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
