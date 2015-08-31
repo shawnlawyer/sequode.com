@@ -1,15 +1,15 @@
 <?php
 class SQDE_TokenFinder {
     public static $package = 'Token';
-    public static function search($search_object, $limit=100){
+    public static function search($_i, $limit=100){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $search_object->position = urldecode($search_object->position);
-        //$search_object->field = urldecode($search_object->field);
-        if(!in_array($search_object->position, array('=%','%=%','%=','='))){
-            $search_object->position = '=%';
+        $_i->position = urldecode($_i->position);
+        //$_i->field = urldecode($_i->field);
+        if(!in_array($_i->position, array('=%','%=%','%=','='))){
+            $_i->position = '=%';
         }
-       // if(!in_array($search_object->field, array('name','ip_address'))){
-            $search_object->field = 'name';
+       // if(!in_array($_i->field, array('name','ip_address'))){
+            $_i->field = 'name';
         //}
         
         if(SQDE_UserAuthority::isSystemOwner()){
@@ -17,7 +17,7 @@ class SQDE_TokenFinder {
             if(isset($shared_where)){
                 $where[] = $shared_where;
             }
-            $where[] = array('field'=> $search_object->field,'operator'=>$search_object->position,'value'=>$search_object->search);
+            $where[] = array('field'=> $_i->field,'operator'=>$_i->position,'value'=>$_i->search);
             $_model = new $modeler::$model;
             $_model->getAll($where,'id,name',false, $limit);
             $results = $_model->all;
@@ -27,7 +27,7 @@ class SQDE_TokenFinder {
             if(isset($shared_where)){
                 $where[] = $shared_where;
             }
-            $where[] = array('field'=> $search_object->field,'operator'=>$search_object->position,'value'=>$search_object->search);
+            $where[] = array('field'=> $_i->field,'operator'=>$_i->position,'value'=>$_i->search);
             $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
             
             $_model = new $modeler::$model;
