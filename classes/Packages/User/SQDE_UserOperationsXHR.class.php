@@ -19,7 +19,7 @@ class SQDE_UserOperationsXHR {
         && SQDE_User::exists($user_model_id,'id')
         )){return;}
         SQDE_UserOperations::delete();
-        return;
+        return SQDE_UserCardsXHR::search();
     }
     public static function loginAs($user_model_id){
         $input = json_decode(rawurldecode($json));
@@ -28,7 +28,7 @@ class SQDE_UserOperationsXHR {
         && SQDE_User::exists($user_model_id,'id')
         )){return;}
         SQDE_UserOperations::login();
-        return SQDE_SiteRoutes::applicationJS(false);
+        return SQDE_ConsoleRoutes::js(false);
     }
     public static function updatePassword($user_model_id, $json){
         $input = json_decode(rawurldecode($json));

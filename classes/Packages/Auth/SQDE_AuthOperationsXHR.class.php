@@ -11,14 +11,14 @@ class SQDE_AuthOperationsXHR {
         && SQDE_UserAuthority::isPassword(rawurldecode($input->password), SQDE_User::model())
         )){return;}
         SQDE_AuthOperations::login();
-        return SQDE_SiteRoutes::applicationJS(false);
+        return SQDE_ConsoleRoutes::js(false);
     }
     public static function guest($json){
         $js = array();
         $input = json_decode(rawurldecode($json));
         if(intval($input->accept) == 1){
             SQDE_AuthOperations::login(SQDE_UserOperations::newGuest());
-            return SQDE_SiteRoutes::applicationJS(false);
+            return SQDE_ConsoleRoutes::js(false);
         }
     }
 }
