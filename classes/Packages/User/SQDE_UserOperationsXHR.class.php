@@ -2,65 +2,86 @@
 class SQDE_UserOperationsXHR {
     public static $package = 'User';
     public static function newUser(){
+        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
+        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         if(!(
         SQDE_UserAuthority::isSystemOwner()
         )){ return; }
-        return SQDE_UserCardsXHR::details(SQDE_UserOperations::newUser()->id);
+        return $cards_xhr::details($operations::newUser()->id);
     }
     public static function newGuest(){
+        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
+        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         if(!(
         SQDE_UserAuthority::isSystemOwner()
         )){ return; }
-        return SQDE_UserCardsXHR::details(SQDE_UserOperations::newGuest()->id);
+        return $cards_xhr::details($operations::newGuest()->id);
     }
-    public static function delete($user_model_id){
+    public static function delete($_model_id){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
+        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         if(!(
         SQDE_UserAuthority::isSystemOwner()
-        && SQDE_User::exists($user_model_id,'id')
+        && $modeler::exists($_model_id,'id')
         )){return;}
-        SQDE_UserOperations::delete();
-        return SQDE_UserCardsXHR::search();
+        $operations::delete();
+        return $cards_xhr::search();
     }
-    public static function loginAs($user_model_id){
+    public static function loginAs($_model_id){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         $input = json_decode(rawurldecode($json));
         if(!(
         SQDE_UserAuthority::isSystemOwner()
-        && SQDE_User::exists($user_model_id,'id')
+        && $modeler::exists($_model_id,'id')
         )){return;}
-        SQDE_UserOperations::login();
+        $operations::login();
         return SQDE_ConsoleRoutes::js(false);
     }
-    public static function updatePassword($user_model_id, $json){
+    public static function updatePassword($_model_id, $json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
+        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         $input = json_decode(rawurldecode($json));
         if(!(
         SQDE_UserAuthority::isSystemOwner()
-        && SQDE_User::exists($user_model_id,'id')
+        && $modeler::exists($_model_id,'id')
         )){return;}
-        SQDE_UserOperations::updatePassword($input->password);
-        return;
+        $operations::updatePassword($input->password);
+        return $cards_xhr::details($modeler::model()->id);
     }
-    public static function updateRole($user_model_id, $json){
+    public static function updateRole($_model_id, $json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
+        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         $input = json_decode(rawurldecode($json));
         if(!(
             SQDE_UserAuthority::isSystemOwner()
-            && SQDE_User::exists($user_model_id,'id')
+            && $modeler::exists($_model_id,'id')
             && SQDE_Role::exists($input->role,'id')
         )){return;}
-        SQDE_UserOperations::updateRole();
-        return;
+        $operations::updateRole();
+        return $cards_xhr::details($modeler::model()->id);
     }
-    public static function updateActive($user_model_id, $json){
+    public static function updateActive($_model_id, $json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
+        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         $input = json_decode(rawurldecode($json));
         if(!(
             SQDE_UserAuthority::isSystemOwner()
-            && SQDE_User::exists($user_model_id,'id')
+            && $modeler::exists($_model_id,'id')
         )){return;}
-        SQDE_UserOperations::updateActive($input->active);
-        return;
+        $operations::updateActive($input->active);
+        return $cards_xhr::details($modeler::model()->id);
     }
-    public static function updateName($user_model_id, $json){
+    public static function updateName($_model_id, $json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
+        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         if(!(
-            SQDE_User::exists($user_model_id,'id')
+            $modeler::exists($_model_id,'id')
         )){ return; }
         $input = json_decode($json);
         $name = trim(str_replace('-','_',str_replace(' ','_',urldecode($input->username))));
@@ -71,19 +92,14 @@ class SQDE_UserOperationsXHR {
             return ' alert(\'Name can be alphanumeric and contain spaces only\');';
         }
         
-        if(SQDE_User::exists($name,'username') && SQDE_User::model()->id != $user_model_id){
+        if($modeler::exists($name,'username') && $modeler::model()->id != $_model_id){
             return ' alert(\'Name already exists\');';
-        }elseif(SQDE_User::exists($name,'username') && SQDE_User::model()->id == $user_model_id){
+        }elseif($modeler::exists($name,'username') && $modeler::model()->id == $_model_id){
             return;
         }
-        SQDE_User::exists($user_model_id,'id');
-        SQDE_UserOperations::updateName($name);
-        $js = array();
-        $js[] = 'registry.fetch({collection:\'users\', key:'.SQDE_User::model()->id.'});';
-        if(SQDE_AuthenticatedUser::model()->id == $user_model_id){
-            $js[] = 'registry.fetch({collection:\'user\');';
-        }
-        return implode(' ', $js);
+        $modeler::exists($_model_id,'id');
+        $operations::updateName($name);
+        return $cards_xhr::details($modeler::model()->id);
     }
     public static function search($json){
         $_o = json_decode(stripslashes($json));
