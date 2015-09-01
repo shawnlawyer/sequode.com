@@ -4,9 +4,8 @@ class SQDE_BlacklistIPPackage {
 	public static function model(){
         $model = (object) null;
         $model->context = 'blocklist';
-        $model->operations = 'SQDE_BlacklistIPCardObjects';
-        $model->xhr = (object) null;
-        $model->xhr->operations = 'SQDE_BlacklistIPOperationsXHR';
+        $model->modeler = 'SQDE_BlacklistIP';
+        $model->operations = 'SQDE_BlacklistIPOperations';
 		return $model;
 	}
 }

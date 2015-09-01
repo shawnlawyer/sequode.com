@@ -1,12 +1,15 @@
 <?php
 class SQDE_BlacklistIPOperations {
-    public static function create($session_model){
-        SQDE_BlacklistIP::model()->create($session_model->ip_address);
-        return SQDE_BlacklistIP::model();
+    public static $package = 'BlacklistIP'; 
+    public static function create($_session_model){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler::model()->create($_session_model->ip_address);
+        return $modeler::model();
     }
-    public static function delete($blacklist_ip_model){
-        if($blacklist_ip_model == null ){ $blacklist_ip_model = SQDE_BlacklistIP::model(); }
-        $blacklist_ip_model->delete($blacklist_ip_model->id);
-        return SQDE_BlacklistIP::model($blacklist_ip_model);
+    public static function delete($_model = null){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
+        $modeler::model()->delete($modeler::model()->id);
+        return $modeler::model();
     }
 }
