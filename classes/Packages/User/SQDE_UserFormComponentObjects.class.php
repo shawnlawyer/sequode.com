@@ -15,7 +15,7 @@ class SQDE_UserFormComponentObjects{
 	}
     public static function updateEmail($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $_model = ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : $_model;
+        $_model = ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : $_model;
         $_o = (object) null;
         
         SQDE_Component::exists('str','name');
@@ -86,7 +86,7 @@ class SQDE_UserFormComponentObjects{
 	}
     public static function updateRole($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $_model = ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : $_model;
+        $_model = ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : $_model;
         $_o = (object) null;
         $roles_model = new SQDE_Roles;
         $roles_model->getAll();
@@ -105,7 +105,7 @@ class SQDE_UserFormComponentObjects{
 	}
     public static function updateActive($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $_model = ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : $_model;
+        $_model = ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : $_model;
         $_o = (object) null;
         SQDE_Component::exists('checkboxSwitch','name');
         $_o->active = json_decode(SQDE_Component::model()->component_object);
@@ -119,7 +119,7 @@ class SQDE_UserFormComponentObjects{
 	}
     public static function updateName($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $_model = ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : $_model;
+        $_model = ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : $_model;
         $_o = (object) null;
         
         SQDE_Component::exists('str','name');

@@ -1,9 +1,9 @@
 <?php
 class SQDE_AccountFormComponentObjects{
     public static $package = 'Account';
-    public static $modeler = 'SQDE_AuthenticatedUser';
-    public static function updateEmail($_model = null){
-        $_model = ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : $_model;
+    public static function updateEmail(){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $_model = $modeler::model();
         $_o = (object) null;
         
         SQDE_Component::exists('str','name');
