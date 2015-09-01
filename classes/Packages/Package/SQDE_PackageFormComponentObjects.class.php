@@ -3,7 +3,7 @@ class SQDE_PackageFormComponentObjects {
     public static $package = 'Package';
     public static function name($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $_model = ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : $_model;
+        $_model = ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : $_model;
         $_o = (object) null;
         
         SQDE_Component::exists('str','name');
@@ -38,7 +38,7 @@ class SQDE_PackageFormComponentObjects {
 	}
     public static function packageSequode($_model = null, $user_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $_model = ($_model == null) ? forward_static_call_array(array(self::$modeler,'model'),array()) : $_model;
+        $_model = ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : $_model;
         $_user_model = ($_user_model == null) ? SQDE_AuthenticatedUser::model() : $_user_model;
         
         $_o = (object) null;
