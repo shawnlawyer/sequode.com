@@ -61,7 +61,7 @@ class SQDE_ConsoleRoutes{
                 echo '/ </li>';
                 foreach($routes as $route){
                     echo '<li>';
-                    echo '<a href="/'.$route.'">'.$route.'</a>';
+                    echo __FUNCTION__ .'/'. $model->context .'/'. $route;
                     echo '</li>';
                 }
             }
