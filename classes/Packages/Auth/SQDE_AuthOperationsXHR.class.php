@@ -1,6 +1,15 @@
 <?php
 class SQDE_AuthOperationsXHR {
     public static $package = 'Auth';
+	public static $merge = false;
+	public static $routes = array(
+		'login'
+		//'guest'
+	);
+	public static $routes_to_methods = array(
+		'login' => 'login'
+		 //'guest' => 'guest',
+    );
     public static function login($json){
         $js = array();
         $input = json_decode(rawurldecode($json));
