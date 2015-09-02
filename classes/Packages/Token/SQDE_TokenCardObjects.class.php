@@ -77,7 +77,6 @@ class SQDE_TokenCardObjects {
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Token');
         $_o->body[] = $_model->token;
         
-        $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         
         $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/token/details'));
         if(SQDE_UserAuthority::isSystemOwner()){
