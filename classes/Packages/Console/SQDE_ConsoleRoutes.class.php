@@ -48,6 +48,24 @@ class SQDE_ConsoleRoutes{
         }
 		exit;
 	}
+	public static function operations(){
+        
+        $packages = SQDE_PackagesHandler::models();
+        foreach($packages as $package => $model){
+            if(isset($model->xhr_operations)){
+                $routes = SQDE_Routes::routes($routes_class);
+                echo '<li> /';
+                echo $model->context;
+                echo '/ </li>';
+                foreach($routes as $route){
+                    echo '<li>';
+                    echo '<a href="/'.$route.'">'.$route.'</a>';
+                    echo '</li>';
+                }
+            }
+        }
+		exit;
+	}
 	public static function vendorJS(){
 		$files = array('js/jquery-2.1.4.js','js/kinetic_v5_1_0.js');
 		header('Content-type: application/javascript');
