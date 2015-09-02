@@ -54,11 +54,11 @@ class SQDE_ConsoleRoutes{
         
         $packages = SQDE_PackagesHandler::models();
         foreach($packages as $package => $model){
+            echo '<li> /';
+            echo $model->context;
+            echo '/ </li>';
             if(isset($model->xhr->operations)){
                 $routes = SQDE_Routes::routes($model->xhr->operations);
-                echo '<li> /';
-                echo $model->context;
-                echo '/ </li>';
                 foreach($routes as $route){
                     echo '<li>';
                     echo __FUNCTION__ .'/'. $model->context .'/'. $route;
