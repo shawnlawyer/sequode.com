@@ -68,6 +68,24 @@ class SQDE_ConsoleRoutes{
         }
 		exit;
 	}
+	public static function cards(){
+        
+        $packages = SQDE_PackagesHandler::models();
+        foreach($packages as $package => $model){
+            echo '<li> /';
+            echo $model->context;
+            echo '/ </li>';
+            if(isset($model->xhr->cards)){
+                $routes = SQDE_Routes::routes($model->xhr->operations);
+                foreach($routes as $route){
+                    echo '<li>';
+                    echo __FUNCTION__ .'/'. $model->context .'/'. $route;
+                    echo '</li>';
+                }
+            }
+        }
+		exit;
+	}
 	public static function vendorJS(){
 		$files = array('js/jquery-2.1.4.js','js/kinetic_v5_1_0.js');
 		header('Content-type: application/javascript');
