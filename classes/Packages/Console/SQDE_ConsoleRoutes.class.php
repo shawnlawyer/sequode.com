@@ -76,7 +76,7 @@ class SQDE_ConsoleRoutes{
             echo $model->context;
             echo '/ </li>';
             if(isset($model->xhr->cards)){
-                $routes = SQDE_Routes::routes($model->xhr->operations);
+                $routes = SQDE_Routes::routes($model->xhr->cards);
                 foreach($routes as $route){
                     echo '<li>';
                     echo __FUNCTION__ .'/'. $model->context .'/'. $route;
