@@ -60,11 +60,10 @@ class SQDE_ConsoleRoutes{
             echo $model->context;
             echo '/ </li>';
             if(isset($model->xhr->operations)){
+                $routes = SQDE_Routes::routes($model->xhr->operations);
                 foreach($routes as $route){
                     echo '<li>';
-                    echo '<a href="?card='. $model->context .'/'. $route .'">';
-                    echo $model->context .'/'. $route;
-                    echo '</a>';
+                    echo __FUNCTION__ .'/'. $model->context .'/'. $route;
                     echo '</li>';
                 }
             }
@@ -82,9 +81,10 @@ class SQDE_ConsoleRoutes{
                 $routes = SQDE_Routes::routes($model->xhr->cards);
                 foreach($routes as $route){
                     echo '<li>';
-                    echo __FUNCTION__ .'/'. $model->context .'/'. $route;
+                    echo '<a href="?card='. $model->context .'/'. $route .'">';
+                    echo $model->context .'/'. $route;
+                    echo '</a>';
                     echo '</li>';
-                }
             }
         }
 		exit;
