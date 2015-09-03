@@ -81,7 +81,7 @@ class SQDE_ConsoleRoutes{
                 $routes = SQDE_Routes::routes($model->xhr->cards);
                 foreach($routes as $route){
                     echo '<li>';
-                    echo '<a href="?card='. $model->context .'/'. $route .'">';
+                    echo '<a href="/?card='. $model->context .'/'. $route .'">';
                     echo $model->context .'/'. $route;
                     echo '</a>';
                     echo '</li>';
