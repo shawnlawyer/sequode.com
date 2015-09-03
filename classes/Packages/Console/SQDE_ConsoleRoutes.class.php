@@ -85,6 +85,7 @@ class SQDE_ConsoleRoutes{
                     echo $model->context .'/'. $route;
                     echo '</a>';
                     echo '</li>';
+                }
             }
         }
 		exit;
