@@ -10,10 +10,10 @@ class SQDE_SequodeRestAPIServerModule{
         }
         $token = $request_pieces[0];
         array_shift($request_pieces);
-        if(!(SQDE_Package::exists($token, 'token'))){
+        if(!(SQDE_Token::exists($token, 'token'))){
             return;
         }
-        SQDE_AuthenticatedUser::exists(SQDE_Package::model()->owner_id,'id');
+        SQDE_AuthenticatedUser::exists(SQDE_Token::model()->owner_id,'id');
         SQDE_PackagesHandler::add('SQDE_SequodePackage');
         //SQDE_PackagesHandler::add('SQDE_PackagePackage');
         if(!isset($request_pieces[0]) || trim($request_pieces[0]) == ''){
