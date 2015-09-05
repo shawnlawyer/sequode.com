@@ -40,8 +40,10 @@
 }
 .automagic-content-area-xsmall{
   width: 15em;
+  height: 15em;
   padding:0 1em 1em 1em;
   display:block;
+  overflow:auto;
 }
 .automagic-content-area-xxsmall{
   width: 10em;
