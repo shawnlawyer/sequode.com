@@ -30,7 +30,6 @@ class SQDE_ConsoleCardObjects {
         $html = $js = array();
         $html[] = SQDE_Card::divider(true);
         $html[] = '<div class="fitBlock alignCenter">';
-        $html[] = SQDE_Card::shim();
         $component_object = SQDE_Cards::render('Console', 'collection', array('my_sequodes', $user_model));
         $html[] = $component_object->html;
         $js[] = $component_object->js;
