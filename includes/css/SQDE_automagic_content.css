@@ -41,14 +41,14 @@
 .automagic-content-area-xsmall{
   width: 15em;
   height: 15em;
-  padding:0 1em 1em 1em;
+  padding:0;
   display:block;
   overflow:hidden;
 }
 .automagic-content-area-xsmall-tile-container{
   width: 15em;
   height: 15em;
-  padding:0;
+  padding:0 1em 1em 1em;
   display:block;
   overflow-y:scroll;
 }
