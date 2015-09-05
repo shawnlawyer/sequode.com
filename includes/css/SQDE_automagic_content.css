@@ -43,7 +43,19 @@
   height: 15em;
   padding:0 1em 1em 1em;
   display:block;
-  overflow:auto;
+  overflow:hidden;
+}
+.automagic-content-area-xsmall-tile-container{
+  width: 15em;
+  height: 15em;
+  padding:0;
+  display:block;
+  overflow-y:scroll;
+}
+.automagic-content-area-xxsmall{
+  width: 10em;
+  padding:0 1em 1em 1em;
+  display:block;
 }
 .automagic-content-area-xxsmall{
   width: 10em;
