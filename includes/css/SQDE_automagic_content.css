@@ -45,12 +45,12 @@
   display:block;
   overflow:hidden;
 }
-.automagic-content-area-xsmall-tile-container{
-  width: 17em;
-  height: 15em;
-  padding:0;
-  display:block;
-  overflow-y:scroll;
+.automagic-content-area-xsmall-tile-container {
+    width: 17em;
+    height: 13em;
+    padding: 0;
+    display: block;
+    overflow-y: scroll;
 }
 .automagic-content-area-xxsmall{
   width: 10em;
