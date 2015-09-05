@@ -1,8 +1,13 @@
 <?php
 class SQDE_SequodeOriginsRest{
-	public static function package(){
+	public static function package($_model_token){
+        if(!(
+		SQDE_Package::exists($_model_token,'id')
+        && SQDE_Sequode::exists(SQDE_Package::model()->sequode_id,'id')
+        && (SQDE_UserAuthority::isOwner(SQDE_Package::model()) || SQDE_UserAuthority::isSystemOwner())
+        && (SQDE_UserAuthority::isOwner(SQDE_Sequode::model()) || SQDE_UserAuthority::isSystemOwner())
+		)){ return; }
         $used_ids = array();
-        SQDE_Sequode::exists(SQDE_Package::model()->sequode_id,'id');
         $package_sequode_model_ids = array_unique(json_decode(SQDE_Sequode::model()->sequence));
         
 		$sequode_model = new SQDE_Sequodes;
