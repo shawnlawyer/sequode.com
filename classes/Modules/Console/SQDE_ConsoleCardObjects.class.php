@@ -29,7 +29,7 @@ class SQDE_ConsoleCardObjects {
         
         $html = $js = array();
         $html[] = SQDE_Card::divider(true);
-        $html[] = SQDE_Card::shim();
+        $html[] = '<div class="fitBlock alignCenter">';
         $html[] = SQDE_Card::shim();
         $component_object = SQDE_Cards::render('Console', 'collection', array('my_sequodes', $user_model));
         $html[] = $component_object->html;
@@ -42,6 +42,7 @@ class SQDE_ConsoleCardObjects {
         $component_object = SQDE_Cards::render('Console', 'collection', array('my_packages', $user_model));
         $html[] = $component_object->html;
         $js[] = $component_object->js;
+        $html[] = '</div>';
         $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         return $_o;
     }
