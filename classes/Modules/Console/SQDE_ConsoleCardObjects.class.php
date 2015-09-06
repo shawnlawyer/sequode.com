@@ -8,7 +8,6 @@ class SQDE_ConsoleCardObjects {
     public static function collection($collection, $user_model=null){
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
         switch($collection){
-            case 'my':
             case 'my_sequodes':
                 return self::mySequodes($user_model);
             case 'packages':

@@ -244,9 +244,11 @@ class SQDE_ConsoleRoutes{
         return true;
     }
 	public static function collections($collection='collections', $key = null){
-        $collections = array('my', 'sequode_favorites', 'palette', 'sequodes', 'tokens', 'packages');
+        $collections = array('my_sequodes', 'sequode_favorites', 'palette', 'sequodes', 'tokens', 'packages');
+        
+
         switch($collection){
-			case 'my':
+			case 'my_sequodes':
                 SQDE_SequodeCollections::owned();
                 return;
 			case 'machines':

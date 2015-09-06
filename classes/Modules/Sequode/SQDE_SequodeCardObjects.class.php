@@ -527,7 +527,7 @@ class SQDE_SequodeCardObjects {
         );
         
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'my','icon'=>'sequode','card_route'=>'cards/sequode/my','details_route'=>'cards/sequode/details'));
+        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'my_sequodes','icon'=>'sequode','card_route'=>'cards/sequode/my','details_route'=>'cards/sequode/details'));
         return $_o;
     }
     public static function favorites(){
