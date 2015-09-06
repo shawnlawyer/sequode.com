@@ -103,6 +103,7 @@ class SQDE_SequodeCollections{
         return;
 	}
 	public static function palette(){
+        $finder = SQDE_PackagesHandler::model(static::$package)->finder;
         if(in_array(SQDE_Session::get(__FUNCTION__),static::$routes)){
             $method = static::$routes_to_methods[static::$routes];
             self::$method();
