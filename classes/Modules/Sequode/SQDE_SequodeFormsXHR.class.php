@@ -75,6 +75,9 @@ class SQDE_SequodeFormsXHR {
         )){return;}
         return SQDE_ComponentJS::placeForm(SQDE_Forms::render(self::$package, __FUNCTION__), $dom_id);
     }
+    public static function selectPalette($dom_id){
+        return SQDE_ComponentJS::placeForm(SQDE_Forms::render(self::$package, __FUNCTION__), $dom_id);
+    }
     public static function tenancy($_model_id, $dom_id){
         $modeler = static::$modeler;
         if(!(
