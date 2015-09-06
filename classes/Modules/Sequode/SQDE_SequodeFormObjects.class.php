@@ -113,4 +113,9 @@ class SQDE_SequodeFormObjects {
         $form_object->submit_xhr_call_parameters[] = SQDE_Form::$collection_replacement_hook;
 		return $form_object;
 	}
+    public static function selectPalette(){
+        $form_object = SQDE_Form::formObject(static::$objects_source,__FUNCTION__,static::$ajax_library,func_get_args());
+        $form_object->auto_submit_time = 1;
+		return $form_object;
+	}
 }

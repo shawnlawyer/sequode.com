@@ -440,7 +440,7 @@ class SQDE_SequodeCardObjects {
         $items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
-            'js_action'=> 'new SQDE_XHRCall({route:\'forms/account/selectPalette\',inputs:['.SQDE_Form::jsQuotedValue($dom_id).']});'                 
+            'js_action'=> 'new SQDE_XHRCall({route:\'forms/sequode/selectPalette\',inputs:['.SQDE_Form::jsQuotedValue($dom_id).']});'                 
         );
         $_o->menu->items = array_merge($items,$_o->menu->items);
         

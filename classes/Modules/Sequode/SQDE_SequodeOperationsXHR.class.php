@@ -322,4 +322,30 @@ class SQDE_SequodeOperationsXHR {
         $js[] = SQDE_ComponentJS::fetchCollection($collection);
         return implode('',$js);
     }
+    public static function selectPalette($json){
+        if(!(
+        SQDE_UserAuthority::isAuthenticated()
+        )){ return; }
+        $input = json_decode(stripslashes($json));
+        if(!is_object($input) || (trim($input->palette) == '' || empty(trim($input->palette)))){
+            SQDE_Session::set('palette', false);
+        }else{
+            switch($input->palette){
+                case 'sequode_search':
+                case 'sequode_favorites':
+                    SQDE_Session::set('palette', $input->palette);
+                    break;
+                default:
+                    if((
+                    SQDE_Sequode::exists($input->palette,'id')
+                    && SQDE_UserAuthority::canView()
+                    )){ 
+                    SQDE_Session::set('palette', $input->palette);
+                    }
+                    break;
+            }
+        }
+        $js[]=  'registry.fetch({collection:\'palette\'});';
+        return implode(' ',$js);
+    }
 }
