@@ -251,9 +251,6 @@ class SQDE_ConsoleRoutes{
 			case 'my_sequodes':
                 SQDE_SequodeCollections::owned();
                 return;
-			case 'machines':
-                SQDE_MachineCollections::owned();
-                return;
 			case 'packages':
                 SQDE_PackageCollections::owned();
                 return;
@@ -274,9 +271,6 @@ class SQDE_ConsoleRoutes{
                 return;
 			case 'token_search':
                 SQDE_TokenCollections::search();
-                return;
-			case 'machine_search':
-                SQDE_MachineCollections::search();
                 return;
 			case 'sequode_favorites':
                 SQDE_SequodeCollections::favorited();
