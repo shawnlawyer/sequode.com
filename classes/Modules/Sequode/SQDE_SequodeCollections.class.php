@@ -4,7 +4,6 @@ class SQDE_SequodeCollections{
 	public static $merge = true;
 	public static $routes = array(
 		'sequodes',
-		'my',
 		'my_sequodes',
 		'sequode_search',
 		'sequode_favorites'
