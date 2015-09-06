@@ -102,6 +102,7 @@ class SQDE_SequodeCollections{
         echo '{'.implode(',', $nodes).'}';
         return;
 	}
+    /*
 	public static function palette(){
         $finder = SQDE_PackagesHandler::model(static::$package)->finder;
         if(in_array(SQDE_Session::get(__FUNCTION__),static::$routes)){
@@ -120,11 +121,12 @@ class SQDE_SequodeCollections{
         echo '{'.implode(',', $nodes).'}';
         return;
 	}
+    */
 	public static function palette(){
         if(SQDE_Session::get('palette') == 'sequode_search'){
-            self::collections('sequode_search');
+            self::search();
         }elseif(SQDE_Session::get('palette') == 'sequode_favorites'){
-            self::collections('sequode_favorites');
+            self::favorited();
         }elseif(SQDE_Session::is('palette')){
             $sequode_model = new SQDE_Sequodes;
             $sequode_model->exists(SQDE_Session::get('palette'),'id');
