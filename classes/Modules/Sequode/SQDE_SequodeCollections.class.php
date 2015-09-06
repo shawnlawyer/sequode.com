@@ -112,12 +112,31 @@ class SQDE_SequodeCollections{
         $nodes = array();
         $collection = __FUNCTION__;
         if(SQDE_Session::is($collection)){
-            $_array = $finder::search(SQDE_Session::get($collection));
+            $_array = SQDE_Session::get($collection);
             foreach($_array as $_object){
                 $nodes[] = '"'.$_object->id.'":{"id":"'.$_object->id.'","n":"'.$_object->name.'"}';
             }
         }
         echo '{'.implode(',', $nodes).'}';
         return;
+	}
+	public static function palette(){
+        if(SQDE_Session::get('palette') == 'sequode_search'){
+            self::collections('sequode_search');
+        }elseif(SQDE_Session::get('palette') == 'sequode_favorites'){
+            self::collections('sequode_favorites');
+        }elseif(SQDE_Session::is('palette')){
+            $sequode_model = new SQDE_Sequodes;
+            $sequode_model->exists(SQDE_Session::get('palette'),'id');
+            $sequence = array_unique(json_decode($sequode_model->sequence));
+            $nodes = array();
+            foreach($sequence as $id){
+                $sequode_model->exists($id,'id');
+                $nodes[] = '"'.$sequode_model->id.'":{"id":"'.$sequode_model->id.'","n":"'.$sequode_model->name.'"}';
+            }
+            echo '{'.implode(',', $nodes).'}';
+        }else{
+            echo '{}';
+        }
 	}
 }
