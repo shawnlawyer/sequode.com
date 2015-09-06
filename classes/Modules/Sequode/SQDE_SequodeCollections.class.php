@@ -10,7 +10,6 @@ class SQDE_SequodeCollections{
 	);
 	public static $routes_to_methods = array(
 		'sequodes' => 'main',
-		'my' => 'owned',
 		'my_sequodes' => 'owned',
 		'sequode_search' => 'search',
 		'sequode_favorites' => 'favorited'
@@ -110,7 +109,7 @@ class SQDE_SequodeCollections{
             return;
         }
         $nodes = array();
-        $collection = SQDE_PackagesHandler::model(static::$package)->context . '_' . __FUNCTION__;
+        $collection = __FUNCTION__;
         if(SQDE_Session::is($collection)){
             $_array = $finder::search(SQDE_Session::get($collection));
             foreach($_array as $_object){
