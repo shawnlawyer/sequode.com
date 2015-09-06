@@ -279,7 +279,7 @@ class SQDE_ConsoleRoutes{
                 SQDE_SequodeCollections::palette();
                 return;
 			case 'sequodes':
-                SQDE_SequodeCollections::main();
+                SQDE_SequodeCollections::main($key);
                 return;
             default:
 			case 'collections':
