@@ -323,29 +323,26 @@ class SQDE_SequodeOperationsXHR {
         return implode('',$js);
     }
     public static function selectPalette($json){
-        if(!(
-        SQDE_UserAuthority::isAuthenticated()
-        )){ return; }
-        $input = json_decode(stripslashes($json));
-        if(!is_object($input) || (trim($input->palette) == '' || empty(trim($input->palette)))){
+        $_o = json_decode(stripslashes($json));
+        if(!is_object($_o) || (trim($_o->palette) == '' || empty(trim($_o->palette)))){
             SQDE_Session::set('palette', false);
         }else{
-            switch($input->palette){
+            switch($_o->palette){
                 case 'sequode_search':
                 case 'sequode_favorites':
-                    SQDE_Session::set('palette', $input->palette);
+                    SQDE_Session::set('palette', $_o->palette);
                     break;
                 default:
                     if((
-                    SQDE_Sequode::exists($input->palette,'id')
+                    SQDE_Sequode::exists($_o->palette,'id')
                     && SQDE_UserAuthority::canView()
                     )){ 
-                    SQDE_Session::set('palette', $input->palette);
+                    SQDE_Session::set('palette', $_o->palette);
                     }
                     break;
             }
         }
-        $js[]=  'registry.fetch({collection:\'palette\'});';
+        $js[]=  SQDE_ComponentJS::fetchCollection('palette');
         return implode(' ',$js);
     }
 }

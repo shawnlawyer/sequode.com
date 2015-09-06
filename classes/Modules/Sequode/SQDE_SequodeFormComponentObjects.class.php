@@ -180,12 +180,13 @@ class SQDE_SequodeFormComponentObjects   {
 		return $components_object;
 	}
     public static function selectPalette($user_model = null){
-        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model($user_model); }
+        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
         $components_object = (object) null;
         $values = $where = array();
         
-        $values[] = '{\'value\':\'sequode_search\',\'printable\':\'Sequode Search Results\'}';
-        $values[] = '{\'value\':\'user_favorites\',\'printable\':\'My Sequode Favorites\'}';
+        $values[] = '{\'value\':\'0\',\'printable\':\'Select Sequodes Palette\'}';
+        //$values[] = '{\'value\':\'sequode_search\',\'printable\':\'Sequode Search Results\'}';
+        $values[] = '{\'value\':\'sequode_favorites\',\'printable\':\'My Sequode Favorites\'}';
         
         $where[] = array('field'=>'owner_id','operator'=>'=','value'=>5);
         $where[] = array('field'=>'shared','operator'=>'=','value'=>1);
