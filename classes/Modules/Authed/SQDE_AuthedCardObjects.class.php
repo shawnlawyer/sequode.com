@@ -17,7 +17,7 @@ class SQDE_AuthedCardObjects {
                 'css_classes'=>'automagic-card-menu-item noSelect',
                 'id'=>$dom_id,
                 'contents'=>'Logout',
-                'js_action'=> SQDE_ComponentJS::onTapEvents($dom_id, 'window.location.assign(\'/logout\');')
+                'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/authed/logout'))
             );
         return $items;
     }

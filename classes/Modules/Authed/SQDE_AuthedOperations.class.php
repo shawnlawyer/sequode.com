@@ -1,10 +1,7 @@
 <?php
-class SQDE_AuthedRoutes {
+class SQDE_AuthOperations {
     public static $package = 'Authed';
 	public static function logout(){
-        SQDE_AuthOperations
 		SQDE_Session::destroy();
-		header('Location: /');
-		exit();		
 	}
 }

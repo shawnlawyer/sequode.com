@@ -14,8 +14,6 @@ class SQDE_Mailer {
         return $message;
 	}
 	public static function send($to_email, $reply_email, $reply_name, $from_email, $from_name, $subject, $body, $attachments = array()){
-		
-		/*
 		$email = new PHPMailer();
 		$email->IsSMTP();
 		$email->SMTPDebug   = 2;
@@ -25,9 +23,11 @@ class SQDE_Mailer {
         $email->Port        = 587;
         $email->Username 	= 'system@sequode.com';
         $email->Password 	= 'Qj24d2pa';
-		*/
-		
+        
+		/*
 		$email = new AmazonSESMailer('AKIAIZQXUBNBZTGRHMBA', 'FcrVXVAZkGxZr2xXAzzutM2ezEhR9vQFewH55N96');
+        */
+        
 		$email->IsHTML(true);
         $email->AddAddress($to_email); 
         $email->AddReplyTo($reply_email,$reply_name);
