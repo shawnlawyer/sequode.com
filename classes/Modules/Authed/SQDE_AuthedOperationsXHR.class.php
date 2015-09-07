@@ -9,7 +9,6 @@ class SQDE_AuthedOperationsXHR {
 		'logout' => 'logout'
     );
     public static function logout(){
-        SQDE_AuthedOperations::logout(); 
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         forward_static_call_array(array($operations,__FUNCTION__),array());
         return SQDE_ConsoleRoutes::js(false);
