@@ -105,7 +105,6 @@ class SQDE_ConsoleRoutes{
                 }
             }
         }
-        
 		exit;
 	}
 	public static function vendorJS(){
