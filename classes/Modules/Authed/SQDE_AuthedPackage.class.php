@@ -6,7 +6,7 @@ class SQDE_AuthedPackage {
         $model->context = 'authed';
         $model->modeler = 'SQDE_AuthenticatedUser';
         $model->card_objects = 'SQDE_AuthedCardObjects';
-        $model->operations = 'SQDE_AuthOperations';
+        $model->operations = 'SQDE_AuthedOperations';
         $model->xhr = (object) null;
         $model->xhr->operations = 'SQDE_AuthedOperationsXHR';
 		return $model;
