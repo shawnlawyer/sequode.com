@@ -15,7 +15,7 @@ class SQDE_Mailer {
 	}
 	public static function send($to_email, $reply_email, $reply_name, $from_email, $from_name, $subject, $body, $attachments = array()){
 		$email = new PHPMailer();
-		$email->SMTPDebug   = 4;
+		//$email->SMTPDebug   = 4;
 		$email->isSMTP();
         $email->Host 		= 'email-smtp.us-east-1.amazonaws.com';
 		$email->SMTPAuth    = true;
