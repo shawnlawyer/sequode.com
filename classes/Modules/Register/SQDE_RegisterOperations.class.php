@@ -14,25 +14,17 @@ class SQDE_RegisterOperations {
         }
         return $salt . sha1($salt . $text);
     }
-    public static function load(){
-        if(SQDE_Session::isCookieValid() && SQDE_Session::exists(SQDE_Session::model()->session_id, 'session_id')){
-            SQDE_User::exists(SQDE_Session::get('user_id'),'id');
-            SQDE_AuthenticatedUser::exists(SQDE_Session::get('user_id'),'id');
-        }
-    }
-    public static function updateLastSignIn($time=false, $user_model = null){
-        if($user_model != null ){ SQDE_User::model($user_model); }
-        SQDE_User::model()->updateField(($time === false) ? time() : $time ,'last_sign_in');
-        return SQDE_User::model();
-    }
-    public static function login($user_model = null){
-        if($user_model == null ){ $user_model = SQDE_User::model(); }
-        SQDE_AuthenticatedUser::model($user_model);
-        SQDE_Session::model()->updateField($user_model->username,'username');
-        SQDE_Session::set('user_id', $user_model->id, false);
-        SQDE_Session::set('username', $user_model->username, false);
-        SQDE_Session::set('role_id', $user_model->role_id, false);
-        SQDE_Session::save();
-        return SQDE_AuthenticatedUser::model();
+    public static function signup($username, $password, $email, $_model = null){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
+        $modeler::model()->create($username,self::generateHash($password),$email);
+        $modeler::exists($modeler::model()->id, 'id');
+        $modeler::model()->create(substr(SQDE_Session::uniqueHash(),0,15), SQDE_Session::uniqueHash(), substr(SQDE_Session::uniqueHash(),0,15));
+        $modeler::exists($modeler::model()->id, 'id');
+        $modeler::model()->updateField('[]','sequode_favorites');
+        $modeler::model()->updateField('100','role_id');
+        $modeler::model()->updateField('33','allowed_sequode_count');
+        $modeler::model()->updateField('1','active');
+        return $modeler::model();
     }
 }
