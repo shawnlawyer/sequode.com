@@ -14,7 +14,7 @@ class SQDE_RegisterOperationsXHR {
         if(!(
         !SQDE_User::exists(rawurldecode($input->username),'username')
         //&& !SQDE_User::exists(rawurldecode($input->email),'email')
-        && SQDE_UserAuthority::isSecurePassword(rawurldecode($input->password))
+        //&& SQDE_UserAuthority::isSecurePassword(rawurldecode($input->password))
         )){return;}
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         forward_static_call_array(array($operations,__FUNCTION__),array(rawurldecode($input->username),rawurldecode($input->password),rawurldecode($input->email)));
