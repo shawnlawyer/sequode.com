@@ -4,18 +4,18 @@ class SQDE_RegisterFormObjects   {
 	public static $objects_source = 'SQDE_RegisterFormComponentObjects';
 	public static $xhr_library = 'operations/register';
     public static function signup(){
-        $form_object = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
-        $form_object->submit_button = 'Submit';
-		return $form_object;
+        $_o = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
+        $_o->submit_button = 'Submit';
+		return $_o;
 	}
 	public static function terms(){
-        $form_object = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
-		return $form_object;
+        $_o = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
+		return $_o;
 	}
 	public static function acceptTerms(){
-        $form_object = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
-        $form_object->submit_xhr_call_route = static::$xhr_library.'/'.'guest';
-        $form_object->submit_button = 'Submit';
-		return $form_object;
+        $_o = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
+        $_o->submit_xhr_call_route = static::$xhr_library.'/'.'guest';
+        $_o->submit_button = 'Submit';
+		return $_o;
 	}
 }

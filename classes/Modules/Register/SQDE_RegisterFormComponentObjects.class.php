@@ -3,54 +3,54 @@ class SQDE_RegisterFormComponentObjects   {
     public static $package = 'Register';
     
     public static function signup(){
-        $components_object = (object) null;
+        $_o = (object) null;
         
         SQDE_Component::exists('str','name');
-        $components_object->username = json_decode(SQDE_Component::model()->component_object);
-        $components_object->username->Label = 'Username';
-        $components_object->username->Value = '';
-        $components_object->username->Width = 200;
-        $components_object->username->CSS_Class = 'focus-input';
+        $_o->username = json_decode(SQDE_Component::model()->component_object);
+        $_o->username->Label = 'Username';
+        $_o->username->Value = '';
+        $_o->username->Width = 200;
+        $_o->username->CSS_Class = 'focus-input';
         
         SQDE_Component::exists('password','name');
-		$components_object->password = json_decode(SQDE_Component::model()->component_object);
-        $components_object->password->Label = 'Password';
-        $components_object->password->Value = '';
-        $components_object->password->Width = 200;
+		$_o->password = json_decode(SQDE_Component::model()->component_object);
+        $_o->password->Label = 'Password';
+        $_o->password->Value = '';
+        $_o->password->Width = 200;
         
         SQDE_Component::exists('str','name');
-        $components_object->email = json_decode(SQDE_Component::model()->component_object);
-        $components_object->email->Label = 'Email Address';
-        $components_object->email->Value = '';
-        $components_object->email->Width = 200;
+        $_o->email = json_decode(SQDE_Component::model()->component_object);
+        $_o->email->Label = 'Email Address';
+        $_o->email->Value = '';
+        $_o->email->Width = 200;
         
-		return $form_object;
+		return $_o;
 	}
-    public static function acceptTerms($user_model = null){
-        if($user_model == null ){ $user_model = SQDE_User::model($user_model); }
-        $components_object = (object) null;
+    public static function acceptTerms($_model = null){
+        if($_model == null ){ $_model = SQDE_User::model($_model); }
+        $_o = (object) null;
         
         SQDE_Component::exists('checkboxSwitch','name');
-        $components_object->accept = json_decode(SQDE_Component::model()->component_object);
-        $components_object->accept->Label = '';
-        $components_object->accept->On_Text = 'I Accept';
-        $components_object->accept->On_Value = 1;
-        $components_object->accept->Off_Text = 'I Accept';
-        $components_object->accept->Off_Value = 0;
-        $components_object->accept->Value = 0;
-        $components_object->accept->CSS_Class = 'focus-input';
-		return $components_object;
+        $_o->accept = json_decode(SQDE_Component::model()->component_object);
+        $_o->accept->Label = '';
+        $_o->accept->On_Text = 'I Accept';
+        $_o->accept->On_Value = 1;
+        $_o->accept->Off_Text = 'I Accept';
+        $_o->accept->Off_Value = 0;
+        $_o->accept->Value = 0;
+        $_o->accept->CSS_Class = 'focus-input';
+		return $_o;
 	}
-    public static function terms($user_model = null){
-        if($user_model == null ){ $user_model = SQDE_User::model($user_model); }
-        $components_object = (object) null;
+    public static function terms($_model = null){
+        if($_model == null ){ $_model = SQDE_User::model($_model); }
+        $_o = (object) null;
         
         SQDE_Component::exists('text','name');
-        $components_object->terms = json_decode(SQDE_Component::model()->component_object);
-        $components_object->terms->Label = 'Terms & Conditions of Use';
-        $components_object->terms->Value = strip_tags(file_get_contents('terms-conditions.txt',true));
-        $components_object->terms->Width = 30;
-        $components_object->terms->Height = 20;
-		return $components_object;
+        $_o->terms = json_decode(SQDE_Component::model()->component_object);
+        $_o->terms->Label = 'Terms & Conditions of Use';
+        $_o->terms->Value = strip_tags(file_get_contents('terms-conditions.txt',true));
+        $_o->terms->Width = 30;
+        $_o->terms->Height = 20;
+		return $_o;
 	}
 }
