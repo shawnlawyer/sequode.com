@@ -14,12 +14,12 @@ class SQDE_Mailer {
         return $message;
 	}
 	public static function send($to_email, $reply_email, $reply_name, $from_email, $from_name, $subject, $body, $attachments = array()){
-		$email = new PHPMailer();
+		$email = new PHPMailerLite();
 		$email->IsSMTP();
 		$email->SMTPDebug   = 2;
 		$email->SMTPSecure  = 'tls';
 		$email->SMTPAuth    = true; 
-        $email->Host 		= 'email-smtp.us-east-1.amazonaws.com';
+        $email->Host 		= 'ssl://email-smtp.us-east-1.amazonaws.com';
         $email->Port        = 587;
         $email->Username 	= 'AKIAJNA63ZDLQNFL4MDQ';
         $email->Password 	= 'Aiw5Lc0HBIBNsEF1czQR1voTJmr/XsAK1yF5QoHd7aaP';
