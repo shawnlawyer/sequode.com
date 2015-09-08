@@ -14,16 +14,15 @@ class SQDE_RegisterOperations {
         }
         return $salt . sha1($salt . $text);
     }
-    public static function signup($username, $password, $email, $_model = null){
+    public static function signup($username, $password, $email){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->create($username,self::generateHash($password),$email);
         $modeler::exists($modeler::model()->id, 'id');
         $modeler::model()->updateField('[]','sequode_favorites');
         $modeler::model()->updateField('100','role_id');
         $modeler::model()->updateField('33','allowed_sequode_count');
         $modeler::model()->updateField('1','active');
-        $activation_url = $_SERVER['HTTP_HOST'] . '?token=' . SQDE_User::model()->activation_token;
+        $activation_url = $_SERVER['HTTP_HOST'] . '?token=' . $modeler::model()->activation_token;
         $hooks = array(
             "searchStrs" => array('#ACTIVATION-URL#','#USERNAME#'),
             "subjectStrs" => array($activation_url,$modeler::model()->username)

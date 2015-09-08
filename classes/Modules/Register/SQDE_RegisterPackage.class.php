@@ -4,6 +4,7 @@ class SQDE_RegisterPackage {
 	public static function model(){
         $model = (object) null;
         $model->context = 'register';
+        $model->modeler = 'SQDE_User';
         $model->card_objects = 'SQDE_RegisterCardObjects';
         $model->form_objects = 'SQDE_RegisterFormObjects';
         $model->operations = 'SQDE_RegisterOperations';
