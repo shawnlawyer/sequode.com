@@ -15,11 +15,12 @@ class SQDE_Mailer {
 	}
 	public static function send($to_email, $reply_email, $reply_name, $from_email, $from_name, $subject, $body, $attachments = array()){
 		$email = new PHPMailer();
-		$email->IsSMTP();
+		$email->isSMTP();
 		$email->SMTPDebug   = 2;
+        $mail->Debugoutput = 'html';
 		$email->SMTPSecure  = 'tls';
 		$email->SMTPAuth    = true; 
-        $email->Host 		= 'ssl://email-smtp.us-east-1.amazonaws.com';
+        $email->Host 		= 'email-smtp.us-east-1.amazonaws.com';
         $email->Port        = 587;
         $email->Username 	= 'AKIAJNA63ZDLQNFL4MDQ';
         $email->Password 	= 'Aiw5Lc0HBIBNsEF1czQR1voTJmr/XsAK1yF5QoHd7aaP';
@@ -28,21 +29,19 @@ class SQDE_Mailer {
 		$email = new AmazonSESMailer('AKIAIZQXUBNBZTGRHMBA', 'FcrVXVAZkGxZr2xXAzzutM2ezEhR9vQFewH55N96');
         */
         
-		$email->IsHTML(true);
-        $email->AddAddress($to_email); 
-        $email->AddReplyTo($reply_email,$reply_name);
-        $email->From = $from_email;
-        $email->FromName = $from_name;
+        $email->addAddress($to_email); 
+        $email->addReplyTo($reply_email,$reply_name);
+        $mail->setFrom($from_email, $from_name);
         $email->Subject = $subject;
         $email->Body = $body;
+        $mail->msgHTML($body);
 		$email->AltBody = strip_tags(str_replace('<br>', "\n\r", $body));
         if(is_array($attachments)){
             foreach($attachments as $value){
-                $email->AddAttachment($value);
+                $email->addAttachment($value);
             }
         }
-        
-        $email->Send();
+        $email->send();
     }
 	public static function systemSend($to, $subject, $body, $attachments = array()){
 		self::send($to, 'noreply@sequode.com', 'Sequode', 'system@sequode.com', 'Sequode', $subject, $body);
