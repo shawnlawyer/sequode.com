@@ -30,10 +30,10 @@ class SQDE_Mailer {
         
         $email->addAddress($to_email); 
         $email->addReplyTo($reply_email,$reply_name);
-        $mail->setFrom($from_email, $from_name);
+        $email->setFrom($from_email, $from_name);
         $email->Subject = $subject;
         $email->Body = $body;
-        $mail->msgHTML($body);
+        $email->msgHTML($body);
 		$email->AltBody = strip_tags(str_replace('<br>', "\n\r", $body));
         if(is_array($attachments)){
             foreach($attachments as $value){
