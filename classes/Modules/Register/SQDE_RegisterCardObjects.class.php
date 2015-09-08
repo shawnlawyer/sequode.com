@@ -35,7 +35,7 @@ class SQDE_RegisterCardObjects {
     public static function signup(){
         $_o = (object) null;
         $_o->head = 'Signup';
-        $_o->icon_background = 'sessions-icon-background';
+        $_o->icon_background = 'users-icon-background';
         $_o->size = 'medium';
         $_o->body = SQDE_Forms::render(self::$package,__FUNCTION__);
         return $_o;
