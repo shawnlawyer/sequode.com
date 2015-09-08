@@ -3,43 +3,27 @@ class SQDE_ConsoleCardObjects {
     public static $package = 'Console';
     public static function index($user_model=null){
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
-        return self::gettingStarted($user_model);
+        return self::tiles($user_model);
     }
-    public static function collection($collection, $user_model=null){
-        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
-        switch($collection){
-            case 'my_sequodes':
-                return self::mySequodes($user_model);
-            case 'packages':
-            case 'my_packages':
-                return self::myPackages($user_model);
-            case 'tokens':
-            case 'my_tokens':
-                return self::myTokens($user_model);
-        }
-    }
-    public static function gettingStarted($user_model=null){
+    public static function tiles($user_model=null){
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
         $_o = (object) null;
         $_o->size = 'fullscreen';
         $_o->head = 'Sequode Web Services';
         $_o->icon_background = 'sequode-icon-background';
         $_o->body = array();
-        
+        $cards = array('mySequodes','myPackages','myTokens');
         $html = $js = array();
         $html[] = SQDE_Card::divider(true);
         $html[] = '<div class="fitBlock alignCenter">';
-        $component_object = SQDE_Cards::render('Console', 'collection', array('my_sequodes', $user_model));
-        $html[] = $component_object->html;
-        $js[] = $component_object->js;
-        $html[] = SQDE_Card::shim();
-        $component_object = SQDE_Cards::render('Console', 'collection', array('my_tokens', $user_model));
-        $html[] = $component_object->html;
-        $js[] = $component_object->js;
-        $html[] = SQDE_Card::shim();
-        $component_object = SQDE_Cards::render('Console', 'collection', array('my_packages', $user_model));
-        $html[] = $component_object->html;
-        $js[] = $component_object->js;
+        foreach($cards as $key => $card){
+            if($key != 0){
+                $html[] = SQDE_Card::shim();
+            }
+            $object = SQDE_Cards::render('Console', $card);
+            $html[] = $object->html;
+            $js[] = $object->js;
+        }
         $html[] = '</div>';
         $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
         return $_o;
