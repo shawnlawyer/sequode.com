@@ -14,7 +14,7 @@ class SQDE_Mailer {
         return $message;
 	}
 	public static function send($to_email, $reply_email, $reply_name, $from_email, $from_name, $subject, $body, $attachments = array()){
-		$email = new PHPMailerLite();
+		$email = new PHPMailer();
 		$email->IsSMTP();
 		$email->SMTPDebug   = 2;
 		$email->SMTPSecure  = 'tls';
