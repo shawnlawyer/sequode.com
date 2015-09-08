@@ -13,11 +13,14 @@ class SQDE_RegisterOperationsXHR {
         $input = json_decode(rawurldecode($json));
         if(!(
         !SQDE_UserAuthority::isAuthenticated()
-        && SQDE_User::exists(rawurldecode($input->username),'username')
+        && !SQDE_User::exists(rawurldecode($input->username),'username')
+        && !SQDE_User::exists(rawurldecode($input->email),'email')
         && SQDE_UserAuthority::isActive(SQDE_User::model())
-        && SQDE_UserAuthority::isPassword(rawurldecode($input->password), SQDE_User::model())
+        && SQDE_UserAuthority::isSecurePassword(rawurldecode($input->password), SQDE_User::model())
         )){return;}
-        SQDE_AuthOperations::login();
-        return SQDE_ConsoleRoutes::js(false);
+        SQDE_RegisterOperations::login();
+        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
+        forward_static_call_array(array($operations,__FUNCTION__),array(rawurldecode($input->username),rawurldecode($input->password),rawurldecode($input->email)));
+        return 'alert(\'check email\');';
     }
 }
