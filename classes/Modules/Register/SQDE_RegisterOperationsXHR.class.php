@@ -12,11 +12,9 @@ class SQDE_RegisterOperationsXHR {
         $js = array();
         $input = json_decode(rawurldecode($json));
         if(!(
-        !SQDE_UserAuthority::isAuthenticated()
-        && !SQDE_User::exists(rawurldecode($input->username),'username')
+        !SQDE_User::exists(rawurldecode($input->username),'username')
         //&& !SQDE_User::exists(rawurldecode($input->email),'email')
-        && SQDE_UserAuthority::isActive(SQDE_User::model())
-        && SQDE_UserAuthority::isSecurePassword(rawurldecode($input->password), SQDE_User::model())
+        && SQDE_UserAuthority::isSecurePassword(rawurldecode($input->password))
         )){return;}
         SQDE_RegisterOperations::login();
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
