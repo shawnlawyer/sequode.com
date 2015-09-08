@@ -21,8 +21,8 @@ class SQDE_Mailer {
 		$email->SMTPAuth    = true; 
         $email->Host 		= 'email-smtp.us-east-1.amazonaws.com';
         $email->Port        = 587;
-        $email->Username 	= 'system@sequode.com';
-        $email->Password 	= 'Qj24d2pa';
+        $email->Username 	= 'AKIAJDJYFZ7D7H3GZ4NQ';
+        $email->Password 	= 'ArIu8BZrxRtOgJ5yQ+rFQ5qZrKaUgh19K8TtO7camJ2r';
         
 		/*
 		$email = new AmazonSESMailer('AKIAIZQXUBNBZTGRHMBA', 'FcrVXVAZkGxZr2xXAzzutM2ezEhR9vQFewH55N96');
