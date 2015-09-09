@@ -30,9 +30,9 @@ class SQDE_RegisterOperations {
         SQDE_Mailer::systemSend($modeler::model()->email,'Activate Your Sequode Account',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
         return $modeler::model();
     }
-    public static function verify($token){
+    public static function verify($_model=null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $modeler::model()->exists($token,'activation_token');
+        ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->updateField('1','active');
         return $modeler::model();
     }
