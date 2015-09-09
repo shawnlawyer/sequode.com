@@ -9,11 +9,12 @@ class SQDE_RegisterOperationsXHR {
 		'signup' => 'signup'
     );
     public static function signup($json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $js = array();
         $input = json_decode(rawurldecode($json));
         if(!(
-        !SQDE_User::exists(rawurldecode($input->username),'username')
-        //&& !SQDE_User::exists(rawurldecode($input->email),'email')
+        !$modeler::exists(rawurldecode($input->username),'username')
+        //&& !$modeler::exists(rawurldecode($input->email),'email')
         //&& SQDE_UserAuthority::isSecurePassword(rawurldecode($input->password))
         )){return;}
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
@@ -24,16 +25,17 @@ class SQDE_RegisterOperationsXHR {
         return implode(' ', $js);
     }
     public static function verify($json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $js = array();
         $input = json_decode(rawurldecode($json));
         if(!(
-        SQDE_User::exists(rawurldecode($input->token),'activation_token')
-        && SQDE_User::model()->active == 0
+        $modeler::exists(rawurldecode($input->token),'activation_token')
+        && $modeler::model()->active == 0
         )){return;}
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
-        forward_static_call_array(array($operations,__FUNCTION__),array(SQDE_User::model()));
-        $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
+        forward_static_call_array(array($operations,__FUNCTION__),array());
+        $js[] = forward_static_call_array(array($cards_xhr,'terms'),array());
         $js[] = 'alert(\'account verified\');';
         return implode(' ', $js);
     }
