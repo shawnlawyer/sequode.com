@@ -31,6 +31,7 @@ class SQDE_RegisterOperationsXHR {
         && SQDE_User::model()->active == 0
         )){return;}
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
+        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         forward_static_call_array(array($operations,__FUNCTION__),array(rawurldecode(SQDE_User::model())));
         $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
         $js[] = 'alert(\'account verified\');';
