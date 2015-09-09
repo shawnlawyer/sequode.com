@@ -21,13 +21,19 @@ class SQDE_RegisterOperations {
         $modeler::model()->updateField('[]','sequode_favorites');
         $modeler::model()->updateField('100','role_id');
         $modeler::model()->updateField('33','allowed_sequode_count');
-        $modeler::model()->updateField('1','active');
+        $modeler::model()->updateField('0','active');
         $activation_url = $_SERVER['HTTP_HOST'] . '?token=' . $modeler::model()->activation_token;
         $hooks = array(
             "searchStrs" => array('#ACTIVATION-URL#','#USERNAME#'),
             "subjectStrs" => array($activation_url,$modeler::model()->username)
         );
         SQDE_Mailer::systemSend($modeler::model()->email,'Activate Your Sequode Account',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
+        return $modeler::model();
+    }
+    public static function verify($token){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler::model()->exists($token,'activation_token');
+        $modeler::model()->updateField('1','active');
         return $modeler::model();
     }
     /*

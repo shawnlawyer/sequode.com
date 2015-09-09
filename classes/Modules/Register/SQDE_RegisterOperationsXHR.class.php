@@ -20,4 +20,15 @@ class SQDE_RegisterOperationsXHR {
         forward_static_call_array(array($operations,__FUNCTION__),array(rawurldecode($input->username),rawurldecode($input->password),rawurldecode($input->email)));
         return 'alert(\'check email\');';
     }
+    public static function verify($json){
+        $js = array();
+        $input = json_decode(rawurldecode($json));
+        if(!(
+        SQDE_User::exists($input->token,'activation_token')
+        && SQDE_User::model()->active == 0
+        )){return;}
+        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
+        forward_static_call_array(array($operations,__FUNCTION__),array(rawurldecode($input->token)));
+        return 'alert(\'verified\');';
+    }
 }

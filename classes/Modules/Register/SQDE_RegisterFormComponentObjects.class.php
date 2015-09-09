@@ -26,6 +26,18 @@ class SQDE_RegisterFormComponentObjects   {
         
 		return $_o;
 	}
+    public static function verify(){
+        $_o = (object) null;
+        
+        SQDE_Component::exists('str','name');
+        $_o->token = json_decode(SQDE_Component::model()->component_object);
+        $_o->token->Label = 'Token';
+        $_o->token->Value = '';
+        $_o->token->Width = 200;
+        $_o->token->CSS_Class = 'focus-input';
+        
+		return $_o;
+	}
     public static function acceptTerms($_model = null){
         if($_model == null ){ $_model = SQDE_User::model($_model); }
         $_o = (object) null;
