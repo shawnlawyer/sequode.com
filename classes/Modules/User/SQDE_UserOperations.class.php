@@ -62,12 +62,6 @@ class SQDE_UserOperations {
         $modeler::model()->updateField(($time === false) ? time() : $time ,'last_sign_in');
         return $modeler::model();
     }
-    public static function updateDomain($domain, $_model = null){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
-        $modeler::model()->updateField($domain,'domain');
-        return $modeler::model();
-    }
     public static function updateEmail($email, $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
@@ -132,7 +126,6 @@ class SQDE_UserOperations {
         $modeler::model()->create(substr(SQDE_Session::uniqueHash(),0,15), SQDE_Session::uniqueHash(), substr(SQDE_Session::uniqueHash(),0,15));
         $modeler::exists($modeler::model()->id, 'id');
         $modeler::model()->updateField('[]','sequode_favorites');
-        $modeler::model()->updateField('sequo.de','domain');
         $modeler::model()->updateField('100','role_id');
         $modeler::model()->updateField('33','allowed_sequode_count');
         $modeler::model()->updateField('1','active');
@@ -143,7 +136,6 @@ class SQDE_UserOperations {
         $modeler::model()->create(substr(SQDE_Session::uniqueHash(),0,15), SQDE_Session::uniqueHash(), substr(SQDE_Session::uniqueHash(),0,15));
         $modeler::exists($modeler::model()->id, 'id');
         $modeler::model()->updateField('[]','sequode_favorites');
-        $modeler::model()->updateField('sequo.de','domain');
         $modeler::model()->updateField('101','role_id');
         $modeler::model()->updateField('5','allowed_sequode_count');
         $modeler::model()->updateField('1','active');

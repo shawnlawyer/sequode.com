@@ -63,7 +63,7 @@ var SQDE_XHRObject = function(){
         return o;
     };
     self.getCompleteRoute = function(){
-        return self.protocol+'//'+self.domain+self.server_route;
+        return self.protocol + '//' + self.domain + self.server_route;
     };
     self.prepareData = function(d){
         if(!self.prepare_handler){
