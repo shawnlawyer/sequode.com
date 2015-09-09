@@ -26,7 +26,7 @@ class SQDE_RegisterCardObjects {
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'Verify',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/register/signup'))
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/register/verify'))
         
         );
         /*
