@@ -32,7 +32,7 @@ class SQDE_RegisterOperationsXHR {
         )){return;}
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
-        forward_static_call_array(array($operations,__FUNCTION__),array(rawurldecode(SQDE_User::model())));
+        forward_static_call_array(array($operations,__FUNCTION__),array(SQDE_User::model()));
         $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
         $js[] = 'alert(\'account verified\');';
         return implode(' ', $js);
