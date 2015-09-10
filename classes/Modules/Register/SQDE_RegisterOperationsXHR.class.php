@@ -32,6 +32,8 @@ class SQDE_RegisterOperationsXHR {
         $modeler::exists(rawurldecode($input->token),'activation_token')
         && $modeler::model()->active == 0
         )){return;}
+        echo $operations;
+        echo $cards_xhr;
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         forward_static_call_array(array($operations,__FUNCTION__),array());
