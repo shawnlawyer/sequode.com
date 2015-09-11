@@ -41,12 +41,16 @@ class SQDE_RegisterCardObjects {
         return $items;
     }
     public static function signup(){
+        $steps = array('signup','verify','terms');
+        if(!SQDE_Session::is('registration_step')){
+            SQDE_Session::set('registration_step',0);
+        }
         $_o = (object) null;
-        $_o->head = 'Signup';
         $_o->icon_background = 'users-icon-background';
         $_o->size = 'small';
-        $_o->body = SQDE_Forms::render(self::$package,__FUNCTION__);
-        return $_o;
+        $_o->head = 'Signup ' . SQDE_Session::get('registration_step');
+        $_o->body = array_merge(SQDE_Forms::render(self::$package, $steps[SQDE_Session::get('registration_step')]));
+        return $_o;    
     }
     public static function verify(){
         $_o = (object) null;
@@ -59,7 +63,7 @@ class SQDE_RegisterCardObjects {
     public static function terms(){
         $_o = (object) null;
         $_o->head = 'Terms and Conditions';
-        $_o->icon_background = 'settings-icon-background';
+        $_o->icon_background = 'users-icon-background';
         $_o->size = 'medium';
         $_o->body = array_merge(SQDE_Forms::render(self::$package,__FUNCTION__),SQDE_Forms::render(self::$package,'acceptTerms'));
         return $_o;

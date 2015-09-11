@@ -27,6 +27,7 @@ class SQDE_RegisterOperations {
             "searchStrs" => array('#ACTIVATION-URL#','#USERNAME#'),
             "subjectStrs" => array($activation_url,$modeler::model()->username)
         );
+        SQDE_Session::set(SQDE_Session::get('registration_step') + 1);
         SQDE_Mailer::systemSend($modeler::model()->email,'Activate Your Sequode Account',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
         return $modeler::model();
     }

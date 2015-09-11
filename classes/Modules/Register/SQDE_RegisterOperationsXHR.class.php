@@ -22,7 +22,7 @@ class SQDE_RegisterOperationsXHR {
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         forward_static_call_array(array($operations,__FUNCTION__),array(rawurldecode($input->username),rawurldecode($input->password),rawurldecode($input->email)));
-        $js[] = forward_static_call_array(array($cards_xhr,'verify'),array());
+        $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
         $js[] = 'alert(\'check email\');';
         return implode(' ', $js);
     }
@@ -37,7 +37,7 @@ class SQDE_RegisterOperationsXHR {
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         forward_static_call_array(array($operations,__FUNCTION__),array());
-        $js[] = forward_static_call_array(array($cards_xhr,'terms'),array());
+        $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
         $js[] = 'alert(\'account verified\');';
         return implode(' ', $js);
     }
