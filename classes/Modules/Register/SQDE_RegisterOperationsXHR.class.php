@@ -29,7 +29,7 @@ class SQDE_RegisterOperationsXHR {
         $js = array();
         $input = json_decode(rawurldecode($json));
         if(!(
-        $modeler::exists(rawurldecode($input->token),'activation_token')
+        $modeler::exists($input->token,'activation_token')
         //&& $modeler::model()->active == 0
         )){return;}
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
