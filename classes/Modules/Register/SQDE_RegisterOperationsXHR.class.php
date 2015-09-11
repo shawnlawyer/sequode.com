@@ -26,6 +26,7 @@ class SQDE_RegisterOperationsXHR {
     }
     public static function verify($json){
         echo 'too';
+        exit;
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $js = array();
         $input = json_decode(rawurldecode($json));
