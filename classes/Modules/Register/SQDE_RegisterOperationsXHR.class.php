@@ -25,10 +25,10 @@ class SQDE_RegisterOperationsXHR {
         return implode(' ', $js);
     }
     public static function verify($json){
+        echo 'too';
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $js = array();
         $input = json_decode(rawurldecode($json));
-        echo 'too';
         if(!(
         $modeler::exists($input->token,'activation_token')
         //&& $modeler::model()->active == 0
