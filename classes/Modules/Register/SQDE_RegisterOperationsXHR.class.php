@@ -3,10 +3,12 @@ class SQDE_RegisterOperationsXHR {
     public static $package = 'Register';
 	public static $merge = false;
 	public static $routes = array(
-		'signup'
+		'signup',
+        'verify'
 	);
 	public static $routes_to_methods = array(
-		'signup' => 'signup'
+		'signup' => 'signup',
+		'verify' => 'verify'
     );
     public static function signup($json){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
@@ -25,11 +27,9 @@ class SQDE_RegisterOperationsXHR {
         return implode(' ', $js);
     }
     public static function verify($json){
-        echo 'too';
-        exit;
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $js = array();
-        $input = json_decode(rawurldecode($json));
+        $input = json_decode(rawurldecode(rawurldecode($json)));
         if(!(
         $modeler::exists($input->token,'activation_token')
         //&& $modeler::model()->active == 0
