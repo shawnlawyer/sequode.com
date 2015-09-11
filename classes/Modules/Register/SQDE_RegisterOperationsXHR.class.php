@@ -30,12 +30,12 @@ class SQDE_RegisterOperationsXHR {
         $input = json_decode(rawurldecode($json));
         if(!(
         $modeler::exists(rawurldecode($input->token),'activation_token')
-        && $modeler::model()->active == 0
+        //&& $modeler::model()->active == 0
         )){return;}
-        echo $operations;
-        echo $cards_xhr;
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
+        echo $operations;
+        echo $cards_xhr;
         forward_static_call_array(array($operations,__FUNCTION__),array());
         $js[] = forward_static_call_array(array($cards_xhr,'terms'),array());
         $js[] = 'alert(\'account verified\');';
