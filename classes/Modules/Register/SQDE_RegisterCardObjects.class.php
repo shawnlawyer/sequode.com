@@ -35,6 +35,7 @@ class SQDE_RegisterCardObjects {
         $_o->icon_background = 'users-icon-background';
         $_o->size = 'small';
         $_o->head = 'Signup &gt; Step ' . (SQDE_Session::get('registration_step') + 1);
+        $_o->body = array();
         foreach($steps[SQDE_Session::get('registration_step')]->forms as $form){
             $_o->body = array_merge($_o->body, SQDE_Forms::render(self::$package, $form));
         }
