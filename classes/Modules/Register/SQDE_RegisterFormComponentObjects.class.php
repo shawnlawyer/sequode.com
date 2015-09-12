@@ -74,7 +74,7 @@ class SQDE_RegisterFormComponentObjects   {
         $_o->terms = json_decode(SQDE_Component::model()->component_object);
         $_o->terms->Label = 'Terms & Conditions of Use';
         $_o->terms->Value = strip_tags(file_get_contents('terms-conditions.txt',true));
-        $_o->terms->Width = 21;
+        $_o->terms->Width = 23;
         $_o->terms->Height = 18;
         $_o->terms->CSS_Class = 'focus-input';
         
