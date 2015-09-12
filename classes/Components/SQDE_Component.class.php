@@ -450,12 +450,10 @@ class SQDE_Component {
         $label_component->Dom_Id = $dom_id.'LabelText"';
         $label_component->For_Dom_Id = $dom_id;
         $label_component->Value = $component->Display_Value;
+        $output_component = self::mergeComponents($output_component,(object) array('html' => implode(' ',$html),'js' => implode(' ',$js)));
         $output_component = self::mergeComponents($output_component,self::label($label_component));
         
-        $output_component->html .= implode(' ',$html);
-        $output_component->js .= implode(' ',$js);
         return $output_component;
-        
     }
     public static function checkboxSwitch($component){
         

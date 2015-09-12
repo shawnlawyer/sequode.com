@@ -26,14 +26,15 @@ class SQDE_RegisterFormComponentObjects   {
         
 		return $_o;
 	}
-    public static function email(){
+    public static function username(){
         $_o = (object) null;
         
         SQDE_Component::exists('str','name');
-        $_o->email = json_decode(SQDE_Component::model()->component_object);
-        $_o->email->Label = 'Email Address';
-        $_o->email->Value = '';
-        $_o->email->Width = 200;
+        $_o->username = json_decode(SQDE_Component::model()->component_object);
+        $_o->username->Label = 'Username';
+        $_o->username->Value = '';
+        $_o->username->Width = 200;
+        $_o->username->CSS_Class = 'focus-input';
         
 		return $_o;
 	}
@@ -62,6 +63,7 @@ class SQDE_RegisterFormComponentObjects   {
         $_o->accept->Off_Value = 0;
         $_o->accept->Value = 0;
         $_o->accept->CSS_Class = 'focus-input';
+        
 		return $_o;
 	}
     public static function terms($_model = null){
@@ -72,8 +74,10 @@ class SQDE_RegisterFormComponentObjects   {
         $_o->terms = json_decode(SQDE_Component::model()->component_object);
         $_o->terms->Label = 'Terms & Conditions of Use';
         $_o->terms->Value = strip_tags(file_get_contents('terms-conditions.txt',true));
-        $_o->terms->Width = 20;
-        $_o->terms->Height = 20;
+        $_o->terms->Width = 21;
+        $_o->terms->Height = 18;
+        $_o->terms->CSS_Class = 'focus-input';
+        
 		return $_o;
 	}
 }
