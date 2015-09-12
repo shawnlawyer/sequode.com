@@ -21,51 +21,18 @@ class SQDE_RegisterCardObjects {
             'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/register/signup'))
         
         );
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Verify',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/register/verify'))
-        
-        );
-        /*
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Get Started',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/auth/terms'))
-        );
-        */
         return $items;
     }
     public static function signup(){
-        $steps = array('signup','verify','terms');
+        $steps = array('email','verify','terms');
         if(!SQDE_Session::is('registration_step')){
             SQDE_Session::set('registration_step',0);
         }
         $_o = (object) null;
         $_o->icon_background = 'users-icon-background';
         $_o->size = 'small';
-        $_o->head = 'Signup ' . SQDE_Session::get('registration_step');
+        $_o->head = 'Signup &gt; Step ' . (SQDE_Session::get('registration_step') + 1);
         $_o->body = array_merge(SQDE_Forms::render(self::$package, $steps[SQDE_Session::get('registration_step')]));
         return $_o;    
-    }
-    public static function verify(){
-        $_o = (object) null;
-        $_o->head = 'Verify';
-        $_o->icon_background = 'users-icon-background';
-        $_o->size = 'small';
-        $_o->body = SQDE_Forms::render(self::$package,__FUNCTION__);
-        return $_o;
-    }
-    public static function terms(){
-        $_o = (object) null;
-        $_o->head = 'Terms and Conditions';
-        $_o->icon_background = 'users-icon-background';
-        $_o->size = 'medium';
-        $_o->body = array_merge(SQDE_Forms::render(self::$package,__FUNCTION__),SQDE_Forms::render(self::$package,'acceptTerms'));
-        return $_o;
     }
 }

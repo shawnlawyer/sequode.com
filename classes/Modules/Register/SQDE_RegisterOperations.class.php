@@ -31,6 +31,23 @@ class SQDE_RegisterOperations {
         SQDE_Mailer::systemSend($modeler::model()->email,'Activate Your Sequode Account',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
         return $modeler::model();
     }
+    public static function signup($email){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler::model()->create(self::generateHash($email),self::generateHash($email),$email);
+        $modeler::exists($modeler::model()->id, 'id');
+        $modeler::model()->updateField('[]','sequode_favorites');
+        $modeler::model()->updateField('100','role_id');
+        $modeler::model()->updateField('100','allowed_sequode_count');
+        $modeler::model()->updateField('0','active');
+        $activation_token = $modeler::model()->activation_token;
+        $hooks = array(
+            "searchStrs" => array('#ACTIVATION-URL#','#USERNAME#'),
+            "subjectStrs" => array($activation_token,'')
+        );
+        SQDE_Session::set('registration_step',SQDE_Session::get('registration_step') + 1);
+        SQDE_Mailer::systemSend($modeler::model()->email,'Verify your email address with sequode.com',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
+        return $modeler::model();
+    }
     public static function verify($_model=null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
