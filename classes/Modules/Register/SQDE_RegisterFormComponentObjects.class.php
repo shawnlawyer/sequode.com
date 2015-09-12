@@ -72,7 +72,7 @@ class SQDE_RegisterFormComponentObjects   {
         $_o->terms = json_decode(SQDE_Component::model()->component_object);
         $_o->terms->Label = 'Terms & Conditions of Use';
         $_o->terms->Value = strip_tags(file_get_contents('terms-conditions.txt',true));
-        $_o->terms->Width = 30;
+        $_o->terms->Width = 20;
         $_o->terms->Height = 20;
 		return $_o;
 	}
