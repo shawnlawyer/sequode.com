@@ -24,7 +24,10 @@ class SQDE_RegisterCardObjects {
         return $items;
     }
     public static function signup(){
-        $steps = array('email','verify','terms');
+        $steps = array();
+        $steps[] = object array('forms'=> array('email'));
+        $steps[] = object array('forms'=> array('verify'));
+        $steps[] = object array('forms'=> array('terms','acceptTerms'));
         if(!SQDE_Session::is('registration_step')){
             SQDE_Session::set('registration_step',0);
         }
@@ -32,7 +35,9 @@ class SQDE_RegisterCardObjects {
         $_o->icon_background = 'users-icon-background';
         $_o->size = 'small';
         $_o->head = 'Signup &gt; Step ' . (SQDE_Session::get('registration_step') + 1);
-        $_o->body = array_merge(SQDE_Forms::render(self::$package, $steps[SQDE_Session::get('registration_step')]));
+        foreach($steps[SQDE_Session::get('registration_step')]->forms as $form){
+            $_o->body = array_merge($_o->body, SQDE_Forms::render(self::$package, $form));
+        }
         return $_o;    
     }
 }
