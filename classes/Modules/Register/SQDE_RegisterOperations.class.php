@@ -14,7 +14,7 @@ class SQDE_RegisterOperations {
         }
         return $salt . sha1($salt . $text);
     }
-    public static function signup($username, $password, $email){
+    public static function signupold($username, $password, $email){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $modeler::model()->create($username,self::generateHash($password),$email);
         $modeler::exists($modeler::model()->id, 'id');
