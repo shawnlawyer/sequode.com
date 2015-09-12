@@ -36,9 +36,9 @@ class SQDE_RegisterOperationsXHR {
         $_o->size = 'small';
         $_o->head = 'Create Account';
         $_o->body = array();
-        foreach($steps[SQDE_Session::get('registration_step')]->operations as $operations){
-            $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->$operations;  
-            forward_static_call_array(array($operations_xhr,__FUNCTION__),array($json));
+        foreach($steps[SQDE_Session::get('registration_step')]->operations as $operation){
+            $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->operations;  
+            forward_static_call_array(array($operations_xhr, $operation),array($json));
         }
         $js[] = forward_static_call_array(array($cards_xhr,__FUNCTION__),array());
         return implode(' ', $js);  
