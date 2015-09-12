@@ -52,6 +52,7 @@ class SQDE_RegisterOperations {
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->updateField('1','active');
+        SQDE_Session::set('registration_step',SQDE_Session::get('registration_step') + 1);
         return $modeler::model();
     }
     /*
