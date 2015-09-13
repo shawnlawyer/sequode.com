@@ -12,7 +12,7 @@ class SQDE_RegisterOperationsXHR {
         if(!SQDE_Session::is('registration_step')){return;}
         $steps = array(
             (object) array(
-                'prep'=> array('setEmailAddress'),
+                //'prep'=> array('setEmailAddress'),
                 'operations'=> array('setEmailAddress')
                 
                 ),
@@ -29,32 +29,13 @@ class SQDE_RegisterOperationsXHR {
         $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
         return implode(' ', $js);  
     }
-    public static function main($json){
-        if(!SQDE_Session::is('registration_step')){return;}
-        $steps = array(
-            (object) array('operations'=> array('setEmailAddress')),
-            (object) array('operations'=> array('setPassword')),
-            (object) array('operations'=> array('acceptTerms')),
-            (object) array('operations'=> array('verifyToken'))
-        );
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->operations;
-        foreach($steps[SQDE_Session::get('registration_step')]->operations as $operation){
-            if(forward_static_call_array(array($operations_xhr, $operation),array($json)) == false){
-                return;
-            };
-        }
-        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
-        $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
-        return implode(' ', $js);  
-    }
     public static function setEmailAddress($json){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $js = array();
         $input = json_decode(rawurldecode($json));
         //if(!(
         //&& !$modeler::exists(rawurldecode($input->email),'email')
-        //)){return true;}
+        //)){return false;}
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         return forward_static_call_array(array($operations,'setEmailAddress'), array(rawurldecode($input->email)));
     }
