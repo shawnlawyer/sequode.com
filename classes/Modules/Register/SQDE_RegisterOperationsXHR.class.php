@@ -14,25 +14,25 @@ class SQDE_RegisterOperationsXHR {
                     array(
                         (object) array(
                             'prep' => 'setEmailAddress',
-                            'operation' => 'setEmailAddress')
+                            'operation' => 'setEmailAddress'
                         )
                     ),
                     array(
                         (object) array(
                             'prep' => 'setPassword',
-                            'operation' => 'setPassword')
+                            'operation' => 'setPassword'
                         )
                     ),
                     array(
                         (object) array(
                             'prep' => 'acceptTerms',
-                            'operation' => 'sendToken')
+                            'operation' => 'sendToken'
                         )
                     ),
                     array(
                         (object) array(
                             'prep' => 'verifyToken',
-                            'operation' => 'verifyToken')
+                            'operation' => 'verifyToken'
                         )
                     )
                 );
