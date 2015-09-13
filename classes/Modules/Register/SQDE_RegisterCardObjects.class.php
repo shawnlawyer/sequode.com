@@ -27,8 +27,8 @@ class SQDE_RegisterCardObjects {
         $steps = array();
         $steps[] = (object) array('forms'=> array('email'));
         $steps[] = (object) array('forms'=> array('password'));
-        $steps[] = (object) array('forms'=> array('verify'));
         $steps[] = (object) array('forms'=> array('terms','acceptTerms'));
+        $steps[] = (object) array('forms'=> array('verify'));
         if(!SQDE_Session::is('registration_step')){
             SQDE_Session::set('registration_step',0);
         }        
