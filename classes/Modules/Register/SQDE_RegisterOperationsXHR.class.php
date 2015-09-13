@@ -11,10 +11,14 @@ class SQDE_RegisterOperationsXHR {
     public static function main($json){
         if(!SQDE_Session::is('registration_step')){return;}
         $steps = array(
-        (object) array('operations'=> array('setEmailAddress')),
-        (object) array('operations'=> array('setPassword')),
-        (object) array('operations'=> array('acceptTerms')),
-        (object) array('operations'=> array('verifyToken'))
+            (object) array(
+                'prep'=> array('setEmailAddress'),
+                'operations'=> array('setEmailAddress')
+                
+                ),
+            (object) array('operations'=> array('setPassword')),
+            (object) array('operations'=> array('acceptTerms')),
+            (object) array('operations'=> array('verifyToken'))
         );
         $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->operations;
         foreach($steps[SQDE_Session::get('registration_step')]->operations as $operation){
@@ -25,13 +29,32 @@ class SQDE_RegisterOperationsXHR {
         $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
         return implode(' ', $js);  
     }
+    public static function main($json){
+        if(!SQDE_Session::is('registration_step')){return;}
+        $steps = array(
+            (object) array('operations'=> array('setEmailAddress')),
+            (object) array('operations'=> array('setPassword')),
+            (object) array('operations'=> array('acceptTerms')),
+            (object) array('operations'=> array('verifyToken'))
+        );
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->operations;
+        foreach($steps[SQDE_Session::get('registration_step')]->operations as $operation){
+            if(forward_static_call_array(array($operations_xhr, $operation),array($json)) == false){
+                return;
+            };
+        }
+        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
+        $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
+        return implode(' ', $js);  
+    }
     public static function setEmailAddress($json){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $js = array();
         $input = json_decode(rawurldecode($json));
         //if(!(
         //&& !$modeler::exists(rawurldecode($input->email),'email')
-        //)){return;}
+        //)){return true;}
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         return forward_static_call_array(array($operations,'setEmailAddress'), array(rawurldecode($input->email)));
     }
@@ -42,7 +65,7 @@ class SQDE_RegisterOperationsXHR {
         if(!(
             rawurldecode($input->password) == rawurldecode($input->confirm_password)
             && SQDE_UserAuthority::isSecurePassword(rawurldecode($input->password))
-        )){return;}
+        )){return false;}
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         return forward_static_call_array(array($operations,'setPassword'),array($input->password));
     }
@@ -50,7 +73,7 @@ class SQDE_RegisterOperationsXHR {
         $input = json_decode(rawurldecode(rawurldecode($json)));
         if(!(
             intval($input->accept) != 1
-        )){return;}
+        )){return false;}
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         return forward_static_call_array(array($operations,'sendToken'),array());
     }
@@ -61,7 +84,7 @@ class SQDE_RegisterOperationsXHR {
         if(!(
         $modeler::exists($input->token,'activation_token')
         && $modeler::model()->active == 0
-        )){return;}
+        )){return false;}
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         return forward_static_call_array(array($operations,__FUNCTION__),array());
     }
