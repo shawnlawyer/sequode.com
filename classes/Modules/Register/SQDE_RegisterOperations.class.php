@@ -38,8 +38,9 @@ class SQDE_RegisterOperations {
         SQDE_Mailer::systemSend($modeler::model()->email,'Verify your email address with sequode.com',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
         return $modeler::model();
     }
-    public static function verifyToken(){
+    public static function setActive(){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler::exists(SQDE_Session::get('registration_id'), 'id');
         $modeler::model()->updateField('1','active');
         return $modeler::model();
     }
