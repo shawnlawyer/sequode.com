@@ -32,15 +32,12 @@ class SQDE_RegisterOperationsXHR {
         $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->operations;
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         $parameters = forward_static_call_array(array($operations_xhr, $step->prep), func_get_args());
-        print_r($parameters);
-        if(!is_array($parameters)){
+        if(!(
+            is_array($parameters)
+            && forward_static_call_array(array($operations, $step->operation),$parameters)
+        )){
             return;
         }
-        echo $step->prep;
-        if(forward_static_call_array(array($operations, $step->operation),$parameters) == false){
-            return;
-        }
-        echo $step->operation;
         SQDE_Session::set('registration_step', SQDE_Session::get('registration_step') + 1);
         $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
