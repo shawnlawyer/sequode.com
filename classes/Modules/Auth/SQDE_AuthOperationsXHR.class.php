@@ -19,10 +19,6 @@ class SQDE_AuthOperationsXHR {
         && SQDE_UserAuthority::isActive(SQDE_User::model())
         && SQDE_UserAuthority::isPassword(rawurldecode($input->password), SQDE_User::model())
         )){return;}
-        if(!(
-        SQDE_UserAuthority::isActive(SQDE_User::model())
-        && SQDE_UserAuthority::isPassword(rawurldecode($input->password), SQDE_User::model())
-        )){return;}
         SQDE_AuthOperations::login();
         return SQDE_ConsoleRoutes::js(false);
     }

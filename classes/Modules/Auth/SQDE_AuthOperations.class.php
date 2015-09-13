@@ -28,7 +28,7 @@ class SQDE_AuthOperations {
     public static function login($user_model = null){
         if($user_model == null ){ $user_model = SQDE_User::model(); }
         SQDE_AuthenticatedUser::model($user_model);
-        SQDE_Session::model()->updateField($user_model->username,'username');
+        SQDE_Session::model()->updateField($user_model->email,'username');
         SQDE_Session::set('user_id', $user_model->id, false);
         SQDE_Session::set('username', $user_model->username, false);
         SQDE_Session::set('role_id', $user_model->role_id, false);
