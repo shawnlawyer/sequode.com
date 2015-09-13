@@ -11,26 +11,26 @@ class SQDE_RegisterOperationsXHR {
     public static function main(){
         if(!SQDE_Session::is('registration_step')){return;}
         $steps = array(
-                    (object) array(
-                            'prep' => 'verifyEmailAddress',
-                            'operation' => 'setEmailAddress'
-                    ),
-                    (object) array(
-                            'prep' => 'verifyPassword',
-                            'operation' => 'setPassword'
-                    ),
-                    (object) array(
-                            'prep' => 'verifyAccept',
-                            'operation' => 'sendToken'
-                    ),
-                    (object) array(
-                            'prep' => 'verifyToken',
-                            'operation' => 'setActive'
-                        )
-                );
+            (object) array(
+                'prep' => 'verifyEmailAddress',
+                'operation' => 'setEmailAddress'
+            ),
+            (object) array(
+                'prep' => 'verifyPassword',
+                'operation' => 'setPassword'
+            ),
+            (object) array(
+                'prep' => 'verifyAccept',
+                'operation' => 'sendToken'
+            ),
+            (object) array(
+                'prep' => 'verifyToken',
+                'operation' => 'setActive'
+            )
+        );
+        $step = $steps[SQDE_Session::get('registration_step')];
         $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->operations;
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-        $step = $steps[SQDE_Session::get('registration_step')]
         $parameters = forward_static_call_array(array($operations_xhr, $step->prep), func_get_args());
         print_r($parameters);
         if($parameters == false){
