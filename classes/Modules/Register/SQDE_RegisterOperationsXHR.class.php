@@ -42,7 +42,7 @@ class SQDE_RegisterOperationsXHR {
             if($parameters == false){
                 return;
             }
-            if(forward_static_call_array(array($operations_xhr, $step->prep),array($json)) == false){
+            if(forward_static_call_array(array($operations_xhr, $step->operation),array($json)) == false){
                 return;
             }
         }
@@ -75,4 +75,14 @@ class SQDE_RegisterOperationsXHR {
         )){return false;}
         return array();
     }
+    public static function verifyToken($json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $input = json_decode(rawurldecode(rawurldecode($json)));
+        if(!(
+        $modeler::exists($input->token,'activation_token')
+        && $modeler::model()->active == 0
+        )){return false;}
+        return array();
+    }
+    
 }
