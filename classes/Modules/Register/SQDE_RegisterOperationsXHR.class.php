@@ -22,7 +22,7 @@ class SQDE_RegisterOperationsXHR {
         }
         
         $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
-        $js[] = forward_static_call_array(array($cards_xhr,__FUNCTION__),array());
+        $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
         return implode(' ', $js);  
     }
     public static function setEmailAddress($json){
