@@ -43,6 +43,7 @@ class SQDE_RegisterOperationsXHR {
             if($parameters == false){
                 return;
             }
+            echo 'here';
             if(forward_static_call_array(array($operations, $step->operation),$parameters) == false){
                 return;
             }
@@ -71,9 +72,9 @@ class SQDE_RegisterOperationsXHR {
     }
     public static function verifyAccept($json){
         $input = json_decode(rawurldecode($json));
-        //if(!(
-        //    intval($input->accept) == 1
-        //)){return false;}
+        if(!(
+            intval($input->accept) == 1
+        )){return false;}
         return array();
     }
     public static function verifyToken($json){
