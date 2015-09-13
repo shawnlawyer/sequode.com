@@ -33,7 +33,7 @@ class SQDE_RegisterOperations {
         $modeler::exists(SQDE_Session::get('registration_id'), 'id');
         $hooks = array(
             "searchStrs" => array('#ACTIVATION-URL#','#USERNAME#'),
-            "subjectStrs" => array($modeler::model()->activation_token,'')
+            "subjectStrs" => array(SQDE_Session::get('registration_token'),'')
         );
         SQDE_Mailer::systemSend($modeler::model()->email,'Verify your email address with sequode.com',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
         return $modeler::model();

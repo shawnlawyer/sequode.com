@@ -13,19 +13,19 @@ class SQDE_RegisterOperationsXHR {
         $steps = array(
                     array(
                         (object) array(
-                            'prep' => 'setEmailAddress',
+                            'prep' => 'verifyEmailAddress',
                             'operation' => 'setEmailAddress'
                         )
                     ),
                     array(
                         (object) array(
-                            'prep' => 'setPassword',
+                            'prep' => 'verifyPassword',
                             'operation' => 'setPassword'
                         )
                     ),
                     array(
                         (object) array(
-                            'prep' => 'acceptTerms',
+                            'prep' => 'verifyAccept',
                             'operation' => 'sendToken'
                         )
                     ),
@@ -52,7 +52,7 @@ class SQDE_RegisterOperationsXHR {
         $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
         return implode(' ', $js);  
     }
-    public static function setEmailAddress($json){
+    public static function verifyEmailAddress($json){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $input = json_decode(rawurldecode($json));
         //if(!(
@@ -60,7 +60,7 @@ class SQDE_RegisterOperationsXHR {
         //)){return false;}
         return array(rawurldecode($input->email));
     }
-    public static function setPassword($json){
+    public static function verifyPassword($json){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $input = json_decode(rawurldecode($json));
         if(!(
@@ -69,7 +69,7 @@ class SQDE_RegisterOperationsXHR {
         )){return false;}
         return array(rawurldecode($input->password));
     }
-    public static function acceptTerms($json){
+    public static function verifyAccept($json){
         $input = json_decode(rawurldecode($json));
         if(!(
             intval($input->accept) == 1
