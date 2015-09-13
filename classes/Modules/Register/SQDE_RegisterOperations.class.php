@@ -42,6 +42,7 @@ class SQDE_RegisterOperations {
         SQDE_Session::set('registration_id', $modeler::model()->id);
         SQDE_Session::set('registration_token', $modeler::model()->activation_token);
         
+        SQDE_Session::set('registration_step',SQDE_Session::get('registration_step') + 1);
         SQDE_Mailer::systemSend($modeler::model()->email,'Verify your email address with sequode.com',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
         return $modeler::model();
     }

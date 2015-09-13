@@ -53,7 +53,7 @@ class SQDE_RegisterOperationsXHR {
     public static function acceptTerms($json){
         $input = json_decode(rawurldecode(rawurldecode($json)));
         if(!(
-            intval($input->accept) != 1
+            intval($input->accept) == 1
         )){return false;}
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         return forward_static_call_array(array($operations,'sendToken'),array());
@@ -67,6 +67,6 @@ class SQDE_RegisterOperationsXHR {
         && $modeler::model()->active == 0
         )){return false;}
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-        return forward_static_call_array(array($operations,__FUNCTION__),array());
+        return forward_static_call_array(array($operations,'verifyToken'),array());
     }
 }
