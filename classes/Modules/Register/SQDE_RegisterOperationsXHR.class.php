@@ -8,47 +8,39 @@ class SQDE_RegisterOperationsXHR {
 	public static $routes_to_methods = array(
 		'signup' => 'main'
     );
-    public static function main($json){
+    public static function main(){
         if(!SQDE_Session::is('registration_step')){return;}
         $steps = array(
-                    array(
-                        (object) array(
+                    (object) array(
                             'prep' => 'verifyEmailAddress',
                             'operation' => 'setEmailAddress'
-                        )
                     ),
-                    array(
-                        (object) array(
+                    (object) array(
                             'prep' => 'verifyPassword',
                             'operation' => 'setPassword'
-                        )
                     ),
-                    array(
-                        (object) array(
+                    (object) array(
                             'prep' => 'verifyAccept',
                             'operation' => 'sendToken'
-                        )
                     ),
-                    array(
-                        (object) array(
+                    (object) array(
                             'prep' => 'verifyToken',
                             'operation' => 'setActive'
                         )
-                    )
                 );
         $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->operations;
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-        foreach($steps[SQDE_Session::get('registration_step')] as $step){
-            echo 'here';
-            $parameters = forward_static_call_array(array($operations_xhr, $step->prep),array($json));
-            if($parameters == false){
-                return;
-            }
-            echo 'here';
-            if(forward_static_call_array(array($operations, $step->operation),$parameters) == false){
-                return;
-            }
+        $step = $steps[SQDE_Session::get('registration_step')]
+        $parameters = forward_static_call_array(array($operations_xhr, $step->prep), func_get_args());
+        print_r($parameters);
+        if($parameters == false){
+            return;
         }
+        echo $step->prep;
+        if(forward_static_call_array(array($operations, $step->operation),$parameters) == false){
+            return;
+        }
+        echo $step->operation;
         SQDE_Session::set('registration_step', SQDE_Session::get('registration_step') + 1);
         $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
