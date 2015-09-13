@@ -22,9 +22,11 @@ class SQDE_RegisterOperationsXHR {
         );
         $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->operations;
         foreach($steps[SQDE_Session::get('registration_step')]->operations as $operation){
-            forward_static_call_array(array($operations_xhr, $operation),array($json));
+            if(forward_static_call_array(array($operations_xhr, $operation),array($json)) == false){
+                return;
+            }
         }
-        
+        SQDE_Session::set('registration_step', SQDE_Session::get('registration_step') + 1);
         $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
         return implode(' ', $js);  

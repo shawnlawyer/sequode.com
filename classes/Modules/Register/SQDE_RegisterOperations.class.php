@@ -18,7 +18,6 @@ class SQDE_RegisterOperations {
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $modeler::model()->create(self::generateHash($email),self::generateHash($email),$email);
         $modeler::exists($modeler::model()->id, 'id');
-        SQDE_Session::set('registration_step', SQDE_Session::get('registration_step') + 1);
         SQDE_Session::set('registration_id', $modeler::model()->id);
         SQDE_Session::set('registration_token', $modeler::model()->activation_token);
         return $modeler::model();
@@ -27,7 +26,6 @@ class SQDE_RegisterOperations {
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $modeler::exists(SQDE_Session::get('registration_id'), 'id');
         $modeler::model()->updateField(self::generateHash($value),'password');
-        SQDE_Session::set('registration_step',SQDE_Session::get('registration_step') + 1);
         return $modeler::model();
     }
     public static function sendToken(){
@@ -38,11 +36,8 @@ class SQDE_RegisterOperations {
             "searchStrs" => array('#ACTIVATION-URL#','#USERNAME#'),
             "subjectStrs" => array($activation_token,'')
         );
-        SQDE_Session::set('registration_step', SQDE_Session::get('registration_step') + 1);
         SQDE_Session::set('registration_id', $modeler::model()->id);
         SQDE_Session::set('registration_token', $modeler::model()->activation_token);
-        
-        SQDE_Session::set('registration_step',SQDE_Session::get('registration_step') + 1);
         SQDE_Mailer::systemSend($modeler::model()->email,'Verify your email address with sequode.com',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
         return $modeler::model();
     }
@@ -50,7 +45,6 @@ class SQDE_RegisterOperations {
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->updateField('1','active');
-        SQDE_Session::set('registration_step',SQDE_Session::get('registration_step') + 1);
         return $modeler::model();
     }
     /*
