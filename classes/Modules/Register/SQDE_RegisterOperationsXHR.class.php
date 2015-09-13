@@ -66,7 +66,7 @@ class SQDE_RegisterOperationsXHR {
             rawurldecode($input->password) == rawurldecode($input->confirm_password)
             && SQDE_UserAuthority::isSecurePassword(rawurldecode($input->password))
         )){return false;}
-        return array(rawurldecode($input->email));
+        return array(rawurldecode($input->password));
     }
     public static function acceptTerms($json){
         $input = json_decode(rawurldecode($json));
