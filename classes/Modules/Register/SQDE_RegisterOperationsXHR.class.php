@@ -69,7 +69,7 @@ class SQDE_RegisterOperationsXHR {
         return array(rawurldecode($input->email));
     }
     public static function acceptTerms($json){
-        $input = json_decode(rawurldecode(rawurldecode($json)));
+        $input = json_decode(rawurldecode($json));
         if(!(
             intval($input->accept) == 1
         )){return false;}
@@ -77,7 +77,7 @@ class SQDE_RegisterOperationsXHR {
     }
     public static function verifyToken($json){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $input = json_decode(rawurldecode(rawurldecode($json)));
+        $input = json_decode(rawurldecode($json));
         if(!(
         $modeler::exists($input->token,'activation_token')
         && $modeler::model()->active == 0
