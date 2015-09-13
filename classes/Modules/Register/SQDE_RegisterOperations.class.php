@@ -31,13 +31,10 @@ class SQDE_RegisterOperations {
     public static function sendToken(){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $modeler::exists(SQDE_Session::get('registration_id'), 'id');
-        $activation_token = $modeler::model()->activation_token;
         $hooks = array(
             "searchStrs" => array('#ACTIVATION-URL#','#USERNAME#'),
-            "subjectStrs" => array($activation_token,'')
+            "subjectStrs" => array($modeler::model()->activation_token,'')
         );
-        SQDE_Session::set('registration_id', $modeler::model()->id);
-        SQDE_Session::set('registration_token', $modeler::model()->activation_token);
         SQDE_Mailer::systemSend($modeler::model()->email,'Verify your email address with sequode.com',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
         return $modeler::model();
     }
