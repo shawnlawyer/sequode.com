@@ -26,7 +26,7 @@ class SQDE_RegisterOperations {
     public static function setPassword($value){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $modeler::exists(SQDE_Session::get('registration_id'), 'id');
-        $modeler::model()->updateField(self::generateHash($password),'password');
+        $modeler::model()->updateField(self::generateHash($value),'password');
         SQDE_Session::set('registration_step',SQDE_Session::get('registration_step') + 1);
         return $modeler::model();
     }
