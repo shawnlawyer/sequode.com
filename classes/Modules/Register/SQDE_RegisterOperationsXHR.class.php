@@ -39,6 +39,7 @@ class SQDE_RegisterOperationsXHR {
         $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->operations;
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         foreach($steps[SQDE_Session::get('registration_step')] as $step){
+            echo 'here';
             $parameters = forward_static_call_array(array($operations_xhr, $step->prep),array($json));
             if($parameters == false){
                 return;
