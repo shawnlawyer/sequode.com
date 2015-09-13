@@ -32,7 +32,7 @@ class SQDE_RegisterOperationsXHR {
                     array(
                         (object) array(
                             'prep' => 'verifyToken',
-                            'operation' => 'verifyToken'
+                            'operation' => 'setActive'
                         )
                     )
                 );
@@ -79,8 +79,9 @@ class SQDE_RegisterOperationsXHR {
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $input = json_decode(rawurldecode($json));
         if(!(
-        $modeler::exists($input->token,'activation_token')
-        && $modeler::model()->active == 0
+            $modeler::exists($input->token,'activation_token')
+            && $modeler::model()->activation_token == SQDE_Session::get('registration_token')
+            && $modeler::model()->active == 0
         )){return false;}
         return array();
     }
