@@ -42,7 +42,7 @@ class SQDE_RegisterOperationsXHR {
             if($parameters == false){
                 return;
             }
-            if(forward_static_call_array(array($operations_xhr, $step->operation),array($json)) == false){
+            if(forward_static_call_array(array($operations_xhr, $step->operation),$parameters) == false){
                 return;
             }
         }
