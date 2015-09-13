@@ -33,7 +33,7 @@ class SQDE_RegisterOperationsXHR {
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         $parameters = forward_static_call_array(array($operations_xhr, $step->prep), func_get_args());
         print_r($parameters);
-        if($parameters === false){
+        if(!is_array($parameters)){
             return;
         }
         echo $step->prep;
