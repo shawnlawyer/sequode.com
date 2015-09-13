@@ -76,6 +76,12 @@ class SQDE_RegisterFormComponentObjects   {
         $_o->password->Value = '';
         $_o->password->Width = 200;
         
+        SQDE_Component::exists('password','name');
+		$_o->confirm_password = json_decode(SQDE_Component::model()->component_object);
+        $_o->confirm_password->Label = 'Confirm Password';
+        $_o->confirm_password->Value = '';
+        $_o->confirm_password->Width = 200;
+        
 		return $_o;
 	}
 }

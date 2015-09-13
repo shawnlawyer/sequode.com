@@ -14,58 +14,38 @@ class SQDE_RegisterOperations {
         }
         return $salt . sha1($salt . $text);
     }
-    public static function signupold($username, $password, $email){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $modeler::model()->create($username,self::generateHash($password),$email);
-        $modeler::exists($modeler::model()->id, 'id');
-        $modeler::model()->updateField('[]','sequode_favorites');
-        $modeler::model()->updateField('100','role_id');
-        $modeler::model()->updateField('33','allowed_sequode_count');
-        $modeler::model()->updateField('0','active');
-        $activation_url = $_SERVER['HTTP_HOST'] . '?token=' . $modeler::model()->activation_token;
-        $hooks = array(
-            "searchStrs" => array('#ACTIVATION-URL#','#USERNAME#'),
-            "subjectStrs" => array($activation_url,$modeler::model()->username)
-        );
-        SQDE_Session::set('registration_step',SQDE_Session::get('registration_step') + 1);
-        SQDE_Mailer::systemSend($modeler::model()->email,'Activate Your Sequode Account',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
-        return $modeler::model();
-    }
-    public static function email($email){
+    public static function setEmailAddress($email){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $modeler::model()->create(self::generateHash($email),self::generateHash($email),$email);
         $modeler::exists($modeler::model()->id, 'id');
-        $modeler::model()->updateField('[]','sequode_favorites');
-        $modeler::model()->updateField('100','role_id');
-        $modeler::model()->updateField('100','allowed_sequode_count');
-        $modeler::model()->updateField('0','active');
+        SQDE_Session::set('registration_step', SQDE_Session::get('registration_step') + 1);
+        SQDE_Session::set('registration_id', $modeler::model()->id);
+        SQDE_Session::set('registration_token', $modeler::model()->activation_token);
+        return $modeler::model();
+    }
+    public static function setPassword($value){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler::exists(SQDE_Session::get('registration_id'), 'id');
+        $modeler::model()->updateField(self::generateHash($password),'password');
+        SQDE_Session::set('registration_step',SQDE_Session::get('registration_step') + 1);
+        return $modeler::model();
+    }
+    public static function sendToken(){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler::exists(SQDE_Session::get('registration_id'), 'id');
         $activation_token = $modeler::model()->activation_token;
         $hooks = array(
             "searchStrs" => array('#ACTIVATION-URL#','#USERNAME#'),
             "subjectStrs" => array($activation_token,'')
         );
-        SQDE_Session::set('registration_step',SQDE_Session::get('registration_step') + 1);
+        SQDE_Session::set('registration_step', SQDE_Session::get('registration_step') + 1);
+        SQDE_Session::set('registration_id', $modeler::model()->id);
+        SQDE_Session::set('registration_token', $modeler::model()->activation_token);
+        
         SQDE_Mailer::systemSend($modeler::model()->email,'Verify your email address with sequode.com',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
         return $modeler::model();
     }
-    public static function signup($email){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $modeler::model()->create(self::generateHash($email),self::generateHash($email),$email);
-        $modeler::exists($modeler::model()->id, 'id');
-        $modeler::model()->updateField('[]','sequode_favorites');
-        $modeler::model()->updateField('100','role_id');
-        $modeler::model()->updateField('100','allowed_sequode_count');
-        $modeler::model()->updateField('0','active');
-        $activation_token = $modeler::model()->activation_token;
-        $hooks = array(
-            "searchStrs" => array('#ACTIVATION-URL#','#USERNAME#'),
-            "subjectStrs" => array($activation_token,'')
-        );
-        SQDE_Session::set('registration_step',SQDE_Session::get('registration_step') + 1);
-        SQDE_Mailer::systemSend($modeler::model()->email,'Verify your email address with sequode.com',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
-        return $modeler::model();
-    }
-    public static function verify($_model=null){
+    public static function verifyToken($_model=null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->updateField('1','active');
@@ -117,6 +97,23 @@ class SQDE_RegisterOperations {
             return true;
         }
         return false;
+    }
+    public static function signupold($username, $password, $email){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler::model()->create($username,self::generateHash($password),$email);
+        $modeler::exists($modeler::model()->id, 'id');
+        $modeler::model()->updateField('[]','sequode_favorites');
+        $modeler::model()->updateField('100','role_id');
+        $modeler::model()->updateField('33','allowed_sequode_count');
+        $modeler::model()->updateField('0','active');
+        $activation_url = $_SERVER['HTTP_HOST'] . '?token=' . $modeler::model()->activation_token;
+        $hooks = array(
+            "searchStrs" => array('#ACTIVATION-URL#','#USERNAME#'),
+            "subjectStrs" => array($activation_url,$modeler::model()->username)
+        );
+        SQDE_Session::set('registration_step',SQDE_Session::get('registration_step') + 1);
+        SQDE_Mailer::systemSend($modeler::model()->email,'Activate Your Sequode Account',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
+        return $modeler::model();
     }
     */
 }

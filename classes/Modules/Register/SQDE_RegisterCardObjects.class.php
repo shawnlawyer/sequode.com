@@ -26,6 +26,7 @@ class SQDE_RegisterCardObjects {
     public static function signup(){
         $steps = array();
         $steps[] = (object) array('forms'=> array('email'));
+        $steps[] = (object) array('forms'=> array('password'));
         $steps[] = (object) array('forms'=> array('verify'));
         $steps[] = (object) array('forms'=> array('terms','acceptTerms'));
         if(!SQDE_Session::is('registration_step')){
