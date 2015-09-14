@@ -99,6 +99,6 @@ class SQDE_UserAuthority {
         return (in_array($sequode_model->id, json_decode($user_model->sequode_favorites))) ? true : false;
     }
     public static function isAnEmailAddress($email){
-        return (filter_var($email,FILTER_VALIDATE_EMAIL) === false) ? true : false;
+        return (filter_var($email,FILTER_VALIDATE_EMAIL) === false) ? false : true;
     }
 }
