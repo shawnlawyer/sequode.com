@@ -98,4 +98,7 @@ class SQDE_UserAuthority {
         if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
         return (in_array($sequode_model->id, json_decode($user_model->sequode_favorites))) ? true : false;
     }
+    public static function isAnEmailAddress($email){
+        return (strlen($email) <= 150 && preg_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", $email)) ? true : false;
+    }
 }
