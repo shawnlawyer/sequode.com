@@ -9,15 +9,16 @@ class SQDE_AuthOperationsXHR {
 		'login' => 'main'
     );
     public static function main($json){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $js = array();
         $input = json_decode(rawurldecode($json));
         if(!(
         (
-            SQDE_User::exists(rawurldecode($input->username),'email')
-            || SQDE_User::exists(rawurldecode($input->username),'username')
+            $modeler::exists(rawurldecode($input->username),'email')
+            || $modeler::exists(rawurldecode($input->username),'username')
         )
-        && SQDE_UserAuthority::isActive(SQDE_User::model())
-        && SQDE_UserAuthority::isPassword(rawurldecode($input->password), SQDE_User::model())
+        && SQDE_UserAuthority::isActive($modeler::model())
+        && SQDE_UserAuthority::isPassword(rawurldecode($input->password), $modeler::model())
         )){return;}
         SQDE_AuthOperations::login();
         return SQDE_ConsoleRoutes::js(false);
