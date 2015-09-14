@@ -12,10 +12,10 @@ class SQDE_AuthOperationsXHR {
         $js = array();
         $input = json_decode(rawurldecode($json));
         if(!(
-        //(
+        (
             SQDE_User::exists(rawurldecode($input->username),'email')
             || SQDE_User::exists(rawurldecode($input->username),'username')
-        //)
+        )
         && SQDE_UserAuthority::isActive(SQDE_User::model())
         && SQDE_UserAuthority::isPassword(rawurldecode($input->password), SQDE_User::model())
         )){return;}
