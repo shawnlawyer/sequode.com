@@ -10,7 +10,6 @@ class SQDE_RegisterPackage {
         $model->operations = 'SQDE_RegisterOperations';
         $model->xhr = (object) null;
         $model->xhr->operations = 'SQDE_RegisterOperationsXHR';
-        $model->xhr->forms = 'SQDE_RegisterFormsXHR';
         $model->xhr->cards = 'SQDE_RegisterCardsXHR';
 		return $model;
 	}
