@@ -15,9 +15,7 @@ class SQDE_AuthOperations {
         return $salt . sha1($salt . $text);
     }
     public static function load(){
-        if(SQDE_Session::isCookieValid() && SQDE_Session::exists(SQDE_Session::model()->session_id, 'session_id')){
-            SQDE_AuthenticatedUser::exists(SQDE_Session::get('user_id'),'id');
-        }
+        SQDE_AuthenticatedUser::exists(SQDE_Session::get('user_id'),'id');
     }
     public static function updateLastSignIn($time=false, $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;

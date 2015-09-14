@@ -34,8 +34,6 @@ function autoload_files($file,$stack,$dump=false){
 		}
 	}
 }
-define('AWS_DISABLE_CONFIG_AUTO_DISCOVERY',1);
-
 date_default_timezone_set('America/Los_Angeles');
 ob_start('ob_gzhandler');
 SQDE_Session::start();
