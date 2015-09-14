@@ -48,7 +48,7 @@ class SQDE_RegisterOperationsXHR {
         $input = json_decode(rawurldecode($json));
         if(!(
         //!$modeler::exists(rawurldecode($input->email),'email')
-        SQDE_UserAuthority::isAnEmailAddress(rawurldecode($input->email))
+        //SQDE_UserAuthority::isAnEmailAddress(rawurldecode($input->email))
         )){return false;}
         return array(rawurldecode($input->email));
     }
