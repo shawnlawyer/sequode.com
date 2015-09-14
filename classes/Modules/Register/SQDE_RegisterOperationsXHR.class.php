@@ -46,10 +46,10 @@ class SQDE_RegisterOperationsXHR {
     public static function verifyEmailAddress($json){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $input = json_decode(rawurldecode($json));
-        //if(!(
+        if(!(
         //!$modeler::exists(rawurldecode($input->email),'email')
-        //SQDE_UserAuthority::isAnEmailAddress(rawurldecode($input->email))
-        //)){return false;}
+        SQDE_UserAuthority::isAnEmailAddress(rawurldecode($input->email))
+        )){return false;}
         return array(rawurldecode($input->email));
     }
     public static function verifyPassword($json){
