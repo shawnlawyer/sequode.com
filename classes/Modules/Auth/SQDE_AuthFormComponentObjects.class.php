@@ -19,31 +19,4 @@ class SQDE_AuthFormComponentObjects   {
         
 		return $components_object;
 	}
-    public static function acceptTerms($user_model = null){
-        if($user_model == null ){ $user_model = SQDE_User::model($user_model); }
-        $components_object = (object) null;
-        
-        SQDE_Component::exists('checkboxSwitch','name');
-        $components_object->accept = json_decode(SQDE_Component::model()->component_object);
-        $components_object->accept->Label = '';
-        $components_object->accept->On_Text = 'I Accept';
-        $components_object->accept->On_Value = 1;
-        $components_object->accept->Off_Text = 'I Accept';
-        $components_object->accept->Off_Value = 0;
-        $components_object->accept->Value = 0;
-        $components_object->accept->CSS_Class = 'focus-input';
-		return $components_object;
-	}
-    public static function terms($user_model = null){
-        if($user_model == null ){ $user_model = SQDE_User::model($user_model); }
-        $components_object = (object) null;
-        
-        SQDE_Component::exists('text','name');
-        $components_object->terms = json_decode(SQDE_Component::model()->component_object);
-        $components_object->terms->Label = 'Terms & Conditions of Use';
-        $components_object->terms->Value = strip_tags(file_get_contents('terms-conditions.txt',true));
-        $components_object->terms->Width = 30;
-        $components_object->terms->Height = 20;
-		return $components_object;
-	}
 }

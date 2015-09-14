@@ -10,6 +10,7 @@ class SQDE_AuthOperationsXHR {
     );
     public static function main($json){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         $js = array();
         $input = json_decode(rawurldecode($json));
         if(!(
@@ -20,7 +21,7 @@ class SQDE_AuthOperationsXHR {
         && SQDE_UserAuthority::isActive($modeler::model())
         && SQDE_UserAuthority::isPassword(rawurldecode($input->password), $modeler::model())
         )){return;}
-        SQDE_AuthOperations::login();
+        forward_static_call_array(array($operations,'login'),array())
         return SQDE_ConsoleRoutes::js(false);
     }
 }
