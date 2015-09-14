@@ -14,21 +14,25 @@ class SQDE_AuthOperations {
         }
         return $salt . sha1($salt . $text);
     }
-    public static function updateLastSignIn($time=false, $_model = null){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
-        $modeler::model()->updateField(($time === false) ? time() : $time ,'last_sign_in');
-        return $modeler::model();
-    }
     public static function login($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
-        SQDE_Session::model()->updateField($_model->email,'username');
-        SQDE_Session::set('user_id', $_model->id, false);
-        SQDE_Session::set('username', $_model->username, false);
-        SQDE_Session::set('role_id', $_model->role_id, false);
+        $modeler::model()->updateField(($time === false) ? time() : $time ,'last_sign_in');
+        SQDE_Session::model()->updateField($modeler::model()->email,'username');
+        SQDE_Session::set('user_id', $modeler::model()->id, false);
+        SQDE_Session::set('username', $modeler::model()->username, false);
+        SQDE_Session::set('role_id', $modeler::model()->role_id, false);
         SQDE_Session::save();
-        self::updateLastSignIn();
         return $modeler::model();
+    }
+    public static function updateLastSignIn($time=false, $_model = null){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
+        return $modeler::model();
+    }
+    public static function load(){
+        if(SQDE_Session::isCookieValid() && SQDE_Session::exists(SQDE_Session::model()->session_id, 'session_id')){
+            SQDE_AuthenticatedUser::exists(SQDE_Session::get('user_id'),'id');
+        }
     }
 }
