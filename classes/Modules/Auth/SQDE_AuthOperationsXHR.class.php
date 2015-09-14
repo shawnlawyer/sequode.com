@@ -21,7 +21,7 @@ class SQDE_AuthOperationsXHR {
         && SQDE_UserAuthority::isActive($modeler::model())
         && SQDE_UserAuthority::isPassword(rawurldecode($input->password), $modeler::model())
         )){return;}
-        forward_static_call_array(array($operations,'login'),array())
+        forward_static_call_array(array($operations,'login'),array());
         return SQDE_ConsoleRoutes::js(false);
     }
 }
