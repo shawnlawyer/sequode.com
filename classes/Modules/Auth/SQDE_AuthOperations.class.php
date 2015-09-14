@@ -14,9 +14,6 @@ class SQDE_AuthOperations {
         }
         return $salt . sha1($salt . $text);
     }
-    public static function load(){
-        SQDE_AuthenticatedUser::exists(SQDE_Session::get('user_id'),'id');
-    }
     public static function updateLastSignIn($time=false, $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));

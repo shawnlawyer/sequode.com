@@ -37,7 +37,7 @@ function autoload_files($file,$stack,$dump=false){
 date_default_timezone_set('America/Los_Angeles');
 ob_start('ob_gzhandler');
 SQDE_Session::start();
-if(SQDE_Session::is('user_id')){;
-    SQDE_AuthOperations::load();
+if(SQDE_Session::is('user_id')){
+    SQDE_AuthenticatedUser::exists(SQDE_Session::get('user_id'),'id');
 }
 SQDE_ApplicationProfile::model($_SERVER['APPLICATION_PROFILE']);
