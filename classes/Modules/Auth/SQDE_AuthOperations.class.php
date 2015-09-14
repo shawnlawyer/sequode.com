@@ -16,7 +16,7 @@ class SQDE_AuthOperations {
     }
     public static function load(){
         if(SQDE_Session::isCookieValid() && SQDE_Session::exists(SQDE_Session::model()->session_id, 'session_id')){
-            SQDE_Authenticated::exists(SQDE_Session::get('user_id'),'id');
+            SQDE_AuthenticatedUser::exists(SQDE_Session::get('user_id'),'id');
         }
     }
     public static function updateLastSignIn($time=false, $_model = null){
