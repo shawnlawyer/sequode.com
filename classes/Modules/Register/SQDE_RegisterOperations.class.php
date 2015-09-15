@@ -7,11 +7,7 @@ class SQDE_RegisterOperations {
 		return $prefix.md5($time.$seed);
 	}
 	public static function generateHash($text, $salt = null){
-        if ($salt === null){
-            $salt = substr(md5(uniqid(rand(), true)), 0, 25);
-        }else{
-            $salt = substr($salt, 0, 25);
-        }
+        $salt = ($salt === null) ? substr(md5(uniqid(rand(), true)), 0, 25) : substr($salt, 0, 25);
         return $salt . sha1($salt . $text);
     }
     public static function setEmailAddress($email){
@@ -42,6 +38,21 @@ class SQDE_RegisterOperations {
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $modeler::exists(SQDE_Session::get('registration_id'), 'id');
         $modeler::model()->updateField('1','active');
+        return $modeler::model();
+    }
+    public static function reset(){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler::exists(SQDE_Session::get('registration_id'), 'id');
+        $modeler::model()->delete($modeler::model()->id);
+        SQDE_Session::set('registration_id', null);
+        SQDE_Session::set('registration_token', null);
+        return $modeler::model();
+    }
+    
+    public static function delete($_model = null){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
+        $modeler::model()->delete($modeler::model()->id);
         return $modeler::model();
     }
     /*

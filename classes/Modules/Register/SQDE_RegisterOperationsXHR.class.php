@@ -82,6 +82,8 @@ class SQDE_RegisterOperationsXHR {
     }
     public static function reset(){
         SQDE_Session::set('registration_step',0);
+        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
+        forward_static_call_array(array($cards_xhr,'reset'),array());
         $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
         return implode(' ', $js);  
