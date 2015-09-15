@@ -47,7 +47,7 @@ class SQDE_RegisterCardObjects {
             );
         }
         $_o->head = 'Create Account';
-        $_o->body = array('','<div class="subline kids alignCenter">Step ' . (SQDE_Session::get('registration_step') + 1) . '</div>','');
+        $_o->body = array('','<div class="subline kids">Step ' . (SQDE_Session::get('registration_step') + 1) . '</div>','');
         foreach($steps[SQDE_Session::get('registration_step')]->forms as $form){
             $_o->body = array_merge($_o->body, SQDE_Forms::render(self::$package, $form));
         }
