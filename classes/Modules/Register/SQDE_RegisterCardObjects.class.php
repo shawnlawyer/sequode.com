@@ -38,7 +38,7 @@ class SQDE_RegisterCardObjects {
         if(intval(SQDE_Session::get('registration_step')) != 0){
             $_o->menu->items = array();
             $dom_id = SQDE_Component::uniqueHash('','');
-            $items[] = array(
+            $_o->menu->items[] = array(
                 'css_classes'=>'automagic-card-menu-item noSelect',
                 'id'=>$dom_id,
                 'contents'=>'Start Over',
