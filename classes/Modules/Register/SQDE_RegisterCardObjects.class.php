@@ -35,6 +35,17 @@ class SQDE_RegisterCardObjects {
         $_o = (object) null;
         $_o->icon_background = 'users-icon-background';
         $_o->size = 'small';
+        if(intval(SQDE_Session::get('registration_step')) != 0){
+            $_o->menu->items = array();
+            $dom_id = SQDE_Component::uniqueHash('','');
+            $items[] = array(
+                'css_classes'=>'automagic-card-menu-item noSelect',
+                'id'=>$dom_id,
+                'contents'=>'Start Over',
+                'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/register/reset'))
+            
+            );
+        }
         $_o->head = 'Create Account';
         $_o->body = array('','Step ' . (SQDE_Session::get('registration_step') + 1) ,'');
         foreach($steps[SQDE_Session::get('registration_step')]->forms as $form){

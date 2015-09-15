@@ -3,10 +3,12 @@ class SQDE_RegisterOperationsXHR {
     public static $package = 'Register';
 	public static $merge = false;
 	public static $routes = array(
-		'signup'
+		'signup',
+        'reset'
 	);
 	public static $routes_to_methods = array(
-		'signup' => 'main'
+		'signup' => 'main',
+		'reset' => 'reset'
     );
     public static function main(){
         if(!SQDE_Session::is('registration_step')){return;}
@@ -77,6 +79,9 @@ class SQDE_RegisterOperationsXHR {
             && $modeler::model()->active == 0
         )){return false;}
         return array();
+    }
+    public static function reset(){
+        SQDE_Session::set('registration_step',0);
     }
     
 }
