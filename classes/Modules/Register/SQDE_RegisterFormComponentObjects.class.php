@@ -7,9 +7,10 @@ class SQDE_RegisterFormComponentObjects   {
         
         SQDE_Component::exists('str','name');
         $_o->email = json_decode(SQDE_Component::model()->component_object);
-        $_o->email->Label = 'Email Address';
+        $_o->email->Label = 'Email';
         $_o->email->Value = '';
         $_o->email->Width = 200;
+        $_o->email->CSS_Class = 'focus-input';
         
 		return $_o;
 	}
@@ -25,8 +26,7 @@ class SQDE_RegisterFormComponentObjects   {
         
 		return $_o;
 	}
-    public static function acceptTerms($_model = null){
-        if($_model == null ){ $_model = SQDE_User::model($_model); }
+    public static function acceptTerms(){
         $_o = (object) null;
         
         SQDE_Component::exists('checkboxSwitch','name');
@@ -41,29 +41,15 @@ class SQDE_RegisterFormComponentObjects   {
         
 		return $_o;
 	}
-    public static function terms($_model = null){
-        if($_model == null ){ $_model = SQDE_User::model($_model); }
+    public static function terms(){
         $_o = (object) null;
         
         SQDE_Component::exists('text','name');
         $_o->terms = json_decode(SQDE_Component::model()->component_object);
-        $_o->terms->Label = 'Terms & Conditions of Use';
+        $_o->terms->Label = 'Terms &amp; Conditions of Use';
         $_o->terms->Value = strip_tags(file_get_contents('terms-conditions.txt',true));
         $_o->terms->Width = 23;
         $_o->terms->Height = 18;
-        $_o->terms->CSS_Class = 'focus-input';
-        
-		return $_o;
-	}
-    public static function username(){
-        $_o = (object) null;
-        
-        SQDE_Component::exists('str','name');
-        $_o->username = json_decode(SQDE_Component::model()->component_object);
-        $_o->username->Label = 'Username';
-        $_o->username->Value = '';
-        $_o->username->Width = 200;
-        $_o->username->CSS_Class = 'focus-input';
         
 		return $_o;
 	}
@@ -75,6 +61,7 @@ class SQDE_RegisterFormComponentObjects   {
         $_o->password->Label = 'Password';
         $_o->password->Value = '';
         $_o->password->Width = 200;
+        $_o->password->CSS_Class = 'focus-input';
         
         SQDE_Component::exists('password','name');
 		$_o->confirm_password = json_decode(SQDE_Component::model()->component_object);

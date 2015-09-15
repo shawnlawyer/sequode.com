@@ -31,7 +31,7 @@ class SQDE_RegisterCardObjects {
         $steps[] = (object) array('forms'=> array('verify'));
         if(!SQDE_Session::is('registration_step')){
             SQDE_Session::set('registration_step',0);
-        }        
+        }
         $_o = (object) null;
         $_o->icon_background = 'users-icon-background';
         $_o->size = 'small';
@@ -51,6 +51,7 @@ class SQDE_RegisterCardObjects {
         foreach($steps[SQDE_Session::get('registration_step')]->forms as $form){
             $_o->body = array_merge($_o->body, SQDE_Forms::render(self::$package, $form));
         }
+        $_o->body[] = (object) array('js' => '$(\'.focus-input\').focus(); $(\'.focus-input\').select();');
         return $_o;    
     }
 }
