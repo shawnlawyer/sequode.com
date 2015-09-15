@@ -82,11 +82,15 @@ class SQDE_RegisterOperationsXHR {
     }
     public static function reset(){
         SQDE_Session::set('registration_step',0);
-        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-        forward_static_call_array(array($cards_xhr,'reset'),array());
-        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
-        $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
-        return implode(' ', $js);  
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        if($modeler::exists(SQDE_Session::get('registration_id'), 'id'){
+            $operations = SQDE_PackagesHandler::model(static::$package)->operations;
+            forward_static_call_array(array($operations,'reset'),array());
+            $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
+            $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
+            return implode(' ', $js);
+        }
+        return;
     }
     
 }
