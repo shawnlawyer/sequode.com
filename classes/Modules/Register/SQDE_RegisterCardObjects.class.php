@@ -25,10 +25,22 @@ class SQDE_RegisterCardObjects {
     }
     public static function signup(){
         $steps = array();
-        $steps[] = (object) array('forms'=> array('email'));
-        $steps[] = (object) array('forms'=> array('password'));
-        $steps[] = (object) array('forms'=> array('terms','acceptTerms'));
-        $steps[] = (object) array('forms'=> array('verify'));
+        $steps[] = (object) array(
+            'forms'=> array('email'),
+            'content'=> 'Enter an email address to begin.'
+        );
+        $steps[] = (object) array(
+            'forms'=> array('password'),
+            'content'=> 'Create a password. <br/>Tip: Your password must be 8 characters long, contain 1 capital letter (A) 1 lowercase letter (a) 1 number (1) and one symbol character(!).'
+        );
+        $steps[] = (object) array(
+            'forms'=> array('terms','acceptTerms'),
+            'content'=> ''
+        );
+        $steps[] = (object) array(
+            'forms'=> array('verify'),
+            'content'=> 'A verififation token has been emailed to you. <br/>Tip: Copy and Paste the code to verify your email address.'
+        );
         if(!SQDE_Session::is('registration_step')){
             SQDE_Session::set('registration_step',0);
         }
@@ -47,7 +59,7 @@ class SQDE_RegisterCardObjects {
             );
         }
         $_o->head = 'Create Account';
-        $_o->body = array('','<div class="subline kids">Step ' . (SQDE_Session::get('registration_step') + 1) . '</div>','');
+        $_o->body = array('','<div class="subline kids">Step ' . (SQDE_Session::get('registration_step') + 1) . '</div>',$steps[SQDE_Session::get('registration_step')]->content);
         foreach($steps[SQDE_Session::get('registration_step')]->forms as $form){
             $_o->body = array_merge($_o->body, SQDE_Forms::render(self::$package, $form));
         }
