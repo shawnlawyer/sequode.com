@@ -50,9 +50,8 @@ class SQDE_RegisterCardObjects {
             'forms'=> array('verify'),
             'content'=> (object) array(
                 'head' => 'Step ' . (SQDE_Session::get('registration_step') + 1) . ' Verification',
-                'body' => 'Enter an email address to begin.'
+                'body' => 'A verififation token was been emailed to you. <br/><br/>Copy and Paste the code to verify your email address.'
             )
-            'content'=> 'A verififation token was been emailed to you. <br/><br/>Copy and Paste the code to verify your email address.'
         );
         $steps[] = (object) array(,
             'content'=> (object) array(
