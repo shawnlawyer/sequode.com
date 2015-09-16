@@ -28,28 +28,28 @@ class SQDE_RegisterCardObjects {
         $steps[] = (object) array(
             'forms'=> array('email'),
             'content'=> (object) array(
-                'head' => 'Step ' . (SQDE_Session::get('registration_step') + 1) . ' Register Email',
+                'head' => 'Step ' . (SQDE_Session::get('registration_step') + 1) . '<br><br>Register Email',
                 'body' => 'Enter an email address to begin.'
             )
         );
         $steps[] = (object) array(
             'forms'=> array('password'),
             'content'=> (object) array(
-                'head' => 'Step ' . (SQDE_Session::get('registration_step') + 1) . ' Create Password',
+                'head' => 'Step ' . (SQDE_Session::get('registration_step') + 1) . '<br><br>Create Password',
                 'body' => 'A password must be at least 8 characters long and contain at least 1 capital letter (A), 1 lowercase letter (a), 1 number (1) and one symbol character(!).'
             )
         );
         $steps[] = (object) array(
             'forms'=> array('terms','acceptTerms'),
             'content'=> (object) array(
-                'head' => 'Step ' . (SQDE_Session::get('registration_step') + 1) . ' Accept Terms',
+                'head' => 'Step ' . (SQDE_Session::get('registration_step') + 1) . '<br><br>Accept Terms',
                 'body' => 'Enter an email address to begin.'
             )
         );
         $steps[] = (object) array(
             'forms'=> array('verify'),
             'content'=> (object) array(
-                'head' => 'Step ' . (SQDE_Session::get('registration_step') + 1) . ' Verification',
+                'head' => 'Step ' . (SQDE_Session::get('registration_step') + 1) . '<br><br>Verification',
                 'body' => 'A verififation token was been emailed to you. <br/><br/>Copy and Paste the code to verify your email address.'
             )
         );
