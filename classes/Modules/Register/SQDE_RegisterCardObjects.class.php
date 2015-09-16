@@ -80,7 +80,7 @@ class SQDE_RegisterCardObjects {
         $_o->body = array('');
         if(isset($steps[SQDE_Session::get('registration_step')]->content)){
             if(isset($steps[SQDE_Session::get('registration_step')]->content->head)){
-                $_o->body[] = '<div class="subline kids alignCenter">'.$steps[SQDE_Session::get('registration_step')]->content->head.'</div>';
+                $_o->body[] = '<div class="subline">'.$steps[SQDE_Session::get('registration_step')]->content->head.'</div>';
             }
             if(isset($steps[SQDE_Session::get('registration_step')]->content->head)){
                 $_o->body[] = $steps[SQDE_Session::get('registration_step')]->content->body;
