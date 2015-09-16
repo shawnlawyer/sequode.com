@@ -43,14 +43,14 @@ class SQDE_RegisterCardObjects {
             'forms'=> array('terms','acceptTerms'),
             'content'=> (object) array(
                 'head' => 'Accept Terms',
-                'body' => 'Enter an email address to begin.'
+                'body' => 'Terms &amp; Conditions of Use'
             )
         );
         $steps[] = (object) array(
             'forms'=> array('verify'),
             'content'=> (object) array(
                 'head' => 'Verification',
-                'body' => 'A verififation token was been emailed to you. <br/><br/>Copy and Paste the code to verify your email address.'
+                'body' => 'An email has been sent to you containing a verification token. <br/><br/>Copy and Paste the token to verify your email address.'
             )
         );
         $steps[] = (object) array(
