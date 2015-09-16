@@ -28,7 +28,7 @@ class SQDE_RegisterCardObjects {
         $steps[] = (object) array(
             'forms'=> array('email'),
             'content'=> (object) array(
-                'head' => 'Register Email',
+                'head' => 'Register Email Address',
                 'body' => 'Enter an email address to begin.'
             )
         );
@@ -42,20 +42,20 @@ class SQDE_RegisterCardObjects {
         $steps[] = (object) array(
             'forms'=> array('terms','acceptTerms'),
             'content'=> (object) array(
-                'head' => 'Accept Terms',
-                'body' => 'Terms &amp; Conditions of Use'
+                'head' => 'Terms &amp; Conditions of Use',
+                'body' => ''
             )
         );
         $steps[] = (object) array(
             'forms'=> array('verify'),
             'content'=> (object) array(
-                'head' => 'Verification',
+                'head' => 'Email Verification',
                 'body' => 'An email has been sent to you containing a verification token. <br/><br/>Copy and Paste the token to verify your email address.'
             )
         );
         $steps[] = (object) array(
             'content'=> (object) array(
-                'head' => 'Complete!',
+                'head' => 'Registration Complete!',
                 'body' => 'Email address has been verified. You can now login.'
             )
         );
@@ -80,7 +80,7 @@ class SQDE_RegisterCardObjects {
         $_o->body = array('');
         if(isset($steps[SQDE_Session::get('registration_step')]->content)){
             if(isset($steps[SQDE_Session::get('registration_step')]->content->head)){
-                $_o->body[] = '<div class="subline kids">'.$steps[SQDE_Session::get('registration_step')]->content->head.'</div>';
+                $_o->body[] = '<div class="subline kids alignCenter">'.$steps[SQDE_Session::get('registration_step')]->content->head.'</div>';
             }
             if(isset($steps[SQDE_Session::get('registration_step')]->content->head)){
                 $_o->body[] = $steps[SQDE_Session::get('registration_step')]->content->body;
