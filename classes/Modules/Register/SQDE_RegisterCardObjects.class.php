@@ -27,22 +27,38 @@ class SQDE_RegisterCardObjects {
         $steps = array();
         $steps[] = (object) array(
             'forms'=> array('email'),
-            'content'=> (object) array('head' => 'Enter an email address to begin.','body' =>
+            'content'=> (object) array(
+                'head' => 'Step ' . (SQDE_Session::get('registration_step') + 1) . ' Register Email',
+                'body' => 'Enter an email address to begin.'
+            )
         );
         $steps[] = (object) array(
             'forms'=> array('password'),
-            'content'=> 'Create a password. <br/><br/>A password must be at least 8 characters long and contain at least 1 capital letter (A), 1 lowercase letter (a), 1 number (1) and one symbol character(!).'
+            'content'=> (object) array(
+                'head' => 'Step ' . (SQDE_Session::get('registration_step') + 1) . ' Create Password',
+                'body' => 'A password must be at least 8 characters long and contain at least 1 capital letter (A), 1 lowercase letter (a), 1 number (1) and one symbol character(!).'
+            )
         );
         $steps[] = (object) array(
             'forms'=> array('terms','acceptTerms'),
-            'content'=> ''
+            'content'=> (object) array(
+                'head' => 'Step ' . (SQDE_Session::get('registration_step') + 1) . ' Accept Terms',
+                'body' => 'Enter an email address to begin.'
+            )
         );
         $steps[] = (object) array(
             'forms'=> array('verify'),
-            'content'=> 'A verififation token has been emailed to you. <br/><br/>Copy and Paste the code to verify your email address.'
+            'content'=> (object) array(
+                'head' => 'Step ' . (SQDE_Session::get('registration_step') + 1) . ' Verification',
+                'body' => 'Enter an email address to begin.'
+            )
+            'content'=> 'A verififation token was been emailed to you. <br/><br/>Copy and Paste the code to verify your email address.'
         );
-        $steps[] = (object) array(
-            'content'=> 'Email address has been verified.'
+        $steps[] = (object) array(,
+            'content'=> (object) array(
+                'head' => 'Complete!',
+                'body' => 'Email address has been verified. You can now login.'
+            )
         );
         if(!SQDE_Session::is('registration_step')){
             SQDE_Session::set('registration_step',0);
@@ -62,9 +78,14 @@ class SQDE_RegisterCardObjects {
             );
         }
         $_o->head = 'Create Account';
-        $_o->body = array('','<div class="subline kids">Step ' . (SQDE_Session::get('registration_step') + 1) . '</div>');
+        $_o->body = array('');
         if(isset($steps[SQDE_Session::get('registration_step')]->content)){
-            $_o->body[] = $steps[SQDE_Session::get('registration_step')]->content;
+            if(isset($steps[SQDE_Session::get('registration_step')]->content->head)){
+                $_o->body[] = '<div class="subline kids">'.$steps[SQDE_Session::get('registration_step')]->content->head.'</div>';
+            }
+            if(isset($steps[SQDE_Session::get('registration_step')]->content->head)){
+                $_o->body[] = $steps[SQDE_Session::get('registration_step')]->content->body;
+            }
         }
         if(isset($steps[SQDE_Session::get('registration_step')]->forms)){
             foreach($steps[SQDE_Session::get('registration_step')]->forms as $form){
