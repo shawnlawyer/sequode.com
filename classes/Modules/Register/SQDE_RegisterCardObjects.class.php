@@ -53,7 +53,7 @@ class SQDE_RegisterCardObjects {
                 'body' => 'A verififation token was been emailed to you. <br/><br/>Copy and Paste the code to verify your email address.'
             )
         );
-        $steps[] = (object) array(,
+        $steps[] = (object) array(
             'content'=> (object) array(
                 'head' => 'Complete!',
                 'body' => 'Email address has been verified. You can now login.'
