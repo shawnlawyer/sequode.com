@@ -27,11 +27,11 @@ class SQDE_RegisterCardObjects {
         $steps = array();
         $steps[] = (object) array(
             'forms'=> array('email'),
-            'content'=> 'Enter an email address to begin.'
+            'content'=> (object) array('head' => 'Enter an email address to begin.','body' =>
         );
         $steps[] = (object) array(
             'forms'=> array('password'),
-            'content'=> 'Create a password. <br/>Tip: Your password must be 8 characters long, contain 1 capital letter (A) 1 lowercase letter (a) 1 number (1) and one symbol character(!).'
+            'content'=> 'Create a password. <br/><br/>A password must be at least 8 characters long and contain at least 1 capital letter (A), 1 lowercase letter (a), 1 number (1) and one symbol character(!).'
         );
         $steps[] = (object) array(
             'forms'=> array('terms','acceptTerms'),
@@ -39,7 +39,10 @@ class SQDE_RegisterCardObjects {
         );
         $steps[] = (object) array(
             'forms'=> array('verify'),
-            'content'=> 'A verififation token has been emailed to you. <br/>Tip: Copy and Paste the code to verify your email address.'
+            'content'=> 'A verififation token has been emailed to you. <br/><br/>Copy and Paste the code to verify your email address.'
+        );
+        $steps[] = (object) array(
+            'content'=> 'Email address has been verified.'
         );
         if(!SQDE_Session::is('registration_step')){
             SQDE_Session::set('registration_step',0);
@@ -59,9 +62,14 @@ class SQDE_RegisterCardObjects {
             );
         }
         $_o->head = 'Create Account';
-        $_o->body = array('','<div class="subline kids">Step ' . (SQDE_Session::get('registration_step') + 1) . '</div>',$steps[SQDE_Session::get('registration_step')]->content);
-        foreach($steps[SQDE_Session::get('registration_step')]->forms as $form){
-            $_o->body = array_merge($_o->body, SQDE_Forms::render(self::$package, $form));
+        $_o->body = array('','<div class="subline kids">Step ' . (SQDE_Session::get('registration_step') + 1) . '</div>');
+        if(isset($steps[SQDE_Session::get('registration_step')]->content)){
+            $_o->body[] = $steps[SQDE_Session::get('registration_step')]->content;
+        }
+        if(isset($steps[SQDE_Session::get('registration_step')]->forms)){
+            foreach($steps[SQDE_Session::get('registration_step')]->forms as $form){
+                $_o->body = array_merge($_o->body, SQDE_Forms::render(self::$package, $form));
+            }
         }
         $_o->body[] = (object) array('js' => '$(\'.focus-input\').focus(); $(\'.focus-input\').select();');
         return $_o;    
