@@ -63,7 +63,7 @@ class SQDE_SequodeCollections{
 	}
 	public static function search(){
         $finder = SQDE_PackagesHandler::model(static::$package)->finder;
-        $collection = SQDE_PackagesHandler::model(static::$package)->context . '_' . __FUNCTION__;
+        $collection = 'sequode_search';
         $nodes = array();
         if(SQDE_Session::is($collection)){
             $_array = $finder::search(SQDE_Session::get($collection));
@@ -89,7 +89,7 @@ class SQDE_SequodeCollections{
 	}
 	public static function favorited(){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $collection = SQDE_PackagesHandler::model(static::$package)->context . '_' . __FUNCTION__;
+        $collection = 'sequode_favorites';
         $nodes = array();
         if(!empty(SQDE_AuthenticatedUser::model()->$collection)){
             $_model_ids = json_decode(SQDE_AuthenticatedUser::model()->$collection);
