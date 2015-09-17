@@ -88,7 +88,7 @@ class SQDE_UserAuthority {
     }
     public static function isPassword($password, $user_model = null){
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
-        return (SQDE_UserOperations::generateHash($password, $user_model->password) == $user_model->password) ? true : false;
+        return (SQDE_AccountOperations::generateHash($password, $user_model->password) == $user_model->password) ? true : false;
     }
     public static function isSecurePassword($password){
         return ( strlen($password) >= 8 &&  strlen($password) <= 100 && preg_match("#[0-9]+#", $password) && preg_match("#[a-z]+#", $password) && preg_match("#[A-Z]+#", $password) && preg_match("#\W+#", $password) ) ? true : false;
