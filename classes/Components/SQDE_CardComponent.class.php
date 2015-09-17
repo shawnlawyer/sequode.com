@@ -5,7 +5,7 @@ class SQDE_CardComponent {
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
         $context = SQDE_PackagesHandler::model($package)->context;
-        $_models = SQDE_UserOperations::getOwnedModels($package, $user_model, 'id,name')->all;
+        $_models = SQDE_AccountOperations::getOwnedModels($package, $user_model, 'id,name')->all;
         $html[] = '<div class="automagic-content-area-xsmall-tile-container">';
         $html[] = '<div class="automagic-card-menu-item noSelect" id="'.$dom_id.'">'.$headline . count($_models).'</div>';
         $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/'.$context.'/my', array($object->id)));
