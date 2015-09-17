@@ -33,7 +33,7 @@ var SQDE_SequodeCards = function(){
            [
             '<div class="automagic-card-head">',
             '<div class="card-icon '+ self.icon +'-icon-background"></div>',
-            '<div class="card-title kids">'+ node.n +'</div>',
+            '<div class="card-title">'+ node.n +'</div>',
             '</div>',
             '<div class="automagic-card-body"></div>'
            ].join('');

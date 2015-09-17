@@ -229,7 +229,7 @@ class SQDE_SequodeCardObjects {
         if(SQDE_SequodeAuthority::isCode() && $_model->owner_id == 8){
             $dom_id = SQDE_Component::uniqueHash('','');
             $html = $js = array();
-            $html = '<div class="subline kids" id="'.$dom_id.'">More info</div>';
+            $html = '<div class="subline" id="'.$dom_id.'">More info</div>';
             $js = SQDE_ComponentJS::onTapEvents($dom_id, 'var win = window.open(\'http://php.net/'.$_model->name.'\', \'_blank\'); win.focus();');
             $_o->body[] = (object) array('html' => $html, 'js' => $js);
         }

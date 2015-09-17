@@ -50,7 +50,7 @@ class SQDE_CardComponent {
         }
         $html = $js = array();
         $dom_id = SQDE_Component::uniqueHash('','');
-        $html[] = '<span class="automagic-card-next noSelect kids" id="'.$dom_id.'"></span>';
+        $html[] = '<span class="automagic-card-next noSelect " id="'.$dom_id.'"></span>';
         if(isset($component->model_id) && isset($component->details_route)){
             $js[] = 'var next_id = registry.nextNode(registry.collection(registry.active_collection), \''.$component->model_id.'\');';
             $js[] = 'if(next_id != \''.$_model->id.'\'){';
@@ -70,7 +70,7 @@ class SQDE_CardComponent {
         }
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
-        $html[] = '<span class="automagic-card-delete noSelect kids" id="'.$dom_id.'">x</span>';
+        $html[] = '<span class="automagic-card-delete noSelect " id="'.$dom_id.'">x</span>';
         $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject($component->route, array($component->model_id)));
         return (object) array('html' => implode('',$html),'js' => implode('',$js));
     }
