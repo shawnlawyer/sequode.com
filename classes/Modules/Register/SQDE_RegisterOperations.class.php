@@ -58,7 +58,7 @@ class SQDE_RegisterOperations {
     /*
     public static function activate($activation_token){
         if(SQDE_User::exists($activation_token,'activation_token') && SQDE_User::model()->active == 0 ){
-            SQDE_User::model(SQDE_UserOperations::activate(SQDE_User::model()));
+            SQDE_User::model(SQDE_AccountOperations::activate(SQDE_User::model()));
             return true;
         }
         return false;
@@ -72,8 +72,8 @@ class SQDE_RegisterOperations {
         SQDE_Mailer::systemSend(SQDE_User::model()->email,'Activate Your Sequode Account',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
     }
     public static function resetPassword(){
-        $password = substr(SQDE_UserOperations::uniqueHash(),3,12);
-        $password_hash = SQDE_UserOperations::generateHash();
+        $password = substr(SQDE_AccountOperations::uniqueHash(),3,12);
+        $password_hash = SQDE_AccountOperations::generateHash();
         $hooks = array(
                 "searchStrs" => array('#GENERATED-PASS#','#USERNAME#'),
                 "subjectStrs" => array($password,SQDE_User::model()->username)
@@ -83,7 +83,7 @@ class SQDE_RegisterOperations {
     public static function register($username, $password, $email){
         //if(  !SQDE_User::model()->exists($email,'email') &&  !SQDE_User::exists($username,'username')){
         if(  !SQDE_User::model()->exists($email,'email') && !SQDE_User::exists($username,'username')){
-            SQDE_User::model(SQDE_UserOperations::register($username,$password,$email));
+            SQDE_User::model(SQDE_AccountOperations::register($username,$password,$email));
             $activation_url = $_SERVER['HTTP_HOST'] . $routes['activate']->url . '?token=' . SQDE_User::model()->activation_token;
             $hooks = array(
                 "searchStrs" => array('#ACTIVATION-URL#','#USERNAME#'),
@@ -96,7 +96,7 @@ class SQDE_RegisterOperations {
     }
     public static function updatePassword($password, $new_password, $confirm_password){
         if(SQDE_Session::is('username') && SQDE_User::exists(SQDE_Session::get('username'),'username') && SQDE_UserAuthority::isActive() && SQDE_UserAuthority::isPassword($password)){
-            SQDE_User::model(SQDE_UserOperations::updatePassword($new_password));
+            SQDE_User::model(SQDE_AccountOperations::updatePassword($new_password));
             return true;
         }
         return false;
