@@ -1,7 +1,7 @@
 <?php
 class SQDE_CardComponent {
-    public static function collectionTile($package, $headline='', $user_model=null){
-        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
+    public static function collectionTile($package, $headline=''){
+        $user_model = SQDE_AuthenticatedUser::model();
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
         $context = SQDE_PackagesHandler::model($package)->context;

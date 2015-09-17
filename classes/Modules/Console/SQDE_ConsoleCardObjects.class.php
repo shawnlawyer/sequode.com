@@ -1,9 +1,8 @@
 <?php
 class SQDE_ConsoleCardObjects {
     public static $package = 'Console';
-    public static function index($user_model=null){
-        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
-        return self::tiles($user_model);
+    public static function index(){
+        return self::tiles(SQDE_AuthenticatedUser::model());
     }
     public static function tiles($user_model=null){
         if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
