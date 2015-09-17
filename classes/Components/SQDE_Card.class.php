@@ -140,7 +140,7 @@ class SQDE_Card  extends SQDE_Mason {
             $html[] = (isset($card_object->size) && $card_object->size == 'fullscreen') ? ' style="position:fixed !important; left: 2.1em !important; top: 0 !important; padding: .3em .3em !important; height:0px !important; overflow:visible !important; vertical-align: bottom;"' : '';
             $html[] = '>';
             $html[] = '<div class="';
-            $html[] = (isset($card_object->icon_type)) ? $card_object->icon_type : 'card-icon';
+            $html[] = (isset($card_object->menu)) ? 'menu-icon' : 'card-icon';
             $html[] = (isset($card_object->icon_background)) ? ' '.$card_object->icon_background : '';
             $html[] = '"';
             $html[] = '>';
