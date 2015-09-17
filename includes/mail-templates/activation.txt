@@ -1,9 +1,9 @@
 Hi,
 
-Here's your activation link for account, #USERNAME#, at Sequode.com.
+Here's your validation token for Sequode.com.
 
-#ACTIVATION-URL#
+#TOKEN#
 
-After you after activate you account, just login and start Sequoding!
+After you after validation, just login and start Sequoding!
 
 #INC-FOOTER#
