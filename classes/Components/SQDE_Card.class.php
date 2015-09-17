@@ -153,7 +153,7 @@ class SQDE_Card  extends SQDE_Mason {
                     $js[] = $menu_component->js;
                 }
             }
-                
+            
             $html[] = '</div>';
             if(isset($card_object->head)){
                 if(is_object($card_object->head)){
@@ -166,7 +166,6 @@ class SQDE_Card  extends SQDE_Mason {
                 }
             }
             $html[] = '</div>';
-            
         }
         if(isset($card_object->body)){
             $body_component = self::cardBodyContentComponent($card_object->body, $card_object->component_seperator);
