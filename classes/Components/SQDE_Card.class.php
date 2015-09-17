@@ -157,12 +157,12 @@ class SQDE_Card  extends SQDE_Mason {
             $html[] = '</div>';
             if(isset($card_object->head)){
                 if(is_object($card_object->head)){
-                    $html[] = '<div class="card-title kids noSelect">';
+                    $html[] = '<div class="card-title noSelect">';
                     $html[] = $card_object->head->html;
                     $html[] = '</div>';
                     $js[] = $card_object->head->js;
                 }else{
-                    $html[] = '<div class="card-title kids noSelect">'.strip_tags($card_object->head).'</div>';                    
+                    $html[] = '<div class="card-title noSelect">'.strip_tags($card_object->head).'</div>';                    
                 }
             }
             $html[] = '</div>';
