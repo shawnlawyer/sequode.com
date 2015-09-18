@@ -56,7 +56,7 @@ class SQDE_AuthCardObjects {
             
             );
         }
-        $_o->head = 'Login';
+        $_o->head = 'Authentication';
         $_o->body = array('');
         if(isset($steps[SQDE_Session::get('auth_step')]->content)){
             if(isset($steps[SQDE_Session::get('auth_step')]->content->head)){

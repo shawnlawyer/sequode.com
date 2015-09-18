@@ -55,7 +55,7 @@ class SQDE_AuthOperationsXHR {
         && SQDE_UserAuthority::isActive($modeler::model())
         )){return;}
         forward_static_call_array(array($operations,'login'),array());
-        return array();
+        return array($modeler::model());
     }
     public static function verifySecret($json){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
@@ -65,7 +65,7 @@ class SQDE_AuthOperationsXHR {
         if(!(
             SQDE_UserAuthority::isPassword(rawurldecode($input->secret), $modeler::model())
         )){return;}
-        return array();
+        return array($modeler::model());
     }
     public static function reset(){
         SQDE_Session::set('registration_step',0);
