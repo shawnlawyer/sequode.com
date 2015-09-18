@@ -34,7 +34,7 @@ class SQDE_AuthOperationsXHR {
         }
         SQDE_Session::set('auth_step', SQDE_Session::get('auth_step') + 1);
         $js = array();
-        if(intval($step) < count($steps)){
+        if(intval(SQDE_Session::get('auth_step')) < count($steps)){
             $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
             $js[] = forward_static_call_array(array($cards_xhr,'login'),array());
         }else{
