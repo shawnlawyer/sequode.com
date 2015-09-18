@@ -66,15 +66,10 @@ class SQDE_AuthOperationsXHR {
         return array($modeler::model());
     }
     public static function reset(){
-        SQDE_Session::set('auth_id',0);
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        if($modeler::exists(SQDE_Session::get('auth_id'), 'id')){
-            $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-            forward_static_call_array(array($operations,'reset'),array());
-            $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
-            $js[] = forward_static_call_array(array($cards_xhr,'login'),array());
-            return implode(' ', $js);
-        }
-        return;
+        SQDE_Session::set('auth_id',null);
+        SQDE_Session::set('auth_step',0);
+        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
+        $js[] = forward_static_call_array(array($cards_xhr,'login'),array());
+        return implode(' ', $js);
     }
 }
