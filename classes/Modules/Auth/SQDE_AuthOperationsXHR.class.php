@@ -54,7 +54,6 @@ class SQDE_AuthOperationsXHR {
         )
         && SQDE_UserAuthority::isActive($modeler::model())
         )){return;}
-        forward_static_call_array(array($operations,'login'),array());
         return array($modeler::model());
     }
     public static function verifySecret($json){
