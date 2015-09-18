@@ -60,7 +60,6 @@ class SQDE_AuthOperationsXHR {
     public static function verifySecret($json){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $modeler::exists(SQDE_Session::get('auth_id'), 'id');
-        $modeler::model()->updateField(self::generateHash($value),'password');
         $input = json_decode(rawurldecode($json));
         if(!(
             SQDE_UserAuthority::isPassword(rawurldecode($input->secret), $modeler::model())
