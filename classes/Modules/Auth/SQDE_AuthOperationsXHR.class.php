@@ -34,11 +34,11 @@ class SQDE_AuthOperationsXHR {
         }
         SQDE_Session::set('auth_step', SQDE_Session::get('auth_step') + 1);
         $js = array();
-        if(count($steps) <= intval($step)){
-           $js[] =  SQDE_ConsoleRoutes::js(false);
-        }else{
+        if(intval($step) < count($steps)){
             $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
             $js[] = forward_static_call_array(array($cards_xhr,'login'),array());
+        }else{
+           $js[] =  SQDE_ConsoleRoutes::js(false);
         }
         return implode(' ', $js);  
     }
@@ -68,7 +68,7 @@ class SQDE_AuthOperationsXHR {
         return array($modeler::model());
     }
     public static function reset(){
-        SQDE_Session::set('registration_step',0);
+        SQDE_Session::set('auth_id',0);
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if($modeler::exists(SQDE_Session::get('auth_id'), 'id')){
             $operations = SQDE_PackagesHandler::model(static::$package)->operations;
