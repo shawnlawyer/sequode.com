@@ -14,6 +14,12 @@ class SQDE_AuthOperations {
         }
         return $salt . sha1($salt . $text);
     }
+    public static function storeLogin($_model = null){
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
+        SQDE_Session::set('auth_id', $modeler::model()->id);
+        return $modeler::model();
+    }
     public static function login($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));

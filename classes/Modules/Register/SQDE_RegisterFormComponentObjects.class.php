@@ -53,6 +53,7 @@ class SQDE_RegisterFormComponentObjects   {
         
 		return $_o;
 	}
+
     public static function password(){
         $_o = (object) null;
         

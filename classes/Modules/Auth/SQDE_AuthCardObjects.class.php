@@ -21,31 +21,57 @@ class SQDE_AuthCardObjects {
             'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/auth/login'))
         
         );
-        /*
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Get Started',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/auth/terms'))
-        );
-        */
         return $items;
     }
     public static function login(){
+        $steps = array();
+        $steps[] = (object) array(
+            'forms'=> array('email'),
+            'content'=> (object) array(
+                'head' => 'Login',
+                'body' => 'Enter your email address / login key'
+            )
+        );
+        $steps[] = (object) array(
+            'forms'=> array('password'),
+            'content'=> (object) array(
+                'head' => 'Login Secret',
+                'body' => 'Enter your password / secret key'
+            )
+        );
+        if(!SQDE_Session::is('auth_step')){
+            SQDE_Session::set('auth_step',0);
+        }
         $_o = (object) null;
+        $_o->icon_background = 'users-icon-background';
+        $_o->size = 'small';
+        if(intval(SQDE_Session::get('auth_step')) != 0){
+            $_o->menu->items = array();
+            $dom_id = SQDE_Component::uniqueHash('','');
+            $_o->menu->items[] = array(
+                'css_classes'=>'automagic-card-menu-item noSelect',
+                'id'=>$dom_id,
+                'contents'=>'Start Over',
+                'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/auth/reset'))
+            
+            );
+        }
         $_o->head = 'Login';
-        $_o->icon_background = 'sessions-icon-background';
-        $_o->size = 'medium';
-        $_o->body = SQDE_Forms::render(self::$package,'login');
-        return $_o;
-    }
-    public static function terms(){
-        $_o = (object) null;
-        $_o->head = 'Terms and Conditions';
-        $_o->icon_background = 'settings-icon-background';
-        $_o->size = 'medium';
-        $_o->body = array_merge(SQDE_Forms::render(self::$package,'terms'),SQDE_Forms::render(self::$package,'acceptTerms'));
-        return $_o;
+        $_o->body = array('');
+        if(isset($steps[SQDE_Session::get('auth_step')]->content)){
+            if(isset($steps[SQDE_Session::get('auth_step')]->content->head)){
+                $_o->body[] = '<div class="subline">'.$steps[SQDE_Session::get('auth_step')]->content->head.'</div>';
+            }
+            if(isset($steps[SQDE_Session::get('auth_step')]->content->head)){
+                $_o->body[] = $steps[SQDE_Session::get('auth_step')]->content->body;
+            }
+        }
+        if(isset($steps[SQDE_Session::get('auth_step')]->forms)){
+            foreach($steps[SQDE_Session::get('auth_step')]->forms as $form){
+                $_o->body = array_merge($_o->body, SQDE_Forms::render(self::$package, $form));
+            }
+        }
+        $_o->body[] = (object) array('js' => '$(\'.focus-input\').focus(); $(\'.focus-input\').select();');
+        return $_o;   
     }
 }
