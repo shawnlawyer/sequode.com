@@ -26,14 +26,14 @@ class SQDE_AuthCardObjects {
     public static function login(){
         $steps = array();
         $steps[] = (object) array(
-            'forms'=> array('email'),
+            'forms'=> array('login'),
             'content'=> (object) array(
                 'head' => 'Login',
                 'body' => 'Enter your email address / login key'
             )
         );
         $steps[] = (object) array(
-            'forms'=> array('password'),
+            'forms'=> array('secret'),
             'content'=> (object) array(
                 'head' => 'Login Secret',
                 'body' => 'Enter your password / secret key'
