@@ -29,23 +29,8 @@ class SQDE_AccountCardObjects {
         $_o->head = 'Account Detail';
         $_o->icon_type = 'menu-icon';
         $_o->icon_background = 'user-icon-background';
-        
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Username');
-        $_o->body[] = $_model->username;
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Role');
-        SQDE_Role::exists($_model->role_id,'id');
-        $_o->body[] = SQDE_Role::model()->name;
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Sign Up Date');
-        $_o->body[] = date('g:ia \o\n l jS F Y',$_model->sign_up_date);
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Allowed Sequode Count');
-        $_o->body[] = $_model->allowed_sequode_count;
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Sequode Favorites');
-        $_o->body[] = $_model->sequode_favorites;
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Email');
         $_o->body[] = $_model->email;
-        $_o->body[] = SQDE_CardComponent::collectionTile('Sequode', 'Sequodes Created : ', $_model);
-        $_o->body[] = SQDE_CardComponent::collectionTile('Package', 'Packages Created : ', $_model);
-        $_o->body[] = SQDE_CardComponent::collectionTile('Token', 'Tokens Created : ', $_model);
         if(SQDE_UserAuthority::isSystemOwner()){
             $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
         }
