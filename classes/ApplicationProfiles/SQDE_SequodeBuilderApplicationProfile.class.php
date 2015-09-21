@@ -12,13 +12,13 @@ class SQDE_SequodeBuilderApplicationProfile {
             SQDE_PackagesHandler::add('SQDE_TokenPackage');
         }else{
             SQDE_PackagesHandler::add('SQDE_AuthPackage');
+            SQDE_PackagesHandler::add('SQDE_RegisterPackage');
         }
         
         if(SQDE_UserAuthority::isSystemOwner()){
             SQDE_PackagesHandler::add('SQDE_SessionPackage');
             SQDE_PackagesHandler::add('SQDE_UserPackage');
             SQDE_PackagesHandler::add('SQDE_BlacklistIPPackage');
-            SQDE_PackagesHandler::add('SQDE_RegisterPackage');
         }
         
         $packages = SQDE_PackagesHandler::models();
