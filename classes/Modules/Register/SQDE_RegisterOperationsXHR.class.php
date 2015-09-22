@@ -29,8 +29,8 @@ class SQDE_RegisterOperationsXHR {
                     'prep' => 'verifyToken',
                     'operation' => 'setActive'
                 )
-            );
-        );
+            )
+        )
     );
     
     public static function signupDialog(){
