@@ -11,21 +11,21 @@ class SQDE_RegisterOperationsXHR {
 		'reset' => 'reset'
     );
 	public static $dialogs = array(
-        'signup' => (object) array(
+        'signup' => array(
             'steps' => array(
-                (object) array(
+                array(
                     'prep' => 'verifyEmailAddress',
                     'operation' => 'setEmailAddress'
                 ),
-                (object) array(
+                array(
                     'prep' => 'verifyPassword',
                     'operation' => 'setPassword'
                 ),
-                (object) array(
+                array(
                     'prep' => 'verifyAccept',
                     'operation' => 'sendToken'
                 ),
-                (object) array(
+                array(
                     'prep' => 'verifyToken',
                     'operation' => 'setActive'
                 )
@@ -34,7 +34,8 @@ class SQDE_RegisterOperationsXHR {
     );
     
     public static function signupDialog(){
-        $step = static::$dialogs[__FUNCTION__]->steps[SQDE_Session::get('registration_step')];
+        
+        $step = (object) static::$dialogs[__FUNCTION__]['steps'][SQDE_Session::get('registration_step')];
         $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->operations;
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         $parameters = forward_static_call_array(array($operations_xhr, 'signupPrep'), func_get_args());
