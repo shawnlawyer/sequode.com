@@ -6,7 +6,7 @@ class SQDE_ConsoleRoutes{
 		'routes',
 		'cards',
 		'operations',
-		'collections'
+		'collections',
 		'application.css',
 		'3rdParty.js',
         'application.js'
