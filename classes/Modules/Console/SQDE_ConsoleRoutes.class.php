@@ -113,7 +113,6 @@ class SQDE_ConsoleRoutes{
         'css/SQDE_automagic_layout.css',
         'css/SQDE_btn.css',
         'css/SQDE_containers.css',
-        'css/SQDE_fonts.css',
         'css/SQDE_globals.css',
         'css/SQDE_icons.css',
         'css/SQDE_shortcuts.css',
@@ -122,6 +121,8 @@ class SQDE_ConsoleRoutes{
         'css/SQDE_client.css'
         );
         header("Content-type: text/css", true);
+        echo '@charset "utf-8";';
+        echo "\n";
 		foreach($files as $file){
 			echo file_get_contents($file,true);
 			echo "\n";
