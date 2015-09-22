@@ -38,6 +38,7 @@ class SQDE_RegisterOperations {
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $modeler::exists(SQDE_Session::get('registration_id'), 'id');
         $modeler::model()->updateField('1','active');
+        $modeler::model()->updateField('1','verified');
         return $modeler::model();
     }
     public static function reset(){
