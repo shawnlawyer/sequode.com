@@ -16,7 +16,7 @@ class SQDE_ConsoleRoutes{
 		'routes' => 'routes',
 		'cards' => 'cards',
 		'operations' => 'operations',
-		'collections' => 'collections'
+		'collections' => 'collections',
 		'application.css' => 'css',
 		'3rdParty.js' => 'vendorJS',
 		'application.js' => 'js'
