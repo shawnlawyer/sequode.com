@@ -55,25 +55,25 @@ class SQDE_RegisterOperationsXHR {
         $input = json_decode(rawurldecode($json));
         switch(static::$dialogs[__FUNCTION__]->steps[SQDE_Session::get('registration_step')]->prep){
             case 'verifyEmailAddress':
-                if((
+                if(
                     !$modeler::exists(rawurldecode($input->email),'email')
                     && SQDE_UserAuthority::isAnEmailAddress(rawurldecode($input->email))
-                )){return array(rawurldecode($input->email));}
+                ){return array(rawurldecode($input->email));}
             case 'verifyPassword':
-                if(!(
+                if(
                     rawurldecode($input->password) == rawurldecode($input->confirm_password)
                     && SQDE_UserAuthority::isSecurePassword(rawurldecode($input->password))
-                )){return array(rawurldecode($input->password));}
+                ){return array(rawurldecode($input->password));}
             case 'verifyAccept':
-                if(!(
+                if(
                     intval($input->accept) == 1
-                )){return array();}
+                ){return array();}
             case 'verifyToken': 
-                if(!(
+                if(
                     $modeler::exists($input->token,'activation_token')
                     && $modeler::model()->activation_token == SQDE_Session::get('registration_token')
                     && $modeler::model()->active == 0
-                )){return array();}
+                ){return array();}
         }
         return false;
     }
