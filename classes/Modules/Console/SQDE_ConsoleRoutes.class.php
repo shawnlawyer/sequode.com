@@ -22,6 +22,11 @@ class SQDE_ConsoleRoutes{
 		'application.js' => 'js'
 	);
     public static function index(){
+        $console = 'Auth';
+        if(SQDE_UserAuthority::isAuthenticated()){
+            $console = 'Sequode';
+        }
+        SQDE_Session::set('console',$console);
 		echo SQDE_ComponentHTML::page();
 		exit;
 	}
@@ -43,6 +48,7 @@ class SQDE_ConsoleRoutes{
 		exit;
 	}
 	public static function operations(){
+        if(!SQDE_Session::is('console')){return;}
         $packages = SQDE_PackagesHandler::models();
         foreach($packages as $package => $model){
             echo '<li> /';
@@ -80,7 +86,7 @@ class SQDE_ConsoleRoutes{
 		exit;
 	}
 	public static function cardsCollection(){
-        
+        if(!SQDE_Session::is('console')){return;}
         $packages = SQDE_PackagesHandler::models();
         echo '{';
         foreach($packages as $package => $model){
@@ -97,6 +103,7 @@ class SQDE_ConsoleRoutes{
 		exit;
 	}
 	public static function vendorJS(){
+        if(!SQDE_Session::is('console')){return;}
 		$files = array('js/jquery-2.1.4.js','js/kinetic_v5_1_0.js');
 		header('Content-type: application/javascript');
 		foreach($files as $file){
@@ -105,6 +112,7 @@ class SQDE_ConsoleRoutes{
 		}
 	}
 	public static function css(){
+        if(!SQDE_Session::is('console')){return;}
 		$files = array(
         'css/SQDE_automagic_cards.css',
         'css/SQDE_automagic_content.css',
@@ -129,7 +137,7 @@ class SQDE_ConsoleRoutes{
 		}
 	}
 	public static function js($closure = true,$force_SSL = true){
-        
+        if(!SQDE_Session::is('console')){return;}
         if(SQDE_UserAuthority::isAuthenticated()){
             $files = array(
                 'js/SQDE_Configuration.js',
@@ -174,7 +182,7 @@ class SQDE_ConsoleRoutes{
         }
 	}
 	public static function xhr(){
-        
+        if(!SQDE_Session::is('console')){return;}
 		$call = false;
 		$args = array();
 
@@ -218,6 +226,7 @@ class SQDE_ConsoleRoutes{
         return true;
     }
 	public static function collections($collection='collections', $key = null){
+        if(!SQDE_Session::is('console')){return;}
         $collections = array('my_sequodes', 'sequode_favorites', 'palette', 'sequodes', 'tokens', 'packages');
         
 
