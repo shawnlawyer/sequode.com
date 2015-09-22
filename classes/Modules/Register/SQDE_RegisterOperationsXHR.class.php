@@ -35,7 +35,7 @@ class SQDE_RegisterOperationsXHR {
     
     public static function signupDialog(){
         
-        $step = (object) static::$dialogs[__FUNCTION__]['steps'][SQDE_Session::get('registration_step')];
+        $step = (object) static::$dialogs['signup']['steps'][SQDE_Session::get('registration_step')];
         $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->operations;
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         $parameters = forward_static_call_array(array($operations_xhr, 'signupPrep'), func_get_args());
@@ -50,11 +50,11 @@ class SQDE_RegisterOperationsXHR {
         $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
         return implode(' ', $js);  
     }
-    public static function signupPrep($json){
+    public static function signupPrep($json = null){
         if(!SQDE_Session::is('registration_step')){return;}
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $input = json_decode(rawurldecode($json));
-        $step = (object) static::$dialogs[__FUNCTION__]['steps'][SQDE_Session::get('registration_step')];
+        $step = (object) static::$dialogs['signup']['steps'][SQDE_Session::get('registration_step')];
         switch($step->prep){
             case 'verifyEmailAddress':
                 if(
