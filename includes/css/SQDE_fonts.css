@@ -1,15 +1,2 @@
 @charset "utf-8";
 /* Fonts */
-
-@font-face {
-  font-family: 'Kids';
-  src: url('/Kids.eot');
-}
-@font-face {
-  font-family: 'Kids';
-  src: url('/Kidsn.ttf') format('truetype');
-}
-
-.kids{
-  font-family: Kids;
-}

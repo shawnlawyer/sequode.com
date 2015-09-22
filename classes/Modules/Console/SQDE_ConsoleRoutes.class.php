@@ -6,35 +6,25 @@ class SQDE_ConsoleRoutes{
 		'routes',
 		'cards',
 		'operations',
-		'collections',
-		'health.php',
+		'collections'
 		'application.css',
 		'3rdParty.js',
-        'application.js',
-		'Kidsn.eot',
-		'Kidsn.ttf'
+        'application.js'
 	);
 	public static $routes_to_methods = array(
 		'xhr' => 'xhr',
 		'routes' => 'routes',
 		'cards' => 'cards',
 		'operations' => 'operations',
-		'collections' => 'collections',
-		'health.php' => 'health',
+		'collections' => 'collections'
 		'application.css' => 'css',
 		'3rdParty.js' => 'vendorJS',
-		'application.js' => 'js',
-		'Kidsn.eot' => 'sequodeKidsnEOTFont',
-		'Kidsn.ttf' => 'sequodeKidsnTTFFont'
+		'application.js' => 'js'
 	);
     public static function index(){
 		echo SQDE_ComponentHTML::page();
 		exit;
 	}
-	public static function health(){
-		echo '1';
-		exit;
-    }
 	public static function routes(){
         if(SQDE_UserAuthority::isSystemOwner()){
             $routes_classes = SQDE_ApplicationProfile::model()->routes;
@@ -53,7 +43,6 @@ class SQDE_ConsoleRoutes{
 		exit;
 	}
 	public static function operations(){
-        
         $packages = SQDE_PackagesHandler::models();
         foreach($packages as $package => $model){
             echo '<li> /';
@@ -138,21 +127,6 @@ class SQDE_ConsoleRoutes{
 			echo "\n";
 		}
 	}
-	public static function sequodeKidsnTTFFont(){
-		$files = array('fonts/Kidsn.ttf');
-        header('Content-type: application/font-sfnt', true);
-		foreach($files as $file){
-			echo file_get_contents($file,true);
-		}
-	}
-	public static function sequodeKidsnEOTFont(){
-		$files = array('fonts/Kidsn.ttf');
-        header('Content-type: application/vnd.ms-fontobject', true);
-		foreach($files as $file){
-			echo file_get_contents($file,true);
-		}
-	}
-    
 	public static function js($closure = true,$force_SSL = true){
         
         if(SQDE_UserAuthority::isAuthenticated()){
