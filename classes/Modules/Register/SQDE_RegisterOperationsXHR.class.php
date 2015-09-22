@@ -54,7 +54,8 @@ class SQDE_RegisterOperationsXHR {
         if(!SQDE_Session::is('registration_step')){return;}
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $input = json_decode(rawurldecode($json));
-        switch(static::$dialogs[__FUNCTION__]->steps[SQDE_Session::get('registration_step')]->prep){
+        $step = (object) static::$dialogs[__FUNCTION__]['steps'][SQDE_Session::get('registration_step')];
+        switch($step->prep){
             case 'verifyEmailAddress':
                 if(
                     !$modeler::exists(rawurldecode($input->email),'email')
