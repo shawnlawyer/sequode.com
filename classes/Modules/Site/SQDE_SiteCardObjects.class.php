@@ -8,7 +8,7 @@ class SQDE_SiteCardObjects {
         $html = $js = array();
         $_o->body = array();
         
-        $html[] = '<div class="subline alignCenter"><br>A Very Beta Sequode<br></div>';
+        $html[] = '<div class="subline alignCenter"><br><br>A Very Beta Sequode<br><br></div>';
         $html[] = '<div class="card-subtitle ">Liquid who?</div>';
         $html[] = '<div class="card-textblock card-text">';
         $html[] = 'Sequode is short for Sequencing Sequence-able Code, so basically turning software code into a bunch of numbers, or as I call it, Liquid Software.';
