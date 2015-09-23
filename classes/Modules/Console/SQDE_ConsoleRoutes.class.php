@@ -138,31 +138,35 @@ class SQDE_ConsoleRoutes{
 	}
 	public static function js($closure = true,$force_SSL = true){
         if(!SQDE_Session::is('console')){return;}
-        if(SQDE_UserAuthority::isAuthenticated()){
-            $files = array(
-                'js/SQDE_Configuration.js',
-                'js/SQDE_SymbolsKit.js',
-                'js/SQDE_BaseKit.js',
-                'js/SQDE_EventsKit.js',
-                'js/SQDE_ShapesKit.js',
-                'js/SQDE_CardsKit.js',
-                'js/SQDE_XHR.js',
-                'js/SQDE_Model.js',
-                'js/SQDE_ModelEnds.js',
-                'js/SQDE_Sequencer.js',
-                'js/SQDE_SequencerPalette.js',
-                'js/SQDE_CollectionCards.js',
-                'js/SQDE_SequodeConsoleRegistry.js',
-                'js/SQDE_SequodeConsole.js',
-                'js/sequode-main.js'
-            );
-        }else{
-            $files = array(
-                'js/SQDE_XHR.js',
-                'js/SQDE_AuthConsole.js',
-                'js/SQDE_AuthConsoleRegistry.js',
-                'js/auth-main.js'
-            );
+        switch(SQDE_Session::get('console')){
+            case 'Sequode':
+                $files = array(
+                    'js/SQDE_Configuration.js',
+                    'js/SQDE_SymbolsKit.js',
+                    'js/SQDE_BaseKit.js',
+                    'js/SQDE_EventsKit.js',
+                    'js/SQDE_ShapesKit.js',
+                    'js/SQDE_CardsKit.js',
+                    'js/SQDE_XHR.js',
+                    'js/SQDE_Model.js',
+                    'js/SQDE_ModelEnds.js',
+                    'js/SQDE_Sequencer.js',
+                    'js/SQDE_SequencerPalette.js',
+                    'js/SQDE_CollectionCards.js',
+                    'js/SQDE_SequodeConsoleRegistry.js',
+                    'js/SQDE_SequodeConsole.js',
+                    'js/sequode-main.js'
+                );
+                break;
+            case 'Auth':
+                $files = array(
+                    'js/SQDE_XHR.js',
+                    'js/SQDE_AuthConsole.js',
+                    'js/SQDE_AuthConsoleRegistry.js',
+                    'js/auth-main.js'
+                );
+                break;
+            
         }
 		header('Content-type: application/javascript');
         echo '/* Copyright (c) 2006-2015 Shawn Thomas Lawyer - shawnlawyer@gmail.com. All Rights Reserved. */';
@@ -227,7 +231,11 @@ class SQDE_ConsoleRoutes{
     }
 	public static function collections($collection='collections', $key = null){
         if(!SQDE_Session::is('console')){return;}
-        $collections = array('my_sequodes', 'sequode_favorites', 'palette', 'sequodes', 'tokens', 'packages');
+        switch(SQDE_Session::get('console')){
+            case 'Sequode':
+                $collections = array('my_sequodes', 'sequode_favorites', 'palette', 'sequodes', 'tokens', 'packages');
+                break;
+        }
         
 
         switch($collection){
