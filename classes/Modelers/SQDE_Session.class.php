@@ -89,15 +89,14 @@ class SQDE_Session extends SQDE_Modeler {
     }
 	public static function end(){
         self::model()->updateField(self::uniqueHash(),'session_id');
-        self::clear();
         /*self::model()->updateField(time() - 86400,'session_start');*/
         self::clear();
-        self::model((object) null);
+        self::model(null);
     }
 	public static function destroy(){
         self::model()->delete(self::model()->id);
         self::clear();
-        self::model((object) null);
+        self::model(null);
     }
 	public static function save(){
         self::model()->updateField(serialize(self::getAll()),'session_data');
