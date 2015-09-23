@@ -28,6 +28,7 @@ class SQDE_AuthOperations {
         SQDE_Session::set('user_id', $modeler::model()->id, false);
         SQDE_Session::set('username', $modeler::model()->username, false);
         SQDE_Session::set('role_id', $modeler::model()->role_id, false);
+		SQDE_Session::set('console','Sequode', false);
         SQDE_Session::save();
         return $modeler::model();
     }
