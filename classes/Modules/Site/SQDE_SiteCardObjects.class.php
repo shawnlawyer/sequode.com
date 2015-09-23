@@ -7,6 +7,8 @@ class SQDE_SiteCardObjects {
         
         $html = $js = array();
         $_o->body = array();
+        
+        $html[] = '<div class="subline alignCenter"><br>A Very Beta Sequode<br></div>';
         $html[] = '<div class="card-subtitle ">Liquid who?</div>';
         $html[] = '<div class="card-textblock card-text">';
         $html[] = 'Sequode is short for Sequencing Sequence-able Code, so basically turning software code into a bunch of numbers, or as I call it, Liquid Software.';
@@ -30,7 +32,7 @@ class SQDE_SiteCardObjects {
         
         $html[] = '<div class="subline ">Better</div>';
         $html[] = '<div class="card-textblock card-text">';
-        $html[] = 'At public launch Sequode will be free to all school age kids globally, because Sequode is about making the World better.';
+        $html[] = 'All current features of Sequode will remain free to all school age kids globally, because Sequode is about making the World better.';
         $html[] = '</div>';
         
         $html[] = '<div class="subline ">Fun</div>';
@@ -42,7 +44,6 @@ class SQDE_SiteCardObjects {
         $html[] = 'A programmer :)';
         $html[] = '</div>';
         
-        $html[] = '<div class="subline alignCenter">Launch 7.21.2015</div>';
         $_o->body[] = (object) array('html' => implode('',$html));
         return $_o;
     }
