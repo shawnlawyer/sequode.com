@@ -87,6 +87,10 @@ class SQDE_Session extends SQDE_Modeler {
 	public static function id(){
        return self::model()->session_id;
     }
+	public static function end(){
+        self::model()->updateField(self::uniqueHash(),'session_id');
+        self::model(null);
+    }
 	public static function destroy(){
         self::model()->delete(self::model()->id);
         self::model(null);
