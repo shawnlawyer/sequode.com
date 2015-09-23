@@ -72,7 +72,7 @@ class SQDE_Session extends SQDE_Modeler {
         if(isset(SQDE_BlacklistIP::model()->id)){
             die('Sequo De');
         }
-        if(self::exists(self::getCookieValue()) && self::model()->ip_address == $ip_address){
+        if(self::exists(self::getCookieValue()) && self::model()->ip_address == $ip_address && self::model()->session_start + 86400 < time()){
             self::load();
             SQDE_Session::set('history', array_merge(self::get('history'), array(substr($_SERVER['REQUEST_URI'], 0, 25))));
         }elseif($auto_create == true && $_SERVER['HTTP_HOST'] == SQDE_Application::model()->sessions->create_domain){
@@ -89,6 +89,7 @@ class SQDE_Session extends SQDE_Modeler {
     }
 	public static function end(){
         self::model()->updateField(self::uniqueHash(),'session_id');
+        self::model()->updateField(time() - 86400,'session_start');
         self::model(null);
     }
 	public static function destroy(){
@@ -103,7 +104,6 @@ class SQDE_Session extends SQDE_Modeler {
     }
 	public static function setCookie(){
         $expire = time()+SQDE_Application::model()->sessions->length;
-        setcookie(SQDE_Application::model()->sessions->cookie, self::id(), $expire, SQDE_Application::model()->sessions->path, '.'.SQDE_Application::model()->sessions->domain);
         setcookie(SQDE_Application::model()->sessions->cookie, self::id(), $expire, SQDE_Application::model()->sessions->path, '.'.SQDE_Application::model()->sessions->domain);
         setcookie(SQDE_Application::model()->sessions->cookie, self::id(), $expire, SQDE_Application::model()->sessions->path, '*.'.SQDE_Application::model()->sessions->domain);
     }
