@@ -21,7 +21,8 @@ class SQDE_AccountPackage {
                             'head' => 'New Password',
                             'body' => 'A password must be at least 8 characters long and contain at least 1 capital letter (A), 1 lowercase letter (a), 1 number (1) and one symbol character(!).'
                         ),
-                        'prep' => 'verifyNewPassword',
+                        'prep' => 'verifyNewPassword'
+                    ),
                     (object) array(
                         'forms'=> array('password'),
                         'content'=> (object) array(
