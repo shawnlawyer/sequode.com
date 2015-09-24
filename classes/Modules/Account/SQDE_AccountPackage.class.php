@@ -12,6 +12,28 @@ class SQDE_AccountPackage {
         $model->xhr->operations = 'SQDE_AccountOperationsXHR';
         $model->xhr->forms = 'SQDE_AccountFormsXHR';
         $model->xhr->cards = 'SQDE_AccountCardsXHR';
+        $model->xhr->dialogs = array(
+            'update_password' => array(
+                'steps' => array(
+                    (object) array(
+                        'forms'=> array('updatePassword'),
+                        'content'=> (object)  array(
+                            'head' => 'New Password',
+                            'body' => 'A password must be at least 8 characters long and contain at least 1 capital letter (A), 1 lowercase letter (a), 1 number (1) and one symbol character(!).'
+                        ),
+                        'prep' => 'verifyNewPassword',
+                    (object) array(
+                        'forms'=> array('password'),
+                        'content'=> (object) array(
+                            'head' => 'Current Password',
+                            'body' => 'Enter your current password.'
+                        ),
+                        'prep' => 'verifyPassword',
+                        'operation' => 'updatePassword'
+                    )
+                )
+            )
+        );
 		return $model;
 	}
 }
