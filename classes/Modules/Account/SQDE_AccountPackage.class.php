@@ -10,7 +10,6 @@ class SQDE_AccountPackage {
         $model->operations = 'SQDE_AccountOperations';
         $model->xhr = (object) null;
         $model->xhr->operations = 'SQDE_AccountOperationsXHR';
-        $model->xhr->forms = 'SQDE_AccountFormsXHR';
         $model->xhr->cards = 'SQDE_AccountCardsXHR';
         $model->xhr->dialogs = array(
             'update_password' => array(

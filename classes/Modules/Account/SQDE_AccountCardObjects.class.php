@@ -44,16 +44,16 @@ class SQDE_AccountCardObjects {
         return $_o;
     }
     public static function updatePassword(){
-        
         $dialog = SQDE_PackagesHandler::model(static::$package)->xhr->dialogs['update_password'];
-        if(!SQDE_Session::is('update_password_step')){
-            SQDE_Session::set('update_password_step',0);
+        if(!SQDE_Session::is('update_password')){
+            SQDE_Session::set('update_password',(object) array('step'=>0, 'prep'=> (object) null));
         }
-        $step = $dialog['steps'][SQDE_Session::get('update_password_step')];
+        $store = SQDE_Session::get('update_password');
+        $step = $dialog['steps'][$store->step];
         $_o = (object) null;
         $_o->icon_background = 'users-icon-background';
         $_o->size = 'small';
-        if(intval(SQDE_Session::get('update_password_step')) != 0){
+        if($store->step != 0){
             $_o->menu->items = array();
             $dom_id = SQDE_Component::uniqueHash('','');
             $_o->menu->items[] = array(
