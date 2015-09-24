@@ -60,7 +60,7 @@ class SQDE_AccountOperationsXHR {
                 }
             case 'verifyPassword':
                 if(
-                    SQDE_UserAuthority::isPassword(rawurldecode($input->secret), $modeler::model())
+                    SQDE_UserAuthority::isPassword(rawurldecode($input->password), $modeler::model())
                 ){array(SQDE_Session::get('update_password_new_secret'));}
         }
         return false;
