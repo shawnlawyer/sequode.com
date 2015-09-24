@@ -31,6 +31,12 @@ class SQDE_AccountPackage {
                         ),
                         'prep' => 'verifyPassword',
                         'operation' => 'updatePassword'
+                    ),
+                    (object) array(
+                        'content'=> (object) array(
+                            'head' => 'Password Updated',
+                            'body' => 'Be sure to use the new password the next time you login.'
+                        )
                     )
                 )
             )
