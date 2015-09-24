@@ -44,24 +44,12 @@ class SQDE_AccountCardObjects {
         return $_o;
     }
     public static function updatePassword(){
-        $steps = array();
-        $steps[] = (object) array(
-            'forms'=> array('updatePassword'),
-            'content'=> (object) array(
-                'head' => 'New Password',
-                'body' => 'A password must be at least 8 characters long and contain at least 1 capital letter (A), 1 lowercase letter (a), 1 number (1) and one symbol character(!).'
-            )
-        );
-        $steps[] = (object) array(
-            'forms'=> array('password'),
-            'content'=> (object) array(
-                'head' => 'Current Password',
-                'body' => 'Enter your current password.'
-            )
-        );
+        
+        $dialog = SQDE_PackagesHandler::model(static::$package)->xhr->dialogs['update_password'];
         if(!SQDE_Session::is('update_password_step')){
             SQDE_Session::set('update_password_step',0);
         }
+        $step = $dialog['steps'][SQDE_Session::get('update_password_step')];
         $_o = (object) null;
         $_o->icon_background = 'users-icon-background';
         $_o->size = 'small';
@@ -78,16 +66,16 @@ class SQDE_AccountCardObjects {
         }
         $_o->head = 'Account Password';
         $_o->body = array('');
-        if(isset($steps[SQDE_Session::get('update_password_step')]->content)){
-            if(isset($steps[SQDE_Session::get('update_password_step')]->content->head)){
-                $_o->body[] = '<div class="subline">'.$steps[SQDE_Session::get('update_password_step')]->content->head.'</div>';
+        if(isset($step->content)){
+            if(isset($step->content->head)){
+                $_o->body[] = '<div class="subline">'.$step->content->head.'</div>';
             }
-            if(isset($steps[SQDE_Session::get('update_password_step')]->content->head)){
-                $_o->body[] = $steps[SQDE_Session::get('update_password_step')]->content->body;
+            if(isset($step->content->head)){
+                $_o->body[] = $step->content->body;
             }
         }
-        if(isset($steps[SQDE_Session::get('update_password_step')]->forms)){
-            foreach($steps[SQDE_Session::get('update_password_step')]->forms as $form){
+        if(isset($step->forms)){
+            foreach($step->forms as $form){
                 $_o->body = array_merge($_o->body, SQDE_Forms::render(self::$package, $form));
             }
         }
