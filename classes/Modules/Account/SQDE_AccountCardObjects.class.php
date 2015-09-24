@@ -18,7 +18,9 @@ class SQDE_AccountCardObjects {
             'id'=>$dom_id,
             'contents'=>'Account Details',
             'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/account/details'))
-        );$items[] = array(
+        );
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'Update Password',
