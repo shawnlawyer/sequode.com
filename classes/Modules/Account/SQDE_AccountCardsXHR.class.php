@@ -4,13 +4,13 @@ class SQDE_AccountCardsXHR {
 	public static $merge = false;
 	public static $routes = array(
 		'details',
-		'password'
+		'updatePassword'
 	);
 	public static $routes_to_methods = array(
 		'details' => 'details',
-		'password' => 'password'
+		'updatePassword' => 'updatePassword'
     );
-    public static function password($dom_id = 'MagicCardsContainer'){
+    public static function updatePassword($dom_id = 'MagicCardsContainer'){
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
     public static function details($dom_id = 'MagicCardsContainer'){

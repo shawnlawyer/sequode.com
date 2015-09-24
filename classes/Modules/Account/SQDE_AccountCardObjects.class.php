@@ -24,7 +24,7 @@ class SQDE_AccountCardObjects {
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'Update Password',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/account/password'))
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/account/updatePassword'))
         );
         return $items;
     }
@@ -43,7 +43,7 @@ class SQDE_AccountCardObjects {
         }
         return $_o;
     }
-    public static function password(){
+    public static function updatePassword(){
         $steps = array();
         $steps[] = (object) array(
             'forms'=> array('updatePassword'),

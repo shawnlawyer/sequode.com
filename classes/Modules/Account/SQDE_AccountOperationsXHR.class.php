@@ -31,13 +31,17 @@ class SQDE_AccountOperationsXHR {
         $parameters = forward_static_call_array(array($operations_xhr, 'updatePasswordPrep'), func_get_args());
         if(!(
             is_array($parameters)
-            && forward_static_call_array(array($operations, $step->operation),$parameters)
         )){
             return;
         }
+        if(isset($step->operation)){
+            if(!(forward_static_call_array(array($operations, $step->operation),$parameters))){
+                return;
+            }
+        }
         SQDE_Session::set('update_password_step', SQDE_Session::get('update_password_step') + 1);
         $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
-        $js[] = forward_static_call_array(array($cards_xhr,'signup'),array());
+        $js[] = forward_static_call_array(array($cards_xhr,'updatePassword'),array());
         return implode(' ', $js);  
     }
     public static function updatePasswordPrep($json = null){
