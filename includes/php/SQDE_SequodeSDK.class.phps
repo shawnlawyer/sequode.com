@@ -89,7 +89,7 @@ class SequodeSDK{
     }
     private function installPackage($token){
         $filepath = SEQUODE_DIRECTORY . DIRECTORY_SEPARATOR . $token.'.class.php';
-        $url = $this->origin_host . $token . '/downloads/package';
+        $url = $this->origin_host . $token . '/downloads/package/source';
         $read = fopen($url, "rb");
         if($read){
             $write = fopen($filepath, "wb");

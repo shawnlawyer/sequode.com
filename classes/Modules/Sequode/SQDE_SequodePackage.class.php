@@ -17,7 +17,7 @@ class SQDE_SequodePackage {
         $model->xhr->cards = 'SQDE_SequodeCardsXHR';
         $model->rest = (object) null;
         $model->rest->operations = 'SQDE_SequodeOperationsRest';
-        $model->rest->origins = 'SQDE_SequodeOriginsRest';
+        $model->rest->downloads = 'SQDE_SequodeDownloadsRest';
 		return $model;
 	}
 }
