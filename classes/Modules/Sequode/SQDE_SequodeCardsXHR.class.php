@@ -1,7 +1,7 @@
 <?php
 class SQDE_SequodeCardsXHR {
     public static $package = 'Sequode';
-    public static function componentSettings($type = false, $member=null, $_model_id=0, $dom_id = 'MagicCardsContainer'){
+    public static function componentSettings($type = false, $member=null, $_model_id=0, $dom_id = 'CardsContainer'){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
         $modeler::exists($_model_id,'id')
@@ -10,7 +10,7 @@ class SQDE_SequodeCardsXHR {
         )){return;}
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__,array($type, $member)), $dom_id);
     }
-    public static function details($_model_id=0, $dom_id = 'MagicCardsContainer'){
+    public static function details($_model_id=0, $dom_id = 'CardsContainer'){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
         $modeler::exists($_model_id,'id')
@@ -18,7 +18,7 @@ class SQDE_SequodeCardsXHR {
         )){return;}
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
-    public static function internalForms($_model_id=0, $dom_id = 'MagicCardsContainer'){
+    public static function internalForms($_model_id=0, $dom_id = 'CardsContainer'){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
         $modeler::exists($_model_id,'id')
@@ -27,7 +27,7 @@ class SQDE_SequodeCardsXHR {
         )){return;}
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
-    public static function internalPositionForms($_model_id=0, $position=0, $dom_id = 'MagicCardsContainer'){
+    public static function internalPositionForms($_model_id=0, $position=0, $dom_id = 'CardsContainer'){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
         $modeler::exists($_model_id,'id')
@@ -36,7 +36,7 @@ class SQDE_SequodeCardsXHR {
         )){return;}
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
-    public static function chart($_model_id=0, $dom_id = 'MagicCardsContainer'){
+    public static function chart($_model_id=0, $dom_id = 'CardsContainer'){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
         $modeler::exists($_model_id,'id')
@@ -45,7 +45,7 @@ class SQDE_SequodeCardsXHR {
         )){return;}
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
-    public static function sequencer($_model_id=0, $dom_id = 'MagicCardsContainer'){
+    public static function sequencer($_model_id=0, $dom_id = 'CardsContainer'){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if(!(
         $modeler::exists($_model_id,'id')
@@ -54,13 +54,13 @@ class SQDE_SequodeCardsXHR {
         )){return;}
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
-    public static function search($dom_id = 'MagicCardsContainer'){
+    public static function search($dom_id = 'CardsContainer'){
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
-    public static function my($dom_id = 'MagicCardsContainer'){
+    public static function my($dom_id = 'CardsContainer'){
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
-    public static function favorites($dom_id = 'MagicCardsContainer'){
+    public static function favorites($dom_id = 'CardsContainer'){
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
 }

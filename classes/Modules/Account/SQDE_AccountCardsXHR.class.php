@@ -10,10 +10,10 @@ class SQDE_AccountCardsXHR {
 		'details' => 'details',
 		'updatePassword' => 'updatePassword'
     );
-    public static function updatePassword($dom_id = 'MagicCardsContainer'){
+    public static function updatePassword($dom_id = 'CardsContainer'){
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
-    public static function details($dom_id = 'MagicCardsContainer'){
+    public static function details($dom_id = 'CardsContainer'){
         return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
 }

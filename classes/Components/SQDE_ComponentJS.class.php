@@ -28,9 +28,9 @@ class SQDE_ComponentJS {
         $js[] = '$(\'.focus-input\').select();';    
         return implode(' ',$js);
     }
-    public static function placeCard($card, $dom_id = 'MagicCardsContainer'){
+    public static function placeCard($card, $dom_id = 'CardsContainer'){
         $html = $js = array();
-        if($dom_id == 'MagicCardsContainer'){
+        if($dom_id == 'CardsContainer'){
             $html[] = SQDE_Card::divider();
         }
         $html[] = $card->html;

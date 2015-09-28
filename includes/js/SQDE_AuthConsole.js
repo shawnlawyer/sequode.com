@@ -28,9 +28,9 @@ var SQDE_AuthConsole = function(){
         var html = 
            ['<div id="MenusContainer" class="fitBlock alignLeft"></div>',
             '<div id="BodyContainer" class="fitBlock alignLeft">',
-            '<div id="bodyCardGridMagicCardsContainer" class="body-card-grid">',
+            '<div id="bodyCardGridCardsContainer" class="body-card-grid">',
             '<div class="full-grid-cell alignCenter">',
-            '<div id="MagicCardsContainer" class="auto-grid-cell"></div>',
+            '<div id="CardsContainer" class="auto-grid-cell"></div>',
             '</div>',
             '</div>'
            ].join('');

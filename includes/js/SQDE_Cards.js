@@ -42,12 +42,12 @@ var SQDE_SequodeCards = function(){
 	};
     self.place = function(){
         var card ,i;
-        $('#MagicCardsContainer').empty();
-        $('#MagicCardsContainer').append('<div class="automagic-divider"></div>');
+        $('#CardsContainer').empty();
+        $('#CardsContainer').append('<div class="automagic-divider"></div>');
         for(i in self.cards){
             
-            $('#MagicCardsContainer').append(self.cards[i]);
-            $('#MagicCardsContainer').append('<div class="automagic-shim"></div>');
+            $('#CardsContainer').append(self.cards[i]);
+            $('#CardsContainer').append('<div class="automagic-shim"></div>');
         }
 	};
 	self.attachCardEvents = function(card,id){
