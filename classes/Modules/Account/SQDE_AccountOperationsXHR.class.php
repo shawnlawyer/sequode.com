@@ -10,60 +10,70 @@ class SQDE_AccountOperationsXHR {
 		'updatePassword' => 'updatePasswordDialog',
 		'resetUpdatePassword' => 'resetUpdatePasswordDialog'
     );
-    public static function updatePasswordDialog(){
+    public static function updatePassword($json = null){
         
-        $dialog = SQDE_PackagesHandler::model(static::$package)->xhr->dialogs['update_password'];
-        if(!SQDE_Session::is('update_password')){ return; }
-        $store = SQDE_Session::get('update_password');
-        $step = $dialog['steps'][$store->step];
+        $dialog = SQDE_PackagesHandler::model(static::$package)->xhr->dialogs[__FUNCTION__];
+        if(!SQDE_Session::is($dialog['session_store_key'])){ return; }
+        $dialog_store = SQDE_Session::get($dialog['session_store_key']);
+        $dialog_step = $dialog['steps'][$dialog_store->step];
         $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->operations;
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-        $parameters = forward_static_call_array(array($operations_xhr, 'updatePasswordPrep'), func_get_args());
-        if(!(
-            is_array($parameters)
-        )){
-            return;
+        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        if($json !=null){
+                $input = json_decode(rawurldecode($json)); 
+                if(isset($input->reset)){ 
+                    SQDE_Session::set($dialog['session_store_key'], $dialog['session_store_setup']);
+                }
         }
-        if(isset($step->operation)){
-            if(!(forward_static_call_array(array($operations, $step->operation),$parameters))){
-                return;
+        $step_qa = array('prep'=>true,'operation'=>true);
+        if(isset($dialog_step->prep) && $dialog_step->prep == true){
+            $step_qa['prep'] = false;
+        }
+        if(isset($dialog_step->operation)){
+            $step_qa['operation'] = false;
+        }
+        if(isset($dialog_step->prep) && $dialog_step->prep == true){
+            if($json !=null){
+                $input = json_decode(rawurldecode($json)); 
+                if(isset($dialog_step->required_members)){
+                    foreach($dialog_step->required_members as $m){
+                        if(!isset($input->$m)){ return;}
+                    }
+                }
+            
+            switch($dialog_store->step){
+                case 0:
+                    if(
+                        rawurldecode($input->password) == rawurldecode($input->confirm_password)
+                        && SQDE_UserAuthority::isSecurePassword(rawurldecode($input->password))
+                    ){
+                        $dialog_store->prep->new_secret = rawurldecode($input->password);
+                        SQDE_Session::set($dialog['session_store_key'], $dialog_store);
+                        $step_qa['prep'] = true;
+                    }
+                    break;
+                case 1:
+                    if(
+                        SQDE_UserAuthority::isPassword(rawurldecode($input->password), $modeler::model())
+                    ){
+                        $_a =  array($store->prep->new_secret);
+                        $step_qa['prep'] = true;
+                    }
+                    break;
             }
         }
-        $store->step++;
-        SQDE_Session::set('update_password', $store);
-        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
-        return forward_static_call_array(array($cards_xhr,'updatePassword'),array());  
-    }
-    public static function updatePasswordPrep($json = null){
-        $dialog = SQDE_PackagesHandler::model(static::$package)->xhr->dialogs['update_password'];
-        if(!SQDE_Session::is('update_password')){ return; }
-        $store = SQDE_Session::get('update_password');
-        $step = $dialog['steps'][$store->step];
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $input = json_decode(rawurldecode($json));
-        switch($step->prep){
-            case 'verifyNewPassword':
-                if(
-                    rawurldecode($input->password) == rawurldecode($input->confirm_password)
-                    && SQDE_UserAuthority::isSecurePassword(rawurldecode($input->password))
-                ){
-                    
-                    $store->prep->new_secret = rawurldecode($input->password);
-                    SQDE_Session::set('update_password',$store);
-                    return array();
-                }
-            case 'verifyPassword':
-                if(
-                    SQDE_UserAuthority::isPassword(rawurldecode($input->password), $modeler::model())
-                ){
-                    return array(SQDE_Session::get('update_password')->prep->new_secret);
-                }
+        if(isset($dialog_step->operation)){
+            if(is_array($_a) && !(forward_static_call_array(array($operations, $dialog_step->operation),$_a))){
+                $step_qa['operation'] = false;
+            }
         }
-        return false;
-    }
-    public static function resetUpdatePasswordDialog(){
-        SQDE_Session::set('update_password',(object) array('step'=>0, 'prep'=> (object) null));
+        
+        
+        if($step_qa['prep'] == true && $step_qa['operation'] == true){
+            $store->step++;
+        }
+        SQDE_Session::set($dialog['session_store_key'], $store);
         $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
-        return forward_static_call_array(array($cards_xhr,'updatePassword'),array());
+        return forward_static_call_array(array($cards_xhr,__FUNCTION__),array());  
     }
 }

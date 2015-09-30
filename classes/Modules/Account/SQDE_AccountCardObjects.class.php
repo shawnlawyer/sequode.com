@@ -44,11 +44,8 @@ class SQDE_AccountCardObjects {
         return $_o;
     }
     public static function updatePassword(){
-        $dialog = SQDE_PackagesHandler::model(static::$package)->xhr->dialogs['update_password'];
-        if(!SQDE_Session::is('update_password')){
-            SQDE_Session::set('update_password',(object) array('step'=>0, 'prep'=> (object) null));
-        }
-        $store = SQDE_Session::get('update_password');
+        $dialog = SQDE_PackagesHandler::model(static::$package)->xhr->dialogs[__FUNCTION__];
+        $store = SQDE_Session::get($dialog['session_store_key']);
         $step = $dialog['steps'][$store->step];
         $_o = (object) null;
         $_o->icon_background = 'users-icon-background';
