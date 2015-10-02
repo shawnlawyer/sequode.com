@@ -7,8 +7,7 @@ class SQDE_AccountOperationsXHR {
         'resetUpdatePassword'
 	);
 	public static $routes_to_methods = array(
-		'updatePassword' => 'updatePasswordDialog',
-		'resetUpdatePassword' => 'resetUpdatePasswordDialog'
+		'updatePassword' => 'updatePassword'
     );
     public static function updatePassword($json = null){
         
@@ -33,14 +32,11 @@ class SQDE_AccountOperationsXHR {
             $step_qa['operation'] = false;
         }
         if(isset($dialog_step->prep) && $dialog_step->prep == true){
-            if($json !=null){
-                $input = json_decode(rawurldecode($json)); 
-                if(isset($dialog_step->required_members)){
-                    foreach($dialog_step->required_members as $m){
-                        if(!isset($input->$m)){ return;}
-                    }
+            if(isset($dialog_step->required_members)){
+                foreach($dialog_step->required_members as $m){
+                    if(!isset($input->$m)){ return;}
                 }
-            
+            }
             switch($dialog_store->step){
                 case 0:
                     if(
