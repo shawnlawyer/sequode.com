@@ -33,7 +33,7 @@ class SQDE_AccountPackage {
                             'head' => 'Current Password',
                             'body' => 'Enter your current password.'
                         ),
-                        'prep' => true
+                        'prep' => true,
                         'operation' => 'updatePassword'
                     ),
                     (object) array(
