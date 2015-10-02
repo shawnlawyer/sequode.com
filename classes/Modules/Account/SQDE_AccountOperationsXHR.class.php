@@ -52,7 +52,7 @@ class SQDE_AccountOperationsXHR {
                     if(
                         SQDE_UserAuthority::isPassword(rawurldecode($input->password), $modeler::model())
                     ){
-                        $_a =  array($store->prep->new_secret);
+                        $_a =  array($dialog_store->prep->new_secret);
                         $step_qa['prep'] = true;
                     }
                     break;
@@ -66,9 +66,9 @@ class SQDE_AccountOperationsXHR {
         
         
         if($step_qa['prep'] == true && $step_qa['operation'] == true){
-            $store->step++;
+            $dialog_store->step++;
         }
-        SQDE_Session::set($dialog['session_store_key'], $store);
+        SQDE_Session::set($dialog['session_store_key'], $dialog_store);
         $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         return forward_static_call_array(array($cards_xhr,__FUNCTION__),array());  
     }

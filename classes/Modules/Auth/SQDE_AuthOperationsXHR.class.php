@@ -7,10 +7,10 @@ class SQDE_AuthOperationsXHR {
         'reset'
 	);
 	public static $routes_to_methods = array(
-		'login' => 'main',
-		'reset' => 'reset'
+		'login' => 'loginDialog',
+		'reset' => 'resetLoginDialog'
     );
-    public static function main(){
+    public static function loginDialog(){
         if(!SQDE_Session::is('auth_step')){return;}
         $steps = array(
             (object) array(
@@ -65,7 +65,7 @@ class SQDE_AuthOperationsXHR {
         )){return;}
         return array($modeler::model());
     }
-    public static function reset(){
+    public static function resetLoginDialog(){
         SQDE_Session::set('auth_id',null);
         SQDE_Session::set('auth_step',0);
         $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
