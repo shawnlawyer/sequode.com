@@ -46,6 +46,7 @@ class SQDE_AuthCardObjects {
         $_o->icon_background = 'users-icon-background';
         $_o->size = 'small';
         if(intval(SQDE_Session::get('auth_step')) != 0){
+            $_o->menu = (object) null;
             $_o->menu->items = array();
             $dom_id = SQDE_Component::uniqueHash('','');
             $_o->menu->items[] = array(
