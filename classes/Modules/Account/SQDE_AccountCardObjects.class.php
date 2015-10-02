@@ -50,7 +50,7 @@ class SQDE_AccountCardObjects {
         $_o = (object) null;
         $_o->icon_background = 'users-icon-background';
         $_o->size = 'small';
-        if($store->step != 0){
+        if($dialog_store->step != 0){
             $_o->menu->items = array();
             $dom_id = SQDE_Component::uniqueHash('','');
             $_o->menu->items[] = array(
