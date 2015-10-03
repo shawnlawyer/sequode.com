@@ -57,9 +57,8 @@ class SQDE_AccountCardObjects {
                 'css_classes'=>'automagic-card-menu-item noSelect',
                 'id'=>$dom_id,
                 'contents'=>'Start Over',
-                'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/account/updatePassword',array(urlencode('{\'reset\':1}')))
-            
-            );
+                'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/account/updatePassword',array(urlencode('{\'reset\':1}'))))
+                );
         }
         $_o->head = 'Account Password';
         $_o->body = array('');
