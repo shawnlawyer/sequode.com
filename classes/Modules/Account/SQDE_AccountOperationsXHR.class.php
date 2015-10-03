@@ -58,8 +58,8 @@ class SQDE_AccountOperationsXHR {
                     break;
             }
         }
-        if(isset($dialog_step->operation)){
-            if(is_array($_a) && !(forward_static_call_array(array($operations, $dialog_step->operation),$_a))){
+        if(isset($dialog_step->operation) && is_array($_a)){
+            if(!(forward_static_call_array(array($operations, $dialog_step->operation),$_a))){
                 $step_qa['operation'] = false;
             }
         }
