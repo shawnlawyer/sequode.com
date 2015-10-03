@@ -29,7 +29,7 @@ class SQDE_AccountOperationsXHR {
             $step_qa['prep'] = false;
         }
         if(isset($dialog_step->operation)){
-            $step_qa['operation'] = false;
+            $step_qa['operation'] = true;
         }
         if(isset($dialog_step->prep) && $dialog_step->prep == true){
             if(isset($dialog_step->required_members)){
