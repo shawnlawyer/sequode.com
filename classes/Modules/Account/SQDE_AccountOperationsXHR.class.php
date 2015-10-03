@@ -20,6 +20,9 @@ class SQDE_AccountOperationsXHR {
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         if($json != null){
                 $input = json_decode(rawurldecode($json)); 
+                echo "moo";
+                
+                exit;
                 if(isset($input->reset)){ 
                     SQDE_Session::set($dialog['session_store_key'], $dialog['session_store_setup']);
                 }
