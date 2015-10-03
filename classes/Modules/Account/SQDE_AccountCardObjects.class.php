@@ -51,13 +51,14 @@ class SQDE_AccountCardObjects {
         $_o->icon_background = 'users-icon-background';
         $_o->size = 'small';
         if($dialog_store->step != 0){
+            $_o->menu = (object) null;
             $_o->menu->items = array();
             $dom_id = SQDE_Component::uniqueHash('','');
             $_o->menu->items[] = array(
                 'css_classes'=>'automagic-card-menu-item noSelect',
                 'id'=>$dom_id,
                 'contents'=>'Start Over',
-                'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/account/updatePassword',array(urlencode('{\'reset\':1}'))))
+                'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/account/updatePassword',array('{\'reset\':1}')))
                 );
         }
         $_o->head = 'Account Password';
