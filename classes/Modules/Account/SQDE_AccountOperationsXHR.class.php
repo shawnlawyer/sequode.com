@@ -25,6 +25,8 @@ class SQDE_AccountOperationsXHR {
                 exit;
                 if(isset($input->reset)){ 
                     SQDE_Session::set($dialog['session_store_key'], $dialog['session_store_setup']);
+                    $dialog_store = SQDE_Session::get($dialog['session_store_key']);
+                    $dialog_step = $dialog['steps'][$dialog_store->step];
                 }
         }
         $step_qa = array('prep'=>true,'operation'=>true);
