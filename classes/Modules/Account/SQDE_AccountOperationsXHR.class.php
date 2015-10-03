@@ -13,8 +13,6 @@ class SQDE_AccountOperationsXHR {
         
         $dialog = SQDE_PackagesHandler::model(static::$package)->xhr->dialogs[__FUNCTION__];
         if(!SQDE_Session::is($dialog['session_store_key'])){ return; }
-        $dialog_store = SQDE_Session::get($dialog['session_store_key']);
-        $dialog_step = $dialog['steps'][$dialog_store->step];
         $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->operations;
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
@@ -22,10 +20,10 @@ class SQDE_AccountOperationsXHR {
                 $input = json_decode(rawurldecode($json)); 
                 if(isset($input->reset)){ 
                     SQDE_Session::set($dialog['session_store_key'], $dialog['session_store_setup']);
-                    $dialog_store = SQDE_Session::get($dialog['session_store_key']);
-                    $dialog_step = $dialog['steps'][$dialog_store->step];
                 }
         }
+        $dialog_store = SQDE_Session::get($dialog['session_store_key']);
+        $dialog_step = $dialog['steps'][$dialog_store->step];
         $step_qa = array('prep'=>true,'operation'=>true);
         if(isset($dialog_step->prep) && $dialog_step->prep == true){
             $step_qa['prep'] = false;
