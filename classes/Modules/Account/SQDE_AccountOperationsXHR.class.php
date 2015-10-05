@@ -19,6 +19,8 @@ class SQDE_AccountOperationsXHR {
         if($json != null){
                 $input = json_decode(rawurldecode($json)); 
                 if(isset($input->reset)){ 
+                echo "oo";
+                exit;
                     SQDE_Session::set($dialog['session_store_key'], $dialog['session_store_setup']);
                 }
         }
