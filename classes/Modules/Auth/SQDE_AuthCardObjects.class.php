@@ -23,29 +23,16 @@ class SQDE_AuthCardObjects {
         );
         return $items;
     }
-    public static function login(){
-        $steps = array();
-        $steps[] = (object) array(
-            'forms'=> array('login'),
-            'content'=> (object) array(
-                'head' => 'Login',
-                'body' => 'Enter your email address / login key'
-            )
-        );
-        $steps[] = (object) array(
-            'forms'=> array('secret'),
-            'content'=> (object) array(
-                'head' => 'Login Secret',
-                'body' => 'Enter your password / secret key'
-            )
-        );
-        if(!SQDE_Session::is('auth_step')){
-            SQDE_Session::set('auth_step',0);
-        }
+   
+    
+    public static function updatePassword(){
+        $dialog = SQDE_PackagesHandler::model(static::$package)->xhr->dialogs[__FUNCTION__];
+        $dialog_store = SQDE_Session::get($dialog['session_store_key']);
+        $step = $dialog['steps'][$dialog_store->step];
         $_o = (object) null;
         $_o->icon_background = 'users-icon-background';
         $_o->size = 'small';
-        if(intval(SQDE_Session::get('auth_step')) != 0){
+        if($dialog_store->step != 0){
             $_o->menu = (object) null;
             $_o->menu->items = array();
             $dom_id = SQDE_Component::uniqueHash('','');
@@ -53,26 +40,26 @@ class SQDE_AuthCardObjects {
                 'css_classes'=>'automagic-card-menu-item noSelect',
                 'id'=>$dom_id,
                 'contents'=>'Start Over',
-                'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/auth/reset'))
-            
-            );
+                'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/auth/login',array(SQDE_Form::jsQuotedValue('{"reset":"1"}'))))
+                );
         }
         $_o->head = 'Authentication';
         $_o->body = array('');
-        if(isset($steps[SQDE_Session::get('auth_step')]->content)){
-            if(isset($steps[SQDE_Session::get('auth_step')]->content->head)){
-                $_o->body[] = '<div class="subline">'.$steps[SQDE_Session::get('auth_step')]->content->head.'</div>';
+        if(isset($step->content)){
+            if(isset($step->content->head)){
+                $_o->body[] = '<div class="subline">'.$step->content->head.'</div>';
             }
-            if(isset($steps[SQDE_Session::get('auth_step')]->content->head)){
-                $_o->body[] = $steps[SQDE_Session::get('auth_step')]->content->body;
+            if(isset($step->content->head)){
+                $_o->body[] = $step->content->body;
             }
         }
-        if(isset($steps[SQDE_Session::get('auth_step')]->forms)){
-            foreach($steps[SQDE_Session::get('auth_step')]->forms as $form){
+        if(isset($step->forms)){
+            foreach($step->forms as $form){
                 $_o->body = array_merge($_o->body, SQDE_Forms::render(self::$package, $form));
             }
         }
         $_o->body[] = (object) array('js' => '$(\'.focus-input\').focus(); $(\'.focus-input\').select();');
-        return $_o;   
+        return $_o;    
     }
+    
 }

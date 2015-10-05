@@ -16,7 +16,6 @@ class SQDE_AccountPackage {
                 'session_store_key' => 'update_password',
                 'session_store_setup' => (object) array('step'=>0, 'prep'=> (object) null),
                 'card'=> 'updatePassword',
-                'prep'=>'updatePasswordPrep',
                 'steps' => array(
                     (object) array(
                         'forms'=> array('updatePassword'),

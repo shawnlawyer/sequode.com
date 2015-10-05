@@ -3,73 +3,76 @@ class SQDE_AuthOperationsXHR {
     public static $package = 'Auth';
 	public static $merge = false;
 	public static $routes = array(
-		'login',
-        'reset'
+		'login'
 	);
 	public static $routes_to_methods = array(
-		'login' => 'loginDialog',
-		'reset' => 'resetLoginDialog'
+		'login' => 'login'
     );
-    public static function loginDialog(){
-        if(!SQDE_Session::is('auth_step')){return;}
-        $steps = array(
-            (object) array(
-                'prep' => 'verifyLogin',
-                'operation' => 'storeLogin'
-            ),
-            (object) array(
-                'prep' => 'verifySecret',
-                'operation' => 'login'
-            )
-        );
-        $step = $steps[SQDE_Session::get('auth_step')];
+    public static function login($json = null){
+        
+        $dialog = SQDE_PackagesHandler::model(static::$package)->xhr->dialogs[__FUNCTION__];
+        if(!SQDE_Session::is($dialog['session_store_key'])){ return; }
+        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
         $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->operations;
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-        $parameters = forward_static_call_array(array($operations_xhr, $step->prep), func_get_args());
-        if(!(
-            is_array($parameters)
-            && forward_static_call_array(array($operations, $step->operation),$parameters)
-        )){
-            return;
-        }
-        SQDE_Session::set('auth_step', SQDE_Session::get('auth_step') + 1);
-        $js = array();
-        if(intval(SQDE_Session::get('auth_step')) < count($steps)){
-            $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
-            $js[] = forward_static_call_array(array($cards_xhr,'login'),array());
-        }else{
-           $js[] =  SQDE_ConsoleRoutes::js(false);
-        }
-        return implode(' ', $js);  
-    }
-    public static function verifyLogin($json){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-        $js = array();
-        $input = json_decode(rawurldecode($json));
-        if(!(
-        (
-            $modeler::exists(rawurldecode($input->login),'email')
-            || $modeler::exists(rawurldecode($input->login),'username')
-        )
-        && SQDE_UserAuthority::isActive($modeler::model())
-        )){return;}
-        return array($modeler::model());
-    }
-    public static function verifySecret($json){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $modeler::exists(SQDE_Session::get('auth_id'), 'id');
-        $input = json_decode(rawurldecode($json));
-        if(!(
-            SQDE_UserAuthority::isPassword(rawurldecode($input->secret), $modeler::model())
-        )){return;}
-        return array($modeler::model());
-    }
-    public static function resetLoginDialog(){
-        SQDE_Session::set('auth_id',null);
-        SQDE_Session::set('auth_step',0);
-        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
-        $js[] = forward_static_call_array(array($cards_xhr,'login'),array());
-        return implode(' ', $js);
+        if($json != null){
+                $input = json_decode(rawurldecode($json)); 
+                if(isset($input->reset)){ 
+                    SQDE_Session::set($dialog['session_store_key'], $dialog['session_store_setup']);
+                    return forward_static_call_array(array($cards_xhr,__FUNCTION__),array());  
+                }
+        }
+        $dialog_store = SQDE_Session::get($dialog['session_store_key']);
+        $dialog_step = $dialog['steps'][$dialog_store->step];
+        if(isset($dialog_step->prep) && $dialog_step->prep == true){
+            if(isset($dialog_step->required_members)){
+                foreach($dialog_step->required_members as $m){
+                    if(!isset($input->$m)){ return;}
+                }
+            }
+            switch($dialog_store->step){
+                case 0:
+                    if(!(
+                    (
+                        $modeler::exists(rawurldecode($input->login),'email')
+                        || $modeler::exists(rawurldecode($input->login),'username')
+                    )
+                    && SQDE_UserAuthority::isActive($modeler::model())
+                    )){
+                        $dialog_store->prep->user_id = $modeler::model()->id;
+                        SQDE_Session::set($dialog['session_store_key'], $dialog_store);
+                    else
+                    {
+                        $error = true;
+                    }
+                    break;
+                case 1:
+                    if(
+                        $modeler::exists($dialog_store->prep->user_id, 'id');
+                        if(!(
+                            SQDE_UserAuthority::isPassword(rawurldecode($input->secret), $modeler::model())
+                        )){return;}
+                    ){
+                        $_a = array($modeler::model());
+                    }
+                    else
+                    {
+                        $error = true;
+                    }
+                    break;
+            }
+        }
+        if(isset($dialog_step->operation) && is_array($_a)){
+            if(!(forward_static_call_array(array($operations, $dialog_step->operation),$_a))){
+                $error = true;
+            }
+        }
+        if(!isset($error)){
+            $dialog_store->step++;
+            SQDE_Session::set($dialog['session_store_key'], $dialog_store);
+            $js = array();
+            return (intval($dialog_store->step) == 2) ? SQDE_ConsoleRoutes::js(false) : forward_static_call_array(array($cards_xhr,__FUNCTION__),array());
+        }
     }
 }
