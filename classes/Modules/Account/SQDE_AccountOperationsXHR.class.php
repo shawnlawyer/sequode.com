@@ -3,8 +3,7 @@ class SQDE_AccountOperationsXHR {
     public static $package = 'Account';
 	public static $merge = false;
 	public static $routes = array(
-		'updatePassword',
-        'resetUpdatePassword'
+		'updatePassword'
 	);
 	public static $routes_to_methods = array(
 		'updatePassword' => 'updatePassword'
@@ -26,13 +25,6 @@ class SQDE_AccountOperationsXHR {
         }
         $dialog_store = SQDE_Session::get($dialog['session_store_key']);
         $dialog_step = $dialog['steps'][$dialog_store->step];
-        $step_qa = array('prep'=>true,'operation'=>true);
-        if(isset($dialog_step->prep) && $dialog_step->prep == true){
-            $step_qa['prep'] = false;
-        }
-        if(isset($dialog_step->operation)){
-            $step_qa['operation'] = true;
-        }
         if(isset($dialog_step->prep) && $dialog_step->prep == true){
             if(isset($dialog_step->required_members)){
                 foreach($dialog_step->required_members as $m){
@@ -47,7 +39,10 @@ class SQDE_AccountOperationsXHR {
                     ){
                         $dialog_store->prep->new_secret = rawurldecode($input->password);
                         SQDE_Session::set($dialog['session_store_key'], $dialog_store);
-                        $step_qa['prep'] = true;
+                    }
+                    else
+                    {
+                        $error = true;
                     }
                     break;
                 case 1:
@@ -55,22 +50,23 @@ class SQDE_AccountOperationsXHR {
                         SQDE_UserAuthority::isPassword(rawurldecode($input->password), $modeler::model())
                     ){
                         $_a =  array($dialog_store->prep->new_secret);
-                        $step_qa['prep'] = true;
+                    }
+                    else
+                    {
+                        $error = true;
                     }
                     break;
             }
         }
         if(isset($dialog_step->operation) && is_array($_a)){
             if(!(forward_static_call_array(array($operations, $dialog_step->operation),$_a))){
-                $step_qa['operation'] = false;
+                $error = true;
             }
         }
-        
-        
-        if($step_qa['prep'] == true && $step_qa['operation'] == true){
+        if(!isset($error)){
             $dialog_store->step++;
+            SQDE_Session::set($dialog['session_store_key'], $dialog_store);
+            return forward_static_call_array(array($cards_xhr,__FUNCTION__),array()); 
         }
-        SQDE_Session::set($dialog['session_store_key'], $dialog_store);
-        return forward_static_call_array(array($cards_xhr,__FUNCTION__),array());  
     }
 }
