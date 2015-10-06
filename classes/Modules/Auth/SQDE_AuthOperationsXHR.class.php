@@ -70,7 +70,6 @@ class SQDE_AuthOperationsXHR {
         if(!isset($error)){
             $dialog_store->step++;
             SQDE_Session::set($dialog['session_store_key'], $dialog_store);
-            $js = array();
             return (intval($dialog_store->step) == 2) ? SQDE_ConsoleRoutes::js(false) : forward_static_call_array(array($cards_xhr,__FUNCTION__),array());
         }
     }
