@@ -45,7 +45,7 @@ class SQDE_AuthOperationsXHR {
                     }
                     else
                     {
-                        $error = true;
+                        $error = 1;
                     }
                     break;
                 case 1:
@@ -57,21 +57,22 @@ class SQDE_AuthOperationsXHR {
                     }
                     else
                     {
-                        $error = true;
+                        $error = 2;
                     }
                     break;
             }
         }
         if(isset($dialog_step->operation) && is_array($_a)){
             if(!(forward_static_call_array(array($operations, $dialog_step->operation),$_a))){
-                $error = true;
+                $error = 3;
             }
         }
-        echo 'here';
         if(!isset($error)){
             $dialog_store->step++;
             SQDE_Session::set($dialog['session_store_key'], $dialog_store);
             return (intval($dialog_store->step) == 2) ? SQDE_ConsoleRoutes::js(false) : forward_static_call_array(array($cards_xhr,__FUNCTION__),array());
+        }else{
+                echo $error;
         }
     }
 }
