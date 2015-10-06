@@ -67,6 +67,7 @@ class SQDE_AuthOperationsXHR {
                 $error = true;
             }
         }
+        echo 'here';
         if(!isset($error)){
             $dialog_store->step++;
             SQDE_Session::set($dialog['session_store_key'], $dialog_store);
