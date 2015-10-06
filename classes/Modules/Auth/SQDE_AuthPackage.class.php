@@ -33,6 +33,7 @@ class SQDE_AuthPackage {
                             'body' => 'Enter your password / secret key'
                         ),
                         'prep' => true,
+                        'required_members' => array('secret'),
                         'operation' => 'login'
                     )
                 )
