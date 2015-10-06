@@ -42,6 +42,7 @@ class SQDE_AuthOperationsXHR {
                     )){
                         $dialog_store->prep->user_id = $modeler::model()->id;
                         SQDE_Session::set($dialog['session_store_key'], $dialog_store);
+                    }
                     else
                     {
                         $error = true;
