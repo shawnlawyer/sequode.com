@@ -33,13 +33,13 @@ class SQDE_AuthOperationsXHR {
             }
             switch($dialog_store->step){
                 case 0:
-                    if(!(
+                    if(
                     (
                         $modeler::exists(rawurldecode($input->login),'email')
                         || $modeler::exists(rawurldecode($input->login),'username')
                     )
                     && SQDE_UserAuthority::isActive($modeler::model())
-                    )){
+                    ){
                         $dialog_store->prep->user_id = $modeler::model()->id;
                         SQDE_Session::set($dialog['session_store_key'], $dialog_store);
                     }
@@ -49,10 +49,10 @@ class SQDE_AuthOperationsXHR {
                     }
                     break;
                 case 1:
-                    if(!(
+                    if(
                         $modeler::exists($dialog_store->prep->user_id, 'id')
                         && SQDE_UserAuthority::isPassword(rawurldecode($input->secret), $modeler::model())
-                    )){
+                    ){
                         $_a = array($modeler::model());
                     }
                     else
