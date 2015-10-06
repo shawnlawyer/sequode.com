@@ -23,9 +23,7 @@ class SQDE_AuthCardObjects {
         );
         return $items;
     }
-   
-    
-    public static function updatePassword(){
+   public static function login(){
         $dialog = SQDE_PackagesHandler::model(static::$package)->xhr->dialogs[__FUNCTION__];
         $dialog_store = SQDE_Session::get($dialog['session_store_key']);
         $step = $dialog['steps'][$dialog_store->step];
@@ -60,6 +58,5 @@ class SQDE_AuthCardObjects {
         }
         $_o->body[] = (object) array('js' => '$(\'.focus-input\').focus(); $(\'.focus-input\').select();');
         return $_o;    
-    }
-    
+    }  
 }
