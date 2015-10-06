@@ -49,12 +49,10 @@ class SQDE_AuthOperationsXHR {
                     }
                     break;
                 case 1:
-                    if(
-                        $modeler::exists($dialog_store->prep->user_id, 'id');
-                        if(!(
-                            SQDE_UserAuthority::isPassword(rawurldecode($input->secret), $modeler::model())
-                        )){return;}
-                    ){
+                    if(!(
+                        $modeler::exists($dialog_store->prep->user_id, 'id')
+                        && SQDE_UserAuthority::isPassword(rawurldecode($input->secret), $modeler::model())
+                    )){
                         $_a = array($modeler::model());
                     }
                     else
