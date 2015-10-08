@@ -4,11 +4,13 @@ class SQDE_AccountCardsXHR {
 	public static $merge = false;
 	public static $routes = array(
 		'details',
-		'updatePassword'
+		'updatePassword',
+		'updateEmail'
 	);
 	public static $routes_to_methods = array(
 		'details' => 'details',
-		'updatePassword' => 'updatePassword'
+		'updatePassword' => 'updatePassword',
+		'updateEmail' => 'updateEmail'
     );
     public static function updatePassword($dom_id = 'CardsContainer'){
         $dialog = SQDE_PackagesHandler::model(static::$package)->xhr->dialogs[__FUNCTION__];
