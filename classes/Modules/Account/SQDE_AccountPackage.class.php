@@ -42,6 +42,37 @@ class SQDE_AccountPackage {
                         )
                     )
                 )
+            ),
+            'updateEmail' => array(
+                'session_store_key' => 'update_email',
+                'session_store_setup' => (object) array('step'=>0, 'prep'=> (object) null),
+                'card'=> 'updateEmail',
+                'steps' => array(
+                    (object) array(
+                        'forms'=> array('updateEmail'),
+                        'content'=> (object)  array(                            
+                            'head' => 'Change Email Address',
+                            'body' => 'Enter the new email address to begin.'
+                        ),
+                        'prep' => true,
+                        'required_members' => array('email')
+                    ),
+                    (object) array(
+                        'forms'=> array('verify'),
+                        'content'=> (object) array(
+                            'head' => 'Email Verification',
+                            'body' => 'An email has been sent to you containing a verification token. <br/><br/>Copy and Paste the token to verify your email address.'
+                        ),
+                        'prep' => true,
+                        'required_members' => array('token')
+                    ),
+                    (object) array(
+                        'content'=> (object) array(
+                            'head' => 'Email Updated',
+                            'body' => 'Be sure to use the new email the next time you login.'
+                        )
+                    )
+                )
             )
         );
 		return $model;

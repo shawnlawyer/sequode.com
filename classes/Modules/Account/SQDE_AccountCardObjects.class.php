@@ -26,6 +26,13 @@ class SQDE_AccountCardObjects {
             'contents'=>'Update Password',
             'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/account/updatePassword'))
         );
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $items[] = array(
+            'css_classes'=>'automagic-card-menu-item noSelect',
+            'id'=>$dom_id,
+            'contents'=>'Update Email',
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/account/updateEmail'))
+        );
         return $items;
     }
     public static function details(){
