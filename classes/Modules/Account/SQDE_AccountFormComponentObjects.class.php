@@ -8,7 +8,7 @@ class SQDE_AccountFormComponentObjects{
         
         SQDE_Component::exists('str','name');
 		$_o->email = json_decode(SQDE_Component::model()->component_object);
-        $_o->email->Label = 'Email';
+        $_o->email->Label = 'Email Address';
         $_o->email->Value = $_model->email;
         $_o->email->Width = 200;
         
