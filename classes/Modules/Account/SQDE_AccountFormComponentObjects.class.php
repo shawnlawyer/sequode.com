@@ -1,7 +1,7 @@
 <?php
 class SQDE_AccountFormComponentObjects{
     public static $package = 'Account';
-    public static function newEmail(){
+    public static function updateEmail(){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $_model = $modeler::model();
         $_o = (object) null;
