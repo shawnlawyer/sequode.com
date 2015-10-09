@@ -19,6 +19,7 @@ class SQDE_RegisterFormObjects   {
         $_o = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
         $_o->submit_xhr_call_route = static::$xhr_library.'/'.'signup';
         $_o->auto_submit_time = 1;
+        $_o->submit_button = 'Submit';
 		return $_o;
 	}
 	public static function terms(){
