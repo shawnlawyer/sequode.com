@@ -3,10 +3,12 @@ class SQDE_AccountOperationsXHR {
     public static $package = 'Account';
 	public static $merge = false;
 	public static $routes = array(
-		'updatePassword'
+		'updatePassword',
+		'updateEmail'
 	);
 	public static $routes_to_methods = array(
-		'updatePassword' => 'updatePassword'
+		'updatePassword' => 'updatePassword',
+		'updateEmail' => 'updateEmail'
     );
     public static function updatePassword($json = null){
         
@@ -95,10 +97,10 @@ class SQDE_AccountOperationsXHR {
             switch($dialog_store->step){
                 case 0:
                     if(
-                        rawurldecode($input->password) == rawurldecode($input->confirm_password)
-                        && SQDE_UserAuthority::isSecurePassword(rawurldecode($input->password))
+                        !$modeler::exists(rawurldecode($input->email),'email')
+                        && SQDE_UserAuthority::isAnEmailAddress(rawurldecode($input->email))
                     ){
-                        $dialog_store->prep->new_secret = rawurldecode($input->password);
+                        $dialog_store->prep->new_email = rawurldecode($input->email);
                         SQDE_Session::set($dialog['session_store_key'], $dialog_store);
                     }
                     else
@@ -110,7 +112,25 @@ class SQDE_AccountOperationsXHR {
                     if(
                         SQDE_UserAuthority::isPassword(rawurldecode($input->password), $modeler::model())
                     ){
-                        $_a =  array($dialog_store->prep->new_secret);
+                        $dialog_store->prep->token = $operations::generateHash();
+                        SQDE_Session::set($dialog['session_store_key'], $dialog_store);
+                        
+                        $hooks = array(
+                            "searchStrs" => array('#TOKEN#'),
+                            "subjectStrs" => array($dialog_store->prep->token)
+                        );
+                        SQDE_Mailer::systemSend($modeler::model()->email,'Verify your email address with sequode.com',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
+                    }
+                    else
+                    {
+                        $error = true;
+                    }
+                    break;
+                case 2:
+                    if(
+                        $dialog_store->prep->token == rawurldecode($input->token)
+                    ){  
+                        $_a =  array($dialog_store->prep->email);
                     }
                     else
                     {
