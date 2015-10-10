@@ -64,7 +64,8 @@ class SQDE_AccountPackage {
                             'body' => 'An email has been sent to you containing a verification token. <br/><br/>Copy and Paste the token to verify your email address.'
                         ),
                         'prep' => true,
-                        'required_members' => array('token')
+                        'required_members' => array('token'),
+                        'operation' => 'updateEmail'
                     ),
                     (object) array(
                         'content'=> (object) array(
