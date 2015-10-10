@@ -101,17 +101,6 @@ class SQDE_AccountOperationsXHR {
                         && SQDE_UserAuthority::isAnEmailAddress(rawurldecode($input->email))
                     ){
                         $dialog_store->prep->new_email = rawurldecode($input->email);
-                        SQDE_Session::set($dialog['session_store_key'], $dialog_store);
-                    }
-                    else
-                    {
-                        $error = true;
-                    }
-                    break;
-                case 1:
-                    if(
-                        SQDE_UserAuthority::isPassword(rawurldecode($input->password), $modeler::model())
-                    ){
                         $dialog_store->prep->token = $operations::generateHash();
                         SQDE_Session::set($dialog['session_store_key'], $dialog_store);
                         
@@ -126,7 +115,7 @@ class SQDE_AccountOperationsXHR {
                         $error = true;
                     }
                     break;
-                case 2:
+                case 1:
                     if(
                         $dialog_store->prep->token == rawurldecode($input->token)
                     ){  
