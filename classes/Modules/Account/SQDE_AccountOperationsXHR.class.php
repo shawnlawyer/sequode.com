@@ -108,7 +108,7 @@ class SQDE_AccountOperationsXHR {
                             "searchStrs" => array('#TOKEN#'),
                             "subjectStrs" => array($dialog_store->prep->token)
                         );
-                        SQDE_Mailer::systemSend($modeler::model()->email,'Verify your email address with sequode.com',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
+                        SQDE_Mailer::systemSend($dialog_store->prep->new_email,'Verify your email address with sequode.com',SQDE_Mailer::makeTemplate('activation.txt',$hooks));
                     }
                     else
                     {
