@@ -119,7 +119,7 @@ class SQDE_AccountOperationsXHR {
                     if(
                         $dialog_store->prep->token == rawurldecode($input->token)
                     ){  
-                        $_a =  array($dialog_store->prep->email);
+                        $_a =  array($dialog_store->prep->new_email);
                     }
                     else
                     {
