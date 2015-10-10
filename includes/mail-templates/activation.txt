@@ -4,6 +4,6 @@ Here's your validation token for Sequode.com.
 
 #TOKEN#
 
-After you after validation, just login and start Sequoding!
+After you've completed validation, just login and start Sequoding!
 
 #INC-FOOTER#
