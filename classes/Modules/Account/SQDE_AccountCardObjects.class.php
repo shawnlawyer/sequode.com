@@ -11,30 +11,13 @@ class SQDE_AccountCardObjects {
         return $_o;
     }
     public static function menuItems(){
+        $dom_id = SQDE_Component::uniqueHash('','');
         $items = array();
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Account Details',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/account/details'))
-        );
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Update Password',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/account/updatePassword'))
-        );
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Update Email',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/account/updateEmail'))
-        );
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Update Email','cards/account/details');
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Update Password','cards/account/updatePassword');
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Update Email','cards/account/updateEmail');
         return $items;
-    }
+    }   
     public static function details(){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
@@ -60,13 +43,7 @@ class SQDE_AccountCardObjects {
         if($dialog_store->step != 0){
             $_o->menu = (object) null;
             $_o->menu->items = array();
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $_o->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Start Over',
-                'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/account/' . __FUNCTION__,array(SQDE_Form::jsQuotedValue('{"reset":"1"}'))))
-                );
+            $_o->menu->items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(SQDE_Form::jsQuotedValue('{"reset":"1"}')));
         }
         $_o->head = 'Account Password';
         $_o->body = array('');
@@ -83,7 +60,6 @@ class SQDE_AccountCardObjects {
                 $_o->body = array_merge($_o->body, SQDE_Forms::render(self::$package, $form));
             }
         }
-        
         if($dialog_store->step != 0){
             $_o->body[] = SQDE_CardComponent::resetDialog('operations/account/' . __FUNCTION__);
         }
@@ -100,13 +76,7 @@ class SQDE_AccountCardObjects {
         if($dialog_store->step != 0){
             $_o->menu = (object) null;
             $_o->menu->items = array();
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $_o->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Start Over',
-                'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/account/' . __FUNCTION__,array(SQDE_Form::jsQuotedValue('{"reset":"1"}'))))
-                );
+            $_o->menu->items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(SQDE_Form::jsQuotedValue('{"reset":"1"}')));
         }
         $_o->head = 'Account Email';
         $_o->body = array('');

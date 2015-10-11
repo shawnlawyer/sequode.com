@@ -12,15 +12,7 @@ class SQDE_AuthCardObjects {
     }
     public static function menuItems(){
         $items = array();
-        
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Login',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/auth/login'))
-        
-        );
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Login','cards/auth/login');
         return $items;
     }
    public static function login(){
@@ -33,13 +25,7 @@ class SQDE_AuthCardObjects {
         if($dialog_store->step != 0){
             $_o->menu = (object) null;
             $_o->menu->items = array();
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $_o->menu->items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Start Over',
-                'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/auth/login',array(SQDE_Form::jsQuotedValue('{"reset":"1"}'))))
-                );
+            $_o->menu->items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Start Over','operations/auth/' . __FUNCTION__,array(SQDE_Form::jsQuotedValue('{"reset":"1"}')));
         }
         $_o->head = 'Authentication';
         $_o->body = array('');

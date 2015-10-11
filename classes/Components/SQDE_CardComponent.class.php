@@ -74,6 +74,15 @@ class SQDE_CardComponent {
         $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject($component->route, array($component->model_id)));
         return (object) array('html' => implode('',$html),'js' => implode('',$js));
     }
+    public static function onTapEventsXHRCallMenuItem($contents, $route, $inputs=null, $callback=null){
+        $dom_id = SQDE_Component::uniqueHash('','');
+        return array(
+            'css_classes'=>'automagic-card-menu-item noSelect',
+            'id'=>$dom_id,
+            'contents'=> $contents,
+            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject($route,$inputs,$callback))
+        );
+    }
     public static function resetDialog($route){
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
