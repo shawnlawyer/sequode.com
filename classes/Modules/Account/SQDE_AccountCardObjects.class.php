@@ -13,7 +13,7 @@ class SQDE_AccountCardObjects {
     public static function menuItems(){
         $dom_id = SQDE_Component::uniqueHash('','');
         $items = array();
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Update Email','cards/account/details');
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Account Details','cards/account/details');
         $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Update Password','cards/account/updatePassword');
         $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Update Email','cards/account/updateEmail');
         return $items;
