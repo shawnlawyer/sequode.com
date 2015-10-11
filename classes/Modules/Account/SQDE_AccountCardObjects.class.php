@@ -83,6 +83,10 @@ class SQDE_AccountCardObjects {
                 $_o->body = array_merge($_o->body, SQDE_Forms::render(self::$package, $form));
             }
         }
+        
+        if($dialog_store->step != 0){
+            $_o->body[] = SQDE_CardComponent::resetDialog('operations/account/' . __FUNCTION__);
+        }
         $_o->body[] = (object) array('js' => '$(\'.focus-input\').focus(); $(\'.focus-input\').select();');
         return $_o;    
     }
@@ -118,6 +122,9 @@ class SQDE_AccountCardObjects {
             foreach($step->forms as $form){
                 $_o->body = array_merge($_o->body, SQDE_Forms::render(self::$package, $form));
             }
+        }
+        if($dialog_store->step != 0){
+            $_o->body[] = SQDE_CardComponent::resetDialog('operations/account/' . __FUNCTION__);
         }
         $_o->body[] = (object) array('js' => '$(\'.focus-input\').focus(); $(\'.focus-input\').select();');
         return $_o;    
