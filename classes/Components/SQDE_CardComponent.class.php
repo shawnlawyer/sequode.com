@@ -78,7 +78,7 @@ class SQDE_CardComponent {
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
         $html[] = '<span class="button noSelect " id="'.$dom_id.'">Start Over</span>';
-        $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject($route, array(SQDE_Form::jsQuotedValue('{"reset":"1"}')));
+        $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject($route, array(SQDE_Form::jsQuotedValue('{"reset":"1"}'))));
         return (object) array('html' => implode('',$html),'js' => implode('',$js));
     }
 }
