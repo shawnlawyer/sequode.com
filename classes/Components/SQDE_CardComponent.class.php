@@ -86,7 +86,7 @@ class SQDE_CardComponent {
     public static function resetDialog($route){
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
-        $html[] = '<span class="btn noSelect " id="'.$dom_id.'">Start Over</span>';
+        $html[] = '<span class="btn noSelect " id="'.$dom_id.'">Reset</span>';
         $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject($route, array(SQDE_Form::jsQuotedValue('{"reset":"1"}'))));
         return (object) array('html' => implode('',$html),'js' => implode('',$js));
     }
