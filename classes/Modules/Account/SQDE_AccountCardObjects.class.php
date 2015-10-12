@@ -17,7 +17,7 @@ class SQDE_AccountCardObjects {
         $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Update Password','cards/account/updatePassword');
         $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Update Email','cards/account/updateEmail');
         return $items;
-    }   
+    }
     public static function details(){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $operations = SQDE_PackagesHandler::model(static::$package)->operations;
