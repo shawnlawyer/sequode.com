@@ -24,7 +24,7 @@ class SQDE_RegisterPackage {
                             'body' => 'Enter an email address to begin.'
                         ),
                         'prep' => true,
-                        'required_members' => array('password','confirm_password')
+                        'required_members' => array('email')
                     ),
                     (object) array(
                         'forms'=> array('password'),
@@ -42,7 +42,7 @@ class SQDE_RegisterPackage {
                             'body' => ''
                         ),
                         'prep' => true,
-                        'required_members' => array('password','confirm_password')
+                        'required_members' => array('accept')
                     ),
                     (object) array(
                         'forms'=> array('verify'),
@@ -51,6 +51,7 @@ class SQDE_RegisterPackage {
                             'body' => 'An email has been sent to you containing a verification token. <br/><br/>Copy and Paste the token to verify your email address.'
                         ),
                         'prep' => true,
+                        'required_members' => array('token')
                         'operation' => 'updatePassword'
                     ),
                     (object) array(
