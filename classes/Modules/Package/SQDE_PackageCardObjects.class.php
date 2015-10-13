@@ -11,51 +11,19 @@ class SQDE_PackageCardObjects {
         return $_o;
     }
     public static function menuItems(){
+        $dom_id = SQDE_Component::uniqueHash('','');
         $items = array();
-       
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'New Package',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/package/newPackage'))
-        );
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'My Packages',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/package/my'))
-        );
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Search Packages',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/package/search'))
-        );
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Package','operations/package/newPackage');
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('My Packages','cards/package/my');
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Sequodes','cards/package/search');
         return $items;
     }
-    
     public static function modelOperationsMenuItems($filter='', $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         $items = array();
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Details',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/package/details', array($_model->id)))
-        );
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Delete',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/package/delete', array($_model->id)))
-        );
-        
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Details','cards/package/details',array($_model->id));
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Delete','cards/package/delete',array($_model->id));
         return $items;
     }
     public static function details($_model = null){

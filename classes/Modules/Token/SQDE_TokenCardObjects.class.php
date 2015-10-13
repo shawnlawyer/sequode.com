@@ -12,28 +12,9 @@ class SQDE_TokenCardObjects {
     }
     public static function menuItems(){
         $items = array();
-       
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'New Tokens',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/token/newToken'))
-        );
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'My Tokens',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/token/my'))
-        );
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Search Tokens',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/token/search'))
-        );
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Token','operations/token/newPackage');
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('My Tokens','cards/token/my');
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Tokens','cards/token/search');
         return $items;
     }
     
@@ -41,21 +22,8 @@ class SQDE_TokenCardObjects {
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         $items = array();
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Details',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/token/details', array($_model->id)))
-        );
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Delete',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/token/delete', array($_model->id)))
-        );
-        
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Details','cards/token/details',array($_model->id));
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Delete','cards/token/delete',array($_model->id));
         return $items;
     }
     public static function details($_model = null){

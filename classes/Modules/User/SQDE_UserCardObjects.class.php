@@ -12,57 +12,18 @@ class SQDE_UserCardObjects {
     }
     public static function menuItems(){
         $items = array();
-        
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Search Users',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/user/search'))
-        );
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'New User',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/user/newUser'))
-        );
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'New Guest',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/user/newGuest'))
-        );
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New User','operations/user/newUser');
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Guest','operations/user/newGuest');
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Users','cards/user/search');
         return $items;
     }
     public static function modelOperationsMenuItems($filter='', $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         $items = array();
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Details',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/user/details', array($_model->id)))
-        );
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Delete',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/user/delete', array($_model->id)))
-        );
-        if(SQDE_UserAuthority::isSystemOwner()){
-            $dom_id = SQDE_Component::uniqueHash('','');
-            $items[] = array(
-                'css_classes'=>'automagic-card-menu-item noSelect',
-                'id'=>$dom_id,
-                'contents'=>'Login As',
-                'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/user/loginAs', array($_model->id)))
-            );
-        }
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Details','cards/user/details',array($_model->id));
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Delete','operations/user/delete',array($_model->id));
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Login As','operations/user/loginAs',array($_model->id));
         return $items;
     }
     public static function details($_model = null){

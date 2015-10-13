@@ -12,14 +12,7 @@ class SQDE_SessionCardObjects {
     }
     public static function menuItems(){
         $items = array();
-        
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Search Sessions',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('cards/session/search'))
-        );
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Sessions','cards/session/search');
         return $items;
     }
     public static function details($_model=null){
@@ -33,14 +26,8 @@ class SQDE_SessionCardObjects {
         $_o->menu = (object) null;
         $_o->menu->items =  array();
         
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $_o->menu->items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'Delete Session',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/session/delete', array($_model->id)))
-        );
         
+        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Delete Session','cards/session/delete',array($_model->id));
         
         $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/session/details'));
         
