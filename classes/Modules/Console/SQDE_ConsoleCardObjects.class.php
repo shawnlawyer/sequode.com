@@ -37,14 +37,7 @@ class SQDE_ConsoleCardObjects {
         $_o->icon_background = 'sequode-icon-background';
         $_o->menu = (object) null;
         $_o->menu->items =  array();
-        
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $_o->menu->items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'New Sequode',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/sequode/newSequence'))
-        );
+        $_o->menu->item[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Sequode','operations/token/newSequence');
         $_o->body = array();
         $_o->body[] = '';
         $_o->body[] = SQDE_CardComponent::collectionTile('Sequode', 'Sequodes Created : ', $user_model);
@@ -59,14 +52,7 @@ class SQDE_ConsoleCardObjects {
         $_o->icon_background = 'atom-icon-background';
         $_o->menu = (object) null;
         $_o->menu->items =  array();
-        
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $_o->menu->items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'New Package',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/package/newPackage'))
-        );
+        $_o->menu->item[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Package','operations/token/newPackage');
         $_o->body = array();
         $_o->body[] = '';
         $_o->body[] = SQDE_CardComponent::collectionTile('Package', 'Packages Created : ', $user_model);
@@ -81,14 +67,7 @@ class SQDE_ConsoleCardObjects {
         $_o->icon_background = 'atom-icon-background';
         $_o->menu = (object) null;
         $_o->menu->items =  array();
-        
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $_o->menu->items[] = array(
-            'css_classes'=>'automagic-card-menu-item noSelect',
-            'id'=>$dom_id,
-            'contents'=>'New Token',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/token/newToken'))
-        );
+        $_o->menu->item[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Token','operations/token/newToken');
         $_o->body = array();
         $_o->body[] = '';
         $_o->body[] = SQDE_CardComponent::collectionTile('Token', 'Tokens Created : ', $user_model);
