@@ -24,7 +24,7 @@ class SQDE_TokenCardObjects {
         $_o = array();
         $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Details','cards/token/details',array($_model->id));
         $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Delete','cards/token/delete',array($_model->id));
-        return $_o;
+        return $items;
     }
     public static function details($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
