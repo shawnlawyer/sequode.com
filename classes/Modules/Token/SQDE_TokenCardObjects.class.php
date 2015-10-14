@@ -11,20 +11,20 @@ class SQDE_TokenCardObjects {
         return $_o;
     }
     public static function menuItems(){
-        $items = array();
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Token','operations/token/newPackage');
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('My Tokens','cards/token/my');
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Tokens','cards/token/search');
-        return $items;
+        $_o = array();
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Token','operations/token/newPackage');
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('My Tokens','cards/token/my');
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Tokens','cards/token/search');
+        return $_o;
     }
     
     public static function modelOperationsMenuItems($filter='', $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
-        $items = array();
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Details','cards/token/details',array($_model->id));
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Delete','cards/token/delete',array($_model->id));
-        return $items;
+        $_o = array();
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Details','cards/token/details',array($_model->id));
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Delete','cards/token/delete',array($_model->id));
+        return $_o;
     }
     public static function details($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;

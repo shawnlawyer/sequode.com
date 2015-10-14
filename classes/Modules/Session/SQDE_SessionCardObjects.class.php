@@ -11,9 +11,9 @@ class SQDE_SessionCardObjects {
         return $_o;
     }
     public static function menuItems(){
-        $items = array();
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Sessions','cards/session/search');
-        return $items;
+        $_o = array();
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Sessions','cards/session/search');
+        return $_o;
     }
     public static function details($_model=null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;

@@ -11,20 +11,20 @@ class SQDE_UserCardObjects {
         return $_o;
     }
     public static function menuItems(){
-        $items = array();
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New User','operations/user/newUser');
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Guest','operations/user/newGuest');
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Users','cards/user/search');
-        return $items;
+        $_o = array();
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New User','operations/user/newUser');
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Guest','operations/user/newGuest');
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Users','cards/user/search');
+        return $_o;
     }
     public static function modelOperationsMenuItems($filter='', $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
-        $items = array();
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Details','cards/user/details',array($_model->id));
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Delete','operations/user/delete',array($_model->id));
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Login As','operations/user/loginAs',array($_model->id));
-        return $items;
+        $_o = array();
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Details', 'cards/user/details', array($_model->id));
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Delete', 'operations/user/delete', array($_model->id));
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Login As', 'operations/user/loginAs', array($_model->id));
+        return $_o;
     }
     public static function details($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;

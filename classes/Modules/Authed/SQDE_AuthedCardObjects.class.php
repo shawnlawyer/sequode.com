@@ -11,8 +11,8 @@ class SQDE_AuthedCardObjects {
         return $_o;
     }
     public static function menuItems(){
-        $items = array();
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Logout','operations/authed/logout');
-        return $items;
+        return array(
+            SQDE_CardComponent::onTapEventsXHRCallMenuItem('Logout','operations/authed/logout')
+        );
     }
 }

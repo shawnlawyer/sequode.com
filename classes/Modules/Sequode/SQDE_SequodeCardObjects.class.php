@@ -12,12 +12,12 @@ class SQDE_SequodeCardObjects {
     }
     public static function menuItems(){
         $dom_id = SQDE_Component::uniqueHash('','');
-        $items = array();
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Sequode','operations/sequode/newSequence');
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('My Sequodes','cards/sequode/my');
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Sequodes','cards/sequode/search');
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Favorites Sequodes','cards/sequode/favorites');
-        return $items;
+        $_o = array();
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Sequode','operations/sequode/newSequence');
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('My Sequodes','cards/sequode/my');
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Sequodes','cards/sequode/search');
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Favorites Sequodes','cards/sequode/favorites');
+        return $_o;
     }
     public static function modelOperationsMenuItems($filter='', $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;

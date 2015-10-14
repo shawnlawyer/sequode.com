@@ -11,9 +11,9 @@ class SQDE_AuthCardObjects {
         return $_o;
     }
     public static function menuItems(){
-        $items = array();
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Login','cards/auth/login');
-        return $items;
+        $_o = array();
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Login','cards/auth/login');
+        return $_o;
     }
    public static function login(){
         $dialog = SQDE_PackagesHandler::model(static::$package)->xhr->dialogs[__FUNCTION__];

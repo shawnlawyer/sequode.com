@@ -11,12 +11,11 @@ class SQDE_AccountCardObjects {
         return $_o;
     }
     public static function menuItems(){
-        $dom_id = SQDE_Component::uniqueHash('','');
-        $items = array();
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Account Details','cards/account/details');
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Update Password','cards/account/updatePassword');
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Update Email','cards/account/updateEmail');
-        return $items;
+        $_o = array();
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Account Details','cards/account/details');
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Update Password','cards/account/updatePassword');
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Update Email','cards/account/updateEmail');
+        return $_o;
     }
     public static function details(){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;

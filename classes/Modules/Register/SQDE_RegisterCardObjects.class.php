@@ -11,6 +11,11 @@ class SQDE_RegisterCardObjects {
         return $_o;
     }
     public static function menuItems(){
+        $_o = array();
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Signup','cards/register/signup');
+        return $_o;
+    }
+    public static function menuItems(){
         $items = array();
         
         $dom_id = SQDE_Component::uniqueHash('','');
