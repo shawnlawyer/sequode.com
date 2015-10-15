@@ -16,7 +16,7 @@ class SQDE_SequodeCardObjects {
         $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Sequode','operations/sequode/newSequence');
         $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('My Sequodes','cards/sequode/my');
         $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Sequodes','cards/sequode/search');
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Favorites Sequodes','cards/sequode/favorites');
+        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Favorited Sequodes','cards/sequode/favorites');
         return $_o;
     }
     public static function modelOperationsMenuItems($filter='', $_model = null){
