@@ -78,7 +78,7 @@ class SQDE_RegisterOperationsXHR {
                 case 3:
                     if(
                         !$modeler::exists($dialog_store->prep->email,'email')
-                        && $dialog_store->prep->token == rawurldecode($input->token)
+                        && $dialog_store->prep->token == trim(rawurldecode($input->token))
                     ){  
                         $_a =  array($dialog_store->prep->email, $dialog_store->prep->password);
                     }
