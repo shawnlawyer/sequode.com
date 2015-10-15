@@ -51,8 +51,8 @@ class SQDE_RegisterPackage {
                             'body' => 'An email has been sent to you containing a verification token. <br/><br/>Copy and Paste the token to verify your email address.'
                         ),
                         'prep' => true,
-                        'required_members' => array('token')
-                        'operation' => 'updatePassword'
+                        'required_members' => array('token'),
+                        'operation' => 'signup'
                     ),
                     (object) array(
                         'content'=> (object) array(
