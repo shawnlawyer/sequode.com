@@ -40,17 +40,17 @@ class SQDE_SequodeCardObjects {
             }
             if(SQDE_UserAuthority::canEdit($_model)){
                 if(!SQDE_SequodeAuthority::isEmptySequence($_model)){
-                    $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Empty Sequence','cards/sequode/emptySequence', array($_model->id));
+                    $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Empty Sequence','operations/sequode/emptySequence', array($_model->id));
                 }
             }
             if(SQDE_UserAuthority::canEdit($_model)){
                 if(!SQDE_SequodeAuthority::isEmptySequence($_model)){
-                    $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Restore To Default','cards/sequode/formatSequence', array($_model->id));
+                    $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Restore To Default','operations/sequode/formatSequence', array($_model->id));
                 }
             }
             if(SQDE_UserAuthority::canCopy($_model)){
                 if(!SQDE_SequodeAuthority::isEmptySequence($_model)){
-                    $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Clone','cards/sequode/cloneSequence', array($_model->id));
+                    $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Clone','operations/sequode/cloneSequence', array($_model->id));
                 }
             }
             if(SQDE_UserAuthority::canEdit($_model)){
@@ -60,7 +60,7 @@ class SQDE_SequodeCardObjects {
             }
             if(SQDE_UserAuthority::canDelete($_model)){
                 if(SQDE_SequodeAuthority::isEmptySequence($_model)){
-                    $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Delete','cards/sequode/deleteSequence', array($_model->id));
+                    $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Delete','operations/sequode/deleteSequence', array($_model->id));
                 }
             }
         }
