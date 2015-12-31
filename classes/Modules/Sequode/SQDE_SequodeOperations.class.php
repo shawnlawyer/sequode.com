@@ -326,7 +326,7 @@ class SQDE_SequodeOperations {
 		$grid_areas = json_decode($modeler::model()->grid_areas);
 		$grid_areas = $kit::moveFromGridAreaToGridArea($from_position, $to_position, $grid_areas, $modeler::model());
 		$grid_areas = $kit::tuneGridAreaPosition($to_position, $grid_areas, $position_tuner, $modeler::model());
-		SQDE_SequodesSequencer::updateSequence($sequence_map);
+		self::updateSequence($sequence_map);
 		$modeler::model()->updateField(json_encode($grid_areas),'grid_areas');
         if($grid_modifier > 0){
             $grid_areas = $kit::modifyGridAreas($to_position, $grid_areas, $modeler::model());
