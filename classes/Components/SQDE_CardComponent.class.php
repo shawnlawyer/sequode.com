@@ -83,10 +83,10 @@ class SQDE_CardComponent {
             'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject($route,$inputs,$callback))
         );
     }
-    public static function resetDialog($route){
+    public static function resetDialogButton($route){
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
-        $html[] = '<span class="btn noSelect " id="'.$dom_id.'">Reset</span>';
+        $html[] = '<span class="btn" id="'.$dom_id.'">Reset</span>';
         $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject($route, array(SQDE_Form::jsQuotedValue('{"reset":"1"}'))));
         return (object) array('html' => implode('',$html),'js' => implode('',$js));
     }

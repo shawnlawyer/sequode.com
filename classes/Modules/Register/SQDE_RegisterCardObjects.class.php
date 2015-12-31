@@ -43,7 +43,7 @@ class SQDE_RegisterCardObjects {
             }
         }
         if($dialog_store->step != 0){
-            $_o->body[] = SQDE_CardComponent::resetDialog('operations/register/' . __FUNCTION__);
+            $_o->body[] = SQDE_CardComponent::resetDialogButton('operations/register/' . __FUNCTION__);
         }
         $_o->body[] = (object) array('js' => '$(\'.focus-input\').focus(); $(\'.focus-input\').select();');
         return $_o;    
