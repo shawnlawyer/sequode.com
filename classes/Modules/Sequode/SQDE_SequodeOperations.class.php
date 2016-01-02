@@ -283,7 +283,7 @@ class SQDE_SequodeOperations {
 		$modeler::model()->updateField(json_encode($kit::makeSequodeProcessDescriptionNode()),'process_description_node');
         return $modeler::model();
     }
-	public static function addToSequence($add__model_id, $position = 0, $position_tuner = null, $grid_modifier = null, $_model = null){
+	public static function addToSequence($add_model_id, $position = 0, $position_tuner = null, $grid_modifier = null, $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
         $kit = SQDE_PackagesHandler::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
@@ -294,7 +294,7 @@ class SQDE_SequodeOperations {
         $position = (count($sequence) == 0) ? 0 : $kit::getSequencePosition($position, $sequence, 1);
 		
 		$sequence_map = $kit::makeUpdateSequenceInputMap($sequence);
-		$sequence_map = $kit::addToUpdateSequenceInputMap($sequence_map, $add__model_id, $position);
+		$sequence_map = $kit::addToUpdateSequenceInputMap($sequence_map, $add_model_id, $position);
         if(count($sequence) == 0){
             self::updateSequence($sequence_map);
             return self::makeDefaultSequencedSequode();

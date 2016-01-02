@@ -1,39 +1,16 @@
 <?php
-function __autoload($class) { 
-	if(!empty($_SERVER["WINDIR"])){
-		$incToken = ";";
-		$dirSep = "\\";
-	}else{
-		$incToken = ":";
-		$dirSep = "/";
+
+spl_autoload_register(function($class, $extention = '.class.php') {
+    $directories = explode((!empty($_SERVER["WINDIR"])) ? ';' : ':', get_include_path();
+    foreach(directories as $directory){
+		if(file_exists($directory .  __DIR__ . $class . $extention)){
+            require_once($directory .  __DIR__ . $class . $extention);
+            return true;
+        }
 	}
-    foreach(explode($incToken, get_include_path()) as $path){
-		$file=$path.$dirSep.$class.'.class.php';
-		if(file_exists($file)){
-			require_once($file);
-			autoload_files($class.'.class.php','class');
-			return;
-		}
-	}
-}
-function autoload_files($file,$stack,$dump=false){
-	static $stacks = array();
-    if (is_string($stack) && !in_array($stack,$stacks)) {
-		$stacks[$stack] = array();
-	}
-	if (is_string($file) && !in_array($file,$stacks[$stack])) {
-		$stacks[$stack][] = $file;
-	}
-	if($dump != false){
-		return $stacks;
-	}else{
-		if(in_array($file,$stacks[$stack])){
-			return null;
-		}else{
-			return $stacks[$stack][search_array($file,$stacks[$stack])];
-		}
-	}
-}
+    return false;
+});
+
 date_default_timezone_set('America/Los_Angeles');
 ob_start('ob_gzhandler');
 SQDE_Session::start();
