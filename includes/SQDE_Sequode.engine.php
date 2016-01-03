@@ -1,14 +1,9 @@
 <?php
 function __autoload($class) { 
-	if(!empty($_SERVER["WINDIR"])){
-		$incToken = ";";
-		$dirSep = "\\";
-	}else{
-		$incToken = ":";
-		$dirSep = "/";
-	}
-    foreach(explode($incToken, get_include_path()) as $path){
-		$file=$path.$dirSep.$class.'.class.php';
+    $directories = explode((!empty($_SERVER["WINDIR"])) ? ';' : ':', get_include_path());
+    $incToken = (!empty($_SERVER["WINDIR"])) ? ';' : ':';
+	foreach(explode($incToken, get_include_path()) as $path){
+		$file=$path.'/'.$class.'.class.php';
 		if(file_exists($file)){
 			require_once($file);
 			return;
