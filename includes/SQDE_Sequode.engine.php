@@ -1,8 +1,7 @@
 <?php
 function __autoload($class) { 
-    $directories = explode((!empty($_SERVER["WINDIR"])) ? ';' : ':', get_include_path());
-    $incToken = (!empty($_SERVER["WINDIR"])) ? ';' : ':';
-	foreach(explode($incToken, get_include_path()) as $path){
+    $paths = explode((!empty($_SERVER["WINDIR"])) ? ';' : ':', get_include_path());
+    foreach($paths as $path){
 		$file=$path.'/'.$class.'.class.php';
 		if(file_exists($file)){
 			require_once($file);
