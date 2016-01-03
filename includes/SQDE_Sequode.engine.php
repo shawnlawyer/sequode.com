@@ -1,13 +1,15 @@
 <?php
+
 spl_autoload_register(function($class) { 
     $paths = explode((!empty($_SERVER["WINDIR"])) ? ';' : ':', get_include_path());
     foreach($paths as $path){
-		$file=$path . DIRECTORY_SEPARATOR . $class . '.class.php';
+		$file = $path . DIRECTORY_SEPARATOR . $class . '.class.php';
 		if(file_exists($file)){
 			require_once($file);
-			return;
-		}
+            return true;
+        }
 	}
+    return false;
 });
 /*
 spl_autoload_register(function($class, $extention = '.class.php') {
