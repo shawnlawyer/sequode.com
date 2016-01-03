@@ -1,7 +1,6 @@
 <?php
-
 spl_autoload_register(function($class, $extention = '.class.php') {
-    $directories = explode((!empty($_SERVER["WINDIR"])) ? ';' : ':', get_include_path();
+    $directories = explode((!empty($_SERVER["WINDIR"])) ? ';' : ':', get_include_path());
     foreach(directories as $directory){
 		if(file_exists($directory .  DIRECTORY_SEPARATOR . $class . $extention)){
             require_once($directory .  DIRECTORY_SEPARATOR . $class . $extention);
