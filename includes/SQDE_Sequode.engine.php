@@ -1,9 +1,9 @@
 <?php
 
-spl_autoload_register(function($class) { 
+spl_autoload_register(function($class, $extention = '.class.php') { 
     $paths = explode((!empty($_SERVER["WINDIR"])) ? ';' : ':', get_include_path());
     foreach($paths as $path){
-		$file = $path . DIRECTORY_SEPARATOR . $class . '.class.php';
+		$file = $path . DIRECTORY_SEPARATOR . $class . $extention;
 		if(file_exists($file)){
 			require_once($file);
             return true;
