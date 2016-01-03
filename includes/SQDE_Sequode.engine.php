@@ -1,5 +1,5 @@
 <?php
-function __autoload($class) { 
+spl_autoload_register(function($class) { 
     $paths = explode((!empty($_SERVER["WINDIR"])) ? ';' : ':', get_include_path());
     foreach($paths as $path){
 		$file=$path.'/'.$class.'.class.php';
@@ -8,7 +8,7 @@ function __autoload($class) {
 			return;
 		}
 	}
-}
+});
 /*
 spl_autoload_register(function($class, $extention = '.class.php') {
     $directories = explode((!empty($_SERVER["WINDIR"])) ? ';' : ':', get_include_path());
