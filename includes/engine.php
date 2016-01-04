@@ -1,5 +1,4 @@
 <?php
-namespace Sequode;
 
 date_default_timezone_set('America/Los_Angeles');
 ob_start('ob_gzhandler');
