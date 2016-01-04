@@ -2,16 +2,16 @@
 class SQDE_SiteCardObjects {
     public static function sequode(){
         $_o = (object) null;
-        $_o->head = 'Sequode';
+        $_o->head = '';
         $_o->component_seperator = '';
         
         $html = $js = array();
         $_o->body = array();
         
-        $html[] = '<div class="subline ">Sequencer for PHP</div>';
+        $html[] = '<div class="subline ">Sequode Sequencer for PHP</div>';
         
         $html[] = '<div class="card-textblock card-text">';
-        $html[] = 'Sequode Sequencer for PHP.';
+        $html[] = 'Sequode Sequencer is a tool for process arrangement in PHP. It allows you to arrange PHP SPL code elements into processes without having to write the code.';
         $html[] = '</div>';
         
         $_o->body[] = (object) array('html' => implode('',$html));
