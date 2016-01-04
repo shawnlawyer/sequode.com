@@ -1,5 +1,4 @@
 <?php
-namespace Sequode;
 
 class SQDE_SequodeBuilderApplicationProfile {
 	public static function model(){
