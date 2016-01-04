@@ -1,2 +1,3 @@
 <?php
-include_once('SQDE_Sequode.engine.php');
+include_once('autoload.php');
+include_once('prepend.php');
