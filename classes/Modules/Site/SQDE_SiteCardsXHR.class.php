@@ -5,7 +5,7 @@ class SQDE_SiteCardsXHR {
         $deck = array();
         $deck[] = SQDE_Cards::render('Site','sequode');
         $deck[] = SQDE_Cards::render('Auth','login');
-        $deck[] = SQDE_Cards::render('Register','register');
+        $deck[] = SQDE_Cards::render('Register','signup');
         return SQDE_ComponentJS::placeDeck($deck, $dom_id);
     }
     public static function menus($dom_id = 'MenusContainer'){
