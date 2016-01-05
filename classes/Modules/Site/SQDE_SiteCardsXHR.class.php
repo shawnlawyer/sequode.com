@@ -2,7 +2,7 @@
 class SQDE_SiteCardsXHR {
     public static $package = 'Site';
     public static function sequode($dom_id = 'CardsContainer'){
-        return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
+        return SQDE_ComponentJS::placeDeck(array(SQDE_Cards::render(self::$package,__FUNCTION__)), $dom_id);
     }
     public static function menus($dom_id = 'MenusContainer'){
         $html = $js = array();
