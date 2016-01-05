@@ -40,7 +40,7 @@ class SQDE_ComponentJS {
     }
     public static function placeDeck($deck, $dom_id = 'CardsContainer', $replace=true, $pad=true){
         $html = $js = array();
-        $html[] = (($pad != false) ? SQDE_Card::divider() : '');
+        $html[] = ($pad != false) ? SQDE_Card::divider() : '';
         foreach($deck as $card){
             $html[] = $card->html;
         }
