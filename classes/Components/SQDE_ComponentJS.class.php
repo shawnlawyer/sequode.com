@@ -49,7 +49,7 @@ class SQDE_ComponentJS {
             }
         }
         $js[] = SQDE_BrowserRemote::addIntoDom($dom_id, implode('',$html), ($replace != false) ? 'replace' : 'append');
-        foreach($deck as $card->js){
+        foreach($deck as $card){
             if(isset($card->js)){
                 $js[] = $card->js;
             }
