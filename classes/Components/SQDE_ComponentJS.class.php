@@ -40,12 +40,16 @@ class SQDE_ComponentJS {
     }
     public static function placeDeck($deck, $dom_id = 'CardsContainer', $replace=true, $pad=true){
         $html = $js = array();
+        $html[] = (($pad != false) ? SQDE_Card::divider() : '');
         foreach($deck as $card){
-            $html[] = (($pad != false) ? SQDE_Card::divider() : '') . $card->html;
+            $html[] = $card->html;
         }
         $js[] = SQDE_BrowserRemote::addIntoDom($dom_id, implode('',$html), ($replace != false) ? 'replace' : 'append');
-        foreach($deck as $card){
-            $js[] = $card->js;
+        
+        foreach($deck as $card->js){
+            if(isset($card->js)){
+                $js[] = $card->js;
+            }
         }
         return implode(' ',$js);
     }
