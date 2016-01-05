@@ -46,7 +46,9 @@ class SQDE_ComponentJS {
         foreach($deck as $card){
             if(isset($card->html)){
                 $html[] = $card->html;
-                $html[] = SQDE_Card::shim();
+                if($pad != false){
+                    $html[] = SQDE_Card::shim();
+                }
             }
         }
         $js[] = SQDE_BrowserRemote::addIntoDom($dom_id, implode('',$html), ($clear != false) ? 'replace' : 'append');
