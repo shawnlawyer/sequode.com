@@ -2,11 +2,14 @@
 class SQDE_SiteCardsXHR {
     public static $package = 'Site';
     public static function sequode($dom_id = 'CardsContainer'){
-        return SQDE_ComponentJS::placeDeck(array(SQDE_Cards::render(self::$package,__FUNCTION__)), $dom_id);
+        $deck = array();
+        $deck[] = SQDE_Cards::render('Site','sequode');
+        $deck[] = SQDE_Cards::render('Auth','login');
+        $deck[] = SQDE_Cards::render('Register','register');
+        return SQDE_ComponentJS::placeDeck($deck, $dom_id);
     }
     public static function menus($dom_id = 'MenusContainer'){
         $html = $js = array();
-        
         $packages = SQDE_PackagesHandler::models();
         $i = count($packages);
         foreach($packages as $package => $model){
