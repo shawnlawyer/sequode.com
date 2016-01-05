@@ -17,6 +17,12 @@
     margin: 0 auto;
     text-align:center;
 }
+.headline {
+  font-size: 1.2em;
+  font-weight:800;
+  color: #000;
+  white-space: nowrap;
+}
 .subline {
   font-size: 1em;
   font-weight:800;
