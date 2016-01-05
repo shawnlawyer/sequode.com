@@ -16,7 +16,7 @@ class SQDE_SiteCardObjects {
         
         $html[] = '<div class="subline ">Sequences of Programming Logic</div>';
         $html[] = '<div class="card-textblock card-text">';
-        $html[] = 'The tool allows you to manage the use and flow of the code in the PHP SPL without having to wirte the code and is not a code replacement tool. The tool  abstracts the code elements into simple visual components and allows you to create software visually by arraging the visual elements on a stage or programmatically via a REST API.';
+        $html[] = 'The tool allows you to manage the use and flow of the code in the PHP SPL without having to wirte the code and is <span class="subline ">not</span> a code replacement tool. The tool  abstracts the code elements into simple visual components and allows you to create software visually by arraging the visual elements on a stage or programmatically via a REST API.';
         $html[] = '</div>';
         
         $_o->body[] = (object) array('html' => implode('',$html));
