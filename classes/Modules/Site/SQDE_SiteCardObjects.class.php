@@ -7,7 +7,7 @@ class SQDE_SiteCardObjects {
         
         $html = $js = array();
         $_o->body = array();
-        $html[] = '<div class="headline alignCenter">Sequode Sequencer</div>'
+        $html[] = '<div class="headline alignCenter">Sequode Sequencer</div>';
         $html[] = '<div class="subline ">Introduction</div>';
         
         $html[] = '<div class="card-textblock card-text">';
