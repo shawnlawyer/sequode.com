@@ -4,7 +4,7 @@ class SQDE_SiteCardsXHR {
     public static function sequode($dom_id = 'CardsContainer'){
         $js = array();
         $deck = array();
-        $deck[] = SQDE_Cards::render('Site','sequode');
+        $deck[] = SQDE_Cards::render('Site','sequode',true,true,false);
         $js[] = SQDE_ComponentJS::placeDeck($deck, $dom_id);
         $deck = array();
         $deck[] = SQDE_Cards::render('Auth','login');
