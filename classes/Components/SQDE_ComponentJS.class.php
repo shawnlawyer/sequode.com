@@ -43,18 +43,12 @@ class SQDE_ComponentJS {
         if($divide != false){
             $html[] = SQDE_Card::divider(false,false);
         }
-        if($shim != false){
-            $html[] = SQDE_Card::shim();
-        }
         foreach($deck as $card){
             if(isset($card->html)){
                 $html[] = $card->html;
-                if($shim != false){
-                    $html[] = SQDE_Card::shim();
-                }
             }
         }
-        $js[] = SQDE_BrowserRemote::addIntoDom($dom_id, implode('',$html), ($clear != false) ? 'replace' : 'append');
+        $js[] = SQDE_BrowserRemote::addIntoDom($dom_id, implode(($shim != false) ? SQDE_Card::shim() : '',$html), ($clear != false) ? 'replace' : 'append');
         foreach($deck as $card){
             if(isset($card->js)){
                 $js[] = $card->js;
