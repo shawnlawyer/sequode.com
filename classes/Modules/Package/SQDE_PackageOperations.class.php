@@ -122,7 +122,7 @@ class SQDE_PackageOperations {
                 $used_ids = array_merge($used_ids,$node->s);
             }elseif($model->usage_type == 0){
                 $node->ct = intval($model->coding_type);
-                $node->c = '%START_CLOSURE_REPLACEMENT_HOOK%'.SQDE_SequodesGenerator::makeCodeFromNode($node).'%END_CLOSURE_REPLACEMENT_HOOK%';
+                $node->c = '%START_CLOSURE_REPLACEMENT_HOOK%'.SQDE_SequodeOperationsKit::makeCodeFromNode($node).'%END_CLOSURE_REPLACEMENT_HOOK%';
             }
             $models[$key] = $node;
         }
