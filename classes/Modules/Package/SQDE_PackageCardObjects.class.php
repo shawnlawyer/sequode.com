@@ -45,7 +45,7 @@ class SQDE_PackageCardObjects {
         $_o->body[] = ($_model->sequode_id != 0 && SQDE_Sequode::exists($_model->sequode_id,'id')) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/package/packageSequode', array($_model->id)), SQDE_Sequode::model()->name, 'settings') : SQDE_Forms::render(self::$package,'packageSequode')[0];
         $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Package Token');
         $_o->body[] = $_model->token;
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('<a href="/source/'.$_model->token.'">Download</a>');
+        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('<a target="_blank" href="/source/'.$_model->token.'">Download</a>');
         
         $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/package/details'));
         if(SQDE_UserAuthority::isSystemOwner()){
