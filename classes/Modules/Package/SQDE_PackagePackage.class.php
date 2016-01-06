@@ -10,6 +10,9 @@ class SQDE_PackagePackage {
         $model->card_objects = 'SQDE_PackageCardObjects';
         $model->form_objects = 'SQDE_PackageFormObjects';
         $model->operations = 'SQDE_PackageOperations';
+		$model->routes = array(
+			'SQDE_PackageDownloadsRest'
+		);
         $model->xhr = (object) null;
         $model->xhr->operations = 'SQDE_PackageOperationsXHR';
         $model->xhr->forms = 'SQDE_PackageFormsXHR';
