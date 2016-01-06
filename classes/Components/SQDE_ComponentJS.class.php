@@ -38,15 +38,18 @@ class SQDE_ComponentJS {
         $js[] = $card->js;
         return implode(' ',$js);
     }
-    public static function placeDeck($deck, $dom_id = 'CardsContainer', $clear=true, $pad=true){
+    public static function placeDeck($deck, $dom_id = 'CardsContainer', $clear=true, $divide=true, $shim=true){
         $html = $js = array();
-        if($pad != false){
-            $html[] = SQDE_Card::divider();
+        if($divide != false){
+            $html[] = SQDE_Card::divider(false,false);
+        }
+        if($shim != false){
+            $html[] = SQDE_Card::shim();
         }
         foreach($deck as $card){
             if(isset($card->html)){
                 $html[] = $card->html;
-                if($pad != false){
+                if($shim != false){
                     $html[] = SQDE_Card::shim();
                 }
             }
