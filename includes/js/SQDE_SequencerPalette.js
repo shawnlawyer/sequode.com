@@ -189,9 +189,6 @@ var SQDE_SequencerPalette = function(){
         sequencer.grid_auger_split_position = false;
     };
     self.initialize();
-    
-    // Event Listeners attachments
-    
 	self.modelEventListeners = function(model){
         model.group = eventsKit.attachDraggableCursorEvents(model.group);
 		model = self.attachEventModelOnDragStart(model);
@@ -230,6 +227,8 @@ var SQDE_SequencerPalette = function(){
             if(typeof(sequencer.sequence) == "object" || sequencer.sequence.length > 0 ){
                 setTimeout(sequencer.reorderFocusedGridArea,0);
                 setTimeout(self.detectDragModelCollision,0,model);
+            }else{
+                sequencer.sequence_layer.draw();
             }
 		});
 		return model;
