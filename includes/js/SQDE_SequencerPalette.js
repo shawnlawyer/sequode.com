@@ -223,11 +223,11 @@ var SQDE_SequencerPalette = function(){
 	};
     self.attachEventModelOnDragMove = function(model){
 		model.group.on("dragmove", function(){
-            //self.moveDragModel(model);
-            //if(typeof(sequencer.sequence) == "object" || sequencer.sequence.length > 0 ){
-                //setTimeout(sequencer.reorderFocusedGridArea,2);
-                //setTimeout(self.detectDragModelCollision,10,model);
-            //}
+            setTimeout(self.moveDragModel,0,model);
+            if(typeof(sequencer.sequence) == "object" || sequencer.sequence.length > 0 ){
+                setTimeout(sequencer.reorderFocusedGridArea,2);
+                setTimeout(self.detectDragModelCollision,10,model);
+            }
 		});
 		return model;
 	};
