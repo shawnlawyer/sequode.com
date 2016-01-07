@@ -193,12 +193,8 @@ var SQDE_SequencerPalette = function(){
             model.group.remove();
 			if(typeof(sequencer.sequence) != "object" || sequencer.sequence.length < 1 ){
                 model.group.moveTo(self.temp_layer);
-                model.group.moveToTop();
-                self.temp_layer.draw();
             } else {
                 model.group.moveTo(sequencer.sequence_layer);
-                model.group.moveToTop();
-                sequencer.sequence_layer.draw();
             }
             self.dragging = true;
             sequencer.dragging = true;
