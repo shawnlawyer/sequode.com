@@ -191,7 +191,16 @@ var SQDE_SequencerPalette = function(){
     self.attachEventModelOnDragStart = function(model){
 		model.group.on("dragstart", function(event){
             model.group.remove();
-			self.dragging = true;
+			if(typeof(sequencer.sequence) != "object" || sequencer.sequence.length < 1 ){
+                model.group.moveTo(self.temp_layer);
+                model.group.moveToTop();
+                self.temp_layer.draw();
+            } else {
+                model.group.moveTo(sequencer.sequence_layer);
+                model.group.moveToTop();
+                sequencer.sequence_layer.draw();
+            }
+            self.dragging = true;
             sequencer.dragging = true;
             model.original = false;
 			if(typeof(sequencer.sequence) == "object" && sequencer.sequence.length > 0 ){
@@ -200,15 +209,6 @@ var SQDE_SequencerPalette = function(){
                 sequencer.flow_lines_layer.hide();
                 sequencer.dragging = true;
                 sequencer.focused_grid_area_id = false;
-            }
-            if(typeof(sequencer.sequence) != "object" || sequencer.sequence.length < 1 ){
-                model.group.moveTo(self.temp_layer);
-                model.group.moveToTop();
-                //self.temp_layer.draw();
-            } else {
-                model.group.moveTo(sequencer.sequence_layer);
-                model.group.moveToTop();
-                //sequencer.sequence_layer.draw();
             }
 		});
 		return model;
