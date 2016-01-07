@@ -90,4 +90,11 @@ class SQDE_CardComponent {
         $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject($route, array(SQDE_Form::jsQuotedValue('{"reset":"1"}'))));
         return (object) array('html' => implode('',$html),'js' => implode('',$js));
     }
+    public static function onTapEventsXHRCallButton($contents, $route, $inputs=null, $callback=null){
+        $dom_id = SQDE_Component::uniqueHash('','');
+        $html = $js = array();
+        $html[] = '<span class="btn" id="'.$dom_id.'">'.$contents.'</span>';
+        $js[] = SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject($route,$inputs,$callback));
+        return (object) array('html' => implode('',$html),'js' => implode('',$js));
+    }
 }

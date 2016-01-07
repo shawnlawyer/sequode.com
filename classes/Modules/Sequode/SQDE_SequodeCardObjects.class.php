@@ -173,9 +173,15 @@ class SQDE_SequodeCardObjects {
             $_o->body[] = (SQDE_UserAuthority::canEdit($_model)) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/updateIsPalette', array($_model->id)), $text, 'settings') : $text;
         } 
         if(SQDE_SequodeAuthority::isSequence() && !SQDE_SequodeAuthority::isEmptySequence()){
-            $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Packages Menu Visibility');
-            $text = (SQDE_SequodeAuthority::isPackage()) ? 'Shown in Packages Menu' : 'Hidden from Packages Menu';
-            $_o->body[] = (SQDE_UserAuthority::canEdit($_model)) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/updateIsPackage', array($_model->id)), $text, 'settings') : $text;
+            $_o->body[] = SQDE_CardComponent::onTapEventsXHRCallButton('View Chart','cards/sequode/chart', array($_model->id));
+        } 
+        if(SQDE_SequodeAuthority::isSequence() && SQDE_UserAuthority::canEdit($_model)){
+            $_o->body[] =  SQDE_CardComponent::onTapEventsXHRCallButton('Edit Chart','cards/sequode/sequencer', array($_model->id));
+            //$dom_id = SQDE_Component::uniqueHash('','');
+            //$html = $js = array();
+           // $html = '<div class="subline" id="'.$dom_id.'">More info</div>';
+            //$js = SQDE_ComponentJS::onTapEvents($dom_id, 'var win = window.open(\'http://php.net/'.$_model->name.'\', \'_blank\'); win.focus();');
+           // $_o->body[] = (object) array('html' => $html, 'js' => $js);
         } 
         foreach(array('input','property') as $type){
             switch($type){
