@@ -225,10 +225,8 @@ var SQDE_SequencerPalette = function(){
 		model.group.on("dragmove", function(){
             setTimeout(self.moveDragModel,0,model);
             if(typeof(sequencer.sequence) == "object" || sequencer.sequence.length > 0 ){
-                setTimeout(sequencer.reorderFocusedGridArea,0);
-                setTimeout(self.detectDragModelCollision,0,model);
-            }else{
-                sequencer.sequence_layer.draw();
+                setTimeout(sequencer.reorderFocusedGridArea,2);
+                setTimeout(self.detectDragModelCollision,10,model);
             }
 		});
 		return model;
