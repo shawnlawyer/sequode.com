@@ -216,9 +216,9 @@ var SQDE_SequencerPalette = function(){
     self.attachEventModelOnDragMove = function(model){
 		model.group.on("dragmove", function(){
             if(typeof(sequencer.sequence) != "object" || sequencer.sequence.length < 1 ){
-                //self.temp_layer.draw();
+                self.temp_layer.draw();
             }else{
-                //sequencer.sequence_layer.draw();
+                sequencer.sequence_layer.draw();
                 self.detectDragModelCollision(model);
                 sequencer.reorderFocusedGridArea(true);
             }
