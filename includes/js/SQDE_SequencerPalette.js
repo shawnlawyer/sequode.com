@@ -96,13 +96,6 @@ var SQDE_SequencerPalette = function(){
         self.background_layer.draw();
         self.models_layer.batchDraw();
 	};
-    self.moveDragModel = function(model){
-        if(typeof(sequencer.sequence) != "object" || sequencer.sequence.length < 1 ){
-            self.temp_layer.draw();
-        }else{
-            sequencer.sequence_layer.draw();
-        }
-    };
     self.detectDragModelCollision = function(model){
         var grid_area_id;
         for(grid_area_id in sequencer.grid_areas){
@@ -188,7 +181,6 @@ var SQDE_SequencerPalette = function(){
         sequencer.grid_areas_layer.draw();
         sequencer.grid_auger_split_position = false;
     };
-    self.initialize();
 	self.modelEventListeners = function(model){
         model.group = eventsKit.attachDraggableCursorEvents(model.group);
 		model = self.attachEventModelOnDragStart(model);
@@ -223,9 +215,11 @@ var SQDE_SequencerPalette = function(){
 	};
     self.attachEventModelOnDragMove = function(model){
 		model.group.on("dragmove", function(){
-            setTimeout(self.moveDragModel,0,model);
-            if(typeof(sequencer.sequence) == "object" || sequencer.sequence.length > 0 ){
-                setTimeout(sequencer.reorderFocusedGridArea,2);
+            if(typeof(sequencer.sequence) != "object" || sequencer.sequence.length < 1 ){
+                self.temp_layer.draw();
+            }else{
+                sequencer.sequence_layer.draw();
+                sequencer.reorderFocusedGridArea();
                 setTimeout(self.detectDragModelCollision,10,model);
             }
 		});
@@ -243,4 +237,5 @@ var SQDE_SequencerPalette = function(){
 		});
 		return model;
 	};
+    self.initialize();
 }
