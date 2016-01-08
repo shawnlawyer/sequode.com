@@ -535,7 +535,7 @@ class SQDE_SequodeOperations {
         $object_map[$map_key]->Value = $value;
         $modeler::model()->updateField(json_encode($kit::removeKeys($object_map)),$object_map_member);
         if($run_maintenance){
-            $modelerOperations::maintenance();
+            return self::maintenance();
         }
         return $modeler::model();
     }
@@ -616,7 +616,7 @@ class SQDE_SequodeOperations {
         $object_map[$internal_key]->Value = null;
         
         $modeler::model()->updateField(json_encode($object_map), $object_map_member);
-        return $modelerOperations::maintenance();
+		return self::maintenance();
     }
     public static function removeReceivingConnection($connection_type = false, $restore_key = 0, $_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
@@ -661,7 +661,7 @@ class SQDE_SequodeOperations {
         $object_map[$restore_key] = $default_object_map[$restore_key];
         
         $modeler::model()->updateField(json_encode($object_map), $object_map_member);
-        return $modelerOperations::maintenance();
+		return self::maintenance();
     }
 	public static function autoSetTenancy($_model = null){
         $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
