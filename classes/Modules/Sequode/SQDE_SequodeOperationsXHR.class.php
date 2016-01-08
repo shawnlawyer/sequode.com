@@ -240,7 +240,7 @@ class SQDE_SequodeOperationsXHR {
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canEdit()
         )){ return; }
-        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($connection_type, $transmitter_key, $receiver_key));
+        forward_static_call_array(array(SQDE_PackagesHandler::model(static::$package)->operations,__FUNCTION__),array($receiver_type, $transmitter_key, $receiver_key));
 		return;
 	}
 	public static function removeReceivingConnection($_model_id, $connection_type = false, $restore_key = 0){
