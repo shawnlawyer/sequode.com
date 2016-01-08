@@ -215,7 +215,7 @@ var SQDE_SequencerPalette = function(){
                 self.temp_layer.draw();
             }else{
                 sequencer.sequence_layer.draw();
-                setTimeout(self.detectDragModelCollision,0,model);
+                self.detectDragModelCollision(model);
             }
 		});
 		return model;
