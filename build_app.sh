@@ -8,13 +8,6 @@ cd /opts/nginx/
 mkdir html
 
 cd /opts/checkout
-git clone git@github.com:/shawnlawyer/Foundation.git
-cd Foundation/
-git checkout master
-#git checkout development
-sudo cp -r classes/. /opts/classes/
-
-cd /opts/checkout
 git clone git@github.com:/shawnlawyer/3rdParty.git
 cd 3rdParty/
 git checkout master
@@ -30,6 +23,7 @@ cd Sequode/
 git checkout development
 sudo cp -r www/. /opts/nginx/html/
 sudo cp -r includes/. /opts/includes/
+sudo cp -r src/. /opts/includes/src/Sequode/
 
 CLASSES_LIST=('Application' 'ApplicationProfiles' 'Authorities' 'Components' 'Database' 'DatabaseModels' 'Email' 'Modelers' 'Server' 'ServerModules' )
 
