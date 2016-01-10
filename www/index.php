@@ -1,2 +1,3 @@
 <?php
-SQDE_Server::run();
+Sequode\test::moo();
+//SQDE_Server::run();
