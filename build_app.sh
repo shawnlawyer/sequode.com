@@ -23,7 +23,7 @@ cd Sequode/
 git checkout development
 sudo cp -r www/. /opts/nginx/html/
 sudo cp -r includes/. /opts/includes/
-sudo cp -r src/. /opts/includes/src/Sequode/
+sudo cp -r src/. /opts/includes/Sequode/src/
 
 CLASSES_LIST=('Application' 'ApplicationProfiles' 'Authorities' 'Components' 'Database' 'DatabaseModels' 'Email' 'Modelers' 'Server' 'ServerModules' )
 
