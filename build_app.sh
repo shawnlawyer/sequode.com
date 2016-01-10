@@ -2,6 +2,9 @@ cd /opts
 sudo rm -Rf *
 mkdir checkout
 mkdir includes
+cd /opts/includes/
+mkdir Sequode
+cd /opts
 mkdir classes
 mkdir nginx
 cd /opts/nginx/
