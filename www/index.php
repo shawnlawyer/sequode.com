@@ -1,3 +1,2 @@
 <?php
-use Sequode;
-Server::run();
+Sequode\Server::run();
