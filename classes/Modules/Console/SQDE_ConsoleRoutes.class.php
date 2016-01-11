@@ -1,6 +1,4 @@
 <?php
-use Sequode;
-
 class SQDE_ConsoleRoutes{
 	public static $merge = false;
 	public static $routes = array(
@@ -34,7 +32,7 @@ class SQDE_ConsoleRoutes{
 	}
 	public static function routes(){
         if(SQDE_UserAuthority::isSystemOwner()){
-            $routes_classes = ApplicationProfile::model()->routes;
+            $routes_classes = Sequode/ApplicationProfile::model()->routes;
             foreach($routes_classes as $routes_class){
                 $routes = Sequode\Routes::routes($routes_class);
                 echo $routes_class.'<br>';
