@@ -215,7 +215,7 @@ class SQDE_ConsoleRoutes{
         if(!in_array($call_pieces[2], Sequode\Routes::routes('\\'.$routes_class))){
             return;
         }
-        $route = Sequode\Routes::routes('\\'.$routes_class, $call_pieces[2]);
+        $route = Sequode\Routes::route('\\'.$routes_class, $call_pieces[2]);
         
 		if(isset($_POST['args']) && !empty($_POST['args'])){
             if( 500000 < strlen(http_build_query($_POST))){ return; }
