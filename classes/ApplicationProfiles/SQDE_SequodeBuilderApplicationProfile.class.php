@@ -22,11 +22,11 @@ class SQDE_SequodeBuilderApplicationProfile {
             Sequode\ModuleRegistry::add('\\'.'SQDE_BlacklistIPPackage');
         }
         
-        $packages = Sequode\ModuleRegistry::models();
+        $modules = Sequode\ModuleRegistry::models();
         $routes = array();
-        foreach($packages as $package){
-            if(isset($package->routes)){
-                $routes = array_merge($routes, $package->routes);
+        foreach($modules as $module){
+            if(isset($module->routes)){
+                $routes = array_merge($routes, $module->routes);
             }
         }
         

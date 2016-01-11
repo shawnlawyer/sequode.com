@@ -1,5 +1,5 @@
 <?php
-class SQDE_Card  extends SQDE_Mason {
+class SQDE_Card  extends Sequode\Patterns\Mason {
     public static $mason = 'card';
 
     public static function shim($break_before = false,$break_after = false){

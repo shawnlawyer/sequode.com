@@ -1,4 +1,5 @@
 <?php
+
 /*
  *
  * (c) Shawn T Lawyer <shawnlawyer@gmail.com>
@@ -6,7 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-class SQDE_Mason extends SQDE_Singleton {
+namespace Sequode\Patterns;
+
+class Mason extends Sequode\Patterns\Singleton {
 
     public static function fetchObject($object_class, $object_method, $parameters = null){
         return forward_static_call_array(array($object_class,$object_method),($parameters == null) ? array() : $parameters);
@@ -15,6 +18,6 @@ class SQDE_Mason extends SQDE_Singleton {
         return forward_static_call_array(array(get_called_class(), static::$mason),func_get_args());
 	}
     public static function getInstance(){
-		return SQDE_Singleton::getInstances(get_class());   
+		return Sequode\Patterns\Singleton::getInstances(get_class());   
     }
 }

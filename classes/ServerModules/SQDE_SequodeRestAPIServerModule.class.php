@@ -14,8 +14,8 @@ class SQDE_SequodeRestAPIServerModule{
             return;
         }
         SQDE_AuthenticatedUser::exists(SQDE_Token::model()->owner_id,'id');
-        Sequode\ModuleRegistry::add('\'.'SQDE_SequodePackage');
-        //Sequode\ModuleRegistry::add('\'.'SQDE_PackagePackage');
+        Sequode\ModuleRegistry::add('\\'.'SQDE_SequodePackage');
+        //Sequode\ModuleRegistry::add('\\'.'SQDE_PackagePackage');
         if(!isset($request_pieces[0]) || trim($request_pieces[0]) == ''){
             exit;
         }

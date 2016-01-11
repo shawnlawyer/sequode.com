@@ -1,5 +1,5 @@
 <?php
-class SQDE_Form extends SQDE_Mason {
+class SQDE_Form extends Sequode\Patterns\Mason {
     public static $mason = 'form';
     public static $collection_replacement_hook = '[%COLLECTION_JS%]';
 	public static function domIds($form_object){
