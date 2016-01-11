@@ -1,8 +1,8 @@
 <?php
 class SQDE_SequodeRunnerSharedTenancyApplicationProfile {
 	public static function model($set = false){
-        Sequode\ModuleRegistry::add('SQDE_SitePackage');
-        Sequode\ModuleRegistry::add('SQDE_SessionSyncPackage');
+        Sequode\ModuleRegistry::add('\'.'SQDE_SitePackage');
+        Sequode\ModuleRegistry::add('\'.'SQDE_SessionSyncPackage');
         $packages = Sequode\ModuleRegistry::models();
         $routes = array();
         foreach($packages as $package){

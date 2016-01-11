@@ -2,24 +2,24 @@
 
 class SQDE_SequodeBuilderApplicationProfile {
 	public static function model(){
-        Sequode\ModuleRegistry::add('SQDE_ConsolePackage');
-        Sequode\ModuleRegistry::add('SQDE_SitePackage');
+        Sequode\ModuleRegistry::add('\\'.'SQDE_ConsolePackage');
+        Sequode\ModuleRegistry::add('\\'.'SQDE_SitePackage');
         
         if(SQDE_UserAuthority::isAuthenticated()){
-            Sequode\ModuleRegistry::add('SQDE_AuthedPackage');
-            Sequode\ModuleRegistry::add('SQDE_SequodePackage');
-            Sequode\ModuleRegistry::add('SQDE_AccountPackage');
-            Sequode\ModuleRegistry::add('SQDE_PackagePackage');
-            Sequode\ModuleRegistry::add('SQDE_TokenPackage');
+            Sequode\ModuleRegistry::add('\\'.'SQDE_AuthedPackage');
+            Sequode\ModuleRegistry::add('\\'.'SQDE_SequodePackage');
+            Sequode\ModuleRegistry::add('\\'.'SQDE_AccountPackage');
+            Sequode\ModuleRegistry::add('\\'.'SQDE_PackagePackage');
+            Sequode\ModuleRegistry::add('\\'.'SQDE_TokenPackage');
         }else{
-            Sequode\ModuleRegistry::add('SQDE_AuthPackage');
-            Sequode\ModuleRegistry::add('SQDE_RegisterPackage');
+            Sequode\ModuleRegistry::add('\\'.'SQDE_AuthPackage');
+            Sequode\ModuleRegistry::add('\\'.'SQDE_RegisterPackage');
         }
         
         if(SQDE_UserAuthority::isSystemOwner()){
-            Sequode\ModuleRegistry::add('SQDE_SessionPackage');
-            Sequode\ModuleRegistry::add('SQDE_UserPackage');
-            Sequode\ModuleRegistry::add('SQDE_BlacklistIPPackage');
+            Sequode\ModuleRegistry::add('\\'.'SQDE_SessionPackage');
+            Sequode\ModuleRegistry::add('\\'.'SQDE_UserPackage');
+            Sequode\ModuleRegistry::add('\\'.'SQDE_BlacklistIPPackage');
         }
         
         $packages = Sequode\ModuleRegistry::models();
