@@ -1,5 +1,6 @@
 <?php
-class SQDE_ApplicationProfile {
+namespace Sequode;
+class ApplicationProfile {
 	public static function model($set = false){
         static $store;
 		if(empty($store)){ $store = false; }

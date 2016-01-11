@@ -6,5 +6,5 @@ SQDE_Session::start();
 if(SQDE_Session::is('user_id')){
     SQDE_AuthOperations::load();
 }
-//SQDE_ApplicationProfile::model('SQDE_SequodeBuilderApplicationProfile');
-SQDE_ApplicationProfile::model($_SERVER['APPLICATION_PROFILE']);
+Sequode\ApplicationProfile::model('\\SQDE_SequodeBuilderApplicationProfile');
+//Sequode\ApplicationProfile::model($_SERVER['APPLICATION_PROFILE']);
