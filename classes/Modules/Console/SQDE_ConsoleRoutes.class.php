@@ -32,9 +32,9 @@ class SQDE_ConsoleRoutes{
 	}
 	public static function routes(){
         if(SQDE_UserAuthority::isSystemOwner()){
-            $routes_classes = Sequode/ApplicationProfile::model()->routes;
+            $routes_classes = Sequode\ApplicationProfile::model()->routes;
             foreach($routes_classes as $routes_class){
-                $routes = Sequode\Routes::routes($routes_class);
+                $routes = Sequode\Routes::routes('\\'.$routes_class);
                 echo $routes_class.'<br>';
                 echo '<ul>';
                 foreach($routes as $route){
@@ -55,7 +55,7 @@ class SQDE_ConsoleRoutes{
             echo $model->context;
             echo '/ </li>';
             if(isset($model->xhr->operations)){
-                $routes = Sequode\Routes::routes($model->xhr->operations);
+                $routes = Sequode\Routes::routes('\\'.$model->xhr->operations);
                 foreach($routes as $route){
                     echo '<li>';
                     echo __FUNCTION__ .'/'. $model->context .'/'. $route;
@@ -73,7 +73,7 @@ class SQDE_ConsoleRoutes{
             echo $model->context;
             echo '/ </li>';
             if(isset($model->xhr->cards)){
-                $routes = Sequode\Routes::routes($model->xhr->cards);
+                $routes = Sequode\Routes::routes('\\'.$model->xhr->cards);
                 foreach($routes as $route){
                     echo '<li>';
                     echo '<a href="/?card='. $model->context .'/'. $route .'">';
@@ -91,7 +91,7 @@ class SQDE_ConsoleRoutes{
         echo '{';
         foreach($packages as $package => $model){
             if(isset($model->xhr->cards)){
-                $routes = SQDE_Routes::routes($model->xhr->cards);
+                $routes = Sequode\Routes::routes('\\'.$model->xhr->cards);
                 foreach($routes as $route){
                     echo '"cards":"'. $model->context .'/'. $route .'",';
                     echo $model->context .'/'. $route;
@@ -212,10 +212,10 @@ class SQDE_ConsoleRoutes{
             return;
         }
         $routes_class = SQDE_PackagesHandler::model($package)->xhr->$request_type;
-        if(!in_array($call_pieces[2], SQDE_Routes::routes($routes_class))){
+        if(!in_array($call_pieces[2], Sequode\Routes::routes('\\'.$routes_class))){
             return;
         }
-        $route = SQDE_Routes::route($routes_class, $call_pieces[2]);
+        $route = Sequode\Routes::routes('\\'.$routes_class, $call_pieces[2]);
         
 		if(isset($_POST['args']) && !empty($_POST['args'])){
             if( 500000 < strlen(http_build_query($_POST))){ return; }
@@ -226,7 +226,7 @@ class SQDE_ConsoleRoutes{
 			$args = $_GET['args'];
 		}
 
-        echo SQDE_XHR::call($routes_class, $route, $args);
+        echo SQDE_XHR::call('\\'. $routes_class, $route, $args);
         return true;
     }
 	public static function collections($collection='collections', $key = null){
