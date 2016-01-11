@@ -25,6 +25,7 @@ class Server {
 				if(in_array('index',get_class_methods('\\'.$routes_class))){
 					$parameters = array(); 
 					unset($request_pieces);
+                    echo 'here';
 					forward_static_call_array(array('\\'.$routes_class ,'index'), $parameters);
 					return;
 				}
@@ -40,6 +41,7 @@ class Server {
 						$parameters = $request_pieces;
 					}
 					unset($request_pieces);
+                    echo 'there';
 					forward_static_call_array(array('\\'.$routes_class ,$route), $parameters);
 					return;
 					
