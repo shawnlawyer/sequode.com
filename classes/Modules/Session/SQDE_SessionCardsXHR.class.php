@@ -2,7 +2,7 @@
 class SQDE_SessionCardsXHR {
     public static $package = 'Session';
     public static function details($_model_id=0, $dom_id = 'CardsContainer'){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         if(!(
             $modeler::exists($_model_id,'id')
         )){ return; }

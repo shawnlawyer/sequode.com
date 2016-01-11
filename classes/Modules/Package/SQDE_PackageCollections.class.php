@@ -17,7 +17,7 @@ class SQDE_PackageCollections{
 		'package_favorites' => 'favorited'
 	);
 	public static function owned(){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         $_model = new $modeler::$model;
         $where = array();
         $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
@@ -30,8 +30,8 @@ class SQDE_PackageCollections{
         return;
 	}
 	public static function search(){
-        $finder = SQDE_PackagesHandler::model(static::$package)->finder;
-        $collection = SQDE_PackagesHandler::model(static::$package)->context . '_' . __FUNCTION__;
+        $finder = Sequode\ModuleRegistry::model(static::$package)->finder;
+        $collection = Sequode\ModuleRegistry::model(static::$package)->context . '_' . __FUNCTION__;
         $nodes = array();
         if(SQDE_Session::is($collection)){
             $_array = $finder::search(SQDE_Session::get($collection));

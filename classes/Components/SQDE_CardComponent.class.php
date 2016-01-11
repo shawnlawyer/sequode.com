@@ -4,7 +4,7 @@ class SQDE_CardComponent {
         $user_model = SQDE_AuthenticatedUser::model();
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
-        $context = SQDE_PackagesHandler::model($package)->context;
+        $context = Sequode\ModuleRegistry::model($package)->context;
         $_models = SQDE_AccountOperations::getOwnedModels($package, $user_model, 'id,name')->all;
         $html[] = '<div class="automagic-content-area-xsmall-tile-container">';
         $html[] = '<div class="automagic-card-menu-item noSelect" id="'.$dom_id.'">'.$headline . count($_models).'</div>';

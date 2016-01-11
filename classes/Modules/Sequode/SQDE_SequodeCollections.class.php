@@ -15,7 +15,7 @@ class SQDE_SequodeCollections{
 		'sequode_favorites' => 'favorited'
 	);
 	public static function main($key = null){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         $_model = new $modeler::$model;
         if($key == null){
             if(SQDE_UserAuthority::isSystemOwner()){
@@ -62,7 +62,7 @@ class SQDE_SequodeCollections{
         }
 	}
 	public static function search(){
-        $finder = SQDE_PackagesHandler::model(static::$package)->finder;
+        $finder = Sequode\ModuleRegistry::model(static::$package)->finder;
         $collection = 'sequode_search';
         $nodes = array();
         if(SQDE_Session::is($collection)){
@@ -75,7 +75,7 @@ class SQDE_SequodeCollections{
         return;
 	}
 	public static function owned(){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         $_model = new $modeler::$model;
         $where = array();
         $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
@@ -88,7 +88,7 @@ class SQDE_SequodeCollections{
         return;
 	}
 	public static function favorited(){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         $collection = 'sequode_favorites';
         $nodes = array();
         if(!empty(SQDE_AuthenticatedUser::model()->$collection)){
@@ -104,7 +104,7 @@ class SQDE_SequodeCollections{
 	}
     /*
 	public static function palette(){
-        $finder = SQDE_PackagesHandler::model(static::$package)->finder;
+        $finder = Sequode\ModuleRegistry::model(static::$package)->finder;
         if(in_array(SQDE_Session::get(__FUNCTION__),static::$routes)){
             $method = static::$routes_to_methods[static::$routes];
             self::$method();

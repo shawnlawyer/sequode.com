@@ -2,7 +2,7 @@
 class SQDE_TokenFinder {
     public static $package = 'Token';
     public static function search($_i, $limit=100){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         $_i->position = urldecode($_i->position);
         //$_i->field = urldecode($_i->field);
         if(!in_array($_i->position, array('=%','%=%','%=','='))){

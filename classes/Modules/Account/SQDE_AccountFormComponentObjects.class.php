@@ -2,7 +2,7 @@
 class SQDE_AccountFormComponentObjects{
     public static $package = 'Account';
     public static function updateEmail(){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         $_model = $modeler::model();
         $_o = (object) null;
         

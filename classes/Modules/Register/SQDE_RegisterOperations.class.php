@@ -11,7 +11,7 @@ class SQDE_RegisterOperations {
         return $salt . sha1($salt . $text);
     }
     public static function signup($email, $password){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         $modeler::model()->create(self::generateHash($email),self::generateHash($password),$email);
         $modeler::model()->updateField('1','active');
         $modeler::model()->updateField('1','verified');

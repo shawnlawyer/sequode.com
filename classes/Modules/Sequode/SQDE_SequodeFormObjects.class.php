@@ -4,7 +4,7 @@ class SQDE_SequodeFormObjects {
     public static $objects_source = 'SQDE_SequodeFormComponentObjects';
 	public static $xhr_library = 'operations/sequode';
     public static function name($_model = null){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		$form_object = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
         $form_object->auto_submit_time = 2000;
@@ -15,7 +15,7 @@ class SQDE_SequodeFormObjects {
 		return $form_object;
 	}
     public static function description($_model = null){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		$form_object = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
         $form_object->auto_submit_time = 2000;
@@ -31,7 +31,7 @@ class SQDE_SequodeFormObjects {
 		return $form_object;
 	}
     public static function component($type, $map_key, $_model = null){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $form_object = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
         $form_object->auto_submit_time = 500;
@@ -45,7 +45,7 @@ class SQDE_SequodeFormObjects {
 		return $form_object;
 	}
 	public static function componentSettings($type, $member, $dom_id, $_model = null){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $form_object = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
         $form_object->auto_submit_time = 1;
@@ -59,7 +59,7 @@ class SQDE_SequodeFormObjects {
 		return $form_object;
 	}
     public static function sequode($dom_id, $_model = null){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $form_object = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
         $form_object->submit_xhr_call_route = static::$xhr_library.'/'.'run';
@@ -70,7 +70,7 @@ class SQDE_SequodeFormObjects {
 		return $form_object;
 	}
     public static function tenancy($_model = null){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $form_object = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
         $form_object->auto_submit_time = 1;
@@ -81,7 +81,7 @@ class SQDE_SequodeFormObjects {
 		return $form_object;
 	}
     public static function sharing($_model = null){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));   
         $form_object = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
         $form_object->auto_submit_time = 1;
@@ -92,7 +92,7 @@ class SQDE_SequodeFormObjects {
 		return $form_object;
 	}
     public static function updateIsPalette($_model = null){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $form_object = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
         $form_object->auto_submit_time = 1;
@@ -103,7 +103,7 @@ class SQDE_SequodeFormObjects {
 		return $form_object;
 	}
     public static function updateIsPackage($_model = null){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $form_object = SQDE_Form::formObject(static::$objects_source, __FUNCTION__, static::$xhr_library, func_get_args());
         $form_object->auto_submit_time = 1;

@@ -10,12 +10,12 @@ class SQDE_AuthOperationsXHR {
     );
     public static function login($json = null){
         
-        $dialog = SQDE_PackagesHandler::model(static::$package)->xhr->dialogs[__FUNCTION__];
+        $dialog = Sequode\ModuleRegistry::model(static::$package)->xhr->dialogs[__FUNCTION__];
         if(!SQDE_Session::is($dialog['session_store_key'])){ return; }
-        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
-        $operations_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->operations;
-        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $cards_xhr = Sequode\ModuleRegistry::model(static::$package)->xhr->cards;
+        $operations_xhr = Sequode\ModuleRegistry::model(static::$package)->xhr->operations;
+        $operations = Sequode\ModuleRegistry::model(static::$package)->operations;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         if($json != null){
                 $input = json_decode(rawurldecode($json)); 
                 if(isset($input->reset)){ 

@@ -14,8 +14,8 @@ class SQDE_SequodeRestAPIServerModule{
             return;
         }
         SQDE_AuthenticatedUser::exists(SQDE_Token::model()->owner_id,'id');
-        SQDE_PackagesHandler::add('SQDE_SequodePackage');
-        //SQDE_PackagesHandler::add('SQDE_PackagePackage');
+        Sequode\ModuleRegistry::add('SQDE_SequodePackage');
+        //Sequode\ModuleRegistry::add('SQDE_PackagePackage');
         if(!isset($request_pieces[0]) || trim($request_pieces[0]) == ''){
             exit;
         }
@@ -30,13 +30,13 @@ class SQDE_SequodeRestAPIServerModule{
         $package = ucfirst(strtolower($request_pieces[0]));
         array_shift($request_pieces);
         
-        if(!SQDE_PackagesHandler::is($package)){
+        if(!Sequode\ModuleRegistry::is($package)){
             exit;
         }
-        if(!isset(SQDE_PackagesHandler::model($package)->rest->$request_type)){
+        if(!isset(Sequode\ModuleRegistry::model($package)->rest->$request_type)){
             exit;
         }
-        $routes_class = SQDE_PackagesHandler::model($package)->rest->$request_type;
+        $routes_class = Sequode\ModuleRegistry::model($package)->rest->$request_type;
         if(!in_array($request_pieces[0], Sequode\Routes::routes('\\'.$routes_class))){
             exit;
         }

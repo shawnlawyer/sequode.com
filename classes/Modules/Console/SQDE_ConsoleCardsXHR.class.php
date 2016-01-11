@@ -6,7 +6,7 @@ class SQDE_ConsoleCardsXHR {
     }
     public static function menus($dom_id = 'MenusContainer'){
         $html = $js = array();
-        $packages = SQDE_PackagesHandler::models();
+        $packages = Sequode\ModuleRegistry::models();
         $i = count($packages);
         foreach($packages as $package => $model){
             if(isset($model->card_objects)){

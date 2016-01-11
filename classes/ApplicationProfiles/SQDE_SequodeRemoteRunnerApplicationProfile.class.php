@@ -19,7 +19,7 @@ class SQDE_SequodeRemoteRunnerApplicationProfile {
         }
     }
 	public static function model($set = false){
-        $packages = SQDE_PackagesHandler::models();
+        $packages = Sequode\ModuleRegistry::models();
         $routes = array();
         foreach($packages as $package){
             if(isset($package->routes)){

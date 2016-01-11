@@ -2,25 +2,25 @@
 class SQDE_UserOperationsXHR {
     public static $package = 'User';
     public static function newUser(){
-        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
+        $operations = Sequode\ModuleRegistry::model(static::$package)->operations;
+        $cards_xhr = Sequode\ModuleRegistry::model(static::$package)->xhr->cards;
         if(!(
         SQDE_UserAuthority::isSystemOwner()
         )){ return; }
         return $cards_xhr::details($operations::newUser()->id);
     }
     public static function newGuest(){
-        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
+        $operations = Sequode\ModuleRegistry::model(static::$package)->operations;
+        $cards_xhr = Sequode\ModuleRegistry::model(static::$package)->xhr->cards;
         if(!(
         SQDE_UserAuthority::isSystemOwner()
         )){ return; }
         return $cards_xhr::details($operations::newGuest()->id);
     }
     public static function delete($_model_id){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $operations = Sequode\ModuleRegistry::model(static::$package)->operations;
+        $cards_xhr = Sequode\ModuleRegistry::model(static::$package)->xhr->cards;
         if(!(
         SQDE_UserAuthority::isSystemOwner()
         && $modeler::exists($_model_id,'id')
@@ -29,8 +29,8 @@ class SQDE_UserOperationsXHR {
         return $cards_xhr::search();
     }
     public static function loginAs($_model_id){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $operations = Sequode\ModuleRegistry::model(static::$package)->operations;
         $input = json_decode(rawurldecode($json));
         if(!(
         SQDE_UserAuthority::isSystemOwner()
@@ -40,9 +40,9 @@ class SQDE_UserOperationsXHR {
         return SQDE_ConsoleRoutes::js(false);
     }
     public static function updatePassword($_model_id, $json){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $operations = Sequode\ModuleRegistry::model(static::$package)->operations;
+        $cards_xhr = Sequode\ModuleRegistry::model(static::$package)->xhr->cards;
         $input = json_decode(rawurldecode($json));
         if(!(
         SQDE_UserAuthority::isSystemOwner()
@@ -52,9 +52,9 @@ class SQDE_UserOperationsXHR {
         return $cards_xhr::details($modeler::model()->id);
     }
     public static function updateRole($_model_id, $json){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $operations = Sequode\ModuleRegistry::model(static::$package)->operations;
+        $cards_xhr = Sequode\ModuleRegistry::model(static::$package)->xhr->cards;
         $input = json_decode(rawurldecode($json));
         if(!(
             SQDE_UserAuthority::isSystemOwner()
@@ -65,9 +65,9 @@ class SQDE_UserOperationsXHR {
         return $cards_xhr::details($modeler::model()->id);
     }
     public static function updateActive($_model_id, $json){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $operations = Sequode\ModuleRegistry::model(static::$package)->operations;
+        $cards_xhr = Sequode\ModuleRegistry::model(static::$package)->xhr->cards;
         $input = json_decode(rawurldecode($json));
         if(!(
             SQDE_UserAuthority::isSystemOwner()
@@ -77,9 +77,9 @@ class SQDE_UserOperationsXHR {
         return $cards_xhr::details($modeler::model()->id);
     }
     public static function updateName($_model_id, $json){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
-        $operations = SQDE_PackagesHandler::model(static::$package)->operations;
-        $cards_xhr = SQDE_PackagesHandler::model(static::$package)->xhr->cards;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $operations = Sequode\ModuleRegistry::model(static::$package)->operations;
+        $cards_xhr = Sequode\ModuleRegistry::model(static::$package)->xhr->cards;
         if(!(
             $modeler::exists($_model_id,'id')
         )){ return; }

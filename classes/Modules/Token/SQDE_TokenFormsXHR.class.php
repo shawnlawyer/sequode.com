@@ -2,7 +2,7 @@
 class SQDE_TokenFormsXHR {
     public static $package = 'Token';
     public static function name($_model_id, $dom_id){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         if(!(
         $modeler::exists($_model_id,'id')
         && (SQDE_UserAuthority::isOwner( $modeler::model() )

@@ -1,5 +1,7 @@
 <?php
-class SQDE_PackagesHandler {
+namespace Sequode;
+
+class ModuleRegistry {
     public static function container($mode, $key = null, $value = null) {
         static $store;
         if(!is_array($store)){

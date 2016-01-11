@@ -16,7 +16,7 @@ class SQDE_AuthCardObjects {
         return $_o;
     }
    public static function login(){
-        $dialog = SQDE_PackagesHandler::model(static::$package)->xhr->dialogs[__FUNCTION__];
+        $dialog = Sequode\ModuleRegistry::model(static::$package)->xhr->dialogs[__FUNCTION__];
         if(!SQDE_Session::is($dialog['session_store_key'])){
             SQDE_Session::set($dialog['session_store_key'], $dialog['session_store_setup']);
         }

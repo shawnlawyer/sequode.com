@@ -9,8 +9,8 @@ class SQDE_UserCollections{
 		'user_search' => 'search'
 	);
 	public static function search(){
-        $finder = SQDE_PackagesHandler::model(static::$package)->finder;
-        $collection = SQDE_PackagesHandler::model(static::$package)->context . '_' . __FUNCTION__;
+        $finder = Sequode\ModuleRegistry::model(static::$package)->finder;
+        $collection = Sequode\ModuleRegistry::model(static::$package)->context . '_' . __FUNCTION__;
         $nodes = array();
         if(SQDE_Session::is($collection)){
             $_array = $finder::search(SQDE_Session::get($collection));
