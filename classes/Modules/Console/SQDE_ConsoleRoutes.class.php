@@ -226,7 +226,7 @@ class SQDE_ConsoleRoutes{
 			$args = $_GET['args'];
 		}
 
-        echo SQDE_XHR::call('\\'.$routes_class, $route, $args);
+        echo SQDE_XHR::call($routes_class, $route, $args);
         return true;
     }
 	public static function collections($collection='collections', $key = null){
