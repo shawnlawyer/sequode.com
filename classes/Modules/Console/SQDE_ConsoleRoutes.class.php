@@ -34,7 +34,7 @@ class SQDE_ConsoleRoutes{
         if(SQDE_UserAuthority::isSystemOwner()){
             $routes_classes = Sequode\ApplicationProfile::model()->routes;
             foreach($routes_classes as $routes_class){
-                $routes = Sequode\Routes::routes('\\'.$routes_class);
+                $routes = Sequode\ZA::routes('\\'.$routes_class);
                 echo $routes_class.'<br>';
                 echo '<ul>';
                 foreach($routes as $route){
@@ -226,7 +226,7 @@ class SQDE_ConsoleRoutes{
 			$args = $_GET['args'];
 		}
 
-        echo SQDE_XHR::call('\\'. $routes_class, $route, $args);
+        echo SQDE_XHR::call('\\'.$routes_class, $route, $args);
         return true;
     }
 	public static function collections($collection='collections', $key = null){
