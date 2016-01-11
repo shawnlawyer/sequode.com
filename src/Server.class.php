@@ -32,8 +32,8 @@ class Server {
 		}
 		if(isset($request_pieces[0]) && trim($request_pieces[0]) != ''){
 			foreach($routes_classes as $routes_class){
-				if(isset($request_pieces[0]) && in_array($request_pieces[0],\SQDE_Routes::routes('\\'.$routes_class))){
-					$route = \SQDE_Routes::route('\\'.$routes_class, trim($request_pieces[0]));
+				if(isset($request_pieces[0]) && in_array($request_pieces[0], Routes::routes('\\'.$routes_class))){
+					$route = Routes::route('\\'.$routes_class, trim($request_pieces[0]));
 					array_shift($request_pieces);
 					$parameters = array(); 
 					if(isset($request_pieces[0])){

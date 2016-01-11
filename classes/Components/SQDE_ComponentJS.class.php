@@ -112,7 +112,6 @@ class SQDE_ComponentJS {
         $js[] = '});';
         return implode('',$js);
 	}
-    
     public static function loadComponentHere($call_object, $contents='', $icon = 'atom'){
         $html = $js = array();
         $dom_id = SQDE_Component::uniqueHash();
