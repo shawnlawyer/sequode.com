@@ -9,7 +9,7 @@
  */
 namespace Sequode\Patterns;
 
-class Mason extends Sequode\Patterns\Singleton {
+class Mason extends Singleton {
 
     public static function fetchObject($object_class, $object_method, $parameters = null){
         return forward_static_call_array(array($object_class,$object_method),($parameters == null) ? array() : $parameters);
@@ -18,6 +18,6 @@ class Mason extends Sequode\Patterns\Singleton {
         return forward_static_call_array(array(get_called_class(), static::$mason),func_get_args());
 	}
     public static function getInstance(){
-		return Sequode\Patterns\Singleton::getInstances(get_class());   
+		return Singleton::getInstances(get_class());   
     }
 }
