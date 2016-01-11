@@ -17,7 +17,7 @@ class Server {
             }
         }
 		$route_class = false;
-        $routes_classes = \SQDE_ApplicationProfile::model()->routes;
+        $routes_classes = ApplicationProfile::model()->routes;
 		$route = 'index';
         $request_pieces = self::requestUriPieces();
 		if(isset($request_pieces[0]) && trim($request_pieces[0]) == ''){
@@ -46,8 +46,8 @@ class Server {
 				}
 			}
 		}
-		if(isset(\SQDE_ApplicationProfile::model()->module)){
-			return forward_static_call_array(array('\\'.\SQDE_ApplicationProfile::model()->module ,'run'), array());	
+		if(isset(ApplicationProfile::model()->module)){
+			return forward_static_call_array(array('\\'.\ApplicationProfile::model()->module ,'run'), array());	
 		}
     }
     public static function requestUriPieces(){
