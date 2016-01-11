@@ -4,7 +4,7 @@ class SQDE_SequodeRestAPIServerModule{
         if ($_SERVER['HTTP_HOST'] != 'api.sequode.com'){
             exit;
         }
-        $request_pieces = SQDE_Server::requestUriPieces();
+        $request_pieces = Sequode\Server::requestUriPieces();
         if(!isset($request_pieces[0]) || trim($request_pieces[0]) == ''){
             exit;
         }
@@ -37,10 +37,10 @@ class SQDE_SequodeRestAPIServerModule{
             exit;
         }
         $routes_class = SQDE_PackagesHandler::model($package)->rest->$request_type;
-        if(!in_array($request_pieces[0], SQDE_Routes::routes($routes_class))){
+        if(!in_array($request_pieces[0], Sequode\Routes::routes('\\'.$routes_class))){
             exit;
         }
-        $route = SQDE_Routes::route($routes_class, $request_pieces[0]);
+        $route = Sequode\Routes::route('\\'.$routes_class, $request_pieces[0]);
         
         array_shift($request_pieces);
 		if(isset($_POST['args']) && !empty($_POST['args'])){
@@ -52,7 +52,7 @@ class SQDE_SequodeRestAPIServerModule{
 			$inputs = $_GET['args'];
 		}
         $inputs = $request_pieces;
-        SQDE_Rest::call($routes_class, $route, $inputs);
+        Sequode\Rest::call('\\'.$routes_class, $route, $inputs);
         return true;
     }
 }
