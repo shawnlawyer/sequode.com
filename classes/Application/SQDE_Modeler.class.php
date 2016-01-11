@@ -1,12 +1,4 @@
 <?php
-/*
- *
- * (c) Shawn T Lawyer <shawnlawyer@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 class SQDE_Modeler extends Sequode\Patterns\Mason {
 	public static function model($replace = false){
         static $store;  
