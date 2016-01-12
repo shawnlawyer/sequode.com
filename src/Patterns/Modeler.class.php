@@ -1,5 +1,6 @@
 <?php
-namespace Sequode\Patterns
+namespace Sequode\Patterns;
+
 class Modeler extends Mason {
 	public static function model($replace = false){
         static $store;  
