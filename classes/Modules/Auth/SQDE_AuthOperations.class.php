@@ -1,4 +1,7 @@
 <?php
+//namespace Sequode/Modules/Auth
+
+//class Operations {
 class SQDE_AuthOperations {
     public static $package = 'Auth';
 	public static function uniqueHash($seed='',$prefix='SQDE'){
@@ -15,7 +18,7 @@ class SQDE_AuthOperations {
         return $salt . sha1($salt . $text);
     }
     public static function login($_model = null){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->updateField(($time === false) ? time() : $time ,'last_sign_in');
         SQDE_Session::model()->updateField($modeler::model()->email,'username');
@@ -27,7 +30,7 @@ class SQDE_AuthOperations {
         return $modeler::model();
     }
     public static function updateLastSignIn($time=false, $_model = null){
-        $modeler = SQDE_PackagesHandler::model(static::$package)->modeler;
+        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         return $modeler::model();
     }
