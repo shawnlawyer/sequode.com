@@ -146,11 +146,11 @@ class ' . SQDE_Package::model()->name . ' {
     public static $token = \'' . SQDE_Package::model()->token . '\';
     ' . file_get_contents('SQDE_PackageExpressor.class.phps',true) . '
     
-    public static $name_to_id = ' . SQDE_FileManager::var_export($name_to_id, true) . ';
-    public static $id_to_key = ' . SQDE_FileManager::var_export($id_to_key, true) . ';
+    public static $name_to_id = ' . Sequode\Exporter\PHPClosure::export($name_to_id, true) . ';
+    public static $id_to_key = ' . Sequode\Exporter\PHPClosure::export($id_to_key, true) . ';
     public static $index = ' . $package_sequode_model_ids[0] . ';
     public static function collection(){
-        return ' . str_replace('Inp_Obj','i', str_replace('Prop_Obj','p', str_replace('Out_Obj','o', str_replace('\'%START_CLOSURE_REPLACEMENT_HOOK%','function($_s){ ',str_replace('%END_CLOSURE_REPLACEMENT_HOOK%\'',' return; }',SQDE_FileManager::var_export($filtered_models, true)))))) . ';
+        return ' . str_replace('Inp_Obj','i', str_replace('Prop_Obj','p', str_replace('Out_Obj','o', str_replace('\'%START_CLOSURE_REPLACEMENT_HOOK%','function($_s){ ',str_replace('%END_CLOSURE_REPLACEMENT_HOOK%\'',' return; }',Sequode\Exporter\PHPClosure::export($filtered_models, true)))))) . ';
     }
     public static function exists($value, $by=\'id\'){
         if($by == \'name\'){
