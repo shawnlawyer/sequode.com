@@ -68,6 +68,6 @@ class SQDE_ApplicationConfiguration {
 		}else{
 			$_o->docRoot = '/opts/nginx/html';
 		}
-        return _o;
+        return $_o;
     }
 }
