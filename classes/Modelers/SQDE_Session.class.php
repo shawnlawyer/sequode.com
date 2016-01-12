@@ -1,5 +1,5 @@
 <?php
-class SQDE_Session extends SQDE_Modeler {
+class SQDE_Session extends Sequode\Patterns\Modeler {
     public static $model = 'SQDE_Sessions';
     public static function container($mode, $key = null, $value = null) {
         static $store;
