@@ -36,4 +36,13 @@ class SQDE_CardComponentHTML {
         }
         return implode('',$html);
 	}
+    public static function menuCardHidingContainer($contents, $z_index=0){
+        $html = array();
+        $html[] = '<div class="menu-container-wrapper" style="z-index: '.$z_index.'; position: relative;">';
+        $html[] = '<div class="menu-container" style="z-index: '.$z_index.'; position: relative;">';
+        $html[] = $contents;
+        $html[] = '</div>';
+        $html[] = '</div>';
+        return implode('',$html);
+	}
 }

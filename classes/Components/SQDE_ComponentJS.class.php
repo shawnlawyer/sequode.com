@@ -18,7 +18,7 @@ class SQDE_ComponentJS {
                 }
             }
         }
-        $js[] = SQDE_BrowserRemote::addIntoDom($dom_id,implode('',$html),'replace');
+        $js[] = self::addIntoDom($dom_id,implode('',$html),'replace');
         foreach($form as $key => $object){
             if(isset($object->js)){
                 $js[] = $object->js;
@@ -34,7 +34,7 @@ class SQDE_ComponentJS {
             $html[] = SQDE_CardComponentHTML::divider();
         }
         $html[] = $card->html;
-        $js[] = SQDE_BrowserRemote::addIntoDom($dom_id, implode(' ',$html), 'replace');
+        $js[] = self::addIntoDom($dom_id, implode(' ',$html), 'replace');
         $js[] = $card->js;
         return implode(' ',$js);
     }
@@ -48,7 +48,7 @@ class SQDE_ComponentJS {
                 $html[] = $card->html;
             }
         }
-        $js[] = SQDE_BrowserRemote::addIntoDom($dom_id, implode(($shim != false) ? SQDE_CardComponentHTML::shim(false,false) : '',$html), ($clear != false) ? 'replace' : 'append');
+        $js[] = self::addIntoDom($dom_id, implode(($shim != false) ? SQDE_CardComponentHTML::shim(false,false) : '',$html), ($clear != false) ? 'replace' : 'append');
         foreach($deck as $card){
             if(isset($card->js)){
                 $js[] = $card->js;
@@ -137,6 +137,31 @@ class SQDE_ComponentJS {
 	}
     public static function fetchCollection($collection, $key=null){
         return ($key == null) ? 'registry.fetch({collection:\''.$collection.'\'});' : 'registry.fetch({collection:\''.$collection.'\', key:'.$key.'});';
+	}
+    public static function addIntoDom($element,$code,$mode='replace'){
+		$stream = ' ';
+		switch($mode){
+			case 'append':
+				$stream .= 'document.getElementById(\''.$element.'\').innerHTML = document.getElementById(\''.$element.'\').innerHTML + \''.self::formatForJS($code).'\';';
+			break;
+			case 'prepend':
+				$stream .= 'document.getElementById(\''.$element.'\').innerHTML = \''.self::formatForJS($code).'\' + document.getElementById(\''.$element.'\').innerHTML;';
+			break;
+			case 'replace':
+			default:
+			
+            $stream .= 'document.getElementById(\''.$element.'\').innerHTML = \''.self::formatForJS($code).'\';';
+			break;
+		}
+		return $stream;
+	}
+	public static function removeInDom($element,$depth=0){
+		$stream .= " ";
+		$stream .= ' $(\''.$element.'\').parentNode.removeChild(document.getElementById(\''.$element.'\'));';
+		return self::depth($stream,$depth);
+	}
+    public static function formatForJS($input){
+		return str_replace("\r",'\r',str_replace("\n",'\n',addslashes($input)));
 	}
     /*
 	public static function collectValues($form_object, $dom_ids){

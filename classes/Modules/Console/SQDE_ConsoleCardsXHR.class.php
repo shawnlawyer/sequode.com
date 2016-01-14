@@ -13,11 +13,11 @@ class SQDE_ConsoleCardsXHR {
                 if(in_array('menu',get_class_methods($model->card_objects))){
                     $i--;
 					$card = SQDE_Cards::render($package,'menu');
-                    $html[] = SQDE_Card::menuCardHidingContainer($card->html,$i);
+                    $html[] = SQDE_CardComponentHTML::menuCardHidingContainer($card->html,$i);
                     $js[] = $card->js;
 				}
             }
         }
-        return SQDE_BrowserRemote::addIntoDom($dom_id, implode('',$html), 'replace'). implode(' ',$js);
+        return SQDE_ComponentJS::addIntoDom($dom_id, implode('',$html), 'replace'). implode(' ',$js);
     }
 }

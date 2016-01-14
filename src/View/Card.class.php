@@ -3,16 +3,6 @@ namespace Sequode\View\Card;
 class Card extends Sequode\Patterns\Mason {
     public static $mason = 'card';
 
-
-    public static function menuCardInHidingContainer($menu_object, $z_index=0){
-        $html = array();
-        $html[] = '<div class="menu-container-wrapper" style="z-index: '.$z_index.'; position: relative;">';
-        $html[] = '<div class="menu-container" style="z-index: '.$z_index.'; position: relative;">';
-        $html[] = self::menuCard($menu_object);
-        $html[] = '</div>';
-        $html[] = '</div>';
-        return implode('',$html);
-	}
     public static function menuCardHidingContainer($contents, $z_index=0){
         $html = array();
         $html[] = '<div class="menu-container-wrapper" style="z-index: '.$z_index.'; position: relative;">';
