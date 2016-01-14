@@ -1,6 +1,5 @@
 <?php
 namespace Sequode\Model;
-\Sequode\Model\Application
 
 class Application{
 	public static function model($replace = false){
