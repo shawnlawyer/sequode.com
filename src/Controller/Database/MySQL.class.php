@@ -1,5 +1,6 @@
 <?php
-class SQDE_MySQLDatabase {
+namespace \Sequode\Controller\Database\
+class MySQL {
 	
 	private $_connection;
 	public $insertId;

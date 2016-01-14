@@ -57,11 +57,11 @@ class SQDE_ApplicationConfiguration {
             "name":"operations"
         }');
         */
-		$this->system_database = new SQDE_MySQLDatabase($system_database->host,$system_database->user,$system_database->password,$system_database->name);
-		$this->sequodes_database = new SQDE_MySQLDatabase($sequodes_database->host,$sequodes_database->user,$sequodes_database->password,$sequodes_database->name);
-		$this->accounts_database = new SQDE_MySQLDatabase($accounts_database->host,$accounts_database->user,$accounts_database->password,$accounts_database->name);
-		$this->sessions_database = new SQDE_MySQLDatabase($sessions_database->host,$sessions_database->user,$sessions_database->password,$sessions_database->name);
-		//$this->database = new SQDE_MySQLDatabase($database->host,$database->user,$database->password,$database->name);
+		$this->system_database = new \Sequode\Controller\Database\MySQL($system_database->host,$system_database->user,$system_database->password,$system_database->name);
+		$this->sequodes_database = new \Sequode\Controller\Database\MySQL($sequodes_database->host,$sequodes_database->user,$sequodes_database->password,$sequodes_database->name);
+		$this->accounts_database = new \Sequode\Controller\Database\MySQL($accounts_database->host,$accounts_database->user,$accounts_database->password,$accounts_database->name);
+		$this->sessions_database = new \Sequode\Controller\Database\MySQL($sessions_database->host,$sessions_database->user,$sessions_database->password,$sessions_database->name);
+		//$this->database = new \Sequode\Controller\Database\MySQL($database->host,$database->user,$database->password,$database->name);
 		if(!empty($_SERVER['WINDIR'])){
 			$this->docRoot = 'C:/wamp/www/msystem';
 		}else{
