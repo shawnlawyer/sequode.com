@@ -15,7 +15,7 @@ spl_autoload_register(function($class){
 spl_autoload_register(function ($class){
     $prefix = 'Sequode';
     $extention = '.class.php';
-    $class_pieces = explode('\\', $class);
+    $class_pieces = explode('\\', trim($class,'\\'));
     if($class_pieces[0] != $prefix){
         return;
     }

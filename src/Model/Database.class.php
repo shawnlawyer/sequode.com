@@ -1,6 +1,6 @@
 <?php
-namespace Sequode;
-class DatabaseModel extends SQDE_Application{
+namespace Sequode\Model;
+class Database extends Application {
 	//Setting object members
 	public $table 			=	'';
 	public $orderBy			=	'id';

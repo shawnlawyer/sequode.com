@@ -4,7 +4,7 @@ class SQDE_SequodeRestAPIServerModule{
         if ($_SERVER['HTTP_HOST'] != 'api.sequode.com'){
             exit;
         }
-        $request_pieces = Sequode\Kit\Server::requestUriPieces();
+        $request_pieces = \Sequode\Controller\HTTPRequest::requestUriPieces();
         if(!isset($request_pieces[0]) || trim($request_pieces[0]) == ''){
             exit;
         }

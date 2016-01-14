@@ -1,5 +1,5 @@
 <?php
-class SQDE_Machines extends SQDE_DatabaseModel {
+class SQDE_Machines extends \Sequode\Model\Database {
     public $database_connection     =   'accounts_database';
 	public $table 					=	'machines';
 	public function __construct() {

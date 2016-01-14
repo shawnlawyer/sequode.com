@@ -1,2 +1,3 @@
 <?php
-Sequode\Kit\Server::run();
+
+\Sequode\Controller\HTTPRequest::run();

@@ -1,5 +1,5 @@
 <?php
-class SQDE_Sessions extends SQDE_DatabaseModel {
+class SQDE_Sessions extends \Sequode\Model\Database {
     public $database_connection     =   'sessions_database';
 	public $table                   =	'sessions';
 	public function __construct() {
