@@ -1,5 +1,5 @@
 <?php
-class SQDE_Session extends Sequode\Patterns\Modeler {
+class SQDE_Session extends \Sequode\Patterns\Modeler {
     public static $model = 'SQDE_Sessions';
     public static function container($mode, $key = null, $value = null) {
         static $store;
@@ -75,7 +75,7 @@ class SQDE_Session extends Sequode\Patterns\Modeler {
         if(self::exists(self::getCookieValue()) && self::model()->ip_address == $ip_address /* &&  time() < self::model()->session_start + 86400 */){
             self::load();
             SQDE_Session::set('history', array_merge(self::get('history'), array(substr($_SERVER['REQUEST_URI'], 0, 25))));
-        }elseif($auto_create == true && $_SERVER['HTTP_HOST'] == SQDE_Application::model()->sessions->create_domain){
+        }elseif($auto_create == true && $_SERVER['HTTP_HOST'] == \Sequode\Model\Application::model()->sessions->create_domain){
             self::create($ip_address);
             SQDE_Session::set('history', array(substr($_SERVER['REQUEST_URI'], 0, 25)));
             self::setCookie();
@@ -105,15 +105,15 @@ class SQDE_Session extends Sequode\Patterns\Modeler {
         self::setAll(unserialize(self::model()->session_data),false);
     }
 	public static function setCookie(){
-        $expire = time()+SQDE_Application::model()->sessions->length;
-        setcookie(SQDE_Application::model()->sessions->cookie, self::id(), $expire, SQDE_Application::model()->sessions->path, '.'.SQDE_Application::model()->sessions->domain);
-        setcookie(SQDE_Application::model()->sessions->cookie, self::id(), $expire, SQDE_Application::model()->sessions->path, '*.'.SQDE_Application::model()->sessions->domain);
+        $expire = time()+\Sequode\Model\Application::model()->sessions->length;
+        setcookie(\Sequode\Model\Application::model()->sessions->cookie, self::id(), $expire, \Sequode\Model\Application::model()->sessions->path, '.'.\Sequode\Model\Application::model()->sessions->domain);
+        setcookie(\Sequode\Model\Application::model()->sessions->cookie, self::id(), $expire, \Sequode\Model\Application::model()->sessions->path, '*.'.\Sequode\Model\Application::model()->sessions->domain);
     }
 	public static function getCookieValue(){
-        return (self::isCookieValid()) ? $_COOKIE[SQDE_Application::model()->sessions->cookie] : false;
+        return (self::isCookieValid()) ? $_COOKIE[\Sequode\Model\Application::model()->sessions->cookie] : false;
     }
 	public static function isCookieValid(){
-        return (isset($_COOKIE[SQDE_Application::model()->sessions->cookie])) ? true : false ;
+        return (isset($_COOKIE[\Sequode\Model\Application::model()->sessions->cookie])) ? true : false ;
     }
     public static function set($key, $value = null, $save = true){
         self::container('set', $key, $value);
