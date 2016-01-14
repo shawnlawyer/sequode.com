@@ -1,37 +1,9 @@
 <?php
-class SQDE_Card  extends Sequode\Patterns\Mason {
+namespace Sequode\View\Card;
+class Card extends Sequode\Patterns\Mason {
     public static $mason = 'card';
 
-    public static function shim($break_before = false,$break_after = false){
-        $html = array();
-        if($break_before != false){
-            $html[] = '<br />';
-        }
-        $html[] = '<div class="automagic-shim"></div>';
-        if($break_after != false){
-            $html[] = '<br />';
-        }
-        return implode('',$html);
-	}
-    public static function divider($break_before = false){
-        $html = array();
-        if($break_before != false){
-            $html[] = '<br />';
-        }
-        $html[] = '<div class="automagic-divider"></div>';
-        return implode('',$html);
-	}
-    public static function contentRowDivider(){
-        $html = array();
-        if($break_before != false){
-            $html[] = '<br />';
-        }
-        $html[] = '<div class="automagic-content-row-divider"></div>';
-        if($break_after != false){
-            $html[] = '<br />';
-        }
-        return implode('',$html);
-	}
+
     public static function menuCardInHidingContainer($menu_object, $z_index=0){
         $html = array();
         $html[] = '<div class="menu-container-wrapper" style="z-index: '.$z_index.'; position: relative;">';
@@ -128,7 +100,7 @@ class SQDE_Card  extends Sequode\Patterns\Mason {
         }
         return (object) array('html' => implode('',$html), 'js' => implode(' ',$js));
 	}
-    public static function card($card_object){
+    public static function render($card_object){
         $html = array();
         $js = array();
         $html[] = '<div class="automagic-card">';

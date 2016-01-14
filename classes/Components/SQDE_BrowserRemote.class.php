@@ -6,10 +6,6 @@ class SQDE_BrowserRemote {
         $time = $time[0] + $time[1];
 		return $prefix.md5($time.$seed);
 	}
-	public static function depth($stream,$depth=0){
-		if($depth>0){ $stream = 'window.'.str_repeat("parent.", $depth).'eval('.$stream.');';}
-		return $stream;
-	}
 	public static function formatForJS($input){
 		return str_replace("\r",'\r',str_replace("\n",'\n',addslashes($input)));
 	}

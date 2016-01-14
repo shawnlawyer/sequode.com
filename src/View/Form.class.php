@@ -1,4 +1,5 @@
 <?php
+namespace Sequode\View\
 class SQDE_Form extends Sequode\Patterns\Mason {
     public static $mason = 'form';
     public static $collection_replacement_hook = '[%COLLECTION_JS%]';
@@ -80,7 +81,7 @@ class SQDE_Form extends Sequode\Patterns\Mason {
 		}
 		return $components_array;
 	}
-    public static function form($form_object){
+    public static function render($form_object){
         $timeout_var_name = SQDE_Component::uniqueHash();
 		$dom_ids = self::domIds($form_object->components);
         $js_event = (object) null;
