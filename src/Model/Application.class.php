@@ -1,5 +1,6 @@
 <?php
-namespace Sequode/Model;
+namespace Sequode\Model;
+
 class Application{
 	public static function model($replace = false){
         static $model;
