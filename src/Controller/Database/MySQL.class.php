@@ -1,5 +1,5 @@
 <?php
-namespace \Sequode\Controller\Database\
+namespace Sequode\Controller\Database;
 class MySQL {
 	
 	private $_connection;
