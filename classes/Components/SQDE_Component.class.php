@@ -346,7 +346,7 @@ class SQDE_Component {
         $dom_id = (isset($component->Dom_Id)) ? $component->Dom_Id : self::uniqueHash();
         $value = 'Button';
         if(isset($component->Value)){   
-            $value = \Sequode\Component\DOMElement\Kit\JS::formatValue($component->Value);
+            $value = self::formatValue($component->Value);
         }
         if(isset($component->On_Click)){   
             $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'click', $component->On_Click);
