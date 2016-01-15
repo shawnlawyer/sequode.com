@@ -7,7 +7,7 @@ class Form extends \Sequode\Patterns\Mason {
         $dom_ids = array();
         if(is_object($form_object)){
             foreach($form_object as $loop_member => $loop_value){
-                $dom_ids[] = SQDE_Component::uniqueHash();
+                $dom_ids[] = \SQDE_Component::uniqueHash();
             }
         }
         return $dom_ids;
@@ -73,7 +73,7 @@ class Form extends \Sequode\Patterns\Mason {
 			$component_object = self::attachComponentObjectEvents($component_object,$js_events_array[$j]);
 			$component_object->Dom_Id = $dom_ids[$i];
 			$component_object->Value = $form_object->$member->Value;
-			$components_array[] = SQDE_Component::render($component_object);
+			$components_array[] = \SQDE_Component::render($component_object);
 			$i++;
             if(count($js_events_array) > 1){
                 $j++;
@@ -82,7 +82,7 @@ class Form extends \Sequode\Patterns\Mason {
 		return $components_array;
 	}
     public static function render($form_object){
-        $timeout_var_name = SQDE_Component::uniqueHash();
+        $timeout_var_name = \SQDE_Component::uniqueHash();
 		$dom_ids = self::domIds($form_object->components);
         $js_event = (object) null;
         $submit_js = '';
@@ -104,12 +104,12 @@ class Form extends \Sequode\Patterns\Mason {
         $components_array = self::components($form_object->components, $dom_ids, array($js_event));
         
         if($form_object->submit_button != null){
-            SQDE_Component::exists('button','name');
-            $button_component = json_decode(SQDE_Component::model()->component_object);
+            \SQDE_Component::exists('button','name');
+            $button_component = json_decode(\SQDE_Component::model()->component_object);
             $button_component->Value = $form_object->submit_button;
             $button_component->CSS_Class = 'btn';
             $button_component->On_Click = self::registerTimeout($timeout_var_name, $submit_js);
-            $components_array[] = SQDE_Component::render($button_component);
+            $components_array[] = \SQDE_Component::render($button_component);
         }
 		return $components_array;
 	}
