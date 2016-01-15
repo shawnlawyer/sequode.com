@@ -13,11 +13,11 @@ class SQDE_ConsoleCardObjects {
         $_o->body = array();
         $cards = array('mySequodes','myPackages','myTokens');
         $html = $js = array();
-        $html[] = SQDE_Card::divider(true);
+        $html[] = \Sequode\Component\Card\Kit\HTML::divider(true);
         $html[] = '<div class="fitBlock alignCenter">';
         foreach($cards as $key => $card){
             if($key != 0){
-                $html[] = SQDE_Card::shim();
+                $html[] = \Sequode\Component\Card\Kit\HTML::shim();
             }
             $object = SQDE_Cards::render('Console', $card);
             $html[] = $object->html;
