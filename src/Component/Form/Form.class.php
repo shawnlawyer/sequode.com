@@ -1,6 +1,6 @@
 <?php
 namespace Sequode\Component\Form;
-class Form extends Sequode\Patterns\Mason {
+class Form extends \Sequode\Patterns\Mason {
     public static $mason = 'form';
     public static $collection_replacement_hook = '[%COLLECTION_JS%]';
 	public static function domIds($form_object){
