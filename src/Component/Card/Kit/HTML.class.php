@@ -1,5 +1,8 @@
 <?php
-class SQDE_CardComponentHTML {
+
+namespace Sequode\Component\Card\Kit;
+
+class HTML {
     public static function modelId(&$_model){
         return '<div style="position:absolute; bottom:5px; right:5px;" class="subline ">Id: '.$_model->id.'</div>';
     }

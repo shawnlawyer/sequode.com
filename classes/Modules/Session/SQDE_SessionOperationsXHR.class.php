@@ -39,7 +39,7 @@ class SQDE_SessionOperationsXHR {
         $collection = 'session_search';
         SQDE_Session::set($collection, $_o);
 		$js=array();
-        $js[] = SQDE_ComponentJS::fetchCollection($collection);
+        $js[] = \Sequode\Component\DOMElement\Kit\JS::fetchCollection($collection);
         return implode(' ',$js);
     }
 }

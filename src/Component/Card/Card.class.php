@@ -1,34 +1,9 @@
 <?php
-namespace Sequode\View\Card;
+namespace Sequode\Component\Card;
 class Card extends Sequode\Patterns\Mason {
     public static $mason = 'card';
 
-    public static function menuCardHidingContainer($contents, $z_index=0){
-        $html = array();
-        $html[] = '<div class="menu-container-wrapper" style="z-index: '.$z_index.'; position: relative;">';
-        $html[] = '<div class="menu-container" style="z-index: '.$z_index.'; position: relative;">';
-        $html[] = $contents;
-        $html[] = '</div>';
-        $html[] = '</div>';
-        return implode('',$html);
-	}
-    public static function menuCard($menu_object){
-        $html = array();
-        $position_adjuster = (isset($menu_object->position_adjuster)) ? ' '.$menu_object->position_adjuster : '';
-        
-        $menu_component = self::cardMenuComponent($menu_object);
-        $html[] = '<div class="automagic-card">';
-        $html[] = '<div class="automagic-card-head">';
-        $html[] = '<div>';
-        $html[] = '<div class="'.$menu_object->icon_type.' '.$menu_object->icon_background.'">';
-        $html[] = $menu_component->html;
-        $html[] = '</div>';
-        $html[] = '</div>';
-        $html[] = '</div>';
-        $html[] = '</div>';
-        return implode('',$html);
-	}
-    public static function cardMenuComponent($menu_object){
+   public static function cardMenuComponent($menu_object){
         $html = $js = array();
         $position_adjuster = (isset($menu_object->position_adjuster)) ? ' '.$menu_object->position_adjuster : '';
 

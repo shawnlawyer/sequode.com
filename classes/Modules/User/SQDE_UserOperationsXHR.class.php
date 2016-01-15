@@ -107,7 +107,7 @@ class SQDE_UserOperationsXHR {
         $collection = 'user_search';
         SQDE_Session::set($collection, $_o);
 		$js=array();
-        $js[] = SQDE_ComponentJS::fetchCollection($collection);
+        $js[] = \Sequode\Component\DOMElement\Kit\JS::fetchCollection($collection);
         return implode(' ',$js);
     }
 }

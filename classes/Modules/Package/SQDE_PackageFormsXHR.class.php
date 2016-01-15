@@ -9,7 +9,7 @@ class SQDE_PackageFormsXHR {
         && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){return;}
-        return SQDE_ComponentJS::placeForm(SQDE_Forms::render(self::$package,__FUNCTION__), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeForm(SQDE_Forms::render(self::$package,__FUNCTION__), $dom_id);
     }
     public static function packageSequode($_model_id, $dom_id){
         $modeler = static::$modeler;
@@ -18,6 +18,6 @@ class SQDE_PackageFormsXHR {
         && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){return;}
-        return SQDE_ComponentJS::placeForm(SQDE_Forms::render(self::$package,__FUNCTION__), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeForm(SQDE_Forms::render(self::$package,__FUNCTION__), $dom_id);
     }
 }

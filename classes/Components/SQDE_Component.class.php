@@ -5,18 +5,6 @@ class SQDE_Component {
 		$number = explode(" ", microtime());
 		return $prefix.sha1(md5((rand(0,$number[0]) + $number[0] + rand(0,$number[1]) + $number[1])).$number[0].$number[1]);
 	}
-	public static function makeComponent($component_object, $component_model = null, $sequode_model = null){
-        if($component_model != null ){ SQDE_Component::model($component_model); }
-        if($sequode_model != null ){ SQDE_Sequode::model($sequode_model); }
-        if($component_object->Component == 'checkboxSwitch' && !isset($component_object->On_Value)){
-            SQDE_Component::exists('checkboxSwitch','name');
-            $component_object = json_decode(SQDE_Component::model()->component_object);
-        }elseif((!isset($component_object->Component) || SQDE_Component::exists($component_object->Component,'name')) && !isset(SQDE_Component::model()->component)){
-            SQDE_Component::exists('str','name');
-            $component_object = json_decode(SQDE_Component::model()->component_object);
-        }
-		return forward_static_call_array(array('SQDE_Component',SQDE_Component::model()->component), array($component_object));
-    }
 	public static function formatScript($input){
 		return str_replace("\r",'\r',str_replace("\n",'\n',str_replace("'","\'",trim($input))));
 	}
@@ -31,16 +19,16 @@ class SQDE_Component {
            $component->Values = json_decode(str_replace('.*-"-*.',"\\'",str_replace("'",'"',str_replace("\\'",'.*-"-*.',$component->Values))));
         }
         if(isset($component->On_Focus)){   
-            $js[] = self::addEventListenerJS($dom_id, 'focus', $component->On_Focus);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'focus', $component->On_Focus);
         }
         if(isset($component->On_Blur)){
-            $js[] = self::addEventListenerJS($dom_id, 'blur', $component->On_Blur);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'blur', $component->On_Blur);
         }
         if(isset($component->On_Change)){
-            $js[] = self::addEventListenerJS($dom_id, 'change', $component->On_Change);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'change', $component->On_Change);
         }
         if(isset($component->Value_Changed)){
-            $js[] = self::addEventListenerJS($dom_id, 'change', $component->Value_Changed);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'change', $component->Value_Changed);
         }
         if(isset($component->CSS_Class)){   
             $class[] = self::formatValue($component->CSS_Class);
@@ -100,22 +88,22 @@ class SQDE_Component {
         $dom_id = (isset($component->Dom_Id)) ? $component->Dom_Id : self::uniqueHash();
         
         if(isset($component->Value)){   
-            $js[] = self::setValueJS($dom_id, $component->Value);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::setValueJS($dom_id, $component->Value);
         }
         if(isset($component->On_Focus)){   
-            $js[] = self::addEventListenerJS($dom_id, 'focus', $component->On_Focus);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'focus', $component->On_Focus);
         }
         if(isset($component->On_Blur)){
-            $js[] = self::addEventListenerJS($dom_id, 'blur', $component->On_Blur);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'blur', $component->On_Blur);
         }
         if(isset($component->On_Change)){
-            $js[] = self::addEventListenerJS($dom_id, 'change', $component->On_Change);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'change', $component->On_Change);
         }
         if(isset($component->Value_Changed)){
-            $js[] = self::addEventListenerJS($dom_id, 'keyup', $component->Value_Changed);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'keyup', $component->Value_Changed);
         }
         if(isset($component->On_Key_Up)){
-            $js[] = self::addEventListenerJS($dom_id, 'keyup', $component->On_Key_Up);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'keyup', $component->On_Key_Up);
         }
         if(isset($component->On_Key_Down)){
             $js[] = self::addEventListenerJS($dom_id, 'keydown', $component->On_Key_Down);
@@ -161,28 +149,28 @@ class SQDE_Component {
         $dom_id = (isset($component->Dom_Id)) ? $component->Dom_Id : self::uniqueHash();
         
         if(isset($component->Value)){   
-            $js[] = self::setValueJS($dom_id, $component->Value);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::setValueJS($dom_id, $component->Value);
         }
         if(isset($component->On_Focus)){   
-            $js[] = self::addEventListenerJS($dom_id, 'focus', $component->On_Focus);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'focus', $component->On_Focus);
         }
         if(isset($component->On_Blur)){
-            $js[] = self::addEventListenerJS($dom_id, 'blur', $component->On_Blur);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'blur', $component->On_Blur);
         }
         if(isset($component->On_Change)){
-            $js[] = self::addEventListenerJS($dom_id, 'change', $component->On_Change);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'change', $component->On_Change);
         }
         if(isset($component->Value_Changed)){
-            $js[] = self::addEventListenerJS($dom_id, 'keyup', $component->Value_Changed);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'keyup', $component->Value_Changed);
         }
         if(isset($component->On_Key_Up)){
-            $js[] = self::addEventListenerJS($dom_id, 'keyup', $component->On_Key_Up);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'keyup', $component->On_Key_Up);
         }
         if(isset($component->On_Key_Down)){
-            $js[] = self::addEventListenerJS($dom_id, 'keydown', $component->On_Key_Down);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'keydown', $component->On_Key_Down);
         }
         if(isset($component->On_Key_Press)){
-            $js[] = self::addEventListenerJS($dom_id, 'keypress', $component->On_Key_Press);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'keypress', $component->On_Key_Press);
         }
         if(isset($component->CSS_Class)){   
             $class[] = self::formatValue($component->CSS_Class);
@@ -225,28 +213,28 @@ class SQDE_Component {
             $dom_id = $component->Dom_Id;
         }
         if(isset($component->Value)){   
-            $js[] = self::setValueJS($dom_id, $component->Value);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::setValueJS($dom_id, $component->Value);
         }
         if(isset($component->On_Focus)){   
-            $js[] = self::addEventListenerJS($dom_id, 'focus', $component->On_Focus);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'focus', $component->On_Focus);
         }
         if(isset($component->On_Blur)){
-            $js[] = self::addEventListenerJS($dom_id, 'blur', $component->On_Blur);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'blur', $component->On_Blur);
         }
         if(isset($component->On_Change)){
-            $js[] = self::addEventListenerJS($dom_id, 'change', $component->On_Change);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'change', $component->On_Change);
         }
         if(isset($component->Value_Changed)){
-            $js[] = self::addEventListenerJS($dom_id, 'keyup', $component->Value_Changed);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'keyup', $component->Value_Changed);
         }
         if(isset($component->On_Key_Up)){
-            $js[] = self::addEventListenerJS($dom_id, 'keyup', $component->On_Key_Up);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'keyup', $component->On_Key_Up);
         }
         if(isset($component->On_Key_Down)){
-            $js[] = self::addEventListenerJS($dom_id, 'keydown', $component->On_Key_Down);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'keydown', $component->On_Key_Down);
         }
         if(isset($component->On_Key_Press)){
-            $js[] = self::addEventListenerJS($dom_id, 'keypress', $component->On_Key_Press);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'keypress', $component->On_Key_Press);
         }
         if(isset($component->CSS_Class)){   
             $class[] = self::formatValue($component->CSS_Class);
@@ -296,13 +284,13 @@ class SQDE_Component {
         $dom_id = (isset($component->Dom_Id)) ? $component->Dom_Id : self::uniqueHash();
         
         if(isset($component->Value)){   
-            $js[] = self::setValueJS($dom_id, $component->Value);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::setValueJS($dom_id, $component->Value);
         }
         if(isset($component->On_Change)){
-            $js[] = self::addEventListenerJS($dom_id, 'change', $component->On_Change);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'change', $component->On_Change);
         }
         if(isset($component->Value_Changed)){
-            $js[] = self::addEventListenerJS($dom_id, 'change', $component->Value_Changed);
+            $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'change', $component->Value_Changed);
         }
         
         $html[] = '<input';
@@ -491,19 +479,6 @@ class SQDE_Component {
         }
         return $component_a;
     }
-	public static function setValueJS($dom_id, $value){
-        $js[] = 'document.getElementById(\''.$dom_id.'\').value = decodeURIComponent(\'';
-        $js[] = rawurlencode($value);
-        $js[] = '\');';
-        return implode('',$js);
-    }
-	public static function addEventListenerJS($dom_id, $event, $event_js){
-        //$js[] = 'document.getElementById(\''.$dom_id.'\').addEventListener(\''.$event.'\',(function(event) {';
-        $js[] = '$(\'#'.$dom_id.'\').on(\''.$event.'\',(function(event) {';
-        $js[] = $event_js;
-        $js[] = '}));';
-        return implode('',$js);
-    }
 	public static function model($replace = false){
         static $model;  
         if(!is_object($model) || ($replace != false && $replace == null)){
@@ -516,7 +491,16 @@ class SQDE_Component {
 	public static function exists($value, $by='id'){
         return (self::model(null)->exists($value,$by)) ? true : false ;
     }
-	protected function __clone(){
-    
-	}
+	public static function render($component_object, $component_model = null, $sequode_model = null){
+        if($component_model != null ){ SQDE_Component::model($component_model); }
+        if($sequode_model != null ){ SQDE_Sequode::model($sequode_model); }
+        if($component_object->Component == 'checkboxSwitch' && !isset($component_object->On_Value)){
+            SQDE_Component::exists('checkboxSwitch','name');
+            $component_object = json_decode(SQDE_Component::model()->component_object);
+        }elseif((!isset($component_object->Component) || SQDE_Component::exists($component_object->Component,'name')) && !isset(SQDE_Component::model()->component)){
+            SQDE_Component::exists('str','name');
+            $component_object = json_decode(SQDE_Component::model()->component_object);
+        }
+		return forward_static_call_array(array('SQDE_Component',SQDE_Component::model()->component), array($component_object));
+    }
 }

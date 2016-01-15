@@ -27,7 +27,7 @@ class SQDE_ConsoleRoutes{
             $console = 'Sequode';
         }
         SQDE_Session::set('console',$console);
-		echo SQDE_ComponentHTML::page();
+		echo \Sequode\Component\DOMElement\Kit\HTML::page();
 		exit;
 	}
 	public static function routes(){
@@ -175,7 +175,7 @@ class SQDE_ConsoleRoutes{
             echo '!function() {';
         }
         if($force_SSL == true && $_SERVER['WORKFLOW_ENVIRONMENT'] != 'development'){
-            //echo SQDE_ComponentJS::forceSSL();
+            //echo \Sequode\Component\DOMElement\Kit\JS::forceSSL();
         }
 		foreach($files as $file){
 			echo file_get_contents($file,true);

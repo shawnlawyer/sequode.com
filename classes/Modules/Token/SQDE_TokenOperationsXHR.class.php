@@ -5,7 +5,7 @@ class SQDE_TokenOperationsXHR {
         $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         forward_static_call_array(array(Sequode\ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array(SQDE_AuthenticatedUser::model()->id));
         $js = array();
-        $js[] = SQDE_ComponentJS::fetchCollection(Sequode\ModuleRegistry::model(static::$package)->collections->main, $modeler::model()->id);
+        $js[] = \Sequode\Component\DOMElement\Kit\JS::fetchCollection(Sequode\ModuleRegistry::model(static::$package)->collections->main, $modeler::model()->id);
         $js[] = forward_static_call_array(array(Sequode\ModuleRegistry::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
@@ -30,7 +30,7 @@ class SQDE_TokenOperationsXHR {
         forward_static_call_array(array(Sequode\ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array($name));
         $js = array();
         $collection = 'tokens';
-        $js[] = SQDE_ComponentJS::fetchCollection($collection, $modeler::model()->id);
+        $js[] = \Sequode\Component\DOMElement\Kit\JS::fetchCollection($collection, $modeler::model()->id);
         $js[] = forward_static_call_array(array(Sequode\ModuleRegistry::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
@@ -52,7 +52,7 @@ class SQDE_TokenOperationsXHR {
         $collection = 'token_search';
         SQDE_Session::set($collection, $_o);
 		$js=array();
-        $js[] = SQDE_ComponentJS::fetchCollection($collection);
+        $js[] = \Sequode\Component\DOMElement\Kit\JS::fetchCollection($collection);
         return implode(' ',$js);
     }
 }

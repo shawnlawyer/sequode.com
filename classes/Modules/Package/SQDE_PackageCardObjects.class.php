@@ -39,17 +39,17 @@ class SQDE_PackageCardObjects {
         $_o->head = 'Package Details';
         $_o->body = array('');
         $_o->body[] = (object) array('js' => 'registry.setContext({card:\'cards/package/details\',collection:\'packages\',node:\''.$_model->id.'\'});');
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Name');
-        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/package/name', array($_model->id)), $_model->name, 'settings');
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Package Sequode');
-        $_o->body[] = ($_model->sequode_id != 0 && SQDE_Sequode::exists($_model->sequode_id,'id')) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/package/packageSequode', array($_model->id)), SQDE_Sequode::model()->name, 'settings') : SQDE_Forms::render(self::$package,'packageSequode')[0];
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Package Token');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Name');
+        $_o->body[] = \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/package/name', array($_model->id)), $_model->name, 'settings');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Package Sequode');
+        $_o->body[] = ($_model->sequode_id != 0 && SQDE_Sequode::exists($_model->sequode_id,'id')) ? \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/package/packageSequode', array($_model->id)), SQDE_Sequode::model()->name, 'settings') : SQDE_Forms::render(self::$package,'packageSequode')[0];
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Package Token');
         $_o->body[] = $_model->token;
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('<a target="_blank" href="/source/'.$_model->token.'">Download</a>');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('<a target="_blank" href="/source/'.$_model->token.'">Download</a>');
         
         $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/package/details'));
         if(SQDE_UserAuthority::isSystemOwner()){
-            $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
+            $_o->body[] = \Sequode\Component\Card\Kit\HTML::modelId($_model);
         }
         return $_o;
     }
@@ -67,7 +67,7 @@ class SQDE_PackageCardObjects {
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'New Package',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/package/newPackage'))
+            'js_action'=> \Sequode\Component\DOMElement\Kit\JS::onTapEventsXHRCall($dom_id, \Sequode\Component\DOMElement\Kit\JS::xhrCallObject('operations/package/newPackage'))
         );
         $_o->body = array();
         $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'packages','icon'=>'atom','card_route'=>'cards/package/my','details_route'=>'cards/package/details'));

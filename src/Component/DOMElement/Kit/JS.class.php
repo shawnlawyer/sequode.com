@@ -1,6 +1,19 @@
 <?php
-class SQDE_ComponentJS {
+namespace Sequode\Component\DOMElement\Kit;
+class JS {
     
+	public static function setValueJS($dom_id, $value){
+        $js[] = 'document.getElementById(\''.$dom_id.'\').value = decodeURIComponent(\'';
+        $js[] = rawurlencode($value);
+        $js[] = '\');';
+        return implode('',$js);
+    }
+	public static function addEventListenerJS($dom_id, $event, $event_js){
+        $js[] = '$(\'#'.$dom_id.'\').on(\''.$event.'\',(function(event) {';
+        $js[] = $event_js;
+        $js[] = '}));';
+        return implode('',$js);
+    }
     public static function placeForm($form, $dom_id){
         $html = $js = array();
         if(count($form) == 1){
@@ -10,11 +23,11 @@ class SQDE_ComponentJS {
                 }
             }
         }else{
-            $html[] = SQDE_CardComponentHTML::contentRowDivider();
+            $html[] = \Sequode\Component\Card\Kit\HTML::contentRowDivider();
             foreach($form as $key => $object){
                 if(isset($object->html)){
                     $html[] = $object->html;
-                    $html[] = SQDE_CardComponentHTML::contentRowDivider();
+                    $html[] = \Sequode\Component\Card\Kit\HTML::contentRowDivider();
                 }
             }
         }
@@ -31,7 +44,7 @@ class SQDE_ComponentJS {
     public static function placeCard($card, $dom_id = 'CardsContainer'){
         $html = $js = array();
         if($dom_id == 'CardsContainer'){
-            $html[] = SQDE_CardComponentHTML::divider();
+            $html[] = \Sequode\Component\Card\Kit\HTML::divider();
         }
         $html[] = $card->html;
         $js[] = self::addIntoDom($dom_id, implode(' ',$html), 'replace');
@@ -41,14 +54,14 @@ class SQDE_ComponentJS {
     public static function placeDeck($deck, $dom_id = 'CardsContainer', $clear=true, $divide=true, $shim=true){
         $html = $js = array();
         if($divide != false){
-            $html[] = SQDE_CardComponentHTML::divider(($shim != false) ? false : true);
+            $html[] = \Sequode\Component\Card\Kit\HTML::divider(($shim != false) ? false : true);
         }
         foreach($deck as $card){
             if(isset($card->html)){
                 $html[] = $card->html;
             }
         }
-        $js[] = self::addIntoDom($dom_id, implode(($shim != false) ? SQDE_CardComponentHTML::shim(false,false) : '',$html), ($clear != false) ? 'replace' : 'append');
+        $js[] = self::addIntoDom($dom_id, implode(($shim != false) ? \Sequode\Component\Card\Kit\HTML::shim(false,false) : '',$html), ($clear != false) ? 'replace' : 'append');
         foreach($deck as $card){
             if(isset($card->js)){
                 $js[] = $card->js;

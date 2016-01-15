@@ -28,7 +28,7 @@ class SQDE_AuthCardObjects {
         if($dialog_store->step != 0){
             $_o->menu = (object) null;
             $_o->menu->items = array();
-            $_o->menu->items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Reset','operations/auth/' . __FUNCTION__,array(SQDE_Form::jsQuotedValue('{"reset":"1"}')));
+            $_o->menu->items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Reset','operations/auth/' . __FUNCTION__,array(Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}')));
         }
         $_o->head = 'Authentication';
         $_o->body = array('');

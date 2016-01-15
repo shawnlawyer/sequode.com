@@ -1,5 +1,5 @@
 <?php
-namespace Sequode\View\
+namespace Sequode\Component\Form;
 class Form extends Sequode\Patterns\Mason {
     public static $mason = 'form';
     public static $collection_replacement_hook = '[%COLLECTION_JS%]';
@@ -73,7 +73,7 @@ class Form extends Sequode\Patterns\Mason {
 			$component_object = self::attachComponentObjectEvents($component_object,$js_events_array[$j]);
 			$component_object->Dom_Id = $dom_ids[$i];
 			$component_object->Value = $form_object->$member->Value;
-			$components_array[] = SQDE_Component::makeComponent($component_object);
+			$components_array[] = SQDE_Component::render($component_object);
 			$i++;
             if(count($js_events_array) > 1){
                 $j++;
@@ -109,7 +109,7 @@ class Form extends Sequode\Patterns\Mason {
             $button_component->Value = $form_object->submit_button;
             $button_component->CSS_Class = 'btn';
             $button_component->On_Click = self::registerTimeout($timeout_var_name, $submit_js);
-            $components_array[] = SQDE_Component::makeComponent($button_component);
+            $components_array[] = SQDE_Component::render($button_component);
         }
 		return $components_array;
 	}

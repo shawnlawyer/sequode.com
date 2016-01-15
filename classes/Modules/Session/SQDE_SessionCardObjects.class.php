@@ -34,7 +34,7 @@ class SQDE_SessionCardObjects {
         $_o->body = array();
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
-        $js[] = SQDE_ComponentJS::documentEventOff('keydown');
+        $js[] = \Sequode\Component\DOMElement\Kit\JS::documentEventOff('keydown');
         $js[] = '$(document).on(\'keydown\',(function(e){';
         
         $js[] = 'if (e.keyCode == 66){';
@@ -62,23 +62,23 @@ class SQDE_SessionCardObjects {
         $js[] = '}));';
         
         
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Username');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Username');
         $_o->body[] = $_model->username;
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Ip Address');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Ip Address');
         $_o->body[] = $_model->ip_address;
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Data');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Data');
         $_o->body[] = '<textarea style="width:20em; height:10em;">'.$_model->session_data.'</textarea>';
         $location = geoip_record_by_name($_model->ip_address);
         if ($location) {
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Geo Location');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Geo Location');
         $_o->body[] = $location['city'].((!empty($location['region'])) ? ' '.$location['region'] : ''). ', '. $location['country_name'].((!empty($location['postal_code'])) ? ', '.$location['postal_code'] : '');
             
         }
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Session Started');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Session Started');
         $_o->body[] = date('g:ia \o\n l jS F Y',$_model->session_start);
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Last Sign In');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Last Sign In');
         $_o->body[] = SQDE_CardComponent::deleteInCollection((object) array('route'=>'operations/session/delete','model_id'=>$_model->id));
-        $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::modelId($_model);
         return $_o;
     }
     public static function search($_model = null){

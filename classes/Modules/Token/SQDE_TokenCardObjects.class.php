@@ -40,15 +40,15 @@ class SQDE_TokenCardObjects {
         $_o->head = 'Token Details';
         $_o->body = array('');
         $_o->body[] = (object) array('js' => 'registry.setContext({card:\'cards/token/details\',collection:\'tokens\',node:\''.$_model->id.'\'});');
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Name');
-        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/token/name', array($_model->id)), $_model->name, 'settings');
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Token');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Name');
+        $_o->body[] = \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/token/name', array($_model->id)), $_model->name, 'settings');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Token');
         $_o->body[] = $_model->token;
         
         
         $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/token/details'));
         if(SQDE_UserAuthority::isSystemOwner()){
-            $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
+            $_o->body[] = \Sequode\Component\Card\Kit\HTML::modelId($_model);
         }
         return $_o;
     }
@@ -66,7 +66,7 @@ class SQDE_TokenCardObjects {
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'New Token',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/token/newToken'))
+            'js_action'=> \Sequode\Component\DOMElement\Kit\JS::onTapEventsXHRCall($dom_id, \Sequode\Component\DOMElement\Kit\JS::xhrCallObject('operations/token/newToken'))
         );
         $_o->body = array();
         $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'tokens','icon'=>'atom','card_route'=>'cards/token/my','details_route'=>'cards/token/details'));

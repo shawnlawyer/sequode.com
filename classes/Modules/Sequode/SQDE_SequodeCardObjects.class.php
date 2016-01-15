@@ -124,20 +124,20 @@ class SQDE_SequodeCardObjects {
         $input_form_object = json_decode($_model->input_form_object);
         $property_form_object = json_decode($_model->property_form_object);
         
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Name');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Name');
         $text = $_model->name;
-        $_o->body[] = (SQDE_UserAuthority::canEdit()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/name', array($_model->id)), $text, 'settings') : $text;
+        $_o->body[] = (SQDE_UserAuthority::canEdit()) ? \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/sequode/name', array($_model->id)), $text, 'settings') : $text;
         
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Description');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Description');
         $text = json_decode($_model->detail)->description;
         $text = (!empty($text)) ? $text : 'Sequode needs description.';
-        $_o->body[] = (SQDE_UserAuthority::canEdit()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/description', array($_model->id)), $text, 'settings') : $text;
+        $_o->body[] = (SQDE_UserAuthority::canEdit()) ? \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/sequode/description', array($_model->id)), $text, 'settings') : $text;
         
         if(SQDE_SequodeAuthority::isCode() && $_model->owner_id == 8){
             $dom_id = SQDE_Component::uniqueHash('','');
             $html = $js = array();
             $html = '<div class="subline" id="'.$dom_id.'">More info</div>';
-            $js = SQDE_ComponentJS::onTapEvents($dom_id, 'var win = window.open(\'http://php.net/'.$_model->name.'\', \'_blank\'); win.focus();');
+            $js = \Sequode\Component\DOMElement\Kit\JS::onTapEvents($dom_id, 'var win = window.open(\'http://php.net/'.$_model->name.'\', \'_blank\'); win.focus();');
             $_o->body[] = (object) array('html' => $html, 'js' => $js);
         }
         if(SQDE_SequodeAuthority::isSequence() && !SQDE_SequodeAuthority::isEmptySequence()){
@@ -148,11 +148,11 @@ class SQDE_SequodeCardObjects {
             //$dom_id = SQDE_Component::uniqueHash('','');
             //$html = $js = array();
            // $html = '<div class="subline" id="'.$dom_id.'">More info</div>';
-            //$js = SQDE_ComponentJS::onTapEvents($dom_id, 'var win = window.open(\'http://php.net/'.$_model->name.'\', \'_blank\'); win.focus();');
+            //$js = \Sequode\Component\DOMElement\Kit\JS::onTapEvents($dom_id, 'var win = window.open(\'http://php.net/'.$_model->name.'\', \'_blank\'); win.focus();');
            // $_o->body[] = (object) array('html' => $html, 'js' => $js);
         }
         if(SQDE_SequodeAuthority::isSequence()){
-            $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Sequence');
+            $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Sequence');
             $sequence = json_decode($_model->sequence);
             $model_object_cache = array();
             if(!SQDE_SequodeAuthority::isEmptySequence($_model)){
@@ -162,7 +162,7 @@ class SQDE_SequodeCardObjects {
                         $model_object_cache[$loop_model_id]->exists($loop_model_id,'id');
                     }
                     $text = '('.($loop_sequence_key+1).') '.$model_object_cache[$loop_model_id]->name;
-                    $_o->body[] = (SQDE_UserAuthority::canEdit()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('cards/sequode/internalPositionForms', array($_model->id, $loop_sequence_key)), $text, 'settings') : $text;
+                    $_o->body[] = (SQDE_UserAuthority::canEdit()) ? \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('cards/sequode/internalPositionForms', array($_model->id, $loop_sequence_key)), $text, 'settings') : $text;
                 }
             }else{
                     $_o->body[] = 'Sequode is empty.';   
@@ -170,19 +170,19 @@ class SQDE_SequodeCardObjects {
             
         }
         if(SQDE_UserAuthority::isSystemOwner()){
-            $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Use Policy');
+            $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Use Policy');
             $text = (SQDE_SequodeAuthority::isShared()) ? 'Public Use' : 'System Restricted Use';
-            $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/sharing', array($_model->id)), $text, 'atom');
+            $_o->body[] = \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/sequode/sharing', array($_model->id)), $text, 'atom');
         }
         if(SQDE_SequodeAuthority::isCode()){
-            $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Tenancy Requirement');
+            $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Tenancy Requirement');
             $text = (SQDE_SequodeAuthority::isTenacyDedicated()) ? 'Dedicated Enviroment' : 'Shared Enviroment';
-            $_o->body[] = (SQDE_UserAuthority::isSystemOwner()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/tenancy', array($_model->id)), $text, 'setting') : $text;
+            $_o->body[] = (SQDE_UserAuthority::isSystemOwner()) ? \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/sequode/tenancy', array($_model->id)), $text, 'setting') : $text;
         } 
         if(SQDE_SequodeAuthority::isSequence() && !SQDE_SequodeAuthority::isEmptySequence()){
-            $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Palettes Menu Visibility');
+            $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Palettes Menu Visibility');
             $text = (SQDE_SequodeAuthority::isPalette()) ? 'Shown in Palettes Menu' : 'Hidden from Palettes Menu';
-            $_o->body[] = (SQDE_UserAuthority::canEdit($_model)) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/updateIsPalette', array($_model->id)), $text, 'settings') : $text;
+            $_o->body[] = (SQDE_UserAuthority::canEdit($_model)) ? \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/sequode/updateIsPalette', array($_model->id)), $text, 'settings') : $text;
         } 
         foreach(array('input','property') as $type){
             switch($type){
@@ -201,17 +201,17 @@ class SQDE_SequodeCardObjects {
             }
         
             if($type_object != (object) null){
-                $_o->body[] = SQDE_CardComponentHTML::sublineBlock($type_title);
+                $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock($type_title);
                 foreach($type_object as $member => $value){
                     $_o->body[] = $member . ' (' . $type_object_detail->$member->type. ') ' . (($type_object_detail->$member->required == true) ? 'required' : 'optional');
                     SQDE_Component::exists($type_form_object->$member->Component,'name');
                     $text = 'Form Component : '. SQDE_Component::model()->printable_name;
-                    $_o->body[] = (SQDE_UserAuthority::canEdit()) ? SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('cards/sequode/componentSettings', array(SQDE_Form::jsQuotedValue($type), SQDE_Form::jsQuotedValue($member), $_model->id)), $text, 'settings') : $text;
+                    $_o->body[] = (SQDE_UserAuthority::canEdit()) ? \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('cards/sequode/componentSettings', array(Sequode\Component\Form\Form::jsQuotedValue($type), Sequode\Component\Form\Form::jsQuotedValue($member), $_model->id)), $text, 'settings') : $text;
                 }
             }
         }
         if($output_object != (object) null){
-            $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Outputs');
+            $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Outputs');
             foreach($output_object as $member => $value){
                 $_o->body[] = $member . ' (' . $output_object_detail->$member->type. ')';
             }
@@ -221,7 +221,7 @@ class SQDE_SequodeCardObjects {
         $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/sequode/details'));
         
         if(SQDE_UserAuthority::isSystemOwner()){
-            $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
+            $_o->body[] = \Sequode\Component\Card\Kit\HTML::modelId($_model);
         }
         return $_o;
     }
@@ -243,7 +243,7 @@ class SQDE_SequodeCardObjects {
             $_o->body[] = SQDE_Cards::render(self::$package,'internalPositionForms',array($loop_sequence_key));
         }
         if(SQDE_UserAuthority::isSystemOwner()){
-            $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
+            $_o->body[] = \Sequode\Component\Card\Kit\HTML::modelId($_model);
         }
         return $_o;
     }
@@ -314,15 +314,15 @@ class SQDE_SequodeCardObjects {
         }
         foreach($possible_components as $component){
             if($type_labels[$component->type] != false){
-                $_o->body[] = SQDE_CardComponentHTML::sublineBlock($type_labels[$component->type]);
+                $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock($type_labels[$component->type]);
                 $type_labels[$component->type] = false;
             }
             if(($component->connected == true)){
                 $text = $component->member;
-                $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/component', array(SQDE_Form::jsQuotedValue($component->type), $_model->id, $component->map_key)), $text, 'settings');
+                $_o->body[] = \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/sequode/component', array(Sequode\Component\Form\Form::jsQuotedValue($component->type), $_model->id, $component->map_key)), $text, 'settings');
             }elseif($component->required == false && $component->value_set == false){ 
                 $text = $component->member;
-                $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/sequode/component', array(SQDE_Form::jsQuotedValue($component->type), $_model->id, $component->map_key)), $text, 'settings');
+                $_o->body[] = \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/sequode/component', array(Sequode\Component\Form\Form::jsQuotedValue($component->type), $_model->id, $component->map_key)), $text, 'settings');
             }else{
                 $components_array = SQDE_Forms::render(self::$package,'component',array($component->type, $component->map_key, $_model));
                 foreach($components_array as $component_object){
@@ -354,7 +354,7 @@ class SQDE_SequodeCardObjects {
         $items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
-            'js_action'=> 'new SQDE_XHRCall({route:\'forms/sequode/selectPalette\',inputs:['.SQDE_Form::jsQuotedValue($dom_id).']});'                 
+            'js_action'=> 'new SQDE_XHRCall({route:\'forms/sequode/selectPalette\',inputs:['.Sequode\Component\Form\Form::jsQuotedValue($dom_id).']});'                 
         );
         $_o->menu->items = array_merge($items,$_o->menu->items);
         
@@ -437,7 +437,7 @@ class SQDE_SequodeCardObjects {
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'New Sequode',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/sequode/newSequence'))
+            'js_action'=> \Sequode\Component\DOMElement\Kit\JS::onTapEventsXHRCall($dom_id, \Sequode\Component\DOMElement\Kit\JS::xhrCallObject('operations/sequode/newSequence'))
         );
         
         $_o->body = array();
@@ -459,7 +459,7 @@ class SQDE_SequodeCardObjects {
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
             'contents'=>'Empty Favorites',
-            'js_action'=> SQDE_ComponentJS::onTapEventsXHRCall($dom_id, SQDE_ComponentJS::xhrCallObject('operations/user/emptySequodeFavorites',[],'function(){registry.fetch({collection:\'sequode_favorites\'});}'))
+            'js_action'=> \Sequode\Component\DOMElement\Kit\JS::onTapEventsXHRCall($dom_id, \Sequode\Component\DOMElement\Kit\JS::xhrCallObject('operations/user/emptySequodeFavorites',[],'function(){registry.fetch({collection:\'sequode_favorites\'});}'))
         );
         
         $_o->body = array();

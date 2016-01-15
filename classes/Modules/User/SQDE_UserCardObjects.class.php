@@ -40,29 +40,29 @@ class SQDE_UserCardObjects {
         $_o->head = 'User Detail';
         $_o->body = array('');
         
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Username');
-        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/user/updateName', array($_model->id)), $_model->username, 'settings');
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Password');
-        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/user/updatePassword', array($_model->id)), 'Set Password', 'settings');
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Role');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Username');
+        $_o->body[] = \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/user/updateName', array($_model->id)), $_model->username, 'settings');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Password');
+        $_o->body[] = \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/user/updatePassword', array($_model->id)), 'Set Password', 'settings');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Role');
         SQDE_Role::exists($_model->role_id,'id');
-        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/user/updateRole', array($_model->id)), SQDE_Role::model()->name, 'settings');
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Active Status');
-        $_o->body[] = SQDE_ComponentJS::loadComponentHere(SQDE_ComponentJS::xhrCallObject('forms/user/updateActive', array($_model->id)), (($_model->active == 1) ? 'Active' : 'Suspended'), 'settings');
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Sign Up Date');
+        $_o->body[] = \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/user/updateRole', array($_model->id)), SQDE_Role::model()->name, 'settings');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Active Status');
+        $_o->body[] = \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/user/updateActive', array($_model->id)), (($_model->active == 1) ? 'Active' : 'Suspended'), 'settings');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Sign Up Date');
         $_o->body[] = date('g:ia \o\n l jS F Y',$_model->sign_up_date);
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Allowed Sequode Count');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Allowed Sequode Count');
         $_o->body[] = $_model->allowed_sequode_count;
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Favorite Sequodes');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Favorite Sequodes');
         $_o->body[] = $_model->sequode_favorites;
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Email');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Email');
         $_o->body[] = $_model->email;
         $_o->body[] = SQDE_CardComponent::collectionTile('Sequode', 'Sequodes Created : ', $_model);
         $_o->body[] = SQDE_CardComponent::collectionTile('Package', 'Packages Created : ', $_model);
         $_o->body[] = SQDE_CardComponent::collectionTile('Token', 'Tokens Created : ', $_model);
         $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/user/details'));
         if(SQDE_UserAuthority::isSystemOwner()){
-            $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
+            $_o->body[] = \Sequode\Component\Card\Kit\HTML::modelId($_model);
         }
         return $_o;
     }

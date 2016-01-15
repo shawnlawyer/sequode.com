@@ -25,10 +25,10 @@ class SQDE_AccountCardObjects {
         $_o->head = 'Account Detail';
         $_o->icon_type = 'menu-icon';
         $_o->icon_background = 'user-icon-background';
-        $_o->body[] = SQDE_CardComponentHTML::sublineBlock('Email');
+        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Email');
         $_o->body[] = $_model->email;
         if(SQDE_UserAuthority::isSystemOwner()){
-            $_o->body[] = SQDE_CardComponentHTML::modelId($_model);
+            $_o->body[] = \Sequode\Component\Card\Kit\HTML::modelId($_model);
         }
         return $_o;
     }
@@ -42,7 +42,7 @@ class SQDE_AccountCardObjects {
         if($dialog_store->step != 0){
             $_o->menu = (object) null;
             $_o->menu->items = array();
-            $_o->menu->items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(SQDE_Form::jsQuotedValue('{"reset":"1"}')));
+            $_o->menu->items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}')));
         }
         $_o->head = 'Account Password';
         $_o->body = array('');
@@ -75,7 +75,7 @@ class SQDE_AccountCardObjects {
         if($dialog_store->step != 0){
             $_o->menu = (object) null;
             $_o->menu->items = array();
-            $_o->menu->items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(SQDE_Form::jsQuotedValue('{"reset":"1"}')));
+            $_o->menu->items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}')));
         }
         $_o->head = 'Account Email';
         $_o->body = array('');

@@ -9,12 +9,12 @@ class SQDE_PackageCardsXHR {
         && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){return;}
-        return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
     public static function search($dom_id = 'CardsContainer'){
-        return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
     public static function my($dom_id = 'CardsContainer'){
-        return SQDE_ComponentJS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
 }

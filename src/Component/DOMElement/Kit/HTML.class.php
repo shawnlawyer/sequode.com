@@ -1,5 +1,6 @@
 <?php
-class SQDE_ComponentHTML {
+namespace Sequode\Component\DOMElement\Kit;
+class HTML {
     public static function loginIframe(){
         return '<iframe style="visibility:hidden;display:none;" height="0" width="0" src="http://sequo.de/setSessionCookie/'.SQDE_Session::id().'"></iframe>';
     }    
