@@ -352,10 +352,10 @@ class SQDE_Component {
             $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'click', $component->On_Click);
         }
         if(isset($component->CSS_Class)){   
-            $class[] = \Sequode\Component\DOMElement\Kit\JS::formatValue($component->CSS_Class);
+            $class[] = self::formatValue($component->CSS_Class);
         }
         if(isset($component->CSS_Style)){   
-            $style[] = \Sequode\Component\DOMElement\Kit\JS::formatValue($component->CSS_Style);
+            $style[] = self::formatValue($component->CSS_Style);
         }
 		
         $class = implode(' ',$class);
@@ -382,7 +382,7 @@ class SQDE_Component {
             $dom_id = $component->Dom_Id;
         }
         if(isset($component->Value)){   
-            $value = \Sequode\Component\DOMElement\Kit\JS::formatValue($component->Value);
+            $value = self::formatValue($component->Value);
         }
         if(isset($component->On_Focus)){   
             $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'focus', $component->On_Focus);
@@ -409,7 +409,7 @@ class SQDE_Component {
             $js[] = \Sequode\Component\DOMElement\Kit\JS::addEventListenerJS($dom_id, 'change', $component->Value_Changed);
         }
         if(isset($component->CSS_Class)){   
-            $class[] = \Sequode\Component\DOMElement\Kit\JS::formatValue($component->CSS_Class);
+            $class[] = self::formatValue($component->CSS_Class);
         }
         if(isset($component->CSS_Style)){   
             $style[] = self::formatValue($component->CSS_Style);
