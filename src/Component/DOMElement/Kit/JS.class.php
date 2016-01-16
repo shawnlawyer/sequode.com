@@ -41,34 +41,6 @@ class JS {
         $js[] = '$(\'.focus-input\').select();';    
         return implode(' ',$js);
     }
-    public static function placeCard($card, $dom_id = 'CardsContainer'){
-        $html = $js = array();
-        if($dom_id == 'CardsContainer'){
-            $html[] = \Sequode\Component\Card\Kit\HTML::divider();
-        }
-        $html[] = $card->html;
-        $js[] = self::addIntoDom($dom_id, implode(' ',$html), 'replace');
-        $js[] = $card->js;
-        return implode(' ',$js);
-    }
-    public static function placeDeck($deck, $dom_id = 'CardsContainer', $clear=true, $divide=true, $shim=true){
-        $html = $js = array();
-        if($divide != false){
-            $html[] = \Sequode\Component\Card\Kit\HTML::divider(($shim != false) ? false : true);
-        }
-        foreach($deck as $card){
-            if(isset($card->html)){
-                $html[] = $card->html;
-            }
-        }
-        $js[] = self::addIntoDom($dom_id, implode(($shim != false) ? \Sequode\Component\Card\Kit\HTML::shim(false,false) : '',$html), ($clear != false) ? 'replace' : 'append');
-        foreach($deck as $card){
-            if(isset($card->js)){
-                $js[] = $card->js;
-            }
-        }
-        return implode(' ',$js);
-    }
     public static function googleAnalytics(){
         $js = array();
         $js[] = '(function(i,s,o,g,r,a,m){i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function(){';
