@@ -12,9 +12,9 @@ class SQDE_TokenCardObjects {
     }
     public static function menuItems(){
         $_o = array();
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Token','operations/token/newPackage');
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('My Tokens','cards/token/my');
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Tokens','cards/token/search');
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('New Token','operations/token/newPackage');
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('My Tokens','cards/token/my');
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Search Tokens','cards/token/search');
         return $_o;
     }
     
@@ -22,8 +22,8 @@ class SQDE_TokenCardObjects {
         $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         $_o = array();
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Details','cards/token/details',array($_model->id));
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Delete','cards/token/delete',array($_model->id));
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Details','cards/token/details',array($_model->id));
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Delete','cards/token/delete',array($_model->id));
         return $items;
     }
     public static function details($_model = null){
@@ -46,7 +46,7 @@ class SQDE_TokenCardObjects {
         $_o->body[] = $_model->token;
         
         
-        $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/token/details'));
+        $_o->body[] = \Sequode\Component\Card\CardKit::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/token/details'));
         if(SQDE_UserAuthority::isSystemOwner()){
             $_o->body[] = \Sequode\Component\Card\Kit\HTML::modelId($_model);
         }
@@ -69,7 +69,7 @@ class SQDE_TokenCardObjects {
             'js_action'=> \Sequode\Component\DOMElement\Kit\JS::onTapEventsXHRCall($dom_id, \Sequode\Component\DOMElement\Kit\JS::xhrCallObject('operations/token/newToken'))
         );
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'tokens','icon'=>'atom','card_route'=>'cards/token/my','details_route'=>'cards/token/details'));
+        $_o->body[] = \Sequode\Component\Card\CardKit::collectionCard((object) array('collection'=>'tokens','icon'=>'atom','card_route'=>'cards/token/my','details_route'=>'cards/token/details'));
         return $_o;
     }
     public static function search(){
@@ -92,7 +92,7 @@ class SQDE_TokenCardObjects {
             );
         }
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'token_search','icon'=>'atom','card_route'=>'cards/token/my','details_route'=>'cards/token/details'));
+        $_o->body[] = \Sequode\Component\Card\CardKit::collectionCard((object) array('collection'=>'token_search','icon'=>'atom','card_route'=>'cards/token/my','details_route'=>'cards/token/details'));
         return $_o;
     }
 }

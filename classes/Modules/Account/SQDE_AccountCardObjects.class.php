@@ -12,9 +12,9 @@ class SQDE_AccountCardObjects {
     }
     public static function menuItems(){
         $_o = array();
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Account Details','cards/account/details');
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Update Password','cards/account/updatePassword');
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Update Email','cards/account/updateEmail');
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Account Details','cards/account/details');
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Update Password','cards/account/updatePassword');
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Update Email','cards/account/updateEmail');
         return $_o;
     }
     public static function details(){
@@ -42,7 +42,7 @@ class SQDE_AccountCardObjects {
         if($dialog_store->step != 0){
             $_o->menu = (object) null;
             $_o->menu->items = array();
-            $_o->menu->items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}')));
+            $_o->menu->items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}')));
         }
         $_o->head = 'Account Password';
         $_o->body = array('');
@@ -60,7 +60,7 @@ class SQDE_AccountCardObjects {
             }
         }
         if($dialog_store->step != 0){
-            $_o->body[] = SQDE_CardComponent::resetDialogButton('operations/account/' . __FUNCTION__);
+            $_o->body[] = \Sequode\Component\Card\CardKit::resetDialogButton('operations/account/' . __FUNCTION__);
         }
         $_o->body[] = (object) array('js' => '$(\'.focus-input\').focus(); $(\'.focus-input\').select();');
         return $_o;    
@@ -75,7 +75,7 @@ class SQDE_AccountCardObjects {
         if($dialog_store->step != 0){
             $_o->menu = (object) null;
             $_o->menu->items = array();
-            $_o->menu->items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}')));
+            $_o->menu->items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}')));
         }
         $_o->head = 'Account Email';
         $_o->body = array('');
@@ -93,7 +93,7 @@ class SQDE_AccountCardObjects {
             }
         }
         if($dialog_store->step > 0){
-            $_o->body[] = SQDE_CardComponent::resetDialogButton('operations/account/' . __FUNCTION__);
+            $_o->body[] = \Sequode\Component\Card\CardKit::resetDialogButton('operations/account/' . __FUNCTION__);
         }
         $_o->body[] = (object) array('js' => '$(\'.focus-input\').focus(); $(\'.focus-input\').select();');
         return $_o;    

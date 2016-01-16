@@ -12,7 +12,7 @@ class SQDE_SessionCardObjects {
     }
     public static function menuItems(){
         $_o = array();
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Sessions','cards/session/search');
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Search Sessions','cards/session/search');
         return $_o;
     }
     public static function details($_model=null){
@@ -27,9 +27,9 @@ class SQDE_SessionCardObjects {
         $_o->menu->items =  array();
         
         
-        $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Delete Session','cards/session/delete',array($_model->id));
+        $items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Delete Session','cards/session/delete',array($_model->id));
         
-        $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/session/details'));
+        $_o->body[] = \Sequode\Component\Card\CardKit::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/session/details'));
         
         $_o->body = array();
         $dom_id = SQDE_Component::uniqueHash('','');
@@ -77,7 +77,7 @@ class SQDE_SessionCardObjects {
         $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Session Started');
         $_o->body[] = date('g:ia \o\n l jS F Y',$_model->session_start);
         $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Last Sign In');
-        $_o->body[] = SQDE_CardComponent::deleteInCollection((object) array('route'=>'operations/session/delete','model_id'=>$_model->id));
+        $_o->body[] = \Sequode\Component\Card\CardKit::deleteInCollection((object) array('route'=>'operations/session/delete','model_id'=>$_model->id));
         $_o->body[] = \Sequode\Component\Card\Kit\HTML::modelId($_model);
         return $_o;
     }
@@ -101,7 +101,7 @@ class SQDE_SessionCardObjects {
             );
         }
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'session_search','icon'=>'atom','card_route'=>'cards/session/search','details_route'=>'cards/session/details'));
+        $_o->body[] = \Sequode\Component\Card\CardKit::collectionCard((object) array('collection'=>'session_search','icon'=>'atom','card_route'=>'cards/session/search','details_route'=>'cards/session/details'));
         return $_o;
     }
 }

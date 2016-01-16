@@ -13,10 +13,10 @@ class SQDE_SequodeCardObjects {
     public static function menuItems(){
         $dom_id = SQDE_Component::uniqueHash('','');
         $_o = array();
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Sequode','operations/sequode/newSequence');
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('My Sequodes','cards/sequode/my');
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Sequodes','cards/sequode/search');
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Favorited Sequodes','cards/sequode/favorites');
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('New Sequode','operations/sequode/newSequence');
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('My Sequodes','cards/sequode/my');
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Search Sequodes','cards/sequode/search');
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Favorited Sequodes','cards/sequode/favorites');
         return $_o;
     }
     public static function modelOperationsMenuItems($filter='', $_model = null){
@@ -24,43 +24,43 @@ class SQDE_SequodeCardObjects {
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         $items = array();
         if(SQDE_UserAuthority::canView($_model)){
-            $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Details','cards/sequode/details', array($_model->id));
+            $items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Details','cards/sequode/details', array($_model->id));
         }
         if(SQDE_UserAuthority::isInSequodeFavorites($_model)){
-            $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Remove From Favorited','operations/account/removeFromSequodeFavorites', array($_model->id));
+            $items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Remove From Favorited','operations/account/removeFromSequodeFavorites', array($_model->id));
         }else{
-            $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Add To Favorited','operations/account/addToSequodeFavorites', array($_model->id));
+            $items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Add To Favorited','operations/account/addToSequodeFavorites', array($_model->id));
         }
         if(SQDE_SequodeAuthority::isSequence($_model)){
             
-            $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('View Chart','cards/sequode/chart', array($_model->id));
+            $items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('View Chart','cards/sequode/chart', array($_model->id));
             
             if(SQDE_UserAuthority::canEdit($_model)){
-                $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Edit Chart','cards/sequode/sequencer', array($_model->id));
+                $items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Edit Chart','cards/sequode/sequencer', array($_model->id));
             }
             if(SQDE_UserAuthority::canEdit($_model)){
                 if(!SQDE_SequodeAuthority::isEmptySequence($_model)){
-                    $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Empty Sequence','operations/sequode/emptySequence', array($_model->id));
+                    $items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Empty Sequence','operations/sequode/emptySequence', array($_model->id));
                 }
             }
             if(SQDE_UserAuthority::canEdit($_model)){
                 if(!SQDE_SequodeAuthority::isEmptySequence($_model)){
-                    $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Restore To Default','operations/sequode/formatSequence', array($_model->id));
+                    $items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Restore To Default','operations/sequode/formatSequence', array($_model->id));
                 }
             }
             if(SQDE_UserAuthority::canCopy($_model)){
                 if(!SQDE_SequodeAuthority::isEmptySequence($_model)){
-                    $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Clone','operations/sequode/cloneSequence', array($_model->id));
+                    $items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Clone','operations/sequode/cloneSequence', array($_model->id));
                 }
             }
             if(SQDE_UserAuthority::canEdit($_model)){
                 if(!SQDE_SequodeAuthority::isEmptySequence($_model)){
-                    $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Internal Forms','cards/sequode/internalForms', array($_model->id));
+                    $items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Internal Forms','cards/sequode/internalForms', array($_model->id));
                 }
             }
             if(SQDE_UserAuthority::canDelete($_model)){
                 if(SQDE_SequodeAuthority::isEmptySequence($_model)){
-                    $items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Delete','operations/sequode/deleteSequence', array($_model->id));
+                    $items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Delete','operations/sequode/deleteSequence', array($_model->id));
                 }
             }
         }
@@ -141,10 +141,10 @@ class SQDE_SequodeCardObjects {
             $_o->body[] = (object) array('html' => $html, 'js' => $js);
         }
         if(SQDE_SequodeAuthority::isSequence() && !SQDE_SequodeAuthority::isEmptySequence()){
-            $_o->body[] = SQDE_CardComponent::onTapEventsXHRCallButton('View Chart','cards/sequode/chart', array($_model->id));
+            $_o->body[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallButton('View Chart','cards/sequode/chart', array($_model->id));
         } 
         if(SQDE_SequodeAuthority::isSequence() && SQDE_UserAuthority::canEdit($_model)){
-            $_o->body[] =  SQDE_CardComponent::onTapEventsXHRCallButton('Edit Chart','cards/sequode/sequencer', array($_model->id));
+            $_o->body[] =  \Sequode\Component\Card\CardKit::onTapEventsXHRCallButton('Edit Chart','cards/sequode/sequencer', array($_model->id));
             //$dom_id = SQDE_Component::uniqueHash('','');
             //$html = $js = array();
            // $html = '<div class="subline" id="'.$dom_id.'">More info</div>';
@@ -218,7 +218,7 @@ class SQDE_SequodeCardObjects {
             $_o->body[] = '';
         }
         
-        $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/sequode/details'));
+        $_o->body[] = \Sequode\Component\Card\CardKit::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/sequode/details'));
         
         if(SQDE_UserAuthority::isSystemOwner()){
             $_o->body[] = \Sequode\Component\Card\Kit\HTML::modelId($_model);
@@ -419,7 +419,7 @@ class SQDE_SequodeCardObjects {
             );
         }
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'sequode_search','icon'=>'sequode','card_route'=>'cards/sequode/search','details_route'=>'cards/sequode/details'));
+        $_o->body[] = \Sequode\Component\Card\CardKit::collectionCard((object) array('collection'=>'sequode_search','icon'=>'sequode','card_route'=>'cards/sequode/search','details_route'=>'cards/sequode/details'));
         return $_o;
     }
     public static function my(){
@@ -441,7 +441,7 @@ class SQDE_SequodeCardObjects {
         );
         
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'my_sequodes','icon'=>'sequode','card_route'=>'cards/sequode/my','details_route'=>'cards/sequode/details'));
+        $_o->body[] = \Sequode\Component\Card\CardKit::collectionCard((object) array('collection'=>'my_sequodes','icon'=>'sequode','card_route'=>'cards/sequode/my','details_route'=>'cards/sequode/details'));
         return $_o;
     }
     public static function favorites(){
@@ -463,7 +463,7 @@ class SQDE_SequodeCardObjects {
         );
         
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'sequode_favorites','icon'=>'sequode','card_route'=>'cards/sequode/favorites','details_route'=>'cards/sequode/details'));
+        $_o->body[] = \Sequode\Component\Card\CardKit::collectionCard((object) array('collection'=>'sequode_favorites','icon'=>'sequode','card_route'=>'cards/sequode/favorites','details_route'=>'cards/sequode/details'));
         return $_o;
     }
 }

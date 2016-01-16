@@ -12,17 +12,17 @@ class SQDE_PackageCardObjects {
     }
     public static function menuItems(){
         $_o = array();
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('New Package','operations/package/newPackage');
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('My Packages','cards/package/my');
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Search Sequodes','cards/package/search');
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('New Package','operations/package/newPackage');
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('My Packages','cards/package/my');
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Search Sequodes','cards/package/search');
         return $_o;
     }
     public static function modelOperationsMenuItems($filter='', $_model = null){
         $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         $_o = array();
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Details','cards/package/details',array($_model->id));
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Delete','cards/package/delete',array($_model->id));
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Details','cards/package/details',array($_model->id));
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Delete','cards/package/delete',array($_model->id));
         return $_o;
     }
     public static function details($_model = null){
@@ -47,7 +47,7 @@ class SQDE_PackageCardObjects {
         $_o->body[] = $_model->token;
         $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('<a target="_blank" href="/source/'.$_model->token.'">Download</a>');
         
-        $_o->body[] = SQDE_CardComponent::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/package/details'));
+        $_o->body[] = \Sequode\Component\Card\CardKit::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/package/details'));
         if(SQDE_UserAuthority::isSystemOwner()){
             $_o->body[] = \Sequode\Component\Card\Kit\HTML::modelId($_model);
         }
@@ -70,7 +70,7 @@ class SQDE_PackageCardObjects {
             'js_action'=> \Sequode\Component\DOMElement\Kit\JS::onTapEventsXHRCall($dom_id, \Sequode\Component\DOMElement\Kit\JS::xhrCallObject('operations/package/newPackage'))
         );
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'packages','icon'=>'atom','card_route'=>'cards/package/my','details_route'=>'cards/package/details'));
+        $_o->body[] = \Sequode\Component\Card\CardKit::collectionCard((object) array('collection'=>'packages','icon'=>'atom','card_route'=>'cards/package/my','details_route'=>'cards/package/details'));
         return $_o;
     }
     public static function search(){
@@ -93,7 +93,7 @@ class SQDE_PackageCardObjects {
             );
         }
         $_o->body = array();
-        $_o->body[] = SQDE_CardComponent::collectionCard((object) array('collection'=>'package_search','icon'=>'atom','card_route'=>'cards/package/search','details_route'=>'cards/package/details'));
+        $_o->body[] = \Sequode\Component\Card\CardKit::collectionCard((object) array('collection'=>'package_search','icon'=>'atom','card_route'=>'cards/package/search','details_route'=>'cards/package/details'));
         return $_o;
     }
 }

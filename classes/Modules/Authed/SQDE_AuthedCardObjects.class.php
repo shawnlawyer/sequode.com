@@ -12,7 +12,7 @@ class SQDE_AuthedCardObjects {
     }
     public static function menuItems(){
         return array(
-            SQDE_CardComponent::onTapEventsXHRCallMenuItem('Logout','operations/authed/logout')
+            \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Logout','operations/authed/logout')
         );
     }
 }

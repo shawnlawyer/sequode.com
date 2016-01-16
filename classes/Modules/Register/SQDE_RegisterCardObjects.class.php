@@ -12,7 +12,7 @@ class SQDE_RegisterCardObjects {
     }
     public static function menuItems(){
         $_o = array();
-        $_o[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Signup','cards/register/signup');
+        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Signup','cards/register/signup');
         return $_o;
     }
     public static function signup(){
@@ -28,7 +28,7 @@ class SQDE_RegisterCardObjects {
         if($dialog_store->step != 0){
             $_o->menu = (object) null;
             $_o->menu->items = array();
-            $_o->menu->items[] = SQDE_CardComponent::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}')));
+            $_o->menu->items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}')));
         }
         $_o->head = ' Create Account';
         $_o->body = array('');
@@ -46,7 +46,7 @@ class SQDE_RegisterCardObjects {
             }
         }
         if($dialog_store->step != 0){
-            $_o->body[] = SQDE_CardComponent::resetDialogButton('operations/register/' . __FUNCTION__);
+            $_o->body[] = \Sequode\Component\Card\CardKit::resetDialogButton('operations/register/' . __FUNCTION__);
         }
         $_o->body[] = (object) array('js' => '$(\'.focus-input\').focus(); $(\'.focus-input\').select();');
         return $_o;    
