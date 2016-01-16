@@ -9,6 +9,6 @@ class SQDE_RegisterCardsXHR {
 		'signup' => 'signup'
     );
     public static function signup($dom_id = 'CardsContainer'){
-        return \Sequode\Component\DOMElement\Kit\JS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
+        return \Sequode\Component\Card\Kit\JS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__), $dom_id);
     }
 }
