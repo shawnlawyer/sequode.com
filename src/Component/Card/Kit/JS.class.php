@@ -8,7 +8,7 @@ class JS {
             $html[] = \Sequode\Component\Card\Kit\HTML::divider();
         }
         $html[] = $card->html;
-        $js[] = self::addIntoDom($dom_id, implode(' ',$html), 'replace');
+        $js[] = \Sequode\Component\DOMElement\Kit\JS::addIntoDom($dom_id, implode(' ',$html), 'replace');
         $js[] = $card->js;
         return implode(' ',$js);
     }
@@ -22,7 +22,7 @@ class JS {
                 $html[] = $card->html;
             }
         }
-        $js[] = self::addIntoDom($dom_id, implode(($shim != false) ? \Sequode\Component\Card\Kit\HTML::shim(false,false) : '',$html), ($clear != false) ? 'replace' : 'append');
+        $js[] = \Sequode\Component\DOMElement\Kit\JS::addIntoDom($dom_id, implode(($shim != false) ? \Sequode\Component\Card\Kit\HTML::shim(false,false) : '',$html), ($clear != false) ? 'replace' : 'append');
         foreach($deck as $card){
             if(isset($card->js)){
                 $js[] = $card->js;
