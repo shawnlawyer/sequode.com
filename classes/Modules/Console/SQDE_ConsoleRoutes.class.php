@@ -147,6 +147,7 @@ class SQDE_ConsoleRoutes{
                     'js/SQDE_EventsKit.js',
                     'js/SQDE_ShapesKit.js',
                     'js/SQDE_CardsKit.js',
+                    'js/SQDE_Cards.js',
                     'js/SQDE_XHR.js',
                     'js/SQDE_Model.js',
                     'js/SQDE_ModelEnds.js',
