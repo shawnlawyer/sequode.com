@@ -1,5 +1,6 @@
 <?php
-class SQDE_Component {
+namespace Sequode\Component\FormInput;
+class FormInput {
 
 	public static function uniqueHash($seed='',$prefix='SQDE'){
 		$number = explode(" ", microtime());
@@ -482,7 +483,7 @@ class SQDE_Component {
 	public static function model($replace = false){
         static $model;  
         if(!is_object($model) || ($replace != false && $replace == null)){
-            $model = new SQDE_Components;
+            $model = new \Sequode\Component\FormInput\FormInputs;
         }elseif($replace != false){
             $model = $replace;
         }
@@ -492,15 +493,15 @@ class SQDE_Component {
         return (self::model(null)->exists($value,$by)) ? true : false ;
     }
 	public static function render($component_object, $component_model = null, $sequode_model = null){
-        if($component_model != null ){ SQDE_Component::model($component_model); }
+        if($component_model != null ){ \Sequode\Component\FormInput\FormInput::model($component_model); }
         if($sequode_model != null ){ SQDE_Sequode::model($sequode_model); }
         if($component_object->Component == 'checkboxSwitch' && !isset($component_object->On_Value)){
-            SQDE_Component::exists('checkboxSwitch','name');
-            $component_object = json_decode(SQDE_Component::model()->component_object);
-        }elseif((!isset($component_object->Component) || SQDE_Component::exists($component_object->Component,'name')) && !isset(SQDE_Component::model()->component)){
-            SQDE_Component::exists('str','name');
-            $component_object = json_decode(SQDE_Component::model()->component_object);
+            \Sequode\Component\FormInput\FormInput::exists('checkboxSwitch','name');
+            $component_object = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
+        }elseif((!isset($component_object->Component) || \Sequode\Component\FormInput\FormInput::exists($component_object->Component,'name')) && !isset(\Sequode\Component\FormInput\FormInput::model()->component)){
+            \Sequode\Component\FormInput\FormInput::exists('str','name');
+            $component_object = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         }
-		return forward_static_call_array(array('SQDE_Component',SQDE_Component::model()->component), array($component_object));
+		return forward_static_call_array(array('\Sequode\Component\FormInput\FormInput',\Sequode\Component\FormInput\FormInput::model()->component), array($component_object));
     }
 }

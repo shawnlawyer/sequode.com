@@ -346,7 +346,7 @@ class SQDE_SequodeOperationsKit{
                     if($type == 'property' && $loop_member == 'Run_Process'){
                         $form_object->$loop_member = json_decode('{"Component":"checkboxSwitch","Label":"Run Process","On_Value":"true","On_Text":"On","Off_Value":"false","Off_Text":"Off","Value":"false"}');
                     }else{
-                        $component = new SQDE_Components();
+                        $component = new \Sequode\Component\FormInput\FormInputs();
                         $component->exists('str','name');
                         $form_object->$loop_member = json_decode($component->component_object);
                         $form_object->$loop_member->Label = $loop_member;

@@ -99,7 +99,7 @@ class JS {
 	}
     public static function loadComponentHere($call_object, $contents='', $icon = 'atom'){
         $html = $js = array();
-        $dom_id = \SQDE_Component::uniqueHash();
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash();
         
         $html[] = '<span id="'.$dom_id.'c">';
         $html[] = '<span class="automagic-card-text-button" id="'.$dom_id.'b">';

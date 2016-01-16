@@ -5,8 +5,8 @@ class SQDE_UserFormComponentObjects{
         $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         $_o = (object) null;
         
-        SQDE_Component::exists('password','name');
-		$_o->password = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('password','name');
+		$_o->password = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $_o->password->Label = 'Password';
         $_o->password->Value = '';
         $_o->password->Width = 200;
@@ -18,14 +18,14 @@ class SQDE_UserFormComponentObjects{
         $_model = ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : $_model;
         $_o = (object) null;
         
-        SQDE_Component::exists('str','name');
-		$_o->email = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('str','name');
+		$_o->email = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $_o->email->Label = 'Email';
         $_o->email->Value = $_model->email;
         $_o->email->Width = 200;
         
-        SQDE_Component::exists('password','name');
-		$_o->password = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('password','name');
+		$_o->password = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $_o->password->Label = 'Password';
         $_o->password->Value = '';
         $_o->password->Width = 200;
@@ -37,31 +37,31 @@ class SQDE_UserFormComponentObjects{
         
         $_o = (object) null;
         
-        SQDE_Component::exists('str','name');
-        $_o->search = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('str','name');
+        $_o->search = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $_o->search->Label = '';
         $_o->search->Value = '';
         $_o->search->Width = 200;
         $_o->search->CSS_Class = 'search-sequodes-input';
         
-        SQDE_Component::exists('select','name');
-        $_o->position = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('select','name');
+        $_o->position = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $_o->position->Label = '';
         $_o->position->Values = "[{'value':'=%','printable':'Starts With'},{'value':'%=%','printable':'Contains'},{'value':'%=','printable':'Ends With'},{'value':'=','printable':'Exact'}]";
         $_o->position->Value = '=%';
         $_o->position->Value_Key = 'value';
         $_o->position->Printable_Key = 'printable';
         
-        SQDE_Component::exists('select','name');
-        $_o->field = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('select','name');
+        $_o->field = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $_o->field->Label = '';
         $_o->field->Values = "[{'value':'username','printable':'Search By Username'},{'value':'email','printable':'Search By Email'}]";
         $_o->field->Value = 'username';
         $_o->field->Value_Key = 'value';
         $_o->field->Printable_Key = 'printable';
         
-        SQDE_Component::exists('select','name');
-        $_o->active = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('select','name');
+        $_o->active = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $_o->active->Label = '';
         $_o->active->Values = "[{'value':'all','printable':'Any'},{'value':'0','printable':'Unactivated'},{'value':'1','printable':'Active'},{'value':'2','printable':'Deactivated'}]";
         $_o->active->Value = 'all';
@@ -75,8 +75,8 @@ class SQDE_UserFormComponentObjects{
         foreach( $roles_model->all as $object){
             $values[] = '{\'value\':\''.$object->id.'\',\'printable\':\''.$object->name.'\'}';
         }
-        SQDE_Component::exists('select','name');
-        $_o->role = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('select','name');
+        $_o->role = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $_o->role->Label = '';
         $_o->role->Values = '[' . implode(',',$values) . ']';
         $_o->role->Value = 'all';
@@ -93,8 +93,8 @@ class SQDE_UserFormComponentObjects{
         foreach( $roles_model->all as $object){
             $values[] = '{\'value\':\''.$object->id.'\',\'printable\':\''.$object->name.'\'}';
         }
-        SQDE_Component::exists('select','name');
-        $_o->role = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('select','name');
+        $_o->role = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $_o->role->Label = '';
         $_o->role->Values = '[' . implode(',',$values) . ']';
         $_o->role->Value = SQDE_User::model()->role_id;
@@ -107,8 +107,8 @@ class SQDE_UserFormComponentObjects{
         $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : $_model;
         $_o = (object) null;
-        SQDE_Component::exists('checkboxSwitch','name');
-        $_o->active = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('checkboxSwitch','name');
+        $_o->active = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $_o->active->Label = '';
         $_o->active->On_Text = 'Active';
         $_o->active->On_Value = 1;
@@ -122,8 +122,8 @@ class SQDE_UserFormComponentObjects{
         $_model = ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : $_model;
         $_o = (object) null;
         
-        SQDE_Component::exists('str','name');
-		$_o->username = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('str','name');
+		$_o->username = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $_o->username->Label = '';
         $_o->username->Value = $_model->username;
         $_o->username->Width = 200;

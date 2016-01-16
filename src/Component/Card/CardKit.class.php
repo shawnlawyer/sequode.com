@@ -3,7 +3,7 @@ namespace Sequode\Component\Card;
 class CardKit {
     public static function collectionTile($package, $headline=''){
         $user_model = \SQDE_AuthenticatedUser::model();
-        $dom_id = \SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         $html = $js = array();
         $context = \Sequode\ModuleRegistry::model($package)->context;
         $_models = \SQDE_AccountOperations::getOwnedModels($package, $user_model, 'id,name')->all;
@@ -28,7 +28,7 @@ class CardKit {
         )){
             return (object) array('html' => '', 'js' => '');
         }
-        $dom_id = \SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         $html = $js = array();
         
         $html[] = '<div  class="fitBlock alignCenter" id="'.$dom_id.'"></div>';
@@ -50,7 +50,7 @@ class CardKit {
             return (object) array('html' => '', 'js' => '');
         }
         $html = $js = array();
-        $dom_id = \SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         $html[] = '<span class="automagic-card-next noSelect " id="'.$dom_id.'"></span>';
         if(isset($component->model_id) && isset($component->details_route)){
             $js[] = 'var next_id = registry.nextNode(registry.collection(registry.active_collection), \''.$component->model_id.'\');';
@@ -69,14 +69,14 @@ class CardKit {
         )){ 
             return (object) array('html' => '', 'js' => '');
         }
-        $dom_id = \SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         $html = $js = array();
         $html[] = '<span class="automagic-card-delete noSelect " id="'.$dom_id.'">x</span>';
         $js[] = \Sequode\Component\DOMElement\Kit\JS::onTapEventsXHRCall($dom_id, \Sequode\Component\DOMElement\Kit\JS::xhrCallObject($component->route, array($component->model_id)));
         return (object) array('html' => implode('',$html),'js' => implode('',$js));
     }
     public static function onTapEventsXHRCallMenuItem($contents, $route, $inputs=null, $callback=null){
-        $dom_id = \SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         return array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
@@ -85,14 +85,14 @@ class CardKit {
         );
     }
     public static function resetDialogButton($route){
-        $dom_id = \SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         $html = $js = array();
         $html[] = '<span class="btn" id="'.$dom_id.'">Reset</span>';
         $js[] = \Sequode\Component\DOMElement\Kit\JS::onTapEventsXHRCall($dom_id, \Sequode\Component\DOMElement\Kit\JS::xhrCallObject($route, array(\Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}'))));
         return (object) array('html' => implode('',$html),'js' => implode('',$js));
     }
     public static function onTapEventsXHRCallButton($contents, $route, $inputs=null, $callback=null){
-        $dom_id = \SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         $html = $js = array();
         $html[] = '<span class="btn" id="'.$dom_id.'">'.$contents.'</span>';
         $js[] = \Sequode\Component\DOMElement\Kit\JS::onTapEventsXHRCall($dom_id, \Sequode\Component\DOMElement\Kit\JS::xhrCallObject($route,$inputs,$callback));

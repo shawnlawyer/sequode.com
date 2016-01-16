@@ -5,8 +5,8 @@ class SQDE_SequodeFormComponentObjects   {
         
         $components_object = (object) null;
         
-        SQDE_Component::exists('str','name');
-        $components_object->name = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('str','name');
+        $components_object->name = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $components_object->name->Label = '';
         $components_object->name->Value = SQDE_Sequode::model()->name;
         $components_object->name->Width = 200;
@@ -20,8 +20,8 @@ class SQDE_SequodeFormComponentObjects   {
         
         $components_object = (object) null;
         
-        SQDE_Component::exists('text','name');
-        $components_object->description = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('text','name');
+        $components_object->description = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $components_object->description->Label = '';
         $components_object->description->Value = @json_decode(SQDE_Sequode::model()->detail)->description;
         $components_object->description->Width = 30;
@@ -35,23 +35,23 @@ class SQDE_SequodeFormComponentObjects   {
         
         $components_object = (object) null;
         
-        SQDE_Component::exists('str','name');
-        $components_object->search = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('str','name');
+        $components_object->search = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $components_object->search->Label = '';
         $components_object->search->Value = '';
         $components_object->search->Width = 200;
         $components_object->search->CSS_Class = 'search-sequodes-input';
         
-        SQDE_Component::exists('select','name');
-        $components_object->position = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('select','name');
+        $components_object->position = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $components_object->position->Label = '';
         $components_object->position->Values = "[{'value':'=%','printable':'Starts With'},{'value':'%=%','printable':'Contains'},{'value':'%=','printable':'Ends With'},{'value':'=','printable':'Exact'}]";
         $components_object->position->Value = '=%';
         $components_object->position->Value_Key = 'value';
         $components_object->position->Printable_Key = 'printable';
         
-        SQDE_Component::exists('checkboxSwitch','name');
-        $components_object->coded = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('checkboxSwitch','name');
+        $components_object->coded = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $components_object->coded->Label = '';
         $components_object->coded->On_Text = 'Coded';
         $components_object->coded->On_Value = 1;
@@ -59,7 +59,7 @@ class SQDE_SequodeFormComponentObjects   {
         $components_object->coded->Off_Value = 0;
         $components_object->coded->Value = 1;
         
-        $components_object->sequenced = json_decode(SQDE_Component::model()->component_object);
+        $components_object->sequenced = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $components_object->sequenced->Label = '';
         $components_object->sequenced->On_Text = 'Sequenced';
         $components_object->sequenced->On_Value = 1;
@@ -67,7 +67,7 @@ class SQDE_SequodeFormComponentObjects   {
         $components_object->sequenced->Off_Value = 0;
         $components_object->sequenced->Value = 1;
         
-        $components_object->my_sequodes = json_decode(SQDE_Component::model()->component_object);
+        $components_object->my_sequodes = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $components_object->my_sequodes->Label = '';
         $components_object->my_sequodes->On_Text = 'My Sequodes';
         $components_object->my_sequodes->On_Value = 1;
@@ -75,7 +75,7 @@ class SQDE_SequodeFormComponentObjects   {
         $components_object->my_sequodes->Off_Value = 0;
         $components_object->my_sequodes->Value = 1;
         
-        $components_object->shared_sequodes = json_decode(SQDE_Component::model()->component_object);
+        $components_object->shared_sequodes = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $components_object->shared_sequodes->Label = '';
         $components_object->shared_sequodes->On_Text = 'Shared Sequodes';
         $components_object->shared_sequodes->On_Value = 1;
@@ -114,8 +114,8 @@ class SQDE_SequodeFormComponentObjects   {
                 return;
         }
 		
-		SQDE_Component::exists($values_object->Component,'name');
-		$components_object = json_decode(SQDE_Component::model()->component_form_object);
+		\Sequode\Component\FormInput\FormInput::exists($values_object->Component,'name');
+		$components_object = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_form_object);
 		foreach($components_object as $component_member => $component_object){
 			if(isset($values_object->$component_member)){
 				$components_object->$component_member->Value = $values_object->$component_member;
@@ -130,8 +130,8 @@ class SQDE_SequodeFormComponentObjects   {
     public static function tenancy($sequode_model = null){
         if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
         $components_object = (object) null;
-        SQDE_Component::exists('checkboxSwitch','name');
-        $components_object->sharing = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('checkboxSwitch','name');
+        $components_object->sharing = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $components_object->sharing->Label = '';
         $components_object->sharing->On_Text = 'Dedicated Tenancy';
         $components_object->sharing->On_Value = 1;
@@ -143,8 +143,8 @@ class SQDE_SequodeFormComponentObjects   {
     public static function sharing($sequode_model = null){
         if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
         $components_object = (object) null;
-        SQDE_Component::exists('checkboxSwitch','name');
-        $components_object->sharing = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('checkboxSwitch','name');
+        $components_object->sharing = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $components_object->sharing->Label = '';
         $components_object->sharing->On_Text = 'Publicly Shared';
         $components_object->sharing->On_Value = 1;
@@ -156,8 +156,8 @@ class SQDE_SequodeFormComponentObjects   {
     public static function updateIsPalette($sequode_model = null){
         if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
         $components_object = (object) null;
-        SQDE_Component::exists('checkboxSwitch','name');
-        $components_object->palette = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('checkboxSwitch','name');
+        $components_object->palette = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $components_object->palette->Label = '';
         $components_object->palette->On_Text = 'Shown in Palettes';
         $components_object->palette->On_Value = 1;
@@ -169,8 +169,8 @@ class SQDE_SequodeFormComponentObjects   {
     public static function updateIsPackage($sequode_model = null){
         if($sequode_model == null ){ $sequode_model = SQDE_Sequode::model(); }
         $components_object = (object) null;
-        SQDE_Component::exists('checkboxSwitch','name');
-        $components_object->package = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('checkboxSwitch','name');
+        $components_object->package = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $components_object->package->Label = '';
         $components_object->package->On_Text = 'Useable As Package';
         $components_object->package->On_Value = 1;
@@ -203,8 +203,8 @@ class SQDE_SequodeFormComponentObjects   {
         foreach( $sequodes_model->all as $object){
             $values[] = '{\'value\':\''.$object->id.'\',\'printable\':\''.$object->name.'\'}';
         }
-        SQDE_Component::exists('select','name');
-        $components_object->palette = json_decode(SQDE_Component::model()->component_object);
+        \Sequode\Component\FormInput\FormInput::exists('select','name');
+        $components_object->palette = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $components_object->palette->Label = '';
         $components_object->palette->Values = '[' . implode(',',$values) . ']';
         $components_object->palette->Value = '0';

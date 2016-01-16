@@ -32,7 +32,7 @@ class SQDE_SessionCardObjects {
         $_o->body[] = \Sequode\Component\Card\CardKit::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/session/details'));
         
         $_o->body = array();
-        $dom_id = SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         $html = $js = array();
         $js[] = \Sequode\Component\DOMElement\Kit\JS::documentEventOff('keydown');
         $js[] = '$(document).on(\'keydown\',(function(e){';

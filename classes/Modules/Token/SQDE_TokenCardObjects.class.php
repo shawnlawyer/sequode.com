@@ -61,7 +61,7 @@ class SQDE_TokenCardObjects {
         $_o->menu = (object) null;
         $_o->menu->items =  array();
         
-        $dom_id = SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         $_o->menu->items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,

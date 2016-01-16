@@ -11,7 +11,7 @@ class SQDE_SequodeCardObjects {
         return $_o;
     }
     public static function menuItems(){
-        $dom_id = SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         $_o = array();
         $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('New Sequode','operations/sequode/newSequence');
         $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('My Sequodes','cards/sequode/my');
@@ -76,7 +76,7 @@ class SQDE_SequodeCardObjects {
         $_o->icon_type = 'card-icon';
         $_o->icon_background = 'atom-icon-background';
         $_o->size = 'medium';
-        $dom_id = SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         $components = \Sequode\ModuleForm::render(self::$package,'componentSettings', array($type, $member, $dom_id));
         $_o->body = array();
         $_o->body[] = '<div id="' . $dom_id . '">';
@@ -134,7 +134,7 @@ class SQDE_SequodeCardObjects {
         $_o->body[] = (SQDE_UserAuthority::canEdit()) ? \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/sequode/description', array($_model->id)), $text, 'settings') : $text;
         
         if(SQDE_SequodeAuthority::isCode() && $_model->owner_id == 8){
-            $dom_id = SQDE_Component::uniqueHash('','');
+            $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
             $html = $js = array();
             $html = '<div class="subline" id="'.$dom_id.'">More info</div>';
             $js = \Sequode\Component\DOMElement\Kit\JS::onTapEvents($dom_id, 'var win = window.open(\'http://php.net/'.$_model->name.'\', \'_blank\'); win.focus();');
@@ -145,7 +145,7 @@ class SQDE_SequodeCardObjects {
         } 
         if(SQDE_SequodeAuthority::isSequence() && SQDE_UserAuthority::canEdit($_model)){
             $_o->body[] =  \Sequode\Component\Card\CardKit::onTapEventsXHRCallButton('Edit Chart','cards/sequode/sequencer', array($_model->id));
-            //$dom_id = SQDE_Component::uniqueHash('','');
+            //$dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
             //$html = $js = array();
            // $html = '<div class="subline" id="'.$dom_id.'">More info</div>';
             //$js = \Sequode\Component\DOMElement\Kit\JS::onTapEvents($dom_id, 'var win = window.open(\'http://php.net/'.$_model->name.'\', \'_blank\'); win.focus();');
@@ -204,8 +204,8 @@ class SQDE_SequodeCardObjects {
                 $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock($type_title);
                 foreach($type_object as $member => $value){
                     $_o->body[] = $member . ' (' . $type_object_detail->$member->type. ') ' . (($type_object_detail->$member->required == true) ? 'required' : 'optional');
-                    SQDE_Component::exists($type_form_object->$member->Component,'name');
-                    $text = 'Form Component : '. SQDE_Component::model()->printable_name;
+                    \Sequode\Component\FormInput\FormInput::exists($type_form_object->$member->Component,'name');
+                    $text = 'Form Component : '. \Sequode\Component\FormInput\FormInput::model()->printable_name;
                     $_o->body[] = (SQDE_UserAuthority::canEdit()) ? \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('cards/sequode/componentSettings', array(Sequode\Component\Form\Form::jsQuotedValue($type), Sequode\Component\Form\Form::jsQuotedValue($member), $_model->id)), $text, 'settings') : $text;
                 }
             }
@@ -350,7 +350,7 @@ class SQDE_SequodeCardObjects {
             'css_classes'=>'automagic-card-menu-item-label noSelect',
             'contents'=>'Select Palette'
         );
-        $dom_id = SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         $items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
@@ -359,7 +359,7 @@ class SQDE_SequodeCardObjects {
         $_o->menu->items = array_merge($items,$_o->menu->items);
         
         $_o->body = array();
-        $dom_id = SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         $html = $js = array();
         $html[] = '<div class="SequencerStageContainer" id="'.$dom_id.'chart"></div>';
         $js[] = 'var sequencer;';
@@ -386,7 +386,7 @@ class SQDE_SequodeCardObjects {
         $_o->head = 'Sequode Chart &gt; View &gt; '.$_model->name;
         
         $_o->body = array();
-        $dom_id = SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         $html = $js = array();
         $html[] = '<div class="SequencerStageContainer" id="'.$dom_id.'chart"></div>';
         $js[] = 'var sequencer;';
@@ -432,7 +432,7 @@ class SQDE_SequodeCardObjects {
         
         $_o->head = 'My Sequodes';
         
-        $dom_id = SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         $_o->menu->items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,
@@ -454,7 +454,7 @@ class SQDE_SequodeCardObjects {
         
         $_o->head = 'Sequode Favorites';
         
-        $dom_id = SQDE_Component::uniqueHash('','');
+        $dom_id = \Sequode\Component\FormInput\FormInput::uniqueHash('','');
         $_o->menu->items[] = array(
             'css_classes'=>'automagic-card-menu-item noSelect',
             'id'=>$dom_id,

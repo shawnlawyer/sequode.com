@@ -1,5 +1,5 @@
 <?php
-class SQDE_Components extends \Sequode\Model\Database {
+class \Sequode\Component\FormInput\FormInputs extends \Sequode\Model\Database {
     public $database_connection     =   'system_database';
 	public $table 				    =	"components";   
 	public $usage_types			=	array(0=>"swing",1=>"logical");
