@@ -1,4 +1,4 @@
-var SQDE_SequodeCards = function(){
+var SQDE_Cards = function(){
 	var self = this;
     self.initialized = false;
     self.details_route = 'cards/sequode/details';
