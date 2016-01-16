@@ -240,7 +240,7 @@ class SQDE_SequodeCardObjects {
         
         $sequence = json_decode($_model->sequence);
         foreach($sequence as $loop_sequence_key => $loop_model_id){
-            $_o->body[] = SQDE_Cards::render(self::$package,'internalPositionForms',array($loop_sequence_key));
+            $_o->body[] = \Sequode\ModuleCard::render(self::$package,'internalPositionForms',array($loop_sequence_key));
         }
         if(SQDE_UserAuthority::isSystemOwner()){
             $_o->body[] = \Sequode\Component\Card\Kit\HTML::modelId($_model);

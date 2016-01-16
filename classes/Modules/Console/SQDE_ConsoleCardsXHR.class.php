@@ -2,7 +2,7 @@
 class SQDE_ConsoleCardsXHR {
     public static $package = 'Console';
     public static function index($dom_id = 'CardsContainer'){
-        return \Sequode\Component\Card\Kit\JS::placeCard(SQDE_Cards::render(self::$package,__FUNCTION__,array(SQDE_AuthenticatedUser::model())), $dom_id);
+        return \Sequode\Component\Card\Kit\JS::placeCard(\Sequode\ModuleCard::render(self::$package,__FUNCTION__,array(SQDE_AuthenticatedUser::model())), $dom_id);
     }
     public static function menus($dom_id = 'MenusContainer'){
         $html = $js = array();
@@ -12,7 +12,7 @@ class SQDE_ConsoleCardsXHR {
             if(isset($model->card_objects)){
                 if(in_array('menu',get_class_methods($model->card_objects))){
                     $i--;
-					$card = SQDE_Cards::render($package,'menu');
+					$card = \Sequode\ModuleCard::render($package,'menu');
                     $html[] = \Sequode\Component\Card\Kit\HTML::menuCardHidingContainer($card->html,$i);
                     $js[] = $card->js;
 				}

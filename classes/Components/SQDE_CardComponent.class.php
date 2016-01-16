@@ -87,7 +87,7 @@ class SQDE_CardComponent {
         $dom_id = SQDE_Component::uniqueHash('','');
         $html = $js = array();
         $html[] = '<span class="btn" id="'.$dom_id.'">Reset</span>';
-        $js[] = \Sequode\Component\DOMElement\Kit\JS::onTapEventsXHRCall($dom_id, \Sequode\Component\DOMElement\Kit\JS::xhrCallObject($route, array(Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}'))));
+        $js[] = \Sequode\Component\DOMElement\Kit\JS::onTapEventsXHRCall($dom_id, \Sequode\Component\DOMElement\Kit\JS::xhrCallObject($route, array(\Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}'))));
         return (object) array('html' => implode('',$html),'js' => implode('',$js));
     }
     public static function onTapEventsXHRCallButton($contents, $route, $inputs=null, $callback=null){
