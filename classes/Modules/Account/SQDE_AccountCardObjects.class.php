@@ -56,7 +56,7 @@ class SQDE_AccountCardObjects {
         }
         if(isset($step->forms)){
             foreach($step->forms as $form){
-                $_o->body = array_merge($_o->body, SQDE_Forms::render(self::$package, $form));
+                $_o->body = array_merge($_o->body, \Sequode\ModuleForm::render(self::$package, $form));
             }
         }
         if($dialog_store->step != 0){
@@ -89,7 +89,7 @@ class SQDE_AccountCardObjects {
         }
         if(isset($step->forms)){
             foreach($step->forms as $form){
-                $_o->body = array_merge($_o->body, SQDE_Forms::render(self::$package, $form));
+                $_o->body = array_merge($_o->body, \Sequode\ModuleForm::render(self::$package, $form));
             }
         }
         if($dialog_store->step > 0){

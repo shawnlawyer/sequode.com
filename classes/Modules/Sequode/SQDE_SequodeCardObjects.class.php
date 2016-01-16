@@ -77,7 +77,7 @@ class SQDE_SequodeCardObjects {
         $_o->icon_background = 'atom-icon-background';
         $_o->size = 'medium';
         $dom_id = SQDE_Component::uniqueHash('','');
-        $components = SQDE_Forms::render(self::$package,'componentSettings', array($type, $member, $dom_id));
+        $components = \Sequode\ModuleForm::render(self::$package,'componentSettings', array($type, $member, $dom_id));
         $_o->body = array();
         $_o->body[] = '<div id="' . $dom_id . '">';
         foreach($components as $component){
@@ -92,7 +92,7 @@ class SQDE_SequodeCardObjects {
         
         $_o = (object) null;
         $_o->head = 'Component';
-        $components = SQDE_Forms::render(self::$package,'sequode');
+        $components = \Sequode\ModuleForm::render(self::$package,'sequode');
         $_o->body = array();
         foreach($components as $component){
             $_o->body[] = $component->html;
@@ -324,7 +324,7 @@ class SQDE_SequodeCardObjects {
                 $text = $component->member;
                 $_o->body[] = \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/sequode/component', array(Sequode\Component\Form\Form::jsQuotedValue($component->type), $_model->id, $component->map_key)), $text, 'settings');
             }else{
-                $components_array = SQDE_Forms::render(self::$package,'component',array($component->type, $component->map_key, $_model));
+                $components_array = \Sequode\ModuleForm::render(self::$package,'component',array($component->type, $component->map_key, $_model));
                 foreach($components_array as $component_object){
                     $_o->body[] = $component_object;
                 }
@@ -407,7 +407,7 @@ class SQDE_SequodeCardObjects {
         $_o->menu = (object) null;
         $_o->menu->items = array();
         
-        $search_components_array = SQDE_Forms::render(self::$package,'search');
+        $search_components_array = \Sequode\ModuleForm::render(self::$package,'search');
         $_o->head = $search_components_array[0];
         array_shift($search_components_array);
         

@@ -74,7 +74,7 @@ class SQDE_UserCardObjects {
         $_o->menu = (object) null;
         $_o->menu->items = array();
         
-        $search_components_array = SQDE_Forms::render(self::$package,'search');
+        $search_components_array = \Sequode\ModuleForm::render(self::$package,'search');
         $_o->head = $search_components_array[0];
         array_shift($search_components_array);
         

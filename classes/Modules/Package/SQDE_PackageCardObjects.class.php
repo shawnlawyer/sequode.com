@@ -42,7 +42,7 @@ class SQDE_PackageCardObjects {
         $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Name');
         $_o->body[] = \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/package/name', array($_model->id)), $_model->name, 'settings');
         $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Package Sequode');
-        $_o->body[] = ($_model->sequode_id != 0 && SQDE_Sequode::exists($_model->sequode_id,'id')) ? \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/package/packageSequode', array($_model->id)), SQDE_Sequode::model()->name, 'settings') : SQDE_Forms::render(self::$package,'packageSequode')[0];
+        $_o->body[] = ($_model->sequode_id != 0 && SQDE_Sequode::exists($_model->sequode_id,'id')) ? \Sequode\Component\DOMElement\Kit\JS::loadComponentHere(\Sequode\Component\DOMElement\Kit\JS::xhrCallObject('forms/package/packageSequode', array($_model->id)), SQDE_Sequode::model()->name, 'settings') : \Sequode\ModuleForm::render(self::$package,'packageSequode')[0];
         $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Package Token');
         $_o->body[] = $_model->token;
         $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('<a target="_blank" href="/source/'.$_model->token.'">Download</a>');
@@ -81,7 +81,7 @@ class SQDE_PackageCardObjects {
         $_o->menu = (object) null;
         $_o->menu->items = array();
         
-        $search_components_array = SQDE_Forms::render(self::$package,'search');
+        $search_components_array = \Sequode\ModuleForm::render(self::$package,'search');
         $_o->head = $search_components_array[0];
         array_shift($search_components_array);
         
