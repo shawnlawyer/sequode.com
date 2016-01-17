@@ -47,7 +47,7 @@ class SQDE_RegisterFormComponentObjects   {
         \Sequode\Component\FormInput\FormInput::exists('text','name');
         $_o->terms = json_decode(\Sequode\Component\FormInput\FormInput::model()->component_object);
         $_o->terms->Label = '';
-        $_o->terms->Value = strip_tags(file_get_contents('terms-conditions.txt',true));
+        $_o->terms->Value = strip_tags(file_get_contents('text/terms-conditions.txt',true));
         $_o->terms->Width = 23;
         $_o->terms->Height = 18;
         
