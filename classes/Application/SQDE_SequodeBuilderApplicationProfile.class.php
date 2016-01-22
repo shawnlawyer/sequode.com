@@ -24,7 +24,7 @@ class SQDE_SequodeBuilderApplicationProfile {
         }
         
         foreach($modules as $module){
-            Sequode\ModuleRegistry::add('\\'.'SQDE_BlacklistIPPackage');
+            Sequode\ModuleRegistry::add($module);
         }
         
         $modules = Sequode\ModuleRegistry::models();
