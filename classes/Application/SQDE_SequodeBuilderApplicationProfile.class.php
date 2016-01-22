@@ -2,23 +2,28 @@
 
 class SQDE_SequodeBuilderApplicationProfile {
 	public static function model(){
-        Sequode\ModuleRegistry::add('\\'.'SQDE_ConsolePackage');
-        Sequode\ModuleRegistry::add('\\'.'SQDE_SitePackage');
+        $modules = array();
+        $modules['\\'.'SQDE_ConsolePackage'];
+        $modules['\\'.'SQDE_SitePackage'];
         
         if(SQDE_UserAuthority::isAuthenticated()){
-            Sequode\ModuleRegistry::add('\\'.'SQDE_AuthedPackage');
-            Sequode\ModuleRegistry::add('\\'.'SQDE_SequodePackage');
-            Sequode\ModuleRegistry::add('\\'.'SQDE_AccountPackage');
-            Sequode\ModuleRegistry::add('\\'.'SQDE_PackagePackage');
-            Sequode\ModuleRegistry::add('\\'.'SQDE_TokenPackage');
+            $modules['\\'.'SQDE_AuthedPackage'];
+            $modules['\\'.'SQDE_SequodePackage'];
+            $modules['\\'.'SQDE_AccountPackage'];
+            $modules['\\'.'SQDE_PackagePackage'];
+            $modules['\\'.'SQDE_TokenPackage'];
         }else{
-            Sequode\ModuleRegistry::add('\\'.'SQDE_AuthPackage');
-            Sequode\ModuleRegistry::add('\\'.'SQDE_RegisterPackage');
+            $modules['\\'.'SQDE_AuthPackage'];
+            $modules['\\'.'SQDE_RegisterPackage'];
         }
         
         if(SQDE_UserAuthority::isSystemOwner()){
-            Sequode\ModuleRegistry::add('\\'.'SQDE_SessionPackage');
-            Sequode\ModuleRegistry::add('\\'.'SQDE_UserPackage');
+            $modules['\\'.'SQDE_SessionPackage'];
+            $modules['\\'.'SQDE_UserPackage'];
+            $modules['\\'.'SQDE_BlacklistIPPackage'];
+        }
+        
+        foreach($modules as $module){
             Sequode\ModuleRegistry::add('\\'.'SQDE_BlacklistIPPackage');
         }
         
@@ -30,10 +35,9 @@ class SQDE_SequodeBuilderApplicationProfile {
             }
         }
         
-        $model = (object) null;
-        $model->routes = $routes;
-        $model->server_account = (SQDE_UserAuthority::isAuthenticated()) ? SQDE_AuthenticatedUser::model()->id : 2 ;
-        $model->module = 'SQDE_SequodeRestAPIServerModule';
-		return $model;
+        $_o = (object) null;
+        $_o->routes = $routes;
+        $_o->module = 'SQDE_SequodeRestAPIServerModule';
+		return $_o;
 	}
 }
