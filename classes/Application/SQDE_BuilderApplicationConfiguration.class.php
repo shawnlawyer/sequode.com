@@ -1,5 +1,5 @@
 <?php
-class SQDE_BuilderApplicationConfiguration {
+class SQDE_BuilderApplicationSettings {
 	
 	public static function model(){
         
