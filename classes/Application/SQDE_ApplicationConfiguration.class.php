@@ -4,7 +4,7 @@ class SQDE_ApplicationConfiguration {
         if(isset(\Sequode\ApplicationConfiguration::model()->database)){
             $this->database = (object) null;
             foreach(\Sequode\ApplicationConfiguration::model()->database as $member => $database){
-            $this->database->{$member . '_database'} = new \Sequode\Controller\Database\MySQL($database->host,$database->user,$database->password,$database->name);
+            $this->{$member . '_database'} = new \Sequode\Controller\Database\MySQL($database->host,$database->user,$database->password,$database->name);
             }
         }
     }
