@@ -50,24 +50,7 @@ class SQDE_BuilderApplicationConfiguration {
             "password":"N4tur4l#$(",
             "name":"sessions"
         }');
-                
-        $_o->database = (object) null;
-        $_o->database->system = $system_database;
-        $_o->database->sequodes = $sequodes_database;
-        $_o->database->accounts = $accounts_database;
-        $_o->database->sessions = $sessions_database;
         
-        $emailer = json_decode('{
-            "relay":"SMTP",
-            "auth":"true",
-            "host":"email-smtp.us-east-1.amazonaws.com",
-            "username":"AKIAJNA63ZDLQNFL4MDQ",
-            "password":"Aiw5Lc0HBIBNsEF1czQR1voTJmr/XsAK1yF5QoHd7aaP",
-            "security":"tls",
-            "port":"587"
-        }');
-        
-        $_o->emailer = $emailer;
         $_o->database = (object) null;
         $_o->database->system = $system_database;
         $_o->database->sequodes = $sequodes_database;
