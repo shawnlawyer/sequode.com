@@ -1,8 +1,7 @@
 <?php
+use Sequode\Model\Database as DatabaseModel;
 
-use \Sequode\Model\Database as SQLDatabaseTable;
-
-class SQDE_Users extends SQLDatabaseTable {
+class SQDE_Users extends DatabaseModel {
     public $database_connection     =   'accounts_database';
 	public $table                   =	'users';
     public function __construct() {

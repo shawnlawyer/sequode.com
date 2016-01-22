@@ -1,5 +1,7 @@
 <?php
-class SQDE_Packages extends \Sequode\Model\Database {
+use Sequode\Model\Database as DatabaseModel;
+
+class SQDE_Packages extends DatabaseModel {
     public $database_connection     =   'accounts_database';
 	public $table 					=	'packages';
 	public function __construct() {

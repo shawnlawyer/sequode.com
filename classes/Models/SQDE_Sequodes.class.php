@@ -1,5 +1,7 @@
 <?php
-class SQDE_Sequodes extends \Sequode\Model\Database {
+use Sequode\Model\Database as DatabaseModel;
+
+class SQDE_Sequodes extends DatabaseModel {
     public $database_connection     =   'sequodes_database';
 	public $table 					=	'sequodes';
 	public $stub_file_extension		=	'.sequode.php';

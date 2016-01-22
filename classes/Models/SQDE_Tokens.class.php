@@ -1,5 +1,7 @@
 <?php
-class SQDE_Tokens extends \Sequode\Model\Database {
+use Sequode\Model\Database as DatabaseModel;
+
+class SQDE_Tokens extends DatabaseModel {
     public $database_connection     =   'accounts_database';
 	public $table 					=	'tokens';
 	public function __construct() {

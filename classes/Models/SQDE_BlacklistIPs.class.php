@@ -1,5 +1,7 @@
 <?php
-class SQDE_BlacklistIPs extends \Sequode\Model\Database {
+use Sequode\Model\Database as DatabaseModel;
+
+class SQDE_BlacklistIPs extends DatabaseModel {
     public $database_connection     =   'sessions_database';
 	public $table                   =	'ip_blacklist';
 	public function __construct() {
