@@ -11,6 +11,4 @@ if(SQDE_Session::is('user_id')){
 
 Sequode\ApplicationProfile::model('\\SQDE_SequodeBuilderApplicationProfile');
 
-echo 'here';
-exit;
 //Sequode\ApplicationProfile::model($_SERVER['APPLICATION_PROFILE']);
