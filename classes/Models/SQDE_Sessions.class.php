@@ -1,5 +1,5 @@
 <?php
-use Sequode\Model\Database as DatabaseModel
+use Sequode\Model\Database as DatabaseModel;
 
 class SQDE_Sessions extends DatabaseModel {
     public $database_connection     =   'sessions_database';
