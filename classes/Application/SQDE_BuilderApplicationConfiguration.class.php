@@ -1,5 +1,5 @@
 <?php
-class SQDE_BuillderApplicationConfiguration {
+class SQDE_BuilderApplicationConfiguration {
 	
 	public static function model(){
         $access_control = array( 
