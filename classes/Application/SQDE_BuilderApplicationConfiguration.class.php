@@ -2,7 +2,7 @@
 class SQDE_BuilderApplicationConfiguration {
 	
 	public static function model(){
-        
+        $_o = (object) null;
         $access_control = array( 
             'api.sequode.com',
             'xhr.sequode.com',
@@ -53,9 +53,9 @@ class SQDE_BuilderApplicationConfiguration {
                 
         $_o->database = (object) null;
         $_o->database->system = $system_database;
-        $_o->database->sequode = $sequodes_database;
-        $_o->database->account = $accounts_database;
-        $_o->database->session = $sessions_database;
+        $_o->database->sequodes = $sequodes_database;
+        $_o->database->accounts = $accounts_database;
+        $_o->database->sessions = $sessions_database;
         
         $emailer = json_decode('{
             "relay":"SMTP",
