@@ -1,7 +1,7 @@
 <?php
-use Sequode\Model\Database as DatabaseModel;
+use Sequode\Model\Database\SQL\ORM;
 
-class SQDE_Sequodes extends DatabaseModel {
+class SQDE_Sequodes extends ORM {
     public $database_connection     =   'sequodes_database';
 	public $table 					=	'sequodes';
 	public $stub_file_extension		=	'.sequode.php';
