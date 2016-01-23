@@ -2,6 +2,7 @@
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
 use Sequode\Controller\Application\HTTPRequest;
+use Sequode\Model\Application\Routes;
 
 class SQDE_SequodeRestAPIServerModule{
     public static function run(){
@@ -41,10 +42,10 @@ class SQDE_SequodeRestAPIServerModule{
             exit;
         }
         $routes_class = ModuleRegistry::model($package)->rest->$request_type;
-        if(!in_array($request_pieces[0], Sequode\Routes::routes('\\'.$routes_class))){
+        if(!in_array($request_pieces[0], Routes::routes('\\'.$routes_class))){
             exit;
         }
-        $route = \Sequode\Routes::route('\\'.$routes_class, $request_pieces[0]);
+        $route = Routes::route('\\'.$routes_class, $request_pieces[0]);
         
         array_shift($request_pieces);
 		if(isset($_POST['args']) && !empty($_POST['args'])){

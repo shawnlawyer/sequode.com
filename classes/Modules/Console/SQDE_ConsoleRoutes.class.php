@@ -1,6 +1,7 @@
 <?php
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
+use Sequode\Model\Application\Routes;
 
 class SQDE_ConsoleRoutes{
 	public static $merge = false;
@@ -58,7 +59,7 @@ class SQDE_ConsoleRoutes{
             echo $model->context;
             echo '/ </li>';
             if(isset($model->xhr->operations)){
-                $routes = Sequode\Routes::routes('\\'.$model->xhr->operations);
+                $routes = Routes::routes('\\'.$model->xhr->operations);
                 foreach($routes as $route){
                     echo '<li>';
                     echo __FUNCTION__ .'/'. $model->context .'/'. $route;
@@ -76,7 +77,7 @@ class SQDE_ConsoleRoutes{
             echo $model->context;
             echo '/ </li>';
             if(isset($model->xhr->cards)){
-                $routes = Sequode\Routes::routes('\\'.$model->xhr->cards);
+                $routes = Routes::routes('\\'.$model->xhr->cards);
                 foreach($routes as $route){
                     echo '<li>';
                     echo '<a href="/?card='. $model->context .'/'. $route .'">';
@@ -94,7 +95,7 @@ class SQDE_ConsoleRoutes{
         echo '{';
         foreach($packages as $package => $model){
             if(isset($model->xhr->cards)){
-                $routes = Sequode\Routes::routes('\\'.$model->xhr->cards);
+                $routes = Routes::routes('\\'.$model->xhr->cards);
                 foreach($routes as $route){
                     echo '"cards":"'. $model->context .'/'. $route .'",';
                     echo $model->context .'/'. $route;
@@ -216,10 +217,10 @@ class SQDE_ConsoleRoutes{
             return;
         }
         $routes_class = ModuleRegistry::model($package)->xhr->$request_type;
-        if(!in_array($call_pieces[2], Sequode\Routes::routes('\\'.$routes_class))){
+        if(!in_array($call_pieces[2], Routes::routes('\\'.$routes_class))){
             return;
         }
-        $route = Sequode\Routes::route('\\'.$routes_class, $call_pieces[2]);
+        $route = Routes::route('\\'.$routes_class, $call_pieces[2]);
         
 		if(isset($_POST['args']) && !empty($_POST['args'])){
             if( 500000 < strlen(http_build_query($_POST))){ return; }
