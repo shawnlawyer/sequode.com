@@ -1,6 +1,7 @@
 <?php
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
+use Sequode\View\Module\Card as ModuleCard;
 
 class SQDE_ConsoleCardsXHR {
     public static $package = 'Console';
