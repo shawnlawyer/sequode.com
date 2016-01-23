@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\View\Module\Card as ModuleCard;
+
 class SQDE_ConsoleCardObjects {
     public static $package = 'Console';
     public static function index(){
