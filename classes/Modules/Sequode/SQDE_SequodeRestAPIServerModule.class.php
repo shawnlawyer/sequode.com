@@ -1,13 +1,14 @@
 <?php
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
+use Sequode\Controller\Application\HTTPRequest;
 
 class SQDE_SequodeRestAPIServerModule{
     public static function run(){
         if ($_SERVER['HTTP_HOST'] != 'api.sequode.com'){
             exit;
         }
-        $request_pieces = \Sequode\Controller\HTTPRequest::requestUriPieces();
+        $request_pieces = HTTPRequest::requestUriPieces();
         if(!isset($request_pieces[0]) || trim($request_pieces[0]) == ''){
             exit;
         }
