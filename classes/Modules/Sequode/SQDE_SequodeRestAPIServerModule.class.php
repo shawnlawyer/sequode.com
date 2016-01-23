@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_SequodeRestAPIServerModule{
     public static function run(){
         if ($_SERVER['HTTP_HOST'] != 'api.sequode.com'){
@@ -14,8 +17,8 @@ class SQDE_SequodeRestAPIServerModule{
             return;
         }
         SQDE_AuthenticatedUser::exists(SQDE_Token::model()->owner_id,'id');
-        \Sequode\ModuleRegistry::add('\\'.'SQDE_SequodePackage');
-        //Sequode\ModuleRegistry::add('\\'.'SQDE_PackagePackage');
+        ModuleRegistry::add('\\'.'SQDE_SequodePackage');
+        //ModuleRegistry::add('\\'.'SQDE_PackagePackage');
         if(!isset($request_pieces[0]) || trim($request_pieces[0]) == ''){
             exit;
         }
@@ -30,13 +33,13 @@ class SQDE_SequodeRestAPIServerModule{
         $package = ucfirst(strtolower($request_pieces[0]));
         array_shift($request_pieces);
         
-        if(!\Sequode\ModuleRegistry::is($package)){
+        if(!ModuleRegistry::is($package)){
             exit;
         }
-        if(!isset(\Sequode\ModuleRegistry::model($package)->rest->$request_type)){
+        if(!isset(ModuleRegistry::model($package)->rest->$request_type)){
             exit;
         }
-        $routes_class = \Sequode\ModuleRegistry::model($package)->rest->$request_type;
+        $routes_class = ModuleRegistry::model($package)->rest->$request_type;
         if(!in_array($request_pieces[0], Sequode\Routes::routes('\\'.$routes_class))){
             exit;
         }

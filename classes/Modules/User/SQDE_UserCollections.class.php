@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_UserCollections{
     public static $package = 'User';
 	public static $merge = true;
@@ -9,8 +12,8 @@ class SQDE_UserCollections{
 		'user_search' => 'search'
 	);
 	public static function search(){
-        $finder = Sequode\ModuleRegistry::model(static::$package)->finder;
-        $collection = Sequode\ModuleRegistry::model(static::$package)->context . '_' . __FUNCTION__;
+        $finder = ModuleRegistry::model(static::$package)->finder;
+        $collection = ModuleRegistry::model(static::$package)->context . '_' . __FUNCTION__;
         $nodes = array();
         if(SQDE_Session::is($collection)){
             $_array = $finder::search(SQDE_Session::get($collection));

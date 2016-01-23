@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_RegisterOperationsXHR {
     public static $package = 'Register';
 	public static $merge = false;
@@ -11,12 +14,12 @@ class SQDE_RegisterOperationsXHR {
     );
     public static function signup($json = null){
         
-        $dialog = Sequode\ModuleRegistry::model(static::$package)->xhr->dialogs[__FUNCTION__];
+        $dialog = ModuleRegistry::model(static::$package)->xhr->dialogs[__FUNCTION__];
         if(!SQDE_Session::is($dialog['session_store_key'])){ return; }
-        $cards_xhr = Sequode\ModuleRegistry::model(static::$package)->xhr->cards;
-        $operations_xhr = Sequode\ModuleRegistry::model(static::$package)->xhr->operations;
-        $operations = Sequode\ModuleRegistry::model(static::$package)->operations;
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $cards_xhr = ModuleRegistry::model(static::$package)->xhr->cards;
+        $operations_xhr = ModuleRegistry::model(static::$package)->xhr->operations;
+        $operations = ModuleRegistry::model(static::$package)->operations;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         if($json != null){
                 $input = json_decode(rawurldecode($json)); 
                 if(isset($input->reset)){ 

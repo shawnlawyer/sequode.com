@@ -1,8 +1,11 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_SessionFinder {
     public static $package = 'Session';
     public static function search($_i, $limit=100){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_i->position = urldecode($_i->position);
         $_i->field = urldecode($_i->field);
         if(!in_array($_i->position, array('=%','%=%','%=','='))){

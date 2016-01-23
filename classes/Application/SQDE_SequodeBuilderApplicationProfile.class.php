@@ -1,5 +1,7 @@
 <?php
 
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_SequodeBuilderApplicationProfile {
 	public static function model(){
         $modules = array();
@@ -24,10 +26,10 @@ class SQDE_SequodeBuilderApplicationProfile {
         }
         
         foreach($modules as $module){
-            Sequode\ModuleRegistry::add($module);
+            ModuleRegistry::add($module);
         }
         
-        $modules = Sequode\ModuleRegistry::models();
+        $modules = ModuleRegistry::models();
         $routes = array();
         foreach($modules as $module){
             if(isset($module->routes)){

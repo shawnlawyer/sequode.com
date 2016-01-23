@@ -3,7 +3,7 @@ class SQDE_PackageOperations {
     public static $package = 'Package';
     
     public static function getModel($value = null, $by = null, $owner_id = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = new $modeler::$model;
         switch($by){
             case 'id':
@@ -32,19 +32,19 @@ class SQDE_PackageOperations {
         return false;   
 	}
     public static function updatePackageSequode($sequode_id, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->updateField($sequode_id,'sequode_id');
         return $modeler::model();
     }
     public static function updateName($name, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->updateField(str_replace(" ","_",$name),'name');
         return $modeler::model();
     }
     public static function newPackage($owner = 0){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $modeler::model()->create();
         $modeler::exists($modeler::model()->id,'id');
         $modeler::model()->updateField(substr(SQDE_Session::uniqueHash('package','SQDEPAC'),0,15),'name');
@@ -52,14 +52,14 @@ class SQDE_PackageOperations {
         return $modeler::model();
 	}
     public static function delete($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->delete($modeler::model()->id);
         return $modeler::model();
     }
     
 	public static function download($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $used_ids = array();
         $package_sequode_model_ids = array_unique(json_decode(SQDE_Sequode::model()->sequence));

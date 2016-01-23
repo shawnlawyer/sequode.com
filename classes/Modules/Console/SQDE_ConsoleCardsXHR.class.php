@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_ConsoleCardsXHR {
     public static $package = 'Console';
     public static function index($dom_id = 'CardsContainer'){
@@ -6,7 +9,7 @@ class SQDE_ConsoleCardsXHR {
     }
     public static function menus($dom_id = 'MenusContainer'){
         $html = $js = array();
-        $packages = Sequode\ModuleRegistry::models();
+        $packages = ModuleRegistry::models();
         $i = count($packages);
         foreach($packages as $package => $model){
             if(isset($model->card_objects)){

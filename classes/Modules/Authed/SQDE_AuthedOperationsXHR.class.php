@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_AuthedOperationsXHR {
     public static $package = 'Authed';
 	public static $merge = false;
@@ -9,7 +12,7 @@ class SQDE_AuthedOperationsXHR {
 		'logout' => 'logout'
     );
     public static function logout(){
-        $operations = Sequode\ModuleRegistry::model(static::$package)->operations;
+        $operations = ModuleRegistry::model(static::$package)->operations;
         forward_static_call_array(array($operations,__FUNCTION__),array());
         return SQDE_ConsoleRoutes::js(false);
     }

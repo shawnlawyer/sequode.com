@@ -1,16 +1,19 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_TokenOperationsXHR {
     public static $package = 'Token';
     public static function newToken(){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        forward_static_call_array(array(Sequode\ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array(SQDE_AuthenticatedUser::model()->id));
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        forward_static_call_array(array(ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array(SQDE_AuthenticatedUser::model()->id));
         $js = array();
-        $js[] = \Sequode\Component\DOMElement\Kit\JS::fetchCollection(Sequode\ModuleRegistry::model(static::$package)->collections->main, $modeler::model()->id);
-        $js[] = forward_static_call_array(array(Sequode\ModuleRegistry::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
+        $js[] = \Sequode\Component\DOMElement\Kit\JS::fetchCollection(ModuleRegistry::model(static::$package)->collections->main, $modeler::model()->id);
+        $js[] = forward_static_call_array(array(ModuleRegistry::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
     public static function updateName($_model_id, $json){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         if(!(
         $modeler::exists($_model_id,'id')
         && (SQDE_UserAuthority::isOwner( $modeler::model() )
@@ -27,23 +30,23 @@ class SQDE_TokenOperationsXHR {
         if(!eregi("^([A-Za-z0-9_])*$",$name)){
             return ' alert(\'Token name must be alphanumeric and all spaces will convert to underscore.\');';
         }
-        forward_static_call_array(array(Sequode\ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array($name));
+        forward_static_call_array(array(ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array($name));
         $js = array();
         $collection = 'tokens';
         $js[] = \Sequode\Component\DOMElement\Kit\JS::fetchCollection($collection, $modeler::model()->id);
-        $js[] = forward_static_call_array(array(Sequode\ModuleRegistry::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
+        $js[] = forward_static_call_array(array(ModuleRegistry::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
     public static function delete($_model_id){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         if(!(
         $modeler::exists($_model_id,'id')
         && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){ return; }
-        forward_static_call_array(array(Sequode\ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array());
+        forward_static_call_array(array(ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array());
         $js = array();
-        $js[] = forward_static_call_array(array(Sequode\ModuleRegistry::model(static::$package)->xhr->cards,'my'),array());
+        $js[] = forward_static_call_array(array(ModuleRegistry::model(static::$package)->xhr->cards,'my'),array());
         return implode(' ', $js);
     }
     public static function search($json){

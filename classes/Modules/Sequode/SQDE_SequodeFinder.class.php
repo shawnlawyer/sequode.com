@@ -1,8 +1,11 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_SequodeFinder {
     public static $package = 'Sequode';
     public static function search($_i, $limit=100){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         if($_i->coded == 0 && $_i->sequenced == 0){
             return array();
         }elseif($_i->coded == 1 && $_i->sequenced == 0){

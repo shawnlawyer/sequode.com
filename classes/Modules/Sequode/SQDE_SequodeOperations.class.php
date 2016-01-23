@@ -1,10 +1,11 @@
 <?php
-//namespace Sequode/Modules/Sequencer
-//class Operations {
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_SequodeOperations {
     public static $package = 'Sequode';
     public static function getModel($value = null, $by = null, $owner_id = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = new $modeler::$model;
         switch($by){
             case 'id':
@@ -33,7 +34,7 @@ class SQDE_SequodeOperations {
         return false;   
 	}
 	public static function updateTenancy($value = 0, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         switch(intval($value)){
             case 1:
@@ -46,7 +47,7 @@ class SQDE_SequodeOperations {
         return $modeler::model();
 	}
 	public static function updateSharing($value = 0, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         switch(intval($value)){
             case 1:
@@ -59,7 +60,7 @@ class SQDE_SequodeOperations {
         return $modeler::model();
 	}
 	public static function updateIsPalette($value = 0, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         switch(intval($value)){
             case 1:
@@ -72,7 +73,7 @@ class SQDE_SequodeOperations {
         return $modeler::model();
 	}
 	public static function updateIsPackage($value = 0, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         switch(intval($value)){
             case 1:
@@ -85,14 +86,14 @@ class SQDE_SequodeOperations {
         return $modeler::model();
 	}
     public static function updateName($name, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->updateField(str_replace(" ","_",$name),'name');
         self::maintenance();
         return $modeler::model();
     }
     public static function updateDescription($description, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $description = htmlentities(strip_tags($description), ENT_NOQUOTES);
         $description = (strlen($description) <= 1000) ? $description : substr($description, 0, 1000);
@@ -103,7 +104,7 @@ class SQDE_SequodeOperations {
         return $modeler::model();
     }
     public static function updateComponentSettings($type, $member, $input_object, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         switch($type){
             case 'input':
@@ -129,8 +130,8 @@ class SQDE_SequodeOperations {
         return $modeler::model();
 	}
     public static function newSequence($owner = 0){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        $kit = Sequode\ModuleRegistry::model(static::$package)->operations_kit;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        $kit = ModuleRegistry::model(static::$package)->operations_kit;
         
         $modeler::model()->create(substr($kit::uniqueHash(),0,15), '', 1, 1);
         $modeler::exists($modeler::model()->id,'id');
@@ -166,7 +167,7 @@ class SQDE_SequodeOperations {
         return $modeler::model();
 	}
     public static function makeSequenceCopy($owner = 0, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $name = $modeler::model()->name . ' Copy ' . ($modeler::model()->times_cloned + 1);
         $printable_name = (trim($modeler::model()->printable_name) != '') ? trim($modeler::model()->printable_name) . ' Copy ' . ($modeler::model()->times_cloned + 1) : $name ;
@@ -197,8 +198,8 @@ class SQDE_SequodeOperations {
         return $modeler::model();
 	}
     public static function maintenance($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        $kit = Sequode\ModuleRegistry::model(static::$package)->operations_kit;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        $kit = ModuleRegistry::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         if(SQDE_SequodeAuthority::isSequence()){
             $modeler::model()->updateField(json_encode($kit::makeProcessObject('input')),'input_object');
@@ -235,15 +236,15 @@ class SQDE_SequodeOperations {
         return $modeler::model();
     }
     public static function regenerateProcessDescriptionNode($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        $kit = Sequode\ModuleRegistry::model(static::$package)->operations_kit;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        $kit = ModuleRegistry::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->updateField(json_encode($kit::makeSequodeProcessDescriptionNode()),'process_description_node');
         return $modeler::model();
     }
 	public static function makeDefaultSequencedSequode( $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        $kit = Sequode\ModuleRegistry::model(static::$package)->operations_kit;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        $kit = ModuleRegistry::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		if(intval($modeler::model()->usage_type) != 1){return false;}
 		$input_object = (object) null;
@@ -266,28 +267,28 @@ class SQDE_SequodeOperations {
 		return $modeler::model();
 	}
     public static function deleteSequence($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         if(!SQDE_SequodeAuthority::isSequence()){return $modeler::model();}
         $modeler::model()->delete($modeler::model()->id);
         return $modeler::model();
     }
     public static function forgetCode($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         if(!SQDE_SequodeAuthority::isCode()){return $modeler::model();}
         //$modeler::model()->delete($modeler::model()->id);
         return $modeler::model();
     }
 	public static function updateProcessDescriptionNode($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		$modeler::model()->updateField(json_encode($kit::makeSequodeProcessDescriptionNode()),'process_description_node');
         return $modeler::model();
     }
 	public static function addToSequence($add_model_id, $position = 0, $position_tuner = null, $grid_modifier = null, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        $kit = Sequode\ModuleRegistry::model(static::$package)->operations_kit;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        $kit = ModuleRegistry::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		if($position_tuner != null ){ $position_tuner = intval($position_tuner);}; 
 		if($grid_modifier != null ){ $grid_modifier = intval($grid_modifier);}; 
@@ -317,8 +318,8 @@ class SQDE_SequodeOperations {
         }
     }
 	public static function reorderSequence($from_position = 0, $to_position = 0, $position_tuner = null, $grid_modifier = null, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        $kit = Sequode\ModuleRegistry::model(static::$package)->operations_kit;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        $kit = ModuleRegistry::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		$sequence = json_decode($modeler::model()->sequence);
 		$from_position = $kit::getSequencePosition($from_position, $sequence);
@@ -338,8 +339,8 @@ class SQDE_SequodeOperations {
         return $modeler::model();
     }
 	public static function removeFromSequence($position, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        $kit = Sequode\ModuleRegistry::model(static::$package)->operations_kit;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        $kit = ModuleRegistry::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		$sequence = json_decode($modeler::model()->sequence);
 		$position = $kit::getSequencePosition($position, $sequence);
@@ -353,8 +354,8 @@ class SQDE_SequodeOperations {
 		return $modeler::model();
     }
 	public static function modifyGridAreas($position = 0, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        $kit = Sequode\ModuleRegistry::model(static::$package)->operations_kit;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        $kit = ModuleRegistry::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		$sequence = json_decode($modeler::model()->sequence);
 		$position = $kit::getSequencePosition($position, $sequence, 1);
@@ -365,15 +366,15 @@ class SQDE_SequodeOperations {
 		return $modeler::model();
     }
 	public static function emptySequence($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		$modeler::model()->updateField('[]','sequence');
 		self::makeDefaultSequencedSequode();
         return $modeler::model();
     }	
 	public static function buildSequodeCodeNodeOffMineObject($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        $kit = Sequode\ModuleRegistry::model(static::$package)->operations_kit;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        $kit = ModuleRegistry::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $mine_object = json_decode($modeler::model()->mine_object);
         $detail = (object) null;
@@ -430,8 +431,8 @@ class SQDE_SequodeOperations {
         return $modeler::model();
     }
 	public static function processCodedSequodeSetupData($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        $kit = Sequode\ModuleRegistry::model(static::$package)->operations_kit;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        $kit = ModuleRegistry::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		$detail = json_decode($modeler::model()->detail);
 		$input_object_detail = json_decode($modeler::model()->input_object_detail);
@@ -451,8 +452,8 @@ class SQDE_SequodeOperations {
 		return $modeler::model();
     }
 	public static function moveGridArea($grid_area_key = 0, $x = 0, $y = 0, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        $kit = Sequode\ModuleRegistry::model(static::$package)->operations_kit;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        $kit = ModuleRegistry::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $grid_area_key = intval($grid_area_key);
 		$x = intval($x); 
@@ -466,8 +467,8 @@ class SQDE_SequodeOperations {
 		return $modeler::model();
     }
     public static function updateValue($type = false, $map_key = 0, $value = null, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        $kit = Sequode\ModuleRegistry::model(static::$package)->operations_kit;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        $kit = ModuleRegistry::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         if (intval($modeler::model()->usage_type) === 0){return false;}
         switch($type){
@@ -542,7 +543,7 @@ class SQDE_SequodeOperations {
         return $modeler::model();
     }
     public static function addInternalConnection($receiver_type = false, $transmitter_key = 0, $receiver_key = 0, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         if($receiver_key == 0 || $transmitter_key == 0){return $modeler::model();}
         if(intval($modeler::model()->usage_type) === 0 ){return $modeler::model();}
@@ -575,8 +576,8 @@ class SQDE_SequodeOperations {
         return self::maintenance();
     }
     public static function addExternalConnection($connection_type = false, $transmitter_key = 0, $receiver_key = 0, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        $kit = Sequode\ModuleRegistry::model(static::$package)->operations_kit;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        $kit = ModuleRegistry::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         if(intval($modeler::model()->usage_type) === 0 ){return $modeler::model();}
         switch($connection_type){
@@ -621,7 +622,7 @@ class SQDE_SequodeOperations {
 		return self::maintenance();
     }
     public static function removeReceivingConnection($connection_type = false, $restore_key = 0, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         if(intval($modeler::model()->usage_type) === 0 ){return $modeler::model();}
         switch($connection_type){
@@ -666,7 +667,7 @@ class SQDE_SequodeOperations {
 		return self::maintenance();
     }
 	public static function autoSetTenancy($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		$sequence = json_decode($modeler::model()->sequence);
         $safe = 1;
@@ -687,8 +688,8 @@ class SQDE_SequodeOperations {
         return $modeler::model($_model);
     }
     public static function updateSequence($new_sequence_map, $sequode_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        $kit = Sequode\ModuleRegistry::model(static::$package)->operations_kit;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        $kit = ModuleRegistry::model(static::$package)->operations_kit;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		
 		$old_sequence = json_decode($modeler::model()->sequence);

@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_AccountCardObjects {
     public static $package = 'Account';
     public static function menu(){
@@ -18,8 +21,8 @@ class SQDE_AccountCardObjects {
         return $_o;
     }
     public static function details(){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
-        $operations = Sequode\ModuleRegistry::model(static::$package)->operations;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
+        $operations = ModuleRegistry::model(static::$package)->operations;
         $_model = forward_static_call_array(array($modeler,'model'),array());
         $_o = (object) null;
         $_o->head = 'Account Detail';
@@ -33,7 +36,7 @@ class SQDE_AccountCardObjects {
         return $_o;
     }
     public static function updatePassword(){
-        $dialog = Sequode\ModuleRegistry::model(static::$package)->xhr->dialogs[__FUNCTION__];
+        $dialog = ModuleRegistry::model(static::$package)->xhr->dialogs[__FUNCTION__];
         $dialog_store = SQDE_Session::get($dialog['session_store_key']);
         $step = $dialog['steps'][$dialog_store->step];
         $_o = (object) null;
@@ -66,7 +69,7 @@ class SQDE_AccountCardObjects {
         return $_o;    
     }
     public static function updateEmail(){
-        $dialog = Sequode\ModuleRegistry::model(static::$package)->xhr->dialogs[__FUNCTION__];
+        $dialog = ModuleRegistry::model(static::$package)->xhr->dialogs[__FUNCTION__];
         $dialog_store = SQDE_Session::get($dialog['session_store_key']);
         $step = $dialog['steps'][$dialog_store->step];
         $_o = (object) null;

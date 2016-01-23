@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_SessionCardObjects {
     public static $package = 'Session';
     public static function menu(){
@@ -16,7 +19,7 @@ class SQDE_SessionCardObjects {
         return $_o;
     }
     public static function details($_model=null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;

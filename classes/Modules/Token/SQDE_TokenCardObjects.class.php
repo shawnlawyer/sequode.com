@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_TokenCardObjects {
     public static $package = 'Token';
     public static function menu(){
@@ -19,7 +22,7 @@ class SQDE_TokenCardObjects {
     }
     
     public static function modelOperationsMenuItems($filter='', $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         $_o = array();
         $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Details','cards/token/details',array($_model->id));
@@ -27,7 +30,7 @@ class SQDE_TokenCardObjects {
         return $items;
     }
     public static function details($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;

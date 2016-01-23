@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_AuthCardObjects {
     public static $package = 'Auth';
     public static function menu(){
@@ -16,7 +19,7 @@ class SQDE_AuthCardObjects {
         return $_o;
     }
    public static function login(){
-        $dialog = Sequode\ModuleRegistry::model(static::$package)->xhr->dialogs[__FUNCTION__];
+        $dialog = ModuleRegistry::model(static::$package)->xhr->dialogs[__FUNCTION__];
         if(!SQDE_Session::is($dialog['session_store_key'])){
             SQDE_Session::set($dialog['session_store_key'], $dialog['session_store_setup']);
         }

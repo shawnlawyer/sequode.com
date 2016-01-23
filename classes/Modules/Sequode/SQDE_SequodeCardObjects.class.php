@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_SequodeCardObjects {
     public static $package = 'Sequode';
     public static function menu(){
@@ -20,7 +23,7 @@ class SQDE_SequodeCardObjects {
         return $_o;
     }
     public static function modelOperationsMenuItems($filter='', $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         $items = array();
         if(SQDE_UserAuthority::canView($_model)){
@@ -68,7 +71,7 @@ class SQDE_SequodeCardObjects {
         return $items;
     }
 	public static function componentSettings($type, $member, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;
@@ -87,7 +90,7 @@ class SQDE_SequodeCardObjects {
         return $_o;
 	}
     public static function sequode($dom_id, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;
@@ -100,7 +103,7 @@ class SQDE_SequodeCardObjects {
         return $_o;
 	}   
     public static function details( $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;
@@ -226,7 +229,7 @@ class SQDE_SequodeCardObjects {
         return $_o;
     }
     public static function internalForms( $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;
@@ -249,7 +252,7 @@ class SQDE_SequodeCardObjects {
     }
     public static function internalPositionForms($position, $_model = null){
         $position = intval($position);
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;
@@ -333,7 +336,7 @@ class SQDE_SequodeCardObjects {
         return $_o;
     }
     public static function sequencer( $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;
@@ -373,7 +376,7 @@ class SQDE_SequodeCardObjects {
         return $_o;
     }
     public static function chart( $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null ) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'), array($_model));
         
         $_o = (object) null;

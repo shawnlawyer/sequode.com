@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_ConsoleRoutes{
 	public static $merge = false;
 	public static $routes = array(
@@ -49,7 +52,7 @@ class SQDE_ConsoleRoutes{
 	}
 	public static function operations(){
         if(!SQDE_Session::is('console')){return;}
-        $packages = Sequode\ModuleRegistry::models();
+        $packages = ModuleRegistry::models();
         foreach($packages as $package => $model){
             echo '<li> /';
             echo $model->context;
@@ -67,7 +70,7 @@ class SQDE_ConsoleRoutes{
 	}
 	public static function cards(){
         
-        $packages = Sequode\ModuleRegistry::models();
+        $packages = ModuleRegistry::models();
         foreach($packages as $package => $model){
             echo '<li> /';
             echo $model->context;
@@ -87,7 +90,7 @@ class SQDE_ConsoleRoutes{
 	}
 	public static function cardsCollection(){
         if(!SQDE_Session::is('console')){return;}
-        $packages = Sequode\ModuleRegistry::models();
+        $packages = ModuleRegistry::models();
         echo '{';
         foreach($packages as $package => $model){
             if(isset($model->xhr->cards)){
@@ -205,14 +208,14 @@ class SQDE_ConsoleRoutes{
             return;
         }
         $package = ucfirst(strtolower($call_pieces[1]));
-        if(!Sequode\ModuleRegistry::is($package)){
+        if(!ModuleRegistry::is($package)){
             return;
         }
         $request_type = $call_pieces[0];
-        if(!isset(Sequode\ModuleRegistry::model($package)->xhr->$request_type)){
+        if(!isset(ModuleRegistry::model($package)->xhr->$request_type)){
             return;
         }
-        $routes_class = Sequode\ModuleRegistry::model($package)->xhr->$request_type;
+        $routes_class = ModuleRegistry::model($package)->xhr->$request_type;
         if(!in_array($call_pieces[2], Sequode\Routes::routes('\\'.$routes_class))){
             return;
         }

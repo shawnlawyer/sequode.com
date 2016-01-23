@@ -1,8 +1,11 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_TokenFormComponentObjects{
     public static $package = 'Token';
     public static function name($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : $_model;
         $_o = (object) null;
         

@@ -1,8 +1,11 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_UserFormComponentObjects{
     public static $package = 'User';
     public static function updatePassword(){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_o = (object) null;
         
         \Sequode\Component\FormInput\FormInput::exists('password','name');
@@ -14,7 +17,7 @@ class SQDE_UserFormComponentObjects{
 		return $_o;
 	}
     public static function updateEmail($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : $_model;
         $_o = (object) null;
         
@@ -85,7 +88,7 @@ class SQDE_UserFormComponentObjects{
 		return $_o;
 	}
     public static function updateRole($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : $_model;
         $_o = (object) null;
         $roles_model = new SQDE_Roles;
@@ -104,7 +107,7 @@ class SQDE_UserFormComponentObjects{
 		return $_o;
 	}
     public static function updateActive($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : $_model;
         $_o = (object) null;
         \Sequode\Component\FormInput\FormInput::exists('checkboxSwitch','name');
@@ -118,7 +121,7 @@ class SQDE_UserFormComponentObjects{
 		return $_o;
 	}
     public static function updateName($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : $_model;
         $_o = (object) null;
         

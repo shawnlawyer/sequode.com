@@ -1,8 +1,11 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_UserFinder {
     public static $package = 'User';
     public static function search($search_object, $limit=100){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $search_object->position = urldecode($search_object->position);
         $search_object->field = urldecode($search_object->field);
         if(!in_array($search_object->position, array('=%','%=%','%=','='))){

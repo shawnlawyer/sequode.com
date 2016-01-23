@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_UserOperations {
 
     public static $package = 'User';
@@ -22,7 +25,7 @@ class SQDE_UserOperations {
         }
     }
 	public static function getModelersModelCount($_modeler, $_model){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $_models = new SQDE_Package::$model;
         $where = array();
@@ -31,9 +34,9 @@ class SQDE_UserOperations {
         return intval($_models->results_count);
 	}
 	public static function getOwnedModels($package, $_model, $fields='id'){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
-        $package_modeler = Sequode\ModuleRegistry::model($package)->modeler;
+        $package_modeler = ModuleRegistry::model($package)->modeler;
         $package_model = new $package_modeler::$model;
         $where = array();
         $where[] = array('field'=>'owner_id','operator'=>'=','value'=>$modeler::model()->id);
@@ -41,7 +44,7 @@ class SQDE_UserOperations {
         return $package_model;
 	}
     public static function updateActive($active = 0, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         if($_model != null ){ $modeler::model($_model); }
         $active = (intval($active) == 1) ? 1 : 0;
@@ -49,7 +52,7 @@ class SQDE_UserOperations {
         return $modeler::model();
     }
     public static function register($username, $password, $email, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->create($username,self::generateHash($password),$email);
         $modeler::exists($modeler::model()->id, 'id');
@@ -57,38 +60,38 @@ class SQDE_UserOperations {
         return $modeler::model();
     }
     public static function updateLastSignIn($time=false, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->updateField(($time === false) ? time() : $time ,'last_sign_in');
         return $modeler::model();
     }
     public static function updateEmail($email, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->updateField($email,'email');
         return $modeler::model();
     }
     public static function updatePassword($password, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->updateField(self::generateHash($password),'password');
         return $modeler::model();
     }
     public static function updateName($username, $_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->updateField($username, 'username');
         return $modeler::model();
     }
     public static function emptySequodeFavorites($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->updateField('[]','sequode_favorites');
         return $modeler::model();
     }
     public static function addToSequodeFavorites($sequode_model = null, $_model = null){
         if($sequode_model != null ){ SQDE_Sequode::model($sequode_model); }
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		$palette = json_decode($_model->sequode_favorites);
 		$palette[] = SQDE_Sequode::model()->id;
@@ -97,7 +100,7 @@ class SQDE_UserOperations {
     }
     public static function removeFromSequodeFavorites($sequode_model = null, $_model = null){
         if($sequode_model != null ){ SQDE_Sequode::model($sequode_model); }
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
 		$palette = json_decode($modeler::model()->sequode_favorites);
         $array = array();
@@ -111,7 +114,7 @@ class SQDE_UserOperations {
     }
     
     public static function login($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         SQDE_AuthenticatedUser::model($modeler::model());
         SQDE_Session::model()->updateField($modeler::model()->username,'username');
@@ -122,7 +125,7 @@ class SQDE_UserOperations {
         return SQDE_AuthenticatedUser::model();
     }
     public static function newUser(){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $modeler::model()->create(substr(SQDE_Session::uniqueHash(),0,15), SQDE_Session::uniqueHash(), substr(SQDE_Session::uniqueHash(),0,15));
         $modeler::exists($modeler::model()->id, 'id');
         $modeler::model()->updateField('[]','sequode_favorites');
@@ -132,7 +135,7 @@ class SQDE_UserOperations {
         return $modeler::model();
     }
     public static function newGuest(){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         $modeler::model()->create(substr(SQDE_Session::uniqueHash(),0,15), SQDE_Session::uniqueHash(), substr(SQDE_Session::uniqueHash(),0,15));
         $modeler::exists($modeler::model()->id, 'id');
         $modeler::model()->updateField('[]','sequode_favorites');
@@ -142,7 +145,7 @@ class SQDE_UserOperations {
         return $modeler::model();
     }
     public static function delete($_model = null){
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         if(!($_model->id != 1 && $_model->id != 2 && $_model->role_id > 99)){
             return SQDE_User::model($_model);
@@ -156,7 +159,7 @@ class SQDE_UserOperations {
     }
     public static function updateRole($role_model = null, $_model = null){
         if($role_model == null ){ $role_model = SQDE_Role::model(); }
-        $modeler = Sequode\ModuleRegistry::model(static::$package)->modeler;
+        $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $modeler::model()->updateField($role_model->id,'role_id');
         return $modeler::model();
