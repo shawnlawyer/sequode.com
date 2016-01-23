@@ -19,7 +19,7 @@ class SQDE_ConsoleCardObjects {
             if($key != 0){
                 $html[] = \Sequode\Component\Card\Kit\HTML::shim();
             }
-            $object = \Sequode\ModuleCard::render('Console', $card);
+            $object = ModuleCard::render('Console', $card);
             $html[] = $object->html;
             $js[] = $object->js;
         }

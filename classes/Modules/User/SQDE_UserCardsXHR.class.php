@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\View\Module\Card as ModuleCard;
+
 class SQDE_UserCardsXHR {
     public static $package = 'User';
     public static $modeler = 'SQDE_User';
@@ -7,9 +10,9 @@ class SQDE_UserCardsXHR {
         if(!(
             $modeler::exists($_model_id,'id')
         )){ return; }
-        return \Sequode\Component\Card\Kit\JS::placeCard(\Sequode\ModuleCard::render(self::$package,__FUNCTION__), $dom_id);
+        return \Sequode\Component\Card\Kit\JS::placeCard(ModuleCard::render(self::$package,__FUNCTION__), $dom_id);
     }
     public static function search($dom_id = 'CardsContainer'){
-        return \Sequode\Component\Card\Kit\JS::placeCard(\Sequode\ModuleCard::render(self::$package,__FUNCTION__), $dom_id);
+        return \Sequode\Component\Card\Kit\JS::placeCard(ModuleCard::render(self::$package,__FUNCTION__), $dom_id);
     }
 }

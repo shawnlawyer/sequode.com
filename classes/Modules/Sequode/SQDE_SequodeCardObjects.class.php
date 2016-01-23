@@ -1,6 +1,7 @@
 <?php
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
+use Sequode\View\Module\Card as ModuleCard;
 
 class SQDE_SequodeCardObjects {
     public static $package = 'Sequode';
@@ -243,7 +244,7 @@ class SQDE_SequodeCardObjects {
         
         $sequence = json_decode($_model->sequence);
         foreach($sequence as $loop_sequence_key => $loop_model_id){
-            $_o->body[] = \Sequode\ModuleCard::render(self::$package,'internalPositionForms',array($loop_sequence_key));
+            $_o->body[] = ModuleCard::render(self::$package,'internalPositionForms',array($loop_sequence_key));
         }
         if(SQDE_UserAuthority::isSystemOwner()){
             $_o->body[] = \Sequode\Component\Card\Kit\HTML::modelId($_model);
