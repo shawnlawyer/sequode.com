@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\Model\Module\Registry as ModuleRegistry;
+
 class SQDE_SequodeCollections{
     public static $package = 'Sequode';
 	public static $merge = true;
