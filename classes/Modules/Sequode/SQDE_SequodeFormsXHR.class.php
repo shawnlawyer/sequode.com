@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\View\Module\Form as ModuleForm;
+
 class SQDE_SequodeFormsXHR {
     public static $package = 'Sequode';
     public static $modeler = 'SQDE_Sequode';
@@ -9,7 +12,7 @@ class SQDE_SequodeFormsXHR {
         && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){return;}
-        return \Sequode\Component\DOMElement\Kit\JS::placeForm(\Sequode\ModuleForm::render(self::$package,__FUNCTION__), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeForm(ModuleForm::render(self::$package,__FUNCTION__), $dom_id);
     }
     public static function description($_model_id, $dom_id){
         $modeler = static::$modeler;
@@ -18,7 +21,7 @@ class SQDE_SequodeFormsXHR {
         && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){return;}
-        return \Sequode\Component\DOMElement\Kit\JS::placeForm(\Sequode\ModuleForm::render(self::$package,__FUNCTION__), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeForm(ModuleForm::render(self::$package,__FUNCTION__), $dom_id);
     }
     public static function component($type, $_model_id, $map_key, $dom_id){
         $modeler = static::$modeler;
@@ -28,7 +31,7 @@ class SQDE_SequodeFormsXHR {
         || SQDE_UserAuthority::isSystemOwner())
         && in_array($type, array('input','property'))
         )){return;}
-        return \Sequode\Component\DOMElement\Kit\JS::placeForm(\Sequode\ModuleForm::render(self::$package, __FUNCTION__, array($type, $map_key)), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeForm(ModuleForm::render(self::$package, __FUNCTION__, array($type, $map_key)), $dom_id);
     }
     public static function componentSettings($type, $member, $_model_id, $dom_id){
         $modeler = static::$modeler;
@@ -38,7 +41,7 @@ class SQDE_SequodeFormsXHR {
         || SQDE_UserAuthority::isSystemOwner())
         && in_array($type, array('input','property'))
         )){return;}
-        return \Sequode\Component\DOMElement\Kit\JS::placeForm(\Sequode\ModuleForm::render(self::$package, __FUNCTION__, array($type, $member, $dom_id)), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeForm(ModuleForm::render(self::$package, __FUNCTION__, array($type, $member, $dom_id)), $dom_id);
     }
     public static function sequode($_model_id, $dom_id){
         $modeler = static::$modeler;
@@ -47,7 +50,7 @@ class SQDE_SequodeFormsXHR {
         && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){return;}
-        return \Sequode\Component\DOMElement\Kit\JS::placeForm(\Sequode\ModuleForm::render(self::$package, __FUNCTION__), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeForm(ModuleForm::render(self::$package, __FUNCTION__), $dom_id);
     }
     public static function updateIsPalette($_model_id, $dom_id){
         $modeler = static::$modeler;
@@ -56,7 +59,7 @@ class SQDE_SequodeFormsXHR {
         && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){return;}
-        return \Sequode\Component\DOMElement\Kit\JS::placeForm(\Sequode\ModuleForm::render(self::$package, __FUNCTION__), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeForm(ModuleForm::render(self::$package, __FUNCTION__), $dom_id);
     }
     public static function updateIsPackage($_model_id, $dom_id){
         $modeler = static::$modeler;
@@ -65,7 +68,7 @@ class SQDE_SequodeFormsXHR {
         && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){return;}
-        return \Sequode\Component\DOMElement\Kit\JS::placeForm(\Sequode\ModuleForm::render(self::$package, __FUNCTION__), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeForm(ModuleForm::render(self::$package, __FUNCTION__), $dom_id);
     }
     public static function sharing($_model_id, $dom_id){
         $modeler = static::$modeler;
@@ -73,10 +76,10 @@ class SQDE_SequodeFormsXHR {
         $modeler::exists($_model_id,'id')
         && SQDE_UserAuthority::isSystemOwner()
         )){return;}
-        return \Sequode\Component\DOMElement\Kit\JS::placeForm(\Sequode\ModuleForm::render(self::$package, __FUNCTION__), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeForm(ModuleForm::render(self::$package, __FUNCTION__), $dom_id);
     }
     public static function selectPalette($dom_id){
-        return \Sequode\Component\DOMElement\Kit\JS::placeForm(\Sequode\ModuleForm::render(self::$package, __FUNCTION__), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeForm(ModuleForm::render(self::$package, __FUNCTION__), $dom_id);
     }
     public static function tenancy($_model_id, $dom_id){
         $modeler = static::$modeler;
@@ -88,6 +91,6 @@ class SQDE_SequodeFormsXHR {
             SQDE_UserAuthority::isSystemOwner()
             && SQDE_Sequode::exists($_model_id, 'id')
         )){return;}
-        return \Sequode\Component\DOMElement\Kit\JS::placeForm(\Sequode\ModuleForm::render(self::$package, __FUNCTION__), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeForm(ModuleForm::render(self::$package, __FUNCTION__), $dom_id);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
+use Sequode\View\Module\Form as ModuleForm;
 
 class SQDE_AuthCardObjects {
     public static $package = 'Auth';
@@ -45,7 +46,7 @@ class SQDE_AuthCardObjects {
         }
         if(isset($step->forms)){
             foreach($step->forms as $form){
-                $_o->body = array_merge($_o->body, \Sequode\ModuleForm::render(self::$package, $form));
+                $_o->body = array_merge($_o->body, ModuleForm::render(self::$package, $form));
             }
         }
         if($dialog_store->step != 0){

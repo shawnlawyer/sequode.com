@@ -1,6 +1,7 @@
 <?php
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
+use Sequode\View\Module\Form as ModuleForm;
 
 class SQDE_AccountCardObjects {
     public static $package = 'Account';
@@ -59,7 +60,7 @@ class SQDE_AccountCardObjects {
         }
         if(isset($step->forms)){
             foreach($step->forms as $form){
-                $_o->body = array_merge($_o->body, \Sequode\ModuleForm::render(self::$package, $form));
+                $_o->body = array_merge($_o->body, ModuleForm::render(self::$package, $form));
             }
         }
         if($dialog_store->step != 0){
@@ -92,7 +93,7 @@ class SQDE_AccountCardObjects {
         }
         if(isset($step->forms)){
             foreach($step->forms as $form){
-                $_o->body = array_merge($_o->body, \Sequode\ModuleForm::render(self::$package, $form));
+                $_o->body = array_merge($_o->body, ModuleForm::render(self::$package, $form));
             }
         }
         if($dialog_store->step > 0){

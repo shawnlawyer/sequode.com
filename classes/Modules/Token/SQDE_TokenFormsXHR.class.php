@@ -1,6 +1,7 @@
 <?php
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
+use Sequode\View\Module\Form as ModuleForm;
 
 class SQDE_TokenFormsXHR {
     public static $package = 'Token';
@@ -11,6 +12,6 @@ class SQDE_TokenFormsXHR {
         && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){return;}
-        return \Sequode\Component\DOMElement\Kit\JS::placeForm(\Sequode\ModuleForm::render(self::$package,__FUNCTION__), $dom_id);
+        return \Sequode\Component\DOMElement\Kit\JS::placeForm(ModuleForm::render(self::$package,__FUNCTION__), $dom_id);
     }
 }
