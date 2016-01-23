@@ -2,6 +2,7 @@
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
 use Sequode\Model\Application\Routes;
+use Sequode\Controller\Application\HTTPRequest\XHR as XHRRequest;
 
 class SQDE_ConsoleRoutes{
 	public static $merge = false;
@@ -231,7 +232,7 @@ class SQDE_ConsoleRoutes{
 			$args = $_GET['args'];
 		}
 
-        echo Sequode\XHR::call('\\'.$routes_class, $route, $args);
+        echo XHRRequest::call('\\'.$routes_class, $route, $args);
         return true;
     }
 	public static function collections($collection='collections', $key = null){

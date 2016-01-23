@@ -3,6 +3,7 @@
 use Sequode\Model\Module\Registry as ModuleRegistry;
 use Sequode\Controller\Application\HTTPRequest;
 use Sequode\Model\Application\Routes;
+use Sequode\Controller\Application\HTTPRequest\Rest as RestRequest;
 
 class SQDE_SequodeRestAPIServerModule{
     public static function run(){
@@ -57,7 +58,7 @@ class SQDE_SequodeRestAPIServerModule{
 			$inputs = $_GET['args'];
 		}
         $inputs = $request_pieces;
-        \Sequode\Rest::call('\\'.$routes_class, $route, $inputs);
+        RestRequest::call('\\'.$routes_class, $route, $inputs);
         return true;
     }
 }
