@@ -1,6 +1,8 @@
 <?php
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
+use Sequode\View\Email\EmailContent;
+use Sequode\Controller\Email\Email;
 
 class SQDE_AccountOperationsXHR {
     public static $package = 'Account';
@@ -111,7 +113,7 @@ class SQDE_AccountOperationsXHR {
                             "searchStrs" => array('#TOKEN#'),
                             "subjectStrs" => array($dialog_store->prep->token)
                         );
-                        \Sequode\Operation\Mailer::systemSend($dialog_store->prep->new_email,'Verify your email address with sequode.com',\Sequode\Operation\Mailer::makeTemplate('activation.txt',$hooks));
+                        Email::systemSend($dialog_store->prep->new_email,'Verify your email address with sequode.com', EmailContent::render('activation.txt',$hooks));
                     }
                     else
                     {

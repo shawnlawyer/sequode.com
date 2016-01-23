@@ -20,12 +20,19 @@ class SQDE_BuilderApplicationConfiguration {
         }');
         $_o->sessions = $sessions;
         $site = json_decode('{
-            "email":"noreply@sequode.com",
             "domain":"sequode.com",
-            "display_name":"Sequode",
-            "protocol":"https://"
+            "display_name":"Sequode"
         }');
         $_o->site = $site;
+        $system_email = json_decode('{
+            "reply_email":"noreply@sequode.com",
+            "reply_name":"Sequode",
+            "from_email":"system@sequode.com",
+            "from_name":"Sequode"
+        }');
+        $_o->email = (object) null;
+        $_o->email->system = $system_email;
+        
         $system_database = json_decode('{
             "host":"sequode-'.$_SERVER['WORKFLOW_ENVIRONMENT'].'.ckrl02wpm4xk.us-west-2.rds.amazonaws.com",
             "user":"sequode",
