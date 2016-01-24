@@ -1,6 +1,6 @@
 <?php
 
-use Sequode\View\Module\Form as ModuleForm
+use Sequode\View\Module\Form as ModuleForm;
 use Sequode\Component\DOMElement\Kit\JS as DOMElementKitJS;
 
 class SQDE_SequodeFormsXHR {
