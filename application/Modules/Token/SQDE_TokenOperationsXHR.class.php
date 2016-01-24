@@ -1,6 +1,7 @@
 <?php
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
+use Sequode\Component\DOMElement\Kit\JS as DOMElementKitJS;
 
 class SQDE_TokenOperationsXHR {
     public static $package = 'Token';
@@ -8,7 +9,7 @@ class SQDE_TokenOperationsXHR {
         $modeler = ModuleRegistry::model(static::$package)->modeler;
         forward_static_call_array(array(ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array(SQDE_AuthenticatedUser::model()->id));
         $js = array();
-        $js[] = \Sequode\Component\DOMElement\Kit\JS::fetchCollection(ModuleRegistry::model(static::$package)->collections->main, $modeler::model()->id);
+        $js[] = DOMElementKitJS::fetchCollection(ModuleRegistry::model(static::$package)->collections->main, $modeler::model()->id);
         $js[] = forward_static_call_array(array(ModuleRegistry::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
@@ -33,7 +34,7 @@ class SQDE_TokenOperationsXHR {
         forward_static_call_array(array(ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array($name));
         $js = array();
         $collection = 'tokens';
-        $js[] = \Sequode\Component\DOMElement\Kit\JS::fetchCollection($collection, $modeler::model()->id);
+        $js[] = DOMElementKitJS::fetchCollection($collection, $modeler::model()->id);
         $js[] = forward_static_call_array(array(ModuleRegistry::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
@@ -55,7 +56,7 @@ class SQDE_TokenOperationsXHR {
         $collection = 'token_search';
         SQDE_Session::set($collection, $_o);
 		$js=array();
-        $js[] = \Sequode\Component\DOMElement\Kit\JS::fetchCollection($collection);
+        $js[] = DOMElementKitJS::fetchCollection($collection);
         return implode(' ',$js);
     }
 }

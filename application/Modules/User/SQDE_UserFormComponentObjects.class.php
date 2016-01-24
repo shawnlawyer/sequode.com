@@ -2,6 +2,7 @@
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
 use Sequode\Component\FormInput\FormInput as FormInputComponent;
+
 class SQDE_UserFormComponentObjects{
     public static $package = 'User';
     public static function updatePassword(){
