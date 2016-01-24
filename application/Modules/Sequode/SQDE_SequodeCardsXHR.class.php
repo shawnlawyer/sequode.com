@@ -38,7 +38,7 @@ class SQDE_SequodeCardsXHR {
         && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){return;}
-        return \Sequode\Component\Card\Kit\JS::placeCard(ModuleCard::render(self::$package,__FUNCTION__), $dom_id);
+        return \Sequode\Component\Card\Kit\JS::placeCard(ModuleCard::render(self::$package, __FUNCTION__, array($position)), $dom_id);
     }
     public static function chart($_model_id=0, $dom_id = 'CardsContainer'){
         $modeler = ModuleRegistry::model(static::$package)->modeler;
