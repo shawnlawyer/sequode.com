@@ -2,6 +2,9 @@
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
 use Sequode\View\Module\Form as ModuleForm;
+use Sequode\Component\Card\Kit\HTML as CardKitHTML;
+use Sequode\Component\Card\CardKit as CardKit;
+use Sequode\Component\Form\Form as FormComponent;
 
 class SQDE_AccountCardObjects {
     public static $package = 'Account';
@@ -16,9 +19,9 @@ class SQDE_AccountCardObjects {
     }
     public static function menuItems(){
         $_o = array();
-        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Account Details','cards/account/details');
-        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Update Password','cards/account/updatePassword');
-        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Update Email','cards/account/updateEmail');
+        $_o[] = CardKit::onTapEventsXHRCallMenuItem('Account Details','cards/account/details');
+        $_o[] = CardKit::onTapEventsXHRCallMenuItem('Update Password','cards/account/updatePassword');
+        $_o[] = CardKit::onTapEventsXHRCallMenuItem('Update Email','cards/account/updateEmail');
         return $_o;
     }
     public static function details(){
@@ -29,10 +32,10 @@ class SQDE_AccountCardObjects {
         $_o->head = 'Account Detail';
         $_o->icon_type = 'menu-icon';
         $_o->icon_background = 'user-icon-background';
-        $_o->body[] = \Sequode\Component\Card\Kit\HTML::sublineBlock('Email');
+        $_o->body[] = CardKitHTML::sublineBlock('Email');
         $_o->body[] = $_model->email;
         if(SQDE_UserAuthority::isSystemOwner()){
-            $_o->body[] = \Sequode\Component\Card\Kit\HTML::modelId($_model);
+            $_o->body[] = CardKitHTML::modelId($_model);
         }
         return $_o;
     }
@@ -46,7 +49,7 @@ class SQDE_AccountCardObjects {
         if($dialog_store->step != 0){
             $_o->menu = (object) null;
             $_o->menu->items = array();
-            $_o->menu->items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}')));
+            $_o->menu->items[] = CardKit::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(FormComponent::jsQuotedValue('{"reset":"1"}')));
         }
         $_o->head = 'Account Password';
         $_o->body = array('');
@@ -64,7 +67,7 @@ class SQDE_AccountCardObjects {
             }
         }
         if($dialog_store->step != 0){
-            $_o->body[] = \Sequode\Component\Card\CardKit::resetDialogButton('operations/account/' . __FUNCTION__);
+            $_o->body[] = CardKit::resetDialogButton('operations/account/' . __FUNCTION__);
         }
         $_o->body[] = (object) array('js' => '$(\'.focus-input\').focus(); $(\'.focus-input\').select();');
         return $_o;    
@@ -79,7 +82,7 @@ class SQDE_AccountCardObjects {
         if($dialog_store->step != 0){
             $_o->menu = (object) null;
             $_o->menu->items = array();
-            $_o->menu->items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}')));
+            $_o->menu->items[] = CardKit::onTapEventsXHRCallMenuItem('Start Over','operations/account/' . __FUNCTION__,array(FormComponent::jsQuotedValue('{"reset":"1"}')));
         }
         $_o->head = 'Account Email';
         $_o->body = array('');
@@ -97,7 +100,7 @@ class SQDE_AccountCardObjects {
             }
         }
         if($dialog_store->step > 0){
-            $_o->body[] = \Sequode\Component\Card\CardKit::resetDialogButton('operations/account/' . __FUNCTION__);
+            $_o->body[] = CardKit::resetDialogButton('operations/account/' . __FUNCTION__);
         }
         $_o->body[] = (object) array('js' => '$(\'.focus-input\').focus(); $(\'.focus-input\').select();');
         return $_o;    
