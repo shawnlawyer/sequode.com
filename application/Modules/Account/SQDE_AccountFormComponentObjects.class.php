@@ -1,7 +1,6 @@
 <?php
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
-use Sequode\Model\Module\Registry as ModuleRegistry;
 use Sequode\Component\FormInput\FormInput as FormInputComponent;
 
 class SQDE_AccountFormComponentObjects{
