@@ -1,6 +1,7 @@
 <?php
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
+use Sequode\Component\DOMElement\Kit\JS as DOMElementKitJS;
 
 class SQDE_UserOperationsXHR {
     public static $package = 'User';
@@ -110,7 +111,7 @@ class SQDE_UserOperationsXHR {
         $collection = 'user_search';
         SQDE_Session::set($collection, $_o);
 		$js=array();
-        $js[] = \Sequode\Component\DOMElement\Kit\JS::fetchCollection($collection);
+        $js[] = DOMElementKitJS::fetchCollection($collection);
         return implode(' ',$js);
     }
 }
