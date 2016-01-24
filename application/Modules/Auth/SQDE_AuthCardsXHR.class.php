@@ -1,7 +1,7 @@
 <?php
 
 use Sequode\View\Module\Card as ModuleCard;
-use \Sequode\Component\Card\Kit\JS as CardKitJS;
+use Sequode\Component\Card\Kit\JS as CardKitJS;
 
 class SQDE_AuthCardsXHR {
     public static $package = 'Auth';

@@ -1,6 +1,7 @@
 <?php
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
+use Sequode\Component\DOMElement\Kit\JS as DOMElementKitJS;
 
 class SQDE_PackageOperationsXHR {
     public static $package = 'Package';
@@ -9,7 +10,7 @@ class SQDE_PackageOperationsXHR {
         forward_static_call_array(array(ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array(SQDE_AuthenticatedUser::model()->id));
         $js = array();
         $collection = 'packages';
-        $js[] = \Sequode\Component\DOMElement\Kit\JS::fetchCollection($collection, $modeler::model()->id);
+        $js[] = DOMElementKitJS::fetchCollection($collection, $modeler::model()->id);
         $js[] = forward_static_call_array(array(ModuleRegistry::model(static::$package)->xhr->cards,'details'),array($modeler::model()->id));
         return implode(' ', $js);
     }
