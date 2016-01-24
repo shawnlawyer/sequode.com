@@ -115,7 +115,7 @@ class SQDE_SequodeOperations {
                 return $modeler::model();
         }
 		$form_object = json_decode($modeler::model()->$object_member);
-		$component = new \Sequode\Component\FormInput\FormInput();
+		$component = new \SQDE_Components;
 		if(!$component->exists($input_object->Component,'name')){$component->exists('str','name');}
 		$form_object_member = (object) null;
 		$component_form_object = json_decode($component->component_form_object);
