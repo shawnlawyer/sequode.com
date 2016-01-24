@@ -2,6 +2,7 @@
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
 use Sequode\View\Module\Form as ModuleForm;
+use Sequode\Component\Card\CardKit as CardKit;
 
 class SQDE_AuthCardObjects {
     public static $package = 'Auth';
@@ -16,7 +17,7 @@ class SQDE_AuthCardObjects {
     }
     public static function menuItems(){
         $_o = array();
-        $_o[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Login','cards/auth/login');
+        $_o[] = CardKit::onTapEventsXHRCallMenuItem('Login','cards/auth/login');
         return $_o;
     }
    public static function login(){
@@ -32,7 +33,7 @@ class SQDE_AuthCardObjects {
         if($dialog_store->step != 0){
             $_o->menu = (object) null;
             $_o->menu->items = array();
-            $_o->menu->items[] = \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Reset','operations/auth/' . __FUNCTION__,array(Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}')));
+            $_o->menu->items[] = CardKit::onTapEventsXHRCallMenuItem('Reset','operations/auth/' . __FUNCTION__,array(Sequode\Component\Form\Form::jsQuotedValue('{"reset":"1"}')));
         }
         $_o->head = 'Authentication';
         $_o->body = array('');
@@ -50,7 +51,7 @@ class SQDE_AuthCardObjects {
             }
         }
         if($dialog_store->step != 0){
-            $_o->body[] = \Sequode\Component\Card\CardKit::resetDialogButton('operations/auth/' . __FUNCTION__);
+            $_o->body[] = CardKit::resetDialogButton('operations/auth/' . __FUNCTION__);
         }
         $_o->body[] = (object) array('js' => '$(\'.focus-input\').focus(); $(\'.focus-input\').select();');
         return $_o;    

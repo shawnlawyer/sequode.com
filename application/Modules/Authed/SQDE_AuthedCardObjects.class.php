@@ -1,4 +1,7 @@
 <?php
+
+use Sequode\Component\Card\CardKit as CardKit;
+
 class SQDE_AuthedCardObjects {
     public static $package = 'Authed';
     public static function menu(){
@@ -12,7 +15,7 @@ class SQDE_AuthedCardObjects {
     }
     public static function menuItems(){
         return array(
-            \Sequode\Component\Card\CardKit::onTapEventsXHRCallMenuItem('Logout','operations/authed/logout')
+            CardKit::onTapEventsXHRCallMenuItem('Logout','operations/authed/logout')
         );
     }
 }

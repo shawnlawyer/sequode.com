@@ -1,6 +1,7 @@
 <?php
 
 use Sequode\View\Module\Card as ModuleCard;
+use Sequode\Component\Card\Kit\JS as CardKitJS;
 
 class SQDE_SiteCardsXHR {
     public static $package = 'Site';
@@ -8,11 +9,11 @@ class SQDE_SiteCardsXHR {
         $js = array();
         $deck = array();
         $deck[] = ModuleCard::render('Site','sequode',true,true,true);
-        $js[] = \Sequode\Component\Card\Kit\JS::placeDeck($deck, $dom_id);
+        $js[] = CardKitJS::placeDeck($deck, $dom_id);
         $deck = array();
         $deck[] = ModuleCard::render('Auth','login');
         $deck[] = ModuleCard::render('Register','signup');
-        $js[] =\Sequode\Component\Card\Kit\JS::placeDeck($deck, $dom_id, false);
+        $js[] =CardKitJS::placeDeck($deck, $dom_id, false);
         return implode('',$js);
     }
 }

@@ -2,6 +2,7 @@
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
 use Sequode\View\Module\Card as ModuleCard;
+use Sequode\Component\Card\Kit\JS as CardKitJS
 
 class SQDE_TokenCardsXHR {
     public static $package = 'Token';
@@ -12,12 +13,12 @@ class SQDE_TokenCardsXHR {
         && (SQDE_UserAuthority::isOwner( $modeler::model() )
         || SQDE_UserAuthority::isSystemOwner())
         )){return;}
-        return \Sequode\Component\Card\Kit\JS::placeCard(ModuleCard::render(self::$package,__FUNCTION__), $dom_id);
+        return CardKitJS::placeCard(ModuleCard::render(self::$package,__FUNCTION__), $dom_id);
     }
     public static function search($dom_id = 'CardsContainer'){
-        return \Sequode\Component\Card\Kit\JS::placeCard(ModuleCard::render(self::$package,__FUNCTION__), $dom_id);
+        return CardKitJS::placeCard(ModuleCard::render(self::$package,__FUNCTION__), $dom_id);
     }
     public static function my($dom_id = 'CardsContainer'){
-        return \Sequode\Component\Card\Kit\JS::placeCard(ModuleCard::render(self::$package,__FUNCTION__), $dom_id);
+        return CardKitJS::placeCard(ModuleCard::render(self::$package,__FUNCTION__), $dom_id);
     }
 }
