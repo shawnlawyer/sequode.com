@@ -8,7 +8,7 @@ class SQDE_RegisterFormComponentObjects   {
     public static function email(){
         $_o = (object) null;
         
-        \Sequode\Component\FormInput\FormInput::exists('str','name');
+        FormInputComponent::exists('str','name');
         $_o->email = json_decode(FormInputComponent::model()->component_object);
         $_o->email->Label = '';
         $_o->email->Value = '';

@@ -8,7 +8,7 @@ class SQDE_SessionFormComponentObjects{
         
         $_o = (object) null;
         
-        \Sequode\Component\FormInput\FormInput::exists('str','name');
+        FormInputComponent::exists('str','name');
         $_o->search = json_decode(FormInputComponent::model()->component_object);
         $_o->search->Label = '';
         $_o->search->Value = '';
