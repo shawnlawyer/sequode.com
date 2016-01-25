@@ -1,6 +1,6 @@
 <?php
 
-use Sequode\View\Module\Card as ModuleCard
+use Sequode\View\Module\Card as ModuleCard;
 use Sequode\Component\Card\Kit\JS as CardKitJS;
 
 
