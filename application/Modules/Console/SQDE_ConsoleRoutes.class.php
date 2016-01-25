@@ -2,7 +2,10 @@
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
 use Sequode\Model\Application\Routes;
+use Sequode\Model\Application\Runtime as RuntimeModel;
 use Sequode\Controller\Application\HTTPRequest\XHR as XHRRequest;
+use Sequode\Component\DOMElement\Kit\HTML as DOMElementKitHTML;
+use Sequode\Component\DOMElement\Kit\JS as DOMElementKitJS;
 
 class SQDE_ConsoleRoutes{
 	public static $merge = false;
@@ -32,12 +35,12 @@ class SQDE_ConsoleRoutes{
             $console = 'Sequode';
         }
         SQDE_Session::set('console',$console);
-		echo \Sequode\Component\DOMElement\Kit\HTML::page();
+		echo DOMElementKitHTML::page();
 		exit;
 	}
 	public static function routes(){
         if(SQDE_UserAuthority::isSystemOwner()){
-            $routes_classes = \Sequode\Model\Application\Runtime::model()->routes;
+            $routes_classes = RuntimeModel::model()->routes;
             foreach($routes_classes as $routes_class){
                 $routes = Sequode\ZA::routes('\\'.$routes_class);
                 echo $routes_class.'<br>';
@@ -181,7 +184,7 @@ class SQDE_ConsoleRoutes{
             echo '!function() {';
         }
         if($force_SSL == true && $_SERVER['WORKFLOW_ENVIRONMENT'] != 'development'){
-            //echo \Sequode\Component\DOMElement\Kit\JS::forceSSL();
+            //echo DOMElementKitJS::forceSSL();
         }
 		foreach($files as $file){
 			echo file_get_contents($file,true);
