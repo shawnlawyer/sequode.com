@@ -73,7 +73,7 @@ class SQDE_UserFormComponentObjects{
         $_o->active->Printable_Key = 'printable';
 
                 
-        $roles_model = new SQDE_Roles;
+        $roles_model = new SQDE_Role::$model;
         $roles_model->getAll();
         $values = array('{\'value\':\'all\',\'printable\':\'Any\'}');
         foreach( $roles_model->all as $object){
@@ -92,7 +92,7 @@ class SQDE_UserFormComponentObjects{
         $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : $_model;
         $_o = (object) null;
-        $roles_model = new SQDE_Roles;
+        $roles_model = new SQDE_Role::$model;
         $roles_model->getAll();
         foreach( $roles_model->all as $object){
             $values[] = '{\'value\':\''.$object->id.'\',\'printable\':\''.$object->name.'\'}';

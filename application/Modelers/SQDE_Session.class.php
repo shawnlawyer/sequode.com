@@ -4,7 +4,9 @@ use Sequode\Model\Application\Configuration;
 use Sequode\Patterns\Modeler;
 
 class SQDE_Session extends Modeler {
-    public static $model = 'SQDE_Sessions';
+    
+    public static $model = Sequode\Application\Models\ORM\Sessions::class;
+    
     public static function container($mode, $key = null, $value = null) {
         static $store;
         if(!is_array($store)){
