@@ -21,7 +21,7 @@ class SQDE_SequodeBuilderApplicationProfile {
         
         if(SQDE_UserAuthority::isSystemOwner()){
             $modules[] = '\\'.'SQDE_SessionPackage';
-            $modules[] = '\\'.'SQDE_UserPackage';
+            $modules[] = Sequode\Application\Modules\User\RegisteryModel::class;
             $modules[] = '\\'.'SQDE_BlacklistIPPackage';
         }
         

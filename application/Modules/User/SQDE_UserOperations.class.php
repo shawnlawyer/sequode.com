@@ -1,8 +1,9 @@
 <?php
+namespace Sequode\Application\Modules\User;
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
 
-class SQDE_UserOperations {
+class Operations {
 
     public static $package = 'User';
 	public static function uniqueHash($seed='',$prefix='SQDE'){
