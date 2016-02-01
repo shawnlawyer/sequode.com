@@ -67,13 +67,13 @@ class SQDE_PackageOperations {
         $used_ids = array();
         $package_sequode_model_ids = array_unique(json_decode(SQDE_Sequode::model()->sequence));
         
-		$sequode_model = new SQDE_Sequodes;
+		$sequode_model = new SQDE_Sequode::$model;
         foreach($package_sequode_model_ids as $id){
             $used_ids[] = $id;
             $sequode_model->exists($id,'id');
             $used_ids = array_merge($used_ids, json_decode(SQDE_Sequode::model()->sequence));
         }
-		$sequode_model = new SQDE_Sequodes;
+		$sequode_model = new SQDE_Sequode::$model;
         $models = array();
         $where = array();
         $where[] = array('field'=>'owner_id','operator'=>'!=','value'=>SQDE_AuthenticatedUser::model()->id);

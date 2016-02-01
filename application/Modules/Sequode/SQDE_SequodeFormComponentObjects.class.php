@@ -194,7 +194,7 @@ class SQDE_SequodeFormComponentObjects   {
         $where[] = array('field'=>'owner_id','operator'=>'=','value'=>5);
         $where[] = array('field'=>'shared','operator'=>'=','value'=>1);
         $where[] = array('field'=>'palette','operator'=>'=','value'=>1);
-        $sequodes_model = new SQDE_Sequodes;
+        $sequodes_model = new SQDE_Sequode::$model;
         $sequodes_model->getAll($where);
         foreach( $sequodes_model->all as $object){
             $values[] = '{\'value\':\''.$object->id.'\',\'printable\':\''.$object->name.'\'}';

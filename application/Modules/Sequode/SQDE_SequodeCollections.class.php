@@ -131,7 +131,7 @@ class SQDE_SequodeCollections{
         }elseif(SQDE_Session::get('palette') == 'sequode_favorites'){
             self::favorited();
         }elseif(SQDE_Session::is('palette')){
-            $sequode_model = new SQDE_Sequodes;
+            $sequode_model = new SQDE_Sequode::$model;
             $sequode_model->exists(SQDE_Session::get('palette'),'id');
             $sequence = array_unique(json_decode($sequode_model->sequence));
             $nodes = array();
