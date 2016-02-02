@@ -261,7 +261,7 @@ class SQDE_ConsoleRoutes{
                 SQDE_SequodeCollections::search();
                 return;
 			case 'user_search':
-                SQDE_UserCollections::search();
+                Sequode\Application\Modules\User\Routes\Collection::search();
                 return;
 			case 'session_search':
                 SQDE_SessionCollections::search();
