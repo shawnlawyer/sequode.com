@@ -183,7 +183,7 @@ class SQDE_SequodeFormComponentObjects   {
 		return $components_object;
 	}
     public static function selectPalette($user_model = null){
-        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
+        if($user_model == null ){ $user_model = \Sequode\Application\Modules\Auth\Modeler::model(); }
         $components_object = (object) null;
         $values = $where = array();
         
@@ -200,7 +200,7 @@ class SQDE_SequodeFormComponentObjects   {
             $values[] = '{\'value\':\''.$object->id.'\',\'printable\':\''.$object->name.'\'}';
         }
         $where = array();
-        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
+        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>\Sequode\Application\Modules\Auth\Modeler::model()->id);
         $where[] = array('field'=>'palette','operator'=>'=','value'=>1);
         $sequodes_model->getAll($where);
         foreach( $sequodes_model->all as $object){

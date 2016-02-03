@@ -53,7 +53,7 @@ class SQDE_SequodeOperationsRest{
         if(!(
             SQDE_UserAuthority::canCreate()
         )){ return; }
-        SQDE_SequodeOperations::newSequence(SQDE_AuthenticatedUser::model()->id);
+        SQDE_SequodeOperations::newSequence(\Sequode\Application\Modules\Auth\Modeler::model()->id);
         $object = (object) null;
         $object->Success = 1;
 		$object->Model_Id = SQDE_Sequode::model()->id;
@@ -67,7 +67,7 @@ class SQDE_SequodeOperationsRest{
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canCopy()
         )){ return; }
-		SQDE_SequodeOperations::makeSequenceCopy(SQDE_AuthenticatedUser::model()->id);
+		SQDE_SequodeOperations::makeSequenceCopy(\Sequode\Application\Modules\Auth\Modeler::model()->id);
 		$object = (object) null;
         $object->Success = 1;
 		$object->Model_Id = SQDE_Sequode::model()->id;

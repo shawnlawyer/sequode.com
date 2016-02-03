@@ -4,7 +4,7 @@ class SQDE_AuthedPackage {
 	public static function model(){
         $model = (object) null;
         $model->context = 'authed';
-        $model->modeler = 'SQDE_AuthenticatedUser';
+        $model->modeler = \Sequode\Application\Modules\Auth\Modeler::class;
         $model->card_objects = 'SQDE_AuthedCardObjects';
         $model->operations = 'SQDE_AuthedOperations';
         $model->xhr = (object) null;

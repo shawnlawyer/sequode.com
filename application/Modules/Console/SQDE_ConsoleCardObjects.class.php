@@ -7,10 +7,10 @@ use Sequode\Component\Card\Kit\HTML as CardKitHTML;
 class SQDE_ConsoleCardObjects {
     public static $package = 'Console';
     public static function index(){
-        return self::tiles(SQDE_AuthenticatedUser::model());
+        return self::tiles(\Sequode\Application\Modules\Auth\Modeler::model());
     }
     public static function tiles($user_model=null){
-        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
+        if($user_model == null ){ $user_model = \Sequode\Application\Modules\Auth\Modeler::model(); }
         $_o = (object) null;
         $_o->size = 'fullscreen';
         $_o->head = 'Sequode Web Services';
@@ -34,7 +34,7 @@ class SQDE_ConsoleCardObjects {
     }
     
     public static function mySequodes($user_model=null){
-        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
+        if($user_model == null ){ $user_model = \Sequode\Application\Modules\Auth\Modeler::model(); }
         $_o = (object) null;
         $_o->head = 'My Sequodes';
         $_o->size = 'xsmall';
@@ -49,7 +49,7 @@ class SQDE_ConsoleCardObjects {
         return $_o;
     }
     public static function myPackages($user_model=null){
-        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
+        if($user_model == null ){ $user_model = \Sequode\Application\Modules\Auth\Modeler::model(); }
         $_o = (object) null;
         $_o->head = 'My Packages';
         $_o->size = 'xsmall';
@@ -64,7 +64,7 @@ class SQDE_ConsoleCardObjects {
         return $_o;
     }
     public static function myTokens($user_model=null){
-        if($user_model == null ){ $user_model = SQDE_AuthenticatedUser::model(); }
+        if($user_model == null ){ $user_model = \Sequode\Application\Modules\Auth\Modeler::model(); }
         $_o = (object) null;
         $_o->head = 'My Tokens';
         $_o->size = 'xsmall';

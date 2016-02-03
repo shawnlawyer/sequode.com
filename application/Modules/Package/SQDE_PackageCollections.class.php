@@ -23,7 +23,7 @@ class SQDE_PackageCollections{
         $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = new $modeler::$model;
         $where = array();
-        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
+        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>\Sequode\Application\Modules\Auth\Modeler::model()->id);
         $_model->getAll($where,'id,name');
         $nodes = array();
         foreach($_model->all as $object){

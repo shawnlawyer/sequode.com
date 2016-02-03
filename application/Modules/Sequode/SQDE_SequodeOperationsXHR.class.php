@@ -66,7 +66,7 @@ class SQDE_SequodeOperationsXHR {
         && SQDE_SequodeAuthority::isSequence()
         && SQDE_UserAuthority::canCopy()
         )){ return; }
-        forward_static_call_array(array(ModuleRegistry::model(static::$package)->operations,'makeSequenceCopy'),array(SQDE_AuthenticatedUser::model()->id));
+        forward_static_call_array(array(ModuleRegistry::model(static::$package)->operations,'makeSequenceCopy'),array(\Sequode\Application\Modules\Auth\Modeler::model()->id));
         $js = array();
         $collection = 'sequodes';
         $js[] = DOMElementKitJS::fetchCollection($collection, $modeler::model()->id);
@@ -78,7 +78,7 @@ class SQDE_SequodeOperationsXHR {
         if(!(
         SQDE_UserAuthority::canCreate()
         )){ return; }
-        forward_static_call_array(array(ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array(SQDE_AuthenticatedUser::model()->id));
+        forward_static_call_array(array(ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array(\Sequode\Application\Modules\Auth\Modeler::model()->id));
         $js = array();
         $collection = 'sequodes';
         $js[] = DOMElementKitJS::fetchCollection($collection, $modeler::model()->id);

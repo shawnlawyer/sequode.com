@@ -31,14 +31,14 @@ class SQDE_SequodeCollections{
             }else{
                 $nodes = array();
                 $where = array();
-                $where[] = array('field'=>'owner_id','operator'=>'!=','value'=>SQDE_AuthenticatedUser::model()->id);
+                $where[] = array('field'=>'owner_id','operator'=>'!=','value'=>\Sequode\Application\Modules\Auth\Modeler::model()->id);
                 $where[] = array('field'=>'shared','operator'=>'=','value'=>'1');
                 $_model->getAll($where,'id, process_description_node');
                 foreach($_model->all as $object){
                     $nodes[] = '"' . $object->id . '":' . $object->process_description_node;
                 }
                 $where = array();
-                $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
+                $where[] = array('field'=>'owner_id','operator'=>'=','value'=>\Sequode\Application\Modules\Auth\Modeler::model()->id);
                 $_model->getAll($where,'id, process_description_node');
                 foreach($_model->all as $object){
                     $nodes[] = '"' . $object->id . '":' . $object->process_description_node;
@@ -81,7 +81,7 @@ class SQDE_SequodeCollections{
         $modeler = ModuleRegistry::model(static::$package)->modeler;
         $_model = new $modeler::$model;
         $where = array();
-        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
+        $where[] = array('field'=>'owner_id','operator'=>'=','value'=>\Sequode\Application\Modules\Auth\Modeler::model()->id);
         $_model->getAll($where,'id,name');
         $nodes = array();
         foreach($_model->all as $object){
@@ -94,8 +94,8 @@ class SQDE_SequodeCollections{
         $modeler = ModuleRegistry::model(static::$package)->modeler;
         $collection = 'sequode_favorites';
         $nodes = array();
-        if(!empty(SQDE_AuthenticatedUser::model()->$collection)){
-            $_model_ids = json_decode(SQDE_AuthenticatedUser::model()->$collection);
+        if(!empty(\Sequode\Application\Modules\Auth\Modeler::model()->$collection)){
+            $_model_ids = json_decode(\Sequode\Application\Modules\Auth\Modeler::model()->$collection);
             foreach($_model_ids as $_model_id){
                 if($modeler::exists($_model_id,'id')){
                     $nodes[] = '"'. $modeler::model()->id .'":{"id":"'.$modeler::model()->id.'","n":"'.$modeler::model()->name.'"}';

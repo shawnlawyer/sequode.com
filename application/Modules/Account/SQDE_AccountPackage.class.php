@@ -4,7 +4,7 @@ class SQDE_AccountPackage {
 	public static function model(){
         $model = (object) null;
         $model->context = 'account';
-        $model->modeler = 'SQDE_AuthenticatedUser';
+        $model->modeler = \Sequode\Application\Modules\Auth\Modeler::class;
         $model->card_objects = 'SQDE_AccountCardObjects';
         $model->form_objects = 'SQDE_AccountFormObjects';
         $model->operations = 'SQDE_AccountOperations';

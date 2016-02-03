@@ -35,7 +35,7 @@ class SQDE_SequodeFinder {
                     $where[] = $shared_where;
                 }
                 $where[] = array('field'=>'name','operator'=>$_i->position,'value'=>$_i->search);
-                $where[] = array('field'=>'owner_id','operator'=>'=','value'=>SQDE_AuthenticatedUser::model()->id);
+                $where[] = array('field'=>'owner_id','operator'=>'=','value'=>\Sequode\Application\Modules\Auth\Modeler::model()->id);
                 
                 $_model = new $modeler::$model;
                 $_model->getAll($where,'id,name',false, $limit);
@@ -49,7 +49,7 @@ class SQDE_SequodeFinder {
                     $where[] = $shared_where;
                 }
                 $where[] = array('field'=>'name','operator'=>$_i->position,'value'=>$_i->search);
-                $where[] = array('field'=>'owner_id','operator'=>'!=','value'=>SQDE_AuthenticatedUser::model()->id);
+                $where[] = array('field'=>'owner_id','operator'=>'!=','value'=>\Sequode\Application\Modules\Auth\Modeler::model()->id);
                 $where[] = array('field'=>'shared','operator'=>'=','value'=>'1');
                 
                 $_model = new $modeler::$model;
