@@ -15,7 +15,7 @@ class SQDE_SequodeBuilderApplicationProfile {
             $modules[] = '\\'.'SQDE_PackagePackage';
             $modules[] = '\\'.'SQDE_TokenPackage';
         }else{
-            $modules[] = '\\'.'SQDE_AuthPackage';
+            $modules[] = Sequode\Application\Modules\Auth\Module::class;
             $modules[] = '\\'.'SQDE_RegisterPackage';
         }
         

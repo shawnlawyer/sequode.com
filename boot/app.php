@@ -8,7 +8,7 @@ ob_start('ob_gzhandler');
 Configuration::model('\\SQDE_BuilderApplicationConfiguration');
 SQDE_Session::start();
 if(SQDE_Session::is('user_id')){
-    SQDE_AuthOperations::load();
+    \Sequode\Application\Modules\Auth\Operations::load();
 }
 
 Runtime::model('\\SQDE_SequodeBuilderApplicationProfile');
