@@ -68,14 +68,14 @@ class SQDE_Session extends Modeler {
     }
 	public static function start($auto_create = true){
         $ip_address = explode(',',((!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) ? $_SERVER["HTTP_X_FORWARDED_FOR"] : $_SERVER["REMOTE_ADDR"]))[0];
-        if(!\Sequode\Application\Modules\BlockedIP::exists($ip_address,'ip_address')){
+        if(!\Sequode\Application\Modules\BlockedIP\Modeler::exists($ip_address,'ip_address')){
             $ip_pieces = explode('.', $ip_address);
             $auto_block_ips = array('180','111','88','31');
             if(in_array($ip_pieces[0], $auto_block_ips)){
-                \Sequode\Application\Modules\BlockedIP::model()->create($ip_address);
+                \Sequode\Application\Modules\BlockedIP\Modeler::model()->create($ip_address);
             }
         }
-        if(isset(\Sequode\Application\Modules\BlockedIP::model()->id)){
+        if(isset(\Sequode\Application\Modules\BlockedIP\Modeler::model()->id)){
             die('Sequo De');
         }
         if(self::exists(self::getCookieValue()) && self::model()->ip_address == $ip_address /* &&  time() < self::model()->session_start + 86400 */){

@@ -22,7 +22,7 @@ class SQDE_SequodeBuilderApplicationProfile {
         if(SQDE_UserAuthority::isSystemOwner()){
             $modules[] = '\\'.'SQDE_SessionPackage';
             $modules[] = Sequode\Application\Modules\User\Module::class;
-            $modules[] = '\\'.'SQDE_BlacklistIPPackage';
+            $modules[] = Sequode\Application\Modules\BlockedIP\Module::class;
         }
         
         foreach($modules as $module){
