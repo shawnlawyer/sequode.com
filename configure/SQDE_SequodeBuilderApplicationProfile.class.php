@@ -5,7 +5,7 @@ use Sequode\Model\Module\Registry as ModuleRegistry;
 class SQDE_SequodeBuilderApplicationProfile {
 	public static function model(){
         $modules = array();
-        $modules[] = '\\'.'SQDE_ConsolePackage';
+        $modules[] = Sequode\Application\Modules\Console\Module::class;
         $modules[] = Sequode\Application\Modules\Site\Module::class;
         
         if(SQDE_UserAuthority::isAuthenticated()){
