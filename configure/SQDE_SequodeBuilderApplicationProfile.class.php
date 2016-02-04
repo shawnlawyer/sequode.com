@@ -11,7 +11,7 @@ class SQDE_SequodeBuilderApplicationProfile {
         if(SQDE_UserAuthority::isAuthenticated()){
             $modules[] = Sequode\Application\Modules\Authed\Module::class;
             $modules[] = '\\'.'SQDE_SequodePackage';
-            $modules[] = '\\'.'SQDE_AccountPackage';
+            $modules[] = Sequode\Application\Modules\Account\Module::class;
             $modules[] = '\\'.'SQDE_PackagePackage';
             $modules[] = '\\'.'SQDE_TokenPackage';
         }else{
