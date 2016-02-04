@@ -6,7 +6,7 @@ class SQDE_SequodeBuilderApplicationProfile {
 	public static function model(){
         $modules = array();
         $modules[] = '\\'.'SQDE_ConsolePackage';
-        $modules[] = '\\'.'SQDE_SitePackage';
+        $modules[] = Sequode\Application\Modules\Site\Module::class;
         
         if(SQDE_UserAuthority::isAuthenticated()){
             $modules[] = Sequode\Application\Modules\Authed\Module::class;

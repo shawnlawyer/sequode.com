@@ -35,7 +35,7 @@ class SQDE_SessionOperationsXHR {
             $modeler::exists($_model_id,'id')
             && $modeler::model()->ip_address != $session_ip
         )){ return; }
-        SQDE_BlacklistIP::model()->create($modeler::model()->ip_address);
+        \Sequode\Application\Modules\BlockedIP::model()->create($modeler::model()->ip_address);
     }
     public static function search($json){
         $_o = json_decode(stripslashes($json));
