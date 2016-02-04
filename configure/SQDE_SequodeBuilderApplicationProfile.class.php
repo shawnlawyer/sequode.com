@@ -9,7 +9,7 @@ class SQDE_SequodeBuilderApplicationProfile {
         $modules[] = '\\'.'SQDE_SitePackage';
         
         if(SQDE_UserAuthority::isAuthenticated()){
-            $modules[] = '\\'.'SQDE_AuthedPackage';
+            $modules[] = Sequode\Application\Modules\Authed\Module::class;
             $modules[] = '\\'.'SQDE_SequodePackage';
             $modules[] = '\\'.'SQDE_AccountPackage';
             $modules[] = '\\'.'SQDE_PackagePackage';
