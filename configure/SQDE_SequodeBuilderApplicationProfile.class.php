@@ -13,7 +13,7 @@ class SQDE_SequodeBuilderApplicationProfile {
             $modules[] = '\\'.'SQDE_SequodePackage';
             $modules[] = Sequode\Application\Modules\Account\Module::class;
             $modules[] = '\\'.'SQDE_PackagePackage';
-            $modules[] = '\\'.'SQDE_TokenPackage';
+            $modules[] = Sequode\Application\Modules\Token\Module::class;
         }else{
             $modules[] = Sequode\Application\Modules\Auth\Module::class;
             $modules[] = Sequode\Application\Modules\Register\Module::class;
