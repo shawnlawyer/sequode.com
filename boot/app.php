@@ -6,8 +6,8 @@ date_default_timezone_set('America/Los_Angeles');
 ob_start('ob_gzhandler');
 
 Configuration::model('\\SQDE_BuilderApplicationConfiguration');
-SQDE_Session::start();
-if(SQDE_Session::is('user_id')){
+\Sequode\Application\Modules\Session\Modeler::start();
+if(\Sequode\Application\Modules\Session\Modeler::is('user_id')){
     \Sequode\Application\Modules\Auth\Operations::load();
 }
 

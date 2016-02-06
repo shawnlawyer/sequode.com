@@ -318,9 +318,9 @@ class SQDE_SequodeOperationsXHR {
         $_o = json_decode(stripslashes($json));
         $_o = (!is_object($_o) || (trim($_o->search) == '' || empty(trim($_o->search)))) ? (object) null : $_o;
         $collection = 'sequode_search';
-        SQDE_Session::set($collection, $_o);
+        \Sequode\Application\Modules\Session\Modeler::set($collection, $_o);
 		$js=array();
-        if(SQDE_Session::get('palette') == $collection){
+        if(\Sequode\Application\Modules\Session\Modeler::get('palette') == $collection){
             $js[] = DOMElementKitJS::fetchCollection('palette');
         }
         $js[] = DOMElementKitJS::fetchCollection($collection);
@@ -329,19 +329,19 @@ class SQDE_SequodeOperationsXHR {
     public static function selectPalette($json){
         $_o = json_decode(stripslashes($json));
         if(!is_object($_o) || (trim($_o->palette) == '' || empty(trim($_o->palette)))){
-            SQDE_Session::set('palette', false);
+            \Sequode\Application\Modules\Session\Modeler::set('palette', false);
         }else{
             switch($_o->palette){
                 case 'sequode_search':
                 case 'sequode_favorites':
-                    SQDE_Session::set('palette', $_o->palette);
+                    \Sequode\Application\Modules\Session\Modeler::set('palette', $_o->palette);
                     break;
                 default:
                     if((
                     SQDE_Sequode::exists($_o->palette,'id')
                     && SQDE_UserAuthority::canView()
                     )){ 
-                    SQDE_Session::set('palette', $_o->palette);
+                    \Sequode\Application\Modules\Session\Modeler::set('palette', $_o->palette);
                     }
                     break;
             }

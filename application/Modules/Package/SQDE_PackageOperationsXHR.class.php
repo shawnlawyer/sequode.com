@@ -72,7 +72,7 @@ class SQDE_PackageOperationsXHR {
         $_o = json_decode(stripslashes($json));
         $_o = (!is_object($_o) || (trim($_o->search) == '' || empty(trim($_o->search)))) ? (object) null : $_o;
         $collection = 'package_search';
-        SQDE_Session::set($collection, $_o);
+        \Sequode\Application\Modules\Session\Modeler::set($collection, $_o);
 		$js=array();
         $js[] = DOMElementKitJS::fetchCollection($collection);
         return implode(' ',$js);

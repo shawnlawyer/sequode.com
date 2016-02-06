@@ -50,7 +50,7 @@ class SQDE_PackageOperations {
         $modeler = ModuleRegistry::model(static::$package)->modeler;
         $modeler::model()->create();
         $modeler::exists($modeler::model()->id,'id');
-        $modeler::model()->updateField(substr(SQDE_Session::uniqueHash('package','SQDEPAC'),0,15),'name');
+        $modeler::model()->updateField(substr(\Sequode\Application\Modules\Session\Modeler::uniqueHash('package','SQDEPAC'),0,15),'name');
         $modeler::model()->updateField($owner,'owner_id');
         return $modeler::model();
 	}

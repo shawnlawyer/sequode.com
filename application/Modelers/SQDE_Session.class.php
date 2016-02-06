@@ -1,9 +1,10 @@
 <?php
 
-use Sequode\Model\Application\Configuration;
-use Sequode\Patterns\Modeler;
+namespace Sequode\Application\Modules\Session;
 
-class SQDE_Session extends Modeler {
+use Sequode\Model\Application\Configuration;
+
+class Modeler extends \Sequode\Patterns\Modeler {
     
     public static $model = Sequode\Application\Models\ORM\Sessions::class;
     
@@ -80,10 +81,10 @@ class SQDE_Session extends Modeler {
         }
         if(self::exists(self::getCookieValue()) && self::model()->ip_address == $ip_address /* &&  time() < self::model()->session_start + 86400 */){
             self::load();
-            SQDE_Session::set('history', array_merge(self::get('history'), array(substr($_SERVER['REQUEST_URI'], 0, 25))));
+            \Sequode\Application\Modules\Session\Modeler::set('history', array_merge(self::get('history'), array(substr($_SERVER['REQUEST_URI'], 0, 25))));
         }elseif($auto_create == true && $_SERVER['HTTP_HOST'] == Configuration::model()->sessions->create_domain){
             self::create($ip_address);
-            SQDE_Session::set('history', array(substr($_SERVER['REQUEST_URI'], 0, 25)));
+            \Sequode\Application\Modules\Session\Modeler::set('history', array(substr($_SERVER['REQUEST_URI'], 0, 25)));
             self::setCookie();
         }
     }
