@@ -5,10 +5,10 @@ use Sequode\Model\Application\Runtime;
 date_default_timezone_set('America/Los_Angeles');
 ob_start('ob_gzhandler');
 
-Configuration::model('\\SQDE_BuilderApplicationConfiguration');
+Configuration::model('\\ApplicationConfiguration');
 \Sequode\Application\Modules\Session\Modeler::start();
 if(\Sequode\Application\Modules\Session\Modeler::is('user_id')){
     \Sequode\Application\Modules\Auth\Operations::load();
 }
 
-Runtime::model('\\SQDE_SequodeBuilderApplicationProfile');
+Runtime::model('\\RuntimeModules');

@@ -52,7 +52,7 @@ class SQDE_PackageCardObjects {
         $_o->body[] = CardKitHTML::sublineBlock('Name');
         $_o->body[] = DOMElementKitJS::loadComponentHere(DOMElementKitJS::xhrCallObject('forms/package/name', array($_model->id)), $_model->name, 'settings');
         $_o->body[] = CardKitHTML::sublineBlock('Package Sequode');
-        $_o->body[] = ($_model->sequode_id != 0 && SQDE_Sequode::exists($_model->sequode_id,'id')) ? DOMElementKitJS::loadComponentHere(DOMElementKitJS::xhrCallObject('forms/package/packageSequode', array($_model->id)), SQDE_Sequode::model()->name, 'settings') : ModuleForm::render(self::$package,'packageSequode')[0];
+        $_o->body[] = ($_model->sequode_id != 0 && \Sequode\Application\Modules\Sequode\Modeler::exists($_model->sequode_id,'id')) ? DOMElementKitJS::loadComponentHere(DOMElementKitJS::xhrCallObject('forms/package/packageSequode', array($_model->id)), \Sequode\Application\Modules\Sequode\Modeler::model()->name, 'settings') : ModuleForm::render(self::$package,'packageSequode')[0];
         $_o->body[] = CardKitHTML::sublineBlock('Package Token');
         $_o->body[] = $_model->token;
         $_o->body[] = CardKitHTML::sublineBlock('<a target="_blank" href="/source/'.$_model->token.'">Download</a>');

@@ -19,8 +19,8 @@ class SQDE_PackageOperationsXHR {
         $_o = json_decode($json);
         if(!(
         $modeler::exists($_model_id,'id')
-        && SQDE_Sequode::exists($_o->sequode,'id')
-        && SQDE_SequodeAuthority::isPackage(SQDE_Sequode::model())
+        && \Sequode\Application\Modules\Sequode\Modeler::exists($_o->sequode,'id')
+        && \Sequode\Application\Modules\Sequode\Authority::isPackage(\Sequode\Application\Modules\Sequode\Modeler::model())
         && ( SQDE_UserAuthority::isOwner($modeler::model()) || SQDE_UserAuthority::isSystemOwner() )
         )){ return; }
         forward_static_call_array(array(ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array($_o->sequode));

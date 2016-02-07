@@ -1,5 +1,5 @@
 <?php
-class SQDE_BuilderApplicationConfiguration {
+class ApplicationConfiguration {
 	
 	public static function model(){
         $_o = (object) null;

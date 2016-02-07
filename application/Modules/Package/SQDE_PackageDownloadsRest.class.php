@@ -3,9 +3,9 @@ class SQDE_PackageDownloadsRest{
 	public static function source($_model_token){
         if(!(
 		SQDE_Package::exists($_model_token,'token')
-        && SQDE_Sequode::exists(SQDE_Package::model()->sequode_id,'id')
+        && \Sequode\Application\Modules\Sequode\Modeler::exists(SQDE_Package::model()->sequode_id,'id')
         && (SQDE_UserAuthority::isOwner(SQDE_Package::model()) || SQDE_UserAuthority::isSystemOwner())
-        && (SQDE_UserAuthority::isOwner(SQDE_Sequode::model()) || SQDE_UserAuthority::isSystemOwner())
+        && (SQDE_UserAuthority::isOwner(\Sequode\Application\Modules\Sequode\Modeler::model()) || SQDE_UserAuthority::isSystemOwner())
 		)){ return; }
         
         header('Content-Type: text/plain',true);

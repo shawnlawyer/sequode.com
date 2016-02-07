@@ -48,7 +48,7 @@ class SQDE_PackageFormComponentObjects {
         $values = $where = array();
         
         $values[] = '{\'value\':\'0\',\'printable\':\'Select Package Sequode\'}';
-        $sequodes_model = new SQDE_Sequode::$model;
+        $sequodes_model = new \Sequode\Application\Modules\Sequode\Modeler::$model;
         /*
         $where[] = array('field'=>'owner_id','operator'=>'=','value'=>5);
         $where[] = array('field'=>'shared','operator'=>'=','value'=>1);

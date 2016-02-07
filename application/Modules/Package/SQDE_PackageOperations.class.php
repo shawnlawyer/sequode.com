@@ -65,15 +65,15 @@ class SQDE_PackageOperations {
         $modeler = ModuleRegistry::model(static::$package)->modeler;
         ($_model == null) ? forward_static_call_array(array($modeler,'model'),array()) : forward_static_call_array(array($modeler,'model'),array($_model));
         $used_ids = array();
-        $package_sequode_model_ids = array_unique(json_decode(SQDE_Sequode::model()->sequence));
+        $package_sequode_model_ids = array_unique(json_decode(\Sequode\Application\Modules\Sequode\Modeler::model()->sequence));
         
-		$sequode_model = new SQDE_Sequode::$model;
+		$sequode_model = new \Sequode\Application\Modules\Sequode\Modeler::$model;
         foreach($package_sequode_model_ids as $id){
             $used_ids[] = $id;
             $sequode_model->exists($id,'id');
-            $used_ids = array_merge($used_ids, json_decode(SQDE_Sequode::model()->sequence));
+            $used_ids = array_merge($used_ids, json_decode(\Sequode\Application\Modules\Sequode\Modeler::model()->sequence));
         }
-		$sequode_model = new SQDE_Sequode::$model;
+		$sequode_model = new \Sequode\Application\Modules\Sequode\Modeler::$model;
         $models = array();
         $where = array();
         $where[] = array('field'=>'owner_id','operator'=>'!=','value'=>\Sequode\Application\Modules\Auth\Modeler::model()->id);
