@@ -58,7 +58,7 @@ class SQDE_PackageCardObjects {
         $_o->body[] = CardKitHTML::sublineBlock('<a target="_blank" href="/source/'.$_model->token.'">Download</a>');
         
         $_o->body[] = CardKit::nextInCollection((object) array('model_id'=>$_model->id,'details_route'=>'cards/package/details'));
-        if(SQDE_UserAuthority::isSystemOwner()){
+        if(\Sequode\Application\Module\Auth\Authority::isSystemOwner()){
             $_o->body[] = CardKitHTML::modelId($_model);
         }
         return $_o;

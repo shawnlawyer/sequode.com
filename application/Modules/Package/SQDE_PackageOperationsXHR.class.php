@@ -21,7 +21,7 @@ class SQDE_PackageOperationsXHR {
         $modeler::exists($_model_id,'id')
         && \Sequode\Application\Modules\Sequode\Modeler::exists($_o->sequode,'id')
         && \Sequode\Application\Modules\Sequode\Authority::isPackage(\Sequode\Application\Modules\Sequode\Modeler::model())
-        && ( SQDE_UserAuthority::isOwner($modeler::model()) || SQDE_UserAuthority::isSystemOwner() )
+        && ( \Sequode\Application\Module\Auth\Authority::isOwner($modeler::model()) || \Sequode\Application\Module\Auth\Authority::isSystemOwner() )
         )){ return; }
         forward_static_call_array(array(ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array($_o->sequode));
         $js = array();
@@ -34,8 +34,8 @@ class SQDE_PackageOperationsXHR {
         $modeler = ModuleRegistry::model(static::$package)->modeler;
         if(!(
         $modeler::exists($_model_id,'id')
-        && (SQDE_UserAuthority::isOwner( $modeler::model() )
-        || SQDE_UserAuthority::isSystemOwner())
+        && (\Sequode\Application\Module\Auth\Authority::isOwner( $modeler::model() )
+        || \Sequode\Application\Module\Auth\Authority::isSystemOwner())
         )){ return; }
         $_o = json_decode($json);
         $name = trim(str_replace('-','_',str_replace(' ','_',urldecode($_o->name))));
@@ -60,8 +60,8 @@ class SQDE_PackageOperationsXHR {
         $modeler = ModuleRegistry::model(static::$package)->modeler;
         if(!(
         $modeler::exists($_model_id,'id')
-        && (SQDE_UserAuthority::isOwner( $modeler::model() )
-        || SQDE_UserAuthority::isSystemOwner())
+        && (\Sequode\Application\Module\Auth\Authority::isOwner( $modeler::model() )
+        || \Sequode\Application\Module\Auth\Authority::isSystemOwner())
         )){ return; }
         forward_static_call_array(array(ModuleRegistry::model(static::$package)->operations,__FUNCTION__),array());
         $js = array();

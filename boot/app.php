@@ -6,9 +6,9 @@ use Sequode\Model\Application\Runtime;
 date_default_timezone_set('America/Los_Angeles');
 ob_start('ob_gzhandler');
 
-Configuration::model(ApplicationConfiguration::class);
+Configuration::model(\ApplicationConfiguration::class);
 \Sequode\Application\Modules\Session\Modeler::start();
 if(\Sequode\Application\Modules\Session\Modeler::is('user_id')){
     \Sequode\Application\Modules\Auth\Operations::load();
 }
-Runtime::model(RuntimeModules::class);
+Runtime::model(\RuntimeModules::class);

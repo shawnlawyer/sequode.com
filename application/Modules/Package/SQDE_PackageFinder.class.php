@@ -12,7 +12,7 @@ class SQDE_PackageFinder {
             $_i->field = 'name';
         //}
         
-        if(SQDE_UserAuthority::isSystemOwner()){
+        if(\Sequode\Application\Module\Auth\Authority::isSystemOwner()){
             $where = array();
             if(isset($shared_where)){
                 $where[] = $shared_where;
