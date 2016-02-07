@@ -12,7 +12,7 @@ class RuntimeModules {
             $modules[] = Sequode\Application\Modules\Authed\Module::class;
             $modules[] = Sequode\Application\Modules\Sequode\Module::class;
             $modules[] = Sequode\Application\Modules\Account\Module::class;
-            $modules[] = '\\'.'SQDE_PackagePackage';
+            $modules[] = Sequode\Application\Modules\Package\Module::class;
             $modules[] = Sequode\Application\Modules\Token\Module::class;
         }else{
             $modules[] = Sequode\Application\Modules\Auth\Module::class;
