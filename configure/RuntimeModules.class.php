@@ -8,7 +8,7 @@ class RuntimeModules {
         $modules[] = Sequode\Application\Modules\Console\Module::class;
         $modules[] = Sequode\Application\Modules\Site\Module::class;
         
-        if(\Sequode\Application\Module\Auth\Authority::isAuthenticated()){
+        if(\Sequode\Application\Modules\Auth\Authority::isAuthenticated()){
             $modules[] = Sequode\Application\Modules\Authed\Module::class;
             $modules[] = Sequode\Application\Modules\Sequode\Module::class;
             $modules[] = Sequode\Application\Modules\Account\Module::class;
@@ -19,7 +19,7 @@ class RuntimeModules {
             $modules[] = Sequode\Application\Modules\Register\Module::class;
         }
         
-        if(\Sequode\Application\Module\Auth\Authority::isSystemOwner()){
+        if(\Sequode\Application\Modules\Auth\Authority::isSystemOwner()){
             $modules[] = Sequode\Application\Modules\Session\Module::class;
             $modules[] = Sequode\Application\Modules\User\Module::class;
             $modules[] = Sequode\Application\Modules\BlockedIP\Module::class;

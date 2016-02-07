@@ -10,8 +10,8 @@ class SQDE_PackageCardsXHR {
         $modeler = static::$modeler;
         if(!(
         $modeler::exists($_model_id,'id')
-        && (\Sequode\Application\Module\Auth\Authority::isOwner( $modeler::model() )
-        || \Sequode\Application\Module\Auth\Authority::isSystemOwner())
+        && (\Sequode\Application\Modules\Auth\Authority::isOwner( $modeler::model() )
+        || \Sequode\Application\Modules\Auth\Authority::isSystemOwner())
         )){return;}
         return CardKitJS::placeCard(ModuleCard::render(self::$package,__FUNCTION__), $dom_id);
     }
