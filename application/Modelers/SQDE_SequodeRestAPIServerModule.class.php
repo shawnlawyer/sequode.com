@@ -19,7 +19,7 @@ class SQDE_SequodeRestAPIServerModule{
         if(!(SQDE_Token::exists($token, 'token'))){
             return;
         }
-        \Sequode\Application\Modules\Auth\Modeler::exists(SQDE_Token::model()->owner_id,'id');
+        \Sequode\Application\Modules\Account\Modeler::exists(\Sequode\Application\Modules\Token\Modeler::model()->owner_id,'id');
         ModuleRegistry::add('\\'.'SQDE_SequodePackage');
         //ModuleRegistry::add('\\'.'SQDE_PackagePackage');
         if(!isset($request_pieces[0]) || trim($request_pieces[0]) == ''){
