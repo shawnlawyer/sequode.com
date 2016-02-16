@@ -12,7 +12,7 @@ ob_start('ob_gzhandler');
 Configuration::model(\ApplicationConfiguration::class);
 
 SessionOperations::start();
-if(SessionOperations::is('user_id')){
+if(SessionStore::is('user_id')){
     \Sequode\Application\Modules\Auth\Operations::load();
 }
 
