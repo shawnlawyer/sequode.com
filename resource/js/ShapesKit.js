@@ -1,4 +1,4 @@
-var SQDE_ShapesKit = function(){
+var ShapesKit = function(){
 	var self = this;
 	self.stage = function(o){
 		return new Kinetic.Stage(o);
