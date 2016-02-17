@@ -1,4 +1,4 @@
-var SQDE_SequodeConsole = function(){
+var SequodeConsole = function(){
 	var self = this;
 	self.tearDown = function(){
         main, baseKit, registry, config, shapesKit, cardsKit, eventsKit = undefined;
@@ -12,17 +12,17 @@ var SQDE_SequodeConsole = function(){
         main.tearDown();
     }
     main = self;
-    config = new SQDE_Configuration();
-	baseKit = new SQDE_BaseKit();
-	shapesKit = new SQDE_ShapesKit();
-	cardsKit = new SQDE_Cards();
-	eventsKit = new SQDE_EventsKit();
-	registry = new SQDE_SequodeConsoleRegistry();
+    config = new Configuration();
+	baseKit = new BaseKit();
+	shapesKit = new ShapesKit();
+	cardsKit = new Cards();
+	eventsKit = new EventsKit();
+	registry = new SequodeConsoleRegistry();
 	self.loadMenus = function() {
-        new SQDE_XHRCall({route:'cards/console/menus', inputs:['MenusContainer']});
+        new XHRCall({route:'cards/console/menus', inputs:['MenusContainer']});
     };
     self.loadCard = function(route, inputs) {
-        new SQDE_XHRCall({route:route, inputs:inputs});
+        new XHRCall({route:route, inputs:inputs});
     };
 	self.setContext = function(){
         var call = {route:baseKit.getURLVar("card"),inputs:[]};
@@ -32,7 +32,7 @@ var SQDE_SequodeConsole = function(){
             call.inputs.push(baseKit.getURLVar("id"));
         }
         call.route = 'cards/' + call.route;
-        new SQDE_XHRCall(call);
+        new XHRCall(call);
 	};
     self.placeContainers = function(){
         var html = 

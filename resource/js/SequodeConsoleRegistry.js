@@ -1,4 +1,4 @@
-var SQDE_SequodeConsoleRegistry = function(){
+var SequodeConsoleRegistry = function(){
 	var self = this;
 	self.origin_host = 'https://origin.sequode.com';
 	self.collections_feed = '/collections';

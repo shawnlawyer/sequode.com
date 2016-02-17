@@ -1,4 +1,4 @@
-var SQDE_SymbolsKit = function(){
+var SymbolsKit = function(){
 	var self = this;
     self.symbols = {};
     self.symbols.flip_card = {

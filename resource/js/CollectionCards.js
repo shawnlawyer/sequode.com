@@ -1,4 +1,4 @@
-var SQDE_CollectionCards = function(){
+var CollectionCards = function(){
 	var self = this;
     self.run = function(){
         self.runCollection(self.collection);
@@ -37,7 +37,7 @@ var SQDE_CollectionCards = function(){
 	};
 	self.attachCardEvents = function(card,id){
             card.on("click touchend", function(){
-                new SQDE_XHRCall({route:self.details_route, inputs:[id]});
+                new XHRCall({route:self.details_route, inputs:[id]});
             });
         return card;
 	};

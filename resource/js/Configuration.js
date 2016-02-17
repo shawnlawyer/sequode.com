@@ -1,4 +1,4 @@
-var SQDE_Configuration = function(){
+var Configuration = function(){
 	var self = this;
 	self.sequencer_stage = {
 		container: 'container',

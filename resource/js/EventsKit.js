@@ -1,4 +1,4 @@
-var SQDE_EventsKit = function(){
+var EventsKit = function(){
 	var self = this;
     self.attachDraggableCursorEvents = function(shape){
         shape.on('touch mousedown', function() {

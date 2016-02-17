@@ -1,4 +1,4 @@
-var SQDE_BaseKit = function(){
+var BaseKit = function(){
 	var self = this;
 	self.doCallback = function(callback_method, callback_object){
 		if (typeof callback_object === "object" && typeof callback_object[callback_method] === "function") {

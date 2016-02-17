@@ -1,4 +1,4 @@
-var SQDE_AuthConsole = function(){
+var AuthConsole = function(){
 	var self = this;
 	self.tearDown = function(){
         main, registry = undefined;
@@ -7,15 +7,15 @@ var SQDE_AuthConsole = function(){
         main.tearDown();
     }
 	main = self;
-	registry = new SQDE_AuthConsoleRegistry();
+	registry = new AuthConsoleRegistry();
     self.run = function(){
         self.startup();
 	};
     self.loadMenus = function() {
-        new SQDE_XHRCall({route:'cards/console/menus', inputs:['MenusContainer']});
+        new XHRCall({route:'cards/console/menus', inputs:['MenusContainer']});
     };
     self.loadCard = function(route, inputs) {
-        new SQDE_XHRCall({route:route, inputs:inputs});
+        new XHRCall({route:route, inputs:inputs});
     };
 	self.startup = function(){
 		self.placeContainers();

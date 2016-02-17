@@ -1,4 +1,4 @@
-var SQDE_XHRCall = function(){
+var XHRCall = function(){
 	var self = this;
     self.send = function (){
         if(arguments.length != 0 && typeof arguments[0] == "object" && 'route' in arguments[0]){
@@ -6,7 +6,7 @@ var SQDE_XHRCall = function(){
                 self[i] = arguments[0][i];
             }
         }
-        var o = new SQDE_XHRObject();
+        var o = new XHRObject();
         o.route = self.route;
         o.protocol = self.protocol;
         o.protocol_version = self.protocol_version;
@@ -44,7 +44,7 @@ var SQDE_XHRCall = function(){
         self.send(arguments[0]);
     }
 }
-var SQDE_XHRObject = function(){
+var XHRObject = function(){
 	var self = this;    
     self.XMLHttpRequestObject = function (){
         var o;

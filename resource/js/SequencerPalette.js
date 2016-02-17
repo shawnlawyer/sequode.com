@@ -1,4 +1,4 @@
-var SQDE_SequencerPalette = function(){
+var SequencerPalette = function(){
 	var self = this;
     var sequencer;
     var stage;
@@ -51,7 +51,7 @@ var SQDE_SequencerPalette = function(){
 		}
 	};
 	self.makeModel = function(id,grid_id){
-		var model = new SQDE_Model();
+		var model = new Model();
 		model.parent = self;
 		model.original = false;
 		model.grid_id = grid_id;

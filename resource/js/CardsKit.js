@@ -1,4 +1,4 @@
-var SQDE_CardsKit = function(){
+var CardsKit = function(){
 	var self = this;
     
 	self.card = function(stdObj){

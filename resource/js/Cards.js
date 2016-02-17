@@ -1,4 +1,4 @@
-var SQDE_Cards = function(){
+var Cards = function(){
 	var self = this;
     self.initialized = false;
     self.details_route = 'cards/sequode/details';
@@ -17,7 +17,7 @@ var SQDE_Cards = function(){
         self.cards = [];
         var collection = registry.collection(collection_key);
         if(Object.keys(collection).length == 1){
-            new SQDE_XHRCall({route:self.details_route, inputs:[collection[Object.keys(collection)[0]].id]});
+            new XHRCall({route:self.details_route, inputs:[collection[Object.keys(collection)[0]].id]});
         }else{
             for(var id in collection){
                 self.cards.push(self.card(collection[id]));
@@ -52,7 +52,7 @@ var SQDE_Cards = function(){
 	};
 	self.attachCardEvents = function(card,id){
             card.on("click touchend", function(){
-                new SQDE_XHRCall({route:self.details_route, inputs:[id]});
+                new XHRCall({route:self.details_route, inputs:[id]});
             });
         return card;
 	};

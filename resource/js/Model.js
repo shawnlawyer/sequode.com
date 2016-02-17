@@ -1,4 +1,4 @@
-var SQDE_Model = function(){
+var Model = function(){
 	var self = this;
 	self.default_events = true;
     self.height = 35;

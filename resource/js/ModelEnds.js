@@ -1,4 +1,4 @@
-var SQDE_ModelEnds = function(){
+var ModelEnds = function(){
 	var self = this;
 	self.default_events = true;
 	self.types = ['head','base'];

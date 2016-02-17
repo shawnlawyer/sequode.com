@@ -1,4 +1,4 @@
-var SQDE_AuthConsoleRegistry = function(){
+var AuthConsoleRegistry = function(){
 	var self = this;
     self.timeout = function(key, timeout, delay){
         if (!self.timeouts[key] != null){
