@@ -1,7 +1,7 @@
 <?php
 
-
 use Sequode\Model\Module\Registry as ModuleRegistry;
+
 use Sequode\Controller\Application\HTTPRequest;
 use Sequode\Model\Application\Routes;
 use Sequode\Controller\Application\HTTPRequest\Rest as RestRequest;
@@ -14,7 +14,7 @@ class HTTPAPIRequest{
         }
         $token = $request_pieces[0];
         array_shift($request_pieces);
-        if(!(SQDE_Token::exists($token, 'token'))){
+        if(!(\Sequode\Application\Modules\Token\Modeler::exists($token, 'token'))){
             return;
         }
         
@@ -23,6 +23,7 @@ class HTTPAPIRequest{
         }
         \Sequode\Application\Modules\Account\Modeler::exists(\Sequode\Application\Modules\Token\Modeler::model()->owner_id,'id');
         ModuleRegistry::add(Sequode\Application\Modules\Sequode\Module::class);
+        
         if(!isset($request_pieces[0]) || trim($request_pieces[0]) == ''){
             exit;
         }
