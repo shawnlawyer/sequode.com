@@ -22,7 +22,7 @@ var AuthConsole = function(){
         setTimeout(self.setContext,0);
 	};
 	self.setContext = function(){
-        setTimeout(self.loadCard, 0, 'cards/site/sequode', []);
+        setTimeout(self.loadCard, 0, 'cards/console/index', []);
 	};
     self.placeContainers = function(){
         var html = 
