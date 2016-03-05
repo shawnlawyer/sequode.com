@@ -14,7 +14,7 @@ class RuntimeModules {
         
         }else{
         
-            $modules[] = Sequode\Application\Modules\SequencerConsole\Module::class;
+            $modules[] = Sequode\Application\Modules\ApplicationConsole\Module::class;
             $modules[] = Sequode\Application\Modules\Authed\Module::class;
             $modules[] = Sequode\Application\Modules\Sequode\Module::class;
             $modules[] = Sequode\Application\Modules\Account\Module::class;
