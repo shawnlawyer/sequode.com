@@ -1,4 +1,5 @@
 <?php
+
 class ApplicationConfiguration {
 	
 	public static function model(){

@@ -35,16 +35,21 @@ class HTTPAPIRequest{
             exit;
         }
         
-        $package = ucfirst(strtolower($request_pieces[0]));
+        $context = strtolower($call_pieces[1]);
+        $modules_context = ModuleRegistry::modulesContext();
+        if(!array_key_exists($context, $modules_context)){
+            return;
+        }
+        $module_registry_key = $modules_context[$context];    
+        
         array_shift($request_pieces);
         
-        if(!ModuleRegistry::is($package)){
+        $module = ModuleRegistry::module($module_registry_key);
+        
+        if(!isset($module::model()->rest->$request_type)){
             exit;
         }
-        if(!isset(ModuleRegistry::model($package)->rest->$request_type)){
-            exit;
-        }
-        $routes_class = ModuleRegistry::model($package)->rest->$request_type;
+        $routes_class = $module::model()->rest->$request_type;
         if(!in_array($request_pieces[0], Routes::routes('\\'.$routes_class))){
             exit;
         }

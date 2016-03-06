@@ -2,8 +2,10 @@
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
 
-class Runtime {
-	public static function model(){
+class Modules {
+	
+    public static function model(){
+        
         $modules = array();
         
         if(!\Sequode\Application\Modules\Account\Authority::isAuthenticated()){
@@ -31,21 +33,8 @@ class Runtime {
         
         }
         
-        foreach($modules as $module){
-            ModuleRegistry::add($module);
-        }
-        
-        $modules = ModuleRegistry::models();
-        $routes = array();
-        foreach($modules as $module){
-            if(isset($module->routes)){
-                $routes = array_merge($routes, $module->routes);
-            }
-        }
-        
-        $_o = (object) null;
-        $_o->routes = $routes;
-        $_o->module = HTTPAPIRequest::class;
-		return $_o;
-	}
+        return $modules;
+	
+    }
+    
 }
