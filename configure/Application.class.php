@@ -1,8 +1,9 @@
 <?php
 
-class ApplicationConfiguration {
+class Application {
 	
 	public static function model(){
+        
         /*
         if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], array('https://sequode.com','https://origin.sequode.com','https://console.sequode.com','https://xhr.sequode.com','https://api.sequode.com'))) {
             header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
@@ -92,5 +93,7 @@ class ApplicationConfiguration {
         $_o->emailer = $emailer;
         
         return $_o;
+        
     }
+    
 }
