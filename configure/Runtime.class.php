@@ -21,7 +21,6 @@ class Runtime {
         
         $_o = (object) null;
         $_o->routes = $routes;
-        $_o->module = HTTPAPIRequest::class;
         
 		return $_o;
         
