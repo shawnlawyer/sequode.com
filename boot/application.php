@@ -12,11 +12,12 @@ ob_start('ob_gzhandler');
 
 Configuration::model(\Application::class);
 
-ModuleRegistry::model(\Modules::class);
-        
+  
+     
 SessionOperations::start();
 if(SessionStore::is('user_id')){
     \Sequode\Application\Modules\Auth\Operations::load();
 }
 
+ModuleRegistry::model(\Modules::class); 
 Runtime::model(\Runtime::class);
