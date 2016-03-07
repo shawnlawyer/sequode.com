@@ -7,7 +7,7 @@ use Sequode\Model\Application\Routes;
 use Sequode\Controller\Application\HTTPRequest\Rest as RestRequest;
 
 class HTTPAPIRequest{
-    public static function run(){
+    public static function rest(){
         $request_pieces = HTTPRequest::requestUriPieces();
         if(!isset($request_pieces[0]) || trim($request_pieces[0]) == ''){
             exit;

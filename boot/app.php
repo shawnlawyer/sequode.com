@@ -10,17 +10,9 @@ use Sequode\Application\Modules\Session\Store as SessionStore;
 date_default_timezone_set('America/New_York');
 ob_start('ob_gzhandler');
 
-,
-
-set_include_path(get_include_path() . PATH_SEPARATOR . '../resources/');
-
 Configuration::model(\Application::class);
 
-$modules = Modules::model();
-
-foreach($modules as $module){
-    ModuleRegistry::add($module);
-}
+ModuleRegistry::model(\Modules::class);
         
 SessionOperations::start();
 if(SessionStore::is('user_id')){
