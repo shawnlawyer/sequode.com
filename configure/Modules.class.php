@@ -32,7 +32,9 @@ class Modules {
             }
         
         }
-        $modules = array()
+        
+        $modules = array();
+        
         foreach($raw_modules => $module){
             
             $modules[$module::$registry_key] = $module;
