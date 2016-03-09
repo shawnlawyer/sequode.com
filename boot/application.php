@@ -1,8 +1,7 @@
 <?php
 
 ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . realpath('../resources') . DIRECTORY_SEPARATOR);
-echo ini_get('include_path');
-exit;
+
 use Sequode\Model\Application\Configuration;
 use Sequode\Model\Application\Runtime;
 use Sequode\Model\Module\Registry as ModuleRegistry;
