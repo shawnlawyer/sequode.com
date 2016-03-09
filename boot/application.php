@@ -1,6 +1,6 @@
 <?php
 
-ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . realpath('../resources') . DIRECTORY_SEPARATOR);
+ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . realpath('../resource') . DIRECTORY_SEPARATOR);
 date_default_timezone_set('America/New_York');
 ob_start('ob_gzhandler');
 
