@@ -43,7 +43,10 @@ spl_autoload_register(function ($class){
     array_shift($class_pieces);
     $directory = __DIR__ . '../vendor';
     $file = $directory . DIRECTORY_SEPARATOR . $prefix . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . implode( DIRECTORY_SEPARATOR, $class_pieces ) . $extention;
+    echo $file;
+    exit;
     if(file_exists($file)){
+        
         require_once($file);
         return true;
     }
