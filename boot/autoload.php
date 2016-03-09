@@ -12,26 +12,20 @@ spl_autoload_register(function($class){
 	}
     return false;
 });
-/*
+
 spl_autoload_register(function ($class){
-    $prefix = 'Sequode';
     $extention = '.class.php';
-    $class_pieces = explode('\\', trim($class,'\\'));
-    if($class_pieces[0] != $prefix){
-        return;
+    $class_pieces = trim($class,'\\');
+    
+    $directory = '../configure';
+    $file = $directory . DIRECTORY_SEPARATOR . $prefix . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . implode( DIRECTORY_SEPARATOR, $class_pieces ) . $extention;
+    if(file_exists($file)){
+        
+        require_once($file);
+        return true;
     }
-    array_shift($class_pieces);
-    $directories = explode((!empty($_SERVER["WINDIR"])) ? ';' : ':', get_include_path());
-    foreach($directories as $directory){
-		$file = $directory . DIRECTORY_SEPARATOR . $prefix . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . implode( DIRECTORY_SEPARATOR, $class_pieces ) . $extention;
-		if(file_exists($file)){
-			require_once($file);
-            return true;
-        }
-	}
     return false;
 });
-*/
 
 spl_autoload_register(function ($class){
     $prefix = 'Sequode';
@@ -59,7 +53,7 @@ spl_autoload_register(function ($class){
         return;
     }
     array_shift($class_pieces);
-    $directory = __DIR__ . '../app';
+    $directory = '../app';
     
     $file = $directory . DIRECTORY_SEPARATOR . implode( DIRECTORY_SEPARATOR, $class_pieces ) . $extention;
     if(file_exists($file)){
