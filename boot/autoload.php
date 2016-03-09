@@ -18,7 +18,7 @@ spl_autoload_register(function ($class){
     $class_pieces = trim($class,'\\');
     
     $directory = '../configure';
-    $file = $directory . DIRECTORY_SEPARATOR . $prefix . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . implode( DIRECTORY_SEPARATOR, $class_pieces ) . $extention;
+    $file = $directory . DIRECTORY_SEPARATOR . implode( DIRECTORY_SEPARATOR, $class_pieces ) . $extention;
     if(file_exists($file)){
         
         require_once($file);
