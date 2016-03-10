@@ -19,11 +19,7 @@ class Application {
         }*/
         
         $_o = (object) null;
-        $access_control = array( 
-            'api.sequode.com',
-            'xhr.sequode.com',
-            'origin.sequode.com',
-            'console.sequode.com',
+        $access_control = array(
             'sequode.com'
         );
         $_o->access_control = $access_control;
@@ -50,25 +46,25 @@ class Application {
         $_o->email->system = $system_email;
         
         $system_database = json_decode('{
-            "host":"sequode-'.$_SERVER['WORKFLOW_ENVIRONMENT'].'.ckrl02wpm4xk.us-west-2.rds.amazonaws.com",
+            "host":"sequode-production.ckrl02wpm4xk.us-west-2.rds.amazonaws.com",
             "user":"sequode",
             "password":"N4tur4l#$(",
             "name":"system"
         }');
         $sequodes_database = json_decode('{
-            "host":"sequode-'.$_SERVER['WORKFLOW_ENVIRONMENT'].'.ckrl02wpm4xk.us-west-2.rds.amazonaws.com",
+            "host":"sequode-production.ckrl02wpm4xk.us-west-2.rds.amazonaws.com",
             "user":"sequode",
             "password":"N4tur4l#$(",
             "name":"sequodes"
         }');
         $accounts_database = json_decode('{
-            "host":"sequode-'.$_SERVER['WORKFLOW_ENVIRONMENT'].'.ckrl02wpm4xk.us-west-2.rds.amazonaws.com",
+            "host":"sequode-production.ckrl02wpm4xk.us-west-2.rds.amazonaws.com",
             "user":"sequode",
             "password":"N4tur4l#$(",
             "name":"accounts"
         }');
         $sessions_database = json_decode('{
-            "host":"sequode-'.$_SERVER['WORKFLOW_ENVIRONMENT'].'.ckrl02wpm4xk.us-west-2.rds.amazonaws.com",
+            "host":"sequode-production.ckrl02wpm4xk.us-west-2.rds.amazonaws.com",
             "user":"sequode",
             "password":"N4tur4l#$(",
             "name":"sessions"
