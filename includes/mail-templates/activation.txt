@@ -1,9 +1,0 @@
-Hi,
-
-Here's your activation link for account, #USERNAME#, at Sequode.com.
-
-#ACTIVATION-URL#
-
-After you after activate you account, just login and start Sequoding!
-
-#INC-FOOTER#
