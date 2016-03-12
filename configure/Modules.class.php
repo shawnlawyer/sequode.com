@@ -10,13 +10,13 @@ class Modules {
         
         if(!\Sequode\Application\Modules\Account\Authority::isAuthenticated()){
             
-            $raw_modules[] = Sequode\Application\Modules\AuthConsole\Module::class;
+            $raw_modules[] = Application\Modules\AuthConsole\Module::class;
             $raw_modules[] = Sequode\Application\Modules\Auth\Module::class;
             $raw_modules[] = Sequode\Application\Modules\Register\Module::class;
         
         }else{
         
-            $raw_modules[] = Sequode\Application\Modules\ApplicationConsole\Module::class;
+            $raw_modules[] = Application\Modules\ApplicationConsole\Module::class;
             $raw_modules[] = Sequode\Application\Modules\Authed\Module::class;
             $raw_modules[] = Sequode\Application\Modules\Sequode\Module::class;
             $raw_modules[] = Sequode\Application\Modules\Account\Module::class;
