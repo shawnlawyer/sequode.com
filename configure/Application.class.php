@@ -33,7 +33,8 @@ class Application {
         $_o->sessions = $sessions;
         $site = json_decode('{
             "domain":"sequode.com",
-            "display_name":"Sequode"
+            "display_name":"Sequode",
+            "meta_description":"PHP Drag and Drop App Framework"
         }');
         $_o->site = $site;
         $system_email = json_decode('{
