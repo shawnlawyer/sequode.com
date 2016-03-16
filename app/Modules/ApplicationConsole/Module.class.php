@@ -10,6 +10,9 @@ class Module {
             'context' => 'console',
             'assets' => (object) array(
             
+                'html' => array(
+                    'page' => 'html/page.php'
+                ),
                 'boot_collections' => array(
                     'my_sequodes',
                     'sequode_favorites',

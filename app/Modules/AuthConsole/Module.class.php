@@ -7,7 +7,10 @@ class Module {
         
         $_o = (object)  array (
             'context' => 'console',
-            'assets' => (object) array( 
+            'assets' => (object) array(
+                'html' => array(
+                    'page' => 'html/page.php'
+                ), 
                 'css' => array(
                     'css/automagic_cards.css',
                     'css/automagic_content.css',
