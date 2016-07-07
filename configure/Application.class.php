@@ -47,27 +47,27 @@ class Application {
         $_o->email->system = $system_email;
         
         $system_database = json_decode('{
-            "host":"sequode-production.ckrl02wpm4xk.us-west-2.rds.amazonaws.com",
-            "user":"sequode",
-            "password":"N4tur4l#$(",
+            "host":"",
+            "user":"",
+            "password":"",
             "name":"system"
         }');
         $sequodes_database = json_decode('{
-            "host":"sequode-production.ckrl02wpm4xk.us-west-2.rds.amazonaws.com",
-            "user":"sequode",
-            "password":"N4tur4l#$(",
+            "host":"",
+            "user":"",
+            "password":"",
             "name":"sequodes"
         }');
         $accounts_database = json_decode('{
-            "host":"sequode-production.ckrl02wpm4xk.us-west-2.rds.amazonaws.com",
-            "user":"sequode",
-            "password":"N4tur4l#$(",
+            "host":"",
+            "user":"",
+            "password":"",
             "name":"accounts"
         }');
         $sessions_database = json_decode('{
-            "host":"sequode-production.ckrl02wpm4xk.us-west-2.rds.amazonaws.com",
-            "user":"sequode",
-            "password":"N4tur4l#$(",
+            "host":"",
+            "user":"",
+            "password":"",
             "name":"sessions"
         }');
         
@@ -81,8 +81,8 @@ class Application {
             "relay":"SMTP",
             "auth":"true",
             "host":"email-smtp.us-east-1.amazonaws.com",
-            "username":"AKIAJNA63ZDLQNFL4MDQ",
-            "password":"Aiw5Lc0HBIBNsEF1czQR1voTJmr/XsAK1yF5QoHd7aaP",
+            "username":"",
+            "password":"",
             "security":"tls",
             "port":"587"
         }');
