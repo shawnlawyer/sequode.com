@@ -1,0 +1,87 @@
+#BodyContainer {
+  position:fixed;
+  top:0px;
+  bottom:0px;
+  left:0px;
+  right:0px;
+  margin:0 0 0 0;
+  padding:0 0 0 0;
+  overflow:hidden;
+}
+#MenusContainer {
+  position:fixed;
+  top: 5px;
+  left: -5px;
+  padding:1.6em 0 0 0;
+  z-index:1000;
+  width:2.6em;
+  height:0;
+  overflow:hidden;
+  background-image: url('/assets/img/menu-50.png');
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.4em;
+  background-position:.7em 0;
+}
+#MenusContainer:active {
+  overflow:visible;
+  height:auto;
+  width: 3.5em;
+}
+#MenusContainer:hover {
+  overflow:visible;
+  height:auto;
+  width: 3.5em;
+}
+#MenusContainer:focus {
+  overflow:visible;
+  height:auto;
+  width: 3.5em;
+}
+.menu-container-wrapper {
+  position:relative;
+  margin:.2em 0 .75em 0;
+  height:2em;
+  overflow:visible;
+}
+.menu-container {
+  padding:.1em 1em .1em 1em;
+  height:1px;
+  width:1px;
+  font-size:.65em;
+  overflow:visible;
+}
+.menu-container:hover {
+  font-size:inherit;
+ }
+.menu-container:active {
+  font-size:inherit;
+ }
+.menu-container:focus {
+  font-size:inherit;
+ }
+#SearchFieldContainer {
+  display:inline-block;
+}
+#FormsContainer{
+  background: #fff;
+  width:auto;
+  display:inline-block;
+  margin: 1em;
+  padding:0 0 0 0;
+}
+.formsContainer{
+  width:auto;
+  overflow:visible;
+  margin: 0 auto;
+  text-align:center;
+}
+.SequencerStageContainer{
+    border:0;
+    background:#fff;
+    position:relative;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow:hidden;
+}

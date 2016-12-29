@@ -1,0 +1,77 @@
+
+/* Sequode.com Generic Style Rules */
+
+/* Sequode.com - Icon Rules */
+
+
+.main-head{
+  margin: 0;
+  padding: .5em 0 .5em 0;
+  text-align:left;
+  display:block;
+  background: white;
+  -moz-box-shadow: rgba(0, 0, 0, 0.2)  0 .33em 1em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2)  0 .33em 1em;
+  box-shadow: rgba(0, 0, 0, 0.2)  0 .33em 1em;
+}
+.main-head-options-container{
+  float:right;
+  padding: 2.3em 0 0 0;
+}
+.main-head-option{
+  display:inline-block;
+  height:auto;
+  width:auto;
+  margin: 0 1em 0 0;
+  padding: 0 !important;
+  vertical-align: bottom;
+}
+.main-title{
+  margin: 1.3em 0 0 0;
+  font-size: 3.3em;
+  font-weight:800;
+  color: #000;
+  vertical-align: bottom;
+  display: inline;
+  white-space: nowrap;
+  text-align:left;
+  width: 100%;
+}
+/* Sequode.com - Card Container Rules */
+
+.card{
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background: #fff;
+  padding: 0;
+  margin: 0 auto;
+  overflow:hidden;
+  vertical-align: top;
+  display: inline-block;
+}
+.card-area{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: inline-block;
+}
+.legal-card {
+  font-family: Verdana;
+  width:auto;
+  padding:1em;
+  text-align:center;
+}
+
+
+/* Sequode.com - Menubar Rules */
+
+/* Sequode.com - Footer Menu Rules */
+
+/* clean up */
+
+
+

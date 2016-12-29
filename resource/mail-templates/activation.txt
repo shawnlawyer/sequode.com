@@ -1,0 +1,9 @@
+Hi,
+
+Here's your validation token for Sequode.com.
+
+#TOKEN#
+
+After you've completed validation, just login and start Sequoding!
+
+#INC-FOOTER#

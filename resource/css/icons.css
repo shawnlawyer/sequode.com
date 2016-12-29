@@ -1,0 +1,78 @@
+
+.card-icon{
+ width:1.35em;
+ height:1.36em;
+ vertical-align:middle;
+ background-image: url('/assets/img/sequode-echo-50.png');
+ background-repeat: no-repeat;
+ background-size: 1.3em 1.31em;
+ display: inline-block;
+}
+.menu-icon{
+ cursor: pointer;
+ width:1.35em;
+ height:1.36em;
+ vertical-align:middle;
+ background-image: url('/assets/img/sequode-echo-50.png');
+ background-repeat: no-repeat;
+ background-size: 1.3em 1.31em;
+ display: inline-block;
+}
+.edit-icon{
+ cursor: pointer;
+ width:1em;
+ height:1em;
+ vertical-align:middle;
+ padding:0;
+ background-repeat: no-repeat;
+ background-size: .9em .9em;
+ display: inline-block;
+}
+.load-here-icon{
+ cursor: pointer;
+ width:1em;
+ height:1em;
+ vertical-align:middle;
+ padding:0;
+ background-repeat: no-repeat;
+ background-size: .9em .9em;
+ display: inline-block;
+}
+.text-icon{
+ cursor: pointer;
+ width:1em;
+ height:1em;
+ vertical-align:middle;
+ padding:0;
+ background-repeat: no-repeat;
+ background-size: .9em .9em;
+ display: inline-block;
+}
+
+.home-icon-background{
+    background-image: url('/assets/img/home-50.png') !important;
+}
+.sequode-icon-background{
+    background-image: url('/assets/img/sequode-echo-50.png') !important;
+}
+.settings-icon-background{
+    background-image: url('/assets/img/gear-50.png') !important;
+}
+.search-icon-background{
+    background-image: url('/assets/img/magnify-50.png') !important;
+}
+.palette-icon-background{
+    background-image: url('/assets/img/palette-50.png') !important;
+}
+.favorites-icon-background{
+    background-image: url('/assets/img/star-50.png') !important;
+}
+.atom-icon-background{
+    background-image: url('/assets/img/atom-50.png') !important;
+}
+.user-icon-background{
+    background-image: url('/assets/img/user-50.png') !important;
+}
+.session-icon-background{
+    background-image: url('/assets/img/session-50.png') !important;
+}
