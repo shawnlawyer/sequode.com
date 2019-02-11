@@ -46,11 +46,11 @@ Temporary Items
 
 .idea/
 
-/vendor/
-/logs/*
-/mysql_data/*
-/node_modules/
-/www/assets/js/
-/www/assets/css/
-/bower_components/
+vendor/
+logs/*
+mysql_data/*
+node_modules/
+www/assets/js/
+www/assets/css/
+bower_components/
 
