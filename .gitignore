@@ -44,7 +44,7 @@ Temporary Items
 .apdisk
 
 
-.idea
+.idea/
 
 /vendor/
 /logs/*
