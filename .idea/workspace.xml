@@ -1,0 +1,1047 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="abdb8858-2fc9-44cc-ad60-96ac4503128d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/Application.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/Application.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/Modules/ApplicationConsole/Module.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/Modules/ApplicationConsole/Module.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/Modules/AuthConsole/Module.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/Modules/AuthConsole/Module.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gulpfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/gulpfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/js/sequode-console/AuthConsole.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/1up-50.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/1up-50.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/atom-50.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/atom-50.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/gear-50.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/gear-50.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/grow-50.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/grow-50.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/home-50.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/home-50.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/magnify-50.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/magnify-50.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/menu-50.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/menu-50.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/palette-50.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/palette-50.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/sequode-echo-200.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/sequode-echo-200.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/sequode-echo-50.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/sequode-echo-50.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/sequode-echo-50x50.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/sequode-echo-50x50.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/sequode-echo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/sequode-echo.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/sequode-og-logo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/sequode-og-logo.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/session-50.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/session-50.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/star-50.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/star-50.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/img/user-50.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/user-50.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docker-compose.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="206">
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.dockerignore">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.env">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Session/Traits/Operations/SetGetSessionCookie.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Session/Traits/Operations/ManageSessionStore.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Session/Traits/Operations/ORMModelCreate.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="52" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Console/Traits/Routes/VendorJavascriptTrait.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Console/Traits/Routes/JavascriptTrait.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="383">
+              <caret line="30" column="46" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Dockerfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docker/php.ini">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/FormInput/Modeler.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="38" selection-start-line="6" selection-end-line="6" selection-end-column="38" />
+              <folding>
+                <element signature="e#57#114#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Component/FormInput/FormInput.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="8625">
+              <caret line="575" column="58" selection-start-line="575" selection-start-column="58" selection-end-line="575" selection-end-column="58" />
+              <folding>
+                <element signature="e#46#105#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Model/Traits/ModelerTrait.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="43">
+              <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/Modules/ApplicationConsole/Routes/Routes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="57" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Console/Traits/Routes/IndexTrait.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resource/js/sequode-console/sequode-main.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resource/js/sequode-console/CollectionCards.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-278" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resource/js/sequode-console/SequodeConsole.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="21" column="47" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Controller/Application/HTTPRequest.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/Modules/ApplicationConsole/Module.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/Modules/ApplicationConsole/Routes/XHR/Cards.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="249">
+              <caret line="17" column="21" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="21" />
+              <folding>
+                <element signature="e#69#121#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gulpfile.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="274">
+              <caret line="35" column="64" selection-start-line="35" selection-start-column="64" selection-end-line="35" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Console/Traits/Routes/XHR/CardsConsoleMenusTrait.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/Modules/ApplicationConsole/Components/Cards.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Role/Modeler.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" selection-start-line="6" selection-end-line="6" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Model/Database/SQL/ORM.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-307">
+              <caret line="322" column="22" selection-start-line="322" selection-start-column="22" selection-end-line="322" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Sequode/Modeler.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Auth/Components/FormInputs.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+              <folding>
+                <element signature="e#63#133#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/User/Traits/Operations/ORMModelSignInTrait.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="381">
+              <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/Modules/AuthConsole/Routes/Routes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Auth/Routes/XHR/Operations.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="241">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/User/Authority.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1151">
+              <caret line="93" selection-start-line="93" selection-end-line="93" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Controller/Application/HTTPRequest/XHR.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="2" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+              <folding>
+                <element signature="e#47#114#0#PHP" expanded="true" />
+                <element signature="e#1106#1178#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docker/nginx.conf">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="42">
+              <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Controller/Database/MySQL.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="22" column="55" selection-start-line="22" selection-start-column="55" selection-end-line="22" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Session/Modeler.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
+              <folding>
+                <element signature="e#55#101#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/Application.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="282">
+              <caret line="37" column="55" selection-start-line="37" selection-start-column="55" selection-end-line="37" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>echo file_get_contents($file,true);</find>
+      <find>js(</find>
+      <find>Module</find>
+      <find>JavascriptTrait</find>
+      <find>print_r</find>
+      <find>create</find>
+      <find>getCookieValue</find>
+      <find>moo</find>
+      <find>rere</find>
+      <find>results_count</find>
+      <find>die(</find>
+      <find>if($res</find>
+      <find>if($results</find>
+      <find>if($result</find>
+      <find>echo</find>
+      <find>class Modeler</find>
+      <find>use Sequode\Foundation\ModelerTrait;</find>
+      <find>MergeObjectsTrait</find>
+      <find>mergeCom</find>
+      <find>use Sequode\Fou</find>
+      <find>use Sequode\Foundation\Traits\ModelerTrait;</find>
+      <find>num</find>
+      <find>login(</find>
+      <find>&gt;username</find>
+      <find>login</find>
+      <find>'username')</find>
+      <find>js()</find>
+      <find>/var/www/html</find>
+      <find>user</find>
+      <find>javascript</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>use Sequode\Foundation\Traits\ModelerTrait;</replace>
+      <replace>use Sequode\Model\Traits\ModelerTrait;</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/vendor/shawnlawyer/sequode/src</dir>
+      <dir>$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Model</dir>
+      <dir>$PROJECT_DIR$/application</dir>
+      <dir>$PROJECT_DIR$</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/docker/debug-start.sh" />
+        <option value="$PROJECT_DIR$/Dockerfile-debug" />
+        <option value="$PROJECT_DIR$/docker-compose.override.yml" />
+        <option value="$PROJECT_DIR$/docker-compose.override.example.yml" />
+        <option value="$PROJECT_DIR$/www/index.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/docker/start.sh" />
+        <option value="$PROJECT_DIR$/docker/www.conf" />
+        <option value="$PROJECT_DIR$/.dockerignore" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/User/Model.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/BlockedIP/Model.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Sequode/Model.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/BlockedIP/Traits/Operations/ORMModelCreateTrait.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/FormInput/Model.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Auth/Operations.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/User/Traits/Operations/ORMModelLoadSignedInTrait.php" />
+        <option value="$PROJECT_DIR$/application/Modules/ApplicationConsole/Module.php" />
+        <option value="$PROJECT_DIR$/application/Modules/AuthConsole/Module.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Foundation/Modeler.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Auth/Components/FormInputs.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Foundation/ModelerTrait.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Component/FormInput/FormInput.php" />
+        <option value="$PROJECT_DIR$/application/Application.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Session/Traits/Operations/ManageSessionStore.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Session/Traits/Operations/SetGetSessionCookie.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Session/Modeler.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Controller/Database/MySQL.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Model/Database/SQL/ORM.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/BlockedIP/Modeler.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/FormInput/Modeler.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Model/Traits/ModelerTrait.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Role/Modeler.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Session/Store.php" />
+        <option value="$PROJECT_DIR$/node_modules/bower/package.json" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Session/Traits/Operations/ORMModelCreate.php" />
+        <option value="$PROJECT_DIR$/docker/nginx.conf" />
+        <option value="$PROJECT_DIR$/docker-compose.yml" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Auth/Routes/XHR/Operations.php" />
+        <option value="$PROJECT_DIR$/gulpfile.js" />
+        <option value="$PROJECT_DIR$/Dockerfile" />
+        <option value="$PROJECT_DIR$/public/index.php" />
+        <option value="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Console/Traits/Routes/JavascriptTrait.php" />
+        <option value="$PROJECT_DIR$/.env" />
+      </list>
+    </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="PhpDebugGeneral" xdebug_debug_port="9089" listening_started="true" max_simultaneous_connections="20" />
+  <component name="PhpServers">
+    <servers>
+      <server host="10.254.254.254" id="180c15e9-cc40-4417-b14b-f735ee9b5f87" name="sequode.localhost" port="9089" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$" remote-root="/var/www/app" />
+        </path_mappings>
+      </server>
+      <server host="sequode.localhost" id="c38f5bb7-75b0-4a83-8134-537d81af213c" name="sequode.localhost (1)" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$" remote-root="/var/www/app" />
+          <mapping local-root="$PROJECT_DIR$/public" remote-root="/var/www/app/public" />
+        </path_mappings>
+      </server>
+    </servers>
+  </component>
+  <component name="PhpWebServerValidation" path_to_validation_script="$PROJECT_DIR$/public" selected_validation_type="LOCAL" web_path_to_validation_script="http://sequode.localhost/" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="sequodecom_app:latest">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/larapack/dd" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/phpmailer/phpmailer" />
+      <path value="$PROJECT_DIR$/vendor/shawnlawyer/sequode" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php70" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dotenv" />
+    </include_path>
+  </component>
+  <component name="PhpXdebugProxy" ide_key="PHPSTORM" host="10.254.254.254" port="9089" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="395" />
+    <option name="y" value="37" />
+    <option name="width" value="1400" />
+    <option name="height" value="937" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="sequode.com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sequode.com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sequode.com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sequode.com" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sequode.com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sequode.com" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sequode.com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sequode.com" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sequode.com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sequode.com" type="462c0819:PsiDirectoryNode" />
+              <item name="resource" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.php.debug.xdebug.proxy" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Foundation/Traits" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Model" />
+      <recent name="$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Foundation" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="abdb8858-2fc9-44cc-ad60-96ac4503128d" name="Default Changelist" comment="" />
+      <created>1549318322564</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1549318322564</updated>
+      <workItem from="1549318331650" duration="2553000" />
+      <workItem from="1549326880660" duration="85971000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="88524000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="395" y="37" width="1400" height="937" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2533137" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3289941" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49779087" visible="true" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" weight="0.3289941" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5022091" side_tool="true" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="php">
+          <url>file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Controller/Application/HTTPRequest/XHR.php</url>
+          <line>6</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint type="php">
+          <url>file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/User/Authority.php</url>
+          <line>93</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/application/Modules/ApplicationConsole/Routes/XHR/Cards.php</url>
+          <line>21</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/application/Modules/ApplicationConsole/Routes/Routes.php</url>
+          <line>4</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/User/Traits/Operations/ORMModelSignInTrait.php</url>
+          <line>10</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Foundation/Singleton.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Auth/Operations.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#52#100#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Session/Operations.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#55#85#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/Application.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="37" column="55" selection-start-line="37" selection-start-column="55" selection-end-line="37" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/User/Components/FormInputs.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/FormInput/Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="15" column="77" selection-start-line="15" selection-start-column="77" selection-end-line="15" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Session/Modeler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#55#101#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Session/Traits/Operations/SetGetSessionCookie.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Controller/Database/MySQL.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="22" column="55" selection-start-line="22" selection-start-column="55" selection-end-line="22" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Account/Modeler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Foundation/Modeler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/FormInput/Modeler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="38" selection-start-line="6" selection-end-line="6" selection-end-column="38" />
+          <folding>
+            <element signature="e#57#114#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Foundation/Traits/MergeObjectsTrait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7559" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Component/Traits/MergeObjectsTrait.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Component/FormInput/FormInput.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8625">
+          <caret line="575" column="58" selection-start-line="575" selection-start-column="58" selection-end-line="575" selection-end-column="58" />
+          <folding>
+            <element signature="e#46#105#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/phpmailer/phpmailer/class.pop3.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="265" column="20" selection-start-line="265" selection-start-column="20" selection-end-line="265" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Session/Store.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+          <folding>
+            <element signature="e#55#102#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Component/Traits/MergeComponentObjectsTrait.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Role/Modeler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Token/Modeler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#53#97#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Model/Database/SQL/ORM.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-307">
+          <caret line="322" column="22" selection-start-line="322" selection-start-column="22" selection-end-line="322" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Auth/Components/FormInputs.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+          <folding>
+            <element signature="e#63#133#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Console/Traits/Routes/VendorJavascriptTrait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Session/Traits/Operations/ManageSessionStore.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker/php.ini">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Session/Traits/Operations/ORMModelCreate.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="52" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker/nginx.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.dockerignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/User/Authority.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1151">
+          <caret line="93" selection-start-line="93" selection-end-line="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Controller/Application/HTTPRequest/XHR.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Auth/Routes/XHR/Operations.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Sequode/Modeler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Model/Traits/ModelerTrait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="43">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/Modules/ApplicationConsole/Module.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/Modules/ApplicationConsole/Components/Cards.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/Modules/ApplicationConsole/Routes/Routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="57" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Controller/Application/HTTPRequest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource/js/sequode-console/sequode-main.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource/js/sequode-console/CollectionCards.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-278" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource/js/sequode-console/SequodeConsole.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="21" column="47" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Console/Traits/Routes/IndexTrait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/Modules/ApplicationConsole/Routes/XHR/Cards.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="17" column="21" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="21" />
+          <folding>
+            <element signature="e#69#121#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="35" column="64" selection-start-line="35" selection-start-column="64" selection-end-line="35" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="2" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+          <folding>
+            <element signature="e#47#114#0#PHP" expanded="true" />
+            <element signature="e#1106#1178#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Console/Traits/Routes/XHR/CardsConsoleMenusTrait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/User/Traits/Operations/ORMModelSignInTrait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/Modules/AuthConsole/Routes/Routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/shawnlawyer/sequode/src/Sequode/Application/Modules/Console/Traits/Routes/JavascriptTrait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="30" column="46" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

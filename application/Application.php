@@ -26,17 +26,17 @@ class Application {
         );
         $_o->access_control = $access_control;
         $sessions = json_decode('{
-            "create_domain": "sequode.com",
-            "domain": "sequode.com",
+            "create_domain": "' . $_ENV['APP_HOST'] . '",
+            "domain": "' . $_ENV['APP_HOST'] . '",
             "length": 86400,
             "path": "/",
             "cookie": "sequodeUser"
         }');
         $_o->sessions = $sessions;
         $site = json_decode('{
-            "domain":"sequode.com",
-            "display_name":"Sequode",
-            "meta_description":"PHP Drag and Drop App Framework"
+            "domain": "' . $_ENV['APP_HOST'] . '",
+            "display_name": "' . $_ENV['APP_NAME'] .'",
+            "meta_description": "' . $_ENV['APP_DESCRIPTION'] . '"
         }');
         $_o->site = $site;
         $system_email = json_decode('{
@@ -49,10 +49,10 @@ class Application {
         $_o->email->system = $system_email;
         
         $system_database = json_decode('{
-            "host":"192.168.1.100",
-            "user":"root",
-            "password":"",
-            "name":"sequode"
+            "host": "' . $_ENV['MYSQL_HOST'] .'",
+            "user": "' . $_ENV['MYSQL_USER'] .'",
+            "password": "' . $_ENV['MYSQL_PASSWORD'] .'",
+            "name": "' . $_ENV['MYSQL_DATABASE'] .'"
         }');
         $sequodes_database = clone($system_database);
         $accounts_database = clone($system_database);

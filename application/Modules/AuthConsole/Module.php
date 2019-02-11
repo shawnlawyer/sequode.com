@@ -27,7 +27,7 @@ class Module {
                     'css/client.css'
                 ),
                 'javascript' => array(
-                    'auth-console.min.js'
+                    'assets/js/auth-console.min.js'
                 ),
             ),
             'components' => (object) array (

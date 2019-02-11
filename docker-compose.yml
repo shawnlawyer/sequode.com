@@ -1,0 +1,35 @@
+version: '3.3'
+
+services:
+
+  app:
+    build:
+      context: .
+      args:
+        - WITH_XDEBUG=true
+    env_file: .env
+    depends_on:
+      - mysql
+    ports:
+      - "80:80"
+      - "9000:9000"
+    restart: always
+    volumes:
+      - ./:/var/www/app
+
+  mysql:
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=sequode
+      - MYSQL_USER=sequode
+      - MYSQL_PASSWORD=sequode
+    image: mysql:5.7
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+
+
+

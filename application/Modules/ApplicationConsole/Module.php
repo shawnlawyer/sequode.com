@@ -39,7 +39,7 @@ class Module {
                 ),
                 
                 'javascript' => array(
-                    'sequode-console.min.js'
+                    'assets/js/sequode-console.min.js'
                 ),
             
             ),
