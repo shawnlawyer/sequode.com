@@ -1,3 +1,5 @@
+logs/*
 mysql_data/*
+.idea
 Dockerfile
 docker-compose.yml
