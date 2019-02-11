@@ -44,13 +44,14 @@ Temporary Items
 .apdisk
 
 
-.idea/
+.env
 
-vendor/
-logs/*
-mysql_data/*
-node_modules/
-www/assets/js/
-www/assets/css/
-bower_components/
+/.idea/
+/vendor/
+/logs/
+/mysql_data/*
+/node_modules/
+/www/assets/js/
+/www/assets/css/
+/bower_components/
 
