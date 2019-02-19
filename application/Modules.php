@@ -2,13 +2,11 @@
 
 namespace Application;
 
-use Sequode\Model\Module\Registry as ModuleRegistry;
-
 class Modules {
 	
     public static function model(){
         
-        $raw_modules = array();
+        $raw_modules = [];
         
         if(!\Sequode\Application\Modules\Account\Authority::isAuthenticated()){
             
@@ -35,7 +33,7 @@ class Modules {
         
         }
         
-        $modules = array();
+        $modules = [];
         
         foreach($raw_modules as $module){
             
