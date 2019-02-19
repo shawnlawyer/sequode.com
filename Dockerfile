@@ -7,7 +7,7 @@ WORKDIR /var/www/app
 EXPOSE 80
 RUN ln -sf /usr/share/zoneinfo/EST5EDT /etc/localtime \
  && apt-get update -y  \
- && apt-get upgrade -y\
+ && apt-get upgrade -y \
  && apt-get install -y \
     screen \
     curl \
@@ -32,8 +32,8 @@ RUN ln -sf /usr/share/zoneinfo/EST5EDT /etc/localtime \
 
 COPY ./docker/server-github.pem /root/.ssh/id_rsa
 RUN chmod go-rwx /root/.ssh/id_rsa
-RUN if [ ! -d "logs" ]; then \ mkdir logs; fi
-RUN if [ ! -d "mysql_data" ]; then \ mkdir mysql_data; fi
+RUN if [ ! -d "logs" ]; then mkdir logs; fi
+RUN if [ ! -d "mysql_data" ]; then mkdir mysql_data; fi
 
 COPY ./docker/nginx.conf /etc/nginx/
 COPY ./docker/php.ini /etc/php/7.2/fpm/php.ini
