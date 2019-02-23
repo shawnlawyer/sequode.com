@@ -2,14 +2,13 @@
 
 ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . realpath('../resource') . DIRECTORY_SEPARATOR);
 ob_start('ob_gzhandler');
-
+define("BASE_PATH", realpath('../'));
+define("RESOURCE_PATH", realpath(BASE_PATH . '/resource'));
+define("WWW_PATH", realpath(BASE_PATH . '/public'));
 require_once('../vendor/autoload.php');
 use Symfony\Component\HttpFoundation\Request as SymfonyHTTPRequest;
 use Symfony\Component\Dotenv\Dotenv;
 
-define("BASE_PATH", realpath('../'));
-define("RESOURCE_PATH", realpath(BASE_PATH . '/resource'));
-define("WWW_PATH", realpath(BASE_PATH . '/public'));
 $dotenv = (new Dotenv())->load(BASE_PATH . '/.env');
 //(new \Whoops\Run())->pushHandler(new Whoops\Handler\PrettyPageHandler())->register();
 $request = SymfonyHTTPRequest::createFromGlobals();
@@ -45,7 +44,7 @@ use Sequode\Application\Modules\Auth\Operations as AuthOperations;
 
 ApplicationConfiguration::model(Application\Application::class);
 SessionOperations::start();
-if (SessionStore::is('user_id'))
+if (SessionStore::is('owner_id'))
 {
     AuthOperations::load();
 }

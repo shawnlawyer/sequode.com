@@ -4,35 +4,32 @@ namespace Application\Modules\ApplicationConsole\Components;
 
 use Sequode\Model\Module\Registry as ModuleRegistry;
 use Sequode\View\Module\Card as ModuleCard;
-use Sequode\Component\Card\CardKit as CardKit;
 use Sequode\Component\Card\Kit\HTML as CardKitHTML;
 
 use Application\Modules\ApplicationConsole\Module;
-
+use Sequode\Application\Modules\Account\Modeler as AccountModeler;
 class Cards {
     
     public static $module = Module::class;
     
     public static function index(){
-        
-        $module = static::$module;
-        
-        $user_model = \Sequode\Application\Modules\Account\Modeler::model();
+
+        $user_model = AccountModeler::model();
         
         $_o = (object) null;
         $_o->size = 'fullscreen';
         $_o->head = 'Sequode';
         $_o->icon_background = 'sequode-icon-background';
-        $_o->body = array();
+        $_o->body = [];
         
         $modules = ModuleRegistry::modules();
-        $cards = array();
+        $cards = [];
         foreach($modules as $registry_key => $module){
             if(!empty($module::model()->components->cards)){
                 $class = $module::model()->components->cards;
                 if(!empty($class::$tiles) && is_array($class::$tiles)){
                     foreach($class::$tiles as $card){
-                        $cards[] = ModuleCard::render($module::$registry_key, $card, array($user_model));
+                        $cards[] = ModuleCard::render($module::$registry_key, $card, [$user_model]);
                     }
                     
                 }
@@ -41,7 +38,7 @@ class Cards {
             
         }
         
-        $html = $js = array();
+        $html = $js = [];
         $html[] = CardKitHTML::divider(true);
         $html[] = '<div class="fitBlock alignCenter">';
         foreach($cards as $key => $card){
@@ -52,7 +49,7 @@ class Cards {
             $js[] = $card->js;
         }
         $html[] = '</div>';
-        $_o->body[] = (object) array('html' => implode('',$html),'js' => implode('',$js));
+        $_o->body[] = (object) ['html' => implode('', $html), 'js' => implode('', $js)];
         return $_o;
     
     }
