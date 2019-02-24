@@ -19,12 +19,10 @@ class HTTPAPIRequest{
             return;
         }
         
-        if ($_SERVER['HTTP_HOST'] != 'api.sequode.com'){
-            exit;
-        }
         \Sequode\Application\Modules\Account\Modeler::exists(\Sequode\Application\Modules\Token\Modeler::model()->owner_id,'id');
-        ModuleRegistry::add(Sequode\Application\Modules\Sequode\Module::class);
-        
+        ModuleRegistry::add(\Sequode\Application\Modules\Sequode\Module::class);
+        ModuleRegistry::add(\Sequode\Application\Modules\Package\Module::class);
+
         if(!isset($request_pieces[0]) || trim($request_pieces[0]) == ''){
             exit;
         }
@@ -35,8 +33,9 @@ class HTTPAPIRequest{
         if(!isset($request_pieces[0]) || trim($request_pieces[0]) == ''){
             exit;
         }
-        
-        $context = strtolower($call_pieces[1]);
+
+        $context = strtolower($request_pieces[0]);
+
         $modules_context = ModuleRegistry::modulesContext();
         if(!array_key_exists($context, $modules_context)){
             return;
