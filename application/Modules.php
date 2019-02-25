@@ -2,13 +2,15 @@
 
 namespace Application;
 
+use Sequode\Application\Modules\Account\Authority as AccountAuthority;
+
 class Modules {
 	
     public static function model(){
         
         $raw_modules = [];
         
-        if(!\Sequode\Application\Modules\Account\Authority::isAuthenticated()){
+        if(!AccountAuthority::isAuthenticated()){
             
             $raw_modules[] = \Application\Modules\AuthConsole\Module::class;
             $raw_modules[] = \Sequode\Application\Modules\Auth\Module::class;
@@ -23,7 +25,7 @@ class Modules {
             $raw_modules[] = \Sequode\Application\Modules\Package\Module::class;
             $raw_modules[] = \Sequode\Application\Modules\Token\Module::class;
             
-            if(\Sequode\Application\Modules\Account\Authority::isSystemOwner()){
+            if(AccountAuthority::isSystemOwner()){
                 
                 $raw_modules[] = \Sequode\Application\Modules\Session\Module::class;
                 $raw_modules[] = \Sequode\Application\Modules\User\Module::class;

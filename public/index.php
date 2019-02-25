@@ -15,6 +15,8 @@ use Sequode\Application\Modules\Session\Operations as SessionOperations;
 use Sequode\Application\Modules\Session\Store as SessionStore;
 use Sequode\Application\Modules\Auth\Operations as AuthOperations;
 
+use Sequode\Sequode;
+
 ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . realpath('../resource') . DIRECTORY_SEPARATOR);
 ob_start('ob_gzhandler');
 define("BASE_PATH", realpath('../'));
@@ -27,7 +29,7 @@ $dotenv = (new Dotenv())->load(BASE_PATH . '/.env');
 $request = SymfonyHTTPRequest::createFromGlobals();
 if ($_SERVER['HTTP_HOST'] == $_ENV['SEQUODE_RUN_DOMAIN']) {
     //(new \Whoops\Run())->pushHandler(new Whoops\Handler\PrettyPageHandler())->register();
-    $sequode = new \Sequode\Sequode('SQDEa0b14c475d6a6ffad52060091f9a973f');
+    $sequode = new Sequode('SQDEa0b14c475d6a6ffad52060091f9a973f');
     $sequode->http();
     exit();
 }

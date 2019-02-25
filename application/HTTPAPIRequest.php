@@ -7,6 +7,12 @@ use Sequode\Controller\Application\HTTPRequest;
 use Sequode\Model\Application\Routes;
 use Sequode\Controller\Application\HTTPRequest\Rest as RestRequest;
 
+use Sequode\Application\Modules\Account\Modeler as AccountModeler;
+use Sequode\Application\Modules\Token\Modeler as TokenModeler;
+
+use Sequode\Application\Modules\Package\Module as PackageModule;
+use Sequode\Application\Modules\Sequode\Module as SequodeModule;
+
 class HTTPAPIRequest{
     public static function rest(){
         $request_pieces = HTTPRequest::requestUriPieces();
@@ -15,13 +21,13 @@ class HTTPAPIRequest{
         }
         $token = $request_pieces[0];
         array_shift($request_pieces);
-        if(!(\Sequode\Application\Modules\Token\Modeler::exists($token, 'token'))){
+        if(!(TokenModeler::exists($token, 'token'))){
             return;
         }
         
-        \Sequode\Application\Modules\Account\Modeler::exists(\Sequode\Application\Modules\Token\Modeler::model()->owner_id,'id');
-        ModuleRegistry::add(\Sequode\Application\Modules\Sequode\Module::class);
-        ModuleRegistry::add(\Sequode\Application\Modules\Package\Module::class);
+        AccountModeler::exists(TokenModeler::model()->owner_id,'id');
+        ModuleRegistry::add(SequodeModule::class);
+        ModuleRegistry::add(PackageModule::class);
 
         if(!isset($request_pieces[0]) || trim($request_pieces[0]) == ''){
             exit;
