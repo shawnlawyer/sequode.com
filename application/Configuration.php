@@ -2,7 +2,7 @@
 
 namespace Application;
 
-class Application {
+class Configuration {
 	
 	public static function model(){
         
