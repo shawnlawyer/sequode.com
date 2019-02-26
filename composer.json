@@ -16,7 +16,8 @@
         "filp/whoops": "^2.1",
         "symfony/http-foundation": "^3.2",
         "symfony/console": "^3.2",
-        "symfony/dotenv": "^4.3@dev"
+        "symfony/dotenv": "^4.3@dev",
+      "ext-json": "*"
     },
     "repositories": [
         {
