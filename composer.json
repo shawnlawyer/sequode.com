@@ -29,5 +29,8 @@
         "psr-4": {
             "Application\\":"application/"
         }
+    },
+    "config": {
+        "bin-dir": "./"
     }
 }
