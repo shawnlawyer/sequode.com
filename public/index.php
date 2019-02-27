@@ -9,8 +9,8 @@ require_once('../vendor/autoload.php');
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpFoundation\Request as SymfonyHTTPRequest;
 use Whoops\Handler\PrettyPageHandler;
-use Sequode\Controller\Application\HTTPRequest;
-use Sequode\Controller\Application\HTTPAPIRequest;
+use Sequode\Controller\Application\Request\Site\HTTP as SiteHTTPRequest;
+use Sequode\Controller\Application\Request\API\REST as APIRestRequest;
 use Sequode\Sequode;
 use Sequode\Model\Application\Configuration as ApplicationConfiguration;
 use Sequode\Model\Module\Registry as ModuleRegistry;
@@ -39,9 +39,9 @@ if ($_SERVER['HTTP_HOST'] != $_ENV['SEQUODE_API_DOMAIN']){
 }
 ModuleRegistry::model(Application\Modules::class);
 if ($_SERVER['HTTP_HOST'] == $_ENV['SEQUODE_API_DOMAIN']) {
-    HTTPAPIRequest::rest();
+    APIRestRequest::rest();
 } else {
-    HTTPRequest::run();
+    SiteHTTPRequest::handle();
 }
 
 
