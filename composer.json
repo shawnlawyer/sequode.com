@@ -11,13 +11,13 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "shawnlawyer/sequode": "dev-master",
+        "shawnlawyer/sequode": "master",
         "larapack/dd": "^1.1",
         "filp/whoops": "^2.1",
         "symfony/http-foundation": "^3.2",
         "symfony/console": "^3.2",
         "symfony/dotenv": "^4.3@dev",
-      "ext-json": "*"
+        "ext-json": "*"
     },
     "repositories": [
         {
