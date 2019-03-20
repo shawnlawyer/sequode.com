@@ -31,7 +31,7 @@ var SequodeConsole = function(){
         }else if(baseKit.getURLVar("id") !== null){
             call.inputs.push(baseKit.getURLVar("id"));
         }
-        call.route = 'cards/' + call.route;
+        call.route = call.route.replace('cards/', '');
         new XHRCall(call);
 	};
     self.placeContainers = function(){

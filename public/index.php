@@ -37,7 +37,8 @@ switch($_SERVER['HTTP_HOST']){
         APIRestRequest::handle();
         break;
     case $_ENV['SEQUODE_RUN_DOMAIN']:
-        (new Sequode($_ENV('SEQUODE_RUN_PACKAGE_TOKEN')))->http();
+        $server = new Sequode('SQDEa0b14c475d6a6ffad52060091f9a973f');
+        $server->http();
         break;
 
 }
