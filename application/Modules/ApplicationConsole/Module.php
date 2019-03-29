@@ -2,8 +2,14 @@
 
 namespace Application\Modules\ApplicationConsole;
 
+use Sequode\Application\Modules\Traits\ModuleRoutesTrait;
+
 class Module {
+
+    use ModuleRoutesTrait;
+
     public static $registry_key = 'Console';
+
 	public static function model(){
         
         $_o = (object)  array (
@@ -39,7 +45,7 @@ class Module {
                 ),
                 
                 'javascript' => array(
-                    'assets/js/sequode-console.min.js'
+                    'assets/js/app.min.js'
                 ),
             
             ),

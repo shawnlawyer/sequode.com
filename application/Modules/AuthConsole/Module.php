@@ -1,16 +1,24 @@
 <?php
 namespace Application\Modules\AuthConsole;
 
+use Sequode\Application\Modules\Traits\ModuleRoutesTrait;
+
 class Module {
+
+    use ModuleRoutesTrait;
+
     public static $registry_key = 'Console';
-	public static function model(){
+
+    public static function model(){
         
         $_o = (object)  array (
             'context' => 'console',
             'assets' => (object) array(
                 'html' => array(
                     'page' => 'html/page.php'
-                ), 
+                ),
+                'boot_collections' => array(
+                ),
                 'css' => array(
                     'css/automagic_cards.css',
                     'css/automagic_content.css',
@@ -27,7 +35,7 @@ class Module {
                     'css/client.css'
                 ),
                 'javascript' => array(
-                    'assets/js/auth-console.min.js'
+                    'assets/js/app.min.js'
                 ),
             ),
             'components' => (object) array (

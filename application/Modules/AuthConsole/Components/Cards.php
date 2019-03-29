@@ -5,12 +5,16 @@ namespace Application\Modules\AuthConsole\Components;
 use Application\Modules\AuthConsole\Module;
 
 class Cards {
-    
+
     public static $module = Module::class;
-    
-    
-    public static function feature(){
+
+    public static function index(){
+
+        $module = static::$module;
         $_o = (object) null;
+        $_o->context = (object)[
+            'card' => $module::xhrCardRoute(__FUNCTION__)
+        ];
         $_o->head = 'Sequencer for PHP';
         $_o->component_seperator = '';
         

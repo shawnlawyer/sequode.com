@@ -15,9 +15,10 @@
     "gulp4": "^4.0.2"
   },
   "scripts": {
+    "watch": "gulp watch",
     "gulp": "gulp",
-    "dev": "gulp",
-    "prod": "gulp"
+    "dev": "gulp build",
+    "prod": "gulp build"
   },
   "devDependencies": {},
   "repository": {

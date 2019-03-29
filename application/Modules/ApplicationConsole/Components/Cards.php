@@ -14,9 +14,13 @@ class Cards {
     
     public static function index(){
 
+        $module = static::$module;
         $user_model = AccountModeler::model();
         
         $_o = (object) null;
+        $_o->context = (object)[
+            'card' => $module::xhrCardRoute(__FUNCTION__)
+        ];
         $_o->size = 'fullscreen';
         $_o->head = 'Sequode';
         $_o->icon_background = 'sequode-icon-background';

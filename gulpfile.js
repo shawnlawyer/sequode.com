@@ -6,67 +6,50 @@ var rename = require('gulp-rename');
 
 var paths = {
 
-	authConsoleJS : {
-	    src:[
-            'resource/js/shared/*.js',
-            'resource/js/auth-console/AuthConsoleRegistry.js',
-            'resource/js/auth-console/AuthConsole.js',
-            'resource/js/auth-console/auth-main.js'
-        ],
-        dest: 'public/assets/js/',
-        name: 'auth-console.min.js'
-    },
-	sequodeConsoleJS :  {
+	appJS :  {
         src:[
-            'resource/js/shared/*.js',
-            'resource/js/sequode-console/BaseKit.js',
-            'resource/js/sequode-console/Cards.js',
-            'resource/js/sequode-console/CardsKit.js',
-            'resource/js/sequode-console/CollectionCards.js',
-            'resource/js/sequode-console/Configuration.js',
-            'resource/js/sequode-console/EventsKit.js',
-            'resource/js/sequode-console/Model.js',
-            'resource/js/sequode-console/ModelEnds.js',
-            'resource/js/sequode-console/Sequencer.js',
-            'resource/js/sequode-console/SequencerPalette.js',
-            'resource/js/sequode-console/SymbolsKit.js',
-            'resource/js/sequode-console/ShapesKit.js',
-            'resource/js/sequode-console/SequodeConsoleRegistry.js',
-            'resource/js/sequode-console/SequodeConsole.js',
-            'resource/js/sequode-console/sequode-main.js'
+            'resource/js/app/XHR.js',
+            'resource/js/app/BaseKit.js',
+            'resource/js/app/CardsKit.js',
+            'resource/js/app/EventsKit.js',
+            'resource/js/app/ShapesKit.js',
+            'resource/js/app/SymbolsKit.js',
+            'resource/js/app/Cards.js',
+            'resource/js/app/CollectionCards.js',
+            'resource/js/app/Configuration.js',
+            'resource/js/app/Model.js',
+            'resource/js/app/ModelEnds.js',
+            'resource/js/app/Sequencer.js',
+            'resource/js/app/SequencerPalette.js',
+            'resource/js/app/Registry.js',
+            'resource/js/app/Console.js',
+            'resource/js/app/main.js'
         ],
         dest: 'public/assets/js/',
-        name: 'sequode-console.min.js'
+        name: 'app.min.js'
     }
 };
 
 
-function authConsoleJS() {
-	return gulp.src(paths.authConsoleJS.src)
-	.pipe(concat('auth-console.min.js'))
-	.pipe(gulp.dest('public/assets/js/'));
+function appJS() {
+	return gulp.src(paths.appJS.src)
+	.pipe(concat(paths.appJS.name))
+	.pipe(gulp.dest(paths.appJS.dest));
 }
 
-function sequodeConsoleJS() {
-	return gulp.src(paths.sequodeConsoleJS.src)
-	.pipe(concat('sequode-console.min.js'))
-	.pipe(gulp.dest('public/assets/js/'));
-}
 
 function watch() {
-	gulp.watch(paths.authConsoleJS.src, authConsoleJS);
-	gulp.watch(paths.sequodeConsoleJS.src, sequodeConsoleJS);
+	gulp.watch('./resource/js/app/*.js').on('change', appJS);
 }
 
 function build (done) {
-    gulp.series(gulp.parallel(sequodeConsoleJS, authConsoleJS))();
+    gulp.series(gulp.parallel(appJS))();
     done();
 
 }
 
 
-exports.authConsoleJS = authConsoleJS;
-exports.sequodeConsoleJS = sequodeConsoleJS;
+exports.appJS = appJS;
 exports.watch = watch;
 exports.default = build;
 exports.build = build;

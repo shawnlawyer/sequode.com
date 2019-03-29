@@ -46,5 +46,24 @@ class Modules {
         return $modules;
 	
     }
-    
+
+    public static function alias($modules){
+
+        $alias = [];
+
+        foreach($modules as $alias => $class){
+
+            $alias[] = ["class" => $class, "alias" => $alias];
+
+        }
+
+        return $alias;
+
+    }
+
+    public static function setAlias($alias){
+
+        return class_alias($alias['original'], $alias['alias']);
+
+    }
 }
