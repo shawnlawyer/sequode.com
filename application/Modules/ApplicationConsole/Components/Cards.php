@@ -10,7 +10,6 @@ use Application\Modules\ApplicationConsole\Module;
 use Sequode\Application\Modules\Account\Modeler as AccountModeler;
 class Cards {
     
-    public static $module = Module::class;
     const Module = Module::class;
 
     public static function index(){

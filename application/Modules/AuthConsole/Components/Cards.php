@@ -6,7 +6,6 @@ use Application\Modules\AuthConsole\Module;
 
 class Cards {
 
-    public static $module = Module::class;
     const Module = Module::class;
 
     public static function index(){

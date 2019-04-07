@@ -10,7 +10,6 @@ class Cards {
 
     use XHRCardsCardRouteTrait, CardsConsoleMenusTrait;
 
-    public static $module = Module::class;
     const Module = Module::class;
 
     public static $merge = true;
