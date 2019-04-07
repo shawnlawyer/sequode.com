@@ -20,17 +20,18 @@ class Routes{
         XHRTrait,
         CollectionsTrait;
 
-	public static $module = Module::class;
+    public static $module = Module::class;
+    const Module = Module::class;
+
 	public static $merge = false;
-	public static $routes = array(
-	
+
+	public static $routes = [
         'xhr',
 		'collections',
 		'application.css',
         'application.js',
 		'vendor.js',
-	
-    );
+    ];
     
 	public static $routes_to_methods = array(
     

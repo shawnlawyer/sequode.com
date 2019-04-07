@@ -10,10 +10,14 @@ class Module {
 }
 
 class Operations {
+
     public static $module = Module::class;
+    const Module = Module::class;
 
     public static function test(){
+
         print_r(static::$module::model());
+
     }
 
 }

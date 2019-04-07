@@ -11,10 +11,12 @@ use Sequode\Application\Modules\Account\Modeler as AccountModeler;
 class Cards {
     
     public static $module = Module::class;
-    
+    const Module = Module::class;
+
     public static function index(){
 
-        $module = static::$module;
+        extract((static::Module)::variables());
+
         $user_model = AccountModeler::model();
         
         $_o = (object) null;
@@ -46,14 +48,17 @@ class Cards {
         $html[] = CardKitHTML::divider(true);
         $html[] = '<div class="fitBlock alignCenter">';
         foreach($cards as $key => $card){
+
             if($key != 0){
                 $html[] = CardKitHTML::shim();
             }
             $html[] = $card->html;
             $js[] = $card->js;
+
         }
         $html[] = '</div>';
         $_o->body[] = (object) ['html' => implode('', $html), 'js' => implode('', $js)];
+
         return $_o;
     
     }

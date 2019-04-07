@@ -15,10 +15,11 @@ class Cards {
     use XHRCardsCardRouteTrait, CardsConsoleMenusTrait;
     
     public static $module = Module::class;
-    
+    const Module = Module::class;
+
     public static function index($dom_id = 'CardsContainer'){
 
-        $module = static::$module;
+        extract((static::Module)::variables());
 
         $js = [];
 
@@ -36,4 +37,5 @@ class Cards {
         return implode('', $js);
         
     }
+
 }
