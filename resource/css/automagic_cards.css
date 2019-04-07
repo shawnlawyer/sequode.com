@@ -20,6 +20,8 @@
   margin: 0 auto 2em auto;
   vertical-align: top;
   display: inline-block;
+  max-width: 100%;
+  min-width: 2.4em;
   width: auto;
 }
 .automagic-card-menu-container{

@@ -39,7 +39,7 @@ class Modules {
         
         foreach($raw_modules as $module){
             
-            $modules[$module::$registry_key] = $module;
+            $modules[$module::Registry_Key] = $module;
             
         }
         

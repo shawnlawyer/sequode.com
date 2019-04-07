@@ -34,7 +34,7 @@ class Cards {
                 $class = $module::model()->components->cards;
                 if(!empty($class::$tiles) && is_array($class::$tiles)){
                     foreach($class::$tiles as $card){
-                        $cards[] = ModuleCard::render($module::$registry_key, $card, [$user_model]);
+                        $cards[] = ModuleCard::render($registry_key, $card, [$user_model]);
                     }
                     
                 }

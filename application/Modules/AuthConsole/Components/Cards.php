@@ -13,6 +13,7 @@ class Cards {
         extract((static::Module)::variables());
 
         $_o = (object) null;
+
         $_o->context = (object)[
             'card' => $module::xhrCardRoute(__FUNCTION__)
         ];
@@ -45,6 +46,7 @@ class Cards {
         $html[] = '<div class="card-textblock card-text"></div>';
         
         $_o->body[] = (object) array('html' => implode('',$html));
+
         return $_o;
 
     }

@@ -23,13 +23,13 @@ class Cards {
         $js = [];
 
         $deck = [
-            ModuleCard::render($module::$registry_key, __FUNCTION__, [true])
+            ModuleCard::render($module::Registry_Key, __FUNCTION__, [true])
         ];
         $js[] = CardKitJS::placeDeck($deck, $dom_id);
 
         $deck = [
-            ModuleCard::render(AuthModule::$registry_key, 'login'),
-            ModuleCard::render(RegisterModule::$registry_key, 'signup')
+            ModuleCard::render(AuthModule::Registry_Key, 'login'),
+            ModuleCard::render(RegisterModule::Registry_Key, 'signup')
         ];
         $js[] = CardKitJS::placeDeck($deck, $dom_id, false);
         
