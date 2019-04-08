@@ -5,9 +5,9 @@ namespace Application\Modules\ApplicationConsole\Components;
 use Sequode\Model\Module\Registry as ModuleRegistry;
 use Sequode\View\Module\Card as ModuleCard;
 use Sequode\Component\Card\Kit\HTML as CardKitHTML;
-
 use Application\Modules\ApplicationConsole\Module;
 use Sequode\Application\Modules\Account\Modeler as AccountModeler;
+
 class Cards {
     
     const Module = Module::class;
@@ -29,12 +29,18 @@ class Cards {
         
         $modules = ModuleRegistry::modules();
         $cards = [];
-        foreach($modules as $registry_key => $module){
+        foreach($modules as $key => $module){
+
             if(!empty($module::model()->components->cards)){
+
                 $class = $module::model()->components->cards;
-                if(!empty($class::$tiles) && is_array($class::$tiles)){
-                    foreach($class::$tiles as $card){
-                        $cards[] = ModuleCard::render($registry_key, $card, [$user_model]);
+
+                if(defined($class.'::Tiles') && !empty($class::Tiles)){
+
+                    foreach($class::Tiles as $card){
+
+                        $cards[] = ModuleCard::render($key, $card, [$user_model]);
+
                     }
                     
                 }
@@ -56,6 +62,7 @@ class Cards {
 
         }
         $html[] = '</div>';
+
         $_o->body[] = (object) ['html' => implode('', $html), 'js' => implode('', $js)];
 
         return $_o;

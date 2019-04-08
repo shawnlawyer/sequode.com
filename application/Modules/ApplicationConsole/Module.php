@@ -65,6 +65,7 @@ class Module {
             );
 		
         return $_o;
+
 	}
     
 }

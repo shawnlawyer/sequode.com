@@ -9,9 +9,9 @@
   text-align:center;
 }
 .automagic-card{
-  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 0 .1em 0;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 0 .1em 0;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0 .1em 0;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -38,9 +38,9 @@
   overflow:visible;
 }
 .automagic-card-menu{
-  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 0 .1em 0;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 0 .1em 0;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0 .1em 0;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
