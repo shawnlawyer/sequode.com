@@ -1,13 +1,13 @@
 
 .automagic-divider{
-  height: 2em;
-  width: 2em;
+  height: 1em;
+  width: 1em;
   padding:0;
   margin:0;
 }
 .automagic-shim{
-  height: 2em;
-  width: 2em;
+  height: 1em;
+  width: 1em;
   display:inline-block;
   padding:0;
   margin:0;

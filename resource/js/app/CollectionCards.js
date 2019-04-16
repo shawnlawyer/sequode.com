@@ -17,22 +17,23 @@ var CollectionCards = function(){
         card.addClass('pointer');
         var html = 
            [
-            '<div class="automagic-card-head">',
+            '<div class="automagic-card-head" style="overflow:hidden;">',
             '<div class="card-icon '+ self.icon +'-icon-background"></div>',
             '<div class="card-title ">'+ node.n +'</div>',
             '</div>',
             '<div class="automagic-card-body"></div>'
            ].join('');
            card.append(html);
-        return self.attachCardEvents(card,node.id);
+        return self.attachCardEvents(card, node.id);
 	};
     self.place = function(){
-        var card ,i;
         $('#' + self.container).empty();
-        $('#' + self.container).append('<div class="automagic-divider"></div>');
-        for(i in self.cards){
+        /*$('#' + self.container).append('<div class="automagic-divider"></div>');*/
+        for(var i in self.cards) {
+            if(i > 0){
+                $('#' + self.container).append(' ');
+            }
             $('#' + self.container).append(self.cards[i]);
-            $('#' + self.container).append('<div class="automagic-shim"></div>');
         }
 	};
 	self.attachCardEvents = function(card,id){

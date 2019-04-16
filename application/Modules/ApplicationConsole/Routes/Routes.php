@@ -31,6 +31,14 @@ class Routes{
         'application.js',
 		'vendor.js',
     ];
+
+    const Routes = [
+        'xhr',
+		'collections',
+		'application.css',
+        'application.js',
+		'vendor.js',
+    ];
     
 	public static $routes_to_methods = array(
     

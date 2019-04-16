@@ -17,4 +17,8 @@ class Cards {
     public static $routes = [
         'index'
     ];
+
+    const Routes = [
+        'index'
+    ];
 }

@@ -23,9 +23,9 @@ class Cards {
             'card' => $module::xhrCardRoute(__FUNCTION__)
         ];
         $_o->size = 'fullscreen';
-        $_o->head = 'Sequode';
+        $_o->head = 'Console';
         $_o->icon_background = 'sequode-icon-background';
-        $_o->body = [];
+        $_o->body = [''];
         
         $modules = ModuleRegistry::modules();
         $cards = [];
@@ -39,7 +39,7 @@ class Cards {
 
                     foreach($class::Tiles as $card){
 
-                        $cards[] = ModuleCard::render($key, $card, [$user_model]);
+                        $cards[] = ModuleCard::render($key, $card, [$user_model], [ModuleCard::Modifier_Small_Tile]);
 
                     }
                     
