@@ -20,7 +20,7 @@ class Module {
                     'page' => 'html/page.php'
                 ),
                 'boot_collections' => array(
-                    'my_sequodes',
+                    'sequodes_owned',
                     'sequode_favorites',
                     'palette',
                     'sequodes',

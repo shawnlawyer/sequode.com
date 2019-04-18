@@ -9,8 +9,8 @@
     border:0;
     position:fixed;
     top:0;
-    bottom:-20px;
     left:0;
+    bottom:-20px;
     right:-20px;
     overflow:auto;
     padding:0 20px 0 0;
@@ -39,12 +39,11 @@
   display:block;
 }
 .automagic-content-area-xsmall{
-  width: 15em;
-  height: 10em;
+  width: 27em;
+  height: 10.5em;
     padding: 0 .5em .5em .5em;
   display:block;
-  overflow:hidden;
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
 .automagic-content-area-xsmall-tile-container {
     width: 100%;
@@ -54,11 +53,6 @@
     display: block;
     overflow-y: scroll;
     min-width: 100%;
-}
-.automagic-content-area-xxsmall{
-  width: 10em;
-  padding:0 1em 1em 1em;
-  display:block;
 }
 .automagic-content-area-xxsmall{
   width: 10em;

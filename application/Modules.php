@@ -17,21 +17,23 @@ class Modules {
             $raw_modules[] = \Sequode\Application\Modules\Register\Module::class;
         
         }else{
-        
+
             $raw_modules[] = \Application\Modules\ApplicationConsole\Module::class;
             $raw_modules[] = \Sequode\Application\Modules\Authed\Module::class;
-            $raw_modules[] = \Sequode\Application\Modules\Sequode\Module::class;
-            $raw_modules[] = \Sequode\Application\Modules\Account\Module::class;
-            $raw_modules[] = \Sequode\Application\Modules\Package\Module::class;
-            $raw_modules[] = \Sequode\Application\Modules\Token\Module::class;
-            
+
             if(AccountAuthority::isSystemOwner()){
-                
+
                 $raw_modules[] = \Sequode\Application\Modules\Session\Module::class;
                 $raw_modules[] = \Sequode\Application\Modules\User\Module::class;
                 $raw_modules[] = \Sequode\Application\Modules\BlockedIP\Module::class;
-                
+
             }
+
+            $raw_modules[] = \Sequode\Application\Modules\Account\Module::class;
+            $raw_modules[] = \Sequode\Application\Modules\Sequode\Module::class;
+            $raw_modules[] = \Sequode\Application\Modules\Package\Module::class;
+            $raw_modules[] = \Sequode\Application\Modules\Token\Module::class;
+
         
         }
         
