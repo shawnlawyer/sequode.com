@@ -78,7 +78,7 @@ class Cards {
 
                     $cards[] = (object)['html' => '<div class="alignLeft" style="'.(($z != 1000) ? 'border-top:#ccc 1px solid;': '').'position:relative; padding:0 0 0 0; z-index:'.$z.';">', 'js' => ''];
                     $cards[] = (object)['html' => CardKitHTML::divider(), 'js' => ''];
-                    $cards[] = ModuleCard::render($key, 'menu', []);
+                    $cards[] = ModuleCard::render($key, 'menu', [], [ModuleCard::Modifier_No_Head, ModuleCard::Modifier_Menu_Position_Right]);
                     $cards[] = (object)['html' => '<div class="section-title pointer" id="'.$view_tools_toggle_button_id.'">'.$module::Registry_Key .' Tools</div>', 'js' => ''];
                     $cards[] = (object)['html' => '', 'js' => '$("#'.$view_tools_toggle_button_id.'").on("click touchend", function(){var element = $("#'.$tools_container_id.'"); element.css((element.height() == 0) ? { position:\'relative\', height:\'100%\', visibility:\'visible\', display:\'block\' } : { position:\'absolute\', height:0, visibility:\'hidden\', display:\'inline\' });});'];
                     $cards[] = (object)['html' => '</div> ', 'js' => ''];
@@ -99,7 +99,7 @@ class Cards {
             }
             
         }
-        
+
         $html = $js = [];
         $html[] = '<div class="alignCenter" style="padding:1em;">';
         foreach($cards as $card){
