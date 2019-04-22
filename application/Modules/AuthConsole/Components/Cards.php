@@ -3,10 +3,47 @@
 namespace Application\Modules\AuthConsole\Components;
 
 use Application\Modules\AuthConsole\Module;
+use Sequode\Application\Modules\Traits\Components\CardsMenuCardTrait;
+use Sequode\Component\Card\Kit as CardKit;
 
 class Cards {
 
+    use CardsMenuCardTrait;
+
     const Module = Module::class;
+
+    public static function card(){
+
+        $_o = (object) null;
+        $_o->head = 'Console Tools';
+        $_o->icon = 'sequode';
+        $_o->menu = (object) null;
+        $_o->menu->items = [];
+        $_o->menu->position = '';
+        $_o->size = 'fullscreen';
+        $_o->body = [];
+
+        return $_o;
+
+    }
+
+    public static function menuItems($filters=[]){
+
+        extract((static::Module)::variables());
+
+        $_o = [];
+
+        $_o[$module::xhrCardRoute('index')] = CardKit::onTapEventsXHRCallMenuItem('Console', $module::xhrCardRoute('index'));
+
+        foreach($filters as $filter){
+
+            unset($_o[$filter]);
+
+        }
+
+        return $_o;
+
+    }
 
     public static function index(){
 
@@ -20,8 +57,8 @@ class Cards {
         $_o->head = 'Sequencer for PHP';
         $_o->component_seperator = '';
         
-        $html = $js = array();
-        $_o->body = array();
+        $html = $js = [];
+        $_o->body = [];
         $html[] = '<div class="card-textblock card-text"></div>';
         
         $html[] = '<div class="subline">Project Introduction</div>';

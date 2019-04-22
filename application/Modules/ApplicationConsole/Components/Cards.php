@@ -2,31 +2,33 @@
 
 namespace Application\Modules\ApplicationConsole\Components;
 
+use Sequode\Application\Modules\Traits\Components\CardsMenuCardTrait;
 use Sequode\Model\Module\Registry as ModuleRegistry;
 use Sequode\View\Module\Card as ModuleCard;
 use Sequode\Component\Card\Kit as CardKit;
-use Sequode\Component\Card\Kit\HTML as CardKitHTML;
 use Application\Modules\ApplicationConsole\Module;
 use Sequode\Application\Modules\Account\Modeler as AccountModeler;
 
 class Cards {
-    
+
+    use CardsMenuCardTrait;
+
     const Module = Module::class;
 
-    public static function menu(){
+    public static function card(){
 
         $_o = (object) null;
-
-        $_o->icon_type = 'menu-icon';
-        $_o->icon_background = 'session-icon-background';
+        $_o->head = 'Console Tools';
+        $_o->icon = 'sequode';
         $_o->menu = (object) null;
-        $_o->menu->position_adjuster =  'automagic-card-menu-right-side-adjuster';
-        $_o->menu->items =  self::menuItems();
+        $_o->menu->items = [];
+        $_o->menu->position = '';
+        $_o->size = 'fullscreen';
+        $_o->body = [];
 
         return $_o;
 
     }
-
 
     public static function menuItems($filters=[]){
 
@@ -52,14 +54,12 @@ class Cards {
 
         $user_model = AccountModeler::model();
         
-        $_o = (object) null;
+        $_o = static::card();
         $_o->context = (object)[
             'card' => $module::xhrCardRoute(__FUNCTION__)
         ];
-        $_o->size = 'fullscreen';
         $_o->head = 'Console';
-        $_o->icon_background = 'sequode-icon-background';
-        $_o->body = [''];
+        $_o->body[] = '';
         
         $modules = ModuleRegistry::modules();
 
@@ -75,20 +75,18 @@ class Cards {
                 if(defined($class.'::Tiles') && !empty($class::Tiles)){
                     $view_tools_toggle_button_id = $module::Registry_Key . 'ToolsViewToggleButton';
                     $tools_container_id = $module::Registry_Key . 'ToolsContainer';
-
-                    $cards[] = (object)['html' => '<div class="alignLeft" style="'.(($z != 1000) ? 'border-top:#ccc 1px solid;': '').'position:relative; padding:0 0 0 0; z-index:'.$z.';">', 'js' => ''];
-                    $cards[] = (object)['html' => CardKitHTML::divider(), 'js' => ''];
+                    $cards[] = (object)['html' => '<div class="alignLeft" style="'.(($z != 1000) ? 'border-top:#ccc 1px solid;': '').'position:relative; padding:1em 0 0 0; z-index:'.$z.';">', 'js' => ''];
                     $cards[] = ModuleCard::render($key, 'menu', [], [ModuleCard::Modifier_No_Head, ModuleCard::Modifier_Menu_Position_Right]);
                     $cards[] = (object)['html' => '<div class="section-title pointer" id="'.$view_tools_toggle_button_id.'">'.$module::Registry_Key .' Tools</div>', 'js' => ''];
                     $cards[] = (object)['html' => '', 'js' => '$("#'.$view_tools_toggle_button_id.'").on("click touchend", function(){var element = $("#'.$tools_container_id.'"); element.css((element.height() == 0) ? { position:\'relative\', height:\'100%\', visibility:\'visible\', display:\'block\' } : { position:\'absolute\', height:0, visibility:\'hidden\', display:\'inline\' });});'];
                     $cards[] = (object)['html' => '</div> ', 'js' => ''];
                     $z--;
-                    $cards[] = (object)['html' => '<div id="'.$tools_container_id.'" class="alignLeft" style="visibility:hidden; height:0; position:absolute; top:0; padding:0 0 0 0; z-index:'.$z.';">', 'js' => ''];
+                    $cards[] = (object)['html' => '<div id="'.$tools_container_id.'" class="alignLeft" style="display:grid; grid-gap: 1em; visibility:hidden; height:0; position:absolute; top:0; padding:0 0 0 0; z-index:'.$z.';">', 'js' => ''];
 
                     foreach($class::Tiles as $card){
 
                         $cards[] = ModuleCard::render($key, $card, [], [ModuleCard::Modifier_Small_Tile]);
-                        $cards[] = (object)['html' => ' ', 'js' => ''];
+                        //$cards[] = (object)['html' => ' ', 'js' => ''];
 
                     }
                     $cards[] = (object)['html' => '</div>', 'js' => ''];

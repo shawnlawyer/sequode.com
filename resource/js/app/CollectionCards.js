@@ -30,9 +30,11 @@ var CollectionCards = function(){
         $('#' + self.container).empty();
         /*$('#' + self.container).append('<div class="automagic-divider"></div>');*/
         for(var i in self.cards) {
+            /*
             if(i > 0){
                 $('#' + self.container).append(' ');
-            }
+            }*/
+
             $('#' + self.container).append(self.cards[i]);
         }
 	};

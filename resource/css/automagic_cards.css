@@ -17,17 +17,19 @@
   border-radius: 8px;
   background: #fff;
   padding: 0;
-  margin: 0 auto 1em auto;
+  margin: 0 .5em 1em .5em;
   vertical-align: top;
   display: inline-block;
   max-width: 100%;
   min-width: 2.4em;
   width: auto;
 }
+
 .automagic-card-collection {
 
   width: 100%;
   height: auto;
+  max-height: 70vh;
   display: block;
   text-align: center;
   margin: 3em 0 1em 0;
@@ -35,11 +37,26 @@
   max-width: 100%;
   min-width: 100%;
 }
-.automagic-content-area-xsmall > .automagic-card-collection{
 
-  margin: .5em 0 0 0;
+.automagic-card-collection:empty {
+  height: 0;
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+
+.automagic-content-area-xsmall > .automagic-card-collection > .automagic-card{
+  margin: .25em;
+  padding: 0;
   text-align: left;
 }
+
+.automagic-content-area-xsmall > .automagic-card-collection{
+
+  margin: .5em 0 .5em 0;
+  text-align: left;
+}
+
 .automagic-card-menu-container{
   position:relative;
   top:-.5em;
@@ -118,6 +135,18 @@
   text-align:left;
   display:block;
 }
+
+.automagic-card-body{
+  font-size: 1em;
+  position:relative;
+  z-index:1;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  text-align:left;
+  display:block;
+}
+
 .clear-border{
   -moz-box-shadow: rgba(0, 0, 0, 0) 0 0 0 0 !important;
   -webkit-box-shadow: rgba(0, 0, 0, 0) 0 0 0 0 !important;
@@ -136,16 +165,6 @@
   vertical-align: bottom;
 }
 
-.automagic-card-body{
-  font-size: 1em;
-  position:relative;
-  z-index:1;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  text-align:left;
-  display:block;
-}
 .automagic-card-next {
   position: absolute;
   top: 1.2em;

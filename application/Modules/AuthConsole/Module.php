@@ -1,4 +1,5 @@
 <?php
+
 namespace Application\Modules\AuthConsole;
 
 use Sequode\Application\Modules\Traits\ModuleRoutesTrait;
