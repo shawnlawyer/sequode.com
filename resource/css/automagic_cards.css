@@ -51,6 +51,12 @@
   text-align: left;
 }
 
+.automagic-card-head > .automagic-card{
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
 .automagic-content-area-xsmall > .automagic-card-collection{
 
   margin: .5em 0 .5em 0;

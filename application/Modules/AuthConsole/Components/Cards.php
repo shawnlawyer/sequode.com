@@ -3,29 +3,18 @@
 namespace Application\Modules\AuthConsole\Components;
 
 use Application\Modules\AuthConsole\Module;
+use Sequode\Application\Modules\Traits\Components\CardsCardTrait;
 use Sequode\Application\Modules\Traits\Components\CardsMenuCardTrait;
 use Sequode\Component\Card\Kit as CardKit;
 
 class Cards {
 
-    use CardsMenuCardTrait;
+    use CardsCardTrait,
+        CardsMenuCardTrait;
 
     const Module = Module::class;
 
-    public static function card(){
-
-        $_o = (object) null;
-        $_o->head = 'Console Tools';
-        $_o->icon = 'sequode';
-        $_o->menu = (object) null;
-        $_o->menu->items = [];
-        $_o->menu->position = '';
-        $_o->size = 'fullscreen';
-        $_o->body = [];
-
-        return $_o;
-
-    }
+    const Icon = 'sequode';
 
     public static function menuItems($filters=[]){
 
