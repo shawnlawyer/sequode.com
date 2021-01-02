@@ -1,11 +1,11 @@
 
-.automagic-divider{
+.divider{
   height: 1em;
   width: 1em;
   padding:0;
   margin:0;
 }
-.automagic-shim{
+.shim{
   height: 1em;
   width: 1em;
   display:inline-block;

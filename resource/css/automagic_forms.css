@@ -1,5 +1,5 @@
 
-.automagic-form-title{
+.form-title{
   font-family: Verdana;
   font-size: 1.4em;
   font-weight:500;
@@ -8,13 +8,13 @@
   padding: 0 0 .2em 0;
   white-space:nowrap;
 }
-.automagic-form-grid-group{
+.form-grid-group{
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
   box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
   
 }
-.automagic-form-grid-group-title{
+.form-grid-group-title{
   font-family: Verdana;
   font-size: 1.2em;
   font-weight:500;
@@ -24,13 +24,13 @@
   white-space:nowrap;
 
 }
-.automagic-form-sequode-group{
+.form-sequode-group{
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
   box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
   padding: 0 0 1em 0;
 }
-.automagic-form-sequode-group-title{
+.form-sequode-group-title{
   font-family: Verdana;
   font-size: 1em;
   font-weight:400;
@@ -40,7 +40,7 @@
   white-space:nowrap;
 
 }
-.automagic-form-component-container{
+.form-component-container{
   display: inline-block;
   width:auto;
   font-family: Verdana;
@@ -57,23 +57,23 @@
   box-shadow: rgba(0, 0, 0, 0.2) 0 .33em 1em;
   vertical-align: top;
 }
-.automagic-form-shim{
+.form-shim{
   height: 4em;
 }
 
-.automagic-form-component-required{
+.form-component-required{
 
 }
-.automagic-form-component-optional{
+.form-component-optional{
 
   border: dashed #6e6c6e 1px;
   -webkit-border-radius: 5;
   -moz-border-radius: 5;
   border-radius: 5px;
 }
-.automagic-form-component-connected{
+.form-component-connected{
 
 }
-.automagic-form-component-unconnected{
+.form-component-unconnected{
 
 }
