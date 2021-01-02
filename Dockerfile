@@ -32,14 +32,15 @@ RUN ln -sf /usr/share/zoneinfo/EST5EDT /etc/localtime \
 
 COPY ./docker/server-github.pem /root/.ssh/id_rsa
 RUN chmod go-rwx /root/.ssh/id_rsa
-RUN if [ ! -d "logs" ]; then mkdir logs; fi
-RUN if [ ! -d "mysql_data" ]; then mkdir mysql_data; fi
-
+RUN mkdir logs
+RUN mkdir mysql_data
+RUN curl -s https://getcomposer.org/installer | php; mv composer.phar /usr/local/bin/composer;
 COPY ./docker/nginx.conf /etc/nginx/
 COPY ./docker/php.ini /etc/php/7.2/fpm/php.ini
 COPY ./docker/www.conf /etc/php/7.2/fpm/pool.d/www.conf
 USER www-data
 COPY . /var/www/app
+RUN composer install -n
 USER root
 
 RUN sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/${PHP_VERSION}/cli/php.ini; \
@@ -54,7 +55,6 @@ RUN sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/${PHP_VERS
     sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/${PHP_VERSION}/fpm/php.ini; \
     if [ $WITH_XDEBUG = "true" ] ; then \
         apt-get install php-xdebug; \
-
         echo "zend_extension=xdebug.so" >> /etc/php/${PHP_VERSION}/fpm/conf.d/20-xdebug.ini; \
         echo "xdebug.idekey=PHPSTORM" >> /etc/php/${PHP_VERSION}/fpm/conf.d/20-xdebug.ini; \
         echo "xdebug.remote_enable = 1" >> /etc/php/${PHP_VERSION}/fpm/conf.d/20-xdebug.ini; \
