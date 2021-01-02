@@ -40,7 +40,7 @@ COPY ./docker/php.ini /etc/php/7.2/fpm/php.ini
 COPY ./docker/www.conf /etc/php/7.2/fpm/pool.d/www.conf
 USER www-data
 COPY . /var/www/app
-RUN composer install -n
+RUN (echo yes;) | composer install
 USER root
 
 RUN sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/${PHP_VERSION}/cli/php.ini; \
