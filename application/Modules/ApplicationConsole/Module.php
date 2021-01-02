@@ -29,6 +29,7 @@ class Module {
                 ),
                 
                 'css' => array(
+                    'css/globals.css',
                     'css/automagic_cards.css',
                     'css/automagic_content.css',
                     'css/automagic_data.css',
@@ -36,7 +37,6 @@ class Module {
                     'css/automagic_layout.css',
                     'css/btn.css',
                     'css/containers.css',
-                    'css/globals.css',
                     'css/icons.css',
                     'css/shortcuts.css',
                     'css/text.css',
