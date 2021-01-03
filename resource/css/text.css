@@ -24,7 +24,7 @@
   overflow: hidden !important ;
 }
 
-.automagic-content-area-xsmall > .automagic-card-collection > .automagic-card {
+.content-area-xsmall > .card-collection > .card {
   font-size: .75em;
   font-weight: 600;
 }

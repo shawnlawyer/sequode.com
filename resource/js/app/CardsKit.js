@@ -17,7 +17,7 @@ var CardsKit = function(){
             o.position = stdObj.position;
             o.element.css("position", o.position);
         }
-        o.card.addClass('automagic-card');
+        o.card.addClass('card');
         if(stdObj.css_class){
             o.card.addClass(stdObj.css_class);
         }
@@ -27,12 +27,12 @@ var CardsKit = function(){
             }
         }
         o.head = $('<div>'); 
-        o.head.addClass('automagic-card-head');
+        o.head.addClass('card-head');
         if(stdObj.head){
             o.head.append(stdObj.head);
         }
         o.body = $('<div>'); 
-        o.body.addClass('automagic-card-body');
+        o.body.addClass('card-body');
         if(stdObj.body){
             o.body.append(stdObj.body);
         }
@@ -44,7 +44,7 @@ var CardsKit = function(){
         var o = {};
         o.shim = $('<div>');
         o.element = o.shim;
-        o.shim.addClass('automagic-shim');
+        o.shim.addClass('shim');
         return o;
 	};
 	self.deck = function(stdObj){
@@ -68,7 +68,7 @@ var CardsKit = function(){
         o.dom_id = stdObj.dom_id + '_CardSleeve';
         o.element = o.sleeve;
         o.sleeve.attr('id',o.dom_id);
-        o.sleeve.addClass('automagic-card-sleeve');
+        o.sleeve.addClass('card-sleeve');
         return o;
 	};
 }

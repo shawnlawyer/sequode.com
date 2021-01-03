@@ -27,15 +27,15 @@ var Cards = function(){
     };
     self.card = function(node){
         var card = $('<div>');
-        card.addClass('automagic-card');
+        card.addClass('card');
         card.addClass('pointer');
         var html = 
            [
-            '<div class="automagic-card-head">',
+            '<div class="card-head">',
             '<div class="card-icon '+ self.icon +'-icon-background"></div>',
             '<div class="card-title">'+ node.n +'</div>',
             '</div>',
-            '<div class="automagic-card-body"></div>'
+            '<div class="card-body"></div>'
            ].join('');
            card.append(html);
         return self.attachCardEvents(card,node.id);
@@ -43,11 +43,11 @@ var Cards = function(){
     self.place = function(){
         var card ,i;
         $('#CardsContainer').empty();
-        $('#CardsContainer').append('<div class="automagic-divider"></div>');
+        $('#CardsContainer').append('<div class="divider"></div>');
         for(i in self.cards){
             
             $('#CardsContainer').append(self.cards[i]);
-            $('#CardsContainer').append('<div class="automagic-shim"></div>');
+            $('#CardsContainer').append('<div class="shim"></div>');
         }
 	};
 	self.attachCardEvents = function(card,id){

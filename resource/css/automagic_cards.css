@@ -91,7 +91,7 @@
 }
 .automagic-card-menu-item-label{
   -webkit-transition: background .6s;
-  background: #fff; 
+  background: #fff;
   padding: .5em 1em .5em 1em;
   height:1em;
   width: auto;
@@ -106,7 +106,7 @@
 }
 .automagic-card-menu-item{
   -webkit-transition: background .6s;
-  background: #fff; 
+  background: #fff;
   padding: .5em 1em .5em 1em;
   height:1em;
   width: auto;

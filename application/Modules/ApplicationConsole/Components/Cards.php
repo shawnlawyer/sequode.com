@@ -71,13 +71,13 @@ class Cards {
                     $card->head = (object) [
                         'html' => '<div class="pointer" style="width:auto;" id="'.$view_tools_toggle_button_id.'">'.$module::Registry_Key .' Tools</div>',
                         //'js' => '$("#'.$view_tools_toggle_button_id.'").on("click touchend", function(){var element = $("#'.$tools_container_id.'"); $(\'.tool-cards-section\').each(function(){if(this.id != "'.$tools_container_id.'"){ $(this).css({ position:\'absolute\', height:0, visibility:\'hidden\', display:\'inline\' });}}); element.css((element.height() == 0) ? { position:\'relative\', height:\'100%\', visibility:\'visible\', display:\'block\' } : { position:\'absolute\', height:0, visibility:\'hidden\', display:\'inline\' });});'
-                        'js' => '$("#'.$view_tools_toggle_button_id.'").on("click touchend", function(){var element = $("#'.$tools_container_id.'"); element.css((element.height() == 0) ? { position:\'relative\', height:\'100%\', visibility:\'visible\', display:\'block\' } : { position:\'absolute\', height:0, visibility:\'hidden\', display:\'inline\' });});'
+                         'js' => '$("#'.$view_tools_toggle_button_id.'").on("click touchend", function(){var element = $("#'.$tools_container_id.'"); element.css((element.height() == 0) ? { position:\'relative\', height:\'100%\', visibility:\'visible\', display:\'block\' } : { position:\'absolute\', height:0, visibility:\'hidden\', display:\'inline\' });});'
                     ];
                     $menu_cards[] = ModuleCard::render($key, 'menu', [$card]);
                     $menu_cards[] = (object)['html' => '</div> ', 'js' => ''];
                     $z--;
-                    $section_cards[] = (object)['html' => '<div id="'.$tools_container_id.'" class=" automagic-card alignLeft tool-cards-section" style="clear:all; visibility:hidden; height:0; position:absolute; top:0; padding:0 0 0 0; z-index:'.($z - 500).';">', 'js' => ''];
-                    $section_cards[] = (object)['html' => '<div class="automagic-card-head">', 'js' => ''];
+                    $section_cards[] = (object)['html' => '<div id="'.$tools_container_id.'" class=" card alignLeft tool-cards-section" style="clear:all; visibility:hidden; height:0; position:absolute; top:0; padding:0 0 0 0; z-index:'.($z - 500).';">', 'js' => ''];
+                    $section_cards[] = (object)['html' => '<div class="card-head">', 'js' => ''];
                     $section_cards[] = (object) [
                         'html' => '<div class="pointer" style=" position: relative; top:.25em; float:right; width:1em; height:1em; font-weight: 500; font-size:1.5em;" id="'.$close_tools_toggle_button_id.'">X</div>',
                         'js' => '$("#'.$close_tools_toggle_button_id.'").on("click touchend", function(){var element = $("#'.$tools_container_id.'"); element.css({ position:\'absolute\', height:0, visibility:\'hidden\', display:\'inline\' }); });'
@@ -91,7 +91,7 @@ class Cards {
                     ];
                     $section_cards[] = ModuleCard::render($key, 'menu', [$card]);
                     $section_cards[] = (object)['html' => '</div>', 'js' => ''];
-                    $section_cards[] = (object)['html' => '<div class="automagic-card-body" style="padding: 1em 0 0 0;">', 'js' => ''];
+                    $section_cards[] = (object)['html' => '<div class="card-body" style="padding: 1em 0 0 0;">', 'js' => ''];
 
 
 

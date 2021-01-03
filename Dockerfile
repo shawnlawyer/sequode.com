@@ -13,34 +13,24 @@ RUN ln -sf /usr/share/zoneinfo/EST5EDT /etc/localtime \
     curl \
     git \
     nginx \
-    nodejs \
-    npm \
     php-fpm \
-    php-curl php-gd php-xmlrpc php-mbstring php-mysql \
-    python3 \
-    python3-pip \
- && npm install \
- && pip3 install \
-    flask \
-    flask-admin \
-    requests \
-    pyap \
-    peewee \
-    wtf-peewee \
-    psycopg2-binary \
-    cryptography==2.0
+    php-curl \
+    php-gd \
+    php-xmlrpc \
+    php-mbstring \
+    php-mysql
+
+RUN curl -s https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer
 
 COPY ./docker/server-github.pem /root/.ssh/id_rsa
 RUN chmod go-rwx /root/.ssh/id_rsa
-RUN if [ ! -d "logs" ]; then mkdir logs; fi
-RUN if [ ! -d "mysql_data" ]; then mkdir mysql_data; fi
-
+RUN mkdir -p logs
+RUN mkdir -p mysql_data
 COPY ./docker/nginx.conf /etc/nginx/
 COPY ./docker/php.ini /etc/php/7.2/fpm/php.ini
 COPY ./docker/www.conf /etc/php/7.2/fpm/pool.d/www.conf
-USER www-data
 COPY . /var/www/app
-USER root
 
 RUN sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/${PHP_VERSION}/cli/php.ini; \
     sed -i "s/display_errors = .*/display_errors = On/" /etc/php/${PHP_VERSION}/cli/php.ini; \
@@ -54,7 +44,6 @@ RUN sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/${PHP_VERS
     sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/${PHP_VERSION}/fpm/php.ini; \
     if [ $WITH_XDEBUG = "true" ] ; then \
         apt-get install php-xdebug; \
-
         echo "zend_extension=xdebug.so" >> /etc/php/${PHP_VERSION}/fpm/conf.d/20-xdebug.ini; \
         echo "xdebug.idekey=PHPSTORM" >> /etc/php/${PHP_VERSION}/fpm/conf.d/20-xdebug.ini; \
         echo "xdebug.remote_enable = 1" >> /etc/php/${PHP_VERSION}/fpm/conf.d/20-xdebug.ini; \

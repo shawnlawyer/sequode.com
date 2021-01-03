@@ -13,22 +13,22 @@ var CollectionCards = function(){
     };
     self.card = function(node){
         var card = $('<div>');
-        card.addClass('automagic-card');
+        card.addClass('card');
         card.addClass('pointer');
         var html = 
            [
-            '<div class="automagic-card-head" style="overflow:hidden;">',
+            '<div class="card-head" style="overflow:hidden;">',
             '<div class="card-icon '+ self.icon +'-icon-background"></div>',
             '<div class="card-title ">'+ node.n +'</div>',
             '</div>',
-            '<div class="automagic-card-body"></div>'
+            '<div class="card-body"></div>'
            ].join('');
            card.append(html);
         return self.attachCardEvents(card, node.id);
 	};
     self.place = function(){
         $('#' + self.container).empty();
-        /*$('#' + self.container).append('<div class="automagic-divider"></div>');*/
+        /*$('#' + self.container).append('<div class="divider"></div>');*/
         for(var i in self.cards) {
             /*
             if(i > 0){
