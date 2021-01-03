@@ -14,13 +14,19 @@ RUN ln -sf /usr/share/zoneinfo/EST5EDT /etc/localtime \
     git \
     nginx \
     php-fpm \
-    php-curl php-gd php-xmlrpc php-mbstring php-mysql
+    php-curl \
+    php-gd \
+    php-xmlrpc \
+    php-mbstring \
+    php-mysql
+
+RUN curl -s https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer
 
 COPY ./docker/server-github.pem /root/.ssh/id_rsa
 RUN chmod go-rwx /root/.ssh/id_rsa
-RUN mkdir logs
-RUN mkdir mysql_data
-RUN curl -s https://getcomposer.org/installer | php; mv composer.phar /usr/local/bin/composer;
+RUN mkdir -p logs
+RUN mkdir -p mysql_data
 COPY ./docker/nginx.conf /etc/nginx/
 COPY ./docker/php.ini /etc/php/7.2/fpm/php.ini
 COPY ./docker/www.conf /etc/php/7.2/fpm/pool.d/www.conf
