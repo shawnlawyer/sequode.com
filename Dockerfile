@@ -18,8 +18,6 @@ RUN ln -sf /usr/share/zoneinfo/EST5EDT /etc/localtime \
 
 COPY ./docker/server-github.pem /root/.ssh/id_rsa
 RUN chmod go-rwx /root/.ssh/id_rsa
-RUN mkdir logs
-RUN mkdir mysql_data
 RUN curl -s https://getcomposer.org/installer | php; mv composer.phar /usr/local/bin/composer;
 COPY ./docker/nginx.conf /etc/nginx/
 COPY ./docker/php.ini /etc/php/7.2/fpm/php.ini
