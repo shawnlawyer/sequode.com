@@ -23,6 +23,8 @@ docker exec -it sequodecom_app_1 composer install
 
 ```
 
+Import SQL from sequode.dump
+
 ####Run Container Localhost Cleanup
 ```
 docker container kill $(docker ps -q)
