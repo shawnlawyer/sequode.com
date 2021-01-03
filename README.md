@@ -36,3 +36,36 @@ echo "y" | docker system prune
 rm -Rf sequode.com/
 
 ```
+
+###Caution; Do Not Run This!
+
+####Delete repository history
+
+```
+
+# checkout orphan branch
+git checkout --orphan orphanBranch
+
+# add everything
+git add -A
+
+# commit
+git commit -m "Initial Commit"
+
+# delete master branch
+git branch -D main
+
+# rename current branch to main
+git branch -m main
+
+# force push master
+git push -f origin main
+
+# remove old files
+git gc --aggressive --prune all
+
+# force push master
+git push -f origin main
+
+
+```
