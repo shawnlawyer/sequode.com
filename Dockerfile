@@ -14,18 +14,13 @@ RUN ln -sf /usr/share/zoneinfo/EST5EDT /etc/localtime \
     git \
     nginx \
     php-fpm \
-    php-curl \
-    php-gd \
-    php-xmlrpc \
-    php-mbstring \
-    php-mysql
-
-RUN curl -s https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer
+    php-curl php-gd php-xmlrpc php-mbstring php-mysql
 
 COPY ./docker/server-github.pem /root/.ssh/id_rsa
 RUN chmod go-rwx /root/.ssh/id_rsa
 RUN mkdir logs
+RUN mkdir mysql_data
+RUN curl -s https://getcomposer.org/installer | php; mv composer.phar /usr/local/bin/composer;
 COPY ./docker/nginx.conf /etc/nginx/
 COPY ./docker/php.ini /etc/php/7.2/fpm/php.ini
 COPY ./docker/www.conf /etc/php/7.2/fpm/pool.d/www.conf
@@ -57,6 +52,4 @@ RUN sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/${PHP_VERS
         phpdismod -s cli xdebug; \
     fi ;
 
-ENTRYPOINT ["./docker/start.sh"]
-ENTRYPOINT ["./docker/start.sh"]
-
+ENTRYPOINT ["/var/www/app/docker/start.sh"]
