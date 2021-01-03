@@ -25,8 +25,7 @@ RUN curl -s https://getcomposer.org/installer | php \
 
 COPY ./docker/server-github.pem /root/.ssh/id_rsa
 RUN chmod go-rwx /root/.ssh/id_rsa
-RUN mkdir -p logs
-RUN mkdir -p mysql_data
+RUN mkdir logs
 COPY ./docker/nginx.conf /etc/nginx/
 COPY ./docker/php.ini /etc/php/7.2/fpm/php.ini
 COPY ./docker/www.conf /etc/php/7.2/fpm/pool.d/www.conf
@@ -58,5 +57,6 @@ RUN sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/${PHP_VERS
         phpdismod -s cli xdebug; \
     fi ;
 
-ENTRYPOINT ["/var/www/app/docker/start.sh"]
+ENTRYPOINT ["./docker/start.sh"]
+ENTRYPOINT ["./docker/start.sh"]
 
