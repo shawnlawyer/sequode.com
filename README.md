@@ -2,6 +2,7 @@
 
 ####Run Master Branch
 ```
+
 #clone repository
 git clone git@github.com:shawnlawyer/sequode.com.git
 
@@ -59,6 +60,7 @@ Import SQL from sequode.dump
 
 ####Run Container Localhost Cleanup
 ```
+
 # stop running all containers
 docker container kill $(docker ps -q)
 
